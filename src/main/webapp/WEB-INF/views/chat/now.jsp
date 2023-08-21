@@ -8,7 +8,7 @@
 </head>
 <body>
 <div>
-<h2>안녕하세요</h2>
+<h2>안녕하세요 반갑습니다</h2>
 </div>
 </body>
 </html>
