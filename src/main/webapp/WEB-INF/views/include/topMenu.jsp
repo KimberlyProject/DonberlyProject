@@ -33,6 +33,8 @@
                 <ul>
                     <li><a href="#">QNA</a></li>
                     <li><a href="#">1:1 문의하기</a></li>
+                    <li><a href="/chat/chattingview">1:1 채팅하기</a></li>
+                    <li><a href="/chat/chat_list">채팅 리스트</a></li>
                 </ul></li>
             </ul>               
             <!-- 로그인안 했을 때  -->
