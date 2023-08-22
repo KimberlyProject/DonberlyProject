@@ -2,7 +2,7 @@ package com.ezen.auction.dto;
 
 import java.sql.Date;
 
-public class auctionDTO {
+public class AuctionDTO {
 
 	private String aucCode;
 	private int minPrice;
