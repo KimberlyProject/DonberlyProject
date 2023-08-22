@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.ezen.member.Controller.MemberController;
+import com.ezen.member.controller.MemberController;
 
 @Controller
 @RequestMapping("/chat")

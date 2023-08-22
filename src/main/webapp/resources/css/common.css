@@ -5,6 +5,11 @@
     font-weight: normal;
     font-style: normal;
 }
+* {
+ 	font-family: 'GmarketSansMedium';
+ 	font-weight: normal;
+    font-style: normal;
+}
 body{
     padding-top:70px;
 }

@@ -1,4 +1,4 @@
-package com.ezen.member.Controller;
+package com.ezen.member.controller;
 
 
 import org.slf4j.Logger;
