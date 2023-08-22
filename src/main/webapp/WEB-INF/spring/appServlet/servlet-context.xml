@@ -37,13 +37,7 @@
       <!-- 전달되는 매개변수의 인코딩을 설정 -->
       <beans:property name="defaultEncoding"    value="UTF-8"/>
   	</beans:bean>
-  	
-  	<!-- 파일 업로드를 위한 디렉토리 설정 -->
-  	<!-- String uploadPath = new String ("c:/data/upload"); -->
-  	<beans:bean id="uploadPath" class="java.lang.String">
-  		<beans:constructor-arg value="c:/data/upload"/>
-  	</beans:bean>
-	
-	
+
+
 	
 </beans:beans>
