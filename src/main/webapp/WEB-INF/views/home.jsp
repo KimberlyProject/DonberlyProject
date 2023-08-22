@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
-	<title>Home</title>
+	<title>돈벌리</title>
 	<%@ include file="./include/header.jsp" %>
     <style>
         #mainBanner{
@@ -103,6 +103,6 @@
 	  <p>중고 물품을 입찰하거나 판매 해 보세요</p>
 	  <p><a class="btn btn-success btn-lg" href="#" role="button">경매장 바로가기</a></p>
 	</section>
+	<%@ include file="./include/footer.jsp" %>
 </body>
-<%@ include file="./include/footer.jsp" %>
 </html>
