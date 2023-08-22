@@ -26,7 +26,11 @@
                 </ul>
               </li>
               <li>
-                <a href="/auction/auction_form">경매장</a>
+                <a href="/auction/auction_main">경매장</a>
+                <ul>
+                    <li><a href="/auction/auction_detail">임시 사는사람 디테일</a></li>
+                    <li><a href="/auction/auction_detail_owner">임시 물건올린사람 디테일</a></li>                   
+                </ul>
               </li>                  
               <li>
                 <a href="#">고객센터</a>                

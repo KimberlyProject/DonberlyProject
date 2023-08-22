@@ -14,8 +14,12 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+<<<<<<< HEAD
+
+=======
 		
 	
 	
 	
+>>>>>>> bd00e5724fb062fc69d5b9c1b1f4a7028b462d3d
 </beans>

@@ -54,8 +54,6 @@
     </style>
 </head>
 <body>
-
-<!-- 미안해요 여러분, 테스트중 -->
 	<%@ include file="./include/topMenu.jsp" %>
 	<div id="mainBanner" class="carousel slide" data-ride="carousel">
 	  <!-- Indicators -->
@@ -103,7 +101,7 @@
 	<section>
 	  <h2>경매장</h2>
 	  <p>중고 물품을 입찰하거나 판매 해 보세요</p>
-	  <p><a class="btn btn-success btn-lg" href="#" role="button">경매장 바로가기</a></p>
+	  <p><a class="btn btn-success btn-lg" href="/auction/auction_main" role="button">경매장 바로가기</a></p>
 	</section>
 </body>
 <%@ include file="./include/footer.jsp" %>
