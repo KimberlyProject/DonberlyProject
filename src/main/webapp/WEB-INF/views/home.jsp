@@ -54,6 +54,8 @@
     </style>
 </head>
 <body>
+
+<!-- 미안해요 여러분, 테스트중 -->
 	<%@ include file="./include/topMenu.jsp" %>
 	<div id="mainBanner" class="carousel slide" data-ride="carousel">
 	  <!-- Indicators -->
