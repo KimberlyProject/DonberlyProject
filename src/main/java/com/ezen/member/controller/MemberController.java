@@ -1,4 +1,4 @@
-package com.ezen.member.Controller;
+package com.ezen.member.controller;
 
 
 import org.slf4j.Logger;
@@ -17,6 +17,12 @@ public class MemberController {
 	public String getLogin(Model model){
 		System.out.println("로그인 화면 접속");
 		return "member/login";
+	}
+	
+	@RequestMapping(value="/membership", method=RequestMethod.GET)
+	public String getMembership(Model model){
+		System.out.println("로그인 화면 접속");
+		return "member/membership";
 	}
 	
 }

@@ -1,7 +1,17 @@
 @charset "UTF-8";
-
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+* {
+ 	font-family: 'GmarketSansMedium';
+ 	font-weight: normal;
+    font-style: normal;
+}
 body{
-    padding-top:80px;
+    padding-top:70px;
 }
 ul{
     padding:0;
@@ -22,8 +32,15 @@ header a{
 header .navbar-brand{
     height:auto;
     padding:0;
+    padding-left:20px;
+}
+header .navbar-brand>img{
+	width:120px;
 }
 
+header nav .navbar-right{
+	margin-top:25px;
+}
 header nav .navbar-right.loginbtn{
     margin-right:0;
     font-size:14px;
@@ -32,13 +49,14 @@ header nav .navbar-right.loginbtn{
 header .navbar-nav{
     text-align:center;
     margin-left:50px;
-    margin-top:35px;
 }
 header .navbar-nav li{
     width:150px;
 }
 header .navbar-nav li a{
     transition:0.3s;
+    padding-top:25px;
+    padding-bottom:25px;
 }
 header .nav>li>a:hover, .nav>li>a:focus, .nav>li.on>a{    
     background-color:rgb(39, 83, 46);
@@ -46,7 +64,7 @@ header .nav>li>a:hover, .nav>li>a:focus, .nav>li.on>a{
 }
 header .navbar-nav li ul{
     position:absolute;
-    top:55px;
+    top:75px;
     left:0px;
     display:none;
     border-radius:5px;
@@ -94,6 +112,70 @@ header .dropdown.calicon .dropdown-menu{
 
 .icon-bar{
     background-color:#fff;
+}
+
+#sideMenu{
+    position:fixed;
+    top:70px;
+    left:-200px;
+    z-index:100;
+    padding:50px 10px;
+    width:200px;
+    height:100%;
+    border:1px solid rgb(73, 124, 64);          
+    background-color:#fff;
+    transition:0.5s;
+}
+#sideMenu.show{
+    left:0px;
+}
+#sideMenu>button{
+    position:absolute;
+    top:10px;
+    right:10px;
+}
+#sideMenu li{
+    padding:10px 0;
+}
+#sideMenu a{          
+    font-size:18px;
+    font-weight:bold;
+    color:rgb(73, 124, 64);
+}
+
+.page_dir{
+    font-size:15px;
+    padding:20px 0;
+}
+.page_dir>button{
+    margin-right:10px;
+}
+.page_dir>button{    
+    color:#fff;
+    border:0;
+    background:none;
+    background-color:rgb(73, 124, 64);
+    transition:0.3s;
+}
+.page_dir>button:hover,.page_dir>button:focus{
+    color:#fff;
+    background-color:rgb(63, 102, 56);
+}
+
+
+.pageTitle{
+    position:relative;
+    color:#fff;
+    height:300px;
+    margin:0 0 50px 0;
+    background-image:url('../images/side_banner.jpg');
+    background-position: -74px 1155px;
+}
+.pageTitle>div{   
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
 }
 
 footer{
