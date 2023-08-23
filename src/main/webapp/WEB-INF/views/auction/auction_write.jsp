@@ -13,7 +13,7 @@
 			width: 100px;
 		}
 		input {
-			width: 100%;
+			width: 50%;
 			font-size: 15px;
 		}
 		#productimg {
@@ -40,6 +40,14 @@
 		#formgroup {
 			padding: 0px 40px;
 		}
+		.cate {
+			text-align: center;
+			padding: 30px 30px 30px 30px;
+			width: 300px;
+		}
+		td {
+			text-align:center;
+		}
 	</style>
 </head>
 <body>
@@ -62,26 +70,21 @@
 		
 		<form id="formgroup" name="aucWrite" method="post" action="${path}/auction/auction_wirte_send}" enctype="auction_wirte_send">
 			<!-- 글쓰기 -->
-			<table id="tb1" class="table table-bordered table-striped table-hover">
+			<table id="tb1" class="row table table-bordered table-striped table-hover">
 				<tr><!-- 사진, 제목 -->  
-					<th rowspan="5" id="productimg"><img src="#" alt="상품사진"/></th>
 					<th class="cate">제목</th>
-					<th class="colon">:</th>
-					<th colspan="4"><input type="text" placeholder="예) 상품명"></th>
+					<th colspan="2"><input type="text" placeholder="예) 상품명"></th>
 				<tr> <!-- 최소금액 -->
-					<th class="cate">최소금액</th>
-					<th class="colon">:</th>
-					<th colspan="4"><input type="text" placeholder="예) 1,000원"></th>
+					<th class="cate">최소 금액</th>					
+					<th colspan="2"><input type="text" placeholder="예) 1,000원"></th>
 				</tr>
 				<tr> <!-- 상한금액 -->
-					<th class="cate">상한금액</th>
-					<th class="colon">:</th>
-					<th colspan="4"><input type="text" placeholder="예) 100,000원"></th>
+					<th class="cate">상한 금액</th>					
+					<th colspan="2"><input type="text" placeholder="예) 100,000원"></th>
 				</tr>
 				<tr><!-- 입찰단위 -->
-					<th class="cate">입찰단위</th>
-					<th class="colon">:</th>
-					<th>
+					<th class="cate">입찰 단위</th>				
+					<th colspan="2">
 						<select id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
 							<option value="100" <c:if test="{searchType} == '100'">selected</c:if>>100원</option>
 							<option value="500" <c:if test="{searchType} == '500'">selected</c:if>>500원</option>
@@ -95,37 +98,56 @@
 					</th>
 				</tr>
 				<tr><!-- 마감기한 -->
-					<th class="cate">마감기한</th>
-					<th class="colon">:</th>
-					<th>
+					<th class="cate">마감 기한</th>					
+					<th colspan="2">
 						<select id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
 							<option value="100" <c:if test="{searchType} == '100'">selected</c:if>>서버타임+24h</option>
 						</select>
 					</th>
 				</tr>
 				<tr>
-				<td align="right">이미지파일 첨부</td>
-				<td>
-					<input type="file" name="imageFileName" onchange="readURL(this);"/><br/>
-					<img id="preview" src="#" width="200" height="200"/>
-				</td>
-			</tr>
-			</table> <!-- 글쓰기 -->
-	
-			<table id="tb2" class="table table-bordered table-striped table-hover">
+					<th class="cate" rowspan="2">
+						사진첨부<br/><br/><br/>
+						(1번 사진이<br/>
+						경매장 썸네일로<br/> 
+						설정됩니다.)<br/>
+					</th>	
+					<td>
+						<input type="file" name="aucImg" onchange="readURL(this);"/><br/>
+							<span class="imgNo">1번 사진</span><br/>
+						<img id="preview" src="#" width="200" height="200"/>
+					</td>
+					<td>
+						<input type="file" name="aucImg" onchange="readURL(this);"/><br/>
+							<span class="imgNo">2번 사진</span><br/>
+						<img id="preview" src="#" width="200" height="200"/>
+					</td>
 				<tr>
-					<th id="title" colspan="4" align="center">제품 상세 내용</th><!-- 내용 -->
+					<td>
+						<input type="file" name="aucImg" onchange="readURL(this);"/><br/>
+							<span class="imgNo">3번 사진</span><br/>
+						<img id="preview" src="#" width="200" height="200"/>
+					</td>
+					<td>
+						<input type="file" name="aucImg" onchange="readURL(this);"/><br/>
+							<span class="imgNo">4번 사진</span><br/>
+						<img id="preview" src="#" width="200" height="200"/>
+					</td>
 				</tr>
-				<tr>	
-					<th colspan="4">
-						<textarea placeholder="판매하실 제품에 대한 상세내용을 입력하세요."></textarea>
+				<tr>
+					<th class="cate">제품 설명</th><!-- 내용 -->
+					<th colspan="2">
+						<textarea placeholder="        제품에 대한 상세 내용을 입력해주세요."></textarea>
 					</th>
 				</tr>
-			</table>
-		
+				
+			</table> <!-- 글쓰기 -->
 		</form>
-		<button class="btn btn-success col-sm-offset-6" style="color:#FFFFFF;"><a href="#">상품 올리기</span></a></button>
-
+		<br/>
+		<br/>
+		<button class="btn btn-success col-sm-offset-6"><a style="color:#FFFFFF;" href="#">상품 올리기</a></button>
+		<br/>
+		<br/>
 	<%@ include file="../include/footer.jsp" %>
 </body>
 </html>
