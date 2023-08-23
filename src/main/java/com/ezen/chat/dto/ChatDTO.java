@@ -8,7 +8,7 @@ public class ChatDTO {
 	private String name;
 	private String nickname;
 	private Date reg_date;
-	private int tel;
+	private String tel;
 	private String email;
 	private String address;
 	private String my_img;
@@ -42,10 +42,10 @@ public class ChatDTO {
 	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
 	}
-	public int getTel() {
+	public String getTel() {
 		return tel;
 	}
-	public void setTel(int tel) {
+	public void setTel(String tel) {
 		this.tel = tel;
 	}
 	public String getEmail() {
