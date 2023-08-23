@@ -5,9 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ include file="../include/header.jsp" %>
 </head>
 <body>
-
+<%@ include file="../include/topMenu.jsp" %>
  <h1>신고하기</h1>
     
     <form action="submitReport" method="post">
@@ -34,6 +35,6 @@
         <input type="submit" value="신고하기">
         <input type="button" value="취소" onclick="history.back()">
     </form>
-
+<%@ include file="../include/footer.jsp" %>
 </body>
 </html>

@@ -5,8 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ include file="../include/header.jsp" %>
 </head>
 <body>
+
+<%@ include file="../include/topMenu.jsp" %>
 
  <h1>Q&A 목록</h1>
     
@@ -28,5 +31,6 @@
         </c:forEach>
     </table>
 
+<%@ include file="../include/footer.jsp" %>
 </body>
 </html>
