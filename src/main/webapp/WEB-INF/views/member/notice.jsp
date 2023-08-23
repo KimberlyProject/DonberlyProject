@@ -4,7 +4,7 @@
 <html>
 <head>
 	<title>Home</title>
-	<%@ include file="./WEB-INF/views/include/header.jsp" %>
+	<%@ include file="../include/header.jsp" %>
 	<style>
 		th {
 			text-align:			center;
@@ -36,7 +36,7 @@
 	</style>
 </head>
 <body>
-	<%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
+	<%@ include file="../include/topMenu.jsp" %>
 	<aside id="sideMenu">
       <ul>
         <li><a href="#">공지사항</a></li>
@@ -50,9 +50,9 @@
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       <span><a href="#">고객센터</a></span>
       <span class="glyphicon glyphicon-chevron-right"></span>
-      <span><a href="#">Q & A</a></span>
+      <span><a href="#">공지사항</a></span>
     </div>
-    <h1 class="pageTitle"><div>Q & A</div></h1>
+    <h1 class="pageTitle"><div>공지사항</div></h1>
 	<div class="container">
 		<!-- 글쓰기버튼 -->
 		<div>
@@ -83,53 +83,54 @@
 			<tbody>
 				<tr>
 					<td style="width: 5%;">1</td>
-					<td style="width: 65%;" class="title">사기당하면 어쩌죠?</td>
+					<td style="width: 65%;" class="title">GRAND OPEN!</td>
 					<td style="width: 15%;">admin1234</td>
 					<td style="width: 15%;">2023.08.23</td>
 				</tr>
 				<tr>
 					<td class="content" style="text-align: left;" colspan="5">
-						당했어요 어쩔 수 없어요
+						우리 오픈했어요 짝짝짝!!!<br/>
+						축하해주세요!!
 					</td>
 				</tr>
 				<tr>
 					<td style="width: 5%;">2</td>
-					<td style="width: 65%;" class="title">판매자가 돈만 받고 연락이 안되요.</td>
+					<td style="width: 65%;" class="title">공지사항 입니다.</td>
 					<td style="width: 15%;">admin1234</td>
 					<td style="width: 15%;">2023.08.23</td>
 				</tr>
 				<tr>
 					<td class="content" style="text-align: left;" colspan="5">
-						저런... 안됬네요...
+						누르지 마세요!!
 					</td>
 				</tr>
 				<tr>
 					<td style="width: 5%;">3</td>
-					<td style="width: 65%;" class="title">택배로 벽돌이 왔습니다.</td>
+					<td style="width: 65%;" class="title">공지사항 입니다.</td>
 					<td style="width: 15%;">admin1234</td>
 					<td style="width: 15%;">2023.08.23</td>
 				</tr>
 				<tr>
 					<td class="content" style="text-align: left;" colspan="5">
-						짝짝짝 벽돌 당첨!
+						내용이 없어서
 					</td>
 				</tr>
 				<tr>
 					<td style="width: 5%;">4</td>
-					<td style="width: 65%;" class="title">이런식으로 운영해도 되나요?</td>
+					<td style="width: 65%;" class="title">공지사항 입니다.</td>
 					<td style="width: 15%;">admin1234</td>
 					<td style="width: 15%;">2023.08.23</td>
 				</tr>
 				<tr>
 					<td class="content" style="text-align: left;" colspan="5">
-						안되나요?
+						부끄러워욧!
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
 	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-	<%@ include file="./WEB-INF/views/include/footer.jsp" %>
+	<%@ include file="../include/footer.jsp" %>
 	<script>
 		$(document).ready(function(){
 			$("tr").on("click", function() {

@@ -4,7 +4,7 @@
 <html>
 <head>
 	<title>Home</title>
-	<%@ include file="./WEB-INF/views/include/header.jsp" %>
+	<%@ include file="../include/header.jsp" %>
 	<style>
 		th {
 			text-align:			center;
@@ -39,7 +39,7 @@
 	</style>
 </head>
 <body>
-	<%@ include file="./WEB-INF/views/include/topMenu.jsp" %>
+	<%@ include file="../include/topMenu.jsp" %>
 	<aside id="sideMenu">
       <ul>
         <li><a href="#">1:1 문의</a></li>
@@ -116,7 +116,7 @@
 		</div>
 	</div>
 	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-	<%@ include file="./WEB-INF/views/include/footer.jsp" %>
+	<%@ include file="../include/footer.jsp" %>
 	<script>
 		$(document).ready(function(){
 			$("tr").on("click", function() {
