@@ -94,7 +94,7 @@
 	
 	<section class="board">
 	  <h2>장터</h2>
-	  <p>당신의 물건을 거래 해 보세요</p>
+	  <p>당신의 물건을 거래 해 보세요 수정했습니다!</p>
 	  <p><a class="btn btn-success btn-lg" href="#" role="button">장터 바로가기</a></p>
 	</section>
 	
