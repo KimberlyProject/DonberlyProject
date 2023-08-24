@@ -1,0 +1,39 @@
+package com.ezen.member.controller;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+@Controller
+@RequestMapping("/member")
+public class MemberController {
+	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public String getLogin(Model model){
+		System.out.println("로그인 화면 접속");
+		return "member/login";
+	}
+	
+	@RequestMapping(value="/membership", method=RequestMethod.GET)
+	public String getMembership(Model model){
+		System.out.println("로그인 화면 접속");
+		return "member/membership";
+	}
+	
+	@RequestMapping(value="/notice", method=RequestMethod.GET)
+	public String getNotice(Model model) {
+		System.out.println("공지사항 화면 접속!!!!!!!!!!!!!!!!!");
+		return "/member/notice";
+	}
+	
+	@RequestMapping(value="/qna", method=RequestMethod.GET)
+	public String getQna(Model model) {
+		System.out.println("qna 화면 접속!!!!!!!!!!!!!!!!!");
+		return "/member/qna";
+	}
+}

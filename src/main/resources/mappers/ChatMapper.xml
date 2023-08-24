@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezen.chat.mapper.ChatMapper">
+	
+	<select id="selectChat" resultType="com.ezen.chat.dto.ChatDTO">
+		SELECT * FROM members
+	</select>
+	
+	
+</mapper>
