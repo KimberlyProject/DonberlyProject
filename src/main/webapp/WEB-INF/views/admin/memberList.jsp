@@ -42,16 +42,16 @@
 	<%@ include file="../include/topMenu.jsp" %>
 	<aside id="sideMenu">
       <ul>
-        <li><a href="#">1:1 문의</a></li>
-        <li><a href="#">회원 목록</a></li>
+        <li><a href="./oneOnOneInquiry">1:1 문의</a></li>
+        <li><a href="./memberList">회원 목록</a></li>
       </ul>
       <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
     </aside>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <span><a href="#">관리자</a></span>
+      <span><a href="./oneOnOneInquiry">관리자</a></span>
       <span class="glyphicon glyphicon-chevron-right"></span>
-      <span><a href="#">회원 목록</a></span>
+      <span><a href="./memberList">회원 목록</a></span>
     </div>
     <h1 class="pageTitle"><div>회원 목록</div></h1>
 	<div class="container">

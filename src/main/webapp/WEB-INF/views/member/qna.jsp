@@ -39,8 +39,8 @@
 	<%@ include file="../include/topMenu.jsp" %>
 	<aside id="sideMenu">
       <ul>
-        <li><a href="#">공지사항</a></li>
-        <li><a href="#">Q & A</a></li>
+        <li><a href="./notice">공지사항</a></li>
+        <li><a href="./qna">Q & A</a></li>
         <li><a href="#">1:1문의하기</a></li>
         <li><a href="#">신고하기</a></li>
       </ul>
@@ -48,9 +48,9 @@
     </aside>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <span><a href="#">고객센터</a></span>
+      <span><a href="./notice">고객센터</a></span>
       <span class="glyphicon glyphicon-chevron-right"></span>
-      <span><a href="#">Q & A</a></span>
+      <span><a href="./qna">Q & A</a></span>
     </div>
     <h1 class="pageTitle"><div>Q & A</div></h1>
 	<div class="container">

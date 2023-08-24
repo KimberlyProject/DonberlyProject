@@ -34,12 +34,21 @@
               </li>                  
               <li>
                 <a href="#">고객센터</a>                
-                <ul>
-                    <li><a href="#">QNA</a></li>
+                <ul> 
+                    <li><a href="../member/notice">공지사항</a></li>
+                    <li><a href="../member/qna">Q & A</a></li>
                     <li><a href="#">1:1 문의하기</a></li>
                     <li><a href="/chat/chattingview">1:1 채팅하기</a></li>
                     <li><a href="/chat/chat_list">채팅 리스트</a></li>
-                </ul></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#">관리자</a>                
+                <ul> 
+                    <li><a href="../admin/oneOnOneInquiry">1:1문의</a></li>
+                    <li><a href="../admin/memberList">회원 목록</a></li>
+                </ul>
+              </li>
             </ul>               
             <!-- 로그인안 했을 때  -->
             <c:if test="${ member == null }">
