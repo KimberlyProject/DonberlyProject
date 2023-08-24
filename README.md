@@ -22,3 +22,6 @@ git push -u origin main
 git branch -M main
 git push -u origin main
 ```
+
+## 고발장
+- 고발하고 싶은 사람 적으세요
