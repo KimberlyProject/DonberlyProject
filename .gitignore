@@ -2,6 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,eclipse
 
 ### Eclipse ###
+pom.properties
 .metadata
 bin/
 tmp/
@@ -69,7 +70,7 @@ local.properties
 
 ### Java ###
 # Compiled class file
-*.class
+
 
 # Log file
 *.log
@@ -81,7 +82,7 @@ local.properties
 .mtj.tmp/
 
 # Package Files #
-*.jar
+
 *.war
 *.nar
 *.ear
