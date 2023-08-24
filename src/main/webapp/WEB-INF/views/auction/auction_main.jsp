@@ -33,18 +33,49 @@
         .searchgroup {
            padding:         3px 3px 6px 3px;
         }
-        .carousel-inner {
+        .innerimg {
         	width: 200px;
         	height: 200px;
         }
-        .table {
-        	width: 680px;
+        #detailarea {
+        	vertical-align: middle;
+        	text-align: center;
         }
+
 	</style>
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-	
+	    <aside id="sideMenu">
+      <h2>마이페이지</h2>
+      <ul>
+        <li><a href="#">내 정보 수정</a></li>
+        <li>
+          <a href="#">거래내역</a>
+          <ul>
+            <li><a href="#">삽니다</a></li>
+            <li><a href="#">팝니다</a></li>
+          </ul>
+        </li>
+        <li><a href="#">경매</a>          
+          <ul>
+            <li><a href="#">판매</a></li>
+            <li><a href="#">구매</a></li>
+          </ul>
+        </li>
+        <li><a href="#">캘린더</a></li>
+        <li><a href="#">채팅목록</a></li>
+      </ul>
+      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
+    </aside>
+    <div class="page_dir container">
+      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+      <a href="/">홈</a> &gt;
+      <a href="#">마이페이지</a> &gt;
+      <a href="./">캘린더</a>
+    </div>
+    <h1 class="pageTitle"><div>캘린더</div></h1>
+    
 	<div class="container">
 		<br/><br/>
 	
@@ -78,12 +109,15 @@
 		<%for(int i=0;i<3;i++){ //여기에 디비 갯수 넣으면 됨%>
 			<table class="table table-bordered table-striped table-hover">
 				<tr>
-					<th rowspan="4"  class="carousel-inner" role="listbox"><!-- 롤링사진 -->
-							<div class="aucimg active">
+					<th rowspan="4"  class="innerimg">
+							<div>
 								<img src="../../../resources/images/aucImsi/auc1.jpg" arl="auc1" width="200" height="200"/>
 							</div>
 					</th>
 					<th class="cate">제목</th><th class="colon">:</th><th colspan="4">제목~</th>
+					<th rowspan="4" id="detailarea">
+						<button class="btn btn-warning">자세히 보기</button>
+					</th>
 				</tr>
 				<tr>
 					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">판매자 ID</th>

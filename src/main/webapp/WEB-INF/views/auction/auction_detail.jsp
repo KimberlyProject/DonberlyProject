@@ -45,23 +45,57 @@
 		}
 		#price1 {
 			padding: 0px 0px 0xp 30px;
+			color: blue;
 		}
 		#price2 {
 			padding: 0px 30px 0px 0px;
+			color: red;
 		}
 		.carousel-inner {
         	width: 400px;
         	height: 200px;
         }
-        .table {
-        	width: 900px;
-        	align: center;
+        #saleid {
+        	background-color: orange;
+        	color: white;
+        	width: 200px;
+        	text-align: center;
+        	size: 15px;
         }
 	</style>
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-	
+	    <aside id="sideMenu">
+      <h2>마이페이지</h2>
+      <ul>
+        <li><a href="#">내 정보 수정</a></li>
+        <li>
+          <a href="#">거래내역</a>
+          <ul>
+            <li><a href="#">삽니다</a></li>
+            <li><a href="#">팝니다</a></li>
+          </ul>
+        </li>
+        <li><a href="#">경매</a>          
+          <ul>
+            <li><a href="#">판매</a></li>
+            <li><a href="#">구매</a></li>
+          </ul>
+        </li>
+        <li><a href="#">캘린더</a></li>
+        <li><a href="#">채팅목록</a></li>
+      </ul>
+      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
+    </aside>
+    <div class="page_dir container">
+      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+      <a href="/">홈</a> &gt;
+      <a href="#">마이페이지</a> &gt;
+      <a href="./">캘린더</a>
+    </div>
+    <h1 class="pageTitle"><div>캘린더</div></h1>
+    
 	<div class="container">
 		<br/><br/>
 		
@@ -110,7 +144,8 @@
 				<tr><!-- 현재입찰가 -->
 					<th class="cate">현재입찰가</th>
 					<th class="colon">:</th>
-					<th colspan="4">80,000원</th>
+					<th colspan="4">80,000원&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="saleid">입찰자닉네임</span>
+					</th>
 				</tr>
 				<tr><!-- 입찰단위 -->
 					<th class="cate">입찰단위</th>
@@ -123,7 +158,7 @@
 					<th colspan="4">100,000원</th>
 				</tr>
 				<tr><!-- 경매기간 -->
-					<th class="cate">상한금액</th>
+					<th class="cate">마감기한</th>
 					<th class="colon">:</th>
 					<th colspan="4">sysdate + 24h</th>
 				</tr>
@@ -148,25 +183,25 @@
 		</form>
 		
 		<table id="tb3" class="row">
-				<tr>
-					<td class="col-sm-2"></td>
-					<td id="price1" class="col-sm-2">
-					<input  class="col-sm-1 form-control" type="text" style="width:200px; text-align:right" placeholder="12,500원">
-					<button class="btn btn-success" style="background-color:rgb(73, 124, 64); color:#FFFFFF;">
-					<span>입찰하기</span>
-					</button>
-					</td>
-					<td id="price2" class="col-sm-3">
-					<input  class="col-sm-1 form-control" type="text" class="form-control" style="width:200px; text-align:right" placeholder="110,000">
-					<button class="btn btn-warning" style="background-color:rgb(73, 124, 64); color:#FFFFFF;">
-					<span>상한가 구매</span>
-					</button>
-					</td>	
-					<td class="col-sm-1"></td>
-				</tr>
-			</table>
+			<tr>
+				<td class="col-sm-2"></td>
+				<td id="price1" class="col-sm-2">
+				<input  class="col-sm-1 form-control" type="text" style="width:200px; text-align:right" placeholder="12,500원" disabled>
+				<button class="btn btn-primary" style="background-color:rgb(73, 124, 64); color:#FFFFFF;">
+				<span>입찰하기</span>
+				</button>
+				</td>
+				<td id="price2" class="col-sm-3">
+				<input  class="col-sm-1 form-control" type="text" class="form-control" style="width:200px; text-align:right" placeholder="110,000" disabled>
+				<button class="btn btn-danger" style="background-color:rgb(73, 124, 64); color:#FFFFFF;">
+				<span>상한가 구매</span>
+				</button>
+				</td>	
+				<td class="col-sm-1"></td>
+			</tr>
+		</table>
 		
-			<br/><br/>
+		<br/><br/>
 		
 
 	<%@ include file="../include/footer.jsp" %>

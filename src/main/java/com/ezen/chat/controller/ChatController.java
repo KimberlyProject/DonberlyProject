@@ -16,7 +16,6 @@ import com.ezen.chat.dto.ChatDTO;
 import com.ezen.chat.service.ChatService;
 
 
-
 @Controller
 @RequestMapping("/chat")
 public class ChatController {
