@@ -29,7 +29,8 @@
                 <a href="/auction/auction_main">경매장</a>
                 <ul>
                     <li><a href="/auction/auction_detail">임시 사는사람 디테일</a></li>
-                    <li><a href="/auction/auction_detail_owner">임시 물건올린사람 디테일</a></li>                   
+                    <li><a href="/auction/auction_detail_owner">임시 물건올린사람 디테일</a></li>   
+                    <li><a href="/mypage/auctionDealList">임시 경매 거래내역</a></li>              
                 </ul>
               </li>                  
               <li>

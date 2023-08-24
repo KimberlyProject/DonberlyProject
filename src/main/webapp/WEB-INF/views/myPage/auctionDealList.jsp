@@ -12,34 +12,24 @@
 		.cate{
 			width: 100px;
 		}
+		input{
+			width:500px;
+		}
+		.pagination {
+			color: rgb(73, 124, 64);
+		}
+		#searchbtn {
+			hieght: 80%;
+		}
+		.searchgroup {
+			padding: 3px 3px 6px 3px;
+		}
 		selectbox {
 			margin: 0px;
 		}
 		.btncolor {
 			color: white;
 		}
-		input {
-           width:            500px;
-        }
-        .pagination {
-           color:             rgb(73, 124, 64);
-        }
-        #searchbtn {
-           height:          2.4em;
-           background-color:   rgb(73, 124, 64);
-           color:            #FFFFFF;
-           margin-right:      15px;   
-        }
-        .searchgroup {
-           padding:         3px 3px 6px 3px;
-        }
-        .carousel-inner {
-        	width: 200px;
-        	height: 200px;
-        }
-        .table {
-        	width: 680px;
-        }
 	</style>
 </head>
 <body>
@@ -50,40 +40,44 @@
 	
 		<div class="myroot">
 			<a href="#">홈</a> >
-			<a href="#">경매</a> >
-			<a href="#">경매장</a>
+			<a href="#">고객센터</a> >
+			<a href="#">거래내역</a>
 		</div>
 		<br/><br/>
 		
 		<img src="/resources/images/banner.jpeg" alt="배너" style="width: 1150px;">
 		<br><br><br>
+		
 		<!-- 검색창 -->
-      <div class= "row" align="right" style=" vertical-align:middle; float:right;">
-         <select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
-            <option value="a" <c:if test="{searchType} == 'a'">selected</c:if>>전체</option>
-            <option value="w" <c:if test="{searchType} == 't'">selected</c:if>>제목</option>
-            <option value="c" <c:if test="{searchType} == 'c'">selected</c:if>>내용</option>
-            <option value="w" <c:if test="{searchType} == 'w'">selected</c:if>>작성자</option>
-            <option value="w" <c:if test="{searchType} == 'p'">selected</c:if>>상품번호</option>
-         </select>
-         <input  class="col-sm-2 searchgroup form-control" type="text" class="form-control" style="width:200px;" placeholder="검색하기">
-         <button id ="searchbtn" class="btn btn-secondary" type="button"">
-            <span class="glyphicon glyphicon-search"/>
-         </button>   
-      </div>
-         <!-- 검색창 -->
+		<div class= "row" align="left" style="vertical-align:middle;">
+			<select class=" col-sm-offset-1 col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
+				<option value="i" <c:if test="{searchType} == 'i'">selected</c:if>>전체</option>
+				<option value="o" <c:if test="{searchType} == 'o'">selected</c:if>>팝니다</option>
+				<option value="p" <c:if test="{searchType} == 'p'">selected</c:if>>삽니다</option>
+			</select>
+		</div><!-- 검색창 -->
+		<br/><br/>
+		
+		<!-- 검색창 -->
+		<div class= "row" align="right" style="vertical-align:middle; float:right;">
+			<select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
+				<option value="a" <c:if test="{searchType} == 'a'">selected</c:if>>전체</option>
+				<option value="w" <c:if test="{searchType} == 'w'">selected</c:if>>작성자</option>
+				<option value="c" <c:if test="{searchType} == 'c'">selected</c:if>>내용</option>
+				<option value="p" <c:if test="{searchType} == 'p'">selected</c:if>>상품번호</option>
+			</select>
+ 			<input  class="col-sm-2 searchgroup form-control" type="text" class="form-control" style="width:200px;" placeholder="검색하기">
+			<button id ="searchbtn" class="btn btn-secondary" type="button" style="background-color:rgb(73, 124, 64); color:#FFFFFF;">
+				<span class="glyphicon glyphicon-search"/>
+			</button>	
+		</div><!-- 검색창 -->
 		<br><br><br>
 		
 		<!-- 경매 게시글 -->
 		<%for(int i=0;i<3;i++){ //여기에 디비 갯수 넣으면 됨%>
 			<table class="table table-bordered table-striped table-hover">
 				<tr>
-					<th rowspan="4"  class="carousel-inner" role="listbox"><!-- 롤링사진 -->
-							<div class="aucimg active">
-								<img src="../../../resources/images/aucImsi/auc1.jpg" arl="auc1" width="200" height="200"/>
-							</div>
-					</th>
-					<th class="cate">제목</th><th class="colon">:</th><th colspan="4">제목~</th>
+					<th rowspan="4"><img src="#" alt="상품사진""/></th><th class="cate">제목</th><th class="colon">:</th><th colspan="4">제목~</th>
 				</tr>
 				<tr>
 					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">판매자 ID</th>
@@ -95,7 +89,6 @@
 					<th class="cate">마감 기한</th><th class="colon">:</th><th colspan="4">2023.8.10(금) 24:00</th>
 				</tr>
 			</table>
-
 		<%} %> <!--  경매 게시글 -->
 		
 		<table align="center">

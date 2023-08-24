@@ -49,7 +49,14 @@
 		#price2 {
 			padding: 0px 30px 0px 0px;
 		}
-		
+		.carousel-inner {
+        	width: 400px;
+        	height: 200px;
+        }
+        .table {
+        	width: 900px;
+        	align: center;
+        }
 	</style>
 </head>
 <body>
@@ -74,7 +81,19 @@
 			<!-- 글쓰기 -->
 			<table id="tb1" class="table table-bordered table-striped table-hover">
 				<tr><!-- 사진, 제목 -->  
-					<th rowspan="7" id="productimg"><img src="#" alt="상품사진"/></th>
+					<th rowspan="7" class="carousel-inner" role="listbox"><!-- 롤링사진 -->
+						<div class="aucimg active">
+							<img src="../../../resources/images/aucImsi/auc1.jpg" arl="auc1" width="200" height="200"/>
+						</div>
+						<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+							<span class="glyphicon glyphicon-chevron-left"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+							<span class="glyphicon glyphicon-chevron-right"></span>
+							<span class="sr-only">Next</span>
+						</a>
+					</th>
 					<th class="cate">제목</th>
 					<th class="colon">:</th>
 					<th colspan="4">상품명</th>
