@@ -8,7 +8,7 @@ public class memberDTO {
 	private String pw;
 	private String name;
 	private String nickname;
-	private Date regDate;
+	private Date   regDate;
 	private String tel;
 	private String email;
 	private String address;
