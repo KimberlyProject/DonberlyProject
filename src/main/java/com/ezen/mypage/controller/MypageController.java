@@ -17,5 +17,11 @@ public class MypageController {
 		System.out.println("마이페이지 판매내역 조회!!!!!!!!!!!!!!!!");
 		return "/myPage/salesHistory";
 	}
+	
+	@RequestMapping(value="/calendar", method=RequestMethod.GET)
+	public String Calendar(Model model) {
+		System.out.println("마이페이지 캘린더!!!!!!!!!!!!!!!!");
+		return "/myPage/calendar";
+	}
 
 }

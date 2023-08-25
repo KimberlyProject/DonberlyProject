@@ -17,7 +17,8 @@
 		
 		#i{
 			width:80px; 
-			height:100px;		}
+			height:100px;	
+		}
 	</style>
 	
 </head>
