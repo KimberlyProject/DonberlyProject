@@ -34,7 +34,7 @@ import com.ezen.board.dto.PageMaker;
 import com.ezen.board.dto.SaleArticleVO;
 import com.ezen.board.dto.SearchCriteria;
 import com.ezen.board.service.BoardService;
-import com.ezen.member.dto.memberDTO;
+import com.ezen.member.dto.MemberDTO;
 
 
 
@@ -179,7 +179,7 @@ public class BoardControllerImpl implements BoardController {
 		String thumbnail = upload(multipartRequest);
 		
 		HttpSession session	= multipartRequest.getSession();
-		memberDTO memberDTO	= (memberDTO) session.getAttribute("member");
+		MemberDTO memberDTO	= (MemberDTO) session.getAttribute("member");
 		String	user_id = memberDTO.getUserId();
 		
 		logger.info("2222222222222222222222222222222222222222222222222222222222222222222222222222222222222");
@@ -251,7 +251,7 @@ public class BoardControllerImpl implements BoardController {
 		String thumbnail = upload(multipartRequest);
 		
 		HttpSession session	= multipartRequest.getSession();
-		memberDTO memberDTO	= (memberDTO) session.getAttribute("member");
+		MemberDTO memberDTO	= (MemberDTO) session.getAttribute("member");
 		String	user_id = memberDTO.getUserId();
 		
 		logger.info("2222222222222222222222222222222222222222222222222222222222222222222222222222222222222");
