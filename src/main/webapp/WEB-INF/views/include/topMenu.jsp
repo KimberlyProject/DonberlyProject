@@ -53,8 +53,8 @@
               <li>
                 <a href="#">관리자</a>                
                 <ul> 
-                    <li><a href="../admin/oneOnOneInquiry">1:1문의</a></li>
-                    <li><a href="../admin/memberList">회원 목록</a></li>
+                    <li><a href="/admin/oneOnOneInquiry">1:1문의</a></li>
+                    <li><a href="/admin/memberList">회원 목록</a></li>
                 </ul>
               </li>
             </ul>               
