@@ -16,23 +16,39 @@ public class CcenterController {
 	private static final Logger logger = LoggerFactory.getLogger(CcenterController.class);
 	
 	//보여주기만 하는 컨트롤러
-	@RequestMapping(value="/qna", method=RequestMethod.GET)
-	public String qnaView(Model model) {
-
-		return "/ccenter/qna";
-	}
-	
-	@RequestMapping(value="/report", method=RequestMethod.GET)
-	public String reportView(Model model) {
-	
-		return "/ccenter/report";
-	}
-	
-
+	//---------------------------------------------------------------------------------------------------------------------------------------
+	// 공지사항 화면 접속
+	//---------------------------------------------------------------------------------------------------------------------------------------
 	@RequestMapping(value="/notice", method=RequestMethod.GET)
-	public String noticeView(Model model) {
-	
+	public String getNotice(Model model) {
+		System.out.println("공지사항 화면 접속!!!!!!!!!!!!!!!!!");
 		return "/ccenter/notice";
 	}
 
+	//---------------------------------------------------------------------------------------------------------------------------------------
+	// qna 화면 접속
+	//---------------------------------------------------------------------------------------------------------------------------------------	
+	@RequestMapping(value="/qna", method=RequestMethod.GET)
+	public String getQna(Model model) {
+		System.out.println("qna 화면 접속!!!!!!!!!!!!!!!!!");
+		return "/ccenter/qna";
+	}
+	
+	//---------------------------------------------------------------------------------------------------------------------------------------
+	// 신고하기 화면 접속
+	//---------------------------------------------------------------------------------------------------------------------------------------	
+	@RequestMapping(value="/report", method=RequestMethod.GET)
+	public String getReport(Model model) {
+		System.out.println("신고하기 화면 접속!!!!!!!!!!!!!!!!!");
+		return "/ccenter/report";
+	}
+	
+	//---------------------------------------------------------------------------------------------------------------------------------------
+	// 1:1문의 화면 접속
+	//---------------------------------------------------------------------------------------------------------------------------------------
+	@RequestMapping(value="/askOnetoOne", method=RequestMethod.GET)
+	public String getAskOneToOne(Model model) {
+		System.out.println("1:1문의 화면 접속!!!!!!!!!!!!!!!!!");
+		return "/ccenter/askOnetoOne";
+	}
 }

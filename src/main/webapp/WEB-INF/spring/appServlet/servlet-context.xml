@@ -24,6 +24,7 @@
 	<context:component-scan base-package="com.ezen.main" />
 	<context:component-scan base-package="com.ezen.member" />
 	<context:component-scan base-package="com.ezen.admin" />
+	<context:component-scan base-package="com.ezen.mypage" />
 	<context:component-scan base-package="com.ezen.auction" />
 	<context:component-scan base-package="com.ezen.chat" />
 	<context:component-scan base-package="com.ezen.ccenter"/>
