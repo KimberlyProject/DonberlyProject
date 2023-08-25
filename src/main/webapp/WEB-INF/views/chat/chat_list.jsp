@@ -90,10 +90,10 @@ label{
 	<!-- 목록 끝 -->
 	<script>
 	function make_chat(){	
-		location.href="./chattingview";
+		//location.href="./chattingview";
+	 	window.open("./chattingview", "_blank", "width=500, height=500");
 		
 	}
-	
 	</script>
 
 	

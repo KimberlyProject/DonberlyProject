@@ -36,7 +36,13 @@ table{
 a {
     text-decoration: none;
 }
-
+.container{
+	margin:0;
+	padding:0;
+}
+body{
+	padding:0;
+}
 
 <!---->
 .chat_title{
@@ -98,11 +104,36 @@ a {
 	padding-left: 10px;
 }
 
+.ballon {
+    display: none;
+    position: absolute;
+    width: 205px;
+    height: 40px;
+    left: 448px;
+    bottom: 62px;
+    background: #484848;
+    color: white;
+    border-radius: 5px;
+    padding: 12px 12.8px;
+}
+
+
+.ballon:a {
+    border-top: 10px solid #484848;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 0px solid transparent;
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 160px;
+}
+
 </style>
 </head>
 <body>
-<%@ include file="../include/topMenu.jsp" %>
-	<br>
+
+	
 	<div class="container">
 	
 		<table border="1">
@@ -111,7 +142,7 @@ a {
 			</tr>
 			<tr>
 				<td class="chat_area">
-					채팅치는곳
+					<div class="ballon">안녕하세요</div>
 				</td>
 				<td class="chat_detail" rowspan="2">
 					<div>제목: 물건 팝니다.</div>
@@ -146,6 +177,6 @@ a {
 	</div>
 	<br><br>
 	
-<%@ include file="../include/footer.jsp" %>
+
 </body>
 </html>
