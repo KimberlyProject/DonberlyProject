@@ -21,7 +21,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/membership", method=RequestMethod.GET)
 	public String getMembership(Model model){
-		System.out.println("로그인 화면 접속");
+		System.out.println("회원가입 접속");
 		return "member/membership";
 	}
 
