@@ -40,7 +40,7 @@ public class MemberController {
 		System.out.println("로그인 화면 접속");
 		return "member/membership";
 	}
-	
+
 	//경은
     @RequestMapping(value="/logOn", method=RequestMethod.POST)
     public ModelAndView logOn(@ModelAttribute("member") MemberDTO member,
@@ -69,9 +69,13 @@ public class MemberController {
           rAttr.addFlashAttribute("msg",  false);
           mav.setViewName("redirect:/member/login");
        }
-       
+
        return mav;                   
     }//경은
 	
 	
 }
+
+
+
+
