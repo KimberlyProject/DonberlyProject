@@ -60,7 +60,7 @@
             </ul>               
             <!-- 로그인안 했을 때  -->
             <c:if test="${ member == null }">
-            	<p class="navbar-text navbar-right loginbtn"><a href="${path}/member/login" class="navbar-link"><span class="glyphicon glyphicon-user"></span> 로그인</a></p>
+            	<p class="navbar-text navbar-right loginbtn"><a href="${path}/member/login" class="navbar-link" onClick="return action_path();"><span class="glyphicon glyphicon-user"></span> 로그인</a></p>
             </c:if>
             <c:if test="${ member != null }">
             <!-- 로그인 했을 때 -->
