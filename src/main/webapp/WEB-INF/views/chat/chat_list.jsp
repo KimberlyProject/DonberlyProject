@@ -68,7 +68,7 @@ label{
 	<!-- 채팅한 사람들 목록 -->
 	<%for(int i=0;i<3;i++){ %>
 	<div class="col-sm-6">
-	<table class="table table-bordered table-striped table-hover">
+	<table class="table table-bordered table-striped table-hover" onClick="make_chat()">
 		<tr>
 			<th rowspan="2" class="info-img"><img style="width:100px; height:100px;" src="${path}/resources/images/kuromi.png" alt="프로필 사진"></th>
 			<th class="pw"><label>몽룡이</label></th>
@@ -89,15 +89,9 @@ label{
 	<%} %>
 	<!-- 목록 끝 -->
 	<script>
-	function readURL(input){	//파일을 선택해서 변화가 생겼을 때
-		//파일을 선택해서 파일이 있는 경우. files[0] : 선택한 첫번째 파일
-		if(input.files && input.files[0]){
-			var reader = new FileReader();
-			reader.onload = function(e){
-				$('#preview').attr('src',e.target.result);
-			}
-			reader.readAsDataURL(input.files[0]);
-		}
+	function make_chat(){	
+		location.href="./chattingview";
+		
 	}
 	
 	</script>
