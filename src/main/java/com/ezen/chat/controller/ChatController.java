@@ -11,10 +11,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 import com.ezen.chat.dao.ChatDAO;
 import com.ezen.chat.dto.ChatDTO;
 import com.ezen.chat.service.ChatService;
-
 
 
 @Controller
