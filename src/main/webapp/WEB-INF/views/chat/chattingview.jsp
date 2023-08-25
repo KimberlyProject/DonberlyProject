@@ -40,7 +40,7 @@ a {
 
 <!---->
 .chat_title{
-	background-color:#3CB371;
+	background-color:rgb(73, 124, 64);
 	color:#ffffff;
 	font-size:20px;
 	text-align: center;
@@ -68,6 +68,7 @@ a {
 	
 	width: 400px; height:60px;
 	float:left;
+	
 }
 .chat_text>a{
 	vertical-align: center;
@@ -91,6 +92,10 @@ a {
 	text-align: center;
 	width:300px;
 	
+}
+.col-xs-3{
+	margin-left: 0;
+	padding-left: 10px;
 }
 
 </style>
@@ -130,7 +135,8 @@ a {
 						<textarea style="height: 80px;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
 					</div>
 					<div class="form-group col-xs-3" >
-						<a href="#" class="myButton" onclick="submitFunction()" style="text-decoration: none;">전송</a>
+						<button class="btn btn-success btn-lg" style="height:80px; width:120px;">전송</button>
+						
 						<div class="clearfix"></div>
 					</div>
 				</div>					
