@@ -21,8 +21,8 @@
               <li class="active">
                 <a href="#">장터 <span class="sr-only">(current)</span></a>
                 <ul>
-                    <li><a href="#">삽니다</a></li>
-                    <li><a href="#">팝니다</a></li>                   
+                    <li><a href="/sale/listArticles.do">삽니다</a></li>
+                    <li><a href="/board/listArticles.do">팝니다</a></li>                   
                 </ul>
               </li>
               <li>
