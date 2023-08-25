@@ -5,10 +5,10 @@
 <mapper namespace="com.ezen.member.mapper.memberMapper">
    
    <!-- 경은 -->
-   <select id="logOn" parameterType="com.ezen.member.dto.MemberDTO" resultType="com.ezen.member.dto.MemberDTO">
-      SELECT   user_id, pw, nickname
+   <select id="login" parameterType="com.ezen.member.dto.MemberDTO" resultType="com.ezen.member.dto.MemberDTO">
+      SELECT   userId, pw, nickname
       FROM   members
-      WHERE   user_id       = #{userId}
+      WHERE   userId       = #{userId}
       AND     pw   = #{pw}
    </select>
    

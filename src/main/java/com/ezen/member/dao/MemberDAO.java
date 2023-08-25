@@ -6,5 +6,5 @@ public interface MemberDAO {
 
 
 	//경은
-	public MemberDTO logOn(MemberDTO memberDTO) throws Exception;
+	public MemberDTO login(MemberDTO memberDTO) throws Exception;
 }

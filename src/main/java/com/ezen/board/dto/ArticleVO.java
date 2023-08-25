@@ -15,7 +15,7 @@ public class ArticleVO {
 	private	int		rnum;
 	private	int		level;
 	private	int		articleNO;
-	private	String	user_id;
+	private	String	userId;
 	private	Date	write_date;
 	private	String	title;
 	private String	content;
@@ -76,12 +76,13 @@ public class ArticleVO {
 		this.articleNO = articleNO;
 	}
 
-	public String getUser_id() {
-		return user_id;
+
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public Date getWrite_date() {
@@ -142,7 +143,7 @@ public class ArticleVO {
 
 	@Override
 	public String toString() {
-		return "ArticleVO [rnum=" + rnum + ", level=" + level + ", articleNO=" + articleNO + ", user_id=" + user_id
+		return "ArticleVO [rnum=" + rnum + ", level=" + level + ", articleNO=" + articleNO + ", user_id=" + userId
 				+ ", write_date=" + write_date + ", title=" + title + ", content=" + content + ", p_code=" + p_code
 				+ ", purpose=" + purpose + ", view=" + view + ", thumbnail=" + thumbnail + ", price=" + price + "]";
 	}
