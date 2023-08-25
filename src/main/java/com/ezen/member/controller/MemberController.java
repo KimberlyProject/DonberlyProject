@@ -24,16 +24,5 @@ public class MemberController {
 		System.out.println("로그인 화면 접속");
 		return "member/membership";
 	}
-	
-	@RequestMapping(value="/notice", method=RequestMethod.GET)
-	public String getNotice(Model model) {
-		System.out.println("공지사항 화면 접속!!!!!!!!!!!!!!!!!");
-		return "/member/notice";
-	}
-	
-	@RequestMapping(value="/qna", method=RequestMethod.GET)
-	public String getQna(Model model) {
-		System.out.println("qna 화면 접속!!!!!!!!!!!!!!!!!");
-		return "/member/qna";
-	}
+
 }
