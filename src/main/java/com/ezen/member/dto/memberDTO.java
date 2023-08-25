@@ -110,10 +110,5 @@ public class memberDTO {
 				+ regDate + ", tel=" + tel + ", email=" + email + ", address=" + address + ", myImg=" + myImg + "]";
 	}
 	
-	
-	
-	
-	
-	
-	
+
 }//memberDTO

@@ -23,3 +23,8 @@ git branch -M main
 git push -u origin main
 ```
 
+<<<<<<< HEAD
+=======
+## 고발장
+- 고발하고 싶은 사람 적으세요
+>>>>>>> f9eaf702c00724c767e9b6164e3dc863d1b052b3

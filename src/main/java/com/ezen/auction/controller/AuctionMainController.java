@@ -39,5 +39,20 @@ public class AuctionMainController {
 		return "/auction/auction_detail_owner";
 	}
 	
+	//--------------------------------------------------------------------------------------------//
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }//class
