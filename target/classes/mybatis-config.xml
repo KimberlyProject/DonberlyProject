@@ -6,5 +6,6 @@
 	<typeAliases>
 		
 		<typeAlias type="com.ezen.chat.dto.ChatDTO" alias="chatDTO"/>
+		<typeAlias type="com.ezen.member.dto.MemberDTO" alias="memberDTO"/>
 	</typeAliases>
 </configuration>

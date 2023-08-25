@@ -44,8 +44,8 @@
 	<%@ include file="../include/topMenu.jsp" %>
     <article class="Loginbox container">
       <h1><a href="#"><img src="${ path }/resources/images/logo_g.png" alt="logo"/></a></h1>
-      <form action="" method="post">
-        <input type="text" class="form-control" placeholder="아 이 디" id="user_id" name="user_id">
+      <form action="/member/logOn" method="post">
+        <input type="text" class="form-control" placeholder="아 이 디" id="user_id" name="userId">
         <div class="input-group" style="margin-bottom:10px;">
           <input type="password" class="form-control" placeholder="패 스 워 드" id="pw" name="pw">
           <span class="input-group-addon" id="basic-addon1"><span id="eye" class="glyphicon glyphicon-eye-open"></span></span>
