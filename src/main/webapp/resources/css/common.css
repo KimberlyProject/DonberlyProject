@@ -126,6 +126,11 @@ header .dropdown.calicon .dropdown-menu{
     background-color:#fff;
     transition:0.5s;
 }
+#sideMenu>h2{
+    font-size:26px;
+    font-weight:bold;
+    color:rgb(73, 124, 64);
+}
 #sideMenu.show{
     left:0px;
 }
@@ -134,13 +139,23 @@ header .dropdown.calicon .dropdown-menu{
     top:10px;
     right:10px;
 }
-#sideMenu li{
-    padding:10px 0;
+#sideMenu>ul>li{
+    padding:5px 0;
 }
-#sideMenu a{          
+#sideMenu a:hover{
+    background-color:#9ecc9e;
+}
+#sideMenu a{  
+    display:block;        
     font-size:18px;
     font-weight:bold;
-    color:rgb(73, 124, 64);
+    color:#333;
+    transition:0.3s;
+    text-decoration: none;
+    padding:10px 0px 10px 10px;   
+}
+#sideMenu li>ul>li a{
+    font-size:14px;
 }
 
 .page_dir{

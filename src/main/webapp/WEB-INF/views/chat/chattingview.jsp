@@ -36,25 +36,40 @@ table{
 a {
     text-decoration: none;
 }
-
+.container{
+	margin:0;
+	padding:0;
+}
+body{
+	padding:0;
+	margin-right:0px;
+	width: 969px;
+	overflow: hidden;
+}
+html{
+	width: 969px;
+	margin: 0;
+	padding:0;
+	overflow: hidden;
+}
 
 <!---->
 .chat_title{
-	background-color:#3CB371;
+	background-color:rgb(73, 124, 64);
 	color:#ffffff;
 	font-size:20px;
 	text-align: center;
 	vertical-align: center;
-	width:1300px; height: 50px;
+	width:998px; height: 50px;
 }
 
 .chat_area{
-	width:700px; height:600px;
+	width:599px; height:600px;
 	align-content: center;
 	background-color: #DCFFDC;
 }
 .chat_detail{
-	width:500px;
+	width:399px;
 	vertical-align:top;
 	text-align: center;
 	font-size: 20px;
@@ -68,6 +83,7 @@ a {
 	
 	width: 400px; height:60px;
 	float:left;
+	
 }
 .chat_text>a{
 	vertical-align: center;
@@ -92,21 +108,201 @@ a {
 	width:300px;
 	
 }
+.col-xs-3{
+	margin-left: 0;
+	padding-left: 10px;
+}
 
+.ballon {
+    display: none;
+    position: absolute;
+    width: 205px;
+    height: 40px;
+    left: 448px;
+    bottom: 62px;
+    background: #484848;
+    color: white;
+    border-radius: 5px;
+    padding: 12px 12.8px;
+}
+
+
+.ballon:a {
+    border-top: 10px solid #484848;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 0px solid transparent;
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 160px;
+}
+.row{
+	width:969px;
+}
+<!---->
+.wrap .chat .textbox {
+    position: relative;
+    display: inline-block;
+    max-width: calc(100% - 70px);
+    padding: 10px;
+    margin-top: 7px;
+    font-size: 13px;
+    border-radius: 10px;
+}
+
+.wrap .chat .textbox::before {
+    position: absolute;
+    display: block;
+    top: 0;
+    font-size: 1.5rem;
+}
+.wrap .ch1 .textbox {		/*텍스트 박스*/
+    margin-left: 20px;
+    background-color: #ddd;
+    float: right;
+    
+    
+}
+
+.wrap .ch1 .textbox::before {
+    left: -15px;
+    
+    color: #ddd;
+}
+
+.wrap .chat .textbox {
+    position: relative;
+    display: inline-block;
+    max-width: calc(100% - 70px);
+    padding: 10px;
+    margin-top: 20px;
+    
+    border-radius: 10px;
+    font-size: 13px;
+    background-color: #ddd;
+}
+
+.wrap .chat .textbox::before {
+    position: absolute;
+    display: block;
+   
+    top: 0;
+    left: -15px;
+    font-size: 1.5rem;
+    color: #ddd;
+}
+.wrap .ch2 {
+    flex-direction: row-reverse;
+}
+
+.wrap .ch2 .textbox {
+    margin-right: 20px;
+    background-color: #F9EB54;
+    float: left;
+}
+
+.wrap .ch2 .textbox::before {
+    right: -15px;
+    
+    color: #F9EB54;
+}
+
+.textbox{
+	margin: 0;
+	padding: 0;
+}
+
+.time{
+	float: right;
+	position: relative;
+	top:60px;
+}
 </style>
 </head>
 <body>
-<%@ include file="../include/topMenu.jsp" %>
-	<br>
+
+	
 	<div class="container">
 	
-		<table border="1">
+		<table border="1" style="margin: 0px; padding: 0px;">
 			<tr>
 				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">채팅창</td>
 			</tr>
 			<tr>
 				<td class="chat_area">
-					채팅치는곳
+					<div class="wrap"  style="overflow:auto; width:599px; height:600px;">
+	        			<div class="chat ch1">
+	            			<div class="icon"><i class="fa-solid fa-user"></i></div>
+	            			<div class="textbox">안녕하세요. 반갑습니다.</div>
+	            			<div class="time">2023</div>
+	        			</div>
+	        			<br><br><br>
+	        			
+	        			<div class="chat ch2">
+	            			<div class="icon"><i class="fa-solid fa-user"></i></div>
+	            			<div class="textbox">안녕하세요. 16일 거래 가능하신가요?</div>
+	            			<div class="time">2023</div>
+	        			</div>
+	        			<br><br><br>
+	        			
+	        			<div class="chat ch1">
+	            			<div class="icon"><i class="fa-solid fa-user"></i></div>
+	            			<div class="textbox">네 그럼 16일 종각역에서 3시에 어떠신가요?</div>
+	        			</div>
+	        			<br><br><br>
+        			
+				        <div class="chat ch2">
+				            <div class="icon"><i class="fa-solid fa-user"></i></div>
+				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
+				        </div>
+				        <br><br><br>
+				        <div class="chat ch2">
+				            <div class="icon"><i class="fa-solid fa-user"></i></div>
+				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
+				        </div>
+				        <br><br><br>
+				        <div class="chat ch2">
+				            <div class="icon"><i class="fa-solid fa-user"></i></div>
+				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
+				        </div>
+				        <br><br><br>
+				        <div class="chat ch2">
+				            <div class="icon"><i class="fa-solid fa-user"></i></div>
+				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
+				        </div>
+				        <br><br><br>
+				        <div class="chat ch2">
+				            <div class="icon"><i class="fa-solid fa-user"></i></div>
+				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
+				        </div>
+				        <br><br><br>
+				        <div class="chat ch2">
+				            <div class="icon"><i class="fa-solid fa-user"></i></div>
+				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
+				        </div>
+				        <br><br><br>
+				        <div class="chat ch2">
+				            <div class="icon"><i class="fa-solid fa-user"></i></div>
+				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
+				        </div>
+				        <br><br><br>
+				        <div class="chat ch2">
+				            <div class="icon"><i class="fa-solid fa-user"></i></div>
+				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
+				        </div>
+				        <br><br><br>
+				        <div class="chat ch2">
+				            <div class="icon"><i class="fa-solid fa-user"></i></div>
+				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
+				        </div>
+				        <br><br><br>
+				        <div class="chat ch2">
+				            <div class="icon"><i class="fa-solid fa-user"></i></div>
+				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
+				        </div>
+				        <br><br><br>
+    				</div>
 				</td>
 				<td class="chat_detail" rowspan="2">
 					<div>제목: 물건 팝니다.</div>
@@ -130,7 +326,8 @@ a {
 						<textarea style="height: 80px;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
 					</div>
 					<div class="form-group col-xs-3" >
-						<a href="#" class="myButton" onclick="submitFunction()" style="text-decoration: none;">전송</a>
+						<button class="btn btn-success btn-lg" style="height:80px; width:120px;">전송</button>
+						
 						<div class="clearfix"></div>
 					</div>
 				</div>					
@@ -140,6 +337,6 @@ a {
 	</div>
 	<br><br>
 	
-<%@ include file="../include/footer.jsp" %>
+
 </body>
 </html>

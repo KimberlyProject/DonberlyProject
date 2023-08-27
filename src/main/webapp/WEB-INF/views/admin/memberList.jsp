@@ -14,7 +14,6 @@
 		}
 		.content {
 			display:			none;
-			text-align:			left;
 		}
 		.content.on {
 			display:			table-cell;
@@ -31,17 +30,26 @@
         	padding:			3px 3px 6px 3px;
         	margin-bottom:			10px;
       	}
-      	.title {
+      	.addr {
       		text-align:			left;
+      	}
+      	.stop {
+      		margin-left:		50px;
       	}
       	.head > th:first-child {
 			width:				5%;
 		}
 		.head > th:nth-child(2) {
-			width:				65%;
+			width:				5%;
 		}
 		.head > th:nth-child(3) {
 			width:				15%;
+		}
+		.head > th:nth-child(4) {
+			width:				15%;
+		}
+		.head > th:nth-child(5) {
+			width:				45%;
 		}
 		.head > th:last-child {
 			width:				15%;
@@ -52,31 +60,27 @@
 	<%@ include file="../include/topMenu.jsp" %>
 	<aside id="sideMenu">
       <ul>
-        <li><a href="./notice">공지사항</a></li>
-        <li><a href="./qna">Q & A</a></li>
-        <li><a href="#">1:1문의하기</a></li>
-        <li><a href="#">신고하기</a></li>
+        <li><a href="./oneOnOneInquiry">1:1 문의</a></li>
+        <li><a href="./memberList">회원 목록</a></li>
       </ul>
       <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
     </aside>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <span><a href="./notice">고객센터</a></span>
+      <span><a href="./oneOnOneInquiry">관리자</a></span>
       <span class="glyphicon glyphicon-chevron-right"></span>
-      <span><a href="./qna">Q & A</a></span>
+      <span><a href="./memberList">회원 목록</a></span>
     </div>
-    <h1 class="pageTitle"><div>Q & A</div></h1>
+    <h1 class="pageTitle"><div>회원 목록</div></h1>
 	<div class="container">
-		<!-- 글쓰기버튼 -->
-		<div>
-			<button class="btn btn-success col-sm-1" style="float:left; ">글쓰기</button>
-		</div>
 		<!-- 검색창 -->
 		<div class="row" style="vertical-align: middle; float:right;">
 			<select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
 				<option value="a" <c:if test="{searchType} == 'a'">selected</c:if>>전체</option>
-				<option value="t" <c:if test="{searchType} == 't'">selected</c:if>>제목</option>
-				<option value="c" <c:if test="{searchType} == 'c'">selected</c:if>>내용</option>
+				<option value="i" <c:if test="{searchType} == 'i'">selected</c:if>>아이디</option>
+				<option value="t" <c:if test="{searchType} == 't'">selected</c:if>>연락처</option>
+				<option value="addr" <c:if test="{searchType} == 'addr'">selected</c:if>>주소</option>
+				<option value="d" <c:if test="{searchType} == 'd'">selected</c:if>>가입일자</option>
 			</select>
 			<input  class="col-sm-2 searchgroup form-control" type="text" class="form-control" style="width:200px;" placeholder="검색하기">
 			<button id ="searchbtn" class="btn btn-success" type="button">
@@ -87,59 +91,47 @@
 		<table class="table table-bordered table-striped table-hover">
 			<thead>
 				<tr class="head" style="background: rgb(73, 124, 64); color: #FFF;">
+					<th><span class="glyphicon glyphicon-ok"></span></th>
 					<th>No</th>
-					<th>Title</th>
-					<th>Id</th>
-					<th>Date</th>
+					<th>아이디</th>
+					<th>연락처</th>
+					<th>주소</th>
+					<th>가입일자</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
+					<td><input type="checkbox" style="width: 100%;"/></td>
 					<td>1</td>
-					<td class="title">사기당하면 어쩌죠?</td>
-					<td>admin1234</td>
+					<td>heedong</td>
+					<td>010-1111-1111</td>
+					<td class="addr">서울특별시 종로구 종로 78 (종로2가, 미려빌딩 3,5,6층)</td>
 					<td>2023.08.23</td>
 				</tr>
 				<tr>
-					<td class="content" colspan="5">
-						당했어요 어쩔 수 없어요
-					</td>
-				</tr>
-				<tr>
+					<td><input type="checkbox" style="width: 100%;"/></td>
 					<td>2</td>
-					<td class="title">판매자가 돈만 받고 연락이 안되요.</td>
-					<td>admin1234</td>
+					<td>bangja</td>
+					<td>010-2222-2222</td>
+					<td class="addr">서울특별시 종로구 종로 78 (종로2가, 미려빌딩 3,5,6층)</td>
 					<td>2023.08.23</td>
 				</tr>
 				<tr>
-					<td class="content" colspan="5">
-						저런... 안됬네요...
-					</td>
-				</tr>
-				<tr>
+					<td><input type="checkbox" style="width: 100%;"/></td>
 					<td>3</td>
-					<td class="title">택배로 벽돌이 왔습니다.</td>
-					<td>admin1234</td>
+					<td>chunhyang</td>
+					<td>010-2222-2222</td>
+					<td class="addr">서울특별시 종로구 종로 78 (종로2가, 미려빌딩 3,5,6층)</td>
 					<td>2023.08.23</td>
 				</tr>
-				<tr>
-					<td class="content" colspan="5">
-						짝짝짝 벽돌 당첨!
-					</td>
-				</tr>
-				<tr>
-					<td>4</td>
-					<td class="title">이런식으로 운영해도 되나요?</td>
-					<td>admin1234</td>
-					<td>2023.08.23</td>
-				</tr>
-				<tr>
-					<td class="content"colspan="5">
-						안되나요?
-					</td>
-				</tr>
+				<br/>
+				
 			</tbody>
 		</table>
+		<div align="center">
+			<button class="btn btn-warning col-sm-offset-4 col-sm-1" style="width:120px;">3일 정지</button>
+			<button class="btn btn-danger col-sm-1 stop" style="width:120px;">영구 정지</button>
+		</div>
 	</div>
 	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	<%@ include file="../include/footer.jsp" %>

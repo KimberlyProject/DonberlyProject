@@ -21,8 +21,8 @@
               <li class="active">
                 <a href="#">장터 <span class="sr-only">(current)</span></a>
                 <ul>
-                    <li><a href="#">삽니다</a></li>
-                    <li><a href="#">팝니다</a></li>                   
+                    <li><a href="/sale/listArticles.do">삽니다</a></li>
+                    <li><a href="/board/listArticles.do">팝니다</a></li>                   
                 </ul>
               </li>
               <li>
@@ -34,19 +34,33 @@
               </li>                  
               <li>
                 <a href="#">고객센터</a>                
-                <ul>
-                    <li><a href="/ccenter/qna">QNA</a></li>
-                    <li><a href="#">1:1 문의하기</a></li>
+                <ul> 
                     <li><a href="/ccenter/notice">공지사항</a></li>
+                    <li><a href="/ccenter/qna">Q & A</a></li>
+                    <li><a href="/ccenter/askOnetoOne">1:1 문의하기</a></li>
                     <li><a href="/ccenter/report">신고하기</a></li>
-                    
+                </ul>
+              </li>
+              <li>
+                <a href="#">마이페이지</a>                
+                <ul> 
+                    <li><a href="../myPage/salesHistory">판매내역</a></li>
                     <li><a href="/chat/chattingview">1:1 채팅하기</a></li>
                     <li><a href="/chat/chat_list">채팅 리스트</a></li>
-                </ul></li>
+                    
+                </ul>
+              </li>
+              <li>
+                <a href="#">관리자</a>                
+                <ul> 
+                    <li><a href="/admin/oneOnOneInquiry">1:1문의</a></li>
+                    <li><a href="/admin/memberList">회원 목록</a></li>
+                </ul>
+              </li>
             </ul>               
             <!-- 로그인안 했을 때  -->
             <c:if test="${ member == null }">
-            	<p class="navbar-text navbar-right loginbtn"><a href="${path}/member/login" class="navbar-link"><span class="glyphicon glyphicon-user"></span> 로그인</a></p>
+            	<p class="navbar-text navbar-right loginbtn"><a href="${path}/member/login" class="navbar-link" onClick="return action_path();"><span class="glyphicon glyphicon-user"></span> 로그인</a></p>
             </c:if>
             <c:if test="${ member != null }">
             <!-- 로그인 했을 때 -->
