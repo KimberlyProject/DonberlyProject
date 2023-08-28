@@ -69,7 +69,7 @@ public class BoardControllerImpl implements BoardController {
 	//-----------------------------------------------------------------------------------------------------------
 	// 업로드된 폴더와 위치가 같아야 한다.
 	//-----------------------------------------------------------------------------------------------------------
-	private static final String ARTICLE_IMAGE_REPO = "C:\\data\\board\\article_image";
+	private static final String ARTICLE_IMAGE_REPO = "C:\\data\\workspace\\DonberlyProject\\src\\main\\webapp\\resources\\images\\board\\article_image";
 	
 	//-----------------------------------------------------------------------------------------------------------
 	// Spring에서 지원하는 어노테이션
@@ -84,40 +84,7 @@ public class BoardControllerImpl implements BoardController {
 	@Inject		// Java에서 지원하는 어노테이션
 	private SaleArticleVO saleArticleVO;
 	
-	//-----------------------------------------------------------------------------------------------------------
-	// 게시글 목록
-	//-----------------------------------------------------------------------------------------------------------
-	@Override
-	@RequestMapping(value="/board/listArticlesold.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		String viewName = (String) request.getAttribute("viewName");
-		
-		List	articlesList	= boardService.listArticles();
-		
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("articleList", articlesList);
-		
-		// viewName이 없기 때문에 URL로 부터 뷰 이름이 결정된다.
-		// /board/listArticles.do => /board/listArticles
-		return mav;
-	}
 	
-	@Override
-	@RequestMapping(value="/sale/listArticlesold.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView saleListArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		String viewName = (String) request.getAttribute("viewName");
-		
-		List	articlesList	= boardService.saleListArticles();
-		
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("articleList", articlesList);
-		
-		// viewName이 없기 때문에 URL로 부터 뷰 이름이 결정된다.
-		// /board/listArticles.do => /board/listArticles
-		return mav;
-	}
 
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 쓰기 화면
@@ -180,12 +147,12 @@ public class BoardControllerImpl implements BoardController {
 		
 		HttpSession session	= multipartRequest.getSession();
 		MemberDTO memberDTO	= (MemberDTO) session.getAttribute("member");
-		String	user_id = memberDTO.getUserId();
+		String	userId = memberDTO.getUserId();
 		
 		logger.info("2222222222222222222222222222222222222222222222222222222222222222222222222222222222222");
-		logger.info("user_id : " + user_id);
+		logger.info("userId : " + userId);
 		
-		articleMap.put("user_id", 	user_id);
+		articleMap.put("userId", 	userId);
 		articleMap.put("thumbnail", thumbnail);
 		
 		String	message;
@@ -252,12 +219,12 @@ public class BoardControllerImpl implements BoardController {
 		
 		HttpSession session	= multipartRequest.getSession();
 		MemberDTO memberDTO	= (MemberDTO) session.getAttribute("member");
-		String	user_id = memberDTO.getUserId();
+		String	userId = memberDTO.getUserId();
 		
 		logger.info("2222222222222222222222222222222222222222222222222222222222222222222222222222222222222");
-		logger.info("user_id : " + user_id);
+		logger.info("userId : " + userId);
 		
-		articleMap.put("user_id", 	user_id);
+		articleMap.put("userId", 	userId);
 		articleMap.put("thumbnail", thumbnail);
 		
 		String	message;
@@ -268,8 +235,8 @@ public class BoardControllerImpl implements BoardController {
 		try {
 			int articleNO = boardService.saleAddNewArticle(articleMap);
 			if(thumbnail != null && thumbnail.length() != 0) {
-				File srcDir  = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + thumbnail);
-				File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO);
+				File srcDir  = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + thumbnail );
+				File destDir = new File(ARTICLE_IMAGE_REPO + "\\"  + articleNO);
 				FileUtils.moveToDirectory(srcDir, destDir, true);
 			}
 			
@@ -642,6 +609,18 @@ public class BoardControllerImpl implements BoardController {
 		return mav;
 		
 	} // End - 게시글 목록 (페이징) 화면 보여주기 
+
+	@Override
+	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ModelAndView saleListArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 
