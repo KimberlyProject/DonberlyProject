@@ -125,7 +125,7 @@
           </ul>
         </li>
         <li><a href="#">캘린더</a></li>
-        <li><a href="#">채팅목록</a></li>
+        <li><a href="/chat/chat_list">채팅목록</a></li>
       </ul>
       <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
     </aside>

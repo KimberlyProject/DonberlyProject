@@ -255,7 +255,7 @@ div.chat.ch2{
 					<div class="wrap"  style="overflow:auto; width:599px; height:600px;">
 						<!-- 시작 날짜! -->
 						<div class="chat_date">
-							<div class="textbox">2023년 4월 25일</div>
+							<div class="textbox">2023년 8월 28일</div>
 						</div>
 						<!-- 날짜 끝! -->
 						<!-- 상대방이 ch1 -->
