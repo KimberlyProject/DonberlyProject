@@ -19,7 +19,7 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li class="active">
-                <a href="#">장터 <span class="sr-only">(current)</span></a>
+                <a href="/sale/listArticles.do">장터 <span class="sr-only">(current)</span></a>
                 <ul>
                     <li><a href="/sale/listArticles.do">삽니다</a></li>
                     <li><a href="/board/listArticles.do">팝니다</a></li>                   
@@ -33,7 +33,7 @@
                 </ul>
               </li>                  
               <li>
-                <a href="#">고객센터</a>                
+                <a href="/ccenter/notice">고객센터</a>                
                 <ul> 
                     <li><a href="/ccenter/notice">공지사항</a></li>
                     <li><a href="/ccenter/qna">Q & A</a></li>
@@ -42,16 +42,17 @@
                 </ul>
               </li>
               <li>
-                <a href="#">마이페이지</a>                
+                <a href="/myPage/myPage">마이페이지</a>                
                 <ul> 
-                    <li><a href="../myPage/salesHistory">판매내역</a></li>
+                    <li><a href="/myPage/salesHistory">판매내역</a></li>
                     <li><a href="/chat/chattingview">1:1 채팅하기</a></li>
                     <li><a href="/chat/chat_list">채팅 리스트</a></li>
+                    <li><a href="/myPage/calendar">캘린더</a></li>
                     
                 </ul>
               </li>
               <li>
-                <a href="#">관리자</a>                
+                <a href="/admin/oneOnOneInquiry">관리자</a>                
                 <ul> 
                     <li><a href="/admin/oneOnOneInquiry">1:1문의</a></li>
                     <li><a href="/admin/memberList">회원 목록</a></li>
@@ -65,14 +66,16 @@
             <c:if test="${ member != null }">
             <!-- 로그인 했을 때 -->
 	            <div class="navbar-text navbar-right loginbtn">
-	                <div class="dropdown calicon">
+	            
+                   	<a href="/myPage/calendar"><span class="glyphicon glyphicon-calendar"></span></a>    
+	                <!--<div class="dropdown calicon">
 	                    <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 	                        <span class="glyphicon glyphicon-calendar"></span>                     
 	                    </button>
 	                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
 	                      <li><img src="./images/cal.jpeg" alt="달력"></li>                          
 	                    </ul>
-	                </div>
+	                </div> -->
 	
 	                <div class="dropdown alermicon">
 	                    <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -91,7 +94,7 @@
 	                      <li><a href="#">''님이 댓글을 달았습니다</a></li>                          
 	                    </ul>
 	                </div>
-	                <a href="${path}/member/login" class="navbar-link"></span><span class="glyphicon glyphicon-user"></span> ${ member.name } 님</a>
+	                <a href="${path}/myPage/myPage" class="navbar-link"></span><span class="glyphicon glyphicon-user"></span> ${ member.nickname } 님</a>
 	            </div>
             </c:if>
           </div><!-- /.navbar-collapse -->
