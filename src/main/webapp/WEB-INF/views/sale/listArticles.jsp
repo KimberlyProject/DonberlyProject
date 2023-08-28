@@ -29,7 +29,7 @@
     		<ul>
         		<li><a href="#">장터</a></li>
         		<li>
-          			<a href="#">팝니다</a>
+          			<a href="#">삽니다</a>
 		          		<ul>
 		            		<li><a href="#">목록</a></li>
 		            
@@ -55,7 +55,7 @@
 
 
 <div class="container">
-	<h1 align="center">게시글</h1>
+	<h1 align="center">삼</h1>
 	
 	<!-- 검색 조건 -->
 	<div class="col-sm-offset-6">
