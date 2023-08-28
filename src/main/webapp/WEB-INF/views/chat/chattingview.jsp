@@ -322,9 +322,9 @@ div.chat.ch2{
 				<td class="chat_text"  colspan="2">
 				<div class="row" style="height: 90px;">
 					<div class="form-group col-xs-5">
-						<textarea style="height: 80px;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
+						<textarea style="height: 80px; width:440px;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
 					</div>
-					<div class="form-group col-xs-3" >
+					<div class="form-group col-xs-4" style="padding-left:55px;">
 						<button class="btn btn-success btn-lg" style="height:80px; width:120px;">전송</button>
 						
 						<div class="clearfix"></div>
