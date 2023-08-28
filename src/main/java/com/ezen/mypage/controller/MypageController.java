@@ -17,5 +17,11 @@ public class MypageController {
 		System.out.println("마이페이지 판매내역 조회!!!!!!!!!!!!!!!!");
 		return "/myPage/salesHistory";
 	}
+	
+	@RequestMapping(value="/myInfo", method=RequestMethod.GET)
+	public String getMyInfo(Model model){
+		System.out.println("내정보 화면 접속");
+		return "myPage/myInfo";
+	}
 
 }

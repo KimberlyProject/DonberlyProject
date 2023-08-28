@@ -27,4 +27,20 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne(namespace + ".logOn", memberDTO);
 	}//경은 logOn()
 
+	// 회원 아이디 중복 검사
+	@Override
+	public int idCheck(MemberDTO memberDTO) throws Exception {
+		logger.info("MemberDAOImple 아이디 중복 검사");
+		return sqlSession.selectOne(namespace + ".idCheck", memberDTO);
+	} // End - public int idCheck(MemberDTO memberDTO)
+
+	//-----------------------------------------------------------------------------------------------------------
+	// 회원 가입 POST
+	//-----------------------------------------------------------------------------------------------------------
+	@Override
+	public int membership(MemberDTO memberDTO) throws Exception {
+		logger.info("MemberDAOImple 회원 가입 POST");
+		return sqlSession.insert(namespace + ".insert", memberDTO);
+	} // End - public int memberInsert(MemberDTO memberDTO)
+
 }

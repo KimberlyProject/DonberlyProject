@@ -9,4 +9,13 @@ public interface MemberService {
 	//경은
 	public MemberDTO logOn(MemberDTO memberDTO) throws Exception;
 	
+	
+	// 회원 아이디 중복 검사
+	public int idCheck(MemberDTO memberDTO) throws Exception;
+	
+	// 회원 가입 POST
+	public int membership(MemberDTO memberDTO) throws Exception;
+	
+
+
 }

@@ -6,10 +6,24 @@
    
    <!-- 경은 -->
    <select id="logOn" parameterType="com.ezen.member.dto.MemberDTO" resultType="com.ezen.member.dto.MemberDTO">
-      SELECT   user_id, pw, nickname
+      SELECT   userId, pw, nickname
       FROM   members
-      WHERE   user_id       = #{userId}
+      WHERE   userId       = #{userId}
       AND     pw   = #{pw}
    </select>
+   
+	<!-- 회원 아이디 중복 검사 -->
+	<select id="idCheck" parameterType="com.ezen.member.dto.MemberDTO" resultType="int">
+		SELECT	COUNT(*)
+		FROM	members
+		WHERE	userId		= #{userId}
+	</select>
+	
+	<!-- 회원 가입 POST -->
+	<insert id="insert" parameterType="com.ezen.member.dto.MemberDTO">
+		INSERT INTO members
+				(userId, 	  pw,    name,    nickname, regDate,   tel,     email,    address,    repw, zipCode)
+		VALUES	(#{userId},#{pw}, #{name}, #{nickname}, sysdate, #{tel},  #{email}, #{address}, #{repw}, #{zipCode} )
+	</insert>
    
 </mapper>
