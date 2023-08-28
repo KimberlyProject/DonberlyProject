@@ -156,7 +156,7 @@ public class BoardControllerImpl implements BoardController {
 	@ResponseBody
 	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
-
+		
 		multipartRequest.setCharacterEncoding("UTF-8");
 		
 		Map<String, Object> articleMap = new HashMap<String, Object>();
@@ -180,12 +180,12 @@ public class BoardControllerImpl implements BoardController {
 		
 		HttpSession session	= multipartRequest.getSession();
 		MemberDTO memberDTO	= (MemberDTO) session.getAttribute("member");
-		String	user_id = memberDTO.getUserId();
+		String	userId = memberDTO.getUserId();
 		
 		logger.info("2222222222222222222222222222222222222222222222222222222222222222222222222222222222222");
-		logger.info("user_id : " + user_id);
+		logger.info("userId : " + userId);
 		
-		articleMap.put("user_id", 	user_id);
+		articleMap.put("userId", 	userId);
 		articleMap.put("thumbnail", thumbnail);
 		
 		String	message;
@@ -252,12 +252,12 @@ public class BoardControllerImpl implements BoardController {
 		
 		HttpSession session	= multipartRequest.getSession();
 		MemberDTO memberDTO	= (MemberDTO) session.getAttribute("member");
-		String	user_id = memberDTO.getUserId();
+		String	userId = memberDTO.getUserId();
 		
 		logger.info("2222222222222222222222222222222222222222222222222222222222222222222222222222222222222");
-		logger.info("user_id : " + user_id);
+		logger.info("userId : " + userId);
 		
-		articleMap.put("user_id", 	user_id);
+		articleMap.put("userId", 	userId);
 		articleMap.put("thumbnail", thumbnail);
 		
 		String	message;

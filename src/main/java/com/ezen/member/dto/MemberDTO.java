@@ -10,11 +10,13 @@ public class MemberDTO {
 	private String repw;
 	private String name;
 	private String nickname;
-	private Date regDate;
+	private Date   regDate;
 	private String tel;
 	private String email;
 	private String address;
 	private String zipCode;
+	
+	
 	
 	public String getUserId() {
 		return userId;

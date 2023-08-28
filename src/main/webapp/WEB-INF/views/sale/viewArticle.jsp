@@ -122,7 +122,7 @@
 			
 			<tr>
 				<td id="a" width="150" align="center" >작성자</td>
-				<td id="a"><input type="text"   value="${article.user_id }" name="writer" disabled/></td>
+				<td id="a"><input type="text"   value="${article.userId }" name="writer" disabled/></td>
 			</tr> 
 			
 			<tr>
@@ -154,7 +154,7 @@
 					<input type="button" class="btn btn-info" value="목록으로 돌아가기" onClick="backToList(this.form)"/>
 					<input type="button" class="btn btn-primary" value="1:1채팅" onClick="fn_reply_form('${path}/sale/replyForm.do)', ${article.articleNO})"/>
 					<!-- 로그인한 아이디와 게시글을 쓴 사람의 아이디가 같다면, 글쓴 본인이므로 수정/삭제가 가능하다. -->
-					<c:if test="${member.user_id == article.user_id}">
+					<c:if test="${member.userId == article.userId}">
 						<input type="button" class="btn btn-warning" value="수정하기" onClick="fn_enable(this.form)"/>
 						<input type="button" class="btn btn-danger"  value="삭제하기" onClick="fn_remove('${path}/sale/removeArticle.do', ${article.articleNO})"/>
 					</c:if>

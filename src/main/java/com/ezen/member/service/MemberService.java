@@ -7,6 +7,6 @@ import com.ezen.member.dto.MemberDTO;
 public interface MemberService {
 
 	//경은
-	public MemberDTO logOn(MemberDTO memberDTO) throws Exception;
+	public MemberDTO login(MemberDTO memberDTO) throws Exception;
 	
 }
