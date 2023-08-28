@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%! SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일"); %>
 <html>
 <head>
 	<title>Home</title>
@@ -54,6 +56,9 @@
 		.head > th:last-child {
 			width:				15%;
 		}
+		tr > span {
+			vertical-align:		middle;
+		}
 	</style>
 </head>
 <body>
@@ -100,30 +105,18 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td><input type="checkbox" style="width: 100%;"/></td>
-					<td>1</td>
-					<td>heedong</td>
-					<td>010-1111-1111</td>
-					<td class="addr">서울특별시 종로구 종로 78 (종로2가, 미려빌딩 3,5,6층)</td>
-					<td>2023.08.23</td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" style="width: 100%;"/></td>
-					<td>2</td>
-					<td>bangja</td>
-					<td>010-2222-2222</td>
-					<td class="addr">서울특별시 종로구 종로 78 (종로2가, 미려빌딩 3,5,6층)</td>
-					<td>2023.08.23</td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" style="width: 100%;"/></td>
-					<td>3</td>
-					<td>chunhyang</td>
-					<td>010-2222-2222</td>
-					<td class="addr">서울특별시 종로구 종로 78 (종로2가, 미려빌딩 3,5,6층)</td>
-					<td>2023.08.23</td>
-				</tr>
+				<c:forEach var="list" items="${memberList}" varStatus="memberNum">
+					<tr>
+						<td><span><input type="checkbox" style="width: 100%;"/></span></td>
+						<a href="/admin/memberDetail?id=${list.userId}">
+							<td><span>${memberNum.count}</span></td>
+							<td><span><input type="text" class="form-control" id="id" name="id" value="${list.userId}" readonly="readonly"/></span></td>
+							<td><span><input type="text" class="form-control" id="tel" name="tel" value="${list.tel}"/></span></td>
+							<td class="addr"><span><input type="text" class="form-control" id="addr" name="addr" value="${list.address}"/></span></td>
+							<td><span><fmt:formatDate value="${list.regDate}" pattern="yyyy년 MM월 dd일"/></span></td>
+						</a>
+					</tr>
+				</c:forEach>
 				<br/>
 				
 			</tbody>

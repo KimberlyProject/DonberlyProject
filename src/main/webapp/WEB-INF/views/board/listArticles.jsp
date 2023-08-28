@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%  String   userId         = (String) session.getAttribute("member.userId"); %>
 <!DOCTYPE html>
+
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -22,7 +24,20 @@
 	
 </head>
 <body>
+
 <%@ include file="../include/topMenu.jsp" %>
+
+<!-- 세션 값이 없으면 로그인과 회원가입을 활성화 시킨다. -->
+<hr/>
+
+<c:if test="${member != null}">
+   <h1>${member.userId }</h1>
+</c:if>
+<c:if test="${member == null}">
+   <h1>세션 없어요</h1>
+</c:if>
+<div class="container">
+	
 
 	<aside id="sideMenu">
     	<h2>장터</h2>
@@ -55,7 +70,7 @@
 
 
 <div class="container">
-	<h1 align="center">게시글</h1>
+	<h1 align="center">팝니다</h1>
 	
 	<!-- 검색 조건 -->
 	<div class="col-sm-offset-6">

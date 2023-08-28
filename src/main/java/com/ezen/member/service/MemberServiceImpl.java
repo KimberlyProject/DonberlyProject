@@ -19,11 +19,12 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Inject
 	private MemberDAO memberDAO;
+	
 	//경은
 	@Override
-	public MemberDTO logOn(MemberDTO memberDTO) throws Exception {
+	public MemberDTO login(MemberDTO memberDTO) throws Exception {
 	
-		return memberDAO.logOn(memberDTO);
+		return memberDAO.login(memberDTO);
 	}
 
 

@@ -22,9 +22,9 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	//경은
 	@Override
-	public MemberDTO logOn(MemberDTO memberDTO) throws Exception {
+	public MemberDTO login(MemberDTO memberDTO) throws Exception {
 		logger.info("MemberDAOImpl 로그인 POST");
-		return sqlSession.selectOne(namespace + ".logOn", memberDTO);
+		return sqlSession.selectOne(namespace + ".login", memberDTO);
 	}//경은 logOn()
 
 }
