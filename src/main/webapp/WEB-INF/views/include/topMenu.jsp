@@ -61,7 +61,7 @@
             </ul>               
             <!-- 로그인안 했을 때  -->
             <c:if test="${ member == null }">
-            	<p class="navbar-text navbar-right loginbtn"><a href="${path}/member/login" class="navbar-link" onClick="return action_path();"><span class="glyphicon glyphicon-user"></span> 로그인</a></p>
+            	<p class="navbar-text navbar-right loginbtn"><a href="${path}/member/login" class="navbar-link" onClick="return action_path();"><span class="glyphicon glyphicon-user"></span> 로그인</a></p>            	 
             </c:if>
             <c:if test="${ member != null }">
             <!-- 로그인 했을 때 -->
@@ -94,7 +94,17 @@
 	                      <li><a href="#">''님이 댓글을 달았습니다</a></li>                          
 	                    </ul>
 	                </div>
-	                <a href="${path}/myPage/myPage" class="navbar-link"></span><span class="glyphicon glyphicon-user"></span> ${ member.nickname } 님</a>
+                    <div class="dropdown myinfo">
+	                   <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+	                       ${ member.nickname } 님                     
+	                   </button>
+	                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+	                     <li><a href="/myPage/myPage">내 정보 보기</a></li>                          
+	                     <li><a href="/member/logout">로그 아웃</a></li>                          
+	                   </ul>
+	               </div>
+	                
+	                <%-- <a href="${path}/myPage/myPage" class="navbar-link"></span><span class="glyphicon glyphicon-user"></span> ${ member.nickname } 님</a> --%>
 	            </div>
             </c:if>
           </div><!-- /.navbar-collapse -->
