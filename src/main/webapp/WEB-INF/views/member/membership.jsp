@@ -64,7 +64,7 @@
       <form action="" method="get">
         <div>
           <label for="user_id">아 이 디</label>
-          <input type="text" id="user_id" name="user_id"/>
+          <input type="text" id="user_id" name="userId"/>
           <button class="btn">중복 확인</button>
         </div>
         <div>

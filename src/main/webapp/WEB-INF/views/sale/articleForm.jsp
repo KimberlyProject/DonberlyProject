@@ -94,6 +94,7 @@
 				<td id="a" align="right">작성자</td>
 				<td id="b" colspan="2" align="left">
 					<input type="text" size="50" maxlength="50" value="${member.nickname}" readonly/>
+					<input type="hidden" size="50" maxlength="50" value="${userId}" readonly/>
 				</td>
 			</tr>			
 			<tr>

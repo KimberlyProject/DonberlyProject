@@ -6,9 +6,15 @@
    
    <!-- 경은 -->
    <select id="logOn" parameterType="com.ezen.member.dto.MemberDTO" resultType="com.ezen.member.dto.MemberDTO">
+<<<<<<< HEAD
       SELECT   userID, pw, nickname
       FROM   members
       WHERE   userID       = #{userId}
+=======
+      SELECT   userId, pw, nickname
+      FROM   members
+      WHERE   userId       = #{userId}
+>>>>>>> 2ce09097b12b2ea151fc3ce7c0b6d86259b8ae1b
       AND     pw   = #{pw}
    </select>
    
