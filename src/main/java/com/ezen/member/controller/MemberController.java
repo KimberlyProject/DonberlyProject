@@ -82,7 +82,7 @@ public class MemberController {
 			// 세션을 발급한다.
 			session.setAttribute("member", 	memberDTO);
 			session.setAttribute("isLogOn", true);
-			session.setMaxInactiveInterval(-1);
+			session.setMaxInactiveInterval(60 * 180);
 			String action = (String)session.getAttribute("action");
 			System.out.println("Login action : " + action);
 			System.out.println("Login session : " + member);
@@ -103,9 +103,17 @@ public class MemberController {
 			mav.setViewName("redirect:/member/login");
 		}
 		
-		return mav;
-							  
-	} 
+		return mav;							  
+	}
+	
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String getLogout (@RequestParam(value="action", required=false) String action,
+							HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		 
+		return "/member/login";
+	}
     
 
 }
