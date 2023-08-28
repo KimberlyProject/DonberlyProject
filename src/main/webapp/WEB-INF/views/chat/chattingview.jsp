@@ -141,6 +141,40 @@ html{
 	width:969px;
 }
 <!---->
+
+a {
+    text-decoration: none;
+}
+
+.wrap {
+    padding: 40px 0;
+    background-color: #A8C0D6;
+}
+
+.wrap .chat {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.wrap .chat .icon {
+    position: relative;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #eee;
+}
+
+.wrap .chat .icon i {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    font-size: 2.5rem;
+    color: #aaa;
+    transform: translateX(-50%);
+}
+
 .wrap .chat .textbox {
     position: relative;
     display: inline-block;
@@ -157,41 +191,18 @@ html{
     top: 0;
     font-size: 1.5rem;
 }
-.wrap .ch1 .textbox {		/*텍스트 박스*/
+
+.wrap .ch1 .textbox {
     margin-left: 20px;
     background-color: #ddd;
-    float: right;
-    
-    
 }
 
 .wrap .ch1 .textbox::before {
     left: -15px;
-    
+    /*content: "◀";*/
     color: #ddd;
 }
 
-.wrap .chat .textbox {
-    position: relative;
-    display: inline-block;
-    max-width: calc(100% - 70px);
-    padding: 10px;
-    margin-top: 20px;
-    
-    border-radius: 10px;
-    font-size: 13px;
-    background-color: #ddd;
-}
-
-.wrap .chat .textbox::before {
-    position: absolute;
-    display: block;
-   
-    top: 0;
-    left: -15px;
-    font-size: 1.5rem;
-    color: #ddd;
-}
 .wrap .ch2 {
     flex-direction: row-reverse;
 }
@@ -199,25 +210,35 @@ html{
 .wrap .ch2 .textbox {
     margin-right: 20px;
     background-color: #F9EB54;
-    float: left;
 }
 
 .wrap .ch2 .textbox::before {
     right: -15px;
-    
+    /*content: "▶";*/
     color: #F9EB54;
 }
-
-.textbox{
-	margin: 0;
-	padding: 0;
+.time2{
+	vertical-align: bottom;
+	text-align: right;
+	padding-right: 40px;
+}
+.time1{
+	padding-left:30px;
+}
+div.chat.ch1, div.chat.ch2{
+	padding-bottom: 0px;
+}
+div.chat.ch1{
+	padding-left: 0;
+}
+div.chat.ch2{
+	padding-right: 0;
+}
+.chat_date{
+	text-align:center;
+	background-color: #F0FFF0;
 }
 
-.time{
-	float: right;
-	position: relative;
-	top:60px;
-}
 </style>
 </head>
 <body>
@@ -227,81 +248,58 @@ html{
 	
 		<table border="1" style="margin: 0px; padding: 0px;">
 			<tr>
-				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">채팅창</td>
+				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">사람님과의 채팅창</td>
 			</tr>
 			<tr>
 				<td class="chat_area">
 					<div class="wrap"  style="overflow:auto; width:599px; height:600px;">
+						<!-- 시작 날짜! -->
+						<div class="chat_date">
+							<div class="textbox">2023년 4월 25일</div>
+						</div>
+						<!-- 날짜 끝! -->
+						<!-- 상대방이 ch1 -->
 	        			<div class="chat ch1">
-	            			<div class="icon"><i class="fa-solid fa-user"></i></div>
 	            			<div class="textbox">안녕하세요. 반갑습니다.</div>
-	            			<div class="time">2023</div>
 	        			</div>
-	        			<br><br><br>
+	            		<div class="time1" >20시30분</div>
+	        			<!-- 묶음 끝 -->
 	        			
+	        			<!-- 내가 ch2 -->
 	        			<div class="chat ch2">
-	            			<div class="icon"><i class="fa-solid fa-user"></i></div>
-	            			<div class="textbox">안녕하세요. 16일 거래 가능하신가요?</div>
-	            			<div class="time">2023</div>
+	            			<div class="textbox">안녕하세요. 16일 거래 가능하신가요? 제가 1212121212121212121212ㅇㅎㄶㄶ55555555555555555555ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ5ㄶㄶㄷㄴㄷㅎㄴㅇㄹㄹㄹㄹㅇㅎㅇㅀㅇㅎㄹㅇㅀㅇㅀㅇㅀㅇㅀㅇㅎㄹㄹㄹㄹㄹㄹㄹㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㅎㅎㅎㅎㅎㅎㅎㅎ1212</div>
 	        			</div>
-	        			<br><br><br>
+	            		<div class="time2" >20시30분</div>
+	        			<!-- 묶음 끝 -->
 	        			
 	        			<div class="chat ch1">
-	            			<div class="icon"><i class="fa-solid fa-user"></i></div>
 	            			<div class="textbox">네 그럼 16일 종각역에서 3시에 어떠신가요?</div>
 	        			</div>
-	        			<br><br><br>
+	            		<div class="time1" >20시30분</div>
+	        			
         			
 				        <div class="chat ch2">
-				            <div class="icon"><i class="fa-solid fa-user"></i></div>
 				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
 				        </div>
-				        <br><br><br>
+				        <div class="time2" >20시30분</div>
+				        
 				        <div class="chat ch2">
-				            <div class="icon"><i class="fa-solid fa-user"></i></div>
 				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
 				        </div>
-				        <br><br><br>
+				        <div class="time2" >20시30분</div>
+				        
 				        <div class="chat ch2">
-				            <div class="icon"><i class="fa-solid fa-user"></i></div>
 				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
 				        </div>
-				        <br><br><br>
+				        <div class="time2" >20시30분</div>
+				        
 				        <div class="chat ch2">
-				            <div class="icon"><i class="fa-solid fa-user"></i></div>
 				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
 				        </div>
-				        <br><br><br>
-				        <div class="chat ch2">
-				            <div class="icon"><i class="fa-solid fa-user"></i></div>
-				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
-				        </div>
-				        <br><br><br>
-				        <div class="chat ch2">
-				            <div class="icon"><i class="fa-solid fa-user"></i></div>
-				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
-				        </div>
-				        <br><br><br>
-				        <div class="chat ch2">
-				            <div class="icon"><i class="fa-solid fa-user"></i></div>
-				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
-				        </div>
-				        <br><br><br>
-				        <div class="chat ch2">
-				            <div class="icon"><i class="fa-solid fa-user"></i></div>
-				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
-				        </div>
-				        <br><br><br>
-				        <div class="chat ch2">
-				            <div class="icon"><i class="fa-solid fa-user"></i></div>
-				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
-				        </div>
-				        <br><br><br>
-				        <div class="chat ch2">
-				            <div class="icon"><i class="fa-solid fa-user"></i></div>
-				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
-				        </div>
-				        <br><br><br>
+				        <div class="time2" >20시30분</div>
+				        
+				        
+				        
     				</div>
 				</td>
 				<td class="chat_detail" rowspan="2">
@@ -311,7 +309,8 @@ html{
 					<div>상품코드: 123456</div>
 					<div style="padding-bottom: 10px;">가격: 10,000원</div>
 					
-					<br><br><br><br><br><br><br><br>
+					<img src="${path}/resources/images/kuromi.png" alt="사진" width="200px;" height="200px;"/>
+					<br><br>
 					<button type="button" class="btn btn-success btn-lg">일정 추가</button>
 					<br><br>
 					<button type="button" class="btn btn-danger btn-lg">신고 하기</button>
