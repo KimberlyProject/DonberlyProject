@@ -15,13 +15,6 @@
           font-size:18px;
           margin-bottom:10px;
         }
-        #membership form>div>div,
-        #membership form>div>input{
-        	padding:0;
-        }
-        #membership form>div #idCheck{
-        	margin-left:10px;
-        }
         #membership form>div>label{
           text-align:center;
           display:inline-block;
@@ -56,18 +49,6 @@
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp"%>
-<aside id="sideMenu">
-      <ul>
-        <li><a href="#">회원가입</a></li>
-        <li><a href="#">로그인</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
-    <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      회원 가입
-    </div>
-    <h1 class="pageTitle"><div>회원 가입</div></h1>
 
 <div class="container" id="membership">
 
@@ -75,13 +56,13 @@
 		<div class="form-group">
 			<div class="col-sm-2"></div>
 			<div class="col-sm-6">
-				<h2 align="center">환영합니다!</h2>
+				<h2 align="center">회원가입</h2>
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<label class="control-label col-sm-2">아 이 디</label>
-			<div class="col-sm-5">
+			<div class="col-sm-2">
 				<input type="text" class="form-control" id="userID" name="userId" maxlength="10" placeholder="아이디를 입력하세요."/>
 			</div>
 			<div class="col-sm-2">
@@ -90,15 +71,26 @@
 		</div>
 		
 		<div class="form-group">
+			<label class="control-label col-sm-2">안내글</label>
+			<div class="col-sm-8">
+				<input type="text" class="form-control msg" id="msg" name="msg" readonly placeholder="메시지"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-8" id="msg2"></div>
+		</div>
+		
+		<div class="form-group">
 			<label class="control-label col-sm-2">비밀번호</label>
-			<div class="col-sm-5">
+			<div class="col-sm-2">
 				<input type="password" class="form-control" id="pw" name="pw" maxlength="10" placeholder="비밀번호"/>
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<label class="control-label col-sm-2">비밀번호확인</label>
-			<div class="col-sm-5">
+			<div class="col-sm-2">
 				<input type="password" class="form-control" id="repw" name="repw" maxlength="10" placeholder="비밀번호확인"/>
 			</div>
 		</div>
@@ -119,7 +111,7 @@
 		
 		<div class="form-group">
 			<label class="control-label col-sm-2">전화번호</label>
-			<div class="col-sm-2">
+			<div class="col-sm-1">
 				<select class="form-control" id="tel1" name="tel1">
 					<option value="010">010</option>
 					<option value="011">011</option>
@@ -153,14 +145,14 @@
 		
 		<div class="form-group">
 			<label class="control-label col-sm-2">주    소</label>
-			<div class="col-sm-5">
+			<div class="col-sm-6">
 				<input type="text"   class="form-control" name="address_1" id="address_1"/>
 			</div>
 		</div>
 		
 		<div class="form-group">
 			<label class="control-label col-sm-2">상세주소</label>
-			<div class="col-sm-5">
+			<div class="col-sm-6">
 				<input type="text"   class="form-control" name="address_2" id="address_2"/>
 			</div>
 		</div>
@@ -168,7 +160,7 @@
 		
 		<div class="form-group">
 			<label class="control-label col-sm-2">이메일</label>
-			<div class="col-sm-5">
+			<div class="col-sm-6">
 				<input type="text"   class="form-control" name="email" id="email"/>
 			</div>
 		</div>
