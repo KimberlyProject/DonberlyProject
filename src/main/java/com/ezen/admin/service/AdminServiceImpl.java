@@ -16,16 +16,45 @@ public class AdminServiceImpl implements AdminService {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 	
-	//--------------------------------------------------------------------------------------------------
-	// public List<MemberDTO> selectMember() throws Exception; : 회원 전체 목록
-	//--------------------------------------------------------------------------------------------------
-	
 	@Inject
 	private AdminDAO adminDAO;
 	
+	//--------------------------------------------------------------------------------------------------
+	// public List<MemberDTO> selectMember() throws Exception; : 회원 전체 목록
+	//--------------------------------------------------------------------------------------------------	
 	@Override
 	public List<MemberDTO> selectMember() throws Exception {
+		
 		return adminDAO.selectMember();
+	}
+	
+	//--------------------------------------------------------------------------------------------------
+	// public MemberDTO memberDetail(String id) throws Exception : 회원 상세 정보
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public MemberDTO memberDetail(String userId) throws Exception {
+		
+		return adminDAO.memberDetail(userId);
+	}
+	
+	//--------------------------------------------------------------------------------------------------
+	// public void memberUpdate(MemberDTO memberDTO) throws Exception : 회원 정보 수정
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public void memberUpdate(MemberDTO memberDTO) throws Exception {
+		
+		logger.info("회원 정보 수정 Service");
+		adminDAO.memberUpdate(memberDTO);
+		
+	}
+
+	@Override
+	public void memberDelete(String memberDTO) throws Exception {
+
+		logger.info("회원 정보 수정 Service ==> " + memberDTO);
+		
+		adminDAO.memberDelete(memberDTO);
+		
 	}
 
 }

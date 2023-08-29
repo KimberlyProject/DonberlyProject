@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ezen.admin.service.AdminService;
 //import com.ezen.member.dto.MemberDTO;
@@ -54,4 +55,41 @@ public class AdminController {
 		
 		return "/admin/memberList";
 	} // End - public String getMemberList(Model model) throws Exception
+	
+	//--------------------------------------------------------------------------------------------------
+	// 회원아이디에 대한 상세 정보 조회
+	//--------------------------------------------------------------------------------------------------
+	@RequestMapping(value="/memberDetail", method=RequestMethod.GET)
+	public void memberDetail(@RequestParam("userId") String userId, Model model) throws Exception {
+		
+		MemberDTO memberDTO = adminService.memberDetail(userId);
+		model.addAttribute("detail", memberDTO);
+		
+		System.out.println("상세정보 : " + memberDTO);
+
+	}
+	
+	//--------------------------------------------------------------------------------------------------
+	// 회원 정보 수정
+	//--------------------------------------------------------------------------------------------------
+	@RequestMapping(value="/memberUpdate", method=RequestMethod.POST)
+	public String memberUpdate(MemberDTO memberDTO) throws Exception {
+		logger.info("회원정보수정 Controller ==> " + memberDTO);
+		// Client에서 보내오는 데이터들의 name이 맞으면 memberDTO에 알아서 값이 들어간다.
+		adminService.memberUpdate(memberDTO);
+		
+		return "redirect:/admin/memberDetail?userId=" + memberDTO.getUserId();
+	}
+	
+	//--------------------------------------------------------------------------------------------------
+	// 회원 정보 삭제
+	//--------------------------------------------------------------------------------------------------
+	@RequestMapping(value="/memberDelete", method=RequestMethod.POST)
+	public String memberDelete(MemberDTO memberDTO, Model model) throws Exception {
+		logger.info("회원 정보 삭제 Controller ==> " + memberDTO);
+		adminService.memberDelete(memberDTO.getUserId());
+		
+		return "redirect:/admin/memberList";
+	}
+	
 }

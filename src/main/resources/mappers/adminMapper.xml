@@ -34,9 +34,32 @@
 		<result property="thumbnail"		column="thumbnail"/>
 		<result property="price"			column="price"/>
 	</resultMap>
+	
 	<select id="selectMember" resultType="com.ezen.member.dto.MemberDTO">
-		SELECT	* FROM members
+		SELECT	* 
+		FROM	members
 	</select>
+	
+	<select id="detail" parameterType="String" resultType="com.ezen.member.dto.MemberDTO">
+		SELECT	* 
+		FROM	members
+		WHERE	userId = #{userId}
+	</select>
+	
+	<update id="update" parameterType="com.ezen.member.dto.MemberDTO">
+		UPDATE	members
+		SET		pw			= #{pw},
+				repw		= #{repw},
+				name		= #{name},
+				nickname	= #{nickname},
+				tel			= #{tel},
+				email		= #{email},
+				address		= #{address}
+		WHERE	userId		= #{userId}
+	</update>
+	<delete id="delete" parameterType="com.ezen.member.dto.MemberDTO">
+		DELETE FROM members WHERE userId = #{userId}
+	</delete>
 </mapper>
 
 
