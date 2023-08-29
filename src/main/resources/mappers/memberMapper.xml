@@ -19,6 +19,13 @@
 		WHERE	userId		= #{userId}
 	</select>
 	
+	<!-- 회원 닉네임 중복 검사 -->
+	<select id="nickCheck" parameterType="com.ezen.member.dto.MemberDTO" resultType="int">
+		SELECT	COUNT(*)
+		FROM	members
+		WHERE	nickname		= #{nickname}
+	</select>
+	
 	<!-- 회원 가입 POST -->
 	<insert id="insert" parameterType="com.ezen.member.dto.MemberDTO">
 		INSERT INTO members

@@ -43,4 +43,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.insert(namespace + ".insert", memberDTO);
 	} // End - public int memberInsert(MemberDTO memberDTO)
 
+	// 닉네임 중복 검사
+	@Override
+	public int nickCheck(MemberDTO memberDTO) throws Exception {
+		logger.info("MemberDAOImple 닉네임 중복 검사");
+		return sqlSession.selectOne(namespace + ".nickCheck", memberDTO);
+	}
+
 }

@@ -15,6 +15,9 @@ public interface MemberService {
 	
 	// 회원 가입 POST
 	public int membership(MemberDTO memberDTO) throws Exception;
+
+	// 닉네임 중복 검사
+	public int nickCheck(MemberDTO memberDTO) throws Exception;
 	
 
 

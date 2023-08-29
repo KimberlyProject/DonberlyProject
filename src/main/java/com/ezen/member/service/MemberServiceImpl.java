@@ -40,5 +40,12 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
+	@Override
+	public int nickCheck(MemberDTO memberDTO) throws Exception {
+		logger.info("MemberServiceImpl 아이디 중복 검사()");
+		int result = memberDAO.nickCheck(memberDTO);
+		return result;
+	}
+
 
 }

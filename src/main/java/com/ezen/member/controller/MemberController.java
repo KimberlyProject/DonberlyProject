@@ -66,7 +66,26 @@ public class MemberController {
 			
 		} // End - public int idCheck(MemberDTO memberDTO)
 	
+	//-----------------------------------------------------------------------------------------------------------
+	// 닉네임 중복 검사
+	//-----------------------------------------------------------------------------------------------------------
+	@ResponseBody
+	@RequestMapping(value="/nickCheck", method=RequestMethod.POST)
+	public int nickCheck(MemberDTO memberDTO) throws Exception {
+		
+		logger.info("닉네임 중복 검사 : " + memberDTO);
+		
+		int result = memberService.nickCheck(memberDTO);
+		logger.info("닉네임 중복 검사 결과 : " + result);
+		
+		// result 값 : 1이면 닉네임에 해당하는 정보가 이미 존재
+		//			   0이면 닉네임에 해당하는 정보가 존재하지 않는다.
+		return result;
+		
+	} // End - public int nickCheck(MemberDTO memberDTO)
 
+	
+	
 	//-----------------------------------------------------------------------------------------------------------
 	// 회원 가입 POST (AJAX)
 	//-----------------------------------------------------------------------------------------------------------
