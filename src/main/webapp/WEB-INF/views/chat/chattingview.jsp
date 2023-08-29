@@ -248,7 +248,7 @@ div.chat.ch2{
 	
 		<table border="1" style="margin: 0px; padding: 0px;">
 			<tr>
-				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">사람님과의 채팅창</td>
+				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">사람과의 채팅창</td>
 			</tr>
 			<tr>
 				<td class="chat_area">
