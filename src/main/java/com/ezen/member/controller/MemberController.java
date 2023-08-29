@@ -106,16 +106,6 @@ public class MemberController {
 		
 	} // End - public String postRegisterAjax()
 	
-	//-----------------------------------------------------------------------------------------------------------
-	// 로그아웃
-	//-----------------------------------------------------------------------------------------------------------
-	@RequestMapping(value="/logout", method=RequestMethod.GET)
-	public String logout(HttpSession session) throws Exception {
-		// 로그아웃 버튼을 눌렀을 경우에는 세션을 없앤다.
-		session.invalidate();
-		return "redirect:/member/login";
-	} // End - 로그아웃
-	
 	
 	
 	@RequestMapping(value="/findPasswd", method=RequestMethod.GET)
@@ -187,10 +177,6 @@ public class MemberController {
 		 
 		return "/member/login";
 	}
-    
-
-       return mav;                   
-    }//경은
 	
   	@RequestMapping(value="/profile", method=RequestMethod.GET)
   	public String getProfile(Model model){
