@@ -68,7 +68,9 @@
     	<div>장터</div>
     </h1>
 
-	<h1 align="center">게시글</h1>
+
+<div class="container">
+	<h1 align="center">팝니다</h1>
 	
 	<!-- 검색 조건 -->
 	<div class="col-sm-offset-6">

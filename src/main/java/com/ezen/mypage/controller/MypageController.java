@@ -23,5 +23,10 @@ public class MypageController {
 		System.out.println("마이페이지 캘린더!!!!!!!!!!!!!!!!");
 		return "/myPage/calendar";
 	}
+	@RequestMapping(value="/myInfo", method=RequestMethod.GET)
+	public String getMyInfo(Model model){
+		System.out.println("내정보 화면 접속");
+		return "myPage/myInfo";
+	}
 
 }

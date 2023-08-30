@@ -143,7 +143,7 @@ public class ArticleVO {
 
 	@Override
 	public String toString() {
-		return "ArticleVO [rnum=" + rnum + ", level=" + level + ", articleNO=" + articleNO + ", user_id=" + userId
+		return "ArticleVO [rnum=" + rnum + ", level=" + level + ", articleNO=" + articleNO + ", userId=" + userId
 				+ ", write_date=" + write_date + ", title=" + title + ", content=" + content + ", p_code=" + p_code
 				+ ", purpose=" + purpose + ", view=" + view + ", thumbnail=" + thumbnail + ", price=" + price + "]";
 	}

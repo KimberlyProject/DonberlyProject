@@ -36,7 +36,22 @@ table{
 a {
     text-decoration: none;
 }
-
+.container{
+	margin:0;
+	padding:0;
+}
+body{
+	padding:0;
+	margin-right:0px;
+	width: 969px;
+	overflow: hidden;
+}
+html{
+	width: 969px;
+	margin: 0;
+	padding:0;
+	overflow: hidden;
+}
 
 <!---->
 .chat_title{
@@ -45,16 +60,16 @@ a {
 	font-size:20px;
 	text-align: center;
 	vertical-align: center;
-	width:1300px; height: 50px;
+	width:998px; height: 50px;
 }
 
 .chat_area{
-	width:700px; height:600px;
+	width:599px; height:600px;
 	align-content: center;
 	background-color: #DCFFDC;
 }
 .chat_detail{
-	width:500px;
+	width:399px;
 	vertical-align:top;
 	text-align: center;
 	font-size: 20px;
@@ -98,20 +113,194 @@ a {
 	padding-left: 10px;
 }
 
+.ballon {
+    display: none;
+    position: absolute;
+    width: 205px;
+    height: 40px;
+    left: 448px;
+    bottom: 62px;
+    background: #484848;
+    color: white;
+    border-radius: 5px;
+    padding: 12px 12.8px;
+}
+
+
+.ballon:a {
+    border-top: 10px solid #484848;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 0px solid transparent;
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: 160px;
+}
+.row{
+	width:969px;
+}
+<!---->
+
+a {
+    text-decoration: none;
+}
+
+.wrap {
+    padding: 40px 0;
+    background-color: #A8C0D6;
+}
+
+.wrap .chat {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.wrap .chat .icon {
+    position: relative;
+    overflow: hidden;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #eee;
+}
+
+.wrap .chat .icon i {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    font-size: 2.5rem;
+    color: #aaa;
+    transform: translateX(-50%);
+}
+
+.wrap .chat .textbox {
+    position: relative;
+    display: inline-block;
+    max-width: calc(100% - 70px);
+    padding: 10px;
+    margin-top: 7px;
+    font-size: 13px;
+    border-radius: 10px;
+}
+
+.wrap .chat .textbox::before {
+    position: absolute;
+    display: block;
+    top: 0;
+    font-size: 1.5rem;
+}
+
+.wrap .ch1 .textbox {
+    margin-left: 20px;
+    background-color: #ddd;
+}
+
+.wrap .ch1 .textbox::before {
+    left: -15px;
+    /*content: "◀";*/
+    color: #ddd;
+}
+
+.wrap .ch2 {
+    flex-direction: row-reverse;
+}
+
+.wrap .ch2 .textbox {
+    margin-right: 20px;
+    background-color: #F9EB54;
+}
+
+.wrap .ch2 .textbox::before {
+    right: -15px;
+    /*content: "▶";*/
+    color: #F9EB54;
+}
+.time2{
+	vertical-align: bottom;
+	text-align: right;
+	padding-right: 40px;
+}
+.time1{
+	padding-left:30px;
+}
+div.chat.ch1, div.chat.ch2{
+	padding-bottom: 0px;
+}
+div.chat.ch1{
+	padding-left: 0;
+}
+div.chat.ch2{
+	padding-right: 0;
+}
+.chat_date{
+	text-align:center;
+	background-color: #F0FFF0;
+}
+
 </style>
 </head>
 <body>
-<%@ include file="../include/topMenu.jsp" %>
-	<br>
+
+	
 	<div class="container">
 	
-		<table border="1">
+		<table border="1" style="margin: 0px; padding: 0px;">
 			<tr>
-				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">채팅창</td>
+				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">사람님과의 채팅창</td>
 			</tr>
 			<tr>
 				<td class="chat_area">
-					채팅치는곳
+					<div class="wrap"  style="overflow:auto; width:599px; height:600px;">
+						<!-- 시작 날짜! -->
+						<div class="chat_date">
+							<div class="textbox">2023년 4월 25일</div>
+						</div>
+						<!-- 날짜 끝! -->
+						<!-- 상대방이 ch1 -->
+	        			<div class="chat ch1">
+	            			<div class="textbox">안녕하세요. 반갑습니다.</div>
+	        			</div>
+	            		<div class="time1" >20시30분</div>
+	        			<!-- 묶음 끝 -->
+	        			
+	        			<!-- 내가 ch2 -->
+	        			<div class="chat ch2">
+	            			<div class="textbox">안녕하세요. 16일 거래 가능하신가요? 제가 1212121212121212121212ㅇㅎㄶㄶ55555555555555555555ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ5ㄶㄶㄷㄴㄷㅎㄴㅇㄹㄹㄹㄹㅇㅎㅇㅀㅇㅎㄹㅇㅀㅇㅀㅇㅀㅇㅀㅇㅎㄹㄹㄹㄹㄹㄹㄹㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㅎㅎㅎㅎㅎㅎㅎㅎ1212</div>
+	        			</div>
+	            		<div class="time2" >20시30분</div>
+	        			<!-- 묶음 끝 -->
+	        			
+	        			<div class="chat ch1">
+	            			<div class="textbox">네 그럼 16일 종각역에서 3시에 어떠신가요?</div>
+	        			</div>
+	            		<div class="time1" >20시30분</div>
+	        			
+        			
+				        <div class="chat ch2">
+				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
+				        </div>
+				        <div class="time2" >20시30분</div>
+				        
+				        <div class="chat ch2">
+				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
+				        </div>
+				        <div class="time2" >20시30분</div>
+				        
+				        <div class="chat ch2">
+				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
+				        </div>
+				        <div class="time2" >20시30분</div>
+				        
+				        <div class="chat ch2">
+				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
+				        </div>
+				        <div class="time2" >20시30분</div>
+				        
+				        
+				        
+    				</div>
 				</td>
 				<td class="chat_detail" rowspan="2">
 					<div>제목: 물건 팝니다.</div>
@@ -120,7 +309,8 @@ a {
 					<div>상품코드: 123456</div>
 					<div style="padding-bottom: 10px;">가격: 10,000원</div>
 					
-					<br><br><br><br><br><br><br><br>
+					<img src="${path}/resources/images/kuromi.png" alt="사진" width="200px;" height="200px;"/>
+					<br><br>
 					<button type="button" class="btn btn-success btn-lg">일정 추가</button>
 					<br><br>
 					<button type="button" class="btn btn-danger btn-lg">신고 하기</button>
@@ -146,6 +336,6 @@ a {
 	</div>
 	<br><br>
 	
-<%@ include file="../include/footer.jsp" %>
+
 </body>
 </html>
