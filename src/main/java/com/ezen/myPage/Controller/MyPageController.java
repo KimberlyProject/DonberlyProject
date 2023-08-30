@@ -1,4 +1,4 @@
-package com.ezen.myPage.Controller;
+package com.ezen.mypage.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,4 +18,20 @@ public class MyPageController {
 		return "/myPage/salesHistory";
 	}
 
+	
+	
+	//노을 임시
+	/*
+	@RequestMapping(value="/salesHistory", method=RequestMethod.GET)
+	public String salesHistory(Model model) {
+		System.out.println("마이페이지 판매내역 조회!!!!!!!!!!!!!!!!");
+		return "/myPage/salesHistory";
+	 
+	  redirect
+	  
+	  
+	  
+	  
+	*/
+	//경은 임시
 }

@@ -33,8 +33,8 @@
       <ul>
         <li><a href="./notice">공지사항</a></li>
         <li><a href="./qna">Q & A</a></li>
-        <li><a href="askOnetoOne">1:1 문의하기</a></li>
-        <li><a href="#">신고하기</a></li>
+        <li><a href="./askOnetoOne">1:1 문의하기</a></li>
+        <li><a href="./report">신고하기</a></li>
       </ul>
       <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
     </aside>
