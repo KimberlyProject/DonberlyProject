@@ -81,18 +81,22 @@ public class AuctionController {
 		
 		
 		List<String> fileList = upload(req);
-		System.out.println("upload 메서드 실행중");
+		System.out.println("upload 메서드 실행중" + fileList);
 		List<AucImgDTO> imgFileList = new ArrayList<AucImgDTO>();
+		System.out.println("이미지 List<AucImgDTO> 가져오기" + imgFileList);
 		if(fileList != null && fileList.size() != 0 ) {
 			for(String fileName : fileList) {
 				AucImgDTO aucImgDTO = new AucImgDTO();
 				aucImgDTO.setImgName(fileName);
 				imgFileList.add(aucImgDTO);
 			}
-			articleMap.put("imgFileList", imgFileList);
-			
+		} else if(fileList == null) {
+			AucImgDTO aucImgDTO = new AucImgDTO();
+			aucImgDTO.setImgName("이미지가 첨부되지 않았습니다.");
+			imgFileList.add(aucImgDTO);
 		}
-		
+		articleMap.put("imgFileList", imgFileList);
+		System.out.println("이미지 파일 가져오기 articleMap" + imgFileList);
 		
 		String msg;
 		ResponseEntity resEnt = null;
@@ -109,7 +113,6 @@ public class AuctionController {
 					File srcFile = new File(IMGROOT + "\\" + "temp" + "\\" + imgName);
 					File destFile = new File(IMGROOT + "\\" + aucCode);
 					FileUtils.moveFileToDirectory(srcFile,  destFile, true);
-				
 				}
 			}
 			msg = "<script>";
@@ -117,7 +120,6 @@ public class AuctionController {
 			msg += "location.href='" + req.getContextPath()+"/auction/auction_main';";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, resHds, HttpStatus.CREATED);
-		
 		} catch(Exception e) {
 			if(imgFileList != null && imgFileList.size() != 0) {
 				for(AucImgDTO aucImgDTO : imgFileList) {
@@ -165,17 +167,16 @@ public class AuctionController {
 		String viewName = (String) request.getAttribute("viewName");
 		List<AuctionDTO> articlesList	= auctionService.listArticles();
 		List<AucImgDTO> articlesList2 = auctionService.listArticlesImg();
-		
+
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("articlesList", articlesList);	
 		mav.addObject("articlesList2", articlesList2);
 		return mav;
-		
 	}			
-	
+
 	//디테일페이지 불러오기
 	@RequestMapping(value="/auction_detail", method=RequestMethod.GET)
-	public ModelAndView viewArticle(@RequestParam("aucCode")int aucCode, HttpServletRequest req, HttpServletResponse res)
+	public ModelAndView viewArticle(@RequestParam("aucCode") int aucCode, HttpServletRequest req, HttpServletResponse res)
 			throws Exception {
 		String viewName = (String)req.getAttribute("viewName");
 		AuctionDTO auctionDTO = auctionService.viewArticle(aucCode);
@@ -188,10 +189,6 @@ public class AuctionController {
 		
 		return mav;
 	}	
-	
-
-	
-	
 	
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -8,25 +8,35 @@
    	<!-- 새로운 게시글 사용할 번호 추출하기  -->
  	<select id ="selectNewAucCode" resultType="int">
  		<![CDATA[
- 			SELECT nvl(max(imgNo), 0) from aucImg
+ 			SELECT nvl(max(aucCode), 1) from auction
  		]]>
  	</select>
  	
    	<!-- 새로운 게시글 추가하기 -->
   	<insert id="insertNewArticle" parameterType="java.util.Map">
   		<![CDATA[
-  			insert into auction (aucCode, minprice, maxPrice, writeDate, title, content, nowBid, 
-  								 bidRate, aucId, status, deadline)
-  			values (#{aucCode}, #{minprice}, #{maxPrice}, #{writeDate}, #{title}, #{content}, #{nowBid}, 
-  					#{bidRate}, #{aucId}, #{status}, #{deadline})
+  			insert into 
+  			auction (aucCode, minprice, maxPrice, writeDate, title, content, nowBid, 
+  					bidRate, aucId, status, deadline)
+  			values (#{aucCode}, #{minprice}, #{maxPrice}, sysdate, #{title}, #{content}, #{nowBid}, 
+  					#{bidRate}, #{aucId}, #{status}, SYSDATE+#{deadline})
   		]]>
   	</insert>
+  	
+  	
+   	<!-- 새로운 게시글 이미지에 사용할 번호 추출하기  -->
+ 	<select id ="selectNewImgFileNo" resultType="int">
+ 		<![CDATA[
+ 			<![CDATA[
+ 			SELECT nvl(max(imgNo), 1) from aucImg
+ 		]]>
+ 	</select>
   	
   	<!-- 새로운 게시글에 이미지 추가하기 -->
  	<insert id="insertNewImg" parameterType="java.util.Map">
  		<foreach item="item" collection="list" open="INSERT ALL"
  			separator=" " close="SELECT * FROM DUAL">
- 			INTO aucImg (imgNo, imgNfffame, aucCode, regDate)
+ 			INTO aucImg (imgNo, imgName, aucCode, regDate)
  			values (#{item.imgNo}, #{item.imgName}, #{item.aucCode}, sysdate)	
  		</foreach>
  	</insert>

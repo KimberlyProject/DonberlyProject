@@ -168,7 +168,7 @@ public class MemberController {
 	      return mav;
 	                       
 	   } 
-	
+
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String getLogout (@RequestParam(value="action", required=false) String action,
 							HttpServletRequest request, HttpServletResponse response) {
