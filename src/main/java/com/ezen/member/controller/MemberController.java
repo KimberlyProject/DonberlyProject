@@ -127,47 +127,47 @@ public class MemberController {
 	} // End - public String getLogin()
 	
 	//경은
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public ModelAndView login(@ModelAttribute("member") MemberDTO member,
-							  RedirectAttributes rAttr,
-							  HttpServletRequest request, HttpServletResponse response) throws Exception {
-								
-		ModelAndView mav = new ModelAndView();  
-		
-		// 로그인한 회원정보가 있는지 검사한다.
-		MemberDTO memberDTO = memberService.login(member);
-		
-		// 세션을 사용할 준비를 한다.
-		HttpSession session = request.getSession();
-		
-		//-----------------------------------------------------------------------------------------------------------
-		if(memberDTO != null) {	// 아이디와 비밀번호에 맞는 회원정보를 찾아왔으면
-			// 세션을 발급한다.
-			session.setAttribute("member", 	memberDTO);
-			session.setAttribute("isLogOn", true);
-			session.setMaxInactiveInterval(60 * 180);
-			String action = (String)session.getAttribute("action");
-			System.out.println("Login action : " + action);
-			System.out.println("Login session : " + member);
-			System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-			
-			session.removeAttribute("action");
-			
-			if(action != null) {
-				mav.setViewName("redirect:" + action);
-			} else {
-				mav.setViewName("redirect:/board/listArticles.do");
-			}
-			
-			
-		} else { // 아이디와 비밀번호에 해당하는 정보가 없으면
-			session.setAttribute("member", null);
-			rAttr.addFlashAttribute("msg",  false);
-			mav.setViewName("redirect:/member/login");
-		}
-		
-		return mav;							  
-	}
+	   @RequestMapping(value="/logOn", method=RequestMethod.POST)
+	   public ModelAndView login(@ModelAttribute("member") MemberDTO member,
+	                       RedirectAttributes rAttr,
+	                       HttpServletRequest request, HttpServletResponse response) throws Exception {
+	                        
+	      ModelAndView mav = new ModelAndView();  
+	      
+	      // 로그인한 회원정보가 있는지 검사한다.
+	      MemberDTO memberDTO = memberService.login(member);
+	      
+	      // 세션을 사용할 준비를 한다.
+	      HttpSession session = request.getSession();
+	      
+	      //-----------------------------------------------------------------------------------------------------------
+	      if(memberDTO != null) {   // 아이디와 비밀번호에 맞는 회원정보를 찾아왔으면
+	         // 세션을 발급한다.
+	         session.setAttribute("member",    memberDTO);
+	         session.setAttribute("isLogOn", true);
+	         String action = (String)session.getAttribute("action");
+	         System.out.println("Login action : " + action);
+	         System.out.println("Login session : " + member);
+	         System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+	         
+	         session.removeAttribute("action");
+	         
+	         if(action != null) {
+	            mav.setViewName("redirect:" + action);
+	         } else {
+	            mav.setViewName("redirect:/board/listArticles.do");
+	         }
+	         
+	         
+	      } else { // 아이디와 비밀번호에 해당하는 정보가 없으면
+	         session.setAttribute("member", null);
+	         rAttr.addFlashAttribute("msg",  false);
+	         mav.setViewName("redirect:/member/logOn");
+	      }
+	      
+	      return mav;
+	                       
+	   } 
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)
 	public String getLogout (@RequestParam(value="action", required=false) String action,
