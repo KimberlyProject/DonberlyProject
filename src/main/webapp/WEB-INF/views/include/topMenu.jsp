@@ -48,7 +48,7 @@
                     <li><a href="/chat/chattingview">1:1 채팅하기</a></li>
                     <li><a href="/chat/chat_list">채팅 리스트</a></li>
                     <li><a href="/myPage/calendar">캘린더</a></li>
-                    
+                    <li><a href="../myPage/marketInfo.do">장터</a></li>
                 </ul>
               </li>
               <li>
