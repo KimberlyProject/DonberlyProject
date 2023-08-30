@@ -29,7 +29,7 @@
 	<!-- 회원 가입 POST -->
 	<insert id="insert" parameterType="com.ezen.member.dto.MemberDTO">
 		INSERT INTO members
-				(userId, 	  pw,    name,    nickname, regDate,   tel,     email,    address,    repw, zipCode)
+				(userId, 	  pw,    name,    nickname, regDate,   tel,     email,    address,    repw, ZIP_CODE)
 		VALUES	(#{userId},#{pw}, #{name}, #{nickname}, sysdate, #{tel},  #{email}, #{address}, #{repw}, #{zipCode} )
 	</insert>
    
