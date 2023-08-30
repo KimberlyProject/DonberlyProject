@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Created by https://www.toptal.com/developers/gitignore/api/java,windows,maven,eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,windows,maven,eclipse
 
@@ -81,6 +82,14 @@ local.properties
 
 # Package Files #
 *.jar
+=======
+.classpath
+.project
+.metadata/
+bin/
+.settings/
+*.class
+>>>>>>> 93191e83b23b9c60421cd84c3cfd263f6c026149
 *.war
 *.nar
 *.ear
@@ -88,10 +97,10 @@ local.properties
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+# Servers 폴더
+Servers
 
+<<<<<<< HEAD
 ### Maven ###
 target/
 pom.xml.tag
@@ -139,3 +148,17 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/java,windows,maven,eclipse
+=======
+# Spring 관련 폴더, 파일
+target
+/target/
+.springBeans
+pom.properties
+MANIFEST.MF
+*.log
+.factorypath
+settings.json
+
+# SpringBoot 관련 파일
+config.properties
+>>>>>>> 93191e83b23b9c60421cd84c3cfd263f6c026149

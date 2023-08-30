@@ -14,6 +14,7 @@
 		}
 		.content {
 			display:			none;
+			text-align:			left;
 		}
 		.content.on {
 			display:			table-cell;
@@ -33,6 +34,18 @@
       	.title {
       		text-align:			left;
       	}
+      	.head > th:first-child {
+			width:				5%;
+		}
+		.head > th:nth-child(2) {
+			width:				65%;
+		}
+		.head > th:nth-child(3) {
+			width:				15%;
+		}
+		.head > th:last-child {
+			width:				15%;
+		}
 	</style>
 </head>
 <body>
@@ -73,56 +86,56 @@
       	<!-- 검색창 -->
 		<table class="table table-bordered table-striped table-hover">
 			<thead>
-				<tr style="background: rgb(73, 124, 64); color: #FFF;">
-					<th style="width: 5%;">No</th>
-					<th style="width: 65%;">Title</th>
-					<th style="width: 15%;">Id</th>
-					<th style="width: 15%;">Date</th>
+				<tr class="head" style="background: rgb(73, 124, 64); color: #FFF;">
+					<th>No</th>
+					<th>Title</th>
+					<th>Id</th>
+					<th>Date</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td style="width: 5%;">1</td>
-					<td style="width: 65%;" class="title">GRAND OPEN!</td>
-					<td style="width: 15%;">admin1234</td>
-					<td style="width: 15%;">2023.08.23</td>
+					<td>1</td>
+					<td class="title">GRAND OPEN!</td>
+					<td>admin1234</td>
+					<td>2023.08.23</td>
 				</tr>
 				<tr>
-					<td class="content" style="text-align: left;" colspan="5">
+					<td class="content" colspan="4">
 						우리 오픈했어요 짝짝짝!!!<br/>
 						축하해주세요!!
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 5%;">2</td>
-					<td style="width: 65%;" class="title">공지사항 입니다.</td>
-					<td style="width: 15%;">admin1234</td>
-					<td style="width: 15%;">2023.08.23</td>
+					<td>2</td>
+					<td class="title">공지사항 입니다.</td>
+					<td>admin1234</td>
+					<td>2023.08.23</td>
 				</tr>
 				<tr>
-					<td class="content" style="text-align: left;" colspan="5">
+					<td class="content" colspan="4">
 						누르지 마세요!!
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 5%;">3</td>
-					<td style="width: 65%;" class="title">공지사항 입니다.</td>
-					<td style="width: 15%;">admin1234</td>
-					<td style="width: 15%;">2023.08.23</td>
+					<td>3</td>
+					<td class="title">공지사항 입니다.</td>
+					<td>admin1234</td>
+					<td>2023.08.23</td>
 				</tr>
 				<tr>
-					<td class="content" style="text-align: left;" colspan="5">
+					<td class="content" colspan="4">
 						내용이 없어서
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 5%;">4</td>
-					<td style="width: 65%;" class="title">공지사항 입니다.</td>
-					<td style="width: 15%;">admin1234</td>
-					<td style="width: 15%;">2023.08.23</td>
+					<td>4</td>
+					<td class="title">공지사항 입니다.</td>
+					<td>admin1234</td>
+					<td>2023.08.23</td>
 				</tr>
 				<tr>
-					<td class="content" style="text-align: left;" colspan="5">
+					<td class="content" colspan="4">
 						부끄러워욧!
 					</td>
 				</tr>

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,44 +70,42 @@
 		<img src="/resources/images/banner.jpeg" alt="배너" style="width: 1150px;">
 		<br><br><br>
 		
-		
-		<form id="formgroup" name="aucWrite" method="post" action="${path}/auction/auction_wirte_send}" enctype="auction_wirte_send">
-			<!-- 글쓰기 -->
-			<table id="tb1" class="table table-bordered table-striped table-hover">
+	
+			<table id="tb1" class="table table-bordered table-striped">
 				<tr><!-- 사진, 제목 -->  
 					<th rowspan="7" id="productimg"><img src="#" alt="상품사진"/></th>
 					<th class="cate">제목</th>
 					<th class="colon">:</th>
-					<th colspan="4">상품명</th>
+					<th colspan="4">${articlesList.title}</th>
 				<tr> <!-- 상품번호 -->
 					<th class="cate">상품번호</th>
 					<th class="colon">:</th>
-					<th colspan="4">2023082201</th>
+					<th colspan="4">${articlesList.aucCode}</th>
 				</tr>
 				<tr> <!-- 판매자 -->
 					<th class="cate">판매자</th>
 					<th class="colon">:</th>
-					<th colspan="4">길동이</th>
+					<th colspan="4">${articlesList.aucId}</th>
 				</tr>
 				<tr><!-- 현재입찰가 -->
 					<th class="cate">현재입찰가</th>
 					<th class="colon">:</th>
-					<th colspan="4">80,000원</th>
+					<th colspan="4">${articlesList.nowBid}원</th>
 				</tr>
 				<tr><!-- 입찰단위 -->
 					<th class="cate">입찰단위</th>
 					<th class="colon">:</th>
-					<th colspan="4">100원</th>
+					<th colspan="4">${articlesList.bidRate}원</th>
 				</tr>
 				<tr><!-- 상한금액 -->
 					<th class="cate">상한금액</th>
 					<th class="colon">:</th>
-					<th colspan="4">100,000원</th>
+					<th colspan="4">${articlesList.maxPrice}원</th>
 				</tr>
 				<tr><!-- 경매기간 -->
-					<th class="cate">상한금액</th>
+					<th class="cate">마감기한</th>
 					<th class="colon">:</th>
-					<th colspan="4">sysdate + 24h</th>
+					<th colspan="4">${articlesList.deadline}</th>
 				</tr>
 			</table> 
 			
@@ -117,11 +116,8 @@
 				</tr>
 				<tr>	
 					<th id="textbox" colspan="4">
-						<textarea rows=15 placeholder="판매하실 제품에 대한 상세내용을 입력하세요.">
-							맥 m1 미쳤음. 
-							에어인데 무거워. 
-							사지마^^
-							140만원에 샀는데 풀박이라 100만원부터 시작할게요!
+						<textarea rows=15>
+							${articlesList.content}
 						</textarea>
 					</th>
 				</tr>
@@ -132,13 +128,13 @@
 				<tr>
 					<td class="col-sm-2"></td>
 					<td id="price1" class="col-sm-2">
-					<input  class="col-sm-1 form-control" type="text" style="width:200px; text-align:right" placeholder="12,500원">
+					<input  class="col-sm-1 form-control" type="text" style="width:200px; text-align:right" placeholder="${articlesList.nowBid + articlesList.bidRate}">
 					<button class="btn btn-success" style="background-color:rgb(73, 124, 64); color:#FFFFFF;">
 					<span>입찰하기</span>
 					</button>
 					</td>
 					<td id="price2" class="col-sm-3">
-					<input  class="col-sm-1 form-control" type="text" class="form-control" style="width:200px; text-align:right" placeholder="110,000">
+					<input  class="col-sm-1 form-control" type="text" class="form-control" style="width:200px; text-align:right" placeholder="${articlesList.maxPrice}원">
 					<button class="btn btn-warning" style="background-color:rgb(73, 124, 64); color:#FFFFFF;">
 					<span>상한가 구매</span>
 					</button>

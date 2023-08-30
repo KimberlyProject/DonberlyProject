@@ -14,6 +14,7 @@
 		}
 		.content {
 			display:			none;
+			text-align:			left;
 		}
 		.content.on {
 			display:			table-cell;
@@ -33,6 +34,18 @@
       	.title {
       		text-align:			left;
       	}
+      	.head > th:first-child {
+			width:				5%;
+		}
+		.head > th:nth-child(2) {
+			width:				65%;
+		}
+		.head > th:nth-child(3) {
+			width:				15%;
+		}
+		.head > th:last-child {
+			width:				15%;
+		}
 	</style>
 </head>
 <body>
@@ -73,55 +86,55 @@
       	<!-- 검색창 -->
 		<table class="table table-bordered table-striped table-hover">
 			<thead>
-				<tr style="background: rgb(73, 124, 64); color: #FFF;">
-					<th style="width: 5%;">No</th>
-					<th style="width: 65%;">Title</th>
-					<th style="width: 15%;">Id</th>
-					<th style="width: 15%;">Date</th>
+				<tr class="head" style="background: rgb(73, 124, 64); color: #FFF;">
+					<th>No</th>
+					<th>Title</th>
+					<th>Id</th>
+					<th>Date</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td style="width: 5%;">1</td>
-					<td style="width: 65%;" class="title">사기당하면 어쩌죠?</td>
-					<td style="width: 15%;">admin1234</td>
-					<td style="width: 15%;">2023.08.23</td>
+					<td>1</td>
+					<td class="title">사기당하면 어쩌죠?</td>
+					<td>admin1234</td>
+					<td>2023.08.23</td>
 				</tr>
 				<tr>
-					<td class="content" style="text-align: left;" colspan="5">
+					<td class="content" colspan="5">
 						당했어요 어쩔 수 없어요
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 5%;">2</td>
-					<td style="width: 65%;" class="title">판매자가 돈만 받고 연락이 안되요.</td>
-					<td style="width: 15%;">admin1234</td>
-					<td style="width: 15%;">2023.08.23</td>
+					<td>2</td>
+					<td class="title">판매자가 돈만 받고 연락이 안되요.</td>
+					<td>admin1234</td>
+					<td>2023.08.23</td>
 				</tr>
 				<tr>
-					<td class="content" style="text-align: left;" colspan="5">
+					<td class="content" colspan="5">
 						저런... 안됬네요...
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 5%;">3</td>
-					<td style="width: 65%;" class="title">택배로 벽돌이 왔습니다.</td>
-					<td style="width: 15%;">admin1234</td>
-					<td style="width: 15%;">2023.08.23</td>
+					<td>3</td>
+					<td class="title">택배로 벽돌이 왔습니다.</td>
+					<td>admin1234</td>
+					<td>2023.08.23</td>
 				</tr>
 				<tr>
-					<td class="content" style="text-align: left;" colspan="5">
+					<td class="content" colspan="5">
 						짝짝짝 벽돌 당첨!
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 5%;">4</td>
-					<td style="width: 65%;" class="title">이런식으로 운영해도 되나요?</td>
-					<td style="width: 15%;">admin1234</td>
-					<td style="width: 15%;">2023.08.23</td>
+					<td>4</td>
+					<td class="title">이런식으로 운영해도 되나요?</td>
+					<td>admin1234</td>
+					<td>2023.08.23</td>
 				</tr>
 				<tr>
-					<td class="content" style="text-align: left;" colspan="5">
+					<td class="content"colspan="5">
 						안되나요?
 					</td>
 				</tr>

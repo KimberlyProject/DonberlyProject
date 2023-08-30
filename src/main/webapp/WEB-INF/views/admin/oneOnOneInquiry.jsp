@@ -14,6 +14,7 @@
 		}
 		.content {
 			display:			none;
+			text-align:			left;
 		}
 		.content.on {
 			display:			table-cell;
@@ -33,6 +34,21 @@
       	.title {
       		text-align:			left;
       	}
+      	.head > th:first-child {
+			width:				5%;
+		}
+		.head > th:nth-child(2) {
+			width:				5%;
+		}
+		.head > th:nth-child(3) {
+			width:				60%;
+		}
+		.head > th:nth-child(4) {
+			width:				15%;
+		}
+		.head > th:last-child {
+			width:				15%;
+		}
 	</style>
 </head>
 <body>
@@ -73,24 +89,24 @@
       	<!-- 검색창 -->
 		<table class="table table-bordered table-striped table-hover">
 			<thead>
-				<tr style="background: rgb(73, 124, 64); color: #FFF;">
-					<th style="width: 5%;"><span class="glyphicon glyphicon-ok"></span></th>
-					<th style="width: 5%;">No</th>
-					<th style="width: 60%;">Title</th>
-					<th style="width: 15%;">Id</th>
-					<th style="width: 15%;">Date</th>
+				<tr class="head" style="background: rgb(73, 124, 64); color: #FFF;">
+					<th><span class="glyphicon glyphicon-ok"></span></th>
+					<th>No</th>
+					<th>Title</th>
+					<th>Id</th>
+					<th>Date</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td style="width: 5%;"><input type="checkbox" style="width: 100%;"/></td>
-					<td style="width: 5%;">1</td>
-					<td style="width: 60%;" class="title">제목자리입니다.</td>
-					<td style="width: 15%;">gildong</td>
-					<td style="width: 15%;">2023.08.23</td>
+					<td><input type="checkbox" style="width: 100%;"/></td>
+					<td>1</td>
+					<td class="title">제목자리입니다.</td>
+					<td>gildong</td>
+					<td>2023.08.23</td>
 				</tr>
 				<tr>
-					<td class="content" style="text-align: left;" colspan="5">
+					<td class="content" colspan="5">
 						1대1 문의사항 입니다. <br/>
 						답변주세요
 						<div>
@@ -100,14 +116,14 @@
 					
 				</tr>
 				<tr>
-					<td style="width: 5%;"><input type="checkbox" style="width: 100%;"/></td>
-					<td style="width: 5%;">2</td>
-					<td style="width: 60%;" class="title">제목자리입니다.</td>
-					<td style="width: 15%;">gildong</td>
-					<td style="width: 15%;">2023.08.23</td>
+					<td><input type="checkbox" style="width: 100%;"/></td>
+					<td>2</td>
+					<td class="title">제목자리입니다.</td>
+					<td>gildong</td>
+					<td>2023.08.23</td>
 				</tr>
 				<tr>
-					<td class="content" style="text-align: left;" colspan="5">
+					<td class="content" colspan="5">
 						1대1 문의사항 입니다. <br/>
 						답변주세요
 						<div>
@@ -116,14 +132,14 @@
 					</td>
 				</tr>
 				<tr>
-					<td style="width: 5%;"><input type="checkbox" style="width: 100%;"/></td>
-					<td style="width: 5%;">3</td>
-					<td style="width: 60%;" class="title">제목자리입니다.</td>
-					<td style="width: 15%;">gildong</td>
-					<td style="width: 15%;">2023.08.23</td>
+					<td><input type="checkbox" style="width: 100%;"/></td>
+					<td>3</td>
+					<td class="title">제목자리입니다.</td>
+					<td>gildong</td>
+					<td>2023.08.23</td>
 				</tr>
 				<tr>
-					<td class="content" style="text-align: left;" colspan="5">
+					<td class="content" colspan="5">
 						1대1 문의사항 입니다. <br/>
 						답변주세요
 						<div>

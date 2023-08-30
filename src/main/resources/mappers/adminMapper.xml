@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezen.member.mepper.adminMapper">
+
+	<!-- <resultMap id="articlesResult" type="com.ezen.board.dto.ArticleVO"> -->
+	<resultMap id="articlesResult" type="articleVO">
+		<result property="rnum"				column="recNum"/>
+		<result property="level"			column="lvl"/>
+		<result property="articleNO"		column="articleNO"/>
+		<result property="userId"			column="userId"/>
+		<result property="write_date"		column="write_date"/>
+		<result property="title"			column="title"/>
+		<result property="content"			column="content"/>
+		<result property="p_code"			column="p_code"/>
+		<result property="purpose"			column="purpose"/>
+		<result property="view"				column="view"/>
+		<result property="thumbnail"		column="thumbnail"/>
+		<result property="price"			column="price"/>
+	</resultMap>
+	
+	<resultMap id="saleArticlesResult" type="saleArticleVO">
+		<result property="rnum"				column="recNum"/>
+		<result property="level"			column="lvl"/>
+		<result property="articleNO"		column="articleNO"/>
+		<result property="userId"			column="userId"/>
+		<result property="write_date"		column="write_date"/>
+		<result property="title"			column="title"/>
+		<result property="content"			column="content"/>
+		<result property="p_code"			column="p_code"/>
+		<result property="purpose"			column="purpose"/>
+		<result property="view"				column="view"/>
+		<result property="thumbnail"		column="thumbnail"/>
+		<result property="price"			column="price"/>
+	</resultMap>
+	
+	<select id="selectMember" resultType="com.ezen.member.dto.MemberDTO">
+		SELECT	* 
+		FROM	members
+	</select>
+	
+	<select id="detail" parameterType="String" resultType="com.ezen.member.dto.MemberDTO">
+		SELECT	* 
+		FROM	members
+		WHERE	userId = #{userId}
+	</select>
+	
+	<update id="update" parameterType="com.ezen.member.dto.MemberDTO">
+		UPDATE	members
+		SET		pw			= #{pw},
+				repw		= #{repw},
+				name		= #{name},
+				nickname	= #{nickname},
+				tel			= #{tel},
+				email		= #{email},
+				address		= #{address}
+		WHERE	userId		= #{userId}
+	</update>
+	<delete id="delete" parameterType="com.ezen.member.dto.MemberDTO">
+		DELETE FROM members WHERE userId = #{userId}
+	</delete>
+</mapper>
+
+

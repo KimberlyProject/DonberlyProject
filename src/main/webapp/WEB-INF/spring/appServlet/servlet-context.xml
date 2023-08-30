@@ -24,10 +24,13 @@
 	<context:component-scan base-package="com.ezen.main" />
 	<context:component-scan base-package="com.ezen.member" />
 	<context:component-scan base-package="com.ezen.admin" />
-	<context:component-scan base-package="com.ezen.myPage" />
+	<context:component-scan base-package="com.ezen.mypage" />
 	<context:component-scan base-package="com.ezen.auction" />
 	<context:component-scan base-package="com.ezen.chat" />
 	<context:component-scan base-package="com.ezen.ccenter"/>
+	<context:component-scan base-package="com.ezen.board"/>
+	<context:component-scan base-package="com.ezen.info"/>
+
 	
 	
 	<!-- 파일 업로드 관련 설정을 한다. : 파일업로드에 대한 규칙(multipartResolver)을 적용한다. -->
