@@ -62,18 +62,18 @@
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-    <aside id="sideMenu">
-      <ul>
-        <li><a href="#">회원가입</a></li>
-        <li><a href="#">로그인</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
+	<c:set var="menu" value="mypage" />
+	<%@ include file="../include/sidebar.jsp" %>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      회원정보수정
+      홈 &gt; 마이페이지 &gt; 내 정보 &gt; 회원정보수정
     </div>
+    
     <h1 class="pageTitle"><div>회원정보수정</div></h1>
+   	<c:if test="${member == null}">
+		<script>location.href="/member/login"</script>
+	</c:if>   
+	
     <div class="container" id="membership">
       <form action="" method="get">
         <div>

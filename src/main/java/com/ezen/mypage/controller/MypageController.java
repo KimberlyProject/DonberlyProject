@@ -29,4 +29,10 @@ public class MypageController {
 		return "myPage/myInfo";
 	}
 
+  	@RequestMapping(value="/myProfileUpdate", method=RequestMethod.GET)
+  	public String getUserProfileEditor(Model model){
+  		System.out.println("프로필 수정 화면 접속");
+  		return "myPage/myProfileUpdate";
+  	}
+
 }
