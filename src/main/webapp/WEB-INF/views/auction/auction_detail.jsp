@@ -124,24 +124,32 @@
 			</table>
 		</form>
 		
-		<table id="tb3" class="row">
+		
+			<table id="tb3" class="row">
 				<tr>
 					<td class="col-sm-2"></td>
 					<td id="price1" class="col-sm-2">
-					<input  class="col-sm-1 form-control" type="text" style="width:200px; text-align:right" placeholder="${articlesList.nowBid + articlesList.bidRate}">
-					<button class="btn btn-success" style="background-color:rgb(73, 124, 64); color:#FFFFFF;">
-					<span>입찰하기</span>
-					</button>
+						<form name="aucBuyandBid" method="get" action="${path}/auction/modifyandupdate" enctype="multipart/form-data">
+							<input type="hidden" name="aucCode" value="${article.aucCode}"/>
+							<input name="nowBid" value="${articlesList.nowBid + articlesList.bidRate}" class="col-sm-1 form-control" type="text" style="width:200px; text-align:right" placeholder="${articlesList.nowBid + articlesList.bidRate}">
+							<button type="submit" class="btn btn-success" style="background-color:rgb(73, 124, 64); color:#FFFFFF;">
+								<span>입찰하기</span>
+							</button>
+						</form>
 					</td>
 					<td id="price2" class="col-sm-3">
-					<input  class="col-sm-1 form-control" type="text" class="form-control" style="width:200px; text-align:right" placeholder="${articlesList.maxPrice}원">
-					<button class="btn btn-warning" style="background-color:rgb(73, 124, 64); color:#FFFFFF;">
-					<span>상한가 구매</span>
-					</button>
+						<form name="aucBuyandBid" method="get" action="${path}/auction/modifyandupdate" enctype="multipart/form-data">
+							<input type="hidden" name="aucCode" value="${article.aucCode}"/>
+							<input  name="maxPrice" class="col-sm-1 form-control" type="text" class="form-control" style="width:200px; text-align:right" placeholder="${articlesList.maxPrice}원">
+							<button type="submit" class="btn btn-warning" style="background-color:rgb(73, 124, 64); color:#FFFFFF;">
+								<span>상한가 구매</span>
+							</button>
+						</form>
 					</td>	
 					<td class="col-sm-1"></td>
 				</tr>
 			</table>
+		</form>
 		
 			<br/><br/>
 		
