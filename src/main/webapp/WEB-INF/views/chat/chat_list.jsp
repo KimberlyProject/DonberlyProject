@@ -51,6 +51,9 @@ label{
        홈 &gt; 마이페이지 &gt; 채팅창 목록
     </div>
 	<h1 class="pageTitle"><div>채팅창 목록</div></h1>
+	<c:if test="${member == null}">
+	<script>location.href="/member/login"</script>
+	</c:if>   
 	<!-- 검색창 -->
 	<div style="width:1000px; height: 50px; margin-left:110px; margin-right: 0px;">
 		<div class= "row" align="right" style="vertical-align:middle; float:right;">

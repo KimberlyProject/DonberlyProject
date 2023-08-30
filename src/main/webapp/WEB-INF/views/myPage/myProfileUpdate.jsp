@@ -70,6 +70,10 @@
     </div>
     
     <h1 class="pageTitle"><div>회원정보수정</div></h1>
+   	<c:if test="${member == null}">
+		<script>location.href="/member/login"</script>
+	</c:if>   
+	
     <div class="container" id="membership">
       <form action="" method="get">
         <div>

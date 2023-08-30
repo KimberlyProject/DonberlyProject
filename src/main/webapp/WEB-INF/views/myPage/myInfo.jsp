@@ -73,7 +73,9 @@
   <h1 class="pageTitle"><div>내 정보</div></h1>
     
     
-    
+   	<c:if test="${member == null}">
+		<script>location.href="/member/login"</script>
+	</c:if>   
     <div class="profile-info">
         <img src="../../resources/images/jjangu.png" width="100" height="100" alt="프로필 사진"/>
         <p class="nickname"><strong>닉네임:</strong> 사용자_닉네임</p>

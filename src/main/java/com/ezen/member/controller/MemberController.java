@@ -127,7 +127,7 @@ public class MemberController {
 	} // End - public String getLogin()
 	
 	//경은
-	   @RequestMapping(value="/logOn", method=RequestMethod.POST)
+	   @RequestMapping(value="/login", method=RequestMethod.POST)
 	   public ModelAndView login(@ModelAttribute("member") MemberDTO member,
 	                       RedirectAttributes rAttr,
 	                       HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -155,7 +155,7 @@ public class MemberController {
 	         if(action != null) {
 	            mav.setViewName("redirect:" + action);
 	         } else {
-	            mav.setViewName("redirect:/board/listArticles.do");
+	            mav.setViewName("redirect:/");
 	         }
 	         
 	         
@@ -175,7 +175,7 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		 
-		return "/member/login";
+		return "redirect:/member/login";
 	}
 	
   	@RequestMapping(value="/profile", method=RequestMethod.GET)
