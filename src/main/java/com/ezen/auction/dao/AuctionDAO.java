@@ -33,15 +33,18 @@ public class AuctionDAO {
 			private int selectNewAucCode() throws DataAccessException {
 				return sqlSession.selectOne(namespace +".selectNewAucCode");
 			}
+			
 	//새로운 게시글 이미지 추가하기
 	public void insertNewImg(Map articleMap) throws DataAccessException {
+		System.out.println("이미지추가 dao");
 		List<AucImgDTO> imgFileList = (ArrayList)articleMap.get("imgFileList");
 		int aucCode = (Integer)articleMap.get("aucCode");
 		int imgFileNo = selectNewImgFileNo();
 		for(AucImgDTO aucImgDTO : imgFileList) {
 			aucImgDTO.setImgNo(++imgFileNo);
 			aucImgDTO.setAucCode(aucCode);
-		}		
+		}
+		System.out.println("toString" + imgFileList.toString());
 		sqlSession.insert(namespace + ".insertNewImg", articleMap);
 	}		//이미지 번호 추출		
 			private int selectNewImgFileNo() throws DataAccessException {
