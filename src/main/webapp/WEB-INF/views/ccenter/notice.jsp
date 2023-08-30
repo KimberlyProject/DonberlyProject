@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <html>
 <head>
 	<title>Home</title>
@@ -50,20 +49,11 @@
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-	<aside id="sideMenu">
-      <ul>
-        <li><a href="./notice">공지사항</a></li>
-        <li><a href="./qna">Q & A</a></li>
-        <li><a href="#">1:1문의하기</a></li>
-        <li><a href="#">신고하기</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
+	<c:set var="menu" value="ccenter" />
+	<%@ include file="../include/sidebar.jsp" %>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <span><a href="./notice">고객센터</a></span>
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      <span><a href="./notice">공지사항</a></span>
+      홈 &gt; 고객센터 &gt; 공지사항
     </div>
     <h1 class="pageTitle"><div>공지사항</div></h1>
 	<div class="container">

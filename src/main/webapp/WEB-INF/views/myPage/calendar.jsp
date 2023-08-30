@@ -107,34 +107,13 @@
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp" %>
-    <aside id="sideMenu">
-      <h2>마이페이지</h2>
-      <ul>
-        <li><a href="#">내 정보 수정</a></li>
-        <li>
-          <a href="#">거래내역</a>
-          <ul>
-            <li><a href="#">삽니다</a></li>
-            <li><a href="#">팝니다</a></li>
-          </ul>
-        </li>
-        <li><a href="#">경매</a>          
-          <ul>
-            <li><a href="#">판매</a></li>
-            <li><a href="#">구매</a></li>
-          </ul>
-        </li>
-        <li><a href="#">캘린더</a></li>
-        <li><a href="#">채팅목록</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
+<c:set var="menu" value="mypage" />
+<%@ include file="../include/sidebar.jsp" %>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <a href="/">홈</a> &gt;
-      <a href="#">마이페이지</a> &gt;
-      <a href="./">캘린더</a>
+      홈 &gt; 마이페이지 &gt; 캘린더
     </div>
+    
     <h1 class="pageTitle"><div>캘린더</div></h1>
 	   
 	<div class="container" id="calendarPage">     
