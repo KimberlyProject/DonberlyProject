@@ -34,10 +34,10 @@ public class ChatDAOImpl implements ChatDAO {
 	}
 
 	@Override
-	public String insertContent(String content) throws Exception {
+	public void insertContent(ChatDTO chatDTO) throws Exception {
 		
-		//return sqlSession.insert(namespace+".insertContent", content);
-		return null;
+		sqlSession.insert(namespace+".insertContent", chatDTO);
+		
 	}
 	
 	

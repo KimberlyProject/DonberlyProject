@@ -34,11 +34,25 @@ public class ChatController {
 		System.out.println("채팅 입장");
 		return "chat/chattingview";
 	}
+	/*
+	@RequestMapping(value="/chattingview", method=RequestMethod.POST)
+	public void chattingview(@RequestParam(value="content", required=false) String content, Model model) throws Exception{
+		System.out.println("채팅 정보 넣기");
+		System.out.println(content);
+		
+		chatService.insertContent(content);
+	}*/
 	
 	@RequestMapping(value="/chattingview", method=RequestMethod.POST)
-	public String chattingview(@RequestParam(value="content", required=false) String content, Model model) throws Exception{
+	public void chattingview(@RequestParam(value="content", required=false) String content,@RequestParam(value="fromId", required=false) String fromId, Model model) throws Exception{
+		ChatDTO chatDTO = new ChatDTO();
+		chatDTO.setChatContent(content);
+		chatDTO.setFromId(fromId);
 		System.out.println("채팅 정보 넣기");
-		return chatService.insertContent(content);
+		System.out.println(chatDTO.getChatContent());
+		
+		chatService.insertContent(chatDTO);
+		
 	}
 	
 	@RequestMapping(value="/chat_list", method=RequestMethod.GET)

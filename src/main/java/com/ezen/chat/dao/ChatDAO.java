@@ -12,6 +12,6 @@ public interface ChatDAO {
 
 	public List<ChatDTO> selectChat() throws Exception;
 	
-	public String insertContent(String content) throws Exception;
+	public void insertContent(ChatDTO chatDTO) throws Exception;
 }
 

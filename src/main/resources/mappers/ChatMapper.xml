@@ -3,6 +3,22 @@
 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ezen.chat.mapper.ChatMapper">
+
+	<resultMap id="chatResult" type="chatDTO">
+		<result property="chatId"				column="chatId"/>
+		<result property="artNo"			column="artNo"/>
+		<result property="fromId"		column="fromId"/>
+		<result property="toId"			column="toId"/>
+		<result property="chatContent"		column="chatContent"/>
+		<result property="chatTime"			column="chatTime"/>
+	</resultMap>
+	
+	<resultMap id="chatListResult" type="chatListDTO">
+		<result property="chatId"				column="chatId"/>
+		<result property="artNo"			column="artNo"/>
+		<result property="saler"		column="saler"/>
+		<result property="buyer"			column="buyer"/>
+	</resultMap>
 	
 	<select id="selectChat" resultType="com.ezen.chat.dto.ChatDTO">
 		select chatcontent
@@ -10,7 +26,10 @@
 		order by chattime
 	</select>
 	
-	<insert id="insertContent">
-	
+	<insert id="insertContent" parameterType="com.ezen.chat.dto.ChatDTO">
+		insert into chat values(1,1,#{fromId},'a200',#{chatContent},sysdate)
 	</insert>
+	
+	
+	
 </mapper>
