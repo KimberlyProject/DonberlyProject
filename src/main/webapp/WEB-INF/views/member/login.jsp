@@ -45,7 +45,7 @@
     <article class="Loginbox container">
       <h1><a href="#"><img src="${ path }/resources/images/logo_g.png" alt="logo"/></a></h1>
       <c:if test="${ member == null }">
-      <form action="/member/logOn" method="post">
+      <form action="/member/login" method="post">
         <input type="text" class="form-control" placeholder="아 이 디" id="userId" name="userId">
         <div class="input-group" style="margin-bottom:10px;">
           <input type="password" class="form-control" placeholder="패 스 워 드" id="pw" name="pw">
@@ -64,7 +64,7 @@
     
     
    	<c:if test="${ member != null }">
-   	<script>location.href = "/myPage/myPage"</script>
+   	<script>location.href = "/myPage/myInfo"</script>
     </c:if>
     
     <script>

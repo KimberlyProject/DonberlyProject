@@ -58,7 +58,6 @@
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       홈 &gt; 관리자 &gt; 1:1 문의
     </div>
-    
     <h1 class="pageTitle"><div>1:1 문의</div></h1>
 	<div class="container">
 		<!-- 삭제버튼 -->

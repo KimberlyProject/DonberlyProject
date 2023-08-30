@@ -115,7 +115,10 @@
     </div>
     
     <h1 class="pageTitle"><div>캘린더</div></h1>
-	   
+	
+	<c:if test="${member == null}">
+		<script>location.href="/member/login"</script>
+	</c:if>   
 	<div class="container" id="calendarPage">     
 	   <div class="calHeader">
 	     <div class="btn prevDay"><span class="glyphicon glyphicon-chevron-left"></span></div>
