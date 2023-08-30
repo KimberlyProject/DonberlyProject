@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%! SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일"); %>
 <html>
 <head>
 	<title>Home</title>
@@ -36,6 +38,27 @@
       	.stop {
       		margin-left:		50px;
       	}
+      	.head > th:first-child {
+			width:				5%;
+		}
+		.head > th:nth-child(2) {
+			width:				5%;
+		}
+		.head > th:nth-child(3) {
+			width:				15%;
+		}
+		.head > th:nth-child(4) {
+			width:				15%;
+		}
+		.head > th:nth-child(5) {
+			width:				45%;
+		}
+		.head > th:last-child {
+			width:				15%;
+		}
+		tr > span {
+			vertical-align:		middle;
+		}
 	</style>
 </head>
 <body>
@@ -72,40 +95,28 @@
       	<!-- 검색창 -->
 		<table class="table table-bordered table-striped table-hover">
 			<thead>
-				<tr style="background: rgb(73, 124, 64); color: #FFF;">
-					<th style="width: 5%;"><span class="glyphicon glyphicon-ok"></span></th>
-					<th style="width: 5%;">No</th>
-					<th style="width: 15%;">아이디</th>
-					<th style="width: 15%;">연락처</th>
-					<th style="width: 45%;">주소</th>
-					<th style="width: 15%;">가입일자</th>
+				<tr class="head" style="background: rgb(73, 124, 64); color: #FFF;">
+					<th><span class="glyphicon glyphicon-ok"></span></th>
+					<th>No</th>
+					<th>아이디</th>
+					<th>연락처</th>
+					<th>주소</th>
+					<th>가입일자</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td style="width: 5%;"><input type="checkbox" style="width: 100%;"/></td>
-					<td style="width: 5%;">1</td>
-					<td style="width: 15%;">heedong</td>
-					<td style="width: 15%;">010-1111-1111</td>
-					<td class="addr" style="width: 45%;">서울특별시 종로구 종로 78 (종로2가, 미려빌딩 3,5,6층)</td>
-					<td style="width: 15%;">2023.08.23</td>
-				</tr>
-				<tr>
-					<td style="width: 5%;"><input type="checkbox" style="width: 100%;"/></td>
-					<td style="width: 5%;">2</td>
-					<td style="width: 15%;">bangja</td>
-					<td style="width: 15%;">010-2222-2222</td>
-					<td class="addr" style="width: 45%;">서울특별시 종로구 종로 78 (종로2가, 미려빌딩 3,5,6층)</td>
-					<td style="width: 15%;">2023.08.23</td>
-				</tr>
-				<tr>
-					<td style="width: 5%;"><input type="checkbox" style="width: 100%;"/></td>
-					<td style="width: 5%;">3</td>
-					<td style="width: 15%;">chunhyang</td>
-					<td style="width: 15%;">010-2222-2222</td>
-					<td class="addr" style="width: 45%;">서울특별시 종로구 종로 78 (종로2가, 미려빌딩 3,5,6층)</td>
-					<td style="width: 15%;">2023.08.23</td>
-				</tr>
+				<c:forEach var="list" items="${memberList}" varStatus="memberNum">
+					<tr>
+						<td><span><input type="checkbox" style="width: 100%;"/></span></td>
+						<a href="/admin/memberDetail?id=${list.userId}">
+							<td><span>${memberNum.count}</span></td>
+							<td><span><input type="text" class="form-control" id="id" name="id" value="${list.userId}" readonly="readonly"/></span></td>
+							<td><span><input type="text" class="form-control" id="tel" name="tel" value="${list.tel}"/></span></td>
+							<td class="addr"><span><input type="text" class="form-control" id="addr" name="addr" value="${list.address}"/></span></td>
+							<td><span><fmt:formatDate value="${list.regDate}" pattern="yyyy년 MM월 dd일"/></span></td>
+						</a>
+					</tr>
+				</c:forEach>
 				<br/>
 				
 			</tbody>

@@ -8,5 +8,6 @@
 		<typeAlias type="com.ezen.chat.dto.ChatDTO" alias="chatDTO"/>
 		<typeAlias type="com.ezen.board.dto.ArticleVO"	alias="articleVO"/>
 		<typeAlias type="com.ezen.board.dto.ArticleVO"	alias="saleArticleVO"/>
+		
 	</typeAliases>
 </configuration>

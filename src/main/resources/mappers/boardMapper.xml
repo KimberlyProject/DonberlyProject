@@ -9,7 +9,7 @@
 		<result property="rnum"				column="recNum"/>
 		<result property="level"			column="lvl"/>
 		<result property="articleNO"		column="articleNO"/>
-		<result property="user_id"			column="user_id"/>
+		<result property="userId"			column="userId"/>
 		<result property="write_date"		column="write_date"/>
 		<result property="title"			column="title"/>
 		<result property="content"			column="content"/>
@@ -24,7 +24,7 @@
 		<result property="rnum"				column="recNum"/>
 		<result property="level"			column="lvl"/>
 		<result property="articleNO"		column="articleNO"/>
-		<result property="user_id"			column="user_id"/>
+		<result property="userId"			column="userId"/>
 		<result property="write_date"		column="write_date"/>
 		<result property="title"			column="title"/>
 		<result property="content"			column="content"/>
@@ -38,14 +38,14 @@
 	<!-- 게시물 목록 : 계층상태로 추출하기 -->
 	<select id="selectAllArticleList" resultMap="articlesResult">
 		<![CDATA[
-		SELECT	 articleNO, user_id, write_date, title, content,  thumbnail, price
+		SELECT	 articleNO, userId, write_date, title, content,  thumbnail, price
 		FROM		article_buy
 		]]>
 	</select>
 	
 	<select id="saleSelectAllArticleList" resultMap="articlesResult">
 		<![CDATA[
-		SELECT	 articleNO, user_id, write_date, title, content,  thumbnail, price
+		SELECT	 articleNO, userId, write_date, title, content,  thumbnail, price
 		FROM		article_sale
 		]]>
 	</select>
@@ -85,16 +85,16 @@
 	<insert id="insertNewArticle" parameterType="java.util.Map">
 		<![CDATA[
 			INSERT INTO article_buy
-					(articleNO,  user_id, write_date,	title,		content,	 thumbnail, price, p_code)
-			VALUES 	(#{articleNO}, #{user_id}, sysdate,	#{title},	#{content},	#{thumbnail}, #{price} , #{p_code})
+					(articleNO,  userId, write_date,	title,		content,	 thumbnail, price, p_code)
+			VALUES 	(#{articleNO}, #{userId}, sysdate,	#{title},	#{content},	#{thumbnail}, #{price} , #{p_code})
 		]]>
 	</insert>
 	
 	<insert id="saleInsertNewArticle" parameterType="java.util.Map">
 		<![CDATA[
 			INSERT INTO article_sale
-					(articleNO,  user_id, write_date,	title,		content,	 thumbnail, price, p_code)
-			VALUES 	(#{articleNO}, #{user_id}, sysdate,	#{title},	#{content},	#{thumbnail}, #{price} , #{p_code})
+					(articleNO,  userId, write_date,	title,		content,	 thumbnail, price, p_code)
+			VALUES 	(#{articleNO}, #{userId}, sysdate,	#{title},	#{content},	#{thumbnail}, #{price} , #{p_code})
 		]]>
 	</insert>
 
@@ -193,7 +193,7 @@
 	<![CDATA[
 	SELECT	*
 	FROM	(
-		SELECT  ROWNUM AS recNum, articleNO, user_id, write_date, title, content, thumbnail, price
+		SELECT  ROWNUM AS recNum, articleNO, userId, write_date, title, content, thumbnail, price
 		FROM article_buy
         WHERE		1=1
  	]]>
@@ -208,7 +208,7 @@
 	<![CDATA[
 	SELECT	*
 	FROM	(
-		SELECT  ROWNUM AS recNum, articleNO, user_id, write_date, title, content, thumbnail, price
+		SELECT  ROWNUM AS recNum, articleNO, userId, write_date, title, content, thumbnail, price
 		FROM article_sale
         WHERE		1=1
  	]]>
