@@ -29,20 +29,10 @@ public class MypageController {
 		return "myPage/myInfo";
 	}
 
-	
-	
-	//노을 임시
-	/*
-	@RequestMapping(value="/salesHistory", method=RequestMethod.GET)
-	public String salesHistory(Model model) {
-		System.out.println("마이페이지 판매내역 조회!!!!!!!!!!!!!!!!");
-		return "/myPage/salesHistory";
-	 
-	  redirect
-	  
-	  
-	  
-	  
-	*/
-	//경은 임시
+  	@RequestMapping(value="/myProfileUpdate", method=RequestMethod.GET)
+  	public String getUserProfileEditor(Model model){
+  		System.out.println("프로필 수정 화면 접속");
+  		return "myPage/myProfileUpdate";
+  	}
+
 }

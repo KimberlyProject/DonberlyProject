@@ -81,13 +81,9 @@
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp"%>
-<aside id="sideMenu">
-      <ul>
-        <li><a href="#">회원가입</a></li>
-        <li><a href="#">로그인</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
+<c:set var="menu" value="member" />
+<%@ include file="../include/sidebar.jsp" %>
+
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       회원 가입
@@ -362,6 +358,7 @@ $(document).ready(function() {
     }
 </script>
 
+<%@ include file="../include/footer.jsp"%>
 
 </body>
 </html>
