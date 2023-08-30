@@ -89,7 +89,6 @@
       <a href="#">마이페이지</a> &gt;
       <a href="./">캘린더</a>
     </div>
-    <h1 class="paitle"><div>캘린더</div></h1>
     
 	<div class="container">
 	
