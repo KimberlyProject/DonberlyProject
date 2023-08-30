@@ -7,8 +7,10 @@
 <title>돈벌리</title>
 	<%@ include file="../include/header.jsp" %>
 	<style>
+		body{
+			padding:0;
+		}
 	  .Loginbox{
-	    margin:100px auto 200px;
 	    width:400px;
 	    /* height:100vh; */
 	    text-align:center;
@@ -41,7 +43,6 @@
 	</style>
 </head>
 <body>
-	<%@ include file="../include/topMenu.jsp" %>
     <article class="Loginbox container">
       <h1><a href="#"><img src="${ path }/resources/images/logo_g.png" alt="logo"/></a></h1>
       <form action="" method="post">
@@ -55,6 +56,5 @@
         <a href="./findPasswd">비밀번호 찾기</a>
       </div>
     </article>
-	<%@ include file="../include/footer.jsp" %>
 </body>
 </html>
