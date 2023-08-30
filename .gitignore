@@ -25,4 +25,8 @@ MANIFEST.MF
 settings.json
 
 # SpringBoot 관련 파일
+<<<<<<< HEAD
 config.properties
+=======
+config.properties
+>>>>>>> 269cb3768781a9d57200e456113ab8f08b8efee0

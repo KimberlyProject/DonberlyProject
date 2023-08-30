@@ -26,6 +26,12 @@ public class ChatServiceImpl implements ChatService {
 		// TODO Auto-generated method stub
 		return chatDAO.selectChat();
 	}
+
+	@Override
+	public String insertContent(String content) throws Exception {
+		// TODO Auto-generated method stub
+		return chatDAO.insertContent(content);
+	}
 	
 	
 	

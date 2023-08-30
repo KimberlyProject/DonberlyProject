@@ -321,21 +321,78 @@ div.chat.ch2{
 			<tr>
 				<td class="chat_text"  colspan="2">
 				<div class="row" style="height: 90px;">
-					<div class="form-group col-xs-5">
-						<textarea style="height: 80px; width:440px;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
-					</div>
-					<div class="form-group col-xs-4" style="padding-left:55px;">
-						<button class="btn btn-success btn-lg" style="height:80px; width:120px;">전송</button>
-						
-						<div class="clearfix"></div>
-					</div>
-				</div>					
+					<form  id="chatForm" method="post">
+						<div class="form-group col-xs-5">
+							<textarea style="height: 80px; width:440px;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
+						</div>
+						<div class="form-group col-xs-4" style="padding-left:55px;">
+							<button class="btn btn-success btn-lg sendText" style="height:80px; width:120px;">전송</button>
+							<div class="clearfix"></div>
+						</div>
+					</form>					
+				</div>
 				</td>
 			</tr>
 		</table>
 	</div>
 	<br><br>
 	
+<script>
+$(document).ready(function(){
+	
+	$('.sendText').on('click',function(){
+		
+		var form1 = $("#chatForm").serialize();
+		console.log($('#chatContent').val());
+		//예약 확정/취소를 선택한다.
+		if(form1 != null){
+			 $.ajax({
+				 url:	"/chat/chattingview",
+				 type:	"post",
+				 dataType:	"json",
+				 data:	{"content" : $('#chatContent').val()},	//클릭한 좌석번호
+				 success: function(data){
+					alert("컨텐츠 : "+ data);
+					console.log(data);
+					
+					if(data==1){
+						alert("완료");
+					}
+					else{
+						alert("실패");
+					}
+					/*if(data==1){//예약작업이 성공이면
+						 alert("좌석예매가 완료되었습니다.");
+					//예약이 완료되었으므로 예약된 버튼의 색상을 변경한다.
+					$('.seatNO').eq(idx).addClass('btn-danger').removeClass('btn-primary');
+					$('.seatNO').eq(idx).attr('disabled',true);
+					
+					//예매가 성공하였으므로 남은 좌석은 -1로 계산하여 화면에 보여준다.
+					//parseInt(문자) : 더하기의 경우 문자 뒤에 숫자가 붙기 때문에
+					// 숫자로 계산하기 위해서 사용한다. 빼기는 상관없음.
+					let remainCount = parseInt(document.getElementById('numNO').value)-1;
+					$('#seatCount1').text(remainCount);
+					document.getElementById('numNO').value = remainCount;
+					
+					//예매가 성공하였으므로 남은 좌석은 +1로 계산하여 화면에 보여준다.
+					//parseInt(문자) : 더하기의 경우 문자 뒤에 숫자가 붙기 때문에
+					// 숫자로 계산하기 위해서 사용한다. 빼기는 상관없음.
+					let reserveCount = parseInt(document.getElementById('numOK').value)+1;
+					$('#seatCount2').text(reserveCount);
+					document.getElementById('numOK').value = reserveCount;
+					
+					}else{	//예약작업 중 문제가 발생하였으면
+						alert("좌석예매 중에 장애가 발생하였습니다.\n\n잠시 후에 다시 해주십시오.");
+					}*/
+				 }
+			 });
+		}else{//취소(아니오) 버튼을 눌렀을 경우
+			alert("예약을 취소합니다.");
+		}
+		
+	});
+});
+</script>
 
 </body>
 </html>

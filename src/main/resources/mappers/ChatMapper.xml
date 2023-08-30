@@ -5,8 +5,12 @@
 <mapper namespace="com.ezen.chat.mapper.ChatMapper">
 	
 	<select id="selectChat" resultType="com.ezen.chat.dto.ChatDTO">
-		SELECT * FROM members
+		select chatcontent
+		from chat
+		order by chattime
 	</select>
 	
+	<insert id="insertContent">
 	
+	</insert>
 </mapper>

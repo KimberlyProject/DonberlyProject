@@ -99,6 +99,7 @@ header nav .navbar-right a:focus, header nav .navbar-right a:hover{
     color:rgb(87, 198, 156);
     text-decoration:none;
 }
+header .myinfo .dropdown-menu a:hover, header .myinfo .dropdown-menu a:focus,
 header .alermicon .dropdown-menu a:hover, header .alermicon .dropdown-menu a:focus{
     color:#333;
     background:#e3fbff;

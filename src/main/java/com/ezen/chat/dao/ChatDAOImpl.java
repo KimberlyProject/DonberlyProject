@@ -32,6 +32,15 @@ public class ChatDAOImpl implements ChatDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".selectChat");
 	}
+
+	@Override
+	public String insertContent(String content) throws Exception {
+		
+		//return sqlSession.insert(namespace+".insertContent", content);
+		return null;
+	}
+	
+	
 	
 
 	

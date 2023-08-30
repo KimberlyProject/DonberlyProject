@@ -6,11 +6,10 @@
    
    <!-- 경은 -->
    <select id="login" parameterType="com.ezen.member.dto.MemberDTO" resultType="com.ezen.member.dto.MemberDTO">
-
+   
       SELECT   userId, pw, nickname
       FROM   members
       WHERE   userID       = #{userId}
       AND     pw   = #{pw}
    </select>
-   
 </mapper>
