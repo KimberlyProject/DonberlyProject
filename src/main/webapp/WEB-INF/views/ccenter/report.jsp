@@ -34,21 +34,12 @@
 <body>
 <%@ include file="../include/topMenu.jsp" %>
 <div id="content-wrapper">
-<aside id="sideMenu">
-      <ul>
-        <li><a href="./notice">공지사항</a></li>
-        <li><a href="./qna">Q & A</a></li>
-        <li><a href="#">1:1 문의하기</a></li>
-        <li><a href="#">신고하기</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
-    <div class="page_dir container">
+<c:set var="menu" value="ccenter" />
+<%@ include file="../include/sidebar.jsp" %>
+     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <span><a href="./notice">고객센터</a></span>
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      <span><a href="./qna">신고하기</a></span>
-    </div>
+      홈 &gt; 고객센터 &gt; 신고하기
+	</div>
     <h1 class="pageTitle"><div>신고하기</div></h1>
     
     <div id="report-form" class="container">

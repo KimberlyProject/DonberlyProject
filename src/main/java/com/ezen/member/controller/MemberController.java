@@ -184,11 +184,6 @@ public class MemberController {
   		return "member/profile";
   	}
 
-  	@RequestMapping(value="/userProfileEditor", method=RequestMethod.GET)
-  	public String getUserProfileEditor(Model model){
-  		System.out.println("프로필 수정 화면 접속");
-  		return "member/userProfileEditor";
-  	}
 }
 
 

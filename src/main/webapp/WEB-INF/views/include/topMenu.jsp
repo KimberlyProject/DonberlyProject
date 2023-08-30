@@ -42,7 +42,7 @@
                 </ul>
               </li>
               <li>
-                <a href="/myPage/myPage">마이페이지</a>                
+                <a href="/myPage/myInfo">마이페이지</a>                
                 <ul> 
                     <li><a href="/myPage/salesHistory">판매내역</a></li>
                     <li><a href="/chat/chattingview">1:1 채팅하기</a></li>
@@ -51,6 +51,7 @@
                     
                 </ul>
               </li>
+              <c:if test="${ member != null }">
               <li>
                 <a href="/admin/oneOnOneInquiry">관리자</a>                
                 <ul> 
@@ -58,6 +59,7 @@
                     <li><a href="/admin/memberList">회원 목록</a></li>
                 </ul>
               </li>
+              </c:if>
             </ul>               
             <!-- 로그인안 했을 때  -->
             <c:if test="${ member == null }">
@@ -99,7 +101,7 @@
 	                       ${ member.nickname } 님                     
 	                   </button>
 	                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-	                     <li><a href="/myPage/myPage">내 정보 보기</a></li>                          
+	                     <li><a href="/myPage/myInfo">내 정보 보기</a></li>                          
 	                     <li><a href="/member/logout">로그 아웃</a></li>                          
 	                   </ul>
 	               </div>
