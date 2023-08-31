@@ -55,7 +55,35 @@
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-	
+	 <aside id="sideMenu">
+      <h2>마이페이지</h2>
+      <ul>
+        <li><a href="#">내 정보 수정</a></li>
+        <li>
+          <a href="#">거래내역</a>
+          <ul>
+            <li><a href="#">삽니다</a></li>
+            <li><a href="#">팝니다</a></li>
+          </ul>
+        </li>
+        <li><a href="#">경매</a>          
+          <ul>
+            <li><a href="#">판매</a></li>
+            <li><a href="#">구매</a></li>
+          </ul>
+        </li>
+        <li><a href="#">캘린더</a></li>
+        <li><a href="#">채팅목록</a></li>
+      </ul>
+      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
+    </aside>
+    <div class="page_dir container">
+      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+      <a href="/">홈</a> &gt;
+      <a href="#">마이페이지</a> &gt;
+      <a href="./">캘린더</a>
+    </div>
+    <h1 class="pageTitle"><div>캘린더</div></h1>
 	<div class="container">
 		<br/><br/>
 		
@@ -90,7 +118,11 @@
 				<tr><!-- 현재입찰가 -->
 					<th class="cate">현재입찰가</th>
 					<th class="colon">:</th>
-					<th colspan="4">${articlesList.nowBid}원</th>
+					<th colspan="4">${articlesList.nowBid}원
+						<button type="button" id="nowBid" class="btn" style="background-color:rgb(73, 124, 64); color:#FFFFFF;">
+							<span>입찰하기</span>
+						</button>
+					</th>
 				</tr>
 				<tr><!-- 입찰단위 -->
 					<th class="cate">입찰단위</th>
@@ -100,7 +132,11 @@
 				<tr><!-- 상한금액 -->
 					<th class="cate">상한금액</th>
 					<th class="colon">:</th>
-					<th colspan="4">${articlesList.maxPrice}원</th>
+					<th colspan="4">${articlesList.maxPrice}원
+						<button type="button" id="maxPrice" class="btn" style="background-color:orange; color:#FFFFFF;">
+							<span>상한가 구매</span>
+						</button>
+					</th>
 				</tr>
 				<tr><!-- 경매기간 -->
 					<th class="cate">마감기한</th>
@@ -122,37 +158,29 @@
 					</th>
 				</tr>
 			</table>
-		</form>
+		</div> <!-- 컨테이너 -->
 		
-		
-			<table id="tb3" class="row">
-				<tr>
-					<td class="col-sm-2"></td>
-					<td id="price1" class="col-sm-2">
-						<form name="aucBuyandBid" method="get" action="${path}/auction/modifyandupdate" enctype="multipart/form-data">
-							<input type="hidden" name="aucCode" value="${article.aucCode}"/>
-							<input name="nowBid" value="${articlesList.nowBid + articlesList.bidRate}" class="col-sm-1 form-control" type="text" style="width:200px; text-align:right" placeholder="${articlesList.nowBid + articlesList.bidRate}">
-							<button type="submit" class="btn btn-success" style="background-color:rgb(73, 124, 64); color:#FFFFFF;">
-								<span>입찰하기</span>
-							</button>
-						</form>
-					</td>
-					<td id="price2" class="col-sm-3">
-						<form name="aucBuyandBid" method="get" action="${path}/auction/modifyandupdate" enctype="multipart/form-data">
-							<input type="hidden" name="aucCode" value="${article.aucCode}"/>
-							<input  name="maxPrice" class="col-sm-1 form-control" type="text" class="form-control" style="width:200px; text-align:right" placeholder="${articlesList.maxPrice}원">
-							<button type="submit" class="btn btn-warning" style="background-color:rgb(73, 124, 64); color:#FFFFFF;">
-								<span>상한가 구매</span>
-							</button>
-						</form>
-					</td>	
-					<td class="col-sm-1"></td>
-				</tr>
-			</table>
-		</form>
-		
-			<br/><br/>
-		
+	
+<script>
+	$(document).ready(function (${articlesList.nowBid + articlesList.bidRate}) {
+		$("#nowBid").on("click", function(){
+			alert(${articlesList.nowBid + articlesList.bidRate} + "원에 입찰하시겠습니까? 입찰 후에는 취소되지 않습니다.");
+			var locateion = "/auction_modifyandupadate?aucCode=" + ${articlesList.aucCode} + "&nowBid=" + ${articlesList.nowBid + articlesList.bidRate};
+			location.href = location;
+		});
+	});
+	
+	$(document).ready(function (${articlesList.maxPrice}) {
+		$("#maxPrice").on("click", function(){
+			alert(${articlesList.maxPrice} + "원에 입찰하시겠습니까? 경매가 완전히 종료됩니다. 경매가 종료된 후에는 취소 할 수 없습니다.");
+			var location = "/auction_modifyandupdate?aucCode=" + ${articlesList.aucCode} + "$maxPrice=" + ${articlesList.maxPrice};
+			location.href = location;
+		});
+	});
+	
+</script>
+
+
 
 	<%@ include file="../include/footer.jsp" %>
 </body>
