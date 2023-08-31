@@ -1,4 +1,4 @@
-package com.ezen.info.dao;
+package com.ezen.mypage.dao;
 
 import java.util.List;
 

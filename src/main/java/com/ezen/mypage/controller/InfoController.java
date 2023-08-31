@@ -1,4 +1,4 @@
-package com.ezen.info.controller;
+package com.ezen.mypage.controller;
 
 import java.io.File;
 import java.util.Iterator;
@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ezen.board.dto.ArticleVO;
 import com.ezen.board.dto.PageMaker;
 import com.ezen.board.dto.SearchCriteria;
-import com.ezen.info.service.InfoService;
+import com.ezen.mypage.service.InfoService;
 
 
 

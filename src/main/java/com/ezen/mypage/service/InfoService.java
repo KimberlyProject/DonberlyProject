@@ -1,4 +1,4 @@
-package com.ezen.info.service;
+package com.ezen.mypage.service;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ezen.board.dto.ArticleVO;
 import com.ezen.board.dto.SearchCriteria;
-import com.ezen.info.dao.InfoDAO;
+import com.ezen.mypage.dao.InfoDAO;
 
 
 
