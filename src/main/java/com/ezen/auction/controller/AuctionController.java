@@ -198,21 +198,41 @@ public class AuctionController {
 		return null;
 	}
 	
-	
-	
-	////////////////////////////////////////////////////////////////////////////////////////////////////
-	@RequestMapping(value="/auction_detail_owner", method=RequestMethod.GET)
-	public ModelAndView auctionDetailOwner(@RequestParam("aucCode")int aucCode, HttpServletRequest req, HttpServletResponse res)
+	//경매취소 삭제하기
+	@RequestMapping(value="/auctionOff", method=RequestMethod.GET)
+	public String removeAuction(@RequestParam("aucCode") int aucCode, HttpServletRequest req, HttpServletResponse res)
 			throws Exception {
-		String viewName = (String)req.getAttribute("viewName");
-		AuctionDTO auctionDTO = auctionService.viewArticle(aucCode);
-		AucImgDTO aucImgDTO = auctionService.viewArticleImg(aucCode);
-		System.out.println("디테일페이지 컨트롤러" + aucCode);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		mav.addObject("articlesList", auctionDTO);
-		mav.addObject("aritlcesList", aucImgDTO);
+			System.out.println("경매종료 삭제하는 컨트롤러 " + aucCode);
+			
+		res.setContentType("text/html;charset=UTF-8");
+		String message;
+		ResponseEntity	resEnt			= null;
+		HttpHeaders		responseHeaders	= new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html;charset=UTF-8");
 		
-		return mav;
+		try {
+			
+			auctionService.removeAuction(aucCode);
+			
+			File destDir = new File(IMGROOT + "\\" + aucCode);
+			FileUtils.deleteDirectory(destDir);
+		
+			message = "<script>";
+			message += " alert('글을 삭제했습니다.');";
+			message += " location.href='" + req.getContextPath()+"/auction/auction_main';";
+			message +=" </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+	       
+		} catch(Exception e) {
+			message = "<script>";
+			message += " alert('작업중 오류가 발생했습니다.다시 시도해 주세요.');";
+			message += " location.href='"+ req.getContextPath()+"/auction/auction_detail?auction=${articlesList.aucCode}';";
+			message +=" </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		return "auction/auction_main";
 	}
+	
+
 }//class

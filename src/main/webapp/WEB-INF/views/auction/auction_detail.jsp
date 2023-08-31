@@ -129,12 +129,12 @@
 				<th colspan="4">${articlesList.nowBid}원
 					<c:choose>
 					<c:when test="${member.userId != articlesList.aucId}">
-						<input type="button" class="btn btn-success buyBtn" onClick="fn_tryBid()" style="color:#FFFFFF;" value="입찰하기">  <!-- "background-color:rgb(73, 124, 64); -->
+						<input type="button" class="btn btn-success buyBtn" onClick="fn_tryBid(${articlesList.aucCode})" style="color:#FFFFFF;" value="입찰하기">  <!-- "background-color:rgb(73, 124, 64); -->
 					</c:when>
 					</c:choose>
 					<c:choose>
 					<c:when test="${member.userId == articlesList.aucId}">
-						<input type="button" class="btn btn-primary saleBtn" onClick="fn_saleNow()" style="color:#FFFFFF;" value="바로판매">  <!-- "background-color:rgb(73, 124, 64); -->
+						<input type="button" class="btn btn-primary saleBtn" onClick="fn_saleNow(${artiaclesList.aucCode})" style="color:#FFFFFF;" value="바로판매">  <!-- "background-color:rgb(73, 124, 64); -->
 					</c:when>
 					</c:choose>
 				</th>
@@ -161,7 +161,7 @@
 				<th colspan="4">${articlesList.deadline}
 					<c:choose>
 					<c:when test="${member.userId == articlesList.aucId}">
-						<input type="button" class="btn btn-danger saleBtn" onClick="fn_off()" style="color:#FFFFFF;" value="경매취소">  <!-- "background-color:rgb(73, 124, 64); -->
+						<input id="auctionOff" type="button" class="btn btn-danger saleBtn" style="color:#FFFFFF;" value="경매취소">  <!-- "background-color:rgb(73, 124, 64); -->
 					</c:when>
 					</c:choose>
 				</th>
@@ -196,6 +196,34 @@
 	
 <script>
 	
+	function fn_tryBid() {
+		
+	}
+	
+	function fn_saleNow() {
+		
+	}
+	
+	function fn_buyNow() {
+		
+	}
+	
+	function fn_off() {
+		
+	}
+	
+	$(document).ready(function () {
+		
+		$("#auctionOff").on("click", function(){
+			if(confirm("현재 입찰 중인 상품입니다. 경매를 취소하시겠습니까? 삭제된 게시글은 복원되지 않습니다.")){
+				var locateion = "/auction/auctionOff?aucCode=" + ${articlesList.aucCode};
+				location.href = location;
+			}else{
+				return;
+			}
+		});
+
+	}
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	$(document).ready(function () {

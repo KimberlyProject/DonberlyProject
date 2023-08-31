@@ -52,4 +52,9 @@ public class AuctionService {
 		AucImgDTO aucImgDTO = auctionDAO.selectArticleImg(aucCode);
 		return aucImgDTO;
 	}
+	
+	//삭제
+	public void removeAuction(int aucCode) throws Exception {
+		auctionDAO.deleteAuction(aucCode);
+	}
 }

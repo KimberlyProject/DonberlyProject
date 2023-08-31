@@ -19,7 +19,7 @@
   			auction (aucCode, minprice, maxPrice, writeDate, title, content, nowBid, 
   					bidRate, aucId, status, deadline)
   			values (#{aucCode}, #{minprice}, #{maxPrice}, sysdate, #{title}, #{content}, #{nowBid}, 
-  					#{bidRate}, #{aucId}, #{status}, SYSDATE+#{deadline})
+  					#{bidRate}, #{aucId}, 0, SYSDATE+#{deadline})
   		]]>
   	</insert>
   	
@@ -40,9 +40,6 @@
  			values (#{item.imgNo}, #{item.imgName}, #{item.aucCode}, sysdate)	
  		</foreach>
  	</insert>
-	
-	
-	
 	
 	<!-- 메인페이지 게시글 resultType -->
 	<resultMap id="aucArticle" type="auctionDTO">
@@ -100,6 +97,14 @@
      	WHERE aucCode = #{aucCode} 
      ]]>
    </select>
+   
+   <!-- 삭제하기 Query -->
+	<delete id="DeleteAuction" parameterType="int">
+		<![CDATA[
+		DELETE FROM auction
+		WHERE  aucCode = #{aucCode}
+		]]>
+	</delete>
 
    
 </mapper>

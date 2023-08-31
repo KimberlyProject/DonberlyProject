@@ -121,7 +121,7 @@
 			<table class="table table-bordered table-striped" id="ta">
 				<c:forEach var="article" items="${articlesList}" varStatus="articleNum">
 				<tr>
-					<th rowspan="4"  class="innerimg">
+					<th rowspan="5"  class="innerimg">
 							<div>
 								<img src="${page}/board/viewArticle.do?articleNO=${article.aucCode}&thumbnail=${articles.imgNo}" arl="auc1" width="200" height="200"/>
 							</div>
@@ -143,6 +143,20 @@
 				</tr>
 				<tr>
 					<th class="cate">마감 기한</th><th class="colon">:</th><th colspan="4">${article.deadline}</th>
+				</tr>
+				<tr>
+					<th class="cate">진행상태</th><th class="colon">:</th>
+					<c:choose>
+					<c:when test="${articlesList.status == 0}">
+						<th colspan="4">경매종료</th>
+					</c:when>
+					</c:choose>
+						<th class="cate">진행상태</th><th class="colon">:</th>
+					<c:choose>
+					<c:when test="${articlesList.status != 0 || articlesList.status == null}">
+						<th clospan="4">입찰 진행중</th>
+					</c:when>
+					</c:choose>
 				</tr>
 				</c:forEach>
 			</table><!--  경매 게시글 -->

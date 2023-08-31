@@ -81,4 +81,10 @@ public class AuctionDAO {
 		return sqlSession.selectOne(namespace + ".pullArticleImgDetail", aucCode);
 	}
 	
+	//삭제
+	public void deleteAuction(int aucCode) throws DataAccessException {
+		sqlSession.delete(namespace + ".deleteAuction", aucCode);
+	}
+	
+	
 }//class
