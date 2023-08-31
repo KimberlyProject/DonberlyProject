@@ -22,14 +22,14 @@ public class InfoDAO {
 	//-----------------------------------------------------------------------------------------------------------
 	// 전체 게시글 수 구하기 (Paging 처리)
 	//-----------------------------------------------------------------------------------------------------------
-	public int infoListTotalCount(SearchCriteria cri) throws DataAccessException {
-		return sqlSession.selectOne(namespace + ".infoListTotalCount", cri);
+	public int infoListTotalCount(SearchCriteria cri, int i) throws DataAccessException {
+		return sqlSession.selectOne(namespace + ".infoListTotalCount"+ i, cri);
 	}
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 목록 가져오기 (Paging)
 	//-----------------------------------------------------------------------------------------------------------
-	public List<ArticleVO> infoListPaging(SearchCriteria cri) throws DataAccessException {
-		return sqlSession.selectList(namespace + ".infoListPaging", cri);
+	public List<ArticleVO> infoListPaging(SearchCriteria cri, int i) throws DataAccessException {
+		return sqlSession.selectList(namespace + ".infoListPaging"+ i, cri);
 	}
 	
 }

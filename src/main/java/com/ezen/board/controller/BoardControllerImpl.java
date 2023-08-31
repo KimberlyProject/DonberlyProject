@@ -610,17 +610,7 @@ public class BoardControllerImpl implements BoardController {
 		
 	} // End - 게시글 목록 (페이징) 화면 보여주기 
 
-	@Override
-	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public ModelAndView saleListArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 	
 

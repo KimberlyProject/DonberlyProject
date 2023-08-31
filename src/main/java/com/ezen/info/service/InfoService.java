@@ -20,12 +20,12 @@ public class InfoService {
 	//-----------------------------------------------------------------------------------------------------------
 	// 전체 게시글 수 구하기 (Paging 처리)
 	//-----------------------------------------------------------------------------------------------------------
-	public int infoListTotalCount(SearchCriteria cri) throws Exception {
-		return infoDAO.infoListTotalCount(cri);
+	public int infoListTotalCount(SearchCriteria cri, int i) throws Exception {
+		return infoDAO.infoListTotalCount(cri, i);
 	}
 	
-	public List<ArticleVO> infoListPaging(SearchCriteria cri) throws Exception {
-		return infoDAO.infoListPaging(cri);
+	public List<ArticleVO> infoListPaging(SearchCriteria cri, int i) throws Exception {
+		return infoDAO.infoListPaging(cri, i);
 	}
 	
 	

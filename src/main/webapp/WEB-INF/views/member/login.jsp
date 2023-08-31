@@ -45,13 +45,13 @@
     <article class="Loginbox container">
       <h1><a href="#"><img src="${ path }/resources/images/logo_g.png" alt="logo"/></a></h1>
       <c:if test="${ member == null }">
-      <form action="/member/logOn" method="post">
+      <form action="/member/login.do" method="post">
         <input type="text" class="form-control" placeholder="아 이 디" id="userId" name="userId">
         <div class="input-group" style="margin-bottom:10px;">
           <input type="password" class="form-control" placeholder="패 스 워 드" id="pw" name="pw">
           <span class="input-group-addon" id="basic-addon1"><span id="eye" class="glyphicon glyphicon-eye-open"></span></span>
         </div>
-        <input type="submit" class="btn" value="로 그 인">
+        <input type="submit" id="submit" class="btn" value="로 그 인">
       </form>    
       <div>
         <a href="membership">회원가입</a> |
@@ -71,11 +71,20 @@
       $('#eye').on('mousedown',function(){
         $('#pw').attr('type','text');
         return false;
-      })
+      });
+      
       $('#eye').on('mouseup',function(){
         $('#pw').attr('type','password');
         return false;
-      })
+      });
+      
+      
+ 
+
+  
+      
+      
+      
     </script>
 	<%@ include file="../include/footer.jsp" %>
 </body>

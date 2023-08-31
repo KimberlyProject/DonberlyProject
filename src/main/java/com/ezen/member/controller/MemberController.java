@@ -127,7 +127,7 @@ public class MemberController {
 	} // End - public String getLogin()
 	
 	//경은
-	   @RequestMapping(value="/logOn", method=RequestMethod.POST)
+	   @RequestMapping(value="/login.do", method=RequestMethod.POST)
 	   public ModelAndView login(@ModelAttribute("member") MemberDTO member,
 	                       RedirectAttributes rAttr,
 	                       HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -152,17 +152,19 @@ public class MemberController {
 	         
 	         session.removeAttribute("action");
 	         
+	         
 	         if(action != null) {
 	            mav.setViewName("redirect:" + action);
 	         } else {
-	            mav.setViewName("redirect:/board/listArticles.do");
+	            mav.setViewName("redirect:/member/login");
 	         }
 	         
 	         
 	      } else { // 아이디와 비밀번호에 해당하는 정보가 없으면
 	         session.setAttribute("member", null);
 	         rAttr.addFlashAttribute("msg",  false);
-	         mav.setViewName("redirect:/member/logOn");
+	         
+	         mav.setViewName("redirect:/member/login");
 	      }
 	      
 	      return mav;
