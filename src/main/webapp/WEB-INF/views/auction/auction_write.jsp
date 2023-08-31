@@ -90,26 +90,20 @@
       <a href="./">캘린더</a>
     </div>
     
+   <%
+	//로그인 세션 없으면 로그인을 먼저 하도록 한다.
+	if(session.getAttribute("isLogOn") == null) {
+		PrintWriter pw = response.getWriter();
+		pw.println("<script>");
+		pw.println("alert('로그인이 필요합니다.');");
+		pw.println("location.href='/member/login?action=/auction/auction_wirte';");
+		pw.println("</script>");
+		pw.flush();
+		pw.close();
+	}
+	%>
+		
 	<div class="container">
-	
-	
-		<br><br><br>
-		
-		<!-- ------------------------------------------------------------------------------------------------------------------- -->	
-		
-		<%
-			//로그인 세션 없으면 로그인을 먼저 하도록 한다.
-			if(session.getAttribute("isLogOn") == null) {
-				PrintWriter pw = response.getWriter();
-				pw.println("<script>");
-				pw.println("alert('로그인이 필요합니다.');");
-				pw.println("location.href='/member/login?action=/auction/auction_wirte';");
-				pw.println("</script>");
-				pw.flush();
-				pw.close();
-			}
-		%>
-		
 		<form id="formgroup" name="aucArticle" method="post" action="${path}/auction/addNewArticle" enctype="multipart/form-data">
 			<!-- 글쓰기 -->
 			<table id="tb1" class="row table table-bordered table-striped">
@@ -183,7 +177,6 @@
 		
 		
 		
-	<%@ include file="../include/footer.jsp" %>
 	
 	<script>
 		function readURL(input) {	// 파일을 선택해서 변화가 생겼을 때
@@ -213,5 +206,6 @@
 	
 	
 	
+	<%@ include file="../include/footer.jsp" %>
 </body>
 </html>

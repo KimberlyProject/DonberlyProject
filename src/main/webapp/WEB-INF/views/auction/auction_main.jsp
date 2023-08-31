@@ -79,7 +79,7 @@
       <a href="#">마이페이지</a> &gt;
       <a href="./">캘린더</a>
     </div>
-    <h1 class="pageTitle"><div>캘린더</div></h1>
+    <h1 class="pageTitle"><div>경매장</div></h1>
     
 	<div class="container">
 		<br/><br/>
@@ -190,7 +190,11 @@
 
 
 
-
 <%@ include file="../include/footer.jsp" %>
+
+<script>
+
+</script>
+
 </body>
 </html>

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.io.PrintWriter" %>
 <%@ page session="true" %>
 <!DOCTYPE html>
 <html>
@@ -51,6 +52,13 @@
 			padding: 0px 30px 0px 0px;
 		}
 		
+		.buyBtn {
+			width: 100px;
+		}
+		.saleBtn {
+			width: 100px;
+		}
+	
 	</style>
 </head>
 <body>
@@ -83,100 +91,134 @@
       <a href="#">마이페이지</a> &gt;
       <a href="./">캘린더</a>
     </div>
-    <h1 class="pageTitle"><div>캘린더</div></h1>
-	<div class="container">
+    <h1 class="pageTitle"><div>경매장</div></h1>
+	 <%
+	//로그인 세션 없으면 로그인을 먼저 하도록 한다.
+	if(session.getAttribute("isLogOn") == null) {
+		PrintWriter pw = response.getWriter();
+		pw.println("<script>");
+		pw.println("alert('로그인이 필요합니다.');");
+		pw.println("location.href='/member/login?action=/auction/auction_wirte';");
+		pw.println("</script>");
+		pw.flush();
+		pw.close();
+	}
+	%>	
+
+		<div class="container">
 		<br/><br/>
+		<table id="tb1" class="table table-bordered table-striped">
+			<tr><!-- 사진, 제목 -->  
+				<th rowspan="7" id="productimg"><img src="#" alt="상품사진"/></th>
+				<th class="cate">제목</th>
+				<th class="colon">:</th>
+				<th colspan="4">${articlesList.title}</th>
+			<tr> <!-- 상품번호 -->
+				<th class="cate">상품번호</th>
+				<th class="colon">:</th>
+				<th colspan="4">${articlesList.aucCode}</th>
+			</tr>
+			<tr> <!-- 판매자 -->
+				<th class="cate">판매자</th>
+				<th class="colon">:</th>
+				<th colspan="4">${articlesList.aucId}</th>
+			</tr>
+			<tr><!-- 현재입찰가 -->
+				<th class="cate">현재입찰가</th>
+				<th class="colon">:</th>
+				<th colspan="4">${articlesList.nowBid}원
+					<c:choose>
+					<c:when test="${member.userId != articlesList.aucId}">
+						<input type="button" class="btn btn-success buyBtn" onClick="fn_tryBid()" style="color:#FFFFFF;" value="입찰하기">  <!-- "background-color:rgb(73, 124, 64); -->
+					</c:when>
+					</c:choose>
+					<c:choose>
+					<c:when test="${member.userId == articlesList.aucId}">
+						<input type="button" class="btn btn-primary saleBtn" onClick="fn_saleNow()" style="color:#FFFFFF;" value="바로판매">  <!-- "background-color:rgb(73, 124, 64); -->
+					</c:when>
+					</c:choose>
+				</th>
+			</tr>
+			<tr><!-- 입찰단위 -->
+				<th class="cate">입찰단위</th>
+				<th class="colon">:</th>
+				<th colspan="4">${articlesList.bidRate}원</th>
+			</tr>
+			<tr><!-- 상한금액 -->
+				<th class="cate">상한금액</th>
+				<th class="colon">:</th>
+				<th colspan="4">${articlesList.maxPrice}원
+					<c:choose>
+					<c:when test="${member.userId != articlesList.aucId}">
+						<input type="button" class="btn btn-warning buyBtn" onClick="fn_buyNow()" style="color:#FFFFFF;" value="바로구매">
+					</c:when>
+					</c:choose>
+				</th>
+			</tr>
+			<tr><!-- 경매기간 -->
+				<th class="cate">마감기한</th>
+				<th class="colon">:</th>
+				<th colspan="4">${articlesList.deadline}
+					<c:choose>
+					<c:when test="${member.userId == articlesList.aucId}">
+						<input type="button" class="btn btn-danger saleBtn" onClick="fn_off()" style="color:#FFFFFF;" value="경매취소">  <!-- "background-color:rgb(73, 124, 64); -->
+					</c:when>
+					</c:choose>
+				</th>
+			</tr>
+		</table> 
 		
-		<div class="myroot">
-			<a href="#">홈</a> >
-			<a href="#">경매</a> >
-			<a href="#">경매장</a>
-			<a href="#">글쓰기</a>
-		</div>
-		<br/><br/>
+		<!-- 글쓰기 -->
+		<table id="tb2" class="table table-bordered table-striped table-hover">
+			<tr>
+				<th id="title" colspan="4" align="center">제품 상세 내용</th><!-- 내용 -->
+			</tr>
+			<tr>	
+				<th id="textbox" colspan="4">
+					<textarea rows=15>
+						${articlesList.content}
+					</textarea>
+				</th>
+			</tr>
+		</table>
+	</div> <!-- 컨테이너 -->
 		
-		<img src="/resources/images/banner.jpeg" alt="배너" style="width: 1150px;">
-		<br><br><br>
+		
+		
+					
+		
 		
 	
-			<table id="tb1" class="table table-bordered table-striped">
-				<tr><!-- 사진, 제목 -->  
-					<th rowspan="7" id="productimg"><img src="#" alt="상품사진"/></th>
-					<th class="cate">제목</th>
-					<th class="colon">:</th>
-					<th colspan="4">${articlesList.title}</th>
-				<tr> <!-- 상품번호 -->
-					<th class="cate">상품번호</th>
-					<th class="colon">:</th>
-					<th colspan="4">${articlesList.aucCode}</th>
-				</tr>
-				<tr> <!-- 판매자 -->
-					<th class="cate">판매자</th>
-					<th class="colon">:</th>
-					<th colspan="4">${articlesList.aucId}</th>
-				</tr>
-				<tr><!-- 현재입찰가 -->
-					<th class="cate">현재입찰가</th>
-					<th class="colon">:</th>
-					<th colspan="4">${articlesList.nowBid}원
-						<button type="button" id="nowBid" class="btn" style="background-color:rgb(73, 124, 64); color:#FFFFFF;">
-							<span>입찰하기</span>
-						</button>
-					</th>
-				</tr>
-				<tr><!-- 입찰단위 -->
-					<th class="cate">입찰단위</th>
-					<th class="colon">:</th>
-					<th colspan="4">${articlesList.bidRate}원</th>
-				</tr>
-				<tr><!-- 상한금액 -->
-					<th class="cate">상한금액</th>
-					<th class="colon">:</th>
-					<th colspan="4">${articlesList.maxPrice}원
-						<button type="button" id="maxPrice" class="btn" style="background-color:orange; color:#FFFFFF;">
-							<span>상한가 구매</span>
-						</button>
-					</th>
-				</tr>
-				<tr><!-- 경매기간 -->
-					<th class="cate">마감기한</th>
-					<th class="colon">:</th>
-					<th colspan="4">${articlesList.deadline}</th>
-				</tr>
-			</table> 
-			
-			<!-- 글쓰기 -->
-			<table id="tb2" class="table table-bordered table-striped table-hover">
-				<tr>
-					<th id="title" colspan="4" align="center">제품 상세 내용</th><!-- 내용 -->
-				</tr>
-				<tr>	
-					<th id="textbox" colspan="4">
-						<textarea rows=15>
-							${articlesList.content}
-						</textarea>
-					</th>
-				</tr>
-			</table>
-		</div> <!-- 컨테이너 -->
+		
+
+		
 		
 	
 <script>
-	$(document).ready(function (${articlesList.nowBid + articlesList.bidRate}) {
-		$("#nowBid").on("click", function(){
-			alert(${articlesList.nowBid + articlesList.bidRate} + "원에 입찰하시겠습니까? 입찰 후에는 취소되지 않습니다.");
-			var locateion = "/auction_modifyandupadate?aucCode=" + ${articlesList.aucCode} + "&nowBid=" + ${articlesList.nowBid + articlesList.bidRate};
-			location.href = location;
-		});
-	});
 	
-	$(document).ready(function (${articlesList.maxPrice}) {
-		$("#maxPrice").on("click", function(){
-			alert(${articlesList.maxPrice} + "원에 입찰하시겠습니까? 경매가 완전히 종료됩니다. 경매가 종료된 후에는 취소 할 수 없습니다.");
-			var location = "/auction_modifyandupdate?aucCode=" + ${articlesList.aucCode} + "$maxPrice=" + ${articlesList.maxPrice};
-			location.href = location;
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	$(document).ready(function () {
+		
+		$("#nowBid").on("click", function(){
+			if(confirm(${articlesList.nowBid + articlesList.bidRate} + "원에 입찰하시겠습니까? 입찰 후에는 취소 할 수 없습니다.")){
+				var locateion = "/auction_updateBid?aucCode=" + ${articlesList.aucCode} + "&nowBid=" + ${articlesList.nowBid + articlesList.bidRate};
+				location.href = location;
+			}else{
+				return;
+			}
 		});
-	});
+
+		$("#maxPrice").on("click", function(){
+			if(confirm(${articlesList.maxPrice} + "원에 입찰하시겠습니까? 입찰 후에는 취소 할 수 없습니다.")){
+				var locateion = "/auction_updateMax?aucCode=" + ${articlesList.aucCode} + "&maxPrice=" + ${articlesList.maxPrice};
+				location.href = location;
+			}else{
+				return;
+			}
+		});
+		
+	}); //$(document).ready(function () {
 	
 </script>
 
