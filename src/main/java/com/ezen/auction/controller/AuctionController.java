@@ -190,6 +190,15 @@ public class AuctionController {
 		return mav;
 	}	
 	
+	@RequestMapping(value="/auction_modiandupdate", method=RequestMethod.GET)
+	public ModelAndView modifyAndUpdate (
+		@RequestParam(value="aucCode") int aucCode,
+		@RequestParam(value="nowBid", required=false) int nowBid,
+		@RequestParam(value="maxPrice", required=false) int maxPrice) throws Exception {
+		return null;
+	}
+	
+	
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value="/auction_detail_owner", method=RequestMethod.GET)
