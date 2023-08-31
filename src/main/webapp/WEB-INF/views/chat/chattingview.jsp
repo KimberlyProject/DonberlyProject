@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%@ include file="../include/header.jsp" %>
@@ -248,14 +249,14 @@ div.chat.ch2{
 	
 		<table border="1" style="margin: 0px; padding: 0px;">
 			<tr>
-				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">사람님과의 채팅창</td>
+				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">과의 채팅창</td>
 			</tr>
 			<tr>
 				<td class="chat_area">
 					<div class="wrap"  style="overflow:auto; width:599px; height:600px;">
 						<!-- 시작 날짜! -->
 						<div class="chat_date">
-							<div class="textbox">2023년 4월 25일</div>
+							<div class="textbox">2023년 8월 28일</div>
 						</div>
 						<!-- 날짜 끝! -->
 						<!-- 상대방이 ch1 -->
@@ -321,21 +322,69 @@ div.chat.ch2{
 			<tr>
 				<td class="chat_text"  colspan="2">
 				<div class="row" style="height: 90px;">
-					<div class="form-group col-xs-5">
-						<textarea style="height: 80px;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
-					</div>
-					<div class="form-group col-xs-3" >
-						<button class="btn btn-success btn-lg" style="height:80px; width:120px;">전송</button>
-						
-						<div class="clearfix"></div>
-					</div>
-				</div>					
+					
+						<div class="form-group col-xs-5">
+							<textarea style="height: 80px; width:440px;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
+							<input id="userId" type="hidden" value="${member.userId}">
+							<input id="articleNo" type="hidden" value="<%=request.getParameter("articleNo")%>">
+							
+						</div>
+						<div class="form-group col-xs-4" style="padding-left:55px;">
+							<button class="btn btn-success btn-lg sendText" style="height:80px; width:120px;">전송</button>
+							<div class="clearfix"></div>
+						</div>
+					
+				</div>
 				</td>
 			</tr>
 		</table>
 	</div>
 	<br><br>
 	
+<script>
+$(document).ready(function(){
+	
+	
+	
+	
+	$('.sendText').on('click',function(){
+		
+		var con = $('#chatContent').val();
+		var now = new Date();
+		console.log($('#chatContent').val());
+		//예약 확정/취소를 선택한다.
+		if($('#chatContent').val()){
+			 $.ajax({
+				 url:	"/chat/chattingview",
+				 type:	"post",
+				 dataType:	"text",
+				 data:	{"content" : $('#chatContent').val(),
+						 "fromId" : $('#userId').val(),
+						 "articleNo" : $('#articleNo').val()
+				 
+				 },	//클릭한 좌석번호
+				 success: function(data){
+					$(".wrap").append(
+						"<div class='chat ch2'><div class='textbox'>"+$('#chatContent').val()+"</div></div>"+
+						"<div class='time2' >"+now.getHours()+"시"+now.getMinutes()+"분"+"</div>"
+					);
+					
+				 },
+				 error:function(request,status,error){
+					 console.log("실패");
+					 
+				 },
+				 complete:function(){
+					 $('#chatContent').val('');
+				 }
+			 });
+		}else{//취소(아니오) 버튼을 눌렀을 경우
+			alert("예약을 취소합니다.");
+		}
+		
+	});
+});
+</script>
 
 </body>
 </html>

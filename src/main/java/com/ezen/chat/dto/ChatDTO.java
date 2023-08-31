@@ -3,75 +3,55 @@ package com.ezen.chat.dto;
 import java.sql.Date;
 
 public class ChatDTO {
-	private String user_id;
-	private String pw;
-	private String name;
-	private String nickname;
-	private Date reg_date;
-	private String tel;
-	private String email;
-	private String address;
-	private String my_img;
-	public String getUser_id() {
-		return user_id;
+	private int chatId;
+	private int artNo;
+	private String fromId;
+	private String ToId;
+	private String chatContent;
+	private Date chatTime;
+	public int getChatId() {
+		return chatId;
 	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setChatId(int chatId) {
+		this.chatId = chatId;
 	}
-	public String getPw() {
-		return pw;
+	public int getArtNo() {
+		return artNo;
 	}
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setArtNo(int artNo) {
+		this.artNo = artNo;
 	}
-	public String getName() {
-		return name;
+	public String getFromId() {
+		return fromId;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setFromId(String fromId) {
+		this.fromId = fromId;
 	}
-	public String getNickname() {
-		return nickname;
+	public String getToId() {
+		return ToId;
 	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
+	public void setToId(String toId) {
+		ToId = toId;
 	}
-	public Date getReg_date() {
-		return reg_date;
+	public String getChatContent() {
+		return chatContent;
 	}
-	public void setReg_date(Date reg_date) {
-		this.reg_date = reg_date;
+	public void setChatContent(String chatContent) {
+		this.chatContent = chatContent;
 	}
-	public String getTel() {
-		return tel;
+	public Date getChatTime() {
+		return chatTime;
 	}
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getMy_img() {
-		return my_img;
-	}
-	public void setMy_img(String my_img) {
-		this.my_img = my_img;
+	public void setChatTime(Date chatTime) {
+		this.chatTime = chatTime;
 	}
 	@Override
 	public String toString() {
-		return "chatDTO [user_id=" + user_id + ", pw=" + pw + ", name=" + name + ", nickname=" + nickname
-				+ ", reg_date=" + reg_date + ", tel=" + tel + ", email=" + email + ", address=" + address + ", my_img="
-				+ my_img + "]";
+		return "ChatDTO [chatId=" + chatId + ", artNo=" + artNo + ", fromId=" + fromId + ", ToId=" + ToId
+				+ ", chatContent=" + chatContent + ", chatTime=" + chatTime + "]";
 	}
+	
+	
 	
 	
 }
