@@ -134,7 +134,7 @@
 			<tr id="trBtn">
 				<td id="a" colspan="2" align="center">
 					<input type="button" class="btn btn-info" value="목록으로 돌아가기" onClick="backToList(this.form)"/>
-					<input type="button" class="btn btn-primary" value="1:1채팅" onClick="fn_reply_form('${path}/board/replyForm.do)', ${article.articleNO})"/>
+					<input type="button" class="btn btn-primary" value="1:1채팅" onClick="fn_chat('${path}/chat/chattingview', ${article.articleNO})"/>
 					<!-- 로그인한 아이디와 게시글을 쓴 사람의 아이디가 같다면, 글쓴 본인이므로 수정/삭제가 가능하다. -->
 					<c:if test="${member.userId == article.userId}">
 						<input type="button" class="btn btn-warning" value="수정하기" onClick="fn_enable(this.form)"/>
@@ -204,6 +204,17 @@ function fn_modify_article(obj) {
 	obj.action = "${page}/board/modArticle.do";
 	obj.submit();
 }
+
+//1:1 채팅
+function fn_chat(url, articleNO){
+	alert('1:1채팅하기');
+	window.open("${path}/chat/chattingview?articleNo=s"+articleNO, "_blank", "width=940, height=750");
+}
+
+
+
+
+
 
 </script>
 

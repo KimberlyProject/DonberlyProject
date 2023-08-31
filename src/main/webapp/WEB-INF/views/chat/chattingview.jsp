@@ -249,7 +249,7 @@ div.chat.ch2{
 	
 		<table border="1" style="margin: 0px; padding: 0px;">
 			<tr>
-				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">사람과의 채팅창</td>
+				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">과의 채팅창</td>
 			</tr>
 			<tr>
 				<td class="chat_area">
@@ -326,6 +326,7 @@ div.chat.ch2{
 						<div class="form-group col-xs-5">
 							<textarea style="height: 80px; width:440px;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
 							<input id="userId" type="hidden" value="${member.userId}">
+							<input id="articleNo" type="hidden" value="<%=request.getParameter("articleNo")%>">
 							
 						</div>
 						<div class="form-group col-xs-4" style="padding-left:55px;">
@@ -343,6 +344,9 @@ div.chat.ch2{
 <script>
 $(document).ready(function(){
 	
+	
+	
+	
 	$('.sendText').on('click',function(){
 		
 		var con = $('#chatContent').val();
@@ -355,7 +359,8 @@ $(document).ready(function(){
 				 type:	"post",
 				 dataType:	"text",
 				 data:	{"content" : $('#chatContent').val(),
-						 "fromId" : $('#userId').val()
+						 "fromId" : $('#userId').val(),
+						 "articleNo" : $('#articleNo').val()
 				 
 				 },	//클릭한 좌석번호
 				 success: function(data){
