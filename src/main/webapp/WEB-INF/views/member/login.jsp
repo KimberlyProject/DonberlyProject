@@ -43,32 +43,28 @@
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
     <article class="Loginbox container">
-      <h1>
-      	<a href="#"><img src="${ path }/resources/images/logo_g.png" alt="logo"/></a>
-      </h1>
-      
-    <c:if test="${ member == null }">
-    <form method="post" action="/member/login">
-      <input type="text" class="form-control" placeholder="아 이 디" id="user_id" name="userId">
-      <div class="input-group" style="margin-bottom:10px;">
-        <input type="password" class="form-control" placeholder="패 스 워 드" id="pw" name="pw">
-        <span class="input-group-addon" id="basic-addon1"><span id="eye" class="glyphicon glyphicon-eye-open"></span></span>
+      <h1><a href="#"><img src="${ path }/resources/images/logo_g.png" alt="logo"/></a></h1>
+      <c:if test="${ member == null }">
+      <form action="/member/login" method="post">
+        <input type="text" class="form-control" placeholder="아 이 디" id="userId" name="userId">
+        <div class="input-group" style="margin-bottom:10px;">
+          <input type="password" class="form-control" placeholder="패 스 워 드" id="pw" name="pw">
+          <span class="input-group-addon" id="basic-addon1"><span id="eye" class="glyphicon glyphicon-eye-open"></span></span>
+        </div>
+        <input type="submit" class="btn" value="로 그 인">
+      </form>    
+      <div>
+        <a href="membership">회원가입</a> |
+        <a href="./findId">아이디 찾기</a> |
+        <a href="./findPasswd">비밀번호 찾기</a>
       </div>
-      <input type="submit" class="btn" value="로 그 인">
-    </form>   
-     
-    <div>
-      <a href="/member/membership">회원가입</a> /
-      <a href="">아이디 찾기</a> /
-      <a href="">비밀번호 찾기</a>
-    </div>
     </c:if>
     
     </article>
     
     
    	<c:if test="${ member != null }">
-   	<script>location.href = "/myPage/myPage"</script>
+   	<script>location.href = "/myPage/myInfo"</script>
     </c:if>
     
     <script>

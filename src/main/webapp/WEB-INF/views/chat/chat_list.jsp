@@ -43,11 +43,17 @@ label{
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp" %>
-<br>
 <div class="container">
-	<h4>홈 > 마이페이지 > 채팅창 목록</h4>
-	<hr>
+<c:set var="menu" value="mypage" />
+<%@ include file="../include/sidebar.jsp" %>
+    <div class="page_dir container">
+      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+       홈 &gt; 마이페이지 &gt; 채팅창 목록
+    </div>
 	<h1 class="pageTitle"><div>채팅창 목록</div></h1>
+	<c:if test="${member == null}">
+	<script>location.href="/member/login"</script>
+	</c:if>   
 	<!-- 검색창 -->
 	<div style="width:1000px; height: 50px; margin-left:110px; margin-right: 0px;">
 		<div class= "row" align="right" style="vertical-align:middle; float:right;">

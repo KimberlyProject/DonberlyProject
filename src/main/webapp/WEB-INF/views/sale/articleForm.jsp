@@ -28,26 +28,9 @@
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp" %>
+<c:set var="menu" value="board" />
+<%@ include file="../include/sidebar.jsp" %>
 
-		 <aside id="sideMenu">
-    	<h2>장터</h2>
-    		<ul>
-        		<li><a href="#">장터</a></li>
-        		<li>
-          			<a href="#">팝니다</a>
-		          		<ul>
-		            		<li><a href="#">목록</a></li>
-		            
-		          		</ul>
-        		</li>
-        		<li><a href="#">삽니다</a>          
-          			<ul>
-            			<li><a href="#">목록</a></li> 
-          			</ul>
-        		</li>
-      		</ul>
-      	<button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       <a href="/">홈</a> &gt;

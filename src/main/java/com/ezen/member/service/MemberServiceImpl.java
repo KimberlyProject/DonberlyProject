@@ -26,6 +26,27 @@ public class MemberServiceImpl implements MemberService {
 	
 		return memberDAO.login(memberDTO);
 	}
+	
+	@Override
+	public int idCheck(MemberDTO memberDTO) throws Exception {
+		logger.info("MemberServiceImpl 아이디 중복 검사()");
+		int result = memberDAO.idCheck(memberDTO);
+		return result;
+	}
+
+	@Override
+	public int membership(MemberDTO memberDTO) throws Exception {
+		logger.info("MemberServiceImpl 회원가입() POST");
+		int result = memberDAO.membership(memberDTO);
+		return result;
+	}
+
+	@Override
+	public int nickCheck(MemberDTO memberDTO) throws Exception {
+		logger.info("MemberServiceImpl 아이디 중복 검사()");
+		int result = memberDAO.nickCheck(memberDTO);
+		return result;
+	}
 
 
 }

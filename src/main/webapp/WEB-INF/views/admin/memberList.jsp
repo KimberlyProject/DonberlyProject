@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%! SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일"); %>
 <html>
@@ -56,26 +55,20 @@
 		.head > th:last-child {
 			width:				15%;
 		}
-		tr > span {
-			vertical-align:		middle;
+		td > a {
+			font-color:			#000;
 		}
 	</style>
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-	<aside id="sideMenu">
-      <ul>
-        <li><a href="./oneOnOneInquiry">1:1 문의</a></li>
-        <li><a href="./memberList">회원 목록</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
-    <div class="page_dir container">
+	<c:set var="menu" value="admin" />
+	<%@ include file="../include/sidebar.jsp" %>	
+   <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <span><a href="./oneOnOneInquiry">관리자</a></span>
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      <span><a href="./memberList">회원 목록</a></span>
+      홈 &gt; 관리자 &gt; 회원 목록
     </div>
+    
     <h1 class="pageTitle"><div>회원 목록</div></h1>
 	<div class="container">
 		<!-- 검색창 -->
@@ -107,14 +100,12 @@
 			<tbody>
 				<c:forEach var="list" items="${memberList}" varStatus="memberNum">
 					<tr>
-						<td><span><input type="checkbox" style="width: 100%;"/></span></td>
-						<a href="/admin/memberDetail?id=${list.userId}">
-							<td><span>${memberNum.count}</span></td>
-							<td><span><input type="text" class="form-control" id="id" name="id" value="${list.userId}" readonly="readonly"/></span></td>
-							<td><span><input type="text" class="form-control" id="tel" name="tel" value="${list.tel}"/></span></td>
-							<td class="addr"><span><input type="text" class="form-control" id="addr" name="addr" value="${list.address}"/></span></td>
-							<td><span><fmt:formatDate value="${list.regDate}" pattern="yyyy년 MM월 dd일"/></span></td>
-						</a>
+						<td><input type="checkbox" style="width: 100%;"/></td>
+						<td><a href="/admin/memberDetail?userId=${list.userId}">${memberNum.count}</a></td>
+						<td><a href="/admin/memberDetail?userId=${list.userId}">${list.userId}</a></td>
+						<td><a href="/admin/memberDetail?userId=${list.userId}">${list.tel}</a></td>
+						<td class="addr"><a href="/admin/memberDetail?userId=${list.userId}">${list.address}</a></td>
+						<td><a href="/admin/memberDetail?userId=${list.userId}"><fmt:formatDate value="${list.regDate}" pattern="yyyy년 MM월 dd일"/></a></td>
 					</tr>
 				</c:forEach>
 				<br/>

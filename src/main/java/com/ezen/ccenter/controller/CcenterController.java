@@ -51,4 +51,13 @@ public class CcenterController {
 		System.out.println("1:1문의 화면 접속!!!!!!!!!!!!!!!!!");
 		return "/ccenter/askOnetoOne";
 	}
+	
+	//---------------------------------------------------------------------------------------------------------------------------------------
+	// 1:1문의 답변 화면 접속
+	//---------------------------------------------------------------------------------------------------------------------------------------
+	@RequestMapping(value="/askOnetoOneAnswer", method=RequestMethod.GET)
+	public String getAskOneToOneAnswer(Model model) {
+		System.out.println("1:1문의 답변 화면 접속!!!!!!!!!!!!!!!!!");
+		return "/ccenter/askOnetoOneAnswer";
+	}
 }
