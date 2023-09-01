@@ -6,35 +6,56 @@
 	<title>Insert title here</title>
 	<%@ include file="../include/header.jsp" %>
 	<style>
-	#trBtn_modify {
+		
+		#trBtn_modify {
 		display:	none;
-	}
-	
-	#a {
-		border: 2px solid rgb(73, 124, 64);
-		vertical-align: middle;
-	}
-	
-	#b {
-		border-top: 2px solid rgb(73, 124, 64);
-		border-bottom: none;
-		border-right: 2px solid rgb(73, 124, 64);
-	}
-	
-	#c {
-		border-top: none;
-		border-right: 2px solid rgb(73, 124, 64);
-	}
-	#n {
-		display: none;
-	}
+		}
+		
+		.line {
+		 background-color: #FFFfff;
+			 border-width: 0;
+		}
+		
+		#preview {
+			width: 450px;
+			height:500px;
+		}
+		
+		.grid-second {
+			display: grid;
+			
+			row-gap: 20px;
+		}
+		
+		.container-div {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+		}
 	</style>
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp" %>
-<c:set var="menu" value="board" />
-<%@ include file="../include/sidebar.jsp" %>
 
+
+			 <aside id="sideMenu">
+    	<h2>장터</h2>
+    		<ul class="item">
+        		<li><a href="#">장터</a></li>
+        		<li>
+          			<a href="#">팝니다</a>
+		          		<ul class="item">
+		            		<li><a href="#">목록</a></li>
+		            
+		          		</ul>
+        		</li>
+        		<li><a href="#">삽니다</a>          
+          			<ul class="item">
+            			<li><a href="#">목록</a></li> 
+          			</ul>
+        		</li>
+      		</ul>
+      	<button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
+    </aside>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       <a href="/">홈</a> &gt;
@@ -44,106 +65,101 @@
     <h1 class="pageTitle">
     	<div>장터</div>
     </h1>
-<br/><br/>
+	
 <div class="container">
+<div>
 	<a href="#" class="text-left">홈</a>><a href="#" class="text-left">장터</a>><a href="#" class="text-left">팝니다</a>><a href="#" class="text-left">상세화면</a>
-		
-	<form name="formArticle" method="post" action="${path}" enctype="multipart/form-data">
-	<table class="table table-bordered table-hover table-condensed">
+</div>
+
+	<form name="formArticle" method="post" action="${path}" enctype="multipart/form-data" class="container-div">
+		<div class="item">
 	<c:choose>
 		<c:when test="${not empty article.thumbnail && article.thumbnail != 'null'}">
 		<!-- 이미지를 가져오는 메서드는 FileDownloadController 클래스에 있다. -->
-			<tr>
-				<td id="a" width="150" align="center" rowspan="1">&nbsp;&nbsp;이미지</td>
-				<td id="b" colspan="2">
+			<ul class="item">
+				
+				<li>
 					<input type="hidden" name="originalFileName" value="${article.thumbnail }"/>
 					<img src="${path}/download.do?articleNO=${article.articleNO}&thumbnail=${article.thumbnail}" id="preview"/><br/>
-				</td>
-			</tr>
-			<tr>
-				<td id="a"><input type="file" class="btn btn-primary" name="thumbnail" id="i_thumbnail" disabled onchange="readURL(this);" /></td>
-			</tr>
+				<li>
+			</ul>
+			<ul class="item">
+				<li id="a"><input type="file" class="btn btn-primary" name="thumbnail" id="i_thumbnail" disabled onchange="readURL(this);" /><li>
+			</ul>
 		</c:when>
 		<c:otherwise>
-			<tr id="tr_fileUpload"> 
-				<td id="a" width="150" align="center"  rowspan="2">이미지</td>
-				<td id="b"><input type="hidden" name="originalFileName" value="${article.thumbnail }"/></td>
-			</tr>
-			<tr>
-				<td id="c">
+			<ul id="tr_fileUpload"> 
+				
+				<li><input type="hidden" name="originalFileName" value="${article.thumbnail }"/><li>
+			</ul>
+			<ul class="item">
+				<li>
 					<img id="preview"/><br/>
 					<input type="file" name="thumbnail" id="i_thumbnail" disabled onchange="readURL(this);"/>
-				</td>
-			</tr>
+				<li>
+			</ul>
 		</c:otherwise>
 	</c:choose>	
+		</div>
+			<div class="item">
 			
-			<tr id = "n" >
-				<td id="a" width="150" align="center" >글번호</td>
-				<td id="a">
-					<input type="text"   value="${article.articleNO }" disabled/>
+				<div class="grid-second">
 					<input type="hidden" value="${article.articleNO }" name="articleNO"/>
-				</td>
-			</tr> 
-			
-			<tr>
-				<td id="a" width="200" align="center" >글제목</td>
-				<td id="a"><input type="text"   value="${article.title }" name="title" id="i_title" disabled/></td>
-			</tr> 
-			<tr>
-				<td id="a" width="150" align="center" >상품번호</td>
-				<td id="a">
-					<input type="text"   value="${article.p_code }" disabled/>
 					<input type="hidden" value="${article.p_code }" name="p_code"/>
-				</td>
-			</tr> 
-			<tr>
-				<td id="a" width="150" align="center" >작성자</td>
-				<td id="a"><input type="text"   value="${member.nickname }" name="writer" disabled/></td>
-			</tr>
-			
-			<tr>
-				<td id="a" width="150" align="center" >작성자</td>
-				<td id="a"><input type="text"   value="${article.userId }" name="writer" disabled/></td>
-			</tr> 
-			
-			<tr>
-				<td id="a" width="150" align="center" >내  용</td>
-				<td id="a"><textarea rows="5" cols="50" name="content" id="i_content" disabled>${article.content }</textarea></td>
-			</tr>
-			<tr>
-				<td id="a" width="20" align="center" >가  격</td>
-				<td id="a"><input type="text"   value="${article.price }" name="price" id="i_price" disabled>원</td>
-			</tr>
-			
-			<tr>
-				<td id="a" width="150" align="center" >등록일자</td>
-				<td id="a">
-					<input type="text" size="30" value="<fmt:formatDate value="${article.write_date }" pattern='yyyy년 MM월 dd일 HH시 mm분'/>" disabled/>
-				</td>
-				
-			</tr> 
-			
-			<tr id="trBtn_modify">
-				<td colspan="2" align="center">
-					<input type="button" class="btn btn-primary" value="수정반영하기" onClick="fn_modify_article(formArticle)"/>
-					<input type="button" class="btn btn-warning" value="취소" onClick="backToList(formArticle)"/>
-				</td>
-			</tr>
-			
-			<tr id="trBtn">
-				<td id="a" colspan="2" align="center">
-					<input type="button" class="btn btn-info" value="목록으로 돌아가기" onClick="backToList(this.form)"/>
-					<input type="button" class="btn btn-primary" value="1:1채팅" onClick="fn_chat('${path}/chat/chattingview', ${article.articleNO})"/>
-					<!-- 로그인한 아이디와 게시글을 쓴 사람의 아이디가 같다면, 글쓴 본인이므로 수정/삭제가 가능하다. -->
-					<c:if test="${member.userId == article.userId}">
-						<input type="button" class="btn btn-warning" value="수정하기" onClick="fn_enable(this.form)"/>
-						<input type="button" class="btn btn-danger"  value="삭제하기" onClick="fn_remove('${path}/board/removeArticle.do', ${article.articleNO})"/>
-					</c:if>
-				</td>
-			</tr>
-			
-		</table>
+					<input type="hidden"   value="${member.nickname }" name="writer" disabled/>
+					
+					<ul class="item">
+						
+						<li><h2><input type="text" class="line"  value="${article.title }" name="title" id="i_title" disabled/></h2><li>
+					</ul> 
+					<ul class="item">
+						<li><input id="i_price" type="text" class="line" value="${article.price }" name="price" disabled/>
+						</li>
+					</ul>
+					<ul class="item">
+						<li>작성자 : ${member.nickname }<li>
+						
+					</ul>
+					
+					<ul class="item">
+						<li>내  용<li>
+						<li><textarea rows="5" style="background-color: #FFFfff;" cols="50" name="content" id="i_content" disabled>${article.content }</textarea><li>
+					</ul>
+					
+					<ul class="item">
+						<li>등록일자<li>
+						<li>
+							<input type="text" class="line" size="30" value="<fmt:formatDate value="${article.write_date }" pattern='yyyy년 MM월 dd일 HH시 mm분'/>" disabled/>
+						<li>
+						
+					</ul> 
+					
+					<ul class="item">
+						<li>조회수<li>
+						<li><input type="text" class="line"  value="${article.view }" name="view" id="i_view" disabled><li>
+					</ul>
+					
+					<ul class="item" id="trBtn_modify">
+						<li>
+							<input type="button" class="btn btn-primary" value="수정반영하기" onClick="fn_modify_article(formArticle)"/>
+							<input type="button" class="btn btn-warning" value="취소" onClick="backToList(formArticle)"/>
+						<li>
+					</ul>
+					
+					<ul class="item" id="trBtn">
+						<li>
+							<input type="button" class="btn btn-info" value="목록으로 돌아가기" onClick="backToList(this.form)"/>
+							<input type="button" class="btn btn-primary" value="1:1채팅" onClick="fn_reply_form('${path}/board/replyForm.do)', ${article.articleNO})"/>
+							<!-- 로그인한 아이디와 게시글을 쓴 사람의 아이디가 같다면, 글쓴 본인이므로 수정/삭제가 가능하다. -->
+							<c:if test="${member.userId == article.userId}">
+								<input type="button" class="btn btn-warning" value="수정하기" onClick="fn_enable(this.form)"/>
+								<input type="button" class="btn btn-danger"  value="삭제하기" onClick="fn_remove('${path}/board/removeArticle.do', ${article.articleNO})"/>
+							</c:if>
+						<li>
+					</ul>
+				</div>
+		</div>
+
 	</form>
 </div>
 <br/><br/><br/><br/>
@@ -205,17 +221,27 @@ function fn_modify_article(obj) {
 	obj.submit();
 }
 
-//1:1 채팅
-function fn_chat(url, articleNO){
-	alert('1:1채팅하기');
-	window.open("${path}/chat/chattingview?articleNo=s"+articleNO, "_blank", "width=940, height=750");
-}
 
+$(document).ready(function() {
 
+	$.ajax({
+		url:			"/board/viewUp.do",
+		type:			"get",
+		dataType:		"json",
+		data:			{"view" : $('#view').val()},
+		success:		function(data) {
+			alert("조회수증가하자");
+			
+		},
+		error: function(info) {
+			// alert("에러가 발생하였습니다!");
+		},
+		complete: function(info) {
+			// alert("작업을 완료하였습니다.");
+		}
+	});
 
-
-
-
+});
 </script>
 
 </body>
