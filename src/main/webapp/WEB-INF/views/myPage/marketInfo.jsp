@@ -89,9 +89,6 @@
 		
 		<img src="/resources/images/banner.jpeg" alt="배너" style="width: 1150px;">
 		<br><br><br>
-		<c:if test="${member == null}">
-			<script>location.href="/member/login"</script>
-		</c:if>   
 		<!-- 좌측 상단 팝니다/삽니다 구분 -->
 		<div class= "selectBox" align="left" style="vertical-align:middle;">
 			<div>
