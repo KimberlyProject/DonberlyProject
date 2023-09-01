@@ -7,25 +7,96 @@
 	<%@ include file="../include/header.jsp" %>
 	
 	<style>
-		#a {
-			border : 1px solid;
+			
+		.imgsize {
+		width: 180px;
+		height: 155px;
+		
 		}
 		
-		#b{
-			text-align: right;
+		.selectBox{
+		display: flex;
+		justify-content:space-between;
 		}
 		
-		#i{
-			width:80px; 
-			height:100px;		}
+		/* 제일 상위 */
+		.products {
+		display:grid;
+		grid-template-columns: 1fr 1fr 1fr;
+	    border: 1px solid #ccc; /* 테이블 경계 설정 */
+	    padding: 10px; /* 테이블 내부 여백 설정 */
+	    margin-bottom: 20px; /* 테이블 간격 설정 */
+	  	}
+		/* products 하위 */
+		.product {	
+	    display: block;
+	    text-align: center;
+	    text-decoration:none;
+	    color: black;
+	    margin-left: 5px;
+	    margin-right: 5px;
+	    margin-bottom: 15px;
+	    
+		}
+		
+		/* 상품 글 제목 */
+		.product-title {
+		font-size: 18px;
+		text-align: center;
+		margin-top: 20px;
+		margin-bottom: 10px;
+		}
+		
+		/* 상품 글 가격 */
+		.product-price {
+		text-align: center;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		}
+		
+		/* 상품 글 판매자 */
+		.product-seller {
+		text-align: center;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		}
+	
+	/* 상품 글 작성일자 */
+	.product-date {
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	}
+	
+	.searchgroup {
+	padding: 5px;
+	}
+			
 	</style>
 	
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp" %>
-<c:set var="menu" value="board" />
-<%@ include file="../include/sidebar.jsp" %>
 
+	<aside id="sideMenu">
+    	<h2>장터</h2>
+    		<ul>
+        		<li><a href="#">장터</a></li>
+        		<li>
+          			<a href="#">팝니다</a>
+		          		<ul>
+		            		<li><a href="#">목록</a></li>
+		            
+		          		</ul>
+        		</li>
+        		<li><a href="#">삽니다</a>          
+          			<ul>
+            			<li><a href="#">목록</a></li> 
+          			</ul>
+        		</li>
+      		</ul>
+      	<button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
+    </aside>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       <a href="/">홈</a> &gt;
@@ -38,7 +109,7 @@
 
 
 <div class="container">
-	<h1 align="center">삼</h1>
+	<h1 align="center">게시글</h1>
 	
 	<!-- 검색 조건 -->
 	<div class="col-sm-offset-6">
@@ -65,26 +136,30 @@
 				</div>
 			</c:when>
 			<c:when test="${articlesList != null}"> <!-- 게시글이 하나라도 있는 경우 -->
-						<div class="row">
+						<div class="products">
 				<c:forEach var="article" items="${articlesList }" varStatus="articleNum">
 					<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
-					
-							<div class="col-sm-4" id="a">
-								<div class="col-sm-6">
-									<a href="${page}/sale/viewArticle.do?articleNO=${article.articleNO}">
-										<img id="i" src="${path}/download.do?articleNO=${article.articleNO }&thumbnail=${article.thumbnail}" id="preview"/>
-									</a><br/>
-								</div>
-								<div class=" col-sm-6"align="right">	
-									<label id="b">
-									<a href="${page}/sale/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a><br/>
-									${article.price}원
-									</label>
-								</div>
-								<div class= "col-sm-8">
-									${article.write_date}
-								</div>
-							</div>
+
+							<ul class="product">
+					          <li>
+					            <a href="${page}/sale/viewArticle.do?articleNO=${article.articleNO}">
+									<img id="i" src="${path}/download.do?articleNO=${article.articleNO }&thumbnail=${article.thumbnail}" class="imgsize"/>
+								</a><br/>
+					          </li>
+					          <li class="product-title">
+					            <a href="${page}/sale/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a><br/>
+					          </li>
+					          <li class="product-price">
+					            ${article.price}원 <!-- 여기에 가격 표시 -->
+					          </li>
+					          <li class="product-seller">
+					          	${article.userId}
+					          </li>
+					          <li class="product-date">
+					          	${article.write_date}
+					          </li>
+					        </ul>
+							
 
 				</c:forEach>
 						</div>
@@ -98,19 +173,19 @@
 		<ul class="btn-group pagination">
 			<c:if test="${pageMaker.prev }"><!-- 이전 -->
 				<li>
-					<a href='<c:url value="/sale/listArticles.do?page=${pageMaker.startPage-1 }&searchType=${cri.searchType }&keyword=${cri.keyword }"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
+					<a href='<c:url value="/board/listArticles.do?page=${pageMaker.startPage-1 }&searchType=${cri.searchType }&keyword=${cri.keyword }"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
 				</li>
 			</c:if>
 		
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
 				<li>
-					<a href='<c:url value="/sale/listArticles.do?page=${pageNum }&searchType=${cri.searchType }&keyword=${cri.keyword }"/>'><i></i>${pageNum }</a>
+					<a href='<c:url value="/board/listArticles.do?page=${pageNum }&searchType=${cri.searchType }&keyword=${cri.keyword }"/>'><i></i>${pageNum }</a>
 				</li>
 			</c:forEach>
 			
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
 				<li>
-					<a href='<c:url value="/sale/listArticles.do?page=${pageMaker.endPage+1 }&searchType=${cri.searchType }&keyword=${cri.keyword }"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
+					<a href='<c:url value="/board/listArticles.do?page=${pageMaker.endPage+1 }&searchType=${cri.searchType }&keyword=${cri.keyword }"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
 				</li>
 			</c:if>
 		
@@ -118,7 +193,7 @@
 	</div>
 	
 	
-	<form id="formList" action="/sale/listArticles.do" method="get">
+	<form id="formList" action="/board/listArticles.do" method="get">
 		<input type="hidden" name="page"		value="${result.currentPageNum }">
 		<input type="hidden" name="size"		value="${result.currentPage.pageSize }">
 		<input type="hidden" name="searchType"	value="${pageVO.type }">
@@ -131,7 +206,7 @@
 		<!-- 로그인이 되었나? 않되었나? 에 따라서 넘어가는 페이지가 다르도록 하기위해서 function()에 세가지 값을 넘겨준다. -->
 	<p class="text-center">
 		<a class="btn btn-primary" 
-		href="javascript:fn_articleForm('${isLogOn}', '${page}/sale/articleForm.do', '${page}/member/login')">상품등록</a>
+		href="javascript:fn_articleForm('${isLogOn}', '${page}/board/articleForm.do', '${page}/member/login')">상품등록</a>
 	</p>
 	</div>
 
@@ -145,7 +220,7 @@ function fn_articleForm(isLogOn, articleForm, loginForm) {
 		location.href = articleForm;
 	} else {
 		alert("로그인을 하신 후에 글쓰기가 가능합니다!");
-		location.href = loginForm + '?action=/sale/articleForm.do';
+		location.href = loginForm + '?action=/board/articleForm.do';
 	}
 }
 
@@ -163,7 +238,8 @@ $(document).ready(function() {
 		formObj.find("[name='page']").val("1");
 		formObj.submit();
 	});
-})
+});
+
 
 
 </script>
