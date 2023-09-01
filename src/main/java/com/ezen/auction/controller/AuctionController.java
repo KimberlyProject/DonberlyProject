@@ -45,12 +45,26 @@ public class AuctionController {
 	@Inject
 	private AuctionService auctionService;
 
+	//메인페이지 불러오기
+	@RequestMapping(value="/auction_main", method=RequestMethod.GET)
+	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("경매장 메인 리스트불러오기 컨트롤러");
+		String viewName = (String) request.getAttribute("viewName");
+		List<AuctionDTO> articlesList	= auctionService.listArticles();
+		List<AucImgDTO> articlesList2 = auctionService.listArticlesImg();
+
+		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("articlesList", articlesList);	
+		mav.addObject("articlesList2", articlesList2);
+		return mav;
+	}	
+	
 	//글쓰기화면
 	@RequestMapping(value="/auction_write", method=RequestMethod.GET)
 	public String auctionWrite(Model model) {
 		System.out.println("경매 글쓰기 화면");
 		return "/auction/auction_write";
-	}
+	}//auctionWrite
 
 	//게시글 업로드
 	@RequestMapping(value="/addNewArticle", method = RequestMethod.POST)
@@ -105,13 +119,14 @@ public class AuctionController {
 		
 		try {
 			int aucCode = auctionService.addNewArticle(articleMap);
+			int imgNo = auctionService.addNewArticle(articleMap);
 			if(imgFileList != null && imgFileList.size() != 0) {
 				for(AucImgDTO aucImgDTO : imgFileList) {
 					imgName = aucImgDTO.getImgName();
 					System.out.println("다중이미지" + imgName);
 					
 					File srcFile = new File(IMGROOT + "\\" + "temp" + "\\" + imgName);
-					File destFile = new File(IMGROOT + "\\" + aucCode);
+					File destFile = new File(IMGROOT + "\\" + imgNo);
 					FileUtils.moveFileToDirectory(srcFile,  destFile, true);
 				}
 			}
@@ -137,7 +152,8 @@ public class AuctionController {
 		}
 		
 		return resEnt;
-	}		//이미지 업로드 메서드
+	}//addNewArticle		
+			//이미지 업로드 메서드
 			private List<String> upload(MultipartHttpServletRequest req) throws Exception {
 				List<String> fileList = new ArrayList<String>();
 				Iterator<String> fileNames = req.getFileNames();
@@ -156,23 +172,8 @@ public class AuctionController {
 					}
 				}
 				return fileList;
-			}
+			}//upload
 	
-	
-		
-	//메인페이지 불러오기
-	@RequestMapping(value="/auction_main", method=RequestMethod.GET)
-	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("경매장 메인 리스트불러오기 컨트롤러");
-		String viewName = (String) request.getAttribute("viewName");
-		List<AuctionDTO> articlesList	= auctionService.listArticles();
-		List<AucImgDTO> articlesList2 = auctionService.listArticlesImg();
-
-		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("articlesList", articlesList);	
-		mav.addObject("articlesList2", articlesList2);
-		return mav;
-	}			
 
 	//디테일페이지 불러오기
 	@RequestMapping(value="/auction_detail", method=RequestMethod.GET)
@@ -188,19 +189,20 @@ public class AuctionController {
 		mav.addObject("aritlcesList", aucImgDTO);
 		
 		return mav;
-	}	
+	}// viewArticle
 	
 	@RequestMapping(value="/auction_modiandupdate", method=RequestMethod.GET)
-	public ModelAndView modifyAndUpdate (
+	public ModelAndView modifyAndUpdate(
 		@RequestParam(value="aucCode") int aucCode,
 		@RequestParam(value="nowBid", required=false) int nowBid,
 		@RequestParam(value="maxPrice", required=false) int maxPrice) throws Exception {
 		return null;
-	}
+	}//modifyAndUpdate
 	
-	//경매취소 삭제하기
+	//판매자 경매취소 삭제하기
 	@RequestMapping(value="/auctionOff", method=RequestMethod.GET)
-	public String removeAuction(@RequestParam("aucCode") int aucCode, HttpServletRequest req, HttpServletResponse res)
+	public String removeAuction(@RequestParam("aucCode") int aucCode, 
+			HttpServletRequest req, HttpServletResponse res)
 			throws Exception {
 			System.out.println("경매종료 삭제하는 컨트롤러 " + aucCode);
 			
@@ -232,7 +234,103 @@ public class AuctionController {
 			e.printStackTrace();
 		}
 		return "auction/auction_main";
-	}
+	}//removeAuction
+
+	//판매자 현재입찰가로 판매하기
+	@RequestMapping(value="/saleNow", method=RequestMethod.GET)
+	public String saleNow(@RequestParam("aucCode") int aucCode,
+								  @RequestParam("cstmId") String cstmId,
+			HttpServletRequest Request, HttpServletResponse response)
+			throws Exception {
+
+		System.out.println("판매자 현재입찰가로 판매하기 Controller");
+		Request.setCharacterEncoding("UTF-8");
+		Map<String, Object> articleMap = new HashMap<String, Object>();
+		Enumeration enu = Request.getParameterNames();
+		
+		while(enu.hasMoreElements()) {
+			String	name	= (String) enu.nextElement();
+			String	value	= Request.getParameter(name);
+			System.out.println(name + ":" + value);
+			articleMap.put(name, value);
+		}
+		
+		String 	aucCode1	= (String)articleMap.get("aucCode");
+		String	message;
+		
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
+		
+		auctionService.saleNow(articleMap);
+		
+		return "auction/auction_main";
+	}//saleNow
+	
+	//구매자 입찰하기
+	@RequestMapping(value="/tryBid", method=RequestMethod.GET)
+	public String tryBid(@RequestParam("aucCode") int aucCode,
+						 @RequestParam("cstmId") String cstmId,
+						 @RequestParam("nowBid") int nowBid,
+			HttpServletRequest Request, HttpServletResponse response)
+			throws Exception {
+
+		System.out.println("구매자 입찰하기 Controller");
+		Request.setCharacterEncoding("UTF-8");
+		Map<String, Object> articleMap = new HashMap<String, Object>();
+		Enumeration enu = Request.getParameterNames();
+		
+		while(enu.hasMoreElements()) {
+			String	name	= (String) enu.nextElement();
+			String	value	= Request.getParameter(name);
+			System.out.println(name + ":" + value);
+			articleMap.put(name, value);
+		}
+		
+		String 	aucCode1 = (String)articleMap.get("aucCode");
+		String	message;
+		
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
+		
+		auctionService.tryBid(articleMap);
+		
+		return "auction/auction_main";
+	}//tryBid
+	
+	//구매자 상한가 구매하기
+	@RequestMapping(value="/buyNow", method=RequestMethod.GET)
+	public String buyNow(@RequestParam("aucCode") int aucCode,
+						 @RequestParam("cstmId") String cstmId,
+						 @RequestParam("maxPrice") int maxPrice,
+			HttpServletRequest Request, HttpServletResponse response)
+			throws Exception {
+
+		System.out.println("상한가 구매 Controller");
+		Request.setCharacterEncoding("UTF-8");
+		Map<String, Object> articleMap = new HashMap<String, Object>();
+		Enumeration enu = Request.getParameterNames();
+		
+		while(enu.hasMoreElements()) {
+			String	name	= (String) enu.nextElement();
+			String	value	= Request.getParameter(name);
+			System.out.println(name + ":" + value);
+			articleMap.put(name, value);
+		}
+		
+		String 	aucCode1	= (String)articleMap.get("aucCode");
+		String	message;
+		
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
+		
+		auctionService.buyNow(articleMap);
+		
+		return "auction/auction_main";
+	}//buyNow
+	
+}
 	
 
-}//class

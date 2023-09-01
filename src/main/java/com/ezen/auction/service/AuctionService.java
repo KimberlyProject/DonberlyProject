@@ -53,8 +53,23 @@ public class AuctionService {
 		return aucImgDTO;
 	}
 	
-	//삭제
+	//판매자 경매종료
 	public void removeAuction(int aucCode) throws Exception {
 		auctionDAO.deleteAuction(aucCode);
+	}
+	
+	//판매자 현재금액 판매
+	public void saleNow(Map articleMap) throws Exception {
+		auctionDAO.saleNow(articleMap);
+	}
+	
+	//구매자 입찰하기
+	public void tryBid(Map articleMap) throws Exception {
+		auctionDAO.tryBid(articleMap);
+	}
+	
+	//구매자 상한가로 구매하기
+	public void buyNow(Map articleMap) throws Exception {
+		auctionDAO.buyNow(articleMap);
 	}
 }

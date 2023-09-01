@@ -39,16 +39,19 @@ public class AuctionDAO {
 		System.out.println("이미지추가 dao");
 		List<AucImgDTO> imgFileList = (ArrayList)articleMap.get("imgFileList");
 		int aucCode = (Integer)articleMap.get("aucCode");
-		int imgFileNo = selectNewImgFileNo();
+		int imgNo = selectNewImgFileNo();
 		for(AucImgDTO aucImgDTO : imgFileList) {
-			aucImgDTO.setImgNo(++imgFileNo);
+			aucImgDTO.setImgNo(++imgNo);
 			aucImgDTO.setAucCode(aucCode);
 		}
+		System.out.println("그래서 번호 보여줌 articleMap " + articleMap);
+		System.out.println("그래서 번호 보여줌 dao " + imgNo);
 		System.out.println("toString" + imgFileList.toString());
 		sqlSession.insert(namespace + ".insertNewImg", articleMap);
-	}		//이미지 번호 추출		
-			private int selectNewImgFileNo() throws DataAccessException {
-				System.out.println("이미지 번호 추출 dao");
+	}
+		//이미지 번호 추출		
+		private int selectNewImgFileNo() throws DataAccessException {
+				System.out.println("이미지 번호 추출 dao 메서드 실행");
 				return sqlSession.selectOne(namespace + ".selectNewImgFileNo");
 			}
 	
@@ -81,11 +84,28 @@ public class AuctionDAO {
 		return sqlSession.selectOne(namespace + ".pullArticleImgDetail", aucCode);
 	}
 	
-	//삭제
+	//판매자 경매종료하기
 	public void deleteAuction(int aucCode) throws DataAccessException {
 		System.out.println("경메 취소 dao");
-		sqlSession.delete(namespace + ".deleteAuction", aucCode);
+		sqlSession.delete(namespace + ".auctionOff", aucCode);
 	}
 	
+	//판매자 현재금액에 판매하기
+	public void saleNow(Map articleMap) throws DataAccessException {
+		System.out.println("saleNow dao");
+		sqlSession.update(namespace + ".saleNow", articleMap);
+	}
+	
+	//구매자 입찰하기
+	public void tryBid(Map articleMap) throws DataAccessException {
+		System.out.println("tryBid dao");
+		sqlSession.update(namespace + ".tryBid", articleMap);
+	}
+	
+	//구매자 상한가 구매하기
+	public void buyNow(Map articleMap) throws DataAccessException {
+		System.out.println("buyNow dao");
+		sqlSession.update(namespace + ".buyNow", articleMap);
+	}
 	
 }//class

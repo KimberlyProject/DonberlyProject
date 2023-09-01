@@ -15,7 +15,7 @@
 			width: 100px;
 		}
 		input {
-			width: 50%;
+			width: 200px;
 			font-size: 15px;
 		}
 		#productimg {
@@ -72,11 +72,7 @@
             <li><a href="#">팝니다</a></li>
           </ul>
         </li>
-        <li><a href="#">경매</a>          
-          <ul>
-            <li><a href="#">판매</a></li>
-            <li><a href="#">구매</a></li>
-          </ul>
+        <li><a href="/auction/auction_main">경매</a>          
         </li>
         <li><a href="#">캘린더</a></li>
         <li><a href="#">채팅목록</a></li>
@@ -86,8 +82,8 @@
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       <a href="/">홈</a> &gt;
-      <a href="#">마이페이지</a> &gt;
-      <a href="./">캘린더</a>
+      <a href="/auction/auction_main">경매장</a> &gt;
+      <a href="#">경매올리기</a>
     </div>
     
    <%
@@ -105,11 +101,12 @@
 		
 	<div class="container">
 		<form id="formgroup" name="aucArticle" method="post" action="${path}/auction/addNewArticle" enctype="multipart/form-data">
+			<input type="hidden" name="aucId" ${member.userId}/>
 			<!-- 글쓰기 -->
 			<table id="tb1" class="row table table-bordered table-striped">
 				<tr><!-- 사진, 제목 -->  
-					<th class="cate">제목</th>
-					<th colspan="2"><input type="text" maxlength="500" name="title" placeholder="예) 상품명"></th>
+					<th class="cate">제목</th> 
+					<th colspan="2"><input type="text" maxlength="500" name="title" placeholder="예) 상품명"> &nbsp;&nbsp;&nbsp; 판매자 [${member.userId}] 님</th>
 				<tr> <!-- 최소금액 -->
 					<th class="cate">최소 금액</th>					
 					<th colspan="2"><input type="text" maxlength="10" name="minPrice" placeholder="숫자만 입력하세요">원</th>
@@ -121,27 +118,27 @@
 				<tr><!-- 입찰단위 -->
 					<th class="cate">입찰 단위</th>				
 					<th colspan="2">
-						<select id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
-							<option maxlength="10" name="bidRate" value="100" <c:if test="{searchType} == '100'">selected</c:if>>100원</option>
-							<option maxlength="10" name="bidRate" value="500" <c:if test="{searchType} == '500'">selected</c:if>>500원</option>
-							<option maxlength="10" name="bidRate" value="1000" <c:if test="{searchType} == '1000'">selected</c:if>>1,000원</option>
-							<option maxlength="10" name="bidRate" value="3000" <c:if test="{searchType} == '3000'">selected</c:if>>3,000원</option>
-							<option maxlength="10" name="bidRate" value="5000" <c:if test="{searchType} == '5000'">selected</c:if>>5,000원</option>
-							<option maxlength="10" name="bidRate" value="10000" <c:if test="{searchType} == '10000'">selected</c:if>>10,000원</option>
-							<option maxlength="10" name="bidRate" value="50000" <c:if test="{searchType} == '50000'">selected</c:if>>50,000원</option>
-							<option maxlength="10" name="bidRate" value="100000" <c:if test="{searchType} == '100000'">selected</c:if>>100,000원</option>
+						<select id="searchType" name ="bidRate" style="font-size: 18px; width: 150px; diplay: table-cell;">
+							<option value="100" <c:if test="{searchType} == '100'">selected</c:if>>100원</option>
+							<option value="500" <c:if test="{searchType} == '500'">selected</c:if>>500원</option>
+							<option value="1000" <c:if test="{searchType} == '1000'">selected</c:if>>1,000원</option>
+							<option value="3000" <c:if test="{searchType} == '3000'">selected</c:if>>3,000원</option>
+							<option value="5000" <c:if test="{searchType} == '5000'">selected</c:if>>5,000원</option>
+							<option value="10000" <c:if test="{searchType} == '10000'">selected</c:if>>10,000원</option>
+							<option value="50000" <c:if test="{searchType} == '50000'">selected</c:if>>50,000원</option>
+							<option value="100000" <c:if test="{searchType} == '100000'">selected</c:if>>100,000원</option>
 						</select>
 					</th>
 				</tr>
 				<tr><!-- 마감기한 -->
 					<th class="cate">마감 기한</th>					
 					<th colspan="2">
-						<select id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
-							<option name="deadline" value="0">오늘 마감</option>
-							<option name="deadline" value="1">1일 후 마감</option>
-							<option name="deadline" value="2">2일 후 마감</option>
-							<option name="deadline" value="3">3일 후 마감</option>
-							<option name="deadline" value="7">7일 후 마감</option>
+						<select id="searchType" name="" style="font-size: 18px; width: 150px; diplay: table-cell;">
+							<option value="0">오늘 마감</option>
+							<option value="1">1일 후 마감</option>
+							<option value="2">2일 후 마감</option>
+							<option value="3">3일 후 마감</option>
+							<option value="7">7일 후 마감</option>
 						</select>
 					</th>
 				</tr>
@@ -153,16 +150,16 @@
 						설정됩니다.)<br/>
 						<br/><br/><br/><br/>
 						이미지 파일 첨부<br/><input type="button" value="파일추가" onclick="fn_addFiles()"/>	
-					</th>	
+					</td>	
 					<th align="right">
 						<input type="file" name="imgName" onchange="readURL(this);"/><br/>
 						<img id="preview" src="" width=200 height=200/>
-						<div id="d_file"></div>
+						<div id="d_file"></div><br/>
 					</th>
 				<tr>
 					<th class="cate">제품 설명</th><!-- 내용 -->
 					<th colspan="2">
-						<textarea placeholder="제품에 대한 상세 내용을 입력해주세요."></textarea>
+						<textarea name="content" placeholder="제품에 대한 상세 내용을 입력해주세요."></textarea>
 					</th>
 				</tr>	
 			</table> <!-- 글쓰기 -->
