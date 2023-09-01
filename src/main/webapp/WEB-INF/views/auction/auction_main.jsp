@@ -49,6 +49,7 @@
         table-spacing {
         	margin-bottom: 20px;
         }
+     
 
 	</style>
 </head>
@@ -79,8 +80,7 @@
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       <a href="/">홈</a> &gt;
-      <a href="#">마이페이지</a> &gt;
-      <a href="./">캘린더</a>
+      <a href="#">경매장</a> &gt;
     </div>
     <h1 class="pageTitle"><div>경매장</div></h1>
     
@@ -121,6 +121,7 @@
 		<c:choose>
 		<c:when test="${articlesList != null}">
 			<!-- 경매게시글 -->
+			<div>
 			<table class="table table-bordered table-striped" id="ta">
 				<c:forEach var="article" items="${articlesList}" varStatus="articleNum">
 				<tr>
@@ -162,8 +163,12 @@
 				
 				</c:forEach>
 			</table><br/><br/><!--  경매 게시글 -->
+			<div>
 		</c:when>
 		</c:choose>
+		
+		
+		
 		
 		
 	
