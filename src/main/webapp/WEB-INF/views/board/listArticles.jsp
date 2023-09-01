@@ -30,12 +30,7 @@
 <!-- 세션 값이 없으면 로그인과 회원가입을 활성화 시킨다. -->
 <hr/>
 
-<c:if test="${member != null}">
-   <h1>${member.userId }</h1>
-</c:if>
-<c:if test="${member == null}">
-   <h1>세션 없어요</h1>
-</c:if>
+
 <div class="container">
 
 <c:set var="menu" value="board" />

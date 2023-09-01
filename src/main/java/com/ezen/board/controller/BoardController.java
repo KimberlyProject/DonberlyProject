@@ -16,14 +16,7 @@ import com.ezen.board.dto.SearchCriteria;
 //-----------------------------------------------------------------------------------------------------------
 public interface BoardController {
 
-	//-----------------------------------------------------------------------------------------------------------
-	// 게시글 목록
-	//-----------------------------------------------------------------------------------------------------------
-	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	
-	public ModelAndView saleListArticles(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-	
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 쓰기 화면
 	//-----------------------------------------------------------------------------------------------------------
