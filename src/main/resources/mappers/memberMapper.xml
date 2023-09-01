@@ -19,6 +19,18 @@
 		WHERE	userId		= #{userId}
 	</select>
 	
+	<select id="findId" parameterType="com.ezen.member.dto.MemberDTO" resultType="string">
+		SELECT	userId
+		FROM	members
+		WHERE	name		= #{name} AND email = #{email}
+	</select>
+	
+	<select id="findPasswd" parameterType="com.ezen.member.dto.MemberDTO" resultType="string">
+		SELECT	pw
+		FROM	members
+		WHERE	userId		= #{userId} AND email = #{email}
+	</select>
+	
 	<!-- 회원 닉네임 중복 검사 -->
 	<select id="nickCheck" parameterType="com.ezen.member.dto.MemberDTO" resultType="int">
 		SELECT	COUNT(*)

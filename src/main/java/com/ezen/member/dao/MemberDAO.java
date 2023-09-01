@@ -10,6 +10,12 @@ public interface MemberDAO {
 
 	// 아이디 중복 확인
 	public int idCheck(MemberDTO memberDTO) throws Exception;
+	
+	// 아이디 찾기
+	public String findId(MemberDTO memberDTO) throws Exception;
+	
+	// 비밀번호 찾기
+	public String findPasswd(MemberDTO memberDTO) throws Exception;
 
 	// 회원가입 POST
 	public int membership(MemberDTO memberDTO) throws Exception;

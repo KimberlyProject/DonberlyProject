@@ -7,13 +7,14 @@
 <title>돈벌리</title>
 	<%@ include file="../include/header.jsp" %>
 	<style>
-		body{
-			padding:0;
-		}
 	  .Loginbox{
-	    width:400px;
-	    /* height:100vh; */
-	    text-align:center;
+		position:absolute;
+		top:50%;
+		left:50%;
+		transform:translate(-50%, -60%);
+		width:400px;
+		/* height:100vh; */
+		text-align:center;
 	  }
 	  .Loginbox h1{
 	      margin-bottom:20px;
@@ -40,15 +41,30 @@
 	      background-color:rgb(31, 89, 39);
 	      color:#fff;
 	  }
+	  .Loginbox .searchBox>a,
+	  .Loginbox .searchBox>span{
+		  color:#337ab7;
+		  cursor:pointer;
+	  }
+	  .Loginbox .searchBox>span:hover{
+		  text-decoration:underline;
+	  }
+	  footer{
+	  	position:absolute;
+	  	left:0px;
+	  	bottom:0px;
+	  	width:100%;
+	  }
 	</style>
 </head>
 <body>
+	<%@ include file="../include/topMenu.jsp" %>
     <article class="Loginbox container">
       <h1><a href="#"><img src="${ path }/resources/images/logo_g.png" alt="logo"/></a></h1>
       <form action="" method="post">
-        <input type="text" class="form-control" placeholder="아 이 디" id="user_id" name="user_id">
-        <input type="password" class="form-control" placeholder="이 메 일" id="user_email" name="user_email">
-        <input type="submit" class="btn" value="비밀번호 찾기">
+        <input type="text" class="form-control" placeholder="아 이 디" id="userId" name="userId">
+        <input type="text" class="form-control" placeholder="이 메 일" id="email" name="email">
+        <input type="button" class="btn" value="비밀번호 찾기" onClick="find();">
       </form>    
       <div>
         <a href="">회원가입</a> |
@@ -56,5 +72,33 @@
         <a href="./findPasswd">비밀번호 찾기</a>
       </div>
     </article>
+    
+    <script>
+    	function find(){
+    		let obj = {
+    				userId : $("#userId").val(),
+    				email : $("#email").val()
+    		};
+			$.ajax({
+			    type : "POST",         
+			    url : "/member/findPasswd",    
+			    data : obj,           
+			    dataType : "text",
+			    success : function(data){ 
+			    	if(data){
+				        alert(`당신의 패스워드는 \${data} 입니다`);
+				        $("#userId").val('');
+				        $("#email").val('');
+			    	}else{
+			    		alert("일치하는 계정이 없습니다.")
+			    	}
+			    },
+			    error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+			    	alert('에러가 발생했습니다.')
+			    }
+			 });
+    	}
+    </script>
+    <%@ include file="../include/footer.jsp" %>
 </body>
 </html>

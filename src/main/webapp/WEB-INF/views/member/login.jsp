@@ -72,8 +72,8 @@
       </form>    
       <div class="searchBox">
         <a href="membership">회원가입</a> |
-        <span onClick="popup('findId');">아이디 찾기</span> |
-        <span onClick="popup('findPasswd');">비밀번호 찾기</span>
+        <a href="./findId">아이디 찾기</a> |
+        <a href="./findPasswd">비밀번호 찾기</a>
       </div>
     </c:if>
     
@@ -91,11 +91,9 @@
 		$('#eye').on('mouseup',function(){
 			$('#pw').attr('type','password');
 			return false;
-		})
-		function popup(page){	
-			window.open("./" + page, "_blank", "width=500, height=400");
-		}
+		})		
     </script>
+    
 	<%@ include file="../include/footer.jsp" %>
 </body>
 </html>

@@ -113,10 +113,26 @@ public class MemberController {
 		System.out.println("아이디찾기 화면 접속!!!!!!!!!!!!!!!");
 		return "member/findId";
 	}
+	@ResponseBody
+	@RequestMapping(value="/findId", method=RequestMethod.POST)
+	public String findId(Model model, MemberDTO memberDTO) throws Exception {
+		System.out.println("아이디찾기");
+		String result = memberService.findId(memberDTO);
+		System.out.println("---------------------------------------------------------------------------------" + result);
+		return result;
+	}
 	@RequestMapping(value="/findPasswd", method=RequestMethod.GET)
 	public String getFindPasswd(Model model) {
 		System.out.println("비밀번호찾기 화면 접속!!!!!!!!!!!!!!!");
 		return "member/findPasswd";
+	}
+	@ResponseBody
+	@RequestMapping(value="/findPasswd", method=RequestMethod.POST)
+	public String findPasswd(Model model, MemberDTO memberDTO) throws Exception {
+		System.out.println("비밀번호찾기");
+		String result = memberService.findPasswd(memberDTO);
+		System.out.println("---------------------------------------------------------------------------------" + result);
+		return result;
 	}
 
 	//찬호
