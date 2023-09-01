@@ -83,6 +83,7 @@ public class AuctionDAO {
 	
 	//삭제
 	public void deleteAuction(int aucCode) throws DataAccessException {
+		System.out.println("경메 취소 dao");
 		sqlSession.delete(namespace + ".deleteAuction", aucCode);
 	}
 	

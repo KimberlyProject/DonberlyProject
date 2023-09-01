@@ -99,7 +99,7 @@
    </select>
    
    <!-- 삭제하기 Query -->
-	<delete id="DeleteAuction" parameterType="int">
+	<delete id="deleteAuction" parameterType="int">
 		<![CDATA[
 		DELETE FROM auction
 		WHERE  aucCode = #{aucCode}

@@ -58,6 +58,14 @@
 		.saleBtn {
 			width: 100px;
 		}
+		#aaa {
+			font-style: bold;
+			color: green;
+		}
+		#bbb {
+			font-style: bold;
+			color: orange;
+		}
 	
 	</style>
 </head>
@@ -124,17 +132,17 @@
 				<th colspan="4">${articlesList.aucId}</th>
 			</tr>
 			<tr><!-- 현재입찰가 -->
-				<th class="cate">현재입찰가</th>
+				<th class="cate">현재입찰가 &nbsp; [${articlesList.cstmId}]님</th>
 				<th class="colon">:</th>
-				<th colspan="4">${articlesList.nowBid}원
+				<th colspan="4"><span id="aaa"/>${articlesList.nowBid}원
 					<c:choose>
 					<c:when test="${member.userId != articlesList.aucId}">
-						<input type="button" class="btn btn-success buyBtn" onClick="fn_tryBid(${articlesList.aucCode})" style="color:#FFFFFF;" value="입찰하기">  <!-- "background-color:rgb(73, 124, 64); -->
+						<input id="tryBid" type="button" class="btn btn-success buyBtn" style="color:#FFFFFF;" value="입찰하기">  														
 					</c:when>
 					</c:choose>
 					<c:choose>
 					<c:when test="${member.userId == articlesList.aucId}">
-						<input type="button" class="btn btn-primary saleBtn" onClick="fn_saleNow(${artiaclesList.aucCode})" style="color:#FFFFFF;" value="바로판매">  <!-- "background-color:rgb(73, 124, 64); -->
+						<input id="saleNow" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="바로판매">
 					</c:when>
 					</c:choose>
 				</th>
@@ -147,10 +155,10 @@
 			<tr><!-- 상한금액 -->
 				<th class="cate">상한금액</th>
 				<th class="colon">:</th>
-				<th colspan="4">${articlesList.maxPrice}원
+				<th colspan="4"><span id="bbb"/>${articlesList.maxPrice}원
 					<c:choose>
 					<c:when test="${member.userId != articlesList.aucId}">
-						<input type="button" class="btn btn-warning buyBtn" onClick="fn_buyNow()" style="color:#FFFFFF;" value="바로구매">
+						<input id="buyNow" type="button" class="btn btn-warning buyBtn" style="color:#FFFFFF;" value="바로구매">
 					</c:when>
 					</c:choose>
 				</th>
@@ -161,7 +169,7 @@
 				<th colspan="4">${articlesList.deadline}
 					<c:choose>
 					<c:when test="${member.userId == articlesList.aucId}">
-						<input id="auctionOff" type="button" class="btn btn-danger saleBtn" style="color:#FFFFFF;" value="경매취소">  <!-- "background-color:rgb(73, 124, 64); -->
+						<input id="auctionOff" type="button" class="btn btn-danger saleBtn" style="color:#FFFFFF;" value="경매취소">  																			
 					</c:when>
 					</c:choose>
 				</th>
@@ -183,70 +191,49 @@
 		</table>
 	</div> <!-- 컨테이너 -->
 		
-		
-		
-					
-		
-		
-	
-		
-
-		
-		
 	
 <script>
-	
-	function fn_tryBid() {
+$(document).ready(function () {
 		
-	}
-	
-	function fn_saleNow() {
-		
-	}
-	
-	function fn_buyNow() {
-		
-	}
-	
-	function fn_off() {
-		
-	}
-	
-	$(document).ready(function () {
-		
-		$("#auctionOff").on("click", function(){
-			if(confirm("현재 입찰 중인 상품입니다. 경매를 취소하시겠습니까? 삭제된 게시글은 복원되지 않습니다.")){
-				var locateion = "/auction/auctionOff?aucCode=" + ${articlesList.aucCode};
-				location.href = location;
-			}else{
+		//판매자 경매종료
+		$("#auctionOff").on("click", function() {
+			if(confirm("현재 입찰 중인 상품입니다. 경매를 취소하시겠습니까? 삭제된 게시글은 복원되지 않습니다.")) {
+				location.href = "/auction/auctionOff?aucCode=" + ${articlesList.aucCode};
+			} else {
 				return;
 			}
-		});
+		}); //#auctionOff
+		
+		//판매자 현재입찰가로 바로 판매
+		$("#saleNow").on("click", function() {
+			var price = ${articlesList.nowBid};
+			var cstm = "${articlesList.cstmId}";
+			if(confirm(cstm + "님에게 " + price + "원에 판매하시겠습니까? 거래가 완료되면 취소할 수 없습니다.")) {
+				location.href = "/auction/saleNow?aucCode=" + ${articlesList.aucCode} + "&cstm=" + ${articlesList.cstmId};
+			} else {
+				return;
+			}
+		});//#saleNow
+		
+		//구매자 입찰하기
+		$("#tryBid").on("click", function() {
+			var price = ${articlesList.nowBid + articlesList.bidRate};
+			if(confirm(price + "원으로 입찰하시겠습니까? 입찰 후 판매자가 경매를 종료하면 즉시 구매가 진행됩니다.")) {
+				location.href = "/auction/tryBid?aucCode=" + ${articlesList.aucCode} + "&cstm=" + ${articlesList.cstmId}; 
+			} else {
+				return;
+			}
+		});//#tryBid
+		
+		//구매자 상한가구매하기
+		$("#buyNow").on("click", function() {
+			var price = ${articlesList.maxPrice};
+			if(confirm("상한가 " + price + "원에 바로 구매하시겠습니까? 경매가 종료되면 취소할 수 없습니다.")) {
+				location.href = "/auction/butNow?aucCode=" + ${articlesList.aucCode} + "&cstm=" + ${articlesList.cstmId};
+			}
+		});//#buyNow
 
-	}
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	$(document).ready(function () {
-		
-		$("#nowBid").on("click", function(){
-			if(confirm(${articlesList.nowBid + articlesList.bidRate} + "원에 입찰하시겠습니까? 입찰 후에는 취소 할 수 없습니다.")){
-				var locateion = "/auction_updateBid?aucCode=" + ${articlesList.aucCode} + "&nowBid=" + ${articlesList.nowBid + articlesList.bidRate};
-				location.href = location;
-			}else{
-				return;
-			}
-		});
-
-		$("#maxPrice").on("click", function(){
-			if(confirm(${articlesList.maxPrice} + "원에 입찰하시겠습니까? 입찰 후에는 취소 할 수 없습니다.")){
-				var locateion = "/auction_updateMax?aucCode=" + ${articlesList.aucCode} + "&maxPrice=" + ${articlesList.maxPrice};
-				location.href = location;
-			}else{
-				return;
-			}
-		});
-		
-	}); //$(document).ready(function () {
+}); //$(document).ready(function () {
 	
 </script>
 
