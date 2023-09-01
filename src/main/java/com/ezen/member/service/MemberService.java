@@ -9,6 +9,11 @@ public interface MemberService {
 	//경은
 	public MemberDTO login(MemberDTO memberDTO) throws Exception;
 	
+	// 아이디 찾기
+	public String findId(MemberDTO memberDTO) throws Exception;
+	
+	// 비밀번호 찾기
+	public String findPasswd(MemberDTO memberDTO) throws Exception;	
 	
 	// 회원 아이디 중복 검사
 	public int idCheck(MemberDTO memberDTO) throws Exception;

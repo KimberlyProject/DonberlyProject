@@ -33,6 +33,15 @@ public class MemberServiceImpl implements MemberService {
 		int result = memberDAO.idCheck(memberDTO);
 		return result;
 	}
+	
+	@Override
+	public String findId(MemberDTO memberDTO) throws Exception {		
+		return memberDAO.findId(memberDTO);
+	}
+	@Override
+	public String findPasswd(MemberDTO memberDTO) throws Exception {		
+		return memberDAO.findPasswd(memberDTO);
+	}
 
 	@Override
 	public int membership(MemberDTO memberDTO) throws Exception {
@@ -47,6 +56,5 @@ public class MemberServiceImpl implements MemberService {
 		int result = memberDAO.nickCheck(memberDTO);
 		return result;
 	}
-
 
 }

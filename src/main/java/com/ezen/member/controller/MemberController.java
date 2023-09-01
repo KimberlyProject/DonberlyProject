@@ -59,7 +59,7 @@ public class MemberController {
 		//			   0이면 아이디에 해당하는 정보가 존재하지 않는다.
 		return result;
 			
-		} // End - public int idCheck(MemberDTO memberDTO)
+	} // End - public int idCheck(MemberDTO memberDTO)
 	
 	//-----------------------------------------------------------------------------------------------------------
 	// 닉네임 중복 검사
@@ -108,10 +108,31 @@ public class MemberController {
 	
 	
 	
+	@RequestMapping(value="/findId", method=RequestMethod.GET)
+	public String getFindId(Model model) {
+		System.out.println("아이디찾기 화면 접속!!!!!!!!!!!!!!!");
+		return "member/findId";
+	}
+	@ResponseBody
+	@RequestMapping(value="/findId", method=RequestMethod.POST)
+	public String findId(Model model, MemberDTO memberDTO) throws Exception {
+		System.out.println("아이디찾기");
+		String result = memberService.findId(memberDTO);
+		System.out.println("---------------------------------------------------------------------------------" + result);
+		return result;
+	}
 	@RequestMapping(value="/findPasswd", method=RequestMethod.GET)
 	public String getFindPasswd(Model model) {
 		System.out.println("비밀번호찾기 화면 접속!!!!!!!!!!!!!!!");
 		return "member/findPasswd";
+	}
+	@ResponseBody
+	@RequestMapping(value="/findPasswd", method=RequestMethod.POST)
+	public String findPasswd(Model model, MemberDTO memberDTO) throws Exception {
+		System.out.println("비밀번호찾기");
+		String result = memberService.findPasswd(memberDTO);
+		System.out.println("---------------------------------------------------------------------------------" + result);
+		return result;
 	}
 
 	//찬호
