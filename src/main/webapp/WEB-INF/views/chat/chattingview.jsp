@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -304,11 +305,12 @@ div.chat.ch2{
     				</div>
 				</td>
 				<td class="chat_detail" rowspan="2">
-					<div>제목: 물건 팝니다.</div>
-					<div>판매자: 이태림</div>
-					<div>구매자: 사람</div>
-					<div>상품코드: 123456</div>
-					<div style="padding-bottom: 10px;">가격: 10,000원</div>
+					
+					<div>${a.title}</div>
+					<div>${chat.seller} 판매자사람(글작성자)</div>
+					<div>${chat.buyer}</div>
+					<div>${a.p_code}</div>
+					<div style="padding-bottom: 10px;">${a.price}</div>
 					
 					<img src="${path}/resources/images/kuromi.png" alt="사진" width="200px;" height="200px;"/>
 					<br><br>

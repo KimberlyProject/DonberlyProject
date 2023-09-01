@@ -208,6 +208,7 @@ function fn_modify_article(obj) {
 //1:1 채팅
 function fn_chat(url, articleNO){
 	alert('1:1채팅하기');
+	
 	window.open("${path}/chat/chattingview?articleNo=s"+articleNO, "_blank", "width=940, height=750");
 }
 
