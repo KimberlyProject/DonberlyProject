@@ -59,11 +59,13 @@
       홈 &gt; 관리자 &gt; 1:1 문의
     </div>
     <h1 class="pageTitle"><div>1:1 문의</div></h1>
+	
 	<div class="container">
 		<!-- 삭제버튼 -->
 		<div>
 			<button class="btn btn-danger col-sm-1" style="float:left; ">삭제하기</button>
 		</div>
+		
 		<!-- 검색창 -->
 		<div class="row" style="vertical-align: middle; float:right;">
 			<select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
@@ -78,6 +80,7 @@
 				<span class="glyphicon glyphicon-search"/>
 			</button>   
 		</div>
+      	
       	<!-- 검색창 -->
 		<table class="table table-bordered table-striped table-hover">
 			<thead>
