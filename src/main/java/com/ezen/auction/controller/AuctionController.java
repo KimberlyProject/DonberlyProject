@@ -1,6 +1,7 @@
 package com.ezen.auction.controller;
 
 import java.io.File;
+
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -41,10 +42,42 @@ import com.ezen.member.dto.MemberDTO;
 public class AuctionController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AuctionController.class);
-	private static final String IMGROOT = "C:\\data\\workspace\\imgfiles";
+	//컴퓨터 경로
+	//private static final String IMGROOT = "C:\\data\\workspace\\imgfiles";
+	//프로젝트 경로 (temp생성후 옮기기도 됨, refresh 해줘야함)
+	private static final String IMGROOT = "C:\\data\\workspace\\DonberlyProject\\src\\main\\webapp\\resources\\images\\auction\\auction_image";
 	@Inject
 	private AuctionService auctionService;
 
+	//-------------------------------------------------------------------------------------------------------------//
+	
+	//이미지 가져오기 컨트롤러
+	@RequestMapping("/pullAuctionImges")
+	protected void pullImgFiles(@RequestParam("aucImg")	String aucImg,
+							@RequestParam("aucCode") int aucCode,
+							HttpServletResponse response)	throws Exception {
+								
+		OutputStream out = response.getOutputStream();
+		String downFile	 = IMGROOT + "\\" + aucCode + "\\" + aucImg;
+		File file = new File(downFile);
+	
+		response.setHeader("Cache-Control", "no-cache");
+		response.addHeader("Content-disposition", "attachement; fileName=" + aucImg);
+	
+		FileInputStream in = new FileInputStream(file);
+		byte[] buffer = new byte[1024 * 8];
+		while(true) {
+			int count = in.read(buffer);
+			if(count == -1)
+				break;
+			out.write(buffer, 0, count);
+		}
+		in.close();
+		out.close();	
+	}//pullImgFiles
+	
+	//-------------------------------------------------------------------------------------------------------------//
+	
 	//메인페이지 불러오기
 	@RequestMapping(value="/auction_main", method=RequestMethod.GET)
 	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -91,7 +124,7 @@ public class AuctionController {
 		
 		HttpSession session = req.getSession();
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
-		String aucId = memberDTO.getUserId();
+		String aucId = memberDTO.getUserId(); //여기 오류는 로그인이 안된것!!!
 		articleMap.put("aucId", aucId);
 		System.out.println("세션이랑 멤버디티오 실행" + aucId);
 		
@@ -121,6 +154,7 @@ public class AuctionController {
 		
 		try {
 			int aucCode = auctionService.addNewArticle(articleMap);
+			//한번만 생성하라고 ㅡㅡ
 			if(imgFileList != null && imgFileList.size() != 0) {
 				for(AucImgDTO aucImgDTO : imgFileList) {
 					imgName = aucImgDTO.getImgName();
@@ -183,9 +217,9 @@ public class AuctionController {
 	public ModelAndView viewArticle(@RequestParam("aucCode") int aucCode, HttpServletRequest req, HttpServletResponse res)
 			throws Exception {
 		String viewName = (String)req.getAttribute("viewName");
-		System.out.println("디테일페이지 컨트롤러" + aucCode);
+		System.out.println("------------------------------------------디테일페이지 컨트롤러" + aucCode + "------------------------------------------");
 		AuctionDTO auctionDTO = auctionService.viewArticle(aucCode);
-		AucImgDTO aucImgDTO = auctionService.viewArticleImg(aucCode);
+		List<AucImgDTO> aucImgDTO = auctionService.viewArticleImg(aucCode);
 		System.out.println(auctionDTO);
 		System.out.println(aucImgDTO);
 		ModelAndView mav = new ModelAndView();
@@ -195,15 +229,8 @@ public class AuctionController {
 		
 		return mav;
 	}// viewArticle
-	
-	
-//	@RequestMapping(value="/auction_modiandupdate", method=RequestMethod.GET)
-//	public ModelAndView modifyAndUpdate(
-//		@RequestParam(value="aucCode") int aucCode,
-//		@RequestParam(value="nowBid", required=false) int nowBid,
-//		@RequestParam(value="maxPrice", required=false) int maxPrice) throws Exception {
-//		return null;
-//	}//modifyAndUpdate
+
+	//-------------------------------------------------------------------------------------------------------------//
 	
 	//판매자 경매취소 삭제하기
 	@RequestMapping(value="/auctionOff", method=RequestMethod.GET)

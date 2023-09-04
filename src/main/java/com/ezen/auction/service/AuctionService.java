@@ -52,8 +52,8 @@ public class AuctionService {
 	}
 	
 	//디테일 image
-	public AucImgDTO viewArticleImg(int aucCode) throws Exception {
-		AucImgDTO aucImgDTO = auctionDAO.selectArticleImg(aucCode);
+	public List<AucImgDTO> viewArticleImg(int aucCode) throws Exception {
+		List<AucImgDTO> aucImgDTO = auctionDAO.selectArticleImg(aucCode);
 		return aucImgDTO;
 	}
 	

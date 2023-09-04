@@ -214,7 +214,7 @@
 	//숫자 입력창 콤마(,)추가하기
 	//function addCommas(input) {
       	//var num = input.value.replace(/,/g, '');
-        //input.value = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+       //input.value = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	//}
 	
 	
