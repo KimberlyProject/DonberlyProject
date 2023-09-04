@@ -31,6 +31,10 @@
 			display: grid;
 			grid-template-columns: 1fr 1fr;
 		}
+		
+		#i_price{
+			text-align: right;
+		}
 	</style>
 </head>
 <body>
@@ -113,7 +117,7 @@
 						<li><h2><input type="text" class="line"  value="${article.title }" name="title" id="i_title" disabled/></h2><li>
 					</ul> 
 					<ul class="item">
-						<li><input id="i_price" type="text" class="line" value="${article.price }" name="price" disabled/>
+						<li><input id="i_price" type="text" class="line" value="${article.price }" name="price" disabled/>원
 						</li>
 					</ul>
 					<ul class="item">
