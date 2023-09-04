@@ -201,14 +201,60 @@ public class MemberController {
 		return "redirect:/member/login";
 	}
 	
-  	@RequestMapping(value="/profile", method=RequestMethod.GET)
-  	public String getProfile(Model model){
-  		System.out.println("프로필 화면 접속");
-  		return "member/profile";
-  	}
+	/*
+	 * @RequestMapping(value="/profile", method=RequestMethod.GET) public String
+	 * getProfile(Model model){ System.out.println("프로필 화면 접속"); return
+	 * "member/profile"; }
+	 */
+	
+	@RequestMapping(value="/profile", method=RequestMethod.GET)
+	public void memberProfile(@RequestParam("userId") String userId, Model model) throws Exception {
+		
+		MemberDTO memberDTO = memberService.memberProfile(userId);
+		model.addAttribute("profile", memberDTO);
+		
+		System.out.println("상세정보 : " + memberDTO);
+
+	}
+
+  	// 11:52
+  	// 회원 정보 수정 GET
+    @RequestMapping(value = "/userProfileEditor", method = RequestMethod.GET)
+    public String getUserProfileEditor(HttpServletRequest request, Model model) throws Exception {
+        HttpSession session = request.getSession();
+        MemberDTO loggedInMember = (MemberDTO) session.getAttribute("member");
+
+        if (loggedInMember != null) {
+            MemberDTO memberDTO = memberService.userProfileEditor(loggedInMember.getUserId());
+            model.addAttribute("editor", memberDTO);
+            return "member/userProfileEditor";
+        } else {
+            // 로그인이 되어있지 않은 경우 처리 (예: 로그인 페이지로 리다이렉트)
+            return "redirect:/member/login";
+        }
+    }
+
+    // 회원 정보 수정 POST
+    @RequestMapping(value = "/memberUpdate", method = RequestMethod.POST)
+    public String memberUpdate(@ModelAttribute("editor") MemberDTO memberDTO, Model model) throws Exception {
+        memberService.memberUpdate(memberDTO);
+        return "redirect:/myPage/myInfo"; // 수정이 완료되면 프로필 페이지로 이동하도록 수정
+    }
+  	
+	@RequestMapping(value = "/memberDelete", method=RequestMethod.POST)
+	public String MemberDeletePost(MemberDTO memberDTO, Model model) throws Exception {
+		
+		// 비밀번호와 비밀번호확인이 틀리면 삭제하지 않고 돌아간다.
+		if(memberDTO.getPw().equals(memberDTO.getRepw())) {
+			memberService.memberDelete(memberDTO);
+		} else {
+			System.out.println("비밀번호와 비밀번호확인이 틀립니다.\n확인 후 다시 해주세요.");
+		}
+		
+		return "redirect:/member/memberList";
+		// return "/member/memberList";
+		
+	} // End - public String MemberDeletePost(MemberDTO memberDTO, Model model)
 
 }
-
-
-
 
