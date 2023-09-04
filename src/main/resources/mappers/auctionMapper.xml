@@ -40,14 +40,6 @@
  	  </foreach>
  	</insert>
  	
- 	<insert id="insertNewImg"  parameterType="java.util.Map">
-		<foreach item="item"  collection="list"   open="INSERT ALL" 
-				separator=" " close="SELECT * FROM DUAL" >
-			INTO  AUCIMG(imgNo, imgName, aucCode)
-			VALUES (#{item.imgNo}, #{item.imgName}, #{item.aucCode})
-		</foreach>
-	</insert>
- 	
 	<!-- 메인페이지 게시글 resultType -->
 	<resultMap id="aucArticle" type="auctionDTO">
 		<result property="aucCode" column="aucCode"/>

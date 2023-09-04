@@ -116,8 +116,38 @@
 		<div class="container">
 		<br/><br/>
 		<table id="tb1" class="table table-bordered table-striped">
-			<tr><!-- 사진, 제목 -->  
-				<th rowspan="7" id="productimg"><img src="#" alt="상품사진"/></th>
+			<tr><!-- 롤링이미지 -->
+				<th  rowspan="7" id="aucImg">
+				    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+				        <!--인디케이터-->
+				        <ol class="carousel-indicators">
+				            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				            <li data-target="#myCarousel" data-slide-to="1"></li>
+				            <li data-target="#myCarousel" data-slide-to="2"></li>
+				        </ol>
+				        <!--슬라이드-->
+				        <div class="carousel-inner" role="listbox">
+				            <div class="item active">
+				                <img src="" arl="" width="250" height="250"/>
+				            </div>
+				            <div class="item">
+				                <img src="" arl="" width="250" height="250"/>
+				            </div>
+				            <div class="item">
+				                <img src="" arl="" width="250" height="250"/>					        
+				            </div>
+				        </div>
+						<!--좌우 버튼-->
+				        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				            <span class="glyphicon glyphicon-chevron-left"></span>
+				            <span class="sr-only">Previous</span>
+				        </a>
+				        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				            <span class="glyphicon glyphicon-chevron-right"></span>
+				            <span class="sr-only">Next</span>
+				        </a>
+				    </div>					
+				</th><!-- 롤링이미지 -->
 				<th class="cate">제목</th>
 				<th class="colon">:</th>
 				<th colspan="4">${articlesList.title}</th>
@@ -166,7 +196,7 @@
 			<tr><!-- 경매기간 -->
 				<th class="cate">마감기한</th>
 				<th class="colon">:</th>
-				<th colspan="4">${articlesList.deadline}
+				<th colspan="4">${articlesList.writeDate} - ${articlesList.deadline}
 					<c:choose>
 					<c:when test="${member.userId == articlesList.aucId}">
 						<input id="auctionOff" type="button" class="btn btn-danger saleBtn" style="color:#FFFFFF;" value="경매취소">  																			

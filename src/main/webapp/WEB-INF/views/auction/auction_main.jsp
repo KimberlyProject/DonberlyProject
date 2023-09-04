@@ -146,7 +146,7 @@
 					<th class="cate">현재 가격</th><th class="colon">:</th><th>999,999</th><th class="cate">상한가</th><th class="colon">:</th><th>${article.maxPrice}</th>
 				</tr>
 				<tr>
-					<th class="cate">마감 기한</th><th class="colon">:</th><th>${article.deadline}</th>
+					<th class="cate">마감 기한</th><th class="colon">:</th><th>${article.writeDate} <br/> - ${article.deadline}</th>
 				
 					<th class="cate">진행상태</th><th class="colon">:</th>
 						<c:choose>

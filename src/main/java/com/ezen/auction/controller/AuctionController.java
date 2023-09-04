@@ -126,7 +126,7 @@ public class AuctionController {
 					System.out.println("다중이미지" + imgName);
 					
 					File srcFile = new File(IMGROOT + "\\" + "temp" + "\\" + imgName);
-					File destFile = new File(IMGROOT + "\\" + imgNo);
+					File destFile = new File(IMGROOT + "\\" + aucCode + "\\" + imgNo);
 					FileUtils.moveFileToDirectory(srcFile,  destFile, true);
 				}
 			}
@@ -160,14 +160,14 @@ public class AuctionController {
 				while(fileNames.hasNext()) {
 					String fileName = fileNames.next();
 					MultipartFile mFile = req.getFile(fileName);
-					String originalFileName = mFile.getOriginalFilename();
-					System.out.println("이미지 이름 잘 들어왔낭???" + originalFileName);
-					fileList.add(originalFileName);
-					File file = new File(IMGROOT + "\\" + "temp" + "\\" + fileName);
+					String imgName = mFile.getOriginalFilename();
+					System.out.println("이미지 이름 잘 들어왔낭???" + imgName);
+					fileList.add(imgName);
+					File file = new File(IMGROOT + "\\" + "temp" + "\\" + imgName);
 					if(mFile.getSize() != 0) {
 						if(!file.exists()) { //경로에 파일이 없는 경우
 							file.getParentFile().mkdirs(); //경로에 해당하는 디렉토리 생성
-							mFile.transferTo(new File(IMGROOT + "\\" + "temp" + "\\" + originalFileName));
+							mFile.transferTo(new File(IMGROOT + "\\" + "temp" + "\\" + imgName));
 						}
 					}
 				}

@@ -23,13 +23,15 @@ public class AuctionDAO {
 	
 	//새로운 게시글 추가하기
 	public int insertNewArticle(Map articleMap) throws DataAccessException {
-		System.err.println("게시글 업로드 dao");
+		System.out.println("게시글 업로드 dao");
 		int aucCode = selectNewAucCode();
 		articleMap.put("aucCode", aucCode);
 		System.out.println("dao에서 aucCode 생성" + aucCode);
 		sqlSession.insert(namespace + ".insertNewArticle", articleMap);
 		return aucCode;
-	}		//aucCode 생성하기
+	}		
+			
+			//aucCode 생성하기
 			private int selectNewAucCode() throws DataAccessException {
 				return sqlSession.selectOne(namespace +".selectNewAucCode");
 			}
@@ -47,13 +49,14 @@ public class AuctionDAO {
 		System.out.println("그래서 번호 보여줌 articleMap " + articleMap);
 		System.out.println("그래서 번호 보여줌 dao " + imgNo);
 		System.out.println("toString" + imgFileList.toString());
-		sqlSession.insert(namespace + ".insertNewImg", articleMap);
-	}
-		//이미지 번호 추출		
-		private int selectNewImgFileNo() throws DataAccessException {
-				System.out.println("이미지 번호 추출 dao 메서드 실행");
-				return sqlSession.selectOne(namespace + ".selectNewImgFileNo");
-			}
+		sqlSession.insert(namespace + ".insertNewImg", imgFileList);
+	}		
+	
+			//이미지 번호 추출		
+			private int selectNewImgFileNo() throws DataAccessException {
+					System.out.println("이미지 번호 추출 dao 메서드 실행");
+					return sqlSession.selectOne(namespace + ".selectNewImgFileNo");
+				}
 	
 	
 	//메인페이지 게시글 불러오기

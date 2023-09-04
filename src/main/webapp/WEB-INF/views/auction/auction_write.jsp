@@ -28,10 +28,6 @@
 		#tb1 {
 			margin: 0px;
 		}
-		#title {
-			text-align: center;
-			font-size: 30px;
-		}
 		th {
 			font-size: 15px;
 		}
@@ -56,6 +52,12 @@
 		#submit {
 			verticla-align: center;
 			text-align: center;
+		}
+		#minPrice {
+		text-align: right;
+		}
+		#maxPrice {
+		text-align: right;
 		}
 	</style>
 </head>
@@ -106,14 +108,14 @@
 			<table id="tb1" class="row table table-bordered table-striped">
 				<tr><!-- 사진, 제목 -->  
 					<th class="cate">제목</th> 
-					<th colspan="2"><input type="text" maxlength="500" name="title" placeholder="예) 상품명"> &nbsp;&nbsp;&nbsp; 판매자 [${member.userId}] 님</th>
+					<th colspan="2"><input id="title" type="text" maxlength="500" name="title" placeholder="예) 상품명"> &nbsp;&nbsp;&nbsp; 판매자 [${member.userId}] 님</th>
 				<tr> <!-- 최소금액 -->
-					<th class="cate">최소 금액</th>					
-					<th colspan="2"><input type="text" maxlength="10" name="minPrice" placeholder="숫자만 입력하세요">원</th>
+					<th id="minprice" class="cate">최소 금액</th>					
+					<th colspan="2"><input id="minPrice" class="commas" onkeyup="addCommas(this)" type="text" maxlength="10" name="minPrice" placeholder="숫자만 입력하세요">원</th>
 				</tr>
 				<tr> <!-- 상한금액 -->
 					<th class="cate">상한 금액</th>					
-					<th colspan="2"><input type="text" maxlength="10" name="maxPrice" placeholder="숫자만 입력하세요">원</th>
+					<th colspan="2"><input id="maxPrice" class="commas" onkeyup="addCommas(this)" type="text" maxlength="10" name="maxPrice" placeholder="숫자만 입력하세요">원</th>
 				</tr>
 				<tr><!-- 입찰단위 -->
 					<th class="cate">입찰 단위</th>				
@@ -149,17 +151,17 @@
 						경매장 썸네일로<br/> 
 						설정됩니다.)<br/>
 						<br/><br/><br/><br/>
-						이미지 파일 첨부<br/><input type="button" value="파일추가" onclick="fn_addFiles()"/>	
+						이미지 파일 첨부<br/><input class="imgName" type="button" value="파일추가" onclick="fn_addFiles()"/>	
 					</td>	
 					<th align="right">
-						<input type="file" name="imgName" onchange="readURL(this);"/><br/>
-						<img id="preview" src="" width=200 height=200/>
-						<div id="d_file"></div><br/>
+						<input type="file" class="imgName" name="imgName" onchange="readURL(this);"/><br/>
+						<img id="preview" src="" width=200 height=200/><br/>
+						<div id="d_file"></div>
 					</th>
 				<tr>
 					<th class="cate">제품 설명</th><!-- 내용 -->
 					<th colspan="2">
-						<textarea name="content" placeholder="제품에 대한 상세 내용을 입력해주세요."></textarea>
+						<textarea name="content" id="content" placeholder="제품에 대한 상세 내용을 입력해주세요."></textarea>
 					</th>
 				</tr>	
 			</table> <!-- 글쓰기 -->
@@ -171,35 +173,70 @@
 		</form>
 		<br/>
 		<br/>
+	</div>		
+<script>
+	//입력창 비워놨을 때 alert창 띄우기
+	$("#submit").on("click", function() {
+		if($("#title").val() == "") {
+			alert("제목을 입력해주세요.");
+			$("#title").focus();
+			return false;
+		}
+		if($("#minPrice").val() == "") {
+			alert("최소금액을 입력해주세요.");
+			$("#minPrice").focus();
+			return false;
+		}
+		if($("#maxPrice").val() == "") {
+			alert("상한금액을 입력해주세요");
+			$("#maxPrice").focus();
+			return false;
+		}
 		
+		//상한금액이 더 작을 경우 다시 입력하도록 한다.
+		//var minPrice = parseInt($("#minPrice").val());
+		//var maxPrice = parseInt($("#maxPrice").val());
+		//if (maxPrice =< minPrice) {
+		//    alert("최소금액보다 더 큰 상한금액을 입력해주세요.");
+		//    $("#maxPrice").focus();
+		//    return false;
+		//}
 		
-		
+		if($("#content").val() == "") {
+			alert("제품에 대한 상세설명을 입력해주세요.");
+			$("#content").focus();
+			return false;
+		}
+	});//
+
 	
-	<script>
-		function readURL(input) {	// 파일을 선택해서 변화가 생겼을 때
-			// 파일을 선택해서 파일이 있는 경우. files[0] : 선택한 첫번째 파일
-			if(input.files && input.files[0]) {
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					$('#preview').attr('src', e.target.result);
-				}
-				reader.readAsDataURL(input.files[0]);
-			}
-		}
-		
-		function readURL(input) {
-			if(input.files && input.files[0]) {
-				var reader = new FileReader();
-			}
-		}
-		
-		var cnt=1;
-		function fn_addFiles() {
-			$("#d_file").append("<br>" + "<input type='file' name='file" + cnt + "' />");
-			$("#d_file").append("<br>" + "<img id='preview' src='#' width=200 height=200/>");
-			cnt++;
-		}
-	</script>
+	//숫자 입력창 콤마(,)추가하기
+	function addCommas(input) {
+            var num = input.value.replace(/,/g, ''); // 이미 있는 쉼표를 제거
+            input.value = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }//
+	
+	
+    //이미지 추가하기 버튼
+	var cnt=1;
+	function fn_addFiles() {
+		$("#d_file").append("<br>" + "<input type='file' name='file" + cnt + "' />");
+		$("#d_file").append("<br>" + "<img id='preview' src='#' width=200 height=200/>");
+		cnt++;
+	}
+	
+    //이미지 미리보기
+	function readURL(input, cnt) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#preview' + cnt).attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+
+	
+</script>
 	
 	
 	
