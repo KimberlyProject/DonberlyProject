@@ -56,5 +56,11 @@ public class MemberServiceImpl implements MemberService {
 		int result = memberDAO.nickCheck(memberDTO);
 		return result;
 	}
+	
+	@Override
+	public void memberDelete(MemberDTO memberDTO) throws Exception {
+		memberDAO.memberDelete(memberDTO);
+	}
+	
 
 }

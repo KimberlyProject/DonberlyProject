@@ -44,4 +44,10 @@
 				(userId, 	  pw,    name,    nickname, regDate,   tel,     email,    address,    repw, ZIP_CODE)
 		VALUES	(#{userId},#{pw}, #{name}, #{nickname}, sysdate, #{tel},  #{email}, #{address}, #{repw}, #{zipCode} )
 	</insert>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="delete" parameterType="String">
+		DELETE	FROM	members
+		WHERE	userId		= #{userId}
+	</delete>
 </mapper>

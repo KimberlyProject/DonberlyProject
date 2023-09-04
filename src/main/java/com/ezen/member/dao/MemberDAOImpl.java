@@ -61,6 +61,12 @@ public class MemberDAOImpl implements MemberDAO {
 		logger.info("MemberDAOImple 닉네임 중복 검사");
 		return sqlSession.selectOne(namespace + ".nickCheck", memberDTO);
 	}
+	
+	
+	@Override
+	public void memberDelete(MemberDTO memberDTO) throws Exception {
+		sqlSession.delete(namespace + ".delete", memberDTO.getUserId());
+	}
 
 
 }

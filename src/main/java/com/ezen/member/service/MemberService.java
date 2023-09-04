@@ -24,6 +24,9 @@ public interface MemberService {
 	// 닉네임 중복 검사
 	public int nickCheck(MemberDTO memberDTO) throws Exception;
 	
+	//회원탈토;
+	public void memberDelete(MemberDTO memberDTO) throws Exception;
+	
 
 
 }
