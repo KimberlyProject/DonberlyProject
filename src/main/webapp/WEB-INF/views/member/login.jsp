@@ -69,6 +69,9 @@
           <span class="input-group-addon" id="basic-addon1"><span id="eye" class="glyphicon glyphicon-eye-open"></span></span>
         </div>
         <input type="submit" id="submit" class="btn" value="로 그 인">
+		<c:if test="${msg == false}">
+		 <div style="color:red;"> 아이디 또는 비밀번호가 일치하지 않습니다.</div>
+		</c:if>
       </form>    
       <div class="searchBox">
         <a href="membership">회원가입</a> |
@@ -91,7 +94,8 @@
 		$('#eye').on('mouseup',function(){
 			$('#pw').attr('type','password');
 			return false;
-		})		
+		})
+		
     </script>
     
 	<%@ include file="../include/footer.jsp" %>
