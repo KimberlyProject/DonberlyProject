@@ -94,9 +94,29 @@ public class AdminController {
 	@RequestMapping(value="/memberDelete", method=RequestMethod.POST)
 	public String memberDelete(MemberDTO memberDTO, Model model) throws Exception {
 		logger.info("회원 정보 삭제 Controller ==> " + memberDTO);
+		
 		adminService.memberDelete(memberDTO.getUserId());
 		
 		return "redirect:/admin/memberList";
 	}
 	
+	//--------------------------------------------------------------------------------------------------
+	// 회원 7일 정지
+	//--------------------------------------------------------------------------------------------------
+	@RequestMapping(value="/Asuspension", method=RequestMethod.POST)
+	public String Asuspension(String userId) throws Exception {
+		logger.info("회원 3일정지 POST " + userId);
+		adminService.Asuspension(userId);
+		return "redirect:/admin/memberList";
+	}
+	
+	//--------------------------------------------------------------------------------------------------
+	// 회원 영구 정지
+	//--------------------------------------------------------------------------------------------------
+	@RequestMapping(value="/Psuspension", method=RequestMethod.POST)
+	public String Psuspension(String userId) throws Exception {
+		logger.info("회원 3일정지 POST " + userId);
+		adminService.Psuspension(userId);
+		return "redirect:/admin/memberList";
+	}
 }

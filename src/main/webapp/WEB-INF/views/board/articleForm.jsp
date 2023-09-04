@@ -59,6 +59,10 @@
         gap: 5px;
       }
       
+      #price{
+      	text-align: right;
+      }
+      
    </style>
    
    <title>글쓰기창</title>
@@ -90,7 +94,7 @@
          </ul>
          <ul class="item">
 			<li>가격</li>
-			<li><input type="text" maxlength="50" name="price"/></li>
+			<li><input type="text" id="price" maxlength="50" name="price"/>원</li>
 		</ul>
          <ul class="item">
             <li><br>글내용: </li>
