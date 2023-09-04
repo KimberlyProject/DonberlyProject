@@ -84,11 +84,13 @@ public class AuctionController {
 		System.out.println("경매장 메인 리스트불러오기 컨트롤러");
 		String viewName = (String) request.getAttribute("viewName");
 		List<AuctionDTO> articlesList	= auctionService.listArticles();
-		List<AucImgDTO> articlesList2 = auctionService.listArticlesImg();
-
+		//List<AucImgDTO> articlesList2 = auctionService.listArticlesImg();
+		AucImgDTO aucImgDTO = auctionService.listArticlesImg();
+		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("articlesList", articlesList);	
-		mav.addObject("articlesList2", articlesList2);
+		//mav.addObject("articlesList2", articlesList2);
+		mav.addObject("articlesList2", aucImgDTO);
 		return mav;
 	}	
 	

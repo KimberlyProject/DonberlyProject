@@ -66,6 +66,10 @@
 			font-style: bold;
 			color: orange;
 		}
+		#imgnull {
+			text-align: center;
+			vertical-align: middle;
+		}
 	
 	</style>
 </head>
@@ -121,7 +125,7 @@
 				<c:choose>
 				<c:when test="${img == null}">
 					<div>
-						<div colspan="4">
+						<div id="imgnull" colspan="4">
 							<p align="center">상품 이미지가 존재하지 않습니다.</p>
 						</div>
 					</div>

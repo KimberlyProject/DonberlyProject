@@ -122,18 +122,14 @@
 		<c:choose>
 		<c:when test="${articlesList != null}">
 			<!-- 경매게시글 -->
-	
+			<div>
 			<table class="table table-bordered table-striped" id="ta">
 				<c:forEach var="article" items="${articlesList}" varStatus="articleNum">
 				<tr>
 					<th rowspan="4"  class="innerimg">
-						
-				            <div class="item">							     
-						        <img id="i" src="${path}/auction/pullAuctionImges?aucImg=${articlesList2.imgName}&aucCode=${articlesList2.aucCode}"/>									
-						   
-						   		<!-- 나는 detail 컨트롤러를 요청하는데 mav때문에 메인으로 뜨고잇음./.최솟값까지는 성공 -->
-						    </div>
-					
+							<div>
+								<img src="${page}/board/viewArticle.do?articleNO=${article.aucCode}&thumbnail=${articles.imgNo}" arl="auc1" width="200" height="200"/>
+							</div>
 					</th>
 					<th class="cate">제목</th><th class="colon">:</th><th colspan="4">${article.title}</th>
 					<th rowspan="4" id="detailarea">
@@ -167,6 +163,7 @@
 				
 				</c:forEach>
 			</table><br/><br/><!--  경매 게시글 -->
+			<div>
 		</c:when>
 		</c:choose>
 		

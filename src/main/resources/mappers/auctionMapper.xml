@@ -71,14 +71,32 @@
 		<result property="aucCode" column="aucCode"/>
 	</resultMap>
    
-	<!-- 메인페이지 image Query -->
+	<!-- 메인페이지 image Query
     <select id="pullArticleImg" resultMap="aucImage">
 		<![CDATA[
 			SELECT IMGNO, IMGNAME, AUCCODE
 			FROM AUCIMG
 		]]>
     </select>
-   
+     -->
+    
+    <!-- 가장 작은 번호 구하기 Query -->
+    <select id ="selectMinImgNo" resultType="int">
+ 		<![CDATA[
+ 			SELECT NVL(MIN(imgNo), 0) 
+ 			FROM AUCIMG
+ 		]]>
+ 	</select>
+ 	
+ 	  <select id="pullArticleImg"  parameterType="int" resultMap="aucImage">
+		<![CDATA[
+			SELECT IMGNO, IMGNAME, AUCCODE
+			FROM AUCIMG
+			WHERE imgNO = #{minImgNo}
+		]]>
+    </select>
+    
+
    <!-- 디테일페이지 게시글 Query -->
    <select id="pullArticleInfoDetail" parameterType="int" resultType="auctionDTO">
    		<![CDATA[

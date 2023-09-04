@@ -38,10 +38,16 @@ public class AuctionService {
 	}
 	
 	//메인 image
-	public List<AucImgDTO> listArticlesImg() throws Exception {
-		List<AucImgDTO> articlesList = auctionDAO.selectAllArticleListImg();
-		return articlesList;
+//	public List<AucImgDTO> listArticlesImg() throws Exception {
+//		List<AucImgDTO> articlesList = auctionDAO.selectAllArticleListImg();
+//		return articlesList;
+//	}
+	
+	public AucImgDTO listArticlesImg() throws Exception {
+		AucImgDTO aucImgDTO = auctionDAO.selectAllarticlesListImg();
+		return aucImgDTO;
 	}
+	
 	
 	//-------------------------------------------------------------------------------------------------------------//
 	
