@@ -46,14 +46,14 @@
           
         }
         /* 아이디, 닉네임 입력 필드의 스타일 */
-	    input#user_id, input#nickname {
+	    input#userId, input#nickname, input#regdate {
 	        background-color: #f0f0f0; /* 연한 그레이 배경색 */
 	        border: 1px solid #ccc;
 	        user-select: none;
 	    }
 	    
 	    /* 마우스 호버 상태 스타일 */
-	    input#user_id:hover, input#nickname:hover {
+	    input#userId:hover, input#nickname:hover, input#regdate:hover {
 	        background-color: #e0e0e0; /* 더 연한 그레이 배경색 */
 	        cursor: not-allowed;
 	    }
@@ -64,52 +64,70 @@
 	<%@ include file="../include/topMenu.jsp" %>
 	<c:set var="menu" value="mypage" />
 	<%@ include file="../include/sidebar.jsp" %>
+    <aside id="sideMenu">
+      <ul>
+        <li><a href="/member/membership">회원가입</a></li>
+        <li><a href="/member/login">로그인</a></li>
+      </ul>
+      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
+    </aside>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       홈 &gt; 마이페이지 &gt; 내 정보 &gt; 회원정보수정
     </div>
     
     <h1 class="pageTitle"><div>회원정보수정</div></h1>
-	
+    
+    
     <div class="container" id="membership">
-      <form action="" method="get">
+      <form name="frm" action="/member/memberUpdate" method="post">
         <div>
-          <label for="user_id">아 이 디</label>
-          <input type="text" id="user_id" name="user_id" readonly />
+          <label for="userId">아 이 디</label>
+          <input type="text" id="userId" name="userId"  value="${editor.userId}" readonly />
         </div>
         <div>
           <label for="pw">비밀번호</label>
-          <input type="password" id="pw" name="pw"/>          
+          <input type="password" id="pw" name="pw" value="${editor.pw}"/>          
         </div>
         <div>
           <label for="repw">비밀번호 확인</label>
-          <input type="password" id="repw" name="repw"/>
+          <input type="password" id="repw" name="repw" value="${editor.repw}"/>
         </div>
         <div>
           <label for="name">이    름</label>
-          <input type="text" id="name" name="name"/>
+          <input type="text" id="name" name="name" value="${editor.name}"/>
         </div>
         <div>
           <label for="nickname">닉네임</label>
-          <input type="text" id="nickname" name="nickname" readonly/>
+          <input type="text" id="nickname" name="nickname" value="${editor.nickname}" readonly/>
+        </div>
+        <div>
+          <label for="zipcode">우편번호</label>
+          <input type="text" id="zipCode" name="zipCode" value="${editor.zipCode}" />
         </div>
         <div>
           <label for="address1">주    소</label>
-          <input type="text" id="address1" name="address1"/>
+          <input type="text" id="address1" name="address"  value="${editor.address}"/>
           <input type="button" class="btn" onclick="daumZipCode()" value="주소 검색"/>       
         </div>
         <div>
           <label for="address2">상세주소</label>
           <input type="text" id="address2" name="address2"/>
+	     <!--  <input type="hidden" id="address" name="address"/> -->
         </div>
         <div>
           <label for="tel">연 락 처</label>
-          <input type="text" id="tel" name="tel"/>
+          <input type="text" id="tel" name="tel" value="${editor.tel}"/>
         </div>
         <div>
           <label for="email">이 메 일</label>
-          <input type="text" id="email" name="email"/>
+          <input type="text" id="email" name="email" value="${editor.email}"/>
         </div>
+        <div>
+	 	  <label for="regdate">가입일자</label>
+			<input type="text" id='regdate' value="<fmt:formatDate value='${editor.regDate}' pattern='yyyy년 MM월 dd일 HH시 mm분'/>" readonly="readonly" />
+			<input type="hidden" id="regdate" name="regdate"  value="${editor.regDate}"/>
+		</div>
         <div class="submit">
           <input type="submit" class="btn" value="수정"/>
         </div>
@@ -120,9 +138,9 @@
     <script>
     function daumZipCode() {
         new daum.Postcode({
+          
           oncomplete: function(data) {
-              // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-            console.log(data);
+          // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
           // 각 주소의 노출규칙에 따라서 주소를 조합한다.
           // 내려오는 변수가 값이 없을 경우에는 공백('') 값을 가지므로, 이를 참고해서 분기한다.
           var fullAddress	= '';	// 최종   주소 변수
@@ -150,6 +168,7 @@
           } // End - if(data.userSelectedType == 'R')
             
           // 추출한 우편번호와 주소정보를 입력항목에 나타낸다.
+          document.getElementById('zipCode').value = data.zonecode;
           document.getElementById('address1').value	= fullAddress;
           
           // 커서를 상세주소 입력란으로 이동시킨다.
@@ -161,6 +180,28 @@
         });
     }
     </script>
+    
+    <script>
+	//위의 폼의 이름을 기술하고, 여기서 위의 폼 이름을 사용해야 한다.
+	function btn_click(str) {
+		// alert(frm.id.value);
+		
+		if(str == "update") {
+			$("#address").val($("#address1").val() + $("#address2").val());
+			frm.action = "/member/memberUpdate";
+		} else if(str == "delete") {
+			frm.action = "/member/memberDelete";
+		} else {
+			alert("키를 잘못 누르셨습니다.");
+		}
+		
+		//frm.setAttribute('method', post);
+		frm.method = "post";
+		frm.submit();
+		
+	}
+	</script>
+    
 	<%@ include file="../include/footer.jsp" %>
 </body>
 </html>
