@@ -6,6 +6,7 @@
 <head>
 	<title>Home</title>
 	<%@ include file="../include/header.jsp" %>
+	<%@ include file="../include/profileModal.jsp" %>
 	<style>
 		th {
 			text-align:			center;
@@ -50,7 +51,7 @@
 			width:				15%;
 		}
 		.head > th:nth-child(5) {
-			width:				45%;
+			width:				15%;
 		}
 		.head > th:last-child {
 			width:				15%;
@@ -76,6 +77,7 @@
 			<select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
 				<option value="a" <c:if test="{searchType} == 'a'">selected</c:if>>전체</option>
 				<option value="i" <c:if test="{searchType} == 'i'">selected</c:if>>아이디</option>
+				<option value="n" <c:if test="{searchType} == 'n'">selected</c:if>>닉네임</option>
 				<option value="t" <c:if test="{searchType} == 't'">selected</c:if>>연락처</option>
 				<option value="addr" <c:if test="{searchType} == 'addr'">selected</c:if>>주소</option>
 				<option value="d" <c:if test="{searchType} == 'd'">selected</c:if>>가입일자</option>
@@ -92,6 +94,7 @@
 					<th><span class="glyphicon glyphicon-ok"></span></th>
 					<th>No</th>
 					<th>아이디</th>
+					<th>닉네임</th>
 					<th>연락처</th>
 					<th>주소</th>
 					<th>가입일자</th>
@@ -103,6 +106,7 @@
 						<td><input type="checkbox" style="width: 100%;"/></td>
 						<td><a href="/admin/memberDetail?userId=${list.userId}">${memberNum.count}</a></td>
 						<td><a href="/admin/memberDetail?userId=${list.userId}">${list.userId}</a></td>
+						<td><a href="javascript:void(0);" onclick="openModal({nickname: '${list.nickname}', email: '${list.email}'})">${list.nickname}</a></td>
 						<td><a href="/admin/memberDetail?userId=${list.userId}">${list.tel}</a></td>
 						<td class="addr"><a href="/admin/memberDetail?userId=${list.userId}">${list.address}</a></td>
 						<td><a href="/admin/memberDetail?userId=${list.userId}"><fmt:formatDate value="${list.regDate}" pattern="yyyy년 MM월 dd일"/></a></td>
