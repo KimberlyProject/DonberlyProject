@@ -22,4 +22,7 @@ public interface MemberDAO {
 
 	// 닉네임 중복 확인
 	public int nickCheck(MemberDTO memberDTO) throws Exception;
+	
+	//회원탈퇴
+	public void memberDelete(MemberDTO memberDTO) throws Exception;
 }

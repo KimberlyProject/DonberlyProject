@@ -206,6 +206,28 @@ public class MemberController {
   		System.out.println("프로필 화면 접속");
   		return "member/profile";
   	}
+  	
+  	
+  
+    	
+
+  	@RequestMapping(value = "/memberDelete", method=RequestMethod.POST)
+  	public String MemberDeletePost(MemberDTO memberDTO, Model model) throws Exception {
+  		
+  		// 비밀번호와 비밀번호확인이 틀리면 삭제하지 않고 돌아간다.
+  		if(memberDTO.getPw().equals(memberDTO.getRepw())) {
+  			memberService.memberDelete(memberDTO);
+  		} else {
+  			System.out.println("비밀번호와 비밀번호확인이 틀립니다.\n확인 후 다시 해주세요.");
+  		}
+  		
+  		return "redirect:/member/memberList";
+  		// return "/member/memberList";
+  		
+  	} // End - public String MemberDeletePost(MemberDTO memberDTO, Model model)
+  	
+  	
+  	
 
 }
 
