@@ -48,5 +48,22 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
+	// 11:52
+	@Override
+    public MemberDTO userProfileEditor(String id) throws Exception {
+        return memberDAO.userProfileEditor(id);
+    }
 
+    @Override
+    public void memberUpdate(MemberDTO memberDTO) throws Exception {
+        memberDAO.memberUpdate(memberDTO);
+    }
+
+    // 09-04
+    @Override
+	public MemberDTO memberProfile(String userId) throws Exception {
+		
+		return memberDAO.memberProfile(userId);
+	}
+    
 }

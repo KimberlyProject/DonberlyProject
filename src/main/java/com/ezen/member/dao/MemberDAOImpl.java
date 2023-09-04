@@ -50,4 +50,20 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne(namespace + ".nickCheck", memberDTO);
 	}
 
+	// 11:52
+	@Override
+	public MemberDTO userProfileEditor(String id) throws Exception {
+		return sqlSession.selectOne(namespace + ".editor", id);
+	}
+
+	@Override
+	public void memberUpdate(MemberDTO memberDTO) throws Exception {
+		sqlSession.update(namespace + ".update", memberDTO);
+	}
+	
+	// 09-04
+	@Override
+	public MemberDTO memberProfile(String userId) throws Exception {
+		return sqlSession.selectOne(namespace + ".profile", userId);
+	}
 }

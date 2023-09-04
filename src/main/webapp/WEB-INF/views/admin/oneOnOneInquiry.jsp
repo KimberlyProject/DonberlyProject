@@ -5,6 +5,7 @@
 <head>
 	<title>Home</title>
 	<%@ include file="../include/header.jsp" %>
+	<%@ include file="../include/profileModal.jsp" %>
 	<style>
 		th {
 			text-align:			center;
@@ -135,7 +136,7 @@
 					<td><input type="checkbox" style="width: 100%;"/></td>
 					<td>3</td>
 					<td class="title">제목자리입니다.</td>
-					<td>gildong</td>
+					<td><a href="javascript:void(0);" onclick="openModal({nickname: '${list.nickname}', email: '${member[0].email}'})">${list.nickname}</a></td>
 					<td>2023.08.23</td>
 				</tr>
 				<tr>

@@ -11,34 +11,11 @@
             background-color: #333;
             color: #fff;
         }
-        .profile-info {
-            border: 1px solid #ccc;
-            padding: 20px;
-            background-color: #f9f9f9;
-            margin: 20px auto; /* 전체 간격을 조절합니다. */
-            max-width: 600px; /* 가로 크기 제한 (선택 사항) */
-            text-align: center;
-        }
-        .profile-info img {
-            border-radius: 50%;
-            display: block;
-            margin: 0 auto 10px;
-        }
-        .profile-info p {
-            margin: 5px 0;
-        }
-        .submit-container {
-            text-align: center; /* 버튼 가운데 정렬 */
-            margin-top: 20px; /* 위쪽 여백 추가 */
-        }
-        #submit {
-            padding: 10px 20px;
-            background-color: #333;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            margin-bottom: 5px;
-        }
+        
+        .submit-container a.btn {
+		    margin-bottom: 10px;
+		}
+		
         .footer {
             background-color: #333;
             color: #fff;
@@ -52,11 +29,100 @@
         	resize: none;
         }
         
-        .submit-container a.btn {
-		    margin-bottom: 10px;
-		}
+		.container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Profile info section */
+        .profile-info {
+            text-align: center;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            margin: 20px auto; /* 전체 간격을 조절합니다. */
+            max-width: 600px; /* 가로 크기 제한 (선택 사항) */
+        }
 
-        /* 추가적인 스타일링을 여기에 추가할 수 있습니다. */
+        .profile-info img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        .profile-info p {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+
+        /* Edit button */
+        .edit-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .edit-button a.btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        
+        /* 모달 스타일 */
+		.modal {
+		    display: none;
+		    position: fixed;
+		    z-index: 1;
+		    left: 0;
+		    top: 0;
+		    width: 100%;
+		    height: 100%;
+		    overflow: auto;
+		    background-color: rgba(0,0,0,0.4);
+		}
+		
+		.modal-content {
+		    background-color: #fefefe;
+		    margin: 25% auto;
+		    padding: 20px;
+		    border: 1px solid #888;
+		    border-radius: 5px;
+		    max-width: 240px;
+		}
+		
+		.close {
+		    color: #aaa;
+		    float: right;
+		    font-size: 28px;
+		    font-weight: bold;
+		}
+		
+		.close:hover,
+		.close:focus {
+		    color: black;
+		    text-decoration: none;
+		    cursor: pointer;
+		}
+		
+		.inline-btn {
+	        display: inline-block;
+	        margin-top: 10px;
+    		margin-left: 70px;
+	    }
+	     
+	    .modal-content label {
+	        margin-left: 25px;
+	    }
+
     </style>
 </head>
 <body>
@@ -64,58 +130,76 @@
         <%@ include file="../include/topMenu.jsp" %>
     </div>
     
-       <aside id="sideMenu">
-      <h2>마이페이지</h2>
-      <ul>
-        <li><a href="userProfileEditor">내 정보 수정</a></li>
-        <li>
-          <a href="#">거래내역</a>
-          <ul>
-            <li><a href="#">삽니다</a></li>
-            <li><a href="#">팝니다</a></li>
-          </ul>
-        </li>
-        <li><a href="#">경매</a>          
-          <ul>
-            <li><a href="#">판매</a></li>
-            <li><a href="#">구매</a></li>
-          </ul>
-        </li>
-        <li><a href="#">캘린더</a></li>
-        <li><a href="#">채팅목록</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
-    <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <a href="/">홈</a> &gt;
-      <a href="#">마이페이지</a> &gt;
-      <a href="./">내정보</a>
-    </div>
+      
 
 	<!-- 배너 타이틀 -->
   <h1 class="pageTitle"><div>내정보</div></h1>
     
     
-    
-    <div class="profile-info">
-        <img src="../../resources/images/jjangu.png" width="100" height="100" alt="프로필 사진"/>
-        <p class="nickname"><strong>닉네임:</strong> 사용자_닉네임</p>
-        <p class="email"><strong>이메일:</strong> 사용자_이메일</p>
-        <p class="introduce"><strong>자기소개</strong></p>
-        <textarea class="introduction" rows="4" cols="50" readonly>안녕하세요 짱구입니다. </textarea>
-    </div>
-    
-     <!-- <div class="submit-container">
-        <input id="submit" type="button" value="수정하기" class="btn btn-success"/>
-     </div> -->
-     
-    <div class="submit-container">
-    	<a href="../member/userProfileEditor" class="btn btn-success">수정하기</a>
+    <div class="container">
+	    <div class="profile-info">
+            <img src="../../resources/images/jjangu.png" alt="프로필 사진">
+            
+            <div class="row">
+            <div class="row-md-offset-2">
+            <p class="info"><strong>닉네임:</strong> ${member.nickname}</p>
+            </div>
+            </div>
+            <p class="info"><strong>이메일:</strong> ${member.email}</p>
+        </div>
+	    
+	     <div class="edit-button">
+	        <a href="javascript:void(0);" class="btn btn-success" onclick="confirmPassword()">수정하기</a>
+	    </div>
 	</div>
+	
+	<!-- 비밀번호 확인 모달 -->
+	<div id="passwordModal" class="modal">
+	    <div class="modal-content">
+	        <span class="close" onclick="closeModal()">&times;</span>
+	        <label for="password">비밀번호를 입력하세요</label>
+	        <input type="password" id="password" name="password" required onkeydown="handleEnterKey(event)">
+	        <button class="btn btn-primary inline-btn" onclick="checkPassword()">확인</button>
+	    </div>
+	</div>
+	
+	
     
     <div class="footer">
         <%@ include file="../include/footer.jsp" %>
     </div>
+    
+    <script>
+	    // Enter 키 처리
+	    function handleEnterKey(event) {
+	        if (event.keyCode === 13) {
+	            event.preventDefault();
+	            checkPassword();
+	        }
+	    }
+    	
+        function confirmPassword() {
+            var modal = document.getElementById("passwordModal");
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("passwordModal");
+            modal.style.display = "none";
+        }
+
+        function checkPassword() {
+            var enteredPassword = document.getElementById("password").value;
+            var storedPasswordFromDB = "${member.pw}"; // 데이터베이스에서 가져온 비밀번호
+
+            if (enteredPassword === storedPasswordFromDB) {
+                window.location.href = "/member/userProfileEditor";
+            } else {
+                alert("비밀번호가 일치하지 않습니다.");
+            }
+
+            closeModal();
+        }
+    </script>
 </body>
 </html>
