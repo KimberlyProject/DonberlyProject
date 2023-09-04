@@ -116,7 +116,8 @@
 		<div class="container">
 		<br/><br/>
 		<table id="tb1" class="table table-bordered table-striped">
-			<tr><!-- 롤링이미지 -->
+			<tr>
+				<!-- 롤링이미지 -->
 				<th  rowspan="7" id="aucImg">
 				    <div id="myCarousel" class="carousel slide" data-ride="carousel">
 				        <!--인디케이터-->
@@ -124,54 +125,56 @@
 				            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 				            <li data-target="#myCarousel" data-slide-to="1"></li>
 				            <li data-target="#myCarousel" data-slide-to="2"></li>
-				        </ol>
+				        </ol>				        
 				        <!--슬라이드-->
-				        <div class="carousel-inner" role="listbox">
-				            <div class="item active">
-				                <img src="" arl="" width="250" height="250"/>
-				            </div>
-				            <div class="item">
-				                <img src="" arl="" width="250" height="250"/>
-				            </div>
-				            <div class="item">
-				                <img src="" arl="" width="250" height="250"/>					        
-				            </div>
-				        </div>
+				        <div class="carousel-inner" role="listbox">				  
+						<c:choose>
+							<c:when test="${not empty img.imgName && img.imgName != 'null'}">
+					            <div class="item active">							     
+									<img id="i" src="${path}/auction/pullAuctionImges?aucImg=${img.imgName}&aucCode=${article.aucCode}"/>									
+					            </div>            
+				        	</c:when>
+				        </c:choose>
+				        </div>				        
 						<!--좌우 버튼-->
-				        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-				            <span class="glyphicon glyphicon-chevron-left"></span>
-				            <span class="sr-only">Previous</span>
-				        </a>
-				        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-				            <span class="glyphicon glyphicon-chevron-right"></span>
-				            <span class="sr-only">Next</span>
-				        </a>
+						<c:choose>
+							<c:when test="${not empty img.imgName && img.imgName != 'null'}">
+						        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+						            <span class="glyphicon glyphicon-chevron-left"></span>
+						            <span class="sr-only">Previous</span>
+						        </a>
+						        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+						            <span class="glyphicon glyphicon-chevron-right"></span>
+						            <span class="sr-only">Next</span>
+						        </a>
+				        </c:when>
+				        </c:choose>
 				    </div>					
-				</th><!-- 롤링이미지 -->
+				</th>
 				<th class="cate">제목</th>
 				<th class="colon">:</th>
-				<th colspan="4">${articlesList.title}</th>
+				<th colspan="4">${article.title}</th>
 			<tr> <!-- 상품번호 -->
 				<th class="cate">상품번호</th>
 				<th class="colon">:</th>
-				<th colspan="4">${articlesList.aucCode}</th>
+				<th colspan="4">${article.aucCode}</th>
 			</tr>
 			<tr> <!-- 판매자 -->
 				<th class="cate">판매자</th>
 				<th class="colon">:</th>
-				<th colspan="4">${articlesList.aucId}</th>
+				<th colspan="4">${article.aucId}</th>
 			</tr>
 			<tr><!-- 현재입찰가 -->
-				<th class="cate">현재입찰가 &nbsp; [${articlesList.cstmId}]님</th>
+				<th class="cate">현재입찰가 &nbsp; [${articlet.cstmId}]님</th>
 				<th class="colon">:</th>
-				<th colspan="4"><span id="aaa"/>${articlesList.nowBid}원
+				<th colspan="4"><span id="aaa"/>${article.nowBid}원
 					<c:choose>
-					<c:when test="${member.userId != articlesList.aucId}">
+					<c:when test="${member.userId != article.aucId}">
 						<input id="tryBid" type="button" class="btn btn-success buyBtn" style="color:#FFFFFF;" value="입찰하기">  														
 					</c:when>
 					</c:choose>
 					<c:choose>
-					<c:when test="${member.userId == articlesList.aucId}">
+					<c:when test="${member.userId == article.aucId}">
 						<input id="saleNow" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="바로판매">
 					</c:when>
 					</c:choose>
@@ -180,14 +183,14 @@
 			<tr><!-- 입찰단위 -->
 				<th class="cate">입찰단위</th>
 				<th class="colon">:</th>
-				<th colspan="4">${articlesList.bidRate}원</th>
+				<th colspan="4">${article.bidRate}원</th>
 			</tr>
 			<tr><!-- 상한금액 -->
 				<th class="cate">상한금액</th>
 				<th class="colon">:</th>
-				<th colspan="4"><span id="bbb"/>${articlesList.maxPrice}원
+				<th colspan="4"><span id="bbb"/>${article.maxPrice}원
 					<c:choose>
-					<c:when test="${member.userId != articlesList.aucId}">
+					<c:when test="${member.userId != article.aucId}">
 						<input id="buyNow" type="button" class="btn btn-warning buyBtn" style="color:#FFFFFF;" value="바로구매">
 					</c:when>
 					</c:choose>
@@ -196,9 +199,9 @@
 			<tr><!-- 경매기간 -->
 				<th class="cate">마감기한</th>
 				<th class="colon">:</th>
-				<th colspan="4">${articlesList.writeDate} - ${articlesList.deadline}
+				<th colspan="4">${article.writeDate} - ${article.deadline}
 					<c:choose>
-					<c:when test="${member.userId == articlesList.aucId}">
+					<c:when test="${member.userId == article.aucId}">
 						<input id="auctionOff" type="button" class="btn btn-danger saleBtn" style="color:#FFFFFF;" value="경매취소">  																			
 					</c:when>
 					</c:choose>
@@ -214,7 +217,7 @@
 			<tr>	
 				<th id="textbox" colspan="4">
 					<textarea rows=15>
-						${articlesList.content}
+						${article.content}
 					</textarea>
 				</th>
 			</tr>

@@ -59,6 +59,8 @@ public class AuctionController {
 		return mav;
 	}	
 	
+	//-------------------------------------------------------------------------------------------------------------//
+	
 	//글쓰기화면
 	@RequestMapping(value="/auction_write", method=RequestMethod.GET)
 	public String auctionWrite(Model model) {
@@ -119,14 +121,13 @@ public class AuctionController {
 		
 		try {
 			int aucCode = auctionService.addNewArticle(articleMap);
-			int imgNo = auctionService.addNewArticle(articleMap);
 			if(imgFileList != null && imgFileList.size() != 0) {
 				for(AucImgDTO aucImgDTO : imgFileList) {
 					imgName = aucImgDTO.getImgName();
 					System.out.println("다중이미지" + imgName);
 					
 					File srcFile = new File(IMGROOT + "\\" + "temp" + "\\" + imgName);
-					File destFile = new File(IMGROOT + "\\" + aucCode + "\\" + imgNo);
+					File destFile = new File(IMGROOT + "\\" + aucCode);
 					FileUtils.moveFileToDirectory(srcFile,  destFile, true);
 				}
 			}
@@ -152,52 +153,57 @@ public class AuctionController {
 		}
 		
 		return resEnt;
-	}//addNewArticle		
-			//이미지 업로드 메서드
-			private List<String> upload(MultipartHttpServletRequest req) throws Exception {
-				List<String> fileList = new ArrayList<String>();
-				Iterator<String> fileNames = req.getFileNames();
-				while(fileNames.hasNext()) {
-					String fileName = fileNames.next();
-					MultipartFile mFile = req.getFile(fileName);
-					String imgName = mFile.getOriginalFilename();
-					System.out.println("이미지 이름 잘 들어왔낭???" + imgName);
-					fileList.add(imgName);
-					File file = new File(IMGROOT + "\\" + "temp" + "\\" + imgName);
-					if(mFile.getSize() != 0) {
-						if(!file.exists()) { //경로에 파일이 없는 경우
-							file.getParentFile().mkdirs(); //경로에 해당하는 디렉토리 생성
-							mFile.transferTo(new File(IMGROOT + "\\" + "temp" + "\\" + imgName));
-						}
-					}
-				}
-				return fileList;
-			}//upload
+	}//addNewArticle	
 	
-
+	//이미지 업로드 메서드
+	private List<String> upload(MultipartHttpServletRequest req) throws Exception {
+		List<String> fileList = new ArrayList<String>();
+		Iterator<String> fileNames = req.getFileNames();
+		while(fileNames.hasNext()) {
+			String fileName = fileNames.next();
+			MultipartFile mFile = req.getFile(fileName);
+			String imgName = mFile.getOriginalFilename();
+			System.out.println("이미지 이름 잘 들어왔낭???" + imgName);
+			fileList.add(imgName);
+			File file = new File(IMGROOT + "\\" + "temp" + "\\" + imgName);
+			if(mFile.getSize() != 0) {
+				if(!file.exists()) { //경로에 파일이 없는 경우
+					file.getParentFile().mkdirs(); //경로에 해당하는 디렉토리 생성
+					mFile.transferTo(new File(IMGROOT + "\\" + "temp" + "\\" + imgName));
+				}
+			}
+		}
+		return fileList;
+	}//upload
+	
+	//-------------------------------------------------------------------------------------------------------------//
+	
 	//디테일페이지 불러오기
 	@RequestMapping(value="/auction_detail", method=RequestMethod.GET)
 	public ModelAndView viewArticle(@RequestParam("aucCode") int aucCode, HttpServletRequest req, HttpServletResponse res)
 			throws Exception {
 		String viewName = (String)req.getAttribute("viewName");
+		System.out.println("디테일페이지 컨트롤러" + aucCode);
 		AuctionDTO auctionDTO = auctionService.viewArticle(aucCode);
 		AucImgDTO aucImgDTO = auctionService.viewArticleImg(aucCode);
-		System.out.println("디테일페이지 컨트롤러" + aucCode);
+		System.out.println(auctionDTO);
+		System.out.println(aucImgDTO);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
-		mav.addObject("articlesList", auctionDTO);
-		mav.addObject("aritlcesList", aucImgDTO);
+		mav.addObject("article", auctionDTO);
+		mav.addObject("img", aucImgDTO);
 		
 		return mav;
 	}// viewArticle
 	
-	@RequestMapping(value="/auction_modiandupdate", method=RequestMethod.GET)
-	public ModelAndView modifyAndUpdate(
-		@RequestParam(value="aucCode") int aucCode,
-		@RequestParam(value="nowBid", required=false) int nowBid,
-		@RequestParam(value="maxPrice", required=false) int maxPrice) throws Exception {
-		return null;
-	}//modifyAndUpdate
+	
+//	@RequestMapping(value="/auction_modiandupdate", method=RequestMethod.GET)
+//	public ModelAndView modifyAndUpdate(
+//		@RequestParam(value="aucCode") int aucCode,
+//		@RequestParam(value="nowBid", required=false) int nowBid,
+//		@RequestParam(value="maxPrice", required=false) int maxPrice) throws Exception {
+//		return null;
+//	}//modifyAndUpdate
 	
 	//판매자 경매취소 삭제하기
 	@RequestMapping(value="/auctionOff", method=RequestMethod.GET)

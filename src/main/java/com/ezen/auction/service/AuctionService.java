@@ -3,6 +3,7 @@ package com.ezen.auction.service;
 import java.util.List;
 
 
+
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -28,6 +29,7 @@ public class AuctionService {
 		return aucCode;
 	}
 
+	//-------------------------------------------------------------------------------------------------------------//
 	
 	//메인 게시글
 	public List<AuctionDTO> listArticles() throws Exception {
@@ -41,17 +43,21 @@ public class AuctionService {
 		return articlesList;
 	}
 	
+	//-------------------------------------------------------------------------------------------------------------//
+	
 	//디테일 게시글
 	public AuctionDTO viewArticle(int aucCode) throws Exception {
 		AuctionDTO auctionDTO = auctionDAO.selectArticle(aucCode);
 		return auctionDTO;
 	}
 	
-	//디테일 
+	//디테일 image
 	public AucImgDTO viewArticleImg(int aucCode) throws Exception {
 		AucImgDTO aucImgDTO = auctionDAO.selectArticleImg(aucCode);
 		return aucImgDTO;
 	}
+	
+	//-------------------------------------------------------------------------------------------------------------//
 	
 	//판매자 경매종료
 	public void removeAuction(int aucCode) throws Exception {

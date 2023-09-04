@@ -1,6 +1,7 @@
 package com.ezen.auction.dao;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,11 @@ public class AuctionDAO {
 	
 	private static final String namespace ="com.ezen.auction.mappers.auctionMapper";
 	
+	//aucCode 생성하기
+	private int selectNewAucCode() throws DataAccessException {
+		return sqlSession.selectOne(namespace +".selectNewAucCode");
+	}
+	
 	//새로운 게시글 추가하기
 	public int insertNewArticle(Map articleMap) throws DataAccessException {
 		System.out.println("게시글 업로드 dao");
@@ -31,11 +37,12 @@ public class AuctionDAO {
 		return aucCode;
 	}		
 			
-			//aucCode 생성하기
-			private int selectNewAucCode() throws DataAccessException {
-				return sqlSession.selectOne(namespace +".selectNewAucCode");
-			}
-			
+	//이미지 번호 추출		
+	private int selectNewImgFileNo() throws DataAccessException {
+		System.out.println("이미지 번호 추출 dao 메서드 실행");
+		return sqlSession.selectOne(namespace + ".selectNewImgFileNo");
+	}
+	
 	//새로운 게시글 이미지 추가하기
 	public void insertNewImg(Map articleMap) throws DataAccessException {
 		System.out.println("이미지추가 dao");
@@ -51,13 +58,8 @@ public class AuctionDAO {
 		System.out.println("toString" + imgFileList.toString());
 		sqlSession.insert(namespace + ".insertNewImg", imgFileList);
 	}		
-	
-			//이미지 번호 추출		
-			private int selectNewImgFileNo() throws DataAccessException {
-					System.out.println("이미지 번호 추출 dao 메서드 실행");
-					return sqlSession.selectOne(namespace + ".selectNewImgFileNo");
-				}
-	
+			
+	//-------------------------------------------------------------------------------------------------------------//		
 	
 	//메인페이지 게시글 불러오기
 	public List selectAllArticlesList() throws DataAccessException {
@@ -86,6 +88,8 @@ public class AuctionDAO {
 		System.out.println("경매 디테일 image dao");
 		return sqlSession.selectOne(namespace + ".pullArticleImgDetail", aucCode);
 	}
+
+	//-------------------------------------------------------------------------------------------------------------//
 	
 	//판매자 경매종료하기
 	public void deleteAuction(int aucCode) throws DataAccessException {

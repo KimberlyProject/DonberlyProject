@@ -6,16 +6,20 @@ import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+@Controller
+@RequestMapping("/auction")
 public class ImgFilesController {
 	
-	private static final String IMGROOT = "C:\\data\\workspace\\DonberlyProject\\src\\main\\webapp\\resources\\images\\board\\article_image";
+	private static final String IMGROOT = "C:\\data\\workspace\\DonberlyProject\\src\\main\\webapp\\resources\\images\\auction\\auction_image";
 	
-	@RequestMapping("/pullImgFiles")
+	//파일 불러오기
+	@RequestMapping("/pullAuctionImges")
 	protected void pullImgFiles(@RequestParam("aucImg")	String aucImg,
-							@RequestParam("aucCode")		String aucCode,
+							@RequestParam("aucCode") int aucCode,
 							HttpServletResponse response)	throws Exception {
 								
 		OutputStream out = response.getOutputStream();

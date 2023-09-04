@@ -13,6 +13,7 @@ public class AuctionDTO {
 	private int nowBid; 
 	private int bidRate; 
 	private Date deadline;
+	private int deadlineRate;
 	private String aucId; 
 	private int status;
 	private String cstmId;
@@ -89,13 +90,21 @@ public class AuctionDTO {
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	
+	public int getDeadlineRate() {
+		return deadlineRate;
+	}
+	public void setDeadlineRate(int deadlineRate) {
+		this.deadlineRate = deadlineRate;
+	}
 	@Override
 	public String toString() {
 		return "AuctionDTO [aucCode=" + aucCode + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + ", writeDate="
 				+ writeDate + ", title=" + title + ", content=" + content + ", nowBid=" + nowBid + ", bidRate="
-				+ bidRate + ", deadline=" + deadline + ", aucId=" + aucId + ", status=" + status + ", cstmId=" + cstmId
-				+ "]";
+				+ bidRate + ", deadline=" + deadline + ", deadlineRate=" + deadlineRate + ", aucId=" + aucId
+				+ ", status=" + status + ", cstmId=" + cstmId + "]";
 	}
+
 	
 	
 	

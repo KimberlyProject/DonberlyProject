@@ -7,8 +7,8 @@
    	<!-- 새로운 게시글 사용할 번호 추출하기  -->
  	<select id ="selectNewAucCode" resultType="int">
  		<![CDATA[
- 			SELECT NVL(MAX(aucCode), 0) + 1 
- 			FROM AUCTION
+ 			SELECT	NVL(MAX(aucCode), 0) + 1
+			FROM	AUCTION
  		]]>
  	</select>
  	
@@ -17,9 +17,9 @@
   		<![CDATA[
   			INSERT INTO
   			AUCTION (aucCode, minPrice, maxPrice, writeDate, title, content, nowBid, 
-  					bidRate, aucId, status)
+  					bidRate, aucId, status, deadline)
   			VALUES (#{aucCode}, #{minPrice}, #{maxPrice}, sysdate, #{title}, #{content}, #{minPrice}, 
-  					#{bidRate}, #{aucId}, 0)
+  					#{bidRate}, #{aucId}, 0, sysdate+#{deadlineRate})
   		]]>
   	</insert>
   	
