@@ -1,5 +1,6 @@
 package com.ezen.chat.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -42,10 +43,25 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public void insertChatList(ChatListDTO chatListDTO) throws Exception {
-		chatDAO.insertChatList(chatListDTO);
+	public int insertChatList(ChatListDTO chatListDTO) throws Exception {
+		return chatDAO.insertChatList(chatListDTO);
 		
 	}
+
+	@Override
+	public List<ChatListDTO> listChat(String userId) throws Exception {
+		
+		return chatDAO.listChat(userId);
+	}
+	//채팅방 번호로 채팅내용 다 가져오기
+	@Override
+	public List<ChatDTO> chatView(int chatId) throws Exception {
+		
+		return chatDAO.chatView(chatId);
+	}
+
+	
+	
 	
 	
 	

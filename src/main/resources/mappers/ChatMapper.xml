@@ -18,6 +18,7 @@
 		<result property="artNo"			column="artNo"/>
 		<result property="saler"		column="saler"/>
 		<result property="buyer"			column="buyer"/>
+		<result property="status"			column="status"/>
 	</resultMap>
 	
 	<select id="selectChat" resultType="com.ezen.chat.dto.ChatDTO">
@@ -28,7 +29,7 @@
 	
 	<!-- 채팅넣기 -->
 	<insert id="insertContent" parameterType="com.ezen.chat.dto.ChatDTO">
-		insert into chat values(1,#{artNo},#{fromId},#{toId},#{chatContent},sysdate)
+		insert into chat values(#{chatId},#{artNo},#{fromId},#{toId},#{chatContent},sysdate)
 	</insert>
 	
 	<!-- 채팅누른 아티클번호 가져오기 -->
@@ -39,7 +40,7 @@
 	
 	<!-- 채팅방 chatList에 정보넣기 -->
 	<insert id="insertChatList" parameterType="com.ezen.chat.dto.ChatListDTO">
-		insert into chatList values(#{chatId},#{artNo},#{seller},#{buyer})
+		insert into chatList values(#{chatId},#{artNo},#{seller},#{buyer},#{status})
 	</insert>
 	
 	<!-- 새로운 채팅방번호 번호 추출하기-->
@@ -49,6 +50,33 @@
 		from chatlist
 		]]>
 	</select>
+	
+	<!-- 채팅방이 이미 있는지 검사 -->
+	<select id="checkChatId" resultType="int">
+		SELECT	COUNT(*)
+		FROM	chatlist
+		WHERE	artNo = #{artNo} and seller = #{seller} and buyer=#{buyer}
+	</select>
+	
+	<!-- 채팅방 목록 보여주기 -->
+	<select id="listChat" parameterType="chatListDTO" resultType="chatListDTO">
+		select * from chatlist
+		where seller=#{userId} or buyer=#{userId}
+	</select>
+	
+	<!-- 채팅한 내용 다 리스트에 넣어서 보내기 -->
+	<select id="chatView" parameterType="int" resultType="chatDTO">
+		select * from chat
+		where chatId=#{chatId}
+	</select>
+	
+	<!--  -->
+	<select id="findChatId" resultType="int">
+		SELECT	chatId
+		FROM	chatlist
+		WHERE	artNo = #{artNo} and seller = #{seller} and buyer=#{buyer}
+	</select>
+	
 	
 	
 	

@@ -5,6 +5,7 @@ public class ChatListDTO {
 	private int artNo;	//연결된 게시판 넘버
 	private String seller;	//판매자 아이디
 	private String buyer;	//구매자 아이디
+	private String status;
 	public int getChatId() {
 		return chatId;
 	}
@@ -29,10 +30,20 @@ public class ChatListDTO {
 	public void setBuyer(String buyer) {
 		this.buyer = buyer;
 	}
+	
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	@Override
 	public String toString() {
-		return "ChatListDTO [chatId=" + chatId + ", artNo=" + artNo + ", seller=" + seller + ", buyer=" + buyer + "]";
+		return "ChatListDTO [chatId=" + chatId + ", artNo=" + artNo + ", seller=" + seller + ", buyer=" + buyer
+				+ ", status=" + status + "]";
 	}
+	
 	
 	
 }

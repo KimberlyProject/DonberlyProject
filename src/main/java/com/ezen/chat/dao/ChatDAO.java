@@ -1,5 +1,6 @@
 package com.ezen.chat.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.text.DefaultEditorKit.InsertContentAction;
@@ -18,6 +19,10 @@ public interface ChatDAO {
 	
 	public List<ArticleVO> getArtDTO(int artNo) throws Exception;
 	
-	public void insertChatList(ChatListDTO chatListDTO) throws Exception;
+	public int insertChatList(ChatListDTO chatListDTO) throws Exception;
+	
+	public List<ChatListDTO> listChat(String userId) throws Exception;
+	
+	public List<ChatDTO> chatView(int chatId) throws Exception;
 }
 

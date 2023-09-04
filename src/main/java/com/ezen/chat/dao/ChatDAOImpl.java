@@ -1,5 +1,6 @@
 package com.ezen.chat.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -50,22 +51,56 @@ public class ChatDAOImpl implements ChatDAO {
 	}
 	//chatlist 추가
 	@Override
-	public void insertChatList(ChatListDTO chatListDTO) throws Exception {
+	public int insertChatList(ChatListDTO chatListDTO) throws Exception {
 		
-		int chatId = selectNewChatId();
-		
-		chatListDTO.setChatId(chatId);
-		sqlSession.insert(namespace+".insertChatList", chatListDTO);
+		if(checkChatId(chatListDTO) == 0) {
+			int chatId = selectNewChatId();
+			chatListDTO.setChatId(chatId);
+			sqlSession.insert(namespace+".insertChatList", chatListDTO);
+			return findChatId(chatListDTO);
+		}
+		else {
+			logger.info("######################이미있어요");
+			return findChatId(chatListDTO);
+		}
 		
 	}
 	
 	
 	//--------------------------------------------------
-	// 새로운 게시글 번호 추출하기
+	// 새로운 채팅방 번호 추출하기
 	//--------------------------------------------------
 	private int selectNewChatId() throws DataAccessException{
+		
+		
 		return sqlSession.selectOne(namespace + ".selectNewChatId");
 	}
+	
+	//채팅방 번호 있는지 확인
+	private int checkChatId(ChatListDTO chatListDTO) throws DataAccessException{
+		return sqlSession.selectOne(namespace + ".checkChatId",chatListDTO);
+	}
+	
+	private int findChatId (ChatListDTO chatListDTO) throws DataAccessException{
+		return sqlSession.selectOne(namespace + ".findChatId",chatListDTO);
+	}
+
+	
+	//채팅 리스트 띄우기
+	@Override
+	public List<ChatListDTO> listChat(String userId) throws Exception {
+		
+		return sqlSession.selectList(namespace+".listChat",userId);
+	}
+
+	@Override
+	public List<ChatDTO> chatView(int chatId) throws Exception {
+		
+		return sqlSession.selectList(namespace+".chatView",chatId);
+	}
+
+	
+	
 	
 	
 
