@@ -22,7 +22,7 @@ public class AdminDAOImpl implements AdminDAO {
 	private static final String namespace = "com.ezen.member.mepper.adminMapper";
 	
 	//--------------------------------------------------------------------------------------------------
-	// public List<MemberDTO> selectMember() throws Exception : 회원 전체 목록
+	// 회원 전체 목록
 	//--------------------------------------------------------------------------------------------------	
 	@Override
 	public List<MemberDTO> selectMember() throws Exception {
@@ -31,7 +31,7 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	//--------------------------------------------------------------------------------------------------
-	// public MemberDTO memberDetail(String id) throws Exception : 회원아이디에 해당하는 상세 정보 조회
+	// 회원아이디에 해당하는 상세 정보 조회
 	//--------------------------------------------------------------------------------------------------
 	@Override
 	public MemberDTO memberDetail(String userId) throws Exception {
@@ -40,7 +40,7 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	//--------------------------------------------------------------------------------------------------
-	// public void memberUpdate(MemberDTO memberDTO) throws Exception : 회원정보 수정 POST
+	// 회원정보 수정 POST
 	//--------------------------------------------------------------------------------------------------
 	@Override
 	public void memberUpdate(MemberDTO memberDTO) throws Exception {
@@ -50,13 +50,33 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	//--------------------------------------------------------------------------------------------------
-	// public void memberDelete(String memberDTO) throws Exception : 회원정보 삭제 POST
+	// 회원정보 삭제 POST
 	//--------------------------------------------------------------------------------------------------
 	@Override
 	public void memberDelete(String memberDTO) throws Exception {
 		
 		logger.info("회원정보삭제 DAO ==> " + memberDTO);
 		sqlSession.delete(namespace + ".delete", memberDTO);
+		
+	}
+
+	//--------------------------------------------------------------------------------------------------
+	// 회원 7일 정지
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public void Asuspension(String userId) throws Exception {
+		logger.info("회원 3일 정지 DAO ==> " + userId);
+		sqlSession.insert(namespace + ".Asuspension", userId);
+		
+	}
+
+	//--------------------------------------------------------------------------------------------------
+	// 회원 영구 정지
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public void Psuspension(String userId) throws Exception {
+		logger.info("회원 3일 정지 DAO ==> " + userId);
+		sqlSession.insert(namespace + ".Psuspension", userId);
 		
 	}
 	

@@ -46,6 +46,11 @@
         #ta {
         	border : 1px;
         }
+        table-spacing {
+        	margin-bottom: 20px;
+        }
+      
+     
 
 	</style>
 </head>
@@ -76,10 +81,9 @@
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       <a href="/">홈</a> &gt;
-      <a href="#">마이페이지</a> &gt;
-      <a href="./">캘린더</a>
+      <a href="#">경매장</a> &gt;
     </div>
-    <h1 class="pageTitle"><div>캘린더</div></h1>
+    <h1 class="pageTitle"><div>경매장</div></h1>
     
 	<div class="container">
 		<br/><br/>
@@ -118,6 +122,7 @@
 		<c:choose>
 		<c:when test="${articlesList != null}">
 			<!-- 경매게시글 -->
+			<div>
 			<table class="table table-bordered table-striped" id="ta">
 				<c:forEach var="article" items="${articlesList}" varStatus="articleNum">
 				<tr>
@@ -139,15 +144,31 @@
 					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">${article.aucId}</th>
 				</tr>
 				<tr>
-					<th class="cate">현재 가격</th><th class="colon">:</th><th>999,999</th><th class="cate">상한가</th><th class="colon">:</th><th>${article.maxPrice}</th>
+					<th class="cate">현재 가격</th><th class="colon">:</th><th>${article.minPrice}</th><th class="cate">상한가</th><th class="colon">:</th><th>${article.maxPrice}</th>
 				</tr>
 				<tr>
-					<th class="cate">마감 기한</th><th class="colon">:</th><th colspan="4">${article.deadline}</th>
+					<th class="cate">마감 기한</th><th class="colon">:</th><th>${article.writeDate} <br/> - ${article.deadline}</th>
+					<th class="cate">진행상태</th><th class="colon">:</th>
+						<c:choose>
+						<c:when test="${article.status == 1}">
+							<th colspan="4">경매종료</th>
+						</c:when>	
+						</c:choose>
+						<c:choose>
+						<c:when test="${article.status == 0 || article.status == null}">
+							<th clospan="4">입찰 진행중</th>
+						</c:when>
+						</c:choose>
 				</tr>
+				
 				</c:forEach>
-			</table><!--  경매 게시글 -->
+			</table><br/><br/><!--  경매 게시글 -->
+			<div>
 		</c:when>
 		</c:choose>
+		
+		
+		
 		
 		
 	
@@ -190,7 +211,11 @@
 
 
 
-
 <%@ include file="../include/footer.jsp" %>
+
+<script>
+
+</script>
+
 </body>
 </html>

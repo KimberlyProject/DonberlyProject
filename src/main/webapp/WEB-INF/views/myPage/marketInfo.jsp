@@ -89,9 +89,6 @@
 		
 		<img src="/resources/images/banner.jpeg" alt="배너" style="width: 1150px;">
 		<br><br><br>
-		<c:if test="${member == null}">
-			<script>location.href="/member/login"</script>
-		</c:if>   
 		<!-- 좌측 상단 팝니다/삽니다 구분 -->
 		<div class= "selectBox" align="left" style="vertical-align:middle;">
 			<div>
@@ -119,8 +116,8 @@
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->		
 		
 		<c:choose>
-			<c:when test="${articlesList == null}"> <!-- 게시글이 하나도 없는 경우 -->
-			<c:if test="${member.userId != articlesList.userId}">
+			<c:when test="${articlesList1 == null}"> <!-- 게시글이 하나도 없는 경우 -->
+			<c:if test="${member.userId != articlesList1.userId}">
 				<div>
 					<div colspan="4">
 						<p align="center">
@@ -130,9 +127,9 @@
 				</div>
 			</c:if>
 			</c:when>
-			<c:when test="${articlesList != null}"> <!-- 게시글이 하나라도 있는 경우 -->
+			<c:when test="${articlesList1 != null}"> <!-- 게시글이 하나라도 있는 경우 -->
 				<div class="products">
-					<c:forEach var="article" items="${articlesList }" varStatus="articleNum">
+					<c:forEach var="article" items="${articlesList1 }" varStatus="articleNum">
 						<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
 						<c:if test="${member.userId == article.userId}">
 								<ul class="product">
@@ -162,20 +159,20 @@
 				<td>
 					<div class="col-sm-offset-3"><!-- 숫자 버튼 -->
 						<ul class="btn-group pagination">
-							<c:if test="${pageMaker.prev}">
+							<c:if test="${pageMaker1.prev}">
 								<li>
-									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageMaker.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
+									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageMaker1.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
 										<span class="glyphicon glyphicon-chevron-left"></span></a>
 								</li>
 							</c:if>
-							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
+							<c:forEach begin="${pageMaker1.startPage}" end="${pageMaker1.endPage}" var="pageNum">
 								<li>
 									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
 								</li>
 							</c:forEach>
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+							<c:if test="${pageMaker1.next && pageMaker1.endPage > 0}">
 								<li>
-									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageMaker.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
+									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageMaker1.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
 										<span class="glyphicon glyphicon-chevron-right"></span></a>
 								</li>
 							</c:if>
@@ -190,8 +187,8 @@
 		
 		<br/><br/><hr/><br/><br/>
 		<c:choose>
-			<c:when test="${saleArticlesList == null}"> <!-- 게시글이 하나도 없는 경우 -->
-				<c:if test="${member.userId != saleArticlesList.userId}">
+			<c:when test="${articlesList2 == null}"> <!-- 게시글이 하나도 없는 경우 -->
+				<c:if test="${member.userId != articlesList2.userId}">
 				<div>
 					<div colspan="4">
 						<p align="center">
@@ -201,9 +198,9 @@
 				</div>
 				</c:if>
 			</c:when>
-			<c:when test="${articlesList != null}"> <!-- 게시글이 하나라도 있는 경우 -->
+			<c:when test="${articlesList2 != null}"> <!-- 게시글이 하나라도 있는 경우 -->
 				<div class="products">
-					<c:forEach var="salearticle" items="${saleArticlesList }" varStatus="articleNum">
+					<c:forEach var="salearticle" items="${articlesList2 }" varStatus="articleNum">
 						<c:if test="${member.userId == salearticle.userId}">
 						<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
 						
@@ -234,20 +231,20 @@
 				<td>
 					<div class="col-sm-offset-3"><!-- 숫자 버튼 -->
 						<ul class="btn-group pagination">
-							<c:if test="${salePageMaker.prev}">
+							<c:if test="${pageMaker2.prev}">
 								<li>
-									<a href='<c:url value="/board/listArticlesPaging.do?page=${salePageMaker.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
+									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageMaker2.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
 										<span class="glyphicon glyphicon-chevron-left"></span></a>
 								</li>
 							</c:if>
-							<c:forEach begin="${salePageMaker.startPage}" end="${salePageMaker.endPage}" var="pageNum">
+							<c:forEach begin="${pageMaker2.startPage}" end="${pageMaker2.endPage}" var="pageNum">
 								<li>
 									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
 								</li>
 							</c:forEach>
-							<c:if test="${salePageMaker.next && salePageMaker.endPage > 0}">
+							<c:if test="${pageMaker2.next && pageMaker2.endPage > 0}">
 								<li>
-									<a href='<c:url value="/board/listArticlesPaging.do?page=${salePageMaker.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
+									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageMaker2.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
 										<span class="glyphicon glyphicon-chevron-right"></span></a>
 								</li>
 							</c:if>

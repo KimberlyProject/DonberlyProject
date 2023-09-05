@@ -33,7 +33,19 @@ public class MemberDAOImpl implements MemberDAO {
 		logger.info("MemberDAOImple 아이디 중복 검사");
 		return sqlSession.selectOne(namespace + ".idCheck", memberDTO);
 	} // End - public int idCheck(MemberDTO memberDTO)
-
+	
+	// 아이디 찾기
+	@Override
+	public String findId(MemberDTO memberDTO) throws Exception {		
+		return sqlSession.selectOne(namespace + ".findId", memberDTO);
+	}
+	
+	// 비밀번호 찾기
+	@Override
+	public String findPasswd(MemberDTO memberDTO) throws Exception {		
+		return sqlSession.selectOne(namespace + ".findPasswd", memberDTO);
+	}
+	
 	//-----------------------------------------------------------------------------------------------------------
 	// 회원 가입 POST
 	//-----------------------------------------------------------------------------------------------------------
@@ -49,5 +61,28 @@ public class MemberDAOImpl implements MemberDAO {
 		logger.info("MemberDAOImple 닉네임 중복 검사");
 		return sqlSession.selectOne(namespace + ".nickCheck", memberDTO);
 	}
+	
+	
+	@Override
+	public void memberDelete(MemberDTO memberDTO) throws Exception {
+		sqlSession.delete(namespace + ".delete", memberDTO.getUserId());
+	}
 
+
+	// 11:52
+	@Override
+	public MemberDTO userProfileEditor(String id) throws Exception {
+		return sqlSession.selectOne(namespace + ".editor", id);
+	}
+
+	@Override
+	public void memberUpdate(MemberDTO memberDTO) throws Exception {
+		sqlSession.update(namespace + ".update", memberDTO);
+	}
+	
+	// 09-04
+	@Override
+	public MemberDTO memberProfile(String userId) throws Exception {
+		return sqlSession.selectOne(namespace + ".profile", userId);
+	}
 }

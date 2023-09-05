@@ -8,10 +8,13 @@
 	<%@ include file="../include/header.jsp" %>
 	<style>
 	  .Loginbox{
-	    margin:100px auto 200px;
-	    width:400px;
-	    /* height:100vh; */
-	    text-align:center;
+		position:absolute;
+		top:50%;
+		left:50%;
+		transform:translate(-50%, -60%);
+		width:400px;
+		/* height:100vh; */
+		text-align:center;
 	  }
 	  .Loginbox h1{
 	      margin-bottom:20px;
@@ -38,6 +41,20 @@
 	      background-color:rgb(31, 89, 39);
 	      color:#fff;
 	  }
+	  .Loginbox .searchBox>a,
+	  .Loginbox .searchBox>span{
+		  color:#337ab7;
+		  cursor:pointer;
+	  }
+	  .Loginbox .searchBox>span:hover{
+		  text-decoration:underline;
+	  }
+	  footer{
+	  	position:absolute;
+	  	left:0px;
+	  	bottom:0px;
+	  	width:100%;
+	  }
 	</style>
 </head>
 <body>
@@ -45,15 +62,18 @@
     <article class="Loginbox container">
       <h1><a href="#"><img src="${ path }/resources/images/logo_g.png" alt="logo"/></a></h1>
       <c:if test="${ member == null }">
-      <form action="/member/login" method="post">
+      <form action="/member/login.do" method="post">
         <input type="text" class="form-control" placeholder="아 이 디" id="userId" name="userId">
         <div class="input-group" style="margin-bottom:10px;">
           <input type="password" class="form-control" placeholder="패 스 워 드" id="pw" name="pw">
           <span class="input-group-addon" id="basic-addon1"><span id="eye" class="glyphicon glyphicon-eye-open"></span></span>
         </div>
-        <input type="submit" class="btn" value="로 그 인">
+        <input type="submit" id="submit" class="btn" value="로 그 인">
+		<c:if test="${msg == false}">
+		 <div style="color:red;"> 아이디 또는 비밀번호가 일치하지 않습니다.</div>
+		</c:if>
       </form>    
-      <div>
+      <div class="searchBox">
         <a href="membership">회원가입</a> |
         <a href="./findId">아이디 찾기</a> |
         <a href="./findPasswd">비밀번호 찾기</a>
@@ -62,21 +82,22 @@
     
     </article>
     
-    
    	<c:if test="${ member != null }">
    	<script>location.href = "/myPage/myInfo"</script>
     </c:if>
     
     <script>
-      $('#eye').on('mousedown',function(){
-        $('#pw').attr('type','text');
-        return false;
-      })
-      $('#eye').on('mouseup',function(){
-        $('#pw').attr('type','password');
-        return false;
-      })
+		$('#eye').on('mousedown',function(){
+			$('#pw').attr('type','text');
+			return false;
+		})
+		$('#eye').on('mouseup',function(){
+			$('#pw').attr('type','password');
+			return false;
+		})
+		
     </script>
+    
 	<%@ include file="../include/footer.jsp" %>
 </body>
 </html>

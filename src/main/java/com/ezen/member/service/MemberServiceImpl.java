@@ -33,6 +33,15 @@ public class MemberServiceImpl implements MemberService {
 		int result = memberDAO.idCheck(memberDTO);
 		return result;
 	}
+	
+	@Override
+	public String findId(MemberDTO memberDTO) throws Exception {		
+		return memberDAO.findId(memberDTO);
+	}
+	@Override
+	public String findPasswd(MemberDTO memberDTO) throws Exception {		
+		return memberDAO.findPasswd(memberDTO);
+	}
 
 	@Override
 	public int membership(MemberDTO memberDTO) throws Exception {
@@ -48,5 +57,27 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
+	// 11:52
+	@Override
+    public MemberDTO userProfileEditor(String id) throws Exception {
+        return memberDAO.userProfileEditor(id);
+    }
 
+    @Override
+    public void memberUpdate(MemberDTO memberDTO) throws Exception {
+        memberDAO.memberUpdate(memberDTO);
+    }
+
+    // 09-04
+    @Override
+	public MemberDTO memberProfile(String userId) throws Exception {
+		
+		return memberDAO.memberProfile(userId);
+	}
+
+	@Override
+	public void memberDelete(MemberDTO memberDTO) throws Exception {
+		memberDAO.memberDelete(memberDTO);
+	}
+    
 }

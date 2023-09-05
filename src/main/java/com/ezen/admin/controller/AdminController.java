@@ -34,8 +34,15 @@ public class AdminController {
 	// 관리자 1:1 문의화면 접속
 	//--------------------------------------------------------------------------------------------------
 	@RequestMapping(value="/oneOnOneInquiry", method=RequestMethod.GET)
-	public String getOneOnOneInquiry(Model model) {
+	public String getOneOnOneInquiry(Model model) throws Exception {
 		System.out.println("관리자 1:1문의화면 접속!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		
+		List<MemberDTO> memberList = adminService.selectMember();
+		System.out.println("회원목록 화면 접속 memberList ==> " + memberList);
+		
+		// 찾아온 데이터를 Model에 담아 View로 보낸다.
+		model.addAttribute("memberList", memberList);
+		
 		return "/admin/oneOnOneInquiry";
 	}
 	
@@ -87,9 +94,29 @@ public class AdminController {
 	@RequestMapping(value="/memberDelete", method=RequestMethod.POST)
 	public String memberDelete(MemberDTO memberDTO, Model model) throws Exception {
 		logger.info("회원 정보 삭제 Controller ==> " + memberDTO);
+		
 		adminService.memberDelete(memberDTO.getUserId());
 		
 		return "redirect:/admin/memberList";
 	}
 	
+	//--------------------------------------------------------------------------------------------------
+	// 회원 7일 정지
+	//--------------------------------------------------------------------------------------------------
+	@RequestMapping(value="/Asuspension", method=RequestMethod.POST)
+	public String Asuspension(String userId) throws Exception {
+		logger.info("회원 3일정지 POST " + userId);
+		adminService.Asuspension(userId);
+		return "redirect:/admin/memberList";
+	}
+	
+	//--------------------------------------------------------------------------------------------------
+	// 회원 영구 정지
+	//--------------------------------------------------------------------------------------------------
+	@RequestMapping(value="/Psuspension", method=RequestMethod.POST)
+	public String Psuspension(String userId) throws Exception {
+		logger.info("회원 3일정지 POST " + userId);
+		adminService.Psuspension(userId);
+		return "redirect:/admin/memberList";
+	}
 }

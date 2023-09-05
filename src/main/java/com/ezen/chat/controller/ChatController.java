@@ -222,8 +222,9 @@ public class ChatController {
 			//채팅방 만들기
 			System.out.println("#################여기로 와"+chatListDTO);
 			int chatId = chatService.insertChatList(chatListDTO);//채팅방 번호 내놓기
-			System.out.println(chatId);
-		return "redirect:/chat/chat_list";
+			System.out.println("이거다####################################"+chatId);
+		
+		return "/chat/chattingview?chatId="+chatId;
 		
 	}
 	
