@@ -158,11 +158,11 @@
 					<ul class="item" id="trBtn">
 						<li>
 							<input type="button" class="btn btn-info" value="목록으로 돌아가기" onClick="backToList(this.form)"/>
-							<input type="button" class="btn btn-primary" value="1:1채팅" onClick="fn_reply_form('${path}/board/replyForm.do)', ${article.articleNO})"/>
+							<input type="button" class="btn btn-primary" value="1:1채팅" onClick="fn_reply_form('${path}/sale/replyForm.do)', ${article.articleNO})"/>
 							<!-- 로그인한 아이디와 게시글을 쓴 사람의 아이디가 같다면, 글쓴 본인이므로 수정/삭제가 가능하다. -->
 							<c:if test="${member.userId == article.userId}">
 								<input type="button" class="btn btn-warning" value="수정하기" onClick="fn_enable(this.form)"/>
-								<input type="button" class="btn btn-danger"  value="삭제하기" onClick="fn_remove('${path}/board/removeArticle.do', ${article.articleNO})"/>
+								<input type="button" class="btn btn-danger"  value="삭제하기" onClick="fn_remove('${path}/sale/removeArticle.do', ${article.articleNO})"/>
 							</c:if>
 						<li>
 					</ul>
@@ -178,7 +178,7 @@
 <script>
 // 게시글 목록으로 돌아가기
 function backToList(obj) {
-	obj.action="${path}/board/listArticles.do";
+	obj.action="${path}/sale/listArticles.do";
 	obj.submit();
 }
 
@@ -226,31 +226,11 @@ function readURL(input) {
 
 // 게시글 수정하기
 function fn_modify_article(obj) {
-	obj.action = "${page}/board/modArticle.do";
+	obj.action = "${page}/sale/modArticle.do";
 	obj.submit();
 }
 
 
-$(document).ready(function() {
-
-	$.ajax({
-		url:			"/board/viewUp.do",
-		type:			"get",
-		dataType:		"json",
-		data:			{"view" : $('#view').val()},
-		success:		function(data) {
-			alert("조회수증가하자");
-			
-		},
-		error: function(info) {
-			// alert("에러가 발생하였습니다!");
-		},
-		complete: function(info) {
-			// alert("작업을 완료하였습니다.");
-		}
-	});
-
-});
 </script>
 
 </body>
