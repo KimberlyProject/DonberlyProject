@@ -324,28 +324,71 @@ div.chat.ch2{
 </script>
 <script>
 function lastDateAjax(){
-	/*$.ajax({
-		method: "POST",
-		url: "/chat/chattingview",
-		cache:false,
-		async: false,
-		success: function(data){
-			if(lastDateTime < data){
-				readAjax(lastDateTime);
-				lastDateTime = data;
-			}else{
-				lastDateTime = data;
-			}
-		}
-	});*/
-	$(".wrap").append(
-			"<div class='chat ch2'><div class='textbox'>야호</div></div>"
+    $.ajax({
+        method: "POST",
+        url: "/lastDate.do",
+        cache: false,
+        async: false,
+        success: function(data){
+            if(lastDateTime < data) {
+                readAjax(lastDateTime);
+                lastDateTime = data;
+            } else {
+                lastDateTime = data;
+            }
+        }
+    });
+}
+function readAjax(compareTime){
+    $.ajax({
+        method: "POST",
+        url: "/chat/chattingview",
+        dataType: "json",
+        cache: false,
+        async: false,
+        data: {
+            "lastDate": compareTime
+        },
+        success: function(data) {
+            if(data.length == 0) {
+                return;
+            } else {
+                $.each(data, function(index, entry){
+                    // ..채팅창 div에 알맞게 글을 뿌려준다..
+                    $("#board").scrollTop($("#board")[0].scrollHeight); // 스크롤바 항상 맨 밑으로 유지
+                });
+            } 
+        }
+    });
+}
+function getChat(){
+	 $.ajax({
+		 url:	"/chat/chattingview",
+		 type:	"post",
+		 dataType: "json",
+		 data:	{"content" : $('#chatContent').val(),
+				 "fromId" : $('#userId').val(),
+				 "chatId" : $('#chatId').val()
+		 },	
+		 success: function(data){
+			$(".wrap").append(
+				"<div class='chat ch2'><div class='textbox'>"+$('#chatContent').val()+"</div></div>"+
+				"<div class='time2' >"+now.getHours()+"시"+now.getMinutes()+"분"+"</div>"
+			);
 			
-		);
-	
+		 },
+		 error:function(request,status,error){
+			 console.log("실패");
+			 
+		 },
+		 complete:function(){
+			 $('#chatContent').val('');
+		 }
+	 });
 }
 $(document).ready(function(){
 	
+	setInterval(console.log("야호"),3000);
 	
 	var sin = $('#chatContent').val();
 	//setInterval(lastDataAjax, 3000);
@@ -362,6 +405,7 @@ $(document).ready(function(){
 			 $.ajax({
 				 url:	"/chat/chattingview",
 				 type:	"post",
+				 dataType:"text",
 				 data:	{"content" : $('#chatContent').val(),
 						 "fromId" : $('#userId').val(),
 						 "chatId" : $('#chatId').val()
@@ -390,32 +434,6 @@ $(document).ready(function(){
 		
 	});
 });
-
-
-
-
-
-function readAjax(compareTime){
-	$.ajax({
-		method: "POST",
-		url:"/chat/chattingview",
-		dataType:"json",
-		cache:false,
-		async: false,
-		data:{
-			"lastDate":compareTime
-		},
-		success: function(data){
-			if(data.length==0){
-				return;
-			}else{
-				$.each(data, function(index,entry){
-					
-				});
-			}
-		}
-	});
-}
 
 
 </script>
