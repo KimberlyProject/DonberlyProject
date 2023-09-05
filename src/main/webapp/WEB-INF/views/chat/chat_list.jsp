@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,12 +73,24 @@ label{
 	<!-- 검색창 끝-->
 	<br><br>
 	<!-- 채팅한 사람들 목록 -->
-	<%for(int i=0;i<3;i++){ %>
+	<c:forEach var="chatList" items="${chatList }" varStatus="chatId">
 	<div class="col-sm-6">
-	<table class="table table-bordered table-striped table-hover" onClick="make_chat()">
+	<table class="table table-bordered table-striped table-hover" onClick="make_chat('${chatList.chatId}')">
 		<tr>
 			<th rowspan="2" class="info-img"><img style="width:100px; height:100px;" src="${path}/resources/images/kuromi.png" alt="프로필 사진"></th>
-			<th class="pw"><label>몽룡이</label></th>
+			<th class="pw">
+				<label>
+				<c:set var="myname" value="${member.userId}"/>
+				<c:set var="seller" value="${chatList.seller}"/>
+				<c:set var="buyer" value="${chatList.buyer}"/>
+				<c:if test="${myname != seller}">
+				${chatList.seller }
+				</c:if>
+				<c:if test="${myname != buyer}">
+				${chatList.buyer }
+				</c:if>
+				</label>
+			</th>
 		</tr>
 		<tr>
 			<th class="pw"><label>happy@naver.com</label></th>
@@ -92,14 +105,16 @@ label{
 		</tr>
 	</table>
 	</div>
-	<%} %>
+	</c:forEach>
 	<!-- 목록 끝 -->
 	<script>
-	function make_chat(){	
-		//location.href="./chattingview";
-	 	window.open("./chattingview", "_blank", "width=940, height=750");
+	function make_chat(chatId){	
+		//location.href="${path}/chat/chattingview?articleNo="+status+artNo;
+	 	window.open("${path}/chat/chattingview?chatId="+chatId , "_blank", "width=940, height=750");
 		
 	}
+	
+	
 	</script>
 
 	

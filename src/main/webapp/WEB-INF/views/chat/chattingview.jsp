@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -253,62 +254,24 @@ div.chat.ch2{
 			</tr>
 			<tr>
 				<td class="chat_area">
+				
 					<div class="wrap"  style="overflow:auto; width:599px; height:600px;">
-						<!-- 시작 날짜! -->
-						<div class="chat_date">
-							<div class="textbox">2023년 8월 28일</div>
-						</div>
-						<!-- 날짜 끝! -->
-						<!-- 상대방이 ch1 -->
-	        			<div class="chat ch1">
-	            			<div class="textbox">안녕하세요. 반갑습니다.</div>
-	        			</div>
-	            		<div class="time1" >20시30분</div>
-	        			<!-- 묶음 끝 -->
-	        			
-	        			<!-- 내가 ch2 -->
-	        			<div class="chat ch2">
-	            			<div class="textbox">안녕하세요. 16일 거래 가능하신가요? 제가 1212121212121212121212ㅇㅎㄶㄶ55555555555555555555ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ5ㄶㄶㄷㄴㄷㅎㄴㅇㄹㄹㄹㄹㅇㅎㅇㅀㅇㅎㄹㅇㅀㅇㅀㅇㅀㅇㅀㅇㅎㄹㄹㄹㄹㄹㄹㄹㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㄹㅎㅎㅎㅎㅎㅎㅎㅎ1212</div>
-	        			</div>
-	            		<div class="time2" >20시30분</div>
-	        			<!-- 묶음 끝 -->
-	        			
-	        			<div class="chat ch1">
-	            			<div class="textbox">네 그럼 16일 종각역에서 3시에 어떠신가요?</div>
-	        			</div>
-	            		<div class="time1" >20시30분</div>
-	        			
-        			
-				        <div class="chat ch2">
-				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
-				        </div>
-				        <div class="time2" >20시30분</div>
-				        
-				        <div class="chat ch2">
-				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
-				        </div>
-				        <div class="time2" >20시30분</div>
-				        
-				        <div class="chat ch2">
-				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
-				        </div>
-				        <div class="time2" >20시30분</div>
-				        
-				        <div class="chat ch2">
-				            <div class="textbox">좋습니다~ 그때 뵙겠습니다~!</div>
-				        </div>
-				        <div class="time2" >20시30분</div>
-				        
-				        
-				        
+						<c:forEach var="chatView" items="${session }">
+				        	<div class="chat ch2">
+				            	<div class="textbox">${chatView.chatContent }</div>
+				        	</div>
+				        	<div class="time2" >${chatView.chatTime}</div>
+				        </c:forEach>
+						
     				</div>
 				</td>
 				<td class="chat_detail" rowspan="2">
-					<div>제목: 물건 팝니다.</div>
-					<div>판매자: 이태림</div>
-					<div>구매자: 사람</div>
-					<div>상품코드: 123456</div>
-					<div style="padding-bottom: 10px;">가격: 10,000원</div>
+					
+					<div>제목</div>
+					<div>판매자: ${artData}</div>
+					<div>구매자: ${member.nickname }</div>
+					<div>코드</div>
+					<div style="padding-bottom: 10px;">${a.price}</div>
 					
 					<img src="${path}/resources/images/kuromi.png" alt="사진" width="200px;" height="200px;"/>
 					<br><br>
@@ -316,7 +279,7 @@ div.chat.ch2{
 					<br><br>
 					<button type="button" class="btn btn-danger btn-lg">신고 하기</button>
 					<br><br>
-					<button type="button" class="btn btn-warning btn-lg">나가기</button>
+					<button type="button" class="btn btn-warning btn-lg" id="getin">나가기</button>
 				</td>
 			</tr>
 			<tr>
@@ -326,7 +289,7 @@ div.chat.ch2{
 						<div class="form-group col-xs-5">
 							<textarea style="height: 80px; width:440px;" id="chatContent" class="form-control" placeholder="메시지를 입력하세요" maxlength="100"></textarea>
 							<input id="userId" type="hidden" value="${member.userId}">
-							<input id="articleNo" type="hidden" value="<%=request.getParameter("articleNo")%>">
+							<input id="chatId" type="hidden" value="<%=request.getParameter("chatId")%>">
 							
 						</div>
 						<div class="form-group col-xs-4" style="padding-left:55px;">
@@ -342,10 +305,33 @@ div.chat.ch2{
 	<br><br>
 	
 <script>
+function lastDateAjax(){
+	/*$.ajax({
+		method: "POST",
+		url: "/chat/chattingview",
+		cache:false,
+		async: false,
+		success: function(data){
+			if(lastDateTime < data){
+				readAjax(lastDateTime);
+				lastDateTime = data;
+			}else{
+				lastDateTime = data;
+			}
+		}
+	});*/
+	$(".wrap").append(
+			"<div class='chat ch2'><div class='textbox'>야호</div></div>"
+			
+		);
+	
+}
 $(document).ready(function(){
 	
-	
-	
+	var sin = $('#chatContent').val();
+	//setInterval(lastDataAjax, 3000);
+	let count = 0;
+	setInterval(() => console.log(sin), 2000);
 	
 	$('.sendText').on('click',function(){
 		
@@ -360,10 +346,12 @@ $(document).ready(function(){
 				 dataType:	"text",
 				 data:	{"content" : $('#chatContent').val(),
 						 "fromId" : $('#userId').val(),
-						 "articleNo" : $('#articleNo').val()
+						 "chatId" : $('#chatId').val()
+						 
 				 
-				 },	//클릭한 좌석번호
-				 success: function(data){
+				 },	
+				 success: function(){
+					 //console.log(data);
 					$(".wrap").append(
 						"<div class='chat ch2'><div class='textbox'>"+$('#chatContent').val()+"</div></div>"+
 						"<div class='time2' >"+now.getHours()+"시"+now.getMinutes()+"분"+"</div>"
@@ -384,6 +372,34 @@ $(document).ready(function(){
 		
 	});
 });
+
+
+
+
+
+function readAjax(compareTime){
+	$.ajax({
+		method: "POST",
+		url:"/chat/chattingview",
+		dataType:"json",
+		cache:false,
+		async: false,
+		data:{
+			"lastDate":compareTime
+		},
+		success: function(data){
+			if(data.length==0){
+				return;
+			}else{
+				$.each(data, function(index,entry){
+					
+				});
+			}
+		}
+	});
+}
+
+
 </script>
 
 </body>
