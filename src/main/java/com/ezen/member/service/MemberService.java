@@ -9,6 +9,9 @@ public interface MemberService {
 	//경은
 	public MemberDTO login(MemberDTO memberDTO) throws Exception;
 	
+	//회원 등급 조회
+	public MemberDTO memberLevel(String userId) throws Exception;
+	
 	// 아이디 찾기
 	public String findId(MemberDTO memberDTO) throws Exception;
 	
