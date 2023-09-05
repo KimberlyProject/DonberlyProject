@@ -44,25 +44,24 @@ public class AuctionController {
 	private static final Logger logger = LoggerFactory.getLogger(AuctionController.class);
 	//컴퓨터 경로
 	//private static final String IMGROOT = "C:\\data\\workspace\\imgfiles";
-	//프로젝트 경로 (temp생성후 옮기기도 됨, refresh 해줘야함)
+	//프로젝트 경로 (임시경로temp생성후 실제저장경로 새성까지 됨, refresh 필수)
 	private static final String IMGROOT = "C:\\data\\workspace\\DonberlyProject\\src\\main\\webapp\\resources\\images\\auction\\auction_image";
 	@Inject
 	private AuctionService auctionService;
 
 	//-------------------------------------------------------------------------------------------------------------//
-	
-	//이미지 가져오기 컨트롤러
+
+	//저장된 이미지 모두 가져오기 컨트롤러
 	@RequestMapping("/pullAuctionImges")
-	protected void pullImgFiles(@RequestParam("aucImg")	String aucImg,
-							@RequestParam("aucCode") int aucCode,
-							HttpServletResponse response)	throws Exception {
+	protected void pullImgFiles(@RequestParam("imgName") String imgName, @RequestParam("aucCode") int aucCode,
+			HttpServletResponse response)	throws Exception {
 								
 		OutputStream out = response.getOutputStream();
-		String downFile	 = IMGROOT + "\\" + aucCode + "\\" + aucImg;
+		String downFile	 = IMGROOT + "\\" + aucCode + "\\" + imgName;
 		File file = new File(downFile);
 	
 		response.setHeader("Cache-Control", "no-cache");
-		response.addHeader("Content-disposition", "attachement; fileName=" + aucImg);
+		response.addHeader("Content-disposition", "attachement; fileName=" + imgName);
 	
 		FileInputStream in = new FileInputStream(file);
 		byte[] buffer = new byte[1024 * 8];
@@ -75,24 +74,42 @@ public class AuctionController {
 		in.close();
 		out.close();	
 	}//pullImgFiles
-	
+		
 	//-------------------------------------------------------------------------------------------------------------//
 	
-	//메인페이지 불러오기
+	//메인페이지 게시글 리스트 전부 불러오기
 	@RequestMapping(value="/auction_main", method=RequestMethod.GET)
 	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("경매장 메인 리스트불러오기 컨트롤러");
 		String viewName = (String) request.getAttribute("viewName");
-		List<AuctionDTO> articlesList	= auctionService.listArticles();
-		//List<AucImgDTO> articlesList2 = auctionService.listArticlesImg();
-		AucImgDTO aucImgDTO = auctionService.listArticlesImg();
+		List<AuctionDTO> articlesList	= auctionService.listArticles(); //게시글 여러개 forEach문으로 출력
+		List<AucImgDTO> articlesList2 = auctionService.listArticlesImg(); //이미지 여러개 forEach문으로 출력
 		
 		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("articlesList", articlesList);	
-		//mav.addObject("articlesList2", articlesList2);
-		mav.addObject("articlesList2", aucImgDTO);
+		mav.addObject("articles", articlesList);	
+		mav.addObject("imgs", articlesList2);
 		return mav;
 	}	
+	
+	//-------------------------------------------------------------------------------------------------------------//
+	
+	//aucCode에 해당하는 디테일페이지 불러오기
+	@RequestMapping(value="/auction_detail", method=RequestMethod.GET)
+	public ModelAndView viewArticle(@RequestParam("aucCode") int aucCode, HttpServletRequest req, HttpServletResponse res)
+			throws Exception {
+		String viewName = (String)req.getAttribute("viewName");
+		System.out.println("------------------------------------------디테일페이지 컨트롤러" + aucCode + "------------------------------------------");
+		AuctionDTO auctionDTO = auctionService.viewArticle(aucCode); //게시글 한개 출력
+		List<AucImgDTO> aucImgDTO = auctionService.viewArticleImg(aucCode); //이미지 여러개 forEach문으로 출력
+		System.out.println(auctionDTO);
+		System.out.println(aucImgDTO);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("article", auctionDTO);
+		mav.addObject("imgs", aucImgDTO);
+		
+		return mav;
+	}// viewArticle
 	
 	//-------------------------------------------------------------------------------------------------------------//
 	
@@ -108,8 +125,19 @@ public class AuctionController {
 	@ResponseBody
 	public ResponseEntity addNewArticle(MultipartHttpServletRequest req, HttpServletResponse res) throws Exception {
 		
+		
 		System.out.println("게시글 업로드 컨트롤러 시작");
 		req.setCharacterEncoding("UTF-8");
+		
+		//minPrice, maxPrice (,)빼고 int로 형변환
+		String min = req.getParameter("minPrice");
+		String sanitizedValueMin = min.replace(",", "");
+		int minPrice = Integer.parseInt(sanitizedValueMin);
+		
+		String max = req.getParameter("maxPrice");
+		String sanitizedValueMax = max.replace(",", "");
+		int maxPrice = Integer.parseInt(sanitizedValueMax);
+		
 		String  imgName = null;
 		
 		Map articleMap = new HashMap();
@@ -126,8 +154,10 @@ public class AuctionController {
 		
 		HttpSession session = req.getSession();
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
-		String aucId = memberDTO.getUserId(); //여기 오류는 로그인이 안된것!!!
+		String aucId = memberDTO.getUserId(); //여기 오류는 로그인이 안된것!
 		articleMap.put("aucId", aucId);
+		articleMap.put("minPrice", minPrice);
+		articleMap.put("maxPrice", maxPrice);
 		System.out.println("세션이랑 멤버디티오 실행" + aucId);
 		
 		
@@ -156,7 +186,6 @@ public class AuctionController {
 		
 		try {
 			int aucCode = auctionService.addNewArticle(articleMap);
-			//한번만 생성하라고 ㅡㅡ
 			if(imgFileList != null && imgFileList.size() != 0) {
 				for(AucImgDTO aucImgDTO : imgFileList) {
 					imgName = aucImgDTO.getImgName();
@@ -211,26 +240,6 @@ public class AuctionController {
 		}
 		return fileList;
 	}//upload
-	
-	//-------------------------------------------------------------------------------------------------------------//
-	
-	//디테일페이지 불러오기
-	@RequestMapping(value="/auction_detail", method=RequestMethod.GET)
-	public ModelAndView viewArticle(@RequestParam("aucCode") int aucCode, HttpServletRequest req, HttpServletResponse res)
-			throws Exception {
-		String viewName = (String)req.getAttribute("viewName");
-		System.out.println("------------------------------------------디테일페이지 컨트롤러" + aucCode + "------------------------------------------");
-		AuctionDTO auctionDTO = auctionService.viewArticle(aucCode);
-		List<AucImgDTO> aucImgDTO = auctionService.viewArticleImg(aucCode);
-		System.out.println(auctionDTO);
-		System.out.println(aucImgDTO);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		mav.addObject("article", auctionDTO);
-		mav.addObject("img", aucImgDTO);
-		
-		return mav;
-	}// viewArticle
 
 	//-------------------------------------------------------------------------------------------------------------//
 	

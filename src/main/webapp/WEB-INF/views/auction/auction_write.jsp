@@ -148,7 +148,7 @@
 					<td class="cate">
 						사진첨부<br/><br/><br/>
 						(1번 사진이<br/>
-						경매장 썸네일로<br/> 
+						썸네일로<br/> 
 						설정됩니다.)<br/>
 						<br/><br/><br/><br/>
 						이미지 파일 첨부<br/><input type="button" value="파일 추가" onClick="fn_addFiles()"/>	
@@ -194,10 +194,16 @@
 			return false;
 		}
 		
-		var minPrice = $("#minPrice").val();
-		var maxPrice = $("#maxPrice").val();
+		var minPrice = parseFloat($("#minPrice").val().replace(/,/g, ''));
+		var maxPrice = parseFloat($("#maxPrice").val().replace(/,/g, ''));
+
+		if (isNaN(minPrice) || isNaN(maxPrice)) {
+		    alert("숫자만 입력해주세요.");
+		    return false;
+		}
+
 		if (minPrice >= maxPrice) {
-		    alert("최소금액보다 더 큰 상한금액을 입력해주세요.");
+		    alert("최소 금액보다 더 큰 상한 금액을 입력해주세요.");
 		    $("#maxPrice").focus();
 		    return false;
 		}
@@ -209,14 +215,12 @@
 		}
 		
 	});
-
 	
 	//숫자 입력창 콤마(,)추가하기
-	//function addCommas(input) {
-      	//var num = input.value.replace(/,/g, '');
-       //input.value = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	//}
-	
+	function addCommas(input) {
+      	var num = input.value.replace(/,/g, '');
+       input.value = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
 	
     //이미지 미리보기
 	function readURL(input) {
@@ -228,19 +232,18 @@
 			reader.readAsDataURL(input.files[0]);
 		}
 	}  
+    
 	//이미지 추가하기
    	var cnt=1;
 	function fn_addFiles() {
-		// $("#d_file").append("<br>"+"<input type='file' name='file" +cnt + "' onchange='readURL(this);' />");
+		//$("#d_file").append("<br>"+"<input type='file' name='file" +cnt + "' onchange='readURL(this);' />");
 		$("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
 		$("#d_file").append("<br>"+"<img  id='preview"+cnt+"' src='#'   width='200' height='200' />");
 		cnt++;
 	}  
 
     
-    
 
-	
 </script>
 	
 	

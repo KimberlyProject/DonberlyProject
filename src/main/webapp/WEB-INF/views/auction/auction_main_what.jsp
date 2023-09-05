@@ -128,7 +128,7 @@
 				<tr>
 					<th rowspan="4"  class="innerimg">
 							<div>
-								<img src="${page}/board/viewArticle.do?articleNO=${article.aucCode}&thumbnail=${articles.imgNo}" arl="auc1" width="200" height="200"/>
+								<img src="${page}/auction/pullAuctionImge?aucImg=${airticlesList2.imgName}&aucCode=${airticle.imgNo}" arl="auc1" width="200" height="200"/>
 							</div>
 					</th>
 					<th class="cate">제목</th><th class="colon">:</th><th colspan="4">${article.title}</th>
