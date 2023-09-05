@@ -68,6 +68,7 @@
 	<select id="chatView" parameterType="int" resultType="chatDTO">
 		select * from chat
 		where chatId=#{chatId}
+		order by chatTime
 	</select>
 	
 	<!--  -->
@@ -75,6 +76,13 @@
 		SELECT	chatId
 		FROM	chatlist
 		WHERE	artNo = #{artNo} and seller = #{seller} and buyer=#{buyer}
+	</select>
+	
+	<!-- 아티클 넘버 챗아이디로 찾기 -->
+	<select id="findArtNo" resultType="chatListDTO">
+		select *
+		from chatlist
+		where chatId = #{chatId}
 	</select>
 	
 	

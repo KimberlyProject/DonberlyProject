@@ -99,6 +99,12 @@ public class ChatDAOImpl implements ChatDAO {
 		return sqlSession.selectList(namespace+".chatView",chatId);
 	}
 
+	@Override
+	public ChatListDTO findArtNo(int chatId) throws Exception {
+		
+		return sqlSession.selectOne(namespace+".findArtNo",chatId);
+	}
+
 	
 	
 	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ezen.board.dto.ArticleVO;
 import com.ezen.chat.dao.ChatDAO;
@@ -44,7 +46,12 @@ public class ChatController {
 	
 	//채팅창 GET
 	@RequestMapping(value="/chattingview", method=RequestMethod.GET)
-	public String chattingview() throws Exception{
+	public String chattingview(String chatId, HttpServletRequest request) throws Exception{
+		
+		HttpSession session= request.getSession();
+		int ch = Integer.parseInt(chatId);
+		List<ChatDTO> chatView = chatService.chatView(ch); //chatList 옮김
+		session.setAttribute("session",chatView);
 		
 		System.out.println("채팅 입장");
 		return "/chat/chattingview";
@@ -56,15 +63,45 @@ public class ChatController {
 	public void chattingview(@RequestParam(value="content", required=false) String content,
 			@RequestParam(value="fromId", required=false) String fromId,
 			@RequestParam(value="chatId", required=false) String chatId,
-			Model model,HttpServletRequest request, HttpServletResponse response) throws Exception{
+			Model model,HttpServletRequest request, HttpServletResponse response,RedirectAttributes attr) throws Exception{
+		
 		//값 받기
+		//HttpSession session = request.getSession();
+		//session.removeAttribute("session");	
+		
 
 		System.out.println(content+fromId+chatId);
-		HttpSession session = null;
-		int ch = Integer.parseInt(chatId);
-		List<ChatDTO> chatView = chatService.chatView(1); //chatList 옮김
-		session.setAttribute("session", chatView);//세션 만들기
 		
+		int ch = Integer.parseInt(chatId);
+		//ch로 chatListDTO 찾기 찾아서 스테이터스로 구별해서 to랑 from 넣기
+		ChatListDTO chatListDTO = chatService.findArtNo(ch);
+		
+		//이미 한 채팅 세션으로 보내주기
+		List<ChatDTO> chatView = chatService.chatView(ch); //chatList 옮김
+		//session.setAttribute("session",chatView);
+		//attr.addFlashAttribute("session",chatView );
+		//보내주기 끝
+		
+		ChatDTO chatDTO = new ChatDTO();
+		chatDTO.setArtNo(chatListDTO.getArtNo());
+		chatDTO.setChatId(ch);
+		chatDTO.setFromId(fromId);
+		chatDTO.setChatContent(content);
+		/*
+		if(chatListDTO.getStatus().equals("s")) {
+			chatDTO.setToId(chatListDTO.getSeller());
+		}
+		else {
+			chatDTO.setToId(chatListDTO.getBuyer());
+		}*/
+		if(fromId.equals(chatListDTO.getSeller())) {
+			chatDTO.setToId(chatListDTO.getBuyer());
+		}
+		else if(fromId.equals(chatListDTO.getBuyer())) {
+			chatDTO.setToId(chatListDTO.getSeller());
+		}
+		System.out.println("################################chatDTO"+chatDTO);
+		chatService.insertContent(chatDTO);  //db에 채팅DTO 넣기
 		
 	}
 	
@@ -186,8 +223,6 @@ public class ChatController {
 			System.out.println("#################여기로 와"+chatListDTO);
 			int chatId = chatService.insertChatList(chatListDTO);//채팅방 번호 내놓기
 			System.out.println(chatId);
-			
-		
 		return "redirect:/chat/chat_list";
 		
 	}

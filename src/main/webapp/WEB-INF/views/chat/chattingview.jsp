@@ -257,10 +257,27 @@ div.chat.ch2{
 				
 					<div class="wrap"  style="overflow:auto; width:599px; height:600px;">
 						<c:forEach var="chatView" items="${session }">
-				        	<div class="chat ch2">
-				            	<div class="textbox">${chatView.chatContent }</div>
-				        	</div>
+						<c:set var="id" value="${chatView.chatId }"/>
+						<c:set var="cid" value='<%=request.getParameter("chatId")%>'/>
+						<c:set var="me" value="${member.userId}"/>
+						<c:set var="fromId" value="${chatView.fromId}"/>
+						<c:set var="toId" value="${chatView.toId}"/>
+						<c:if test="${id eq cid}">
+						
+							<c:if test="${fromId eq me }">
+								<div class="chat ch2">
+				            		<div class="textbox">${chatView.chatContent}</div>
+				        		</div>
 				        	<div class="time2" >${chatView.chatTime}</div>
+							</c:if>
+							
+				        	<c:if test="${toId eq me }">
+								<div class="chat ch1">
+				            		<div class="textbox">${chatView.chatContent }</div>
+				        		</div>
+				        		<div class="time1" >${chatView.chatTime}</div>
+							</c:if>
+				        </c:if>	
 				        </c:forEach>
 						
     				</div>
@@ -303,7 +320,8 @@ div.chat.ch2{
 		</table>
 	</div>
 	<br><br>
-	
+<script>
+</script>
 <script>
 function lastDateAjax(){
 	/*$.ajax({
@@ -328,6 +346,7 @@ function lastDateAjax(){
 }
 $(document).ready(function(){
 	
+	
 	var sin = $('#chatContent').val();
 	//setInterval(lastDataAjax, 3000);
 	let count = 0;
@@ -343,7 +362,6 @@ $(document).ready(function(){
 			 $.ajax({
 				 url:	"/chat/chattingview",
 				 type:	"post",
-				 dataType:	"text",
 				 data:	{"content" : $('#chatContent').val(),
 						 "fromId" : $('#userId').val(),
 						 "chatId" : $('#chatId').val()
@@ -351,7 +369,7 @@ $(document).ready(function(){
 				 
 				 },	
 				 success: function(){
-					 //console.log(data);
+					 
 					$(".wrap").append(
 						"<div class='chat ch2'><div class='textbox'>"+$('#chatContent').val()+"</div></div>"+
 						"<div class='time2' >"+now.getHours()+"시"+now.getMinutes()+"분"+"</div>"

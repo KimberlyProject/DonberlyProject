@@ -60,6 +60,12 @@ public class ChatServiceImpl implements ChatService {
 		return chatDAO.chatView(chatId);
 	}
 
+	@Override
+	public ChatListDTO findArtNo(int chatId) throws Exception {
+		
+		return chatDAO.findArtNo(chatId);
+	}
+
 	
 	
 	

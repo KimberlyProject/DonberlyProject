@@ -20,4 +20,6 @@ public interface ChatService {
 	public List<ChatListDTO>listChat(String userId)throws Exception;
 	
 	public List<ChatDTO>chatView(int chatId) throws Exception;
+	
+	public ChatListDTO findArtNo(int chatId) throws Exception;
 }
