@@ -226,26 +226,6 @@ function fn_modify_article(obj) {
 }
 
 
-$(document).ready(function() {
-
-	$.ajax({
-		url:			"/board/viewUp.do",
-		type:			"get",
-		dataType:		"json",
-		data:			{"view" : $('#view').val()},
-		success:		function(data) {
-			alert("조회수증가하자");
-			
-		},
-		error: function(info) {
-			// alert("에러가 발생하였습니다!");
-		},
-		complete: function(info) {
-			// alert("작업을 완료하였습니다.");
-		}
-	});
-
-});
 </script>
 
 </body>

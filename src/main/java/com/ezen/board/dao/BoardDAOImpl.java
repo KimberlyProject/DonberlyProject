@@ -17,7 +17,7 @@ import com.ezen.board.dto.SearchCriteria;
 // 게시글
 //-----------------------------------------------------------------------------------------------------------
 @Repository("boardDAO")
-public class BoardDAOImpl implements BoardDAO {
+public class BoardDAOImpl {
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -27,13 +27,13 @@ public class BoardDAOImpl implements BoardDAO {
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 목록
 	//-----------------------------------------------------------------------------------------------------------
-	@Override
+	
 	public List selectAllArticlesList() throws DataAccessException {
 		List<ArticleVO> articlesList = sqlSession.selectList(namespace + ".selectAllArticleList");
 		return articlesList;
 	} // End - public List selectAllArticlesList()
 
-	@Override
+	
 	public List saleSelectAllArticlesList() throws DataAccessException {
 		List<SaleArticleVO> saleArticlesList = sqlSession.selectList(namespace + ".saleSelectAllArticleList");
 		return saleArticlesList;
@@ -41,7 +41,7 @@ public class BoardDAOImpl implements BoardDAO {
 	//-----------------------------------------------------------------------------------------------------------
 	// 새로운 게시글 쓰기
 	//-----------------------------------------------------------------------------------------------------------
-	@Override
+	
 	public int insertNewArticle(Map articleMap) throws DataAccessException {
 
 		int articleNO	= selectNewArticleNO();	// 새로 입력할 게시글의 번호를 가져온다.
@@ -58,7 +58,7 @@ public class BoardDAOImpl implements BoardDAO {
 		return articleNO;
 	}
 	
-	@Override
+	
 	public int saleInsertNewArticle(Map articleMap) throws DataAccessException {
 
 		int articleNO	= saleSelectNewArticleNO();	// 새로 입력할 게시글의 번호를 가져온다.
@@ -104,11 +104,11 @@ public class BoardDAOImpl implements BoardDAO {
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 번호에 해당하는 상세 정보
 	//-----------------------------------------------------------------------------------------------------------
-	@Override
+	
 	public ArticleVO selectArticle(int articleNO) throws DataAccessException {
 		return sqlSession.selectOne(namespace + ".selectArticle", articleNO);
 	}
-	@Override
+	
 	public SaleArticleVO saleSelectArticle(int articleNO) throws DataAccessException {
 		return sqlSession.selectOne(namespace + ".saleSelectArticle", articleNO);
 	}
@@ -116,12 +116,12 @@ public class BoardDAOImpl implements BoardDAO {
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 번호에 해당하는 글 삭제하기
 	//-----------------------------------------------------------------------------------------------------------
-	@Override
+	
 	public void deleteArticle(int articleNO) throws DataAccessException {
 		sqlSession.delete(namespace + ".deleteArticle", articleNO);
 	}
 	
-	@Override
+	
 	public void saleDeleteArticle(int articleNO) throws DataAccessException {
 		sqlSession.delete(namespace + ".saleDeleteArticle", articleNO);
 	}
@@ -129,12 +129,12 @@ public class BoardDAOImpl implements BoardDAO {
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 번호에 해당하는 정보수정하기
 	//-----------------------------------------------------------------------------------------------------------
-	@Override
+	
 	public void updateArticle(Map articleMap) throws DataAccessException {
 		sqlSession.update(namespace + ".updateArticle", articleMap);
 	}
 	
-	@Override
+	
 	public void saleUpdateArticle(Map articleMap) throws DataAccessException {
 		sqlSession.update(namespace + ".saleupdateArticle", articleMap);
 	}
@@ -142,12 +142,12 @@ public class BoardDAOImpl implements BoardDAO {
 	//-----------------------------------------------------------------------------------------------------------
 	// 전체 게시글 수 구하기 (Paging 처리)
 	//-----------------------------------------------------------------------------------------------------------
-	@Override
+	
 	public int boardListTotalCount(SearchCriteria cri) throws DataAccessException {
 		return sqlSession.selectOne(namespace + ".buyListTotalCount", cri);
 	}
 	
-	@Override
+	
 	public int saleBoardListTotalCount(SearchCriteria cri) throws DataAccessException {
 		return sqlSession.selectOne(namespace + ".saleListTotalCount", cri);
 	}
@@ -155,12 +155,12 @@ public class BoardDAOImpl implements BoardDAO {
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 목록 가져오기 (Paging)
 	//-----------------------------------------------------------------------------------------------------------
-	@Override
+	
 	public List<ArticleVO> boardListPaging(SearchCriteria cri) throws DataAccessException {
 		return sqlSession.selectList(namespace + ".boardListPaging", cri);
 	}
 
-	@Override
+	
 	public List<SaleArticleVO> saleBoardListPaging(SearchCriteria cri) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace + ".saleBoardListPaging", cri);
