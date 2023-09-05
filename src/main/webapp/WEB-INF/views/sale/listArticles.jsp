@@ -173,19 +173,19 @@
 		<ul class="btn-group pagination">
 			<c:if test="${pageMaker.prev }"><!-- 이전 -->
 				<li>
-					<a href='<c:url value="/board/listArticles.do?page=${pageMaker.startPage-1 }&searchType=${cri.searchType }&keyword=${cri.keyword }"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
+					<a href='<c:url value="/sale/listArticles.do?page=${pageMaker.startPage-1 }&searchType=${cri.searchType }&keyword=${cri.keyword }"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
 				</li>
 			</c:if>
 		
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
 				<li>
-					<a href='<c:url value="/board/listArticles.do?page=${pageNum }&searchType=${cri.searchType }&keyword=${cri.keyword }"/>'><i></i>${pageNum }</a>
+					<a href='<c:url value="/sale/listArticles.do?page=${pageNum }&searchType=${cri.searchType }&keyword=${cri.keyword }"/>'><i></i>${pageNum }</a>
 				</li>
 			</c:forEach>
 			
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
 				<li>
-					<a href='<c:url value="/board/listArticles.do?page=${pageMaker.endPage+1 }&searchType=${cri.searchType }&keyword=${cri.keyword }"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
+					<a href='<c:url value="/sale/listArticles.do?page=${pageMaker.endPage+1 }&searchType=${cri.searchType }&keyword=${cri.keyword }"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
 				</li>
 			</c:if>
 		
@@ -193,7 +193,7 @@
 	</div>
 	
 	
-	<form id="formList" action="/board/listArticles.do" method="get">
+	<form id="formList" action="/sale/listArticles.do" method="get">
 		<input type="hidden" name="page"		value="${result.currentPageNum }">
 		<input type="hidden" name="size"		value="${result.currentPage.pageSize }">
 		<input type="hidden" name="searchType"	value="${pageVO.type }">
@@ -206,7 +206,7 @@
 		<!-- 로그인이 되었나? 않되었나? 에 따라서 넘어가는 페이지가 다르도록 하기위해서 function()에 세가지 값을 넘겨준다. -->
 	<p class="text-center">
 		<a class="btn btn-primary" 
-		href="javascript:fn_articleForm('${isLogOn}', '${page}/board/articleForm.do', '${page}/member/login')">상품등록</a>
+		href="javascript:fn_articleForm('${isLogOn}', '${page}/sale/articleForm.do', '${page}/member/login')">상품등록</a>
 	</p>
 	</div>
 
@@ -220,7 +220,7 @@ function fn_articleForm(isLogOn, articleForm, loginForm) {
 		location.href = articleForm;
 	} else {
 		alert("로그인을 하신 후에 글쓰기가 가능합니다!");
-		location.href = loginForm + '?action=/board/articleForm.do';
+		location.href = loginForm + '?action=/sale/articleForm.do';
 	}
 }
 

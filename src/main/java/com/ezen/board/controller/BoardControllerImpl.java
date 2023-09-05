@@ -34,7 +34,7 @@ import com.ezen.board.dto.Criteria;
 import com.ezen.board.dto.PageMaker;
 import com.ezen.board.dto.SaleArticleVO;
 import com.ezen.board.dto.SearchCriteria;
-import com.ezen.board.service.BoardService;
+import com.ezen.board.service.BoardServiceImpl;
 import com.ezen.member.dto.MemberDTO;
 
 
@@ -43,7 +43,7 @@ import com.ezen.member.dto.MemberDTO;
 // 게시글
 //-----------------------------------------------------------------------------------------------------------
 @Controller("boardController")
-public class BoardControllerImpl implements BoardController {
+public class BoardControllerImpl {
 
 	private static final Logger logger = LoggerFactory.getLogger(BoardControllerImpl.class);
 	
@@ -79,7 +79,7 @@ public class BoardControllerImpl implements BoardController {
 	// @Inject    찾는 순서 : 타입 => @Qualifier => 이름 => 실패
 	//-----------------------------------------------------------------------------------------------------------
 	@Autowired	
-	private BoardService boardService;
+	private BoardServiceImpl boardService;
 	@Inject		// Java에서 지원하는 어노테이션
 	private ArticleVO articleVO;
 	@Inject		// Java에서 지원하는 어노테이션
@@ -90,7 +90,7 @@ public class BoardControllerImpl implements BoardController {
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 쓰기 화면
 	//-----------------------------------------------------------------------------------------------------------
-	@Override
+	
 	@RequestMapping(value="/board/articleForm.do", method=RequestMethod.GET)
 	public ModelAndView articleForm() throws Exception {
 		
@@ -103,7 +103,7 @@ public class BoardControllerImpl implements BoardController {
 		//return "/board/articleForm";
 	} // End - 게시글 쓰기 화면
 	
-	@Override
+	
 	@RequestMapping(value="/sale/articleForm.do", method=RequestMethod.GET)
 	public ModelAndView saleArticleForm() throws Exception {
 		
@@ -119,7 +119,7 @@ public class BoardControllerImpl implements BoardController {
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 쓰기 처리
 	//-----------------------------------------------------------------------------------------------------------
-	@Override
+	
 	@RequestMapping(value="/board/addNewArticle.do", method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
@@ -191,7 +191,7 @@ public class BoardControllerImpl implements BoardController {
 	} // End - 게시글 쓰기 처리
 	
 	
-	@Override
+	
 	@RequestMapping(value="/sale/addNewArticle.do", method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity saleAddNewArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
@@ -296,7 +296,7 @@ public class BoardControllerImpl implements BoardController {
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 번호에 해당하는 상세 정보
 	//-----------------------------------------------------------------------------------------------------------
-	@Override
+	
 	@RequestMapping(value="/board/viewArticle.do", method=RequestMethod.GET)
 	public ModelAndView viewArticle(@RequestParam("articleNO") int articleNO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -315,7 +315,7 @@ public class BoardControllerImpl implements BoardController {
 		return mav;
 	} // End - 게시글 번호에 해당하는 상세 정보
 	
-	@Override
+	
 	@RequestMapping(value="/sale/viewArticle.do", method=RequestMethod.GET)
 	public ModelAndView saleViewArticle(@RequestParam("articleNO") int articleNO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -337,7 +337,7 @@ public class BoardControllerImpl implements BoardController {
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 번호에 해당하는 글 삭제하기
 	//-----------------------------------------------------------------------------------------------------------
-	@Override
+	
 	@RequestMapping(value="/board/removeArticle.do", method=RequestMethod.POST)
 	public ResponseEntity removeArticle(@RequestParam("articleNO") int articleNO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -376,7 +376,7 @@ public class BoardControllerImpl implements BoardController {
 		
 	} // End - 게시글 번호에 해당하는 글 삭제하기
 	
-	@Override
+	
 	@RequestMapping(value="/sale/removeArticle.do", method=RequestMethod.POST)
 	public ResponseEntity saleRemoveArticle(@RequestParam("articleNO") int articleNO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
@@ -418,7 +418,7 @@ public class BoardControllerImpl implements BoardController {
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 번호에 해당하는 글 수정하기
 	//-----------------------------------------------------------------------------------------------------------
-	@Override
+	
 	@ResponseBody
 	@RequestMapping(value="/board/modArticle.do", method=RequestMethod.POST)
 	public ResponseEntity modArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
@@ -483,7 +483,7 @@ public class BoardControllerImpl implements BoardController {
 		return resEnt;
 	} // End - public ResponseEntity modArticle()
 	
-	@Override
+	
 	@ResponseBody
 	@RequestMapping(value="/sale/modArticle.do", method=RequestMethod.POST)
 	public ResponseEntity saleModArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
@@ -551,7 +551,7 @@ public class BoardControllerImpl implements BoardController {
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 목록 (페이징) 화면 보여주기 + 검색조건(SearchCriteria)
 	//-----------------------------------------------------------------------------------------------------------
-	@Override
+	
 	@RequestMapping(value="/board/listArticles.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listArticlesPaging(HttpServletRequest request, HttpServletResponse response, SearchCriteria cri)
 			throws Exception {
@@ -581,7 +581,7 @@ public class BoardControllerImpl implements BoardController {
 		
 	} // End - 게시글 목록 (페이징) 화면 보여주기 
 	
-	@Override
+	
 	@RequestMapping(value="/sale/listArticles.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView saleListArticlesPaging(HttpServletRequest request, HttpServletResponse response, SearchCriteria cri)
 			throws Exception {
