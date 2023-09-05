@@ -3,8 +3,9 @@ package com.ezen.chat.dto;
 public class ChatListDTO {
 	private int chatId;	//채팅방 고유 넘버
 	private int artNo;	//연결된 게시판 넘버
-	private String saler;	//판매자 아이디
+	private String seller;	//판매자 아이디
 	private String buyer;	//구매자 아이디
+	private String status;
 	public int getChatId() {
 		return chatId;
 	}
@@ -17,11 +18,11 @@ public class ChatListDTO {
 	public void setArtNo(int artNo) {
 		this.artNo = artNo;
 	}
-	public String getSaler() {
-		return saler;
+	public String getSeller() {
+		return seller;
 	}
-	public void setSaler(String saler) {
-		this.saler = saler;
+	public void setSeller(String seller) {
+		this.seller = seller;
 	}
 	public String getBuyer() {
 		return buyer;
@@ -29,10 +30,20 @@ public class ChatListDTO {
 	public void setBuyer(String buyer) {
 		this.buyer = buyer;
 	}
+	
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	@Override
 	public String toString() {
-		return "ChatListDTO [chatId=" + chatId + ", artNo=" + artNo + ", saler=" + saler + ", buyer=" + buyer + "]";
+		return "ChatListDTO [chatId=" + chatId + ", artNo=" + artNo + ", seller=" + seller + ", buyer=" + buyer
+				+ ", status=" + status + "]";
 	}
+	
 	
 	
 }

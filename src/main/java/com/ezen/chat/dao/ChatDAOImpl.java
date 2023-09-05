@@ -1,5 +1,6 @@
 package com.ezen.chat.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,10 +8,13 @@ import javax.inject.Inject;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.ezen.board.dto.ArticleVO;
 import com.ezen.chat.controller.ChatController;
 import com.ezen.chat.dto.ChatDTO;
+import com.ezen.chat.dto.ChatListDTO;
 
 @Repository
 public class ChatDAOImpl implements ChatDAO {
@@ -39,6 +43,63 @@ public class ChatDAOImpl implements ChatDAO {
 		sqlSession.insert(namespace+".insertContent", chatDTO);
 		
 	}
+
+	@Override
+	public List<ArticleVO> getArtDTO(int artNo) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".getArticle", artNo);
+	}
+	//chatlist 추가
+	@Override
+	public int insertChatList(ChatListDTO chatListDTO) throws Exception {
+		
+		if(checkChatId(chatListDTO) == 0) {
+			int chatId = selectNewChatId();
+			chatListDTO.setChatId(chatId);
+			sqlSession.insert(namespace+".insertChatList", chatListDTO);
+			return findChatId(chatListDTO);
+		}
+		else {
+			logger.info("######################이미있어요");
+			return findChatId(chatListDTO);
+		}
+		
+	}
+	
+	
+	//--------------------------------------------------
+	// 새로운 채팅방 번호 추출하기
+	//--------------------------------------------------
+	private int selectNewChatId() throws DataAccessException{
+		
+		
+		return sqlSession.selectOne(namespace + ".selectNewChatId");
+	}
+	
+	//채팅방 번호 있는지 확인
+	private int checkChatId(ChatListDTO chatListDTO) throws DataAccessException{
+		return sqlSession.selectOne(namespace + ".checkChatId",chatListDTO);
+	}
+	
+	private int findChatId (ChatListDTO chatListDTO) throws DataAccessException{
+		return sqlSession.selectOne(namespace + ".findChatId",chatListDTO);
+	}
+
+	
+	//채팅 리스트 띄우기
+	@Override
+	public List<ChatListDTO> listChat(String userId) throws Exception {
+		
+		return sqlSession.selectList(namespace+".listChat",userId);
+	}
+
+	@Override
+	public List<ChatDTO> chatView(int chatId) throws Exception {
+		
+		return sqlSession.selectList(namespace+".chatView",chatId);
+	}
+
+	
 	
 	
 	
