@@ -49,6 +49,18 @@
         table-spacing {
         	margin-bottom: 20px;
         }
+        #red {
+        	color: red;
+        }
+        #blue {
+        	color: blue;
+        }
+        #orange {
+        	color: orange;
+        }
+        #green {
+        	color: green;
+        }
       
      
 
@@ -116,11 +128,11 @@
 			</div>
 		</c:when>
 		</c:choose>
+		
 		<!-- 게시글이 있는 경우 -->
 		<c:choose>
 		<c:when test="${articles != null}">
 			<!-- 경매게시글 -->
-			<div>
 			<table class="table table-bordered table-striped" id="ta">
 				<c:forEach var="article" items="${articles}" varStatus="articleNum">
 			    <tr>
@@ -138,7 +150,16 @@
 						<br/>
 						<form action="${path}auction_detail" method="get">
 							<input type="hidden" name="aucCode" value="${article.aucCode}"/>
-							<button id="searchBtn" class="btn btn-warning" type="submit">자세히 보기</button>
+							<c:choose>
+							<c:when test="${article.status == 0 }">
+								<button  class="btn btn-warning" type="submit">자세히 보기</button>
+							</c:when>
+							</c:choose>
+							<c:choose>
+							<c:when test="${article.status == 1 }">
+								<button id="searchBtn" class="btn btn-warning" type="submit">자세히 보기</button>
+							</c:when>
+							</c:choose>
 						</form>
 					</th>
 				</tr>
@@ -150,22 +171,32 @@
 				</tr>
 				<tr>
 					<th class="cate">마감 기한</th><th class="colon">:</th><th>${article.writeDate} <br/> - ${article.deadline}</th>
+					 													<c:set var="today" value="<%= System.currentTimeMillis() %>" />
 					<th class="cate">진행상태</th><th class="colon">:</th>
-						<c:choose>
-						<c:when test="${article.status == 1}">
-							<th colspan="4">경매종료</th>
-						</c:when>	
-						</c:choose>
-						<c:choose>
-						<c:when test="${article.status == 0 || article.status == null}">
-							<th clospan="4">입찰 진행중</th>
-						</c:when>
-						</c:choose>
+						<!-- 경매중 입찰자 X -->
+						<c:choose><c:when test="${article.status == 0 && article.cstmId == null}">
+							<th clospan="4"><span id="blue">입찰 진행중</span></th>
+						</c:when></c:choose>
+						<!-- 경매중 입찰자 O -->
+						<c:choose><c:when test="${article.status == 0 && article.cstmId != null}">
+							<th clospan="4"><span id="blue">입찰 진행중</span> &nbsp;&nbsp;&nbsp;[${article.cstmId}]님</th>
+						</c:when></c:choose>			
+						<!-- 판매가 완료된 경우 -->
+						<c:choose><c:when test="${article.status == 1}">
+							<th colspan="4"><span id="orange">판매완료</span>&nbsp;&nbsp;&nbsp;[${article.cstmId}]님</th>
+						</c:when></c:choose>						
+						<!-- 마감기한, 입찰자X -->
+						<c:choose><c:when test="${article.status == 0 && article.deadline.time < today}">
+							<th colspan="4"><span id="red">경매종료</span> 
+								<!-- 마감기한, 입찰자O -->
+								<c:choose><c:when test="${article.status == 0 && article.deadline.time < today && article.cstmId != null}">
+									<th colspan="4"><span id="orange">판매완료</span>&nbsp;&nbsp;&nbsp;[${article.cstmId}]님</th>
+								</c:when></c:choose>			
+							</th>
+						</c:when></c:choose>
 				</tr>
-				
 				</c:forEach>
 			</table><br/><br/><!--  경매 게시글 -->
-			<div>
 		</c:when>
 		</c:choose>
 		
@@ -231,6 +262,10 @@
 			form.submit();
 		});
 	});
+	
+	 var searchButton = document.getElementById("searchBtn");
+	  searchButton.style.backgroundColor = "gray";
+	  searchButton.disabled = true;
 
 </script>
 

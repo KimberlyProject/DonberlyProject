@@ -178,7 +178,7 @@
 				<th colspan="4">${article.aucId}님
 					<c:choose>
 					<c:when test="${member.userId != article.aucId}">
-						<input id="tryBid" type="button" class="btn btn-primary buyBtn" style="color:#FFFFFF;" value="채팅하기">
+						<input id="chat" type="button" class="btn btn-primary buyBtn" style="color:#FFFFFF;" value="채팅하기">
 					</c:when>
 					</c:choose>
 				</th>
@@ -262,14 +262,17 @@ $(document).ready(function () {
 		    var aucCode = ${article.aucCode};
 		    var cstmId = "${articlesList.cstmId}";
 		    var price = ${article.nowBid + article.bidRate};
-		    if(confirm(cstmId + "님에게 " + price + "원에 판매하시겠습니까? 거래가 완료되면 취소할 수 없습니다.")) {
+		    
+		    if(cstmId == null) {
+		    	laert("아직 입찰되지 않았습니다. 조금만 더 기다려주세요.")
+		    	return;
+		    } else if(confirm(cstmId + "님에게 " + price + "원에 판매하시겠습니까? 거래가 완료되면 취소할 수 없습니다.")) {
 		        location.href = "/auction/saleNow?aucCode=" + aucCode + "&cstmId=" + cstmId;
 		        alert("판매가 완료되었습니다.");
 		    } else {
 		        return;
 		    }
 		});//#saleNow
-		
 		
 		//구매자 입찰하기
 		$("#tryBid").on("click", function() {
