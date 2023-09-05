@@ -156,7 +156,7 @@ public class MemberController {
 	      ModelAndView mav = new ModelAndView();  
 	      
 	      // 로그인한 회원정보가 있는지 검사한다.
-	      MemberDTO memberDTO = memberService.login(member);
+	      MemberDTO memberDTO = memberService.login(member); 
 	      
 	      // 세션을 사용할 준비를 한다.
 	      HttpSession session = request.getSession();
@@ -164,13 +164,16 @@ public class MemberController {
 	      //-----------------------------------------------------------------------------------------------------------
 	      if(memberDTO != null) {   // 아이디와 비밀번호에 맞는 회원정보를 찾아왔으면
 	         // 세션을 발급한다.
+	         String userId = memberDTO.getUserId();
+	         MemberDTO memberLevel = memberService.memberLevel(userId);
+	    	 session.setAttribute("memberlevel", memberLevel);
 	         session.setAttribute("member",    memberDTO);
 	         session.setAttribute("isLogOn", true);
 	         String action = (String)session.getAttribute("action");
 	         System.out.println("Login action : " + action);
 	         System.out.println("Login session : " + member);
 	         System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-	         
+
 	         session.removeAttribute("action");
 	         
 	         
@@ -182,6 +185,7 @@ public class MemberController {
 	         
 	         
 	      } else { // 아이디와 비밀번호에 해당하는 정보가 없으면
+	    	 session.setAttribute("memberlevel", null);
 	         session.setAttribute("member", null);
 	         rAttr.addFlashAttribute("msg",  false);
 	         
