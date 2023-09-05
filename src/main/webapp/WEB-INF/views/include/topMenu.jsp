@@ -27,10 +27,6 @@
               </li>
               <li>
                 <a href="/auction/auction_main">경매장</a>
-                <ul>
-                    <li><a href="/auction/auction_detail">임시 사는사람 디테일</a></li>
-                    <li><a href="/auction/auction_detail_owner">임시 물건올린사람 디테일</a></li>                   
-                </ul>
               </li>                  
               <li>
                 <a href="/ccenter/notice">고객센터</a>                
@@ -44,6 +40,7 @@
               <li>
                 <a href="/myPage/myInfo">마이페이지</a>                
                 <ul> 
+                	<li><a href="/myPage/auctionHistory">경매내역</a></li>
                     <li><a href="/myPage/salesHistory">판매내역</a></li>
                     <li><a href="/chat/chattingview">1:1 채팅하기</a></li>
                     <li><a href="/chat/chat_list">채팅 리스트</a></li>

@@ -25,7 +25,7 @@
         .pagination {
            color:             rgb(73, 124, 64);
         }
-        #searchbtn {
+        #keywordBtn {
            height:          2.4em;
            background-color:   rgb(73, 124, 64);
            color:            #FFFFFF;
@@ -46,6 +46,11 @@
         #ta {
         	border : 1px;
         }
+        table-spacing {
+        	margin-bottom: 20px;
+        }
+      
+     
 
 	</style>
 </head>
@@ -76,10 +81,9 @@
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       <a href="/">홈</a> &gt;
-      <a href="#">마이페이지</a> &gt;
-      <a href="./">캘린더</a>
+      <a href="#">경매장</a> &gt;
     </div>
-    <h1 class="pageTitle"><div>캘린더</div></h1>
+    <h1 class="pageTitle"><div>경매장</div></h1>
     
 	<div class="container">
 		<br/><br/>
@@ -88,23 +92,21 @@
       <div class= "row" align="right" style=" vertical-align:middle; float:right;">
          <select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
             <option value="a" <c:if test="{searchType} == 'a'">selected</c:if>>전체</option>
-            <option value="w" <c:if test="{searchType} == 't'">selected</c:if>>제목</option>
+            <option value="t" <c:if test="{searchType} == 't'">selected</c:if>>제목</option>
             <option value="c" <c:if test="{searchType} == 'c'">selected</c:if>>내용</option>
             <option value="w" <c:if test="{searchType} == 'w'">selected</c:if>>작성자</option>
             <option value="p" <c:if test="{searchType} == 'p'">selected</c:if>>상품번호</option>
          </select>
-         <input  class="col-sm-2 searchgroup form-control" type="text" class="form-control" style="width:200px;" placeholder="검색하기">
-         <button id ="searchbtn" class="btn btn-secondary" type="button"">
+         <input  id="searchKeyword" value="${keyword}" class="col-sm-2 searchgroup form-control" type="text" class="form-control" style="width:200px;" placeholder="검색하기"/>
+         <button id ="keywordBtn" class="btn btn-secondary" type="button">
             <span class="glyphicon glyphicon-search"/>
          </button>   
-      </div>
-         <!-- 검색창 -->
-		<br><br><br>
+      </div><br><br><br>
 		
 		<!-- 경매 게시글 -->
 		<!-- 게시글이 하나도 없는 경우 -->
 		<c:choose>
-		<c:when test="${articlesList == null}">
+		<c:when test="${articles == null}">
 			<div>
 				<div colspan="4">
 					<p align="center">
@@ -116,22 +118,27 @@
 		</c:choose>
 		<!-- 게시글이 있는 경우 -->
 		<c:choose>
-		<c:when test="${articlesList != null}">
+		<c:when test="${articles != null}">
 			<!-- 경매게시글 -->
+			<div>
 			<table class="table table-bordered table-striped" id="ta">
-				<c:forEach var="article" items="${articlesList}" varStatus="articleNum">
-				<tr>
-					<th rowspan="4"  class="innerimg">
-							<div>
-								<img src="${page}/board/viewArticle.do?articleNO=${article.aucCode}&thumbnail=${articles.imgNo}" arl="auc1" width="200" height="200"/>
-							</div>
-					</th>
+				<c:forEach var="article" items="${articles}" varStatus="articleNum">
+			    <tr>
+			        <th rowspan="4" class="innerimg">
+			            <c:forEach var="img" items="${imgs}" varStatus="imgNum">
+			                <c:if test="${articleNum.index == imgNum.index}"> <!-- 첫번째 사진만 출력 -->
+			                    <div class="item">
+			                        <img id="i" src="${path}/auction/pullAuctionImges?imgName=${img.imgName}&aucCode=${img.aucCode}"/>
+			                    </div>
+			                </c:if>
+			            </c:forEach>
+			        </th>
 					<th class="cate">제목</th><th class="colon">:</th><th colspan="4">${article.title}</th>
 					<th rowspan="4" id="detailarea">
 						<br/>
 						<form action="${path}auction_detail" method="get">
 							<input type="hidden" name="aucCode" value="${article.aucCode}"/>
-							<button class="btn btn-warning" type="submit">자세히 보기</button>
+							<button id="searchBtn" class="btn btn-warning" type="submit">자세히 보기</button>
 						</form>
 					</th>
 				</tr>
@@ -139,15 +146,31 @@
 					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">${article.aucId}</th>
 				</tr>
 				<tr>
-					<th class="cate">현재 가격</th><th class="colon">:</th><th>999,999</th><th class="cate">상한가</th><th class="colon">:</th><th>${article.maxPrice}</th>
+					<th class="cate">현재 가격</th><th class="colon">:</th><th>${article.minPrice}</th><th class="cate">상한가</th><th class="colon">:</th><th>${article.maxPrice}</th>
 				</tr>
 				<tr>
-					<th class="cate">마감 기한</th><th class="colon">:</th><th colspan="4">${article.deadline}</th>
+					<th class="cate">마감 기한</th><th class="colon">:</th><th>${article.writeDate} <br/> - ${article.deadline}</th>
+					<th class="cate">진행상태</th><th class="colon">:</th>
+						<c:choose>
+						<c:when test="${article.status == 1}">
+							<th colspan="4">경매종료</th>
+						</c:when>	
+						</c:choose>
+						<c:choose>
+						<c:when test="${article.status == 0 || article.status == null}">
+							<th clospan="4">입찰 진행중</th>
+						</c:when>
+						</c:choose>
 				</tr>
+				
 				</c:forEach>
-			</table><!--  경매 게시글 -->
+			</table><br/><br/><!--  경매 게시글 -->
+			<div>
 		</c:when>
 		</c:choose>
+		
+		
+		
 		
 		
 	
@@ -158,18 +181,18 @@
 						<ul class="btn-group pagination">
 							<c:if test="${pageMaker.prev}">
 								<li>
-									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageMaker.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
+									<a href='<c:url value="/auction/auctionPaging?page=${pageMaker.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
 										<span class="glyphicon glyphicon-chevron-left"></span></a>
 								</li>
 							</c:if>
 							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
 								<li>
-									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
+									<a href='<c:url value="/auction/auctionPaging?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
 								</li>
 							</c:forEach>
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 								<li>
-									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageMaker.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
+									<a href='<c:url value="/auction/auctionPaging?page=${pageMaker.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
 										<span class="glyphicon glyphicon-chevron-right"></span></a>
 								</li>
 							</c:if>
@@ -181,16 +204,35 @@
 		<button class="btn btn-success col-sm-offset-6"><a style="color:#FFFFFF;" href="/auction/auction_write">상품 등록</a></button>
 		<br/><br/>
 		
-		<form id="formList" action="/board/listArticlesPaging.do" method="get">
-			<input type="hidden" name="page">
-			<input type="hidden" name="searchType">
-			<input type="hidden" name="keyword">
+		<form id="formList" action="/auctionSub/auctionPaging" method="get">
+			<input type="hidden" name="page" value="${result.currentPageNum}">
+			<input type="hidden" name="size" value="${result.currentPage.pageSize}">
+			<input type="hidden" name="searchType" value="${searchType}">
+			<input type="hidden" name="keyword" value="${keyword}">
 		</form>
 	</div><!-- <div class="container"> -->
 
 
 
-
 <%@ include file="../include/footer.jsp" %>
+
+<script>
+	$(document).ready(function() {
+		var form = $("#formList");
+		
+		$("#keywordBtn").click(function(e) {
+			var searchType = $("#searchType").find(":selected").val();
+			var keyword = $("#searchKeyword").val();
+			console.log(searchType, "", keyword);
+			
+			form.find("[name='searchType']").val(searchType);
+			form.find("[name='keyword']").val(keyword);
+			form.find("[name='page']").val("1");
+			form.submit();
+		});
+	});
+
+</script>
+
 </body>
 </html>

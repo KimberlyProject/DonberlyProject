@@ -20,7 +20,7 @@ public class AdminServiceImpl implements AdminService {
 	private AdminDAO adminDAO;
 	
 	//--------------------------------------------------------------------------------------------------
-	// public List<MemberDTO> selectMember() throws Exception; : 회원 전체 목록
+	// 회원 전체 목록
 	//--------------------------------------------------------------------------------------------------	
 	@Override
 	public List<MemberDTO> selectMember() throws Exception {
@@ -29,7 +29,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	//--------------------------------------------------------------------------------------------------
-	// public MemberDTO memberDetail(String id) throws Exception : 회원 상세 정보
+	// 회원 상세 정보
 	//--------------------------------------------------------------------------------------------------
 	@Override
 	public MemberDTO memberDetail(String userId) throws Exception {
@@ -38,7 +38,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	//--------------------------------------------------------------------------------------------------
-	// public void memberUpdate(MemberDTO memberDTO) throws Exception : 회원 정보 수정
+	// 회원 정보 수정
 	//--------------------------------------------------------------------------------------------------
 	@Override
 	public void memberUpdate(MemberDTO memberDTO) throws Exception {
@@ -48,12 +48,37 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 
+	//--------------------------------------------------------------------------------------------------
+	// 회원 삭제
+	//--------------------------------------------------------------------------------------------------
 	@Override
 	public void memberDelete(String memberDTO) throws Exception {
 
 		logger.info("회원 정보 수정 Service ==> " + memberDTO);
 		
 		adminDAO.memberDelete(memberDTO);
+		
+	}
+	
+	//--------------------------------------------------------------------------------------------------
+	// 회원 7일 정지
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public void Asuspension(String userId) throws Exception {
+		logger.info("회원 3일 정지 Service ==> " + userId);
+		
+		adminDAO.Asuspension(userId);
+		
+	}
+	
+	//--------------------------------------------------------------------------------------------------
+	// 회원 영구 정지
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public void Psuspension(String userId) throws Exception {
+		logger.info("회원 3일 정지 Service ==> " + userId);
+		
+		adminDAO.Psuspension(userId);
 		
 	}
 

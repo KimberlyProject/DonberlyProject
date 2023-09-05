@@ -57,9 +57,18 @@
 				address		= #{address}
 		WHERE	userId		= #{userId}
 	</update>
+	
 	<delete id="delete" parameterType="com.ezen.member.dto.MemberDTO">
 		DELETE FROM members WHERE userId = #{userId}
 	</delete>
+	
+	<insert id="Asuspension" parameterType="String">
+		INSERT INTO accountStatus VALUES (#{userId}, 'N1', SYSDATE+7)
+	</insert>
+		
+	<insert id="Psuspension" parameterType="String">
+		INSERT INTO accountStatus VALUES (#{userId}, 'N2', SYSDATE)
+	</insert>
 </mapper>
 
 

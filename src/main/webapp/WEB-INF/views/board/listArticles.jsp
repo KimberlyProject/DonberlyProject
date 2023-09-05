@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%  String   userId         = (String) session.getAttribute("member.userId"); %>
 <!DOCTYPE html>
-
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -9,38 +7,96 @@
 	<%@ include file="../include/header.jsp" %>
 	
 	<style>
-		#a {
-			border : 1px solid;
+			
+		.imgsize {
+		width: 180px;
+		height: 155px;
+		
 		}
 		
-		#b{
-			text-align: right;
+		.selectBox{
+		display: flex;
+		justify-content:space-between;
 		}
 		
-		#i{
-			width:80px; 
-			height:100px;		}
+		/* 제일 상위 */
+		.products {
+		display:grid;
+		grid-template-columns: 1fr 1fr 1fr;
+	    border: 1px solid #ccc; /* 테이블 경계 설정 */
+	    padding: 10px; /* 테이블 내부 여백 설정 */
+	    margin-bottom: 20px; /* 테이블 간격 설정 */
+	  	}
+		/* products 하위 */
+		.product {	
+	    display: block;
+	    text-align: center;
+	    text-decoration:none;
+	    color: black;
+	    margin-left: 5px;
+	    margin-right: 5px;
+	    margin-bottom: 15px;
+	    
+		}
+		
+		/* 상품 글 제목 */
+		.product-title {
+		font-size: 18px;
+		text-align: center;
+		margin-top: 20px;
+		margin-bottom: 10px;
+		}
+		
+		/* 상품 글 가격 */
+		.product-price {
+		text-align: center;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		}
+		
+		/* 상품 글 판매자 */
+		.product-seller {
+		text-align: center;
+		margin-top: 10px;
+		margin-bottom: 10px;
+		}
+	
+	/* 상품 글 작성일자 */
+	.product-date {
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	}
+	
+	.searchgroup {
+	padding: 5px;
+	}
+			
 	</style>
 	
 </head>
 <body>
-
 <%@ include file="../include/topMenu.jsp" %>
 
-<!-- 세션 값이 없으면 로그인과 회원가입을 활성화 시킨다. -->
-<hr/>
-
-<c:if test="${member != null}">
-   <h1>${member.userId }</h1>
-</c:if>
-<c:if test="${member == null}">
-   <h1>세션 없어요</h1>
-</c:if>
-<div class="container">
-
-<c:set var="menu" value="board" />
-<%@ include file="../include/sidebar.jsp" %>
-
+	<aside id="sideMenu">
+    	<h2>장터</h2>
+    		<ul>
+        		<li><a href="#">장터</a></li>
+        		<li>
+          			<a href="#">팝니다</a>
+		          		<ul>
+		            		<li><a href="#">목록</a></li>
+		            
+		          		</ul>
+        		</li>
+        		<li><a href="#">삽니다</a>          
+          			<ul>
+            			<li><a href="#">목록</a></li> 
+          			</ul>
+        		</li>
+      		</ul>
+      	<button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
+    </aside>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       <a href="/">홈</a> &gt;
@@ -53,7 +109,7 @@
 
 
 <div class="container">
-	<h1 align="center">팝니다</h1>
+	<h1 align="center">게시글</h1>
 	
 	<!-- 검색 조건 -->
 	<div class="col-sm-offset-6">
@@ -80,26 +136,30 @@
 				</div>
 			</c:when>
 			<c:when test="${articlesList != null}"> <!-- 게시글이 하나라도 있는 경우 -->
-						<div class="row">
+						<div class="products">
 				<c:forEach var="article" items="${articlesList }" varStatus="articleNum">
 					<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
-					
-							<div class="col-sm-4" id="a">
-								<div class="col-sm-6">
-									<a href="${page}/board/viewArticle.do?articleNO=${article.articleNO}">
-										<img id="i" src="${path}/download.do?articleNO=${article.articleNO }&thumbnail=${article.thumbnail}" id="preview"/>
-									</a><br/>
-								</div>
-								<div class=" col-sm-6"align="right">	
-									<label id="b">
-									<a href="${page}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a><br/>
-									${article.price}원
-									</label>
-								</div>
-								<div class= "col-sm-8">
-									${article.write_date}
-								</div>
-							</div>
+
+							<ul class="product">
+					          <li>
+					            <a href="${page}/board/viewArticle.do?articleNO=${article.articleNO}">
+									<img id="i" src="${path}/download.do?articleNO=${article.articleNO }&thumbnail=${article.thumbnail}" class="imgsize"/>
+								</a><br/>
+					          </li>
+					          <li class="product-title">
+					            <a href="${page}/board/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a><br/>
+					          </li>
+					          <li class="product-price">
+					            ${article.price}원 <!-- 여기에 가격 표시 -->
+					          </li>
+					          <li class="product-seller">
+					          	${article.userId}
+					          </li>
+					          <li class="product-date">
+					          	${article.write_date}
+					          </li>
+					        </ul>
+							
 
 				</c:forEach>
 						</div>
@@ -178,7 +238,8 @@ $(document).ready(function() {
 		formObj.find("[name='page']").val("1");
 		formObj.submit();
 	});
-})
+});
+
 
 
 </script>
