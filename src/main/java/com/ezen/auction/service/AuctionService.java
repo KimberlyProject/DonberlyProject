@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.ezen.auction.dao.AuctionDAO;
 import com.ezen.auction.dto.AucImgDTO;
 import com.ezen.auction.dto.AuctionDTO;
+import com.ezen.auction.dto.SearchCriteria;
 
 @Service("AuctionService")
 public class AuctionService {
@@ -78,4 +79,16 @@ public class AuctionService {
 	public void buyNow(Map articleMap) throws Exception {
 		auctionDAO.buyNow(articleMap);
 	}
+	
+	//-------------------------------------------------------------------------------------------------------------//
+	
+	//전체 게시글 수 구하기(paging)
+	public int auctionTotalCount(SearchCriteria cri) throws Exception {
+		return auctionDAO.auctionTotalCount(cri);
+	}
+	//게시글 목록 가져오기(paging)
+	public List<AuctionDTO> auctionPaging(SearchCriteria cri) throws Exception {
+		return auctionDAO.auctionPaging(cri);
+	}
+	
 }
