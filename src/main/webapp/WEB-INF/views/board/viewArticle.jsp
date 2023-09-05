@@ -155,7 +155,9 @@
 							<input type="button" class="btn btn-info" value="목록으로 돌아가기" onClick="backToList(this.form)"/>
 							<input type="hidden" class="seller" name="seller" value="${article.userId}"/>
 							<input type="hidden" class="buyer" name="buyer" value="${member.userId}"/>
+
 							<input type="hidden" class="article" name="article" value="${article.articleNO}"/>
+
 							<input type="button" class="btn btn-primary chatting" value="1:1채팅" onClick="fn_chat(${article.articleNO})"/>
 							<!-- 로그인한 아이디와 게시글을 쓴 사람의 아이디가 같다면, 글쓴 본인이므로 수정/삭제가 가능하다. -->
 							<c:if test="${member.userId == article.userId}">
@@ -166,6 +168,7 @@
 					</ul>
 				</div>
 		</div>
+
 
 	</form>
 </div>
@@ -227,7 +230,6 @@ function fn_modify_article(obj) {
 	obj.action = "${page}/board/modArticle.do";
 	obj.submit();
 }
-
 
 //1:1 채팅 방만들기
 function fn_chat(artNo){
