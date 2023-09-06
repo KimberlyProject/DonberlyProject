@@ -158,7 +158,15 @@
 					<ul class="item" id="trBtn">
 						<li>
 							<input type="button" class="btn btn-info" value="목록으로 돌아가기" onClick="backToList(this.form)"/>
-							<input type="button" class="btn btn-primary" value="1:1채팅" onClick="fn_reply_form('${path}/sale/replyForm.do)', ${article.articleNO})"/>
+							<c:choose>
+								<c:when test="${member.userId == article.userId}">
+									<input type="button" class="btn btn-primary" id="chat" value="1:1채팅" 
+										style="display:none" onClick="fn_reply_form('${path}/board/replyForm.do)', ${article.articleNO})"/>
+								</c:when>
+								<c:otherwise>
+									<input type="button" class="btn btn-primary" id="chat" value="1:1채팅" onClick="fn_reply_form('${path}/board/replyForm.do)', ${article.articleNO})"/>
+								</c:otherwise>
+							</c:choose>
 							<!-- 로그인한 아이디와 게시글을 쓴 사람의 아이디가 같다면, 글쓴 본인이므로 수정/삭제가 가능하다. -->
 							<c:if test="${member.userId == article.userId}">
 								<input type="button" class="btn btn-warning" value="수정하기" onClick="fn_enable(this.form)"/>
