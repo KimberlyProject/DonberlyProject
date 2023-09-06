@@ -2,32 +2,34 @@ package com.ezen.ccenter.dao;
 
 import java.util.Map;
 
-import javax.inject.Inject;
-
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Repository("ccenterDAO")
 public class CcenterDAO {
 
-	@Inject
+	@Autowired
 	private SqlSession sqlSession;
 	
 	private static final String namespace ="com.ezen.ccenter.mappers.ccenterMapper";
 	
 	
-	// 고객센터 내 1:1문의 -> 새로운 1:1문의 글 추가하기
-	public int insertNewAsk(Map articleMap) throws DataAccessException {
-		System.err.println("1:1 문의 글 업로드 dao");
-		int aucCode = selectNewAucCode();
-		articleMap.put("aucCode", aucCode);
-		System.out.println("dao에서 aucCode 생성" + aucCode);
-		sqlSession.insert(namespace + ".insertNewAsk", articleMap);
-		return aucCode;
-	}		//aucCode 생성하기
-			private int selectNewAucCode() throws DataAccessException {
-				return sqlSession.selectOne(namespace +".selectNewAucCode");
-			}
+	private int selectNewArticleNO() throws DataAccessException {
+		System.out.println("1대1문의 번호 생성 실행");
+		return sqlSession.selectOne(namespace + ".selectNewArticleNO");
+	}
+	
+	public int addNewAsk(Map articleMap) throws DataAccessException {
+
+		int articleNO	= selectNewArticleNO();	// 새로 입력할 게시글의 번호를 가져온다.
+		System.out.println("새로운 게시글 번호 추출하기 : " + articleNO);
+		articleMap.put("articleNO", articleNO);
+		
+		sqlSession.insert(namespace + ".addNewAsk", articleMap);
+		
+		return articleNO;
+	}
 			
 }

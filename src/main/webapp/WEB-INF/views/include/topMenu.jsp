@@ -37,7 +37,7 @@
                 <ul> 
                     <li><a href="/ccenter/notice">공지사항</a></li>
                     <li><a href="/ccenter/qna">Q & A</a></li>
-                    <li><a href="/ccenter/askOnetoOne">1:1 문의하기</a></li>
+                    <li><a href="/ccenter/askOnetoOne.do">1:1 문의하기</a></li>
                     <li><a href="/ccenter/report">신고하기</a></li>
                 </ul>
               </li>

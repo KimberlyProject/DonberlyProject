@@ -80,6 +80,7 @@
     <div class="container">
         <form name="askOnetoOne" method="post" action="${path }/ccenter/addNewAsk.do" enctype="multipart/form-data">
             <table style="width: 100%;" class="table" id="table" >
+                            
                 <tr>
                     <td><label for="title">제목</label></td>
                     <td><input type="text" id="title" name="title" placeholder="제목을 입력하세요"></td>

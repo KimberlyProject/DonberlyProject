@@ -10,5 +10,6 @@
 		<typeAlias type="com.ezen.board.dto.ArticleVO"	alias="saleArticleVO"/>
 		<typeAlias type="com.ezen.auction.dto.AuctionDTO" alias="auctionDTO"/>
 		<typeAlias type="com.ezen.auction.dto.AucImgDTO" alias="aucImgDTO"/>
+		<typeAlias type="com.ezen.ccenter.dto.CcenterDTO" alias="ccenterDTO"/>
 	</typeAliases>
 </configuration>
