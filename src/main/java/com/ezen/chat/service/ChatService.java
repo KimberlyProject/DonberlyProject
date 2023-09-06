@@ -22,4 +22,6 @@ public interface ChatService {
 	public List<ChatDTO>chatView(int chatId) throws Exception;
 	
 	public ChatListDTO findArtNo(int chatId) throws Exception;
+	
+	public ChatDTO findContent(ChatDTO chatDTO) throws Exception;
 }

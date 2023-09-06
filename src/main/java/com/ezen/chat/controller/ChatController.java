@@ -36,6 +36,7 @@ public class ChatController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
 	private int cnt=0;
+	private ChatDTO newchatDTO = new ChatDTO("07");
 
 	@Inject
 	private ChatService chatService;
@@ -64,11 +65,6 @@ public class ChatController {
 			@RequestParam(value="fromId", required=false) String fromId,
 			@RequestParam(value="chatId", required=false) String chatId,
 			Model model,HttpServletRequest request, HttpServletResponse response,RedirectAttributes attr) throws Exception{
-		
-		//값 받기
-		//HttpSession session = request.getSession();
-		//session.removeAttribute("session");	
-		
 
 		System.out.println(content+fromId+chatId);
 		
@@ -76,24 +72,12 @@ public class ChatController {
 		//ch로 chatListDTO 찾기 찾아서 스테이터스로 구별해서 to랑 from 넣기
 		ChatListDTO chatListDTO = chatService.findArtNo(ch);
 		
-		//이미 한 채팅 세션으로 보내주기
-		List<ChatDTO> chatView = chatService.chatView(ch); //chatList 옮김
-		//session.setAttribute("session",chatView);
-		//attr.addFlashAttribute("session",chatView );
-		//보내주기 끝
-		
 		ChatDTO chatDTO = new ChatDTO();
 		chatDTO.setArtNo(chatListDTO.getArtNo());
 		chatDTO.setChatId(ch);
 		chatDTO.setFromId(fromId);
 		chatDTO.setChatContent(content);
-		/*
-		if(chatListDTO.getStatus().equals("s")) {
-			chatDTO.setToId(chatListDTO.getSeller());
-		}
-		else {
-			chatDTO.setToId(chatListDTO.getBuyer());
-		}*/
+		//파는사람과 내가 같으면 사는사람이 
 		if(fromId.equals(chatListDTO.getSeller())) {
 			chatDTO.setToId(chatListDTO.getBuyer());
 		}
@@ -221,10 +205,44 @@ public class ChatController {
 	public String makeRoom(@RequestBody ChatListDTO chatListDTO)throws Exception{
 			//채팅방 만들기
 			System.out.println("#################여기로 와"+chatListDTO);
-			int chatId = chatService.insertChatList(chatListDTO);//채팅방 번호 내놓기
-			System.out.println("이거다####################################"+chatId);
+			if(chatListDTO.getSeller()!=null && chatListDTO.getBuyer()!=null) {
+				int chatId = chatService.insertChatList(chatListDTO);//채팅방 번호 내놓기				
+				System.out.println("이거다####################################"+chatId);
+				return "/chat/chattingview?chatId="+chatId;
+			}
+			else {
+				return "";
+			}
 		
-		return "/chat/chattingview?chatId="+chatId;
+		
+	}
+	//getChat
+	@ResponseBody
+	@RequestMapping(value="/getChat", method=RequestMethod.POST)
+	public List<ChatDTO> getChat(@RequestParam(value="chatId", required=false) String chatId,@RequestParam(value="fromId", required=false) String fromId)throws Exception {
+		ChatDTO chatDTO1 = new ChatDTO();
+		ChatDTO chatDTO2 = new ChatDTO(); //chatDTO2가 최근 녀석
+		int ch = Integer.parseInt(chatId);
+		chatDTO1.setChatId(ch);
+		chatDTO1.setFromId(fromId);
+		//fromId가 toId인 chatDTO 찾기
+		chatDTO2 = chatService.findContent(chatDTO1);
+		System.out.println("**************************챗아이디="+chatId+"프롬아이디="+fromId+"가장 최근 컨텐츠"+newchatDTO.getChatContent()+"이번에 쓴 컨텐츠"+chatDTO2.getChatContent());
+		System.out.println(chatDTO2);
+		//return chatDTO2;
+		/*
+		if(newchatDTO.getChatContent().equals(chatDTO2.getChatContent())) {
+			return chatDTO1;
+		}
+		else{
+			newchatDTO = chatDTO2;
+			return chatDTO2;
+		}
+		*/
+		List<ChatDTO> list =  chatService.chatView(ch);
+		
+		return list;
+		
 		
 	}
 	

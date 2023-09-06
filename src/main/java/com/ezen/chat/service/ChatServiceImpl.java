@@ -66,6 +66,12 @@ public class ChatServiceImpl implements ChatService {
 		return chatDAO.findArtNo(chatId);
 	}
 
+	@Override
+	public ChatDTO findContent(ChatDTO chatDTO) throws Exception {
+		
+		return chatDAO.findContent(chatDTO);
+	}
+
 	
 	
 	

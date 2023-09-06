@@ -105,6 +105,14 @@ public class ChatDAOImpl implements ChatDAO {
 		return sqlSession.selectOne(namespace+".findArtNo",chatId);
 	}
 
+	@Override
+	public ChatDTO findContent(ChatDTO chatDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".findContent",chatDTO);
+	}
+
+	
+
 	
 	
 	

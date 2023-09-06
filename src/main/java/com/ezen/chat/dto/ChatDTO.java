@@ -9,6 +9,14 @@ public class ChatDTO {
 	private String ToId;
 	private String chatContent;
 	private Date chatTime;
+	
+	
+	public ChatDTO() {
+		
+	}
+	public ChatDTO(String chatContent){
+		this.setChatContent(chatContent);
+	}
 	public int getChatId() {
 		return chatId;
 	}

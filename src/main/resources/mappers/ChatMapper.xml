@@ -85,6 +85,16 @@
 		where chatId = #{chatId}
 	</select>
 	
+	<!-- fromId로 chatDTO 찾기 -->
+	
+	<select id="findContent" resultType="chatDTO">
+		<![CDATA[
+		select *
+		from (select * from chat where toid = #{fromId} and chatid=#{chatId} order by chattime desc)
+		where rownum <= 1
+		]]>
+	</select>
+	
 	
 	
 	

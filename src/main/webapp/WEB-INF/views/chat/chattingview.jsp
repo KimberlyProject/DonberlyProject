@@ -55,7 +55,7 @@ html{
 	overflow: hidden;
 }
 
-<!---->
+<!-- -->
 .chat_title{
 	background-color:rgb(73, 124, 64);
 	color:#ffffff;
@@ -256,29 +256,7 @@ div.chat.ch2{
 				<td class="chat_area">
 				
 					<div class="wrap"  style="overflow:auto; width:599px; height:600px;">
-						<c:forEach var="chatView" items="${session }">
-						<c:set var="id" value="${chatView.chatId }"/>
-						<c:set var="cid" value='<%=request.getParameter("chatId")%>'/>
-						<c:set var="me" value="${member.userId}"/>
-						<c:set var="fromId" value="${chatView.fromId}"/>
-						<c:set var="toId" value="${chatView.toId}"/>
-						<c:if test="${id eq cid}">
 						
-							<c:if test="${fromId eq me }">
-								<div class="chat ch2">
-				            		<div class="textbox">${chatView.chatContent}</div>
-				        		</div>
-				        	<div class="time2" >${chatView.chatTime}</div>
-							</c:if>
-							
-				        	<c:if test="${toId eq me }">
-								<div class="chat ch1">
-				            		<div class="textbox">${chatView.chatContent }</div>
-				        		</div>
-				        		<div class="time1" >${chatView.chatTime}</div>
-							</c:if>
-				        </c:if>	
-				        </c:forEach>
 						
     				</div>
 				</td>
@@ -361,34 +339,52 @@ function readAjax(compareTime){
         }
     });
 }
+
 function getChat(){
 	 $.ajax({
-		 url:	"/chat/chattingview",
+		 url:	"/chat/getChat",
 		 type:	"post",
 		 dataType: "json",
-		 data:	{"content" : $('#chatContent').val(),
-				 "fromId" : $('#userId').val(),
-				 "chatId" : $('#chatId').val()
+		 data:	{
+			 "fromId" : $('#userId').val(),
+			 "chatId" : $('#chatId').val()
 		 },	
 		 success: function(data){
-			$(".wrap").append(
-				"<div class='chat ch2'><div class='textbox'>"+$('#chatContent').val()+"</div></div>"+
-				"<div class='time2' >"+now.getHours()+"시"+now.getMinutes()+"분"+"</div>"
-			);
-			
+			 console.log(data);
+			 var html="";
+			 for(var i=0 ; i<data.length;i++){
+					if(data[i].fromId == $('#userId').val()){
+						html+=
+						"<div class='chat ch2'><div class='textbox'>"+data[i].chatContent+"</div></div>"+
+						"<div class='time2' >"+data[i].chatTime+"</div>";
+					}
+					else{
+						html+=
+						"<div class='chat ch1'><div class='textbox'>"+data[i].chatContent+"</div></div>"+
+						"<div class='time1' >"+data[i].chatTime+"</div>";
+					} 
+			}
+			 console.log(html);
+			 $('.wrap').html(
+				html		 
+			 
+			 );
+			 const chatbox = document.querySelector(".wrap");
+			 chatbox.scrollTop = chatbox.scrollHeight;
 		 },
 		 error:function(request,status,error){
 			 console.log("실패");
 			 
 		 },
-		 complete:function(){
-			 $('#chatContent').val('');
+		 complete:function(){ 
+			
 		 }
 	 });
 }
 $(document).ready(function(){
 	
-	setInterval(console.log("야호"),3000);
+	
+	setInterval(getChat,500);
 	
 	var sin = $('#chatContent').val();
 	//setInterval(lastDataAjax, 3000);
@@ -434,6 +430,8 @@ $(document).ready(function(){
 		
 	});
 });
+
+
 
 
 </script>
