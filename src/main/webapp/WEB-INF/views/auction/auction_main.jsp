@@ -160,7 +160,7 @@
 							</c:choose>
 							<c:choose>
 							<c:when test="${article.status == 1 }">
-								<button id="searchBtn" class="btn btn-warning" type="submit">자세히 보기</button>
+								<button class="btn detailBtn" type="submit">자세히 보기</button>
 							</c:when>
 							</c:choose>
 						</form>
@@ -177,8 +177,8 @@
 				</tr>
 				<tr>					 													
 					<th class="cate">마감 기한</th><th class="colon">:</th><th>${article.writeDate}<br/>
-						<c:choose><c:when test="${article.deadline.time < today && article.status == 1}">
-					    	${article.deadline}
+						<c:choose><c:when test="${article.deadline.time > today && article.status == 1}">
+					    	~ ${article.deadline}
 						</c:when></c:choose>
 					 	<c:choose><c:when test="${article.deadline.time < today && article.status == 0}">
 					 		<span class="red">~ ${article.deadline} (오늘마감)</span>
@@ -198,7 +198,7 @@
 						</c:when></c:choose>
 						<!-- 판매 완료 orange-->
 						<c:choose><c:when test="${article.status == 1}">
-							<th colspan="4"><span class="gray">판매완료</span>&nbsp;&nbsp;&nbsp;[${article.cstmId}]님</th>
+							<th colspan="4"><span id="gray"><span class="gray">판매완료</span>&nbsp;&nbsp;&nbsp;[${article.cstmId}]님</span></th>
 						</c:when></c:choose>	
 				</tr>
 				</c:forEach>
@@ -265,10 +265,13 @@
 	});
 	
 	//경매끝난 게시글 버튼비활성화
-	var searchButton = document.getElementById("searchBtn");
-	searchButton.style.backgroundColor = "gray";
-	searchButton.disabled = true;
-
+	$(document).ready(function() {
+	  var detailBtn = $(".detailBtn");
+	  detailBtn.css("background-color", "gray");
+	  detailBtn.css("color", "white");
+	  detailBtn.prop("disabled", true);
+	});
+	
 </script>
 
 </body>

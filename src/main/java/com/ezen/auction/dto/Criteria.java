@@ -16,7 +16,7 @@ public class Criteria {
 	
 	public Criteria() {
 		this.page		= 1;
-		this.perPageNum	= 5;
+		this.perPageNum	= 4;
 	}
 	
 	public int getPage() {

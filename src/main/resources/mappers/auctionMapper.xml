@@ -160,7 +160,7 @@
 	<!-- 게시글 검색 조건 -->
 	<sql id="search">
 		<if test="searchType != null"> <!-- 값이 있는 경우에만 -->
-			<if test="searchType == 'a'.toString()"></if>
+			<if test="searchType == 'a'.toString()"><!-- 전체검색 --></if>
 			<if test="searchType == 't'.toString()">AND title LIKE '%' || #{keyword} || '%'</if>
 			<if test="searchType == 'c'.toString()">AND content LIKE '%' || #{keyword} || '%'</if>
 			<if test="searchType == 'w'.toString()">AND aucID LIKE '%' || #{keyword} || '%'</if>

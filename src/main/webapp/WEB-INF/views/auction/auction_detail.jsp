@@ -185,12 +185,7 @@
 				</th>
 			</tr>
 			<tr><!-- 현재입찰가 -->
-				<th class="cate">현재입찰가
-					<c:choose>
-					<c:when test="${article.cstmId != null}">
-					 &nbsp; [${article.cstmId}]님</th>
-					</c:when>
-					</c:choose>
+				<th class="cate">현재입찰가 &nbsp; [${article.cstmId}]님</th>
 				<th class="colon">:</th>
 				<th colspan="4"><span id="aaa"/><fmt:formatNumber type="number" value="${article.nowBid}" pattern="#,##0"/> 원
 					<c:choose>
@@ -199,7 +194,7 @@
 					</c:when>
 					</c:choose>
 					<c:choose>
-					<c:when test="${member.userId == article.aucId && article.cstmId != null}">
+					<c:when test="${member.userId == article.aucId}">
 						<input id="saleNow" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="바로판매">
 					</c:when>
 					</c:choose>
@@ -208,7 +203,7 @@
 			<tr><!-- 입찰단위 -->
 				<th class="cate">입찰단위</th>
 				<th class="colon">:</th>
-				<th colspan="4"><fmt:formatNumber type="number" value="${article.bidRate}" pattern="#,##0"/> 원</th>
+				<th colspan="4"><fmt:formatNumber type="number" value="${article.bidRate}" pattern="#,##0"/> 원
 			</tr>
 			<tr><!-- 상한금액 -->
 				<th class="cate">상한금액</th>
@@ -266,10 +261,13 @@ $(document).ready(function () {
 		//판매자 현재입찰가로 바로 판매
 		$("#saleNow").on("click", function() {
 		    var aucCode = ${article.aucCode};
-		    var cstmId = "${articlesList.cstmId}";
+		    var cstmId = "${article.cstmId}";
 		    var price = ${article.nowBid + article.bidRate};
 		    
-		    if(confirm(cstmId + "님에게 " + price + "원에 판매하시겠습니까? 거래가 완료되면 취소할 수 없습니다.")) {
+		    if(cstmId == null) {
+		    	laert("아직 입찰되지 않았습니다. 조금만 더 기다려주세요.")
+		    	return;
+		    } else if(confirm(cstmId + "님에게 " + price + "원에 판매하시겠습니까? 거래가 완료되면 취소할 수 없습니다.")) {
 		        location.href = "/auction/saleNow?aucCode=" + aucCode + "&cstmId=" + cstmId;
 		        alert("판매가 완료되었습니다.");
 		    } else {
