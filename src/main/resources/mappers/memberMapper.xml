@@ -11,6 +11,13 @@
       WHERE   userId       = #{userId}
       AND     pw   = #{pw}
    </select>
+   <select id="memberLevel" parameterType="com.ezen.member.dto.MemberDTO" resultType="com.ezen.member.dto.MemberDTO">
+		SELECT a.*
+		FROM members m, accountstatus a
+		WHERE m.userid = a.userid
+		AND a.userid = #{userId}
+		AND rownum = 1
+   </select>
    
 	<!-- 회원 아이디 중복 검사 -->
 	<select id="idCheck" parameterType="com.ezen.member.dto.MemberDTO" resultType="int">

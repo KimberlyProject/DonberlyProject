@@ -26,6 +26,12 @@ public class MemberServiceImpl implements MemberService {
 	
 		return memberDAO.login(memberDTO);
 	}
+
+	@Override
+	public MemberDTO memberLevel(String userId) throws Exception {
+		logger.info("MemberServiceImpl 회원 등급 조회()");		
+		return memberDAO.memberLevel(userId);
+	}
 	
 	@Override
 	public int idCheck(MemberDTO memberDTO) throws Exception {

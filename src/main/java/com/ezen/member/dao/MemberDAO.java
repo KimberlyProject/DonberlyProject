@@ -7,6 +7,9 @@ public interface MemberDAO {
 
 	//경은
 	public MemberDTO login(MemberDTO memberDTO) throws Exception;
+	
+	// 회원 등급 조회
+	public MemberDTO memberLevel(String userId) throws Exception;
 
 	// 아이디 중복 확인
 	public int idCheck(MemberDTO memberDTO) throws Exception;
