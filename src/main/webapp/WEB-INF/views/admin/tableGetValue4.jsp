@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<%@ include file="../../include/header.jsp" %>
+	<%@ include file="../include/header.jsp" %>
 
     <style>
         table {
@@ -19,7 +19,7 @@
 </head>
  
 <body>   
-<%@ include file="../../include/topMenu.jsp" %>
+<%@ include file="../include/topMenu.jsp" %>
 <div class="container">
     <br><br>
     <div class="row">

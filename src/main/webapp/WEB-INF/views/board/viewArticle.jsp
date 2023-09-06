@@ -156,7 +156,15 @@
 							<input type="hidden" class="seller" name="seller" value="${article.userId}"/>
 							<input type="hidden" class="buyer" name="buyer" value="${member.userId}"/>
 							<input type="hidden" class="article" name="article" value="${article.articleNO}"/>	
-							<input type="button" class="btn btn-primary chatting" value="1:1채팅" onClick="fn_chat(${article.articleNO})"/>
+							<c:choose>
+								<c:when test="${member.userId == article.userId}">
+									<input type="button" class="btn btn-primary" id="chat" value="1:1채팅" 
+										style="display:none" onClick="fn_reply_form('${path}/board/replyForm.do)', ${article.articleNO})"/>
+								</c:when>
+								<c:otherwise>
+									<input type="button" class="btn btn-primary" id="chat" value="1:1채팅" onClick="fn_reply_form('${path}/board/replyForm.do)', ${article.articleNO})"/>
+								</c:otherwise>
+							</c:choose>
 							<!-- 로그인한 아이디와 게시글을 쓴 사람의 아이디가 같다면, 글쓴 본인이므로 수정/삭제가 가능하다. -->
 							<c:if test="${member.userId == article.userId}">
 								<input type="button" class="btn btn-warning" value="수정하기" onClick="fn_enable(this.form)"/>
