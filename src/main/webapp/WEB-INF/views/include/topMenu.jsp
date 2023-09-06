@@ -2,6 +2,16 @@
 <%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- header -->
+<script>
+if("${memberlevel.userStatus}" == "N1"){
+	alert("${memberlevel.downTime}까지 정지상태입니다.");
+	location.href = '/member/logout';
+}else if("${memberlevel.userStatus}" == "N2"){
+	alert("영구 정지 처리 되셨습니다.");
+	location.href = '/member/logout';
+}
+
+</script>
 <header>
     <nav class="navbar navbar-fixed-top">
         <div class="container-fluid">
@@ -51,7 +61,7 @@
                     <li><a href="../myPage/marketInfo.do">장터</a></li>
                 </ul>
               </li>
-              <c:if test="${ member != null }">
+              <c:if test="${ memberlevel.userStatus == 'A' }">
               <li>
                 <a href="/admin/oneOnOneInquiry">관리자</a>                
                 <ul> 
