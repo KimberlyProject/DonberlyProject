@@ -54,7 +54,7 @@ if("${memberlevel.userStatus}" == "N1"){
               <li>
                 <a href="/myPage/myInfo">마이페이지</a>                
                 <ul> 
-                	<li><a href="/myPage/auctionHistory">경매내역</a></li>
+                	<li><a href="/auction/auctionDealList?aucId=${member.userId}">경매내역</a></li>
                     <li><a href="/myPage/salesHistory">판매내역</a></li>
                     <li><a href="/chat/chattingview">1:1 채팅하기</a></li>
                     <li><a href="/chat/chat_list">채팅 리스트</a></li>

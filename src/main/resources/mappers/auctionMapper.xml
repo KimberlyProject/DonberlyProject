@@ -59,7 +59,7 @@
 	<!-- 메인페이지 게시글 Query -->
     <select id="pullArticleInfo" resultMap="aucArticle">
 		<![CDATA[
-			SELECT   AUCCODE, MINPRICE, MAXPRICE, WRITEDATE, TITLE, CONTENT, NOWBID, BIDRATE, AUCID, STATUS, DEADLINE, CSTMID
+			SELECT  *
 			FROM   AUCTION
 		]]>
     </select>
@@ -74,32 +74,11 @@
 	<!-- 메인페이지 image Query -->
     <select id="pullArticleImg" resultMap="aucImage">
 		<![CDATA[
-			SELECT IMGNO, IMGNAME, AUCCODE
+			SELECT *
 			FROM AUCIMG
 		]]>
     </select>
  
-    
-    <!-- 가장 작은 번호 구하기 Query
-    <select id ="selectMinImgNo" resultType="int">
- 		<![CDATA[
- 			SELECT NVL(MIN(imgNo), 0) 
- 			FROM AUCIMG
- 		]]>
- 	</select>
- 	-->
- 
- 	<!-- 메인페이지 image Query
-	  <select id="pullArticleImg"  parameterType="int" resultMap="aucImage">
-		<![CDATA[
-			SELECT IMGNO, IMGNAME, AUCCODE
-			FROM AUCIMG
-			WHERE imgNO = #{minImgNo}
-		]]>
-    </select>
-     -->
-    
-
    <!-- 디테일페이지 게시글 Query -->
    <select id="pullArticleInfoDetail" parameterType="int" resultType="auctionDTO">
    		<![CDATA[
@@ -197,5 +176,23 @@
 			WHERE aucCode = #{aucCode}
 		]]>
  	</select>
+ 	
+ 	<!-- 마이페이지 게시글 Query -->
+    <select id="myPageArticles" parameterType="String" resultMap="aucArticle">
+		<![CDATA[
+			SELECT  *
+			FROM   AUCTION
+			WHERE aucId = #{aucId}
+		]]>
+    </select>
+    
+    <!-- 마이페이지 image Query -->
+    <select id="myPageImgs" parameterType="int" resultMap="aucImage">
+		<![CDATA[
+			SELECT *
+			FROM AUCIMG
+			WHERE aucCode = #{aucCode}
+		]]>
+    </select>
 	
 </mapper>

@@ -94,4 +94,18 @@ public class AuctionService {
 	public List<AucImgDTO> auctionPagingImg(int aucCode) throws Exception {
 		return auctionDAO.auctionPagingImg(aucCode);
 	}
+	
+	//-------------------------------------------------------------------------------------------------------------//
+	
+	//마이페이지 게시글 가져오기
+	public List<AuctionDTO> myPageArticles(String aucId) throws Exception {
+		List<AuctionDTO> articles = auctionDAO.myPageArticles(aucId);
+		return articles;
+	}
+	
+	//마이페이지 image 가져오기
+	public List<AucImgDTO> myPageImgs(int aucCode) throws Exception {
+		List<AucImgDTO> imgs = auctionDAO.myPageImgs(aucCode);
+		return imgs;
+	}
 }

@@ -40,12 +40,6 @@ public class MypageController {
   		return "myPage/myProfileUpdate";
   	}
   	
-  	//경은 마이페이지 경매내역
-  	@RequestMapping(value="/auctionHistory", method=RequestMethod.GET)
-  	public ModelAndView auctionHistory(@RequestParam ("userId") String userId, 
-  			HttpServletRequest req, HttpServletResponse res) throws Exception {
-  		System.out.println("경매내역 Controller");
-  		return null;
-  	}
+
 
 }
