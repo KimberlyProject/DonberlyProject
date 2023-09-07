@@ -50,13 +50,10 @@
       상세페이지
     </div> 
     <h1 class="pageTitle">
-    	<div>장터</div>
+    	<div>구매장터</div>
     </h1>
 	
 <div class="container">
-<div>
-	<a href="#" class="text-left">홈</a>><a href="#" class="text-left">장터</a>><a href="#" class="text-left">팝니다</a>><a href="#" class="text-left">상세화면</a>
-</div>
 
 	<form name="formArticle" method="post" action="${path}" enctype="multipart/form-data" class="container-div">
 		<div class="item">

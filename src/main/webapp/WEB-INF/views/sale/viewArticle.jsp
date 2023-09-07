@@ -41,7 +41,7 @@
 <%@ include file="../include/topMenu.jsp" %>
 
 
-	<c:set var="menu" value="board" />
+	<c:set var="menu" value="sale" />
 	<%@ include file="../include/sidebar.jsp" %>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
@@ -50,13 +50,11 @@
       상세페이지
     </div> 
     <h1 class="pageTitle">
-    	<div>장터</div>
+    	<div>판매장터</div>
     </h1>
 	
 <div class="container">
-<div>
-	<a href="#" class="text-left">홈</a>><a href="#" class="text-left">장터</a>><a href="#" class="text-left">팝니다</a>><a href="#" class="text-left">상세화면</a>
-</div>
+
 
 	<form name="formArticle" method="post" action="${path}" enctype="multipart/form-data" class="container-div">
 		<div class="item">
@@ -137,7 +135,18 @@
 					<ul class="item" id="trBtn">
 						<li>
 							<input type="button" class="btn btn-info" value="목록으로 돌아가기" onClick="backToList(this.form)"/>
-							<input type="button" class="btn btn-primary" value="1:1채팅" onClick="fn_reply_form('${path}/board/replyForm.do)', ${article.articleNO})"/>
+							<input type="hidden" class="seller" name="seller" value="${article.userId}"/>
+							<input type="hidden" class="buyer" name="buyer" value="${member.userId}"/>
+							<input type="hidden" class="article" name="article" value="${article.articleNO}"/>	
+							<c:choose>
+								<c:when test="${member.userId == article.userId}">
+									<input type="button" class="btn btn-primary" id="chat" value="1:1채팅" 
+										style="display:none" onClick="fn_reply_form('${path}/board/replyForm.do)', ${article.articleNO})"/>
+								</c:when>
+								<c:otherwise>
+									<input type="button" class="btn btn-primary" id="chat" value="1:1채팅" onClick="fn_reply_form('${path}/board/replyForm.do)', ${article.articleNO})"/>
+								</c:otherwise>
+							</c:choose>
 							<!-- 로그인한 아이디와 게시글을 쓴 사람의 아이디가 같다면, 글쓴 본인이므로 수정/삭제가 가능하다. -->
 							<c:if test="${member.userId == article.userId}">
 								<input type="button" class="btn btn-warning" value="수정하기" onClick="fn_enable(this.form)"/>
@@ -158,7 +167,7 @@
 <script>
 // 게시글 목록으로 돌아가기
 function backToList(obj) {
-	obj.action="${path}/board/listArticles.do";
+	obj.action="${path}/sale/listArticles.do";
 	obj.submit();
 }
 
