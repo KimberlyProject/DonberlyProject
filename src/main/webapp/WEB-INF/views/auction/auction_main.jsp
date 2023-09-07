@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page session="true" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,11 +107,10 @@
 		<!-- 검색창 -->
       <div class= "row" align="right" style=" vertical-align:middle; float:right;">
          <select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
-            <option value="a" <c:if test="{searchType} == 'a'">selected</c:if>>전체</option>
             <option value="t" <c:if test="{searchType} == 't'">selected</c:if>>제목</option>
             <option value="c" <c:if test="{searchType} == 'c'">selected</c:if>>내용</option>
             <option value="w" <c:if test="{searchType} == 'w'">selected</c:if>>작성자</option>
-            <option value="p" <c:if test="{searchType} == 'p'">selected</c:if>>상품번호</option>
+            <option value="p" <c:if test="{searchType} == 'p'">selected</c:if>>글번호</option>
          </select>
          <input  id="searchKeyword" value="${keyword}" class="col-sm-2 searchgroup form-control" type="text" class="form-control" style="width:200px;" placeholder="검색하기"/>
          <button id ="keywordBtn" class="btn btn-secondary" type="button">
@@ -116,7 +118,15 @@
          </button>   
       </div><br><br><br>
 		
-		<c:set var="today" value="<%= System.currentTimeMillis() %>" />
+		<%
+		//현재시간 밀리초,
+		long currentTimeMillis = System.currentTimeMillis();
+		//데이터형식 변환
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String formattedDate = dateFormat.format(new java.util.Date(currentTimeMillis));
+		%>
+		<!-- EL식 조건문을 위한 변수설정 -->
+		<c:set var="today" value="<%= formattedDate %>" />
 		
 		<!-- 경매 게시글 -->
 		<!-- 게시글이 하나도 없는 경우 -->
@@ -176,14 +186,18 @@
 						<th><fmt:formatNumber type="number" value="${article.maxPrice}" pattern="#,##0"/> 원</th>
 				</tr>
 				<tr>					 													
-					<th class="cate">마감 기한</th><th class="colon">:</th><th>${article.writeDate}<br/>
-						<c:choose><c:when test="${article.deadline.time > today && article.status == 1}">
+					<th class="cate">마감 기한</th><th class="colon">:</th>
+					<th>${article.writeDate}<br/>
+						<!-- 판매완료 또는 마감 -->
+						<c:choose><c:when test="${article.deadline < today || article.status == 1}">
 					    	~ ${article.deadline}
 						</c:when></c:choose>
-					 	<c:choose><c:when test="${article.deadline.time < today && article.status == 0}">
+						<!-- 입찰중, 오늘마감  -->
+					 	<c:choose><c:when test="${article.deadline == today && article.status == 0}">
 					 		<span class="red">~ ${article.deadline} (오늘마감)</span>
 					 	</c:when></c:choose>
-					 	<c:choose><c:when test="${article.deadline.time > today && article.status == 0}">
+					 	<!-- 입찰중, 마감 전-->
+					 	<c:choose><c:when test="${article.deadline > today && article.status == 0}">
 					 		<span class="orange">~ ${article.deadline}</span>
 					 	</c:when></c:choose>
 					</th>
