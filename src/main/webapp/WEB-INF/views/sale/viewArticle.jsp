@@ -41,7 +41,7 @@
 <%@ include file="../include/topMenu.jsp" %>
 
 
-	<c:set var="menu" value="board" />
+	<c:set var="menu" value="sale" />
 	<%@ include file="../include/sidebar.jsp" %>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
@@ -137,11 +137,11 @@
 					<ul class="item" id="trBtn">
 						<li>
 							<input type="button" class="btn btn-info" value="목록으로 돌아가기" onClick="backToList(this.form)"/>
-							<input type="button" class="btn btn-primary" value="1:1채팅" onClick="fn_reply_form('${path}/board/replyForm.do)', ${article.articleNO})"/>
+							<input type="button" class="btn btn-primary" value="1:1채팅" onClick="fn_reply_form('${path}/sale/replyForm.do)', ${article.articleNO})"/>
 							<!-- 로그인한 아이디와 게시글을 쓴 사람의 아이디가 같다면, 글쓴 본인이므로 수정/삭제가 가능하다. -->
 							<c:if test="${member.userId == article.userId}">
 								<input type="button" class="btn btn-warning" value="수정하기" onClick="fn_enable(this.form)"/>
-								<input type="button" class="btn btn-danger"  value="삭제하기" onClick="fn_remove('${path}/board/removeArticle.do', ${article.articleNO})"/>
+								<input type="button" class="btn btn-danger"  value="삭제하기" onClick="fn_remove('${path}/sale/removeArticle.do', ${article.articleNO})"/>
 								<input type="button" class="btn btn-warning" value="구매완료" id="buyEnd"/>
 							</c:if>
 						<li>
@@ -158,7 +158,7 @@
 <script>
 // 게시글 목록으로 돌아가기
 function backToList(obj) {
-	obj.action="${path}/board/listArticles.do";
+	obj.action="${path}/sale/listArticles.do";
 	obj.submit();
 }
 

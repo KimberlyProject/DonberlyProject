@@ -43,7 +43,7 @@
 		]]>
 	</select>
 	
-	<select id="saleSelectAllArticleList" resultMap="articlesResult">
+	<select id="saleSelectAllArticleList" resultMap="saleArticlesResult">
 		<![CDATA[
 		SELECT	 articleNO, userId, write_date, title, content,  thumbnail, price
 		FROM		article_sale
