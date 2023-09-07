@@ -46,7 +46,8 @@ if("${memberlevel.userStatus}" == "N1"){
                     <li><a href="/ccenter/askOnetoOne">1:1 문의하기</a></li>
                     <li><a href="/ccenter/report">신고하기</a></li>
                 </ul>
-              </li>
+              </li>              
+              <c:if test="${ member != null }">
               <li>
                 <a href="/myPage/myInfo">마이페이지</a>                
                 <ul> 
@@ -58,6 +59,7 @@ if("${memberlevel.userStatus}" == "N1"){
                     <li><a href="../myPage/marketInfo.do">장터</a></li>
                 </ul>
               </li>
+              </c:if>
               <c:if test="${ memberlevel.userStatus == 'A' }">
               <li>
                 <a href="/admin/oneOnOneInquiry">관리자</a>                
