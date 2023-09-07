@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ezen.ccenter.mappers.ccenterMapper">
+
+	 <!-- 1대1 문의글 등록 -->
+    <insert id="addNewAsk" parameterType="java.util.Map">
+		<![CDATA[
+			insert into 
+			ask	(articleNo, userId, writedate, title, content) 
+			values (#{articleNo}, #{userId}, sysdate, #{title}, #{content})
+		]]>
+	</insert>
+	
+	
+	<select id="selectNewArticleNO" resultType="int">
+		<![CDATA[
+		SELECT	NVL(MAX(articleNo), 0) + 1
+		FROM	ask
+		]]>
+	
+	</select>
+	
+</mapper>

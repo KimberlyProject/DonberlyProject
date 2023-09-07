@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.ezen.admin.dao.AdminDAO;
+import com.ezen.ccenter.dto.CcenterDTO;
 import com.ezen.member.dto.MemberDTO;
 
 @Service
@@ -81,5 +82,13 @@ public class AdminServiceImpl implements AdminService {
 		adminDAO.Psuspension(userId);
 		
 	}
+	
+	
+	@Override
+	public List<CcenterDTO> listOneOnOne() throws Exception {
+		List<CcenterDTO> listOneOnOne = adminDAO.listOneOnOne();
+		return listOneOnOne;
+	}
+	
 
 }

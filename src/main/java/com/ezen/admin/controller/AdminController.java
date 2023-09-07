@@ -5,6 +5,8 @@ package com.ezen.admin.controller;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.admin.service.AdminService;
+import com.ezen.ccenter.dto.CcenterDTO;
 //import com.ezen.member.dto.MemberDTO;
 import com.ezen.member.dto.MemberDTO;
 
@@ -118,5 +122,27 @@ public class AdminController {
 		logger.info("회원 3일정지 POST " + userId);
 		adminService.Psuspension(userId);
 		return "redirect:/admin/memberList";
+	
+	//-----------------------------------------------------------------------------------------------------------
+	// 게시글 목록
+	//-----------------------------------------------------------------------------------------------------------
+
+	@RequestMapping(value="/oneOnOneInquiry.do", method= {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView listOneOnOne(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		System.out.println("시작");
+		
+		String viewName = (String) request.getAttribute("viewName");
+	    ModelAndView   mav   = new ModelAndView(viewName);
+		
+		//화면에 출력한 데이터를 가져온다.
+		List<CcenterDTO> listOneOnOne = adminService.listOneOnOne();
+		
+		System.out.println(listOneOnOne);
+		
+		//mav에 object를 추가
+		mav.addObject("ask", listOneOnOne);
+		
+		return mav;
 	}
 }

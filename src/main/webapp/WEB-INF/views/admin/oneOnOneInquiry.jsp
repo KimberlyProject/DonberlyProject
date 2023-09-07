@@ -60,11 +60,13 @@
       홈 &gt; 관리자 &gt; 1:1 문의
     </div>
     <h1 class="pageTitle"><div>1:1 문의</div></h1>
+	
 	<div class="container">
 		<!-- 삭제버튼 -->
 		<div>
 			<button class="btn btn-danger col-sm-1" style="float:left; ">삭제하기</button>
 		</div>
+		
 		<!-- 검색창 -->
 		<div class="row" style="vertical-align: middle; float:right;">
 			<select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
@@ -79,67 +81,46 @@
 				<span class="glyphicon glyphicon-search"/>
 			</button>   
 		</div>
+      	
       	<!-- 검색창 -->
 		<table class="table table-bordered table-striped table-hover">
 			<thead>
 				<tr class="head" style="background: rgb(73, 124, 64); color: #FFF;">
 					<th><span class="glyphicon glyphicon-ok"></span></th>
-					<th>No</th>
-					<th>Title</th>
-					<th>Id</th>
-					<th>Date</th>
+					<th>NO</th>
+					<th>TITLE</th>
+					<th>USER ID</th>
+					<th>DATE</th>
 				</tr>
 			</thead>
 			<tbody>
+			<c:forEach var="ask" items="${ask}" varStatus="articleNum">
 				<tr>
 					<td><input type="checkbox" style="width: 100%;"/></td>
-					<td>1</td>
-					<td class="title">제목자리입니다.</td>
-					<td>gildong</td>
-					<td>2023.08.23</td>
-				</tr>
-				<tr>
-					<td class="content" colspan="5">
-						1대1 문의사항 입니다. <br/>
-						답변주세요
-						<div>
-							<button id ="searchbtn" class="btn btn-success col-sm-1" type="button">답변하기</button>
-						</div>
+					<td>
+						${ask.articleNo}
 					</td>
-					
-				</tr>
-				<tr>
-					<td><input type="checkbox" style="width: 100%;"/></td>
-					<td>2</td>
-					<td class="title">제목자리입니다.</td>
-					<td>gildong</td>
-					<td>2023.08.23</td>
+					<td>
+						${ask.title}
+					</td>
+					<td>
+						${ask.userId}
+					</td>
+					<td>
+						<fmt:formatDate value="${ask.writeDate}" pattern="yyyy년 MM월 dd일"/><br/>
+					</td>
 				</tr>
 				<tr>
 					<td class="content" colspan="5">
-						1대1 문의사항 입니다. <br/>
-						답변주세요
+						${ask.content}
+						<br/>
+						<br/>
 						<div>
 							<button id ="searchbtn" class="btn btn-success col-sm-1" type="button">답변하기</button>
 						</div>
 					</td>
 				</tr>
-				<tr>
-					<td><input type="checkbox" style="width: 100%;"/></td>
-					<td>3</td>
-					<td class="title">제목자리입니다.</td>
-					<td><a href="javascript:void(0);" onclick="openModal({nickname: '${list.nickname}', email: '${member[0].email}'})">${list.nickname}</a></td>
-					<td>2023.08.23</td>
-				</tr>
-				<tr>
-					<td class="content" colspan="5">
-						1대1 문의사항 입니다. <br/>
-						답변주세요
-						<div>
-							<button id ="searchbtn" class="btn btn-success col-sm-1" type="button">답변하기</button>
-						</div>
-					</td>
-				</tr>
+			</c:forEach>
 			</tbody>
 		</table>
 	</div>
