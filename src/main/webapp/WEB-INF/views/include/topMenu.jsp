@@ -31,8 +31,8 @@ if("${memberlevel.userStatus}" == "N1"){
               <li class="active">
                 <a href="/sale/listArticles.do">장터 <span class="sr-only">(current)</span></a>
                 <ul>
-                    <li><a href="/sale/listArticles.do">삽니다</a></li>
-                    <li><a href="/board/listArticles.do">팝니다</a></li>                   
+                    <li><a href="/sale/listArticles.do">팝니다</a></li>
+                    <li><a href="/board/listArticles.do">삽니다</a></li>                   
                 </ul>
               </li>
               <li>

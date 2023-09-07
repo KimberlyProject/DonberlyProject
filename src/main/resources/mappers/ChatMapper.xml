@@ -99,16 +99,16 @@
 	<select id="findArticleVOFromArtNoB" parameterType="int" resultType="articleVO">
 		<![CDATA[
 			SELECT	*
-			FROM	article_buy
+			FROM	article_sale
 			WHERE	articleNO = #{artNo}
 		]]>
 	</select>
 	
-	<!-- artNo으로 articleVO끌어오기 (sale) -->
+	<!-- artNo으로 articleVO끌어오기 (sale) 누군가가 반대로 해놔서 반대로 해야함-->
 	<select id="findArticleVOFromArtNoS" parameterType="int" resultType="articleVO">
 		<![CDATA[
 			SELECT	*
-			FROM	article_sale
+			FROM	article_buy
 			WHERE	articleNO = #{artNo}
 		]]>
 	</select>

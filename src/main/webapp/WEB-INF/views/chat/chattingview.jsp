@@ -261,8 +261,8 @@ div.chat.ch2{
 				<td class="chat_detail" rowspan="2">
 					
 					<div>제목 : ${session.title }</div>
-					<div>판매자: ${session.userId}</div>
-					<div>구매자: ${member.nickname }</div>
+					<div>판매자: ${chatList.seller}</div>
+					<div>구매자: ${chatList.buyer }</div>
 					<div>코드 : ${session.p_code }</div>
 					<div style="padding-bottom: 10px;">${a.price}</div>
 					
@@ -299,44 +299,7 @@ div.chat.ch2{
 <script>
 </script>
 <script>
-function lastDateAjax(){
-    $.ajax({
-        method: "POST",
-        url: "/lastDate.do",
-        cache: false,
-        async: false,
-        success: function(data){
-            if(lastDateTime < data) {
-                readAjax(lastDateTime);
-                lastDateTime = data;
-            } else {
-                lastDateTime = data;
-            }
-        }
-    });
-}
-function readAjax(compareTime){
-    $.ajax({
-        method: "POST",
-        url: "/chat/chattingview",
-        dataType: "json",
-        cache: false,
-        async: false,
-        data: {
-            "lastDate": compareTime
-        },
-        success: function(data) {
-            if(data.length == 0) {
-                return;
-            } else {
-                $.each(data, function(index, entry){
-                    // ..채팅창 div에 알맞게 글을 뿌려준다..
-                    $("#board").scrollTop($("#board")[0].scrollHeight); // 스크롤바 항상 맨 밑으로 유지
-                });
-            } 
-        }
-    });
-}
+
 
 function getChat(){
 	 $.ajax({
@@ -413,7 +376,6 @@ $(document).ready(function(){
 				 },
 				 error:function(request,status,error){
 					 console.log("실패");
-					 
 				 },
 				 complete:function(){
 					 $('#chatContent').val('');

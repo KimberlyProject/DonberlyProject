@@ -57,6 +57,7 @@ public class ChatController {
 		ArticleVO articleVO = chatService.findArticleVOFromArtNo(artNo,chatListDTO.getStatus());
 		
 		session.setAttribute("session",articleVO);
+		session.setAttribute("chatList", chatListDTO);
 		
 		System.out.println("채팅 입장");
 		return "/chat/chattingview";
@@ -130,84 +131,6 @@ public class ChatController {
 		
 	}
 	
-	
-	
-	//채팅 저장하기
-	/*@RequestMapping(value="/sendChat", method=RequestMethod.POST)
-	public String sendChat(@RequestParam(value="content", required=false) String content,@RequestParam(value="fromId", required=false) String fromId,@RequestParam(value="articleNo", required=false) String articleNo, Model model,HttpServletRequest request, HttpServletResponse response  ) throws Exception{
-		//채팅방 만들기
-				HttpSession session = request.getSession();
-				session.removeAttribute("session");	
-		
-				System.out.println("#################여기로 와");
-				ChatListDTO chatListDTO = new ChatListDTO();
-				
-				String status = articleNo.substring(0,1);
-				int artNo;
-				artNo = Integer.parseInt(articleNo.substring(1));
-				chatListDTO.setArtNo(artNo); //게시글 번호  
-				//chatListDTO.setChatId(artNo); //채팅방 번호 (하나씩 늘어야해요)
-				List<ArticleVO> a = getArtDTO(artNo);  //articleNo로 articleDTO가져오기 메서드 이름 getArtDTO
-				//model.addAttribute("chat", chatListDTO);
-				//model.addAttribute("articleD", a);
-				
-				
-				if(status.equals("s")) {
-					//판매게시판에서 채팅하는거니까 상대가 판매자 내가 구매자
-					logger.info("안녕하세요 여긴 구매자 들어왓어요");
-					chatListDTO.setBuyer(fromId); //구매자인 나
-					chatListDTO.setSeller(a.get(0).getUserId()); //판매자
-					chatListDTO.setStatus("s");
-				}
-				else if(status.equals("b")) {
-					//구매게시판에서 채팅하는거니까 상대가 구매자 내가 판매자
-					chatListDTO.setSeller(fromId); //구매자인 나
-					chatListDTO.setBuyer(a.get(0).getUserId()); //판매자
-					chatListDTO.setStatus("b");
-				}
-				int chatId = chatService.insertChatList(chatListDTO);//채팅방 번호 내놓기
-				//채팅방 만들기 끝
-				System.out.println("##########################채팅 아이디"+chatId);
-
-				
-				
-				ChatDTO chatDTO = new ChatDTO();
-				chatDTO.setChatContent(content); //채팅말 넣기
-				chatDTO.setFromId(fromId);  //보내는사람 id 넣기
-				chatDTO.setArtNo(artNo);	//채팅하게된 게시글 번호 넣기
-				chatDTO.setChatId(chatId);
-				
-				//List<ArticleVO> a = getArtDTO(artNo);  //articleNo로 articleDTO가져오기 메서드 이름 getArtDTO
-				chatDTO.setToId(a.get(0).getUserId());	//DTO에 toId 넣어주기
-				
-				System.out.println(articleNo);
-				System.out.println("채팅 정보 넣기");
-				System.out.println(chatDTO.getChatContent());
-				chatService.insertContent(chatDTO);  //db에 채팅DTO 넣기
-				
-				
-				//지금까지 채팅한거 model로 옮기기
-				//지금까지 채팅한 목록 가져오기
-				//그 넘버에 맞는 ChatDTO 가져오기
-				
-				List<ChatDTO> chatView = chatService.chatView(chatId); //chatList 옮김
-				session.setAttribute("session", chatView);
-				
-				//ArrayList<ChatDTO> chatView = (ArrayList<ChatDTO>) chatVieww;
-				
-				
-				
-				ModelAndView mav = new ModelAndView();
-				mav.addObject("artData",a);//넘겨줄 이름, 데이터
-				mav.addObject("chatView",chatView);
-				
-				
-				model.addAttribute("chatView", chatView);
-				System.out.println("이것이 모델이다."+model);
-				
-				return "/chat/chattingview";
-	
-	}*/
 	
 	//방 만들기 makeRoom
 	@ResponseBody
