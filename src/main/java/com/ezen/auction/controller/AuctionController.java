@@ -54,27 +54,33 @@ public class AuctionController {
 	//-------------------------------------------------------------------------------------------------------------//
 	
 	//게시글 페이징, 검색조건
-	@RequestMapping(value="auctionPaging", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="auction_main.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView auctionPaing(HttpServletRequest req, HttpServletResponse res, SearchCriteria cri)
 			throws Exception {
 		
-		System.out.println("paging Controller");
+		System.out.println("페이징 검색조건 Controller");
 		
-		String viewName = "/auction/auction_main"; //찾아지는데, 이미지가 안옴
+		String viewName = (String)req.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-
+		
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(auctionService.auctionTotalCount(cri));
-		List<AuctionDTO> list = auctionService.auctionPaging(cri);
-	
-		mav.addObject("articles", list);
+			
+		List<AuctionDTO> articles = auctionService.auctionPaging(cri);
+
+		for (AuctionDTO auctionDTO : articles) {
+		    int aucCode = auctionDTO.getAucCode();
+		    List<AucImgDTO> imgs = auctionService.auctionPagingImg(aucCode);
+		    mav.addObject("imgs", imgs);
+		}
+		mav.addObject("articles", articles);
 		mav.addObject("pageMaker", pageMaker);
 		mav.addObject("cri", cri);
 
 		return mav;
 	}
-	
+		
 	//-------------------------------------------------------------------------------------------------------------//
 
 	//저장된 이미지 모두 가져오기 컨트롤러

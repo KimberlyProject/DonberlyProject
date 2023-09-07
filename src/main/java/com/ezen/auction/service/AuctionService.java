@@ -90,5 +90,8 @@ public class AuctionService {
 	public List<AuctionDTO> auctionPaging(SearchCriteria cri) throws Exception {
 		return auctionDAO.auctionPaging(cri);
 	}
-	
+	//이미지 목록 가져오기(paging)
+	public List<AucImgDTO> auctionPagingImg(int aucCode) throws Exception {
+		return auctionDAO.auctionPagingImg(aucCode);
+	}
 }

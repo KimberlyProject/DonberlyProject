@@ -37,6 +37,10 @@ if("${memberlevel.userStatus}" == "N1"){
               </li>
               <li>
                 <a href="/auction/auction_main">경매장</a>
+                <ul>
+                	<li><a href="/auction/howtouse">경매장 이용방법</a></li>
+                    <li><a href="/auction/auction_write">경매상품 올리기</a></li>
+              	</ul>
               </li>                  
               <li>
                 <a href="/ccenter/notice">고객센터</a>                

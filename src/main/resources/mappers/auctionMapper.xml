@@ -177,8 +177,6 @@
 	</select>
 	
 	<!-- 게시글 목록 가져오기(paging) -->
-	<!-- rowNum을 가장 안 쪽에 사용하면 Mapper에서 인식을 못하기 때문에 바깥쪽에 사용하였다. -->
-	<!-- rowNum, level이름으로 인해서 resultMap articlesResult로 사용한다. -->
 	<select id="auctionPaging" parameterType="com.ezen.auction.dto.SearchCriteria" resultMap="aucArticle">
 		<![CDATA[
 	        SELECT *
@@ -190,4 +188,14 @@
 	        OFFSET #{perPageNum} * (#{page} - 1) ROWS FETCH NEXT #{perPageNum} ROWS ONLY
 	    ]]>
 	</select>
+	
+	<!-- 이미지 목록 가져오기(paging) -->
+	<select id="auctionPagingImg" parameterType="int" resultMap="aucImage">
+		<![CDATA[
+			SELECT *
+			FROM aucImg
+			WHERE aucCode = #{aucCode}
+		]]>
+ 	</select>
+	
 </mapper>

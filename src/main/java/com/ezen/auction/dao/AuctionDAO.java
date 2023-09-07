@@ -129,5 +129,10 @@ public class AuctionDAO {
 		System.out.println("게시글 목록 dao");
 		return sqlSession.selectList(namespace + ".auctionPaging", cri);
 	}
+	//이미지 목록 가져오기(paging)
+	public List<AucImgDTO> auctionPagingImg(int aucCode) throws DataAccessException {
+		System.out.println("이미지 목록 dao");
+		return sqlSession.selectList(namespace + ".auctionPagingImg", aucCode);
+	}
 	
 }//class
