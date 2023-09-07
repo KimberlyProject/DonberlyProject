@@ -84,7 +84,7 @@
       상품등록
     </div> 
     <h1 class="pageTitle">
-    	<div>장터</div>
+    	<div>구매장터</div>
     </h1>
 
 
