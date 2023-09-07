@@ -59,7 +59,7 @@
 	<!-- 메인페이지 게시글 Query -->
     <select id="pullArticleInfo" resultMap="aucArticle">
 		<![CDATA[
-			SELECT   AUCCODE, MINPRICE, MAXPRICE, WRITEDATE, TITLE, CONTENT, NOWBID, BIDRATE, AUCID, STATUS, DEADLINE, CSTMID
+			SELECT  *
 			FROM   AUCTION
 		]]>
     </select>
@@ -74,32 +74,11 @@
 	<!-- 메인페이지 image Query -->
     <select id="pullArticleImg" resultMap="aucImage">
 		<![CDATA[
-			SELECT IMGNO, IMGNAME, AUCCODE
+			SELECT *
 			FROM AUCIMG
 		]]>
     </select>
  
-    
-    <!-- 가장 작은 번호 구하기 Query
-    <select id ="selectMinImgNo" resultType="int">
- 		<![CDATA[
- 			SELECT NVL(MIN(imgNo), 0) 
- 			FROM AUCIMG
- 		]]>
- 	</select>
- 	-->
- 
- 	<!-- 메인페이지 image Query
-	  <select id="pullArticleImg"  parameterType="int" resultMap="aucImage">
-		<![CDATA[
-			SELECT IMGNO, IMGNAME, AUCCODE
-			FROM AUCIMG
-			WHERE imgNO = #{minImgNo}
-		]]>
-    </select>
-     -->
-    
-
    <!-- 디테일페이지 게시글 Query -->
    <select id="pullArticleInfoDetail" parameterType="int" resultType="auctionDTO">
    		<![CDATA[
@@ -160,7 +139,6 @@
 	<!-- 게시글 검색 조건 -->
 	<sql id="search">
 		<if test="searchType != null"> <!-- 값이 있는 경우에만 -->
-			<if test="searchType == 'a'.toString()"><!-- 전체검색 --></if>
 			<if test="searchType == 't'.toString()">AND title LIKE '%' || #{keyword} || '%'</if>
 			<if test="searchType == 'c'.toString()">AND content LIKE '%' || #{keyword} || '%'</if>
 			<if test="searchType == 'w'.toString()">AND aucID LIKE '%' || #{keyword} || '%'</if>
@@ -178,8 +156,6 @@
 	</select>
 	
 	<!-- 게시글 목록 가져오기(paging) -->
-	<!-- rowNum을 가장 안 쪽에 사용하면 Mapper에서 인식을 못하기 때문에 바깥쪽에 사용하였다. -->
-	<!-- rowNum, level이름으로 인해서 resultMap articlesResult로 사용한다. -->
 	<select id="auctionPaging" parameterType="com.ezen.auction.dto.SearchCriteria" resultMap="aucArticle">
 		<![CDATA[
 	        SELECT *
@@ -191,4 +167,32 @@
 	        OFFSET #{perPageNum} * (#{page} - 1) ROWS FETCH NEXT #{perPageNum} ROWS ONLY
 	    ]]>
 	</select>
+	
+	<!-- 이미지 목록 가져오기(paging) -->
+	<select id="auctionPagingImg" parameterType="int" resultMap="aucImage">
+		<![CDATA[
+			SELECT *
+			FROM aucImg
+			WHERE aucCode = #{aucCode}
+		]]>
+ 	</select>
+ 	
+ 	<!-- 마이페이지 게시글 Query -->
+    <select id="myPageArticles" parameterType="String" resultMap="aucArticle">
+		<![CDATA[
+			SELECT  *
+			FROM   AUCTION
+			WHERE aucId = #{aucId}
+		]]>
+    </select>
+    
+    <!-- 마이페이지 image Query -->
+    <select id="myPageImgs" parameterType="int" resultMap="aucImage">
+		<![CDATA[
+			SELECT *
+			FROM AUCIMG
+			WHERE aucCode = #{aucCode}
+		]]>
+    </select>
+	
 </mapper>
