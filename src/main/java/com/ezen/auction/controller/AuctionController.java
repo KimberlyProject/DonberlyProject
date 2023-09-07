@@ -34,6 +34,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.auction.dto.AucImgDTO;
 import com.ezen.auction.dto.AuctionDTO;
+import com.ezen.auction.dto.PageMaker;
+import com.ezen.auction.dto.SearchCriteria;
 import com.ezen.auction.service.AuctionService;
 import com.ezen.member.dto.MemberDTO;
 
@@ -49,6 +51,30 @@ public class AuctionController {
 	@Inject
 	private AuctionService auctionService;
 
+	//-------------------------------------------------------------------------------------------------------------//
+	
+	//게시글 페이징, 검색조건
+	@RequestMapping(value="auctionPaging", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView auctionPaing(HttpServletRequest req, HttpServletResponse res, SearchCriteria cri)
+			throws Exception {
+		
+		System.out.println("paging Controller");
+		
+		String viewName = "/auction/auction_main"; //찾아지는데, 이미지가 안옴
+		ModelAndView mav = new ModelAndView(viewName);
+
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCri(cri);
+		pageMaker.setTotalCount(auctionService.auctionTotalCount(cri));
+		List<AuctionDTO> list = auctionService.auctionPaging(cri);
+	
+		mav.addObject("articles", list);
+		mav.addObject("pageMaker", pageMaker);
+		mav.addObject("cri", cri);
+
+		return mav;
+	}
+	
 	//-------------------------------------------------------------------------------------------------------------//
 
 	//저장된 이미지 모두 가져오기 컨트롤러

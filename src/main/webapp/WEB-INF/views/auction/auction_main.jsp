@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page session="true" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,6 +49,18 @@
         }
         table-spacing {
         	margin-bottom: 20px;
+        }
+        .red {
+        	color: red;
+        }
+        .blue {
+        	color: blue;
+        }
+        .orange {
+        	color: orange;
+        }
+        .gray {
+        	color: gray;
         }
       
      
@@ -103,24 +116,26 @@
          </button>   
       </div><br><br><br>
 		
+		<c:set var="today" value="<%= System.currentTimeMillis() %>" />
+		
 		<!-- 경매 게시글 -->
 		<!-- 게시글이 하나도 없는 경우 -->
 		<c:choose>
-		<c:when test="${articles == null}">
+		<c:when test="${empty articles}">
 			<div>
-				<div colspan="4">
+				<div>
 					<p align="center">
 						<b><span style="font-size:22px;">등록된 게시글이 없습니다.</span></b>
-						</p>
+					</p>
 				</div>
 			</div>
 		</c:when>
 		</c:choose>
+		
 		<!-- 게시글이 있는 경우 -->
 		<c:choose>
 		<c:when test="${articles != null}">
 			<!-- 경매게시글 -->
-			<div>
 			<table class="table table-bordered table-striped" id="ta">
 				<c:forEach var="article" items="${articles}" varStatus="articleNum">
 			    <tr>
@@ -138,7 +153,16 @@
 						<br/>
 						<form action="${path}auction_detail" method="get">
 							<input type="hidden" name="aucCode" value="${article.aucCode}"/>
-							<button id="searchBtn" class="btn btn-warning" type="submit">자세히 보기</button>
+							<c:choose>
+							<c:when test="${article.status == 0 }">
+								<button  class="btn btn-warning" type="submit">자세히 보기</button>
+							</c:when>
+							</c:choose>
+							<c:choose>
+							<c:when test="${article.status == 1 }">
+								<button class="btn detailBtn" type="submit">자세히 보기</button>
+							</c:when>
+							</c:choose>
 						</form>
 					</th>
 				</tr>
@@ -146,35 +170,43 @@
 					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">${article.aucId}</th>
 				</tr>
 				<tr>
-					<th class="cate">현재 가격</th><th class="colon">:</th><th>${article.minPrice}</th><th class="cate">상한가</th><th class="colon">:</th><th>${article.maxPrice}</th>
+					<th class="cate">현재 입찰가</th><th class="colon">:</th>
+						<th><fmt:formatNumber type="number" value="${article.nowBid}" pattern="#,##0"/> 원</th>
+					<th class="cate">상한가</th><th class="colon">:</th>
+						<th><fmt:formatNumber type="number" value="${article.maxPrice}" pattern="#,##0"/> 원</th>
 				</tr>
-				<tr>
-					<th class="cate">마감 기한</th><th class="colon">:</th><th>${article.writeDate} <br/> - ${article.deadline}</th>
+				<tr>					 													
+					<th class="cate">마감 기한</th><th class="colon">:</th><th>${article.writeDate}<br/>
+						<c:choose><c:when test="${article.deadline.time > today && article.status == 1}">
+					    	~ ${article.deadline}
+						</c:when></c:choose>
+					 	<c:choose><c:when test="${article.deadline.time < today && article.status == 0}">
+					 		<span class="red">~ ${article.deadline} (오늘마감)</span>
+					 	</c:when></c:choose>
+					 	<c:choose><c:when test="${article.deadline.time > today && article.status == 0}">
+					 		<span class="orange">~ ${article.deadline}</span>
+					 	</c:when></c:choose>
+					</th>
 					<th class="cate">진행상태</th><th class="colon">:</th>
-						<c:choose>
-						<c:when test="${article.status == 1}">
-							<th colspan="4">경매종료</th>
-						</c:when>	
-						</c:choose>
-						<c:choose>
-						<c:when test="${article.status == 0 || article.status == null}">
-							<th clospan="4">입찰 진행중</th>
-						</c:when>
-						</c:choose>
+						<!-- 입찰 진행중 blue -->
+						<c:choose><c:when test="${article.status == 0}"> 
+							<th clospan="4"><span class="blue">입찰 진행중</span>
+								<c:choose><c:when test="${article.cstmId != null}">
+									&nbsp;&nbsp;&nbsp;[${article.cstmId}]님
+								</c:when></c:choose>
+							</th>
+						</c:when></c:choose>
+						<!-- 판매 완료 orange-->
+						<c:choose><c:when test="${article.status == 1}">
+							<th colspan="4"><span id="gray"><span class="gray">판매완료</span>&nbsp;&nbsp;&nbsp;[${article.cstmId}]님</span></th>
+						</c:when></c:choose>	
 				</tr>
-				
 				</c:forEach>
 			</table><br/><br/><!--  경매 게시글 -->
-			<div>
 		</c:when>
 		</c:choose>
-		
-		
-		
-		
-		
 	
-		<table align="center">
+		<table>
 			<tr> <!-- 페이징 -->
  				<td>
 					<div class="col-sm-offset-3"><!-- 숫자 버튼 -->
@@ -231,7 +263,15 @@
 			form.submit();
 		});
 	});
-
+	
+	//경매끝난 게시글 버튼비활성화
+	$(document).ready(function() {
+	  var detailBtn = $(".detailBtn");
+	  detailBtn.css("background-color", "gray");
+	  detailBtn.css("color", "white");
+	  detailBtn.prop("disabled", true);
+	});
+	
 </script>
 
 </body>

@@ -41,30 +41,13 @@
 <%@ include file="../include/topMenu.jsp" %>
 
 
-			 <aside id="sideMenu">
-    	<h2>장터</h2>
-    		<ul class="item">
-        		<li><a href="#">장터</a></li>
-        		<li>
-          			<a href="#">팝니다</a>
-		          		<ul class="item">
-		            		<li><a href="#">목록</a></li>
-		            
-		          		</ul>
-        		</li>
-        		<li><a href="#">삽니다</a>          
-          			<ul class="item">
-            			<li><a href="#">목록</a></li> 
-          			</ul>
-        		</li>
-      		</ul>
-      	<button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
+	<c:set var="menu" value="board" />
+	<%@ include file="../include/sidebar.jsp" %>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <a href="/">홈</a> &gt;
-      <a href="#">마이페이지</a> &gt;
-      <a href="./">장터</a>
+      홈 &gt;
+      장터 &gt;
+      상세페이지
     </div> 
     <h1 class="pageTitle">
     	<div>장터</div>
@@ -110,7 +93,8 @@
 				<div class="grid-second">
 					<input type="hidden" value="${article.articleNO }" name="articleNO"/>
 					<input type="hidden" value="${article.p_code }" name="p_code"/>
-					<input type="hidden"   value="${member.nickname }" name="writer" disabled/>
+					<input type="hidden"   value="${member.nickname }" name="writer"/>
+					<input type="hidden" value="${article.purpose }" name="purpose"/>
 					
 					<ul class="item">
 						
@@ -156,13 +140,22 @@
 							<input type="hidden" class="seller" name="seller" value="${article.userId}"/>
 							<input type="hidden" class="buyer" name="buyer" value="${member.userId}"/>
 
-							<input type="hidden" class="article" name="article" value="${article.articleNO}"/>
+							<input type="hidden" class="article" name="article" value="${article.articleNO}"/>	
+							<c:choose>
+								<c:when test="${member.userId == article.userId}">
+									<input type="button" class="btn btn-primary" id="chat" value="1:1채팅" 
+										style="display:none" onClick="fn_reply_form('${path}/board/replyForm.do)', ${article.articleNO})"/>
+								</c:when>
+								<c:otherwise>
+									<input type="button" class="btn btn-primary" id="chat" value="1:1채팅" onClick="fn_chat(${article.articleNO})"/>
+								</c:otherwise>
+							</c:choose>
 
-							<input type="button" class="btn btn-primary chatting" value="1:1채팅" onClick="fn_chat(${article.articleNO})"/>
 							<!-- 로그인한 아이디와 게시글을 쓴 사람의 아이디가 같다면, 글쓴 본인이므로 수정/삭제가 가능하다. -->
 							<c:if test="${member.userId == article.userId}">
 								<input type="button" class="btn btn-warning" value="수정하기" onClick="fn_enable(this.form)"/>
 								<input type="button" class="btn btn-danger"  value="삭제하기" onClick="fn_remove('${path}/board/removeArticle.do', ${article.articleNO})"/>
+								<input type="button" class="btn btn-warning" value="구매완료" id="buyEnd"/>
 							</c:if>
 						<li>
 					</ul>
@@ -264,6 +257,16 @@ function fn_chat(artNo){
 	//window.open("${path}/chat/chattingview?articleNo=s"+articleNO, "_blank", "width=940, height=750");
 }
 
+
+$("#buyEnd").on("click", function() {
+	var articleNO = ${article.articleNO};
+	var userId = "${member.userId}";
+	if(confirm("해당 상품을 구매 완료하시겠습니까?")) {
+	
+	location.href = "/borad/buyEnd?articleNO=" + articleNO + "&userId=" + userId;
+	alert("구매가 완료되었습니다.");
+	}
+});//#buyNow
 
 </script>
 

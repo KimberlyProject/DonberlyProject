@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.io.PrintWriter" %>
 <%@ page session="true" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -178,7 +179,7 @@
 				<th colspan="4">${article.aucId}님
 					<c:choose>
 					<c:when test="${member.userId != article.aucId}">
-						<input id="tryBid" type="button" class="btn btn-primary buyBtn" style="color:#FFFFFF;" value="채팅하기">
+						<input id="chat" type="button" class="btn btn-primary buyBtn" style="color:#FFFFFF;" value="채팅하기">
 					</c:when>
 					</c:choose>
 				</th>
@@ -186,7 +187,7 @@
 			<tr><!-- 현재입찰가 -->
 				<th class="cate">현재입찰가 &nbsp; [${article.cstmId}]님</th>
 				<th class="colon">:</th>
-				<th colspan="4"><span id="aaa"/>${article.nowBid}원
+				<th colspan="4"><span id="aaa"/><fmt:formatNumber type="number" value="${article.nowBid}" pattern="#,##0"/> 원
 					<c:choose>
 					<c:when test="${member.userId != article.aucId}">
 						<input id="tryBid" type="button" class="btn btn-success buyBtn" style="color:#FFFFFF;" value="입찰하기">  														
@@ -202,12 +203,12 @@
 			<tr><!-- 입찰단위 -->
 				<th class="cate">입찰단위</th>
 				<th class="colon">:</th>
-				<th colspan="4">${article.bidRate}원</th>
+				<th colspan="4"><fmt:formatNumber type="number" value="${article.bidRate}" pattern="#,##0"/> 원
 			</tr>
 			<tr><!-- 상한금액 -->
 				<th class="cate">상한금액</th>
 				<th class="colon">:</th>
-				<th colspan="4"><span id="bbb"/>${article.maxPrice}원
+				<th colspan="4"><span id="bbb"/><fmt:formatNumber type="number" value="${article.maxPrice}" pattern="#,##0"/> 원
 					<c:choose>
 					<c:when test="${member.userId != article.aucId}">
 						<input id="buyNow" type="button" class="btn btn-warning buyBtn" style="color:#FFFFFF;" value="바로구매">
@@ -260,16 +261,19 @@ $(document).ready(function () {
 		//판매자 현재입찰가로 바로 판매
 		$("#saleNow").on("click", function() {
 		    var aucCode = ${article.aucCode};
-		    var cstmId = "${articlesList.cstmId}";
+		    var cstmId = "${article.cstmId}";
 		    var price = ${article.nowBid + article.bidRate};
-		    if(confirm(cstmId + "님에게 " + price + "원에 판매하시겠습니까? 거래가 완료되면 취소할 수 없습니다.")) {
+		    
+		    if(cstmId == null) {
+		    	laert("아직 입찰되지 않았습니다. 조금만 더 기다려주세요.")
+		    	return;
+		    } else if(confirm(cstmId + "님에게 " + price + "원에 판매하시겠습니까? 거래가 완료되면 취소할 수 없습니다.")) {
 		        location.href = "/auction/saleNow?aucCode=" + aucCode + "&cstmId=" + cstmId;
 		        alert("판매가 완료되었습니다.");
 		    } else {
 		        return;
 		    }
 		});//#saleNow
-		
 		
 		//구매자 입찰하기
 		$("#tryBid").on("click", function() {

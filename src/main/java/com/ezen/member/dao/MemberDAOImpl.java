@@ -27,6 +27,12 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne(namespace + ".login", memberDTO);
 	}//경은 logOn()
 
+	@Override
+	public MemberDTO memberLevel(String userId) throws Exception {
+		logger.info("MemberDAOImpl 회원등급 조회");		
+		return sqlSession.selectOne(namespace + ".memberLevel", userId);
+	}
+	
 	// 회원 아이디 중복 검사
 	@Override
 	public int idCheck(MemberDTO memberDTO) throws Exception {

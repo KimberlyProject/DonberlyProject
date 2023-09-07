@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.ezen.board.dao.BoardDAOImpl;
 import com.ezen.board.dto.ArticleVO;
 import com.ezen.chat.controller.ChatController;
 import com.ezen.chat.dao.ChatDAO;

@@ -67,6 +67,14 @@
 			location.href = "/member/login?action=" + location.pathname;
 		</script>
 	</c:if> 
+	
+    <c:if test="${ memberlevel.userStatus != 'A' }">
+		<script>
+			alert("권한이 없습니다.");
+			location.href = "/";
+		</script>
+	</c:if>
+	
 	<aside id="sideMenu">
 	  <h2>관리자 페이지</h2>
 	  <ul>

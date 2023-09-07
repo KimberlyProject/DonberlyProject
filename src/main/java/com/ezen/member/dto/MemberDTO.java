@@ -15,7 +15,8 @@ public class MemberDTO {
 	private String email;
 	private String address;
 	private String zipCode;
-	
+	private String userStatus;
+	private Date downTime;
 	
 	
 	public String getUserId() {
@@ -78,14 +79,26 @@ public class MemberDTO {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
+	public String getUserStatus() {
+		return userStatus;
+	}
+	public void setUserStatus(String userStatus) {
+		this.userStatus = userStatus;
+	}
+	public Date getDownTime() {
+		return downTime;
+	}
+	public void setDownTime(Date downTime) {
+		this.downTime = downTime;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "MemberDTO [userId=" + userId + ", pw=" + pw + ", repw=" + repw + ", name=" + name + ", nickname="
 				+ nickname + ", regDate=" + regDate + ", tel=" + tel + ", email=" + email + ", address=" + address
-				+ ", zipCode=" + zipCode + "]";
+				+ ", zipCode=" + zipCode + ", userStatus=" + userStatus + ", downTime=" + downTime + "]";
 	}
-	
-	
 	
 	
 }
