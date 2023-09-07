@@ -8,18 +8,18 @@
     <insert id="addNewAsk" parameterType="java.util.Map">
 		<![CDATA[
 			insert into 
-			ask	(articleNo, userid, writedate, title, content) 
+			ask	(articleNo, userId, writedate, title, content) 
 			values (#{articleNo}, #{userId}, sysdate, #{title}, #{content})
 		]]>
 	</insert>
 	
 	
-		<select id="selectNewArticleNO" resultType="int">
-			<![CDATA[
-			SELECT	NVL(MAX(articleNO), 0) + 1
-			FROM	ask
-			]]>
-		
-		</select>
+	<select id="selectNewArticleNO" resultType="int">
+		<![CDATA[
+		SELECT	NVL(MAX(articleNo), 0) + 1
+		FROM	ask
+		]]>
+	
+	</select>
 	
 </mapper>

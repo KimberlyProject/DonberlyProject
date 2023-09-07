@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.ezen.ccenter.dto.CcenterDTO;
 import com.ezen.member.dto.MemberDTO;
 
 @Repository
@@ -19,7 +20,7 @@ public class AdminDAOImpl implements AdminDAO {
 	@Inject
 	private SqlSession sqlSession;
 	
-	private static final String namespace = "com.ezen.member.mepper.adminMapper";
+	private static final String namespace = "com.ezen.admin.mapper.adminMapper";
 	
 	//--------------------------------------------------------------------------------------------------
 	// public List<MemberDTO> selectMember() throws Exception : 회원 전체 목록
@@ -58,6 +59,15 @@ public class AdminDAOImpl implements AdminDAO {
 		logger.info("회원정보삭제 DAO ==> " + memberDTO);
 		sqlSession.delete(namespace + ".delete", memberDTO);
 		
+	}
+	
+
+	@Override
+	public List<CcenterDTO> listOneOnOne() throws Exception {
+		List<CcenterDTO> listOneOnOne = sqlSession.selectList(namespace + ".listOneOnOne");
+		
+		System.out.println("1:1문의 정보: " + listOneOnOne);
+		return listOneOnOne;
 	}
 	
 }

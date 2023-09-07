@@ -21,15 +21,18 @@ public class CcenterDAO {
 		return sqlSession.selectOne(namespace + ".selectNewArticleNO");
 	}
 	
-	public int addNewAsk(Map articleMap) throws DataAccessException {
+	public int addNewAsk(Map<String, Object> articleMap) throws DataAccessException {
 
-		int articleNO	= selectNewArticleNO();	// 새로 입력할 게시글의 번호를 가져온다.
-		System.out.println("새로운 게시글 번호 추출하기 : " + articleNO);
-		articleMap.put("articleNO", articleNO);
+		int articleNo	= selectNewArticleNO();	// 새로 입력할 게시글의 번호를 가져온다.
+		System.out.println("새로운 게시글 번호 추출하기 : " + articleNo);
 		
-		sqlSession.insert(namespace + ".addNewAsk", articleMap);
+		articleMap.put("articleNo", articleNo);
 		
-		return articleNO;
+		System.out.println("정보들" + articleMap);
+		
+		sqlSession.insert(namespace + ".addNewAsk", articleMap); //article>> 보내는 데이터 타입
+		
+		return articleNo;
 	}
 			
 }

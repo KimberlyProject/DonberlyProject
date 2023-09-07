@@ -4,16 +4,22 @@ import java.sql.Date;
 
 public class CcenterDTO {
 
-	/* 게시글 번호 */
+	// 게시글 번호 
 	private int articleNo;
-	/* 유자 id */
+	
+	// 유저 id 
 	private String userId;
-	/* 작성 일자 */
+	
+	// 작성 일자 
 	private Date writeDate;
-	/* 게시글 제목 */
+	
+	// 게시글 제목
 	private String title;
-	/* 게시글 내용 */
+	
+	// 게시글 내용
 	private String content;
+	
+	
 	
 	public int getArticleNo() {
 		return articleNo;

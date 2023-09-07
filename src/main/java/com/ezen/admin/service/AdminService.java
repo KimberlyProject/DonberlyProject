@@ -2,7 +2,9 @@ package com.ezen.admin.service;
 
 import java.util.List;
 
+import com.ezen.ccenter.dto.CcenterDTO;
 import com.ezen.member.dto.MemberDTO;
+
 
 public interface AdminService {
 	
@@ -25,4 +27,7 @@ public interface AdminService {
 	// public void memberDelete(MemberDTO memberDTO) throws Exception; : 회원 삭제 POST
 	//--------------------------------------------------------------------------------------------------
 	public void memberDelete(String memberDTO) throws Exception;
+	
+	
+	public List<CcenterDTO> listOneOnOne() throws Exception;
 }

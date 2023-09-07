@@ -39,6 +39,7 @@ public class CcenterController {
 	@Inject
 	@Autowired
 	private CcenterService ccenterService;
+	
 	//---------------------------------------------------------------------------------------------------------------------------------------
 	// 공지사항 화면 접속
 	//---------------------------------------------------------------------------------------------------------------------------------------
@@ -49,11 +50,11 @@ public class CcenterController {
 	}
 
 	//---------------------------------------------------------------------------------------------------------------------------------------
-	// qna 화면 접속
+	// QNA 화면 접속
 	//---------------------------------------------------------------------------------------------------------------------------------------	
 	@RequestMapping(value="/qna", method=RequestMethod.GET)
 	public String getQna(Model model) {
-		System.out.println("qna 화면 접속!!!!!!!!!!!!!!!!!");
+		System.out.println("QNA 화면 접속!!!!!!!!!!!!!!!!!");
 		return "/ccenter/qna";
 	}
 	
@@ -73,17 +74,6 @@ public class CcenterController {
 	public String getAskOneToOne(Model model) {
 		System.out.println("1:1문의 화면 접속!!!!!!!!!!!!!!!!!");
 		return "/ccenter/askOnetoOne";
-	}
-	@RequestMapping(value="/askOnetoOne.do", method=RequestMethod.GET)
-	public ModelAndView articleForm() throws Exception {
-		
-		// ModelAndView mav = new ModelAndView("/board/articleForm");
-		System.out.println("1:1문의 화면 접속!!!!!!!!!!!!!!!!!");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/ccenter/askOnetoOne");
-
-		return mav;
-		//return "/board/articleForm";
 	}
 	
 	
@@ -129,23 +119,24 @@ public class CcenterController {
 			System.out.println("value: " + value);
 			articleMap.put(name, value);
 		}
-	//
+	
+		//
 		
 		try {
-			int articleNO = ccenterService.addNewAsk(articleMap);
+			int articleNo = ccenterService.addNewAsk(articleMap);
 			
-			System.out.println(articleNO);
+			System.out.println(articleNo);
 			
 			message	 = "<script>";
 			message	+= "alert('새로운 글을 추가하였습니다.');";
-			message	+= "location.href='" + Request.getContextPath() + "/board/listArticles.do';";
+			message	+= "location.href='" + Request.getContextPath() + "/';";
 			message	+= "</script>";
 			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
 			
 			message	 = "<script>";
 			message	+= "alert('오류가 발생하였습니다.\n다시 시도해 주십시오.');";
-			message	+= "location.href='" + Request.getContextPath() + "/board/articleForm.do';";
+			message	+= "location.href='" + Request.getContextPath() + "/';";
 			message	+= "</script>";
 			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
@@ -163,4 +154,5 @@ public class CcenterController {
 		System.out.println("1:1문의 답변 화면 접속!!!!!!!!!!!!!!!!!");
 		return "/ccenter/askOnetoOneAnswer";
 	}
+	
 }
