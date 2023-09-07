@@ -32,11 +32,15 @@ if("${memberlevel.userStatus}" == "N1"){
                 <a href="/sale/listArticles.do">장터 <span class="sr-only">(current)</span></a>
                 <ul>
                     <li><a href="/sale/listArticles.do">팝니다</a></li>
-                    <li><a href="/board/listArticles.do">삽니다</a></li>                   
+                    <li><a href="/buy/listArticles.do">삽니다</a></li>                   
                 </ul>
               </li>
               <li>
                 <a href="/auction/auction_main">경매장</a>
+                <ul>
+                	<li><a href="/auction/howtouse">경매장 이용방법</a></li>
+                    <li><a href="/auction/auction_write">경매상품 올리기</a></li>
+              	</ul>
               </li>                  
               <li>
                 <a href="/ccenter/notice">고객센터</a>                
@@ -50,7 +54,7 @@ if("${memberlevel.userStatus}" == "N1"){
               <li>
                 <a href="/myPage/myInfo">마이페이지</a>                
                 <ul> 
-                	<li><a href="/myPage/auctionHistory">경매내역</a></li>
+                	<li><a href="/auction/auctionDealList?aucId=${member.userId}">경매내역</a></li>
                     <li><a href="/myPage/salesHistory">판매내역</a></li>
                     <li><a href="/chat/chattingview">1:1 채팅하기</a></li>
                     <li><a href="/chat/chat_list">채팅 리스트</a></li>

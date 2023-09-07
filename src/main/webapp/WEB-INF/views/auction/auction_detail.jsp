@@ -219,7 +219,7 @@
 			<tr><!-- 경매기간 -->
 				<th class="cate">마감기한</th>
 				<th class="colon">:</th>
-				<th colspan="4">${article.writeDate} - ${article.deadline}
+				<th colspan="4">${article.deadline}
 					<c:choose>
 					<c:when test="${member.userId == article.aucId}">
 						<input id="auctionOff" type="button" class="btn btn-danger saleBtn" style="color:#FFFFFF;" value="경매취소">  																			

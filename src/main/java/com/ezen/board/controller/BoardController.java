@@ -84,43 +84,35 @@ public class BoardController {
 	private ArticleVO articleVO;
 	@Inject		// Java에서 지원하는 어노테이션
 	private SaleArticleVO saleArticleVO;
-	
-	
 
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 쓰기 화면
 	//-----------------------------------------------------------------------------------------------------------
 	
-	@RequestMapping(value="/board/articleForm.do", method=RequestMethod.GET)
+	@RequestMapping(value="/buy/articleForm.do", method=RequestMethod.GET)
 	public ModelAndView articleForm() throws Exception {
 		
-		// ModelAndView mav = new ModelAndView("/board/articleForm");
-		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("/board/articleForm");
+		mav.setViewName("/buy/articleForm");
 
 		return mav;
-		//return "/board/articleForm";
 	} // End - 게시글 쓰기 화면
 	
 	
 	@RequestMapping(value="/sale/articleForm.do", method=RequestMethod.GET)
 	public ModelAndView saleArticleForm() throws Exception {
 		
-		// ModelAndView mav = new ModelAndView("/board/articleForm");
-		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/sale/articleForm");
 
 		return mav;
-		//return "/board/articleForm";
 	} // End - 게시글 쓰기 화면
 
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 쓰기 처리
 	//-----------------------------------------------------------------------------------------------------------
 	
-	@RequestMapping(value="/board/addNewArticle.do", method=RequestMethod.POST)
+	@RequestMapping(value="/buy/addNewArticle.do", method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity addNewArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
@@ -162,7 +154,7 @@ public class BoardController {
 		responseHeaders.add("Content-type", "text/html;charset=UTF-8");
 		
 		try {
-			int articleNO = boardService.addNewArticle(articleMap);
+			int articleNO = boardService.buyAddNewArticle(articleMap);
 			if(thumbnail != null && thumbnail.length() != 0) {
 				File srcDir  = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + thumbnail);
 				File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO);
@@ -171,7 +163,7 @@ public class BoardController {
 			
 			message	 = "<script>";
 			message	+= "alert('새로운 글을 추가하였습니다.');";
-			message	+= "location.href='" + multipartRequest.getContextPath() + "/board/listArticles.do';";
+			message	+= "location.href='" + multipartRequest.getContextPath() + "/buy/listArticles.do';";
 			message	+= "</script>";
 			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -180,7 +172,7 @@ public class BoardController {
 			
 			message	 = "<script>";
 			message	+= "alert('오류가 발생하였습니다.\n다시 시도해 주십시오.');";
-			message	+= "location.href='" + multipartRequest.getContextPath() + "/board/articleForm.do';";
+			message	+= "location.href='" + multipartRequest.getContextPath() + "/buy/articleForm.do';";
 			message	+= "</script>";
 			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
@@ -297,14 +289,13 @@ public class BoardController {
 	// 게시글 번호에 해당하는 상세 정보
 	//-----------------------------------------------------------------------------------------------------------
 	
-	@RequestMapping(value="/board/viewArticle.do", method=RequestMethod.GET)
+	@RequestMapping(value="/buy/viewArticle.do", method=RequestMethod.GET)
 	public ModelAndView viewArticle(@RequestParam("articleNO") int articleNO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
 		
 		// 게시글 번호에 해당하는 정보를 모두 가져온다.
-		articleVO = boardService.viewArticle(articleNO);
-		// String nickName = boardService.selectNickName(articleVO.getId());
+		articleVO = boardService.buyViewArticle(articleNO);
 		
 		System.out.println("--------BoardControllerImpl viewArticle() : " + articleVO);
 		
@@ -323,7 +314,6 @@ public class BoardController {
 		
 		// 게시글 번호에 해당하는 정보를 모두 가져온다.
 		saleArticleVO = boardService.saleViewArticle(articleNO);
-		// String nickName = boardService.selectNickName(articleVO.getId());
 		
 		System.out.println("--------BoardControllerImpl viewArticle() : " + saleArticleVO);
 		
@@ -338,7 +328,7 @@ public class BoardController {
 	// 게시글 번호에 해당하는 글 삭제하기
 	//-----------------------------------------------------------------------------------------------------------
 	
-	@RequestMapping(value="/board/removeArticle.do", method=RequestMethod.POST)
+	@RequestMapping(value="/buy/removeArticle.do", method=RequestMethod.POST)
 	public ResponseEntity removeArticle(@RequestParam("articleNO") int articleNO, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 			System.out.println("BoardControllerImpl 글 삭제하기 ==> " + articleNO);
@@ -351,7 +341,7 @@ public class BoardController {
 		
 		try {
 			// 게시글 번호에 해당하는 자료를 DB에서 지운다.
-			boardService.removeArticle(articleNO);
+			boardService.buyRemoveArticle(articleNO);
 			
 			// 사진도 삭제한다.
 			File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO);
@@ -359,14 +349,14 @@ public class BoardController {
 		
 			message = "<script>";
 			message += " alert('글을 삭제했습니다.');";
-			message += " location.href='"+request.getContextPath()+"/board/listArticles.do';";
+			message += " location.href='"+request.getContextPath()+"/buy/listArticles.do';";
 			message +=" </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 	       
 		} catch(Exception e) {
 			message = "<script>";
 			message += " alert('작업중 오류가 발생했습니다.다시 시도해 주세요.');";
-			message += " location.href='"+request.getContextPath()+"/board/listArticles.do';";
+			message += " location.href='"+request.getContextPath()+"/buy/listArticles.do';";
 			message +=" </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
@@ -420,7 +410,7 @@ public class BoardController {
 	//-----------------------------------------------------------------------------------------------------------
 	
 	@ResponseBody
-	@RequestMapping(value="/board/modArticle.do", method=RequestMethod.POST)
+	@RequestMapping(value="/buy/modArticle.do", method=RequestMethod.POST)
 	public ResponseEntity modArticle(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
 
@@ -452,7 +442,7 @@ public class BoardController {
 		// 임시폴더(C:\\data\\board\\article_image\\temp)에 imageFileName이라는 파일이 존재하면 작동하지 않는다.
 		//-----------------------------------------------------------------------------------------------------------
 		try {
-			boardService.modArticle(articleMap);
+			boardService.buyModArticle(articleMap);
 			
 			if(thumbnail != null && thumbnail.length() != 0) {
 				File srcDir  = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + thumbnail);
@@ -465,7 +455,7 @@ public class BoardController {
 			}
 			message	 = "<script>";
 			message	+= "alert('게시글을 수정하였습니다.');";
-			message	+= "location.href='" + multipartRequest.getContextPath() + "/board/viewArticle.do?articleNO=" + articleNO + "';";
+			message	+= "location.href='" + multipartRequest.getContextPath() + "/buy/viewArticle.do?articleNO=" + articleNO + "';";
 			message	+= "</script>";
 			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -474,7 +464,7 @@ public class BoardController {
 			
 			message	 = "<script>";
 			message	+= "alert('오류가 발생하였습니다.\n다시 시도해 주십시오.');";
-			message	+= "location.href='" + multipartRequest.getContextPath() + "/board/viewArticle.do?articleNO=" + articleNO + "';";
+			message	+= "location.href='" + multipartRequest.getContextPath() + "/buy/viewArticle.do?articleNO=" + articleNO + "';";
 			message	+= "</script>";
 			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
@@ -552,7 +542,7 @@ public class BoardController {
 	// 게시글 목록 (페이징) 화면 보여주기 + 검색조건(SearchCriteria)
 	//-----------------------------------------------------------------------------------------------------------
 	
-	@RequestMapping(value="/board/listArticles.do", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/buy/listArticles.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listArticlesPaging(HttpServletRequest request, HttpServletResponse response, SearchCriteria cri)
 			throws Exception {
 
@@ -563,11 +553,11 @@ public class BoardController {
 		pageMaker.setCri(cri);
 		// cri를 가지고 검색한 총 건수를 TotalCount 변수에 저장한다.
 		// System.out.println("총 게시물 개수 : " + boardService.boardListTotalCount(cri));
-		pageMaker.setTotalCount(boardService.boardListTotalCount(cri));
+		pageMaker.setTotalCount(boardService.buyListTotalCount(cri));
 		logger.info("게시물의 총 건수 : " + pageMaker.getTotalCount());
 		
 		// 화면에 출력할 데이터를 가져온다.
-		List<ArticleVO> list = boardService.boardListPaging(cri);
+		List<ArticleVO> list = boardService.buyListPaging(cri);
 		System.out.println("리스트:" + list);
 		
 		// pageMaker의 정보를 콘솔에 보여준다.
@@ -593,11 +583,11 @@ public class BoardController {
 		pageMaker.setCri(cri);
 		// cri를 가지고 검색한 총 건수를 TotalCount 변수에 저장한다.
 		// System.out.println("총 게시물 개수 : " + boardService.boardListTotalCount(cri));
-		pageMaker.setTotalCount(boardService.boardListTotalCount(cri));
+		pageMaker.setTotalCount(boardService.saleListTotalCount(cri));
 		logger.info("게시물의 총 건수 : " + pageMaker.getTotalCount());
 		
 		// 화면에 출력할 데이터를 가져온다.
-		List<SaleArticleVO> list = boardService.saleBoardListPaging(cri);
+		List<SaleArticleVO> list = boardService.saleListPaging(cri);
 		System.out.println("리스트:" + list);
 		
 		// pageMaker의 정보를 콘솔에 보여준다.
@@ -613,7 +603,7 @@ public class BoardController {
 	
 	// 구매완료
 	@ResponseBody
-	@RequestMapping(value="/borad/buyEnd", method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/buy/buyEnd", method={RequestMethod.GET, RequestMethod.POST})
 	public ResponseEntity buyNow(HttpServletRequest Request, HttpServletResponse response)
 			throws Exception {
 
@@ -643,14 +633,14 @@ public class BoardController {
 			boardService.buyNow(articleMap);
 			
 			message	 = "<script>";
-			message	+= "location.href='" + Request.getContextPath() + "/board/listArticles.do';";
+			message	+= "location.href='" + Request.getContextPath() + "/buy/listArticles.do';";
 			message	+= "</script>";
 			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
 			
 			message	 = "<script>";
 			message	+= "alert('오류가 발생하였습니다.\n다시 시도해 주십시오.');";
-			message	+= "location.href='" + Request.getContextPath() + "/board/listArticles.do';";
+			message	+= "location.href='" + Request.getContextPath() + "/buy/listArticles.do';";
 			message	+= "</script>";
 			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();

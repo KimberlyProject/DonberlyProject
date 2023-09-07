@@ -129,5 +129,28 @@ public class AuctionDAO {
 		System.out.println("게시글 목록 dao");
 		return sqlSession.selectList(namespace + ".auctionPaging", cri);
 	}
+	//이미지 목록 가져오기(paging)
+	public List<AucImgDTO> auctionPagingImg(int aucCode) throws DataAccessException {
+		System.out.println("이미지 목록 dao");
+		return sqlSession.selectList(namespace + ".auctionPagingImg", aucCode);
+	}
+	
+	//-------------------------------------------------------------------------------------------------------------//		
+	
+	//마이페이지 게시글 불러오기
+	public List myPageArticles(String aucId) throws DataAccessException {
+		System.out.println("------------------------------------------경메장 메인페이지 dao------------------------------------------");
+		List<AuctionDTO> articles = sqlSession.selectList(namespace + ".myPageArticles", aucId);
+		System.out.println("------------------------------------------디비야 마이페이지 정보내놔" + articles);
+		return articles;
+	}
+
+	//마이페이지 image 불러오기
+	public List myPageImgs(int aucCode) throws DataAccessException {
+		System.out.println("------------------------------------------경매장 메인 image dao------------------------------------------");
+		List<AucImgDTO> imgs = sqlSession.selectList(namespace + ".myPageImgs", aucCode);
+		System.out.println("------------------------------------------디비야 마이페이지 이미지 정보내놔" + imgs);
+		return imgs;
+	}
 	
 }//class

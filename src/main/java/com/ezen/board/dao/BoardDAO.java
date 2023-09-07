@@ -52,10 +52,13 @@ public class BoardDAO {
 		articleMap.put("p_code", p_code);
 		System.out.println("새로운 상품번호 추출하기 : " + p_code);
 		
-		
 		articleMap.put("articleNO", articleNO);
 		sqlSession.insert(namespace + ".insertNewArticle", articleMap);
+		
+		System.out.println("정보들==================" + articleMap);
+		
 		return articleNO;
+		
 	}
 	
 	
@@ -72,6 +75,9 @@ public class BoardDAO {
 		
 		articleMap.put("articleNO", articleNO);
 		sqlSession.insert(namespace + ".saleInsertNewArticle", articleMap);
+		
+		System.out.println("정보들==================" + articleMap);
+		
 		return articleNO;
 	}
 	

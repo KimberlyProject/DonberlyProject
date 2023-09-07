@@ -127,6 +127,12 @@ public class ChatDAOImpl implements ChatDAO {
 		
 	}
 
+	@Override
+	public List<ChatDTO> findLastChat(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".findLastChat",userId);
+	}
+
 	
 
 	

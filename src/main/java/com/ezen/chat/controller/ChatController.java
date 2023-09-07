@@ -113,18 +113,20 @@ public class ChatController {
 		
 		
 		List<ChatListDTO> chatList = chatService.listChat(userId); //chatList 옮김
-		List lastchat  = new ArrayList();
+		//List <ChatDTO>lastchat  = new ArrayList();
 		//챗 아이디로 챗리스트 가져오기
 		//List<ChatListDTO> artNoAndStatus = new ArrayList<ChatListDTO>();
 		
-		for (ChatListDTO chatListDTO : chatList) {
-			int chid = chatListDTO.getChatId();
-            lastchat.add(chatService.findLastChat(chid));
-        }
+		
+		//int chid = chatListDTO.getChatId();
+		//System.out.println("***********************************여기까지는 나오려나");
+		//List <ChatDTO> lastchat =chatService.findLastChat(userId);
+        //System.out.println("여기까지는 나오나" + lastchat);
 		
 		
 		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("lastChat", lastchat);
+		//mav.addObject("lastChat", lastchat);
+		//System.out.println(lastchat);
 		mav.addObject("chatList",chatList);//넘겨줄 이름, 데이터
 		
 		

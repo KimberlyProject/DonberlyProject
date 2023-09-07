@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.io.PrintWriter" %>
 <%@ page session="true" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -97,9 +98,25 @@
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       <a href="/">홈</a> &gt;
-      <a href="#">경매장</a> &gt;
+      <a href="#">마이페이지</a> &gt;
+       <a href="#">경매내역</a> &gt;
     </div>
-    <h1 class="pageTitle"><div>경매장</div></h1>
+    <h1 class="pageTitle"><div>경매내역</div></h1>
+    
+    
+    <%
+	//로그인 세션 없으면 로그인을 먼저 하도록 한다.
+	if(session.getAttribute("isLogOn") == null) {
+		PrintWriter pw = response.getWriter();
+		pw.println("<script>");
+		pw.println("alert('로그인이 필요합니다.');");
+		pw.println("location.href='/member/login?action=/auction/auction_wirte';");
+		pw.println("</script>");
+		pw.flush();
+		pw.close();
+	}
+	%>
+    
     
 	<div class="container">
 		<br/><br/>
@@ -247,7 +264,7 @@
 				</td>
 			</tr>
 		</table> <br/>
-		<button class="btn btn-success col-sm-offset-6"><a style="color:#FFFFFF;" href="/auction/auction_write">상품 등록</a></button>
+	
 		<br/><br/>
 		
 		<form id="formList" action="/auction/auction_main.do" method="get">
@@ -278,14 +295,7 @@
 		});
 	});
 	
-	//경매끝난 게시글 버튼비활성화
-	$(document).ready(function() {
-	  var detailBtn = $(".detailBtn");
-	  detailBtn.css("background-color", "gray");
-	  detailBtn.css("color", "white");
-	  detailBtn.prop("disabled", true);
-	});
-	
+
 </script>
 
 </body>

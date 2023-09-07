@@ -107,7 +107,7 @@
       </div>
       <div class="item con">
          <ul class="item">
-            <li><h3>작성자 : <input type="text" class="line" maxlength="50"  value="${member.nickname }" readonly/></h3> </li>
+            <li><h3>작성자 : <input type="text" class="line" maxlength="50" id="nickname" name="nickname" value="${member.nickname }" readonly/></h3> </li>
          </ul>
          <ul class="item">
             <li>팔고자 하는 것은 </li>

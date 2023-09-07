@@ -79,9 +79,9 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public ChatDTO findLastChat(int chid) throws Exception {
+	public List<ChatDTO> findLastChat(String userId) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return findLastChat(userId);
 	}
 
 	

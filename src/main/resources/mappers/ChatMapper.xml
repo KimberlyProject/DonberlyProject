@@ -115,6 +115,18 @@
 		]]>
 	</select>
 	
+	<!-- chatid로 마지막 컨텐트 찾기 -->
+	<select id="findLastChat" resultType="chatDTO">
+	<![CDATA[
+		select *
+		from (select *
+	        from chat
+	        where fromId = #{userId} or toId = #{userId}
+	        order by chatTime desc)
+	    where rownum<=1
+	 ]]>
+	</select>
+	
 	
 	
 	

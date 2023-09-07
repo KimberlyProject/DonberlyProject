@@ -27,5 +27,5 @@ public interface ChatService {
 	
 	public ArticleVO findArticleVOFromArtNo(int artNo,String status) throws Exception;
 	
-	public ChatDTO findLastChat(int chid) throws Exception;
+	public List<ChatDTO> findLastChat(String userId) throws Exception;
 }
