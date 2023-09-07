@@ -90,7 +90,7 @@
 				<div class="grid-second">
 					<input type="hidden" value="${article.articleNO }" name="articleNO"/>
 					<input type="hidden" value="${article.p_code }" name="p_code"/>
-					<input type="hidden"   value="${member.nickname }" name="writer"/>
+					<input type="hidden" value="${article.nickname }" name="writer"/>
 					<input type="hidden" value="${article.purpose }" name="purpose"/>
 					
 					<ul class="item">
@@ -102,7 +102,7 @@
 						</li>
 					</ul>
 					<ul class="item">
-						<li>작성자 : ${member.nickname }<li>
+						<li>작성자 : ${article.nickname }<li>
 						
 					</ul>
 					
@@ -140,16 +140,16 @@
 							<c:choose>
 								<c:when test="${member.userId == article.userId}">
 									<input type="button" class="btn btn-primary" id="chat" value="1:1채팅" 
-										style="display:none" onClick="fn_reply_form('${path}/board/replyForm.do)', ${article.articleNO})"/>
+										style="display:none" onClick="fn_reply_form('${path}/buy/replyForm.do)', ${article.articleNO})"/>
 								</c:when>
 								<c:otherwise>
-									<input type="button" class="btn btn-primary" id="chat" value="1:1채팅" onClick="fn_reply_form('${path}/board/replyForm.do)', ${article.articleNO})"/>
+									<input type="button" class="btn btn-primary" id="chat" value="1:1채팅" onClick="fn_reply_form('${path}/buy/replyForm.do)', ${article.articleNO})"/>
 								</c:otherwise>
 							</c:choose>
 							<!-- 로그인한 아이디와 게시글을 쓴 사람의 아이디가 같다면, 글쓴 본인이므로 수정/삭제가 가능하다. -->
 							<c:if test="${member.userId == article.userId}">
 								<input type="button" class="btn btn-warning" value="수정하기" onClick="fn_enable(this.form)"/>
-								<input type="button" class="btn btn-danger"  value="삭제하기" onClick="fn_remove('${path}/board/removeArticle.do', ${article.articleNO})"/>
+								<input type="button" class="btn btn-danger"  value="삭제하기" onClick="fn_remove('${path}/buy/removeArticle.do', ${article.articleNO})"/>
 								<input type="button" class="btn btn-warning" value="구매완료" id="buyEnd"/>
 							</c:if>
 						<li>
@@ -167,7 +167,7 @@
 <script>
 // 게시글 목록으로 돌아가기
 function backToList(obj) {
-	obj.action="${path}/board/listArticles.do";
+	obj.action="${path}/buy/listArticles.do";
 	obj.submit();
 }
 
@@ -215,7 +215,7 @@ function readURL(input) {
 
 // 게시글 수정하기
 function fn_modify_article(obj) {
-	obj.action = "${page}/board/modArticle.do";
+	obj.action = "${page}/buy/modArticle.do";
 	obj.submit();
 }
 

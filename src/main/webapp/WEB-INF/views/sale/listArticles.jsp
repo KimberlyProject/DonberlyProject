@@ -157,7 +157,7 @@
 					            ${article.price}원 <!-- 여기에 가격 표시 -->
 					          </li>
 					          <li class="product-seller">
-					          	${article.userId}
+					          	${article.nickname}
 					          </li>
 					          <li class="product-date">
 					          	${article.write_date}

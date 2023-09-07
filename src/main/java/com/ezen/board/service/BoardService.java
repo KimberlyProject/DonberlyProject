@@ -25,7 +25,7 @@ public class BoardService {
 	// 게시글 목록
 	//-----------------------------------------------------------------------------------------------------------
 	
-	public List<ArticleVO> listArticles() throws Exception {
+	public List<ArticleVO> buyListArticles() throws Exception {
 		List<ArticleVO> articleList = boardDAO.selectAllArticlesList();
 		return articleList;
 	} // End - public List<ArticleVO> listArticles()
@@ -41,7 +41,7 @@ public class BoardService {
 	// 새로운 게시글 쓰기
 	//-----------------------------------------------------------------------------------------------------------
 	
-	public int addNewArticle(Map articleMap) throws Exception {
+	public int buyAddNewArticle(Map articleMap) throws Exception {
 		return boardDAO.insertNewArticle(articleMap);
 	}
 	
@@ -54,7 +54,7 @@ public class BoardService {
 	// 게시글 번호에 해당하는 상세 정보
 	//-----------------------------------------------------------------------------------------------------------
 	
-	public ArticleVO viewArticle(int articleNO) throws Exception {
+	public ArticleVO buyViewArticle(int articleNO) throws Exception {
 		ArticleVO articleVO = boardDAO.selectArticle(articleNO);
 		return articleVO;
 	}
@@ -68,7 +68,7 @@ public class BoardService {
 	// 게시글 번호에 해당하는 글 삭제하기
 	//-----------------------------------------------------------------------------------------------------------
 	
-	public void removeArticle(int articleNO) throws Exception {
+	public void buyRemoveArticle(int articleNO) throws Exception {
 		boardDAO.deleteArticle(articleNO);
 	}
 	
@@ -81,7 +81,7 @@ public class BoardService {
 	// 게시글 번호에 해당하는 정보수정하기
 	//-----------------------------------------------------------------------------------------------------------
 	
-	public void modArticle(Map articleMap) throws Exception {
+	public void buyModArticle(Map articleMap) throws Exception {
 		boardDAO.updateArticle(articleMap);
 	}
 	
@@ -94,12 +94,12 @@ public class BoardService {
 	// 전체 게시글 수 구하기 (Paging 처리)
 	//-----------------------------------------------------------------------------------------------------------
 	
-	public int boardListTotalCount(SearchCriteria cri) throws Exception {
+	public int buyListTotalCount(SearchCriteria cri) throws Exception {
 		return boardDAO.boardListTotalCount(cri);
 	}
 	
 	
-	public int saleBoardListTotalCount(SearchCriteria cri) throws Exception {
+	public int saleListTotalCount(SearchCriteria cri) throws Exception {
 		return boardDAO.saleBoardListTotalCount(cri);
 	}
 
@@ -107,12 +107,12 @@ public class BoardService {
 	// 게시글 목록 가져오기 (Paging)
 	//-----------------------------------------------------------------------------------------------------------
 	
-	public List<ArticleVO> boardListPaging(SearchCriteria cri) throws Exception {
+	public List<ArticleVO> buyListPaging(SearchCriteria cri) throws Exception {
 		return boardDAO.boardListPaging(cri);
 	}
 
 	
-	public List<SaleArticleVO> saleBoardListPaging(SearchCriteria cri) throws Exception {
+	public List<SaleArticleVO> saleListPaging(SearchCriteria cri) throws Exception {
 		return boardDAO.saleBoardListPaging(cri);
 	}
 

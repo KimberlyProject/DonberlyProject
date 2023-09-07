@@ -91,7 +91,7 @@
 				<div class="grid-second">
 					<input type="hidden" value="${article.articleNO }" name="articleNO"/>
 					<input type="hidden" value="${article.p_code }" name="p_code"/>
-					<input type="hidden"   value="${member.nickname }" name="writer"/>
+					<input type="hidden"   value="${article.nickname }" name="writer"/>
 					<input type="hidden" value="${article.purpose }" name="purpose"/>
 					
 					<ul class="item">
@@ -103,7 +103,7 @@
 						</li>
 					</ul>
 					<ul class="item">
-						<li>작성자 : ${member.nickname }<li>
+						<li>작성자 : ${article.nickname }<li>
 						
 					</ul>
 					

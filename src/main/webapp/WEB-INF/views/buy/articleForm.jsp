@@ -26,8 +26,7 @@
       } 
       
       function backToList(obj) {
-         // obj.action="${contextPath}/board4/listArticles.do";
-         obj.action="${contextPath}/board/listArticlesPaging.do";
+         obj.action="${contextPath}/buy/listArticlesPaging.do";
          obj.submit();
       }
           
@@ -92,7 +91,7 @@
 
 <div class="container" id="d">
 		<br/><br/>
-   <form  class="conta" name="articleForm" method="post"   action="${contextPath}/board/addNewArticle.do"   enctype="multipart/form-data">
+   <form  class="conta" name="articleForm" method="post"   action="${contextPath}/buy/addNewArticle.do"   enctype="multipart/form-data">
        <!-- <div border="0" align="center"> -->   
       <div class="item image" id="d_file">
          <ul class= "item">
@@ -107,17 +106,17 @@
       </div>
       <div class="item con">
          <ul class="item">
-            <li><h3>작성자 : <input type="text" class="line" maxlength="50"  value="${member.nickname }" readonly/></h3> </li>
+            <li><h3>작성자 : <input type="text" class="line" maxlength="50" id="nickname" name="nickname" value="${member.nickname }" readonly/></h3> </li>
          </ul>
          <ul class="item">
-            <li>팔고자 하는 것은 </li>
+            <li>사고자 하는 것은 </li>
             <li><input type="text"  maxlength="20" name="title" />이구요</li>
          </ul>
          <ul class="item">
 			<li>가격 : &nbsp;<input type="text" id="price" maxlength="10" name="price"/>원</li>
 		</ul>
          <ul class="item">
-            <li>팔고자 하는 것에 대해</li>
+            <li>사고자 하는 것에 대해</li>
             <li><textarea name="content" rows="2" cols="35" maxlength="4000"></textarea>입니다</li>
          </ul>
          <ul class="item">

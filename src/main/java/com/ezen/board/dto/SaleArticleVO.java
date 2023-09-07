@@ -24,6 +24,7 @@ public class SaleArticleVO {
 	private int		view;
 	private	String	thumbnail;
 	private int		price;
+	private String	nickname;
 	
 	
 
@@ -140,11 +141,20 @@ public class SaleArticleVO {
 		this.userId = userId;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	@Override
 	public String toString() {
-		return "ArticleVO [rnum=" + rnum + ", level=" + level + ", articleNO=" + articleNO + ", userId=" + userId
+		return "SaleArticleVO [rnum=" + rnum + ", level=" + level + ", articleNO=" + articleNO + ", userId=" + userId
 				+ ", write_date=" + write_date + ", title=" + title + ", content=" + content + ", p_code=" + p_code
-				+ ", purpose=" + purpose + ", view=" + view + ", thumbnail=" + thumbnail + ", price=" + price + "]";
+				+ ", purpose=" + purpose + ", view=" + view + ", thumbnail=" + thumbnail + ", price=" + price
+				+ ", nickname=" + nickname + "]";
 	}
 
 	

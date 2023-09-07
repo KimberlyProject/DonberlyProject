@@ -166,6 +166,7 @@ public class MemberController {
 	         // 세션을 발급한다.
 	         String userId = memberDTO.getUserId();
 	         MemberDTO memberLevel = memberService.memberLevel(userId);
+	         
 	    	 session.setAttribute("memberlevel", memberLevel);
 	         session.setAttribute("member",    memberDTO);
 	         session.setAttribute("isLogOn", true);
