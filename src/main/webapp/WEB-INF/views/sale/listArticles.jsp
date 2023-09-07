@@ -5,9 +5,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<%@ include file="../include/header.jsp" %>
-	
 	<style>
-			
 		.imgsize {
 		width: 180px;
 		height: 155px;

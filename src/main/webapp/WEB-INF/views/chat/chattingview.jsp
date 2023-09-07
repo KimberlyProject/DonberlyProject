@@ -256,16 +256,14 @@ div.chat.ch2{
 				<td class="chat_area">
 				
 					<div class="wrap"  style="overflow:auto; width:599px; height:600px;">
-						
-						
     				</div>
 				</td>
 				<td class="chat_detail" rowspan="2">
 					
-					<div>제목</div>
-					<div>판매자: ${artData}</div>
+					<div>제목 : ${session.title }</div>
+					<div>판매자: ${session.userId}</div>
 					<div>구매자: ${member.nickname }</div>
-					<div>코드</div>
+					<div>코드 : ${session.p_code }</div>
 					<div style="padding-bottom: 10px;">${a.price}</div>
 					
 					<img src="${path}/resources/images/kuromi.png" alt="사진" width="200px;" height="200px;"/>
@@ -366,11 +364,10 @@ function getChat(){
 			}
 			 console.log(html);
 			 $('.wrap').html(
-				html		 
-			 
+				html
 			 );
 			 const chatbox = document.querySelector(".wrap");
-			 chatbox.scrollTop = chatbox.scrollHeight;
+			 //chatbox.scrollTop = chatbox.scrollHeight;
 		 },
 		 error:function(request,status,error){
 			 console.log("실패");
@@ -405,8 +402,6 @@ $(document).ready(function(){
 				 data:	{"content" : $('#chatContent').val(),
 						 "fromId" : $('#userId').val(),
 						 "chatId" : $('#chatId').val()
-						 
-				 
 				 },	
 				 success: function(){
 					 

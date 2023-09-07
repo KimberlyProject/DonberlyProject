@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.ezen.board.dao.BoardDAOImpl;
 import com.ezen.board.dto.ArticleVO;
 import com.ezen.chat.controller.ChatController;
 import com.ezen.chat.dao.ChatDAO;
@@ -61,15 +62,21 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public ChatListDTO findArtNo(int chatId) throws Exception {
+	public ChatListDTO findChatListFromChatId(int chatId) throws Exception {
 		
-		return chatDAO.findArtNo(chatId);
+		return chatDAO.findChatListFromChatId(chatId);
 	}
 
 	@Override
 	public ChatDTO findContent(ChatDTO chatDTO) throws Exception {
 		
 		return chatDAO.findContent(chatDTO);
+	}
+
+	@Override
+	public ArticleVO findArticleVOFromArtNo(int artNo,String status) throws Exception {
+		
+		return chatDAO.findArticleVOFromArtNo(artNo,status);
 	}
 
 	

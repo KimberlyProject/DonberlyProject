@@ -35,8 +35,7 @@ import com.ezen.member.dto.MemberDTO;
 public class ChatController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
-	private int cnt=0;
-	private ChatDTO newchatDTO = new ChatDTO("07");
+	
 
 	@Inject
 	private ChatService chatService;
@@ -51,8 +50,13 @@ public class ChatController {
 		
 		HttpSession session= request.getSession();
 		int ch = Integer.parseInt(chatId);
-		List<ChatDTO> chatView = chatService.chatView(ch); //chatList 옮김
-		session.setAttribute("session",chatView);
+		ChatListDTO chatListDTO = chatService.findChatListFromChatId(ch); //chatList 옮김
+		int artNo = chatListDTO.getArtNo();
+		
+		//아티클 넘버로 아티클VO 가져오기
+		ArticleVO articleVO = chatService.findArticleVOFromArtNo(artNo,chatListDTO.getStatus());
+		
+		session.setAttribute("session",articleVO);
 		
 		System.out.println("채팅 입장");
 		return "/chat/chattingview";
@@ -70,7 +74,7 @@ public class ChatController {
 		
 		int ch = Integer.parseInt(chatId);
 		//ch로 chatListDTO 찾기 찾아서 스테이터스로 구별해서 to랑 from 넣기
-		ChatListDTO chatListDTO = chatService.findArtNo(ch);
+		ChatListDTO chatListDTO = chatService.findChatListFromChatId(ch);
 		
 		ChatDTO chatDTO = new ChatDTO();
 		chatDTO.setArtNo(chatListDTO.getArtNo());
@@ -84,7 +88,7 @@ public class ChatController {
 		else if(fromId.equals(chatListDTO.getBuyer())) {
 			chatDTO.setToId(chatListDTO.getSeller());
 		}
-		System.out.println("################################chatDTO"+chatDTO);
+		//System.out.println("################################chatDTO"+chatDTO);
 		chatService.insertContent(chatDTO);  //db에 채팅DTO 넣기
 		
 	}
@@ -108,9 +112,15 @@ public class ChatController {
 		
 		
 		List chatList = chatService.listChat(userId); //chatList 옮김
+		//챗 아이디로 챗리스트 가져오기
+		//List<ChatListDTO> artNoAndStatus = new ArrayList<ChatListDTO>();
+		
 		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("chatList",chatList);//넘겨줄 이름, 데이터
+		
+		
+		//닉네임 찾기
 		
 		
 		//viewName이 없기 때문에 URL로 부터 뷰 이름을 검색한다.
@@ -123,7 +133,7 @@ public class ChatController {
 	
 	
 	//채팅 저장하기
-	@RequestMapping(value="/sendChat", method=RequestMethod.POST)
+	/*@RequestMapping(value="/sendChat", method=RequestMethod.POST)
 	public String sendChat(@RequestParam(value="content", required=false) String content,@RequestParam(value="fromId", required=false) String fromId,@RequestParam(value="articleNo", required=false) String articleNo, Model model,HttpServletRequest request, HttpServletResponse response  ) throws Exception{
 		//채팅방 만들기
 				HttpSession session = request.getSession();
@@ -197,7 +207,7 @@ public class ChatController {
 				
 				return "/chat/chattingview";
 	
-	}
+	}*/
 	
 	//방 만들기 makeRoom
 	@ResponseBody
@@ -207,7 +217,7 @@ public class ChatController {
 			System.out.println("#################여기로 와"+chatListDTO);
 			if(chatListDTO.getSeller()!=null && chatListDTO.getBuyer()!=null) {
 				int chatId = chatService.insertChatList(chatListDTO);//채팅방 번호 내놓기				
-				System.out.println("이거다####################################"+chatId);
+				//System.out.println("이거다####################################"+chatId);
 				return "/chat/chattingview?chatId="+chatId;
 			}
 			else {
@@ -227,18 +237,9 @@ public class ChatController {
 		chatDTO1.setFromId(fromId);
 		//fromId가 toId인 chatDTO 찾기
 		chatDTO2 = chatService.findContent(chatDTO1);
-		System.out.println("**************************챗아이디="+chatId+"프롬아이디="+fromId+"가장 최근 컨텐츠"+newchatDTO.getChatContent()+"이번에 쓴 컨텐츠"+chatDTO2.getChatContent());
-		System.out.println(chatDTO2);
-		//return chatDTO2;
-		/*
-		if(newchatDTO.getChatContent().equals(chatDTO2.getChatContent())) {
-			return chatDTO1;
-		}
-		else{
-			newchatDTO = chatDTO2;
-			return chatDTO2;
-		}
-		*/
+		//System.out.println("**************************챗아이디="+chatId+"프롬아이디="+fromId+"가장 최근 컨텐츠"+newchatDTO.getChatContent()+"이번에 쓴 컨텐츠"+chatDTO2.getChatContent());
+		//System.out.println(chatDTO2);
+		
 		List<ChatDTO> list =  chatService.chatView(ch);
 		
 		return list;

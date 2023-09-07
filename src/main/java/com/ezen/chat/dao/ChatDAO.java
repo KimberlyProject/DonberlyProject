@@ -25,8 +25,10 @@ public interface ChatDAO {
 	
 	public List<ChatDTO> chatView(int chatId) throws Exception;
 	
-	public ChatListDTO findArtNo(int chatId) throws Exception;
+	public ChatListDTO findChatListFromChatId(int chatId) throws Exception;
 	
 	public ChatDTO findContent(ChatDTO chatDTO) throws Exception;
+	
+	public ArticleVO findArticleVOFromArtNo(int artNo,String status) throws Exception;
 }
 

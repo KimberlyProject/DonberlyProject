@@ -71,7 +71,7 @@
 		order by chatTime
 	</select>
 	
-	<!--  -->
+	<!-- 챗 아이디 찾기 -->
 	<select id="findChatId" resultType="int">
 		SELECT	chatId
 		FROM	chatlist
@@ -79,7 +79,7 @@
 	</select>
 	
 	<!-- 아티클 넘버 챗아이디로 찾기 -->
-	<select id="findArtNo" resultType="chatListDTO">
+	<select id="findChatListFromChatId" resultType="chatListDTO">
 		select *
 		from chatlist
 		where chatId = #{chatId}
@@ -92,6 +92,24 @@
 		select *
 		from (select * from chat where toid = #{fromId} and chatid=#{chatId} order by chattime desc)
 		where rownum <= 1
+		]]>
+	</select>
+	
+	<!-- artNo으로 articleVO끌어오기 (buy) -->
+	<select id="findArticleVOFromArtNoB" parameterType="int" resultType="articleVO">
+		<![CDATA[
+			SELECT	*
+			FROM	article_buy
+			WHERE	articleNO = #{artNo}
+		]]>
+	</select>
+	
+	<!-- artNo으로 articleVO끌어오기 (sale) -->
+	<select id="findArticleVOFromArtNoS" parameterType="int" resultType="articleVO">
+		<![CDATA[
+			SELECT	*
+			FROM	article_sale
+			WHERE	articleNO = #{artNo}
 		]]>
 	</select>
 	

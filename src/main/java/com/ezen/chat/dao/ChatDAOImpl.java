@@ -100,15 +100,31 @@ public class ChatDAOImpl implements ChatDAO {
 	}
 
 	@Override
-	public ChatListDTO findArtNo(int chatId) throws Exception {
+	public ChatListDTO findChatListFromChatId(int chatId) throws Exception {
 		
-		return sqlSession.selectOne(namespace+".findArtNo",chatId);
+		return sqlSession.selectOne(namespace+".findChatListFromChatId",chatId);
 	}
 
 	@Override
 	public ChatDTO findContent(ChatDTO chatDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".findContent",chatDTO);
+	}
+
+	@Override
+	public ArticleVO findArticleVOFromArtNo(int artNo,String status) throws Exception {
+		if(status.equals("s")) {
+			return sqlSession.selectOne(namespace+".findArticleVOFromArtNoS",artNo);
+			
+		}
+		else if(status.equals("b")) {
+			return sqlSession.selectOne(namespace+".findArticleVOFromArtNoB",artNo);
+		}
+		
+		else {
+			return null;
+		}
+		
 	}
 
 	

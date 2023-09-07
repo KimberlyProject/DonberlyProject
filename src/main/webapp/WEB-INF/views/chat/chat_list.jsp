@@ -82,12 +82,12 @@ label{
 				<label>
 				<c:set var="myname" value="${member.userId}"/>
 				<c:set var="seller" value="${chatList.seller}"/>
-				<c:set var="buyer" value="${chatList.buyer}"/>
+				<c:set var="buyer" value="${chatList.buyer}"/> 
 				<c:if test="${myname != seller}">
-				${chatList.seller }
+				${chatList.seller }	<!-- 상대방 닉네임 들어가야함-->
 				</c:if>
 				<c:if test="${myname != buyer}">
-				${chatList.buyer }
+				${chatList.buyer }  <!-- 상대방 닉네임 -->
 				</c:if>
 				</label>
 			</th>
