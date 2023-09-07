@@ -75,30 +75,13 @@
 <body>
 <%@ include file="../include/topMenu.jsp" %>
 
-<aside id="sideMenu">
-    	<h2>장터</h2>
-    		<ul>
-        		<li><a href="#">장터</a></li>
-        		<li>
-          			<a href="#">팝니다</a>
-		          		<ul>
-		            		<li><a href="#">목록</a></li>
-		            
-		          		</ul>
-        		</li>
-        		<li><a href="#">삽니다</a>          
-          			<ul>
-            			<li><a href="#">목록</a></li> 
-          			</ul>
-        		</li>
-      		</ul>
-      	<button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
+	<c:set var="menu" value="board" />
+<%@ include file="../include/sidebar.jsp" %>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <a href="/">홈</a> &gt;
-      <a href="#">마이페이지</a> &gt;
-      <a href="./">장터</a>
+      홈 &gt;
+      장터 &gt;
+      상품등록
     </div> 
     <h1 class="pageTitle">
     	<div>장터</div>

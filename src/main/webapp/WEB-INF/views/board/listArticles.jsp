@@ -78,30 +78,12 @@
 <body>
 <%@ include file="../include/topMenu.jsp" %>
 
-	<aside id="sideMenu">
-    	<h2>장터</h2>
-    		<ul>
-        		<li><a href="#">장터</a></li>
-        		<li>
-          			<a href="#">팝니다</a>
-		          		<ul>
-		            		<li><a href="#">목록</a></li>
-		            
-		          		</ul>
-        		</li>
-        		<li><a href="#">삽니다</a>          
-          			<ul>
-            			<li><a href="#">목록</a></li> 
-          			</ul>
-        		</li>
-      		</ul>
-      	<button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
+	<c:set var="menu" value="board" />
+	<%@ include file="../include/sidebar.jsp" %>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <a href="/">홈</a> &gt;
-      <a href="#">마이페이지</a> &gt;
-      <a href="./">장터</a>
+      홈 &gt;
+      장터
     </div> 
     <h1 class="pageTitle">
     	<div>장터</div>
@@ -128,7 +110,7 @@
 		<c:choose>
 			<c:when test="${articlesList == null}"> <!-- 게시글이 하나도 없는 경우 -->
 				<div>
-					<div colspan="4">
+					<div>
 						<p align="center">
 							<b><span style="font-size:22px;">등록된 게시글이 없습니다.</span></b>
 						</p>
@@ -139,7 +121,29 @@
 						<div class="products">
 				<c:forEach var="article" items="${articlesList }" varStatus="articleNum">
 					<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
-
+					<c:choose>
+						<c:when test = "${article.purpose == 1 }">
+							<ul class="product">
+					          <li>
+					            <a>
+									<img id="i" src="${path}/download.do?articleNO=${article.articleNO }&thumbnail=${article.thumbnail}" class="imgsize"/>
+								</a><br/>
+					          </li>
+					          <li class="product-title">
+					            <a>${article.title}</a><br/>
+					          </li>
+					          <li class="product-price">
+					            구매완료!
+					          </li>
+					          <li class="product-seller">
+					          	${article.userId}
+					          </li>
+					          <li class="product-date">
+					          	${article.write_date}
+					          </li>
+					        </ul>	
+						</c:when>
+						<c:otherwise>
 							<ul class="product">
 					          <li>
 					            <a href="${page}/board/viewArticle.do?articleNO=${article.articleNO}">
@@ -159,8 +163,8 @@
 					          	${article.write_date}
 					          </li>
 					        </ul>
-							
-
+						</c:otherwise>
+					</c:choose>
 				</c:forEach>
 						</div>
 			</c:when>
