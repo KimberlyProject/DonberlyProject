@@ -17,7 +17,7 @@ import com.ezen.board.dto.SearchCriteria;
 // 게시글
 //-----------------------------------------------------------------------------------------------------------
 @Repository("boardDAO")
-public class BoardDAOImpl {
+public class BoardDAO {
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -166,7 +166,16 @@ public class BoardDAOImpl {
 		return sqlSession.selectList(namespace + ".saleBoardListPaging", cri);
 	}
 
-
+	
+	public void buyNow(Map articleMap) throws DataAccessException {
+		System.out.println("------------------------------------------buyNow dao------------------------------------------");
+		sqlSession.update(namespace + ".buyNow", articleMap);
+	}
+	
+	public void saleNow(Map articleMap) throws DataAccessException {
+		System.out.println("------------------------------------------saleNow dao------------------------------------------");
+		sqlSession.update(namespace + ".saleNow", articleMap);
+	}
 	
 	
 

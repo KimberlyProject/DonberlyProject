@@ -137,6 +137,7 @@
 		UPDATE	article_Buy
 		SET		title		= #{title},
 				content		= #{content},
+				purpose		= #{purpose},
 				thumbnail 	= #{thumbnail},
 				price		= #{price}
 
@@ -149,6 +150,7 @@
 		UPDATE	article_sale
 		SET		title		= #{title},
 				content		= #{content},
+				purpose		= #{purpose},
 				thumbnail 	= #{thumbnail},
 				price		= #{price}
 
@@ -193,8 +195,8 @@
 	<![CDATA[
 	SELECT	*
 	FROM	(
-		SELECT  ROWNUM AS recNum, articleNO, userId, write_date, title, content, thumbnail, price
-		FROM article_buy
+		SELECT  ROWNUM AS recNum, articleNO, userId, write_date, title, content, purpose, thumbnail, price
+		FROM article_buy 
         WHERE		1=1
  	]]>
  		<include refid='search'/>
@@ -208,7 +210,7 @@
 	<![CDATA[
 	SELECT	*
 	FROM	(
-		SELECT  ROWNUM AS recNum, articleNO, userId, write_date, title, content, thumbnail, price
+		SELECT  ROWNUM AS recNum, articleNO, userId, write_date, title, content, purpose, thumbnail, price
 		FROM article_sale
         WHERE		1=1
  	]]>
@@ -218,6 +220,28 @@
 	where recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
 	]]>
 	</select>
+	
+	
+	
+	
+	<!-- 구매완료 -->
+	<update id="buyNow" parameterType="java.util.Map">
+	<![CDATA[
+		UPDATE	article_buy
+		SET		userId = #{userId},
+				purpose = 1
+		WHERE	articleNO	= #{articleNO}
+	]]>
+	</update>
+	
+	<update id="saleNow" parameterType="java.util.Map">
+	<![CDATA[
+		UPDATE	article_sale
+		SET		userId = #{userId},
+				purpose = 1
+		WHERE	articleNO	= #{articleNO}
+	]]>
+	</update>
 	
 </mapper>
 

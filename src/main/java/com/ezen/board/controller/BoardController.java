@@ -34,7 +34,7 @@ import com.ezen.board.dto.Criteria;
 import com.ezen.board.dto.PageMaker;
 import com.ezen.board.dto.SaleArticleVO;
 import com.ezen.board.dto.SearchCriteria;
-import com.ezen.board.service.BoardServiceImpl;
+import com.ezen.board.service.BoardService;
 import com.ezen.member.dto.MemberDTO;
 
 
@@ -43,9 +43,9 @@ import com.ezen.member.dto.MemberDTO;
 // 게시글
 //-----------------------------------------------------------------------------------------------------------
 @Controller("boardController")
-public class BoardControllerImpl {
+public class BoardController {
 
-	private static final Logger logger = LoggerFactory.getLogger(BoardControllerImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	//-----------------------------------------------------------------------------------------------------------
 	// 계층형 쿼리
@@ -79,7 +79,7 @@ public class BoardControllerImpl {
 	// @Inject    찾는 순서 : 타입 => @Qualifier => 이름 => 실패
 	//-----------------------------------------------------------------------------------------------------------
 	@Autowired	
-	private BoardServiceImpl boardService;
+	private BoardService boardService;
 	@Inject		// Java에서 지원하는 어노테이션
 	private ArticleVO articleVO;
 	@Inject		// Java에서 지원하는 어노테이션
@@ -610,10 +610,101 @@ public class BoardControllerImpl {
 		return mav;
 		
 	} // End - 게시글 목록 (페이징) 화면 보여주기 
-
-
 	
+	// 구매완료
+	@ResponseBody
+	@RequestMapping(value="/borad/buyEnd", method={RequestMethod.GET, RequestMethod.POST})
+	public ResponseEntity buyNow(HttpServletRequest Request, HttpServletResponse response)
+			throws Exception {
+
+		System.out.println("구매완료");
+		
+		Map<String, Object> articleMap = new HashMap<String, Object>();
+		Enumeration enu = Request.getParameterNames();
+		
+		while(enu.hasMoreElements()) {
+			String	name	= (String) enu.nextElement();
+			String	value	= Request.getParameter(name);
+			System.out.println(name + ":" + value);
+			articleMap.put(name, value);
+		}
+		
+		String 	articleNO	= (String) articleMap.get("articleNO");
+		String	message;
+		
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
+		
+		//-----------------------------------------------------------------------------------------------------------
+		// 임시폴더(C:\\data\\board\\article_image\\temp)에 imageFileName이라는 파일이 존재하면 작동하지 않는다.
+		//-----------------------------------------------------------------------------------------------------------
+		try {
+			boardService.buyNow(articleMap);
+			
+			message	 = "<script>";
+			message	+= "location.href='" + Request.getContextPath() + "/board/listArticles.do';";
+			message	+= "</script>";
+			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		} catch (Exception e) {
+			
+			message	 = "<script>";
+			message	+= "alert('오류가 발생하였습니다.\n다시 시도해 주십시오.');";
+			message	+= "location.href='" + Request.getContextPath() + "/board/listArticles.do';";
+			message	+= "</script>";
+			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		
+		return resEnt;
+	}
 	
+	@ResponseBody
+	@RequestMapping(value="/sale/saleEnd", method={RequestMethod.GET, RequestMethod.POST})
+	public ResponseEntity saleNow(HttpServletRequest Request, HttpServletResponse response)
+			throws Exception {
+
+		System.out.println("구매완료");
+		
+		Map<String, Object> articleMap = new HashMap<String, Object>();
+		Enumeration enu = Request.getParameterNames();
+		
+		while(enu.hasMoreElements()) {
+			String	name	= (String) enu.nextElement();
+			String	value	= Request.getParameter(name);
+			System.out.println(name + ":" + value);
+			articleMap.put(name, value);
+		}
+		
+		String 	articleNO	= (String) articleMap.get("articleNO");
+		String	message;
+		
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
+		
+		//-----------------------------------------------------------------------------------------------------------
+		// 임시폴더(C:\\data\\board\\article_image\\temp)에 imageFileName이라는 파일이 존재하면 작동하지 않는다.
+		//-----------------------------------------------------------------------------------------------------------
+		try {
+			boardService.saleNow(articleMap);
+			
+			message	 = "<script>";
+			message	+= "location.href='" + Request.getContextPath() + "/sale/listArticles.do';";
+			message	+= "</script>";
+			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		} catch (Exception e) {
+			
+			message	 = "<script>";
+			message	+= "alert('오류가 발생하였습니다.\n다시 시도해 주십시오.');";
+			message	+= "location.href='" + Request.getContextPath() + "/sale/listArticles.do';";
+			message	+= "</script>";
+			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		
+		return resEnt;
+	}	
 
 } // End - public class BoardControllerImpl implements BoardController
 

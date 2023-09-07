@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ezen.board.dao.BoardDAOImpl;
+import com.ezen.board.dao.BoardDAO;
 import com.ezen.board.dto.ArticleVO;
 import com.ezen.board.dto.Criteria;
 import com.ezen.board.dto.SaleArticleVO;
@@ -16,10 +16,10 @@ import com.ezen.board.dto.SearchCriteria;
 // 게시글
 //-----------------------------------------------------------------------------------------------------------
 @Service("boardService")
-public class BoardServiceImpl {
+public class BoardService {
 
 	@Autowired
-	BoardDAOImpl boardDAO;
+	BoardDAO boardDAO;
 	
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 목록
@@ -118,7 +118,13 @@ public class BoardServiceImpl {
 
 
 
-
+	public void buyNow(Map articleMap) throws Exception {
+		boardDAO.buyNow(articleMap);
+	}
+	
+	public void saleNow(Map articleMap) throws Exception {
+		boardDAO.saleNow(articleMap);
+	}
 	
 	
 	
