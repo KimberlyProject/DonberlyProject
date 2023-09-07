@@ -44,7 +44,7 @@ public class ChatController {
 	private ChatListDTO chatListDTO;
 	
 	
-	//채팅창 GET
+	//채팅창 GET articleVO 세션으로 보여주기
 	@RequestMapping(value="/chattingview", method=RequestMethod.GET)
 	public String chattingview(String chatId, HttpServletRequest request) throws Exception{
 		
@@ -55,7 +55,7 @@ public class ChatController {
 		
 		//아티클 넘버로 아티클VO 가져오기
 		ArticleVO articleVO = chatService.findArticleVOFromArtNo(artNo,chatListDTO.getStatus());
-		
+		System.out.println("************************************"+articleVO);
 		session.setAttribute("session",articleVO);
 		session.setAttribute("chatList", chatListDTO);
 		
@@ -112,12 +112,19 @@ public class ChatController {
 		System.out.println("###################"+userId);
 		
 		
-		List chatList = chatService.listChat(userId); //chatList 옮김
+		List<ChatListDTO> chatList = chatService.listChat(userId); //chatList 옮김
+		List lastchat  = new ArrayList();
 		//챗 아이디로 챗리스트 가져오기
 		//List<ChatListDTO> artNoAndStatus = new ArrayList<ChatListDTO>();
 		
+		for (ChatListDTO chatListDTO : chatList) {
+			int chid = chatListDTO.getChatId();
+            lastchat.add(chatService.findLastChat(chid));
+        }
+		
 		
 		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("lastChat", lastchat);
 		mav.addObject("chatList",chatList);//넘겨줄 이름, 데이터
 		
 		

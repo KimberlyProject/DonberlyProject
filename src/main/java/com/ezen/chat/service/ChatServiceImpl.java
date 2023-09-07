@@ -78,6 +78,12 @@ public class ChatServiceImpl implements ChatService {
 		return chatDAO.findArticleVOFromArtNo(artNo,status);
 	}
 
+	@Override
+	public ChatDTO findLastChat(int chid) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 	
 	

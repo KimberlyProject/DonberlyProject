@@ -50,13 +50,10 @@
       상세페이지
     </div> 
     <h1 class="pageTitle">
-    	<div>장터</div>
+    	<div>구매장터</div>
     </h1>
 	
 <div class="container">
-<div>
-	<a href="#" class="text-left">홈</a>><a href="#" class="text-left">장터</a>><a href="#" class="text-left">팝니다</a>><a href="#" class="text-left">상세화면</a>
-</div>
 
 	<form name="formArticle" method="post" action="${path}" enctype="multipart/form-data" class="container-div">
 		<div class="item">
@@ -137,8 +134,8 @@
 					<ul class="item" id="trBtn">
 						<li>
 							<input type="button" class="btn btn-info" value="목록으로 돌아가기" onClick="backToList(this.form)"/>
-							<input type="hidden" class="seller" name="seller" value="${article.userId}"/>
-							<input type="hidden" class="buyer" name="buyer" value="${member.userId}"/>
+							<input type="hidden" class="seller" name="seller" value="${member.userId}"/>
+							<input type="hidden" class="buyer" name="buyer" value="${article.userId}"/>
 
 							<input type="hidden" class="article" name="article" value="${article.articleNO}"/>	
 							<c:choose>
@@ -234,7 +231,7 @@ function fn_chat(artNo){
 		 data:	JSON.stringify({"seller":$('.seller').val(),
 			 	"buyer" : $('.buyer').val(),
 			 	"artNo" : artNo,
-			 	"status" : "s"
+			 	"status" : "b"
 				 
 		 
 		 }),	

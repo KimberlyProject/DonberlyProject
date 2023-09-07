@@ -264,7 +264,7 @@ div.chat.ch2{
 					<div>판매자: ${chatList.seller}</div>
 					<div>구매자: ${chatList.buyer }</div>
 					<div>코드 : ${session.p_code }</div>
-					<div style="padding-bottom: 10px;">${a.price}</div>
+					<div style="padding-bottom: 10px;">가격: ${session.price}원</div>
 					
 					<img src="${path}/resources/images/kuromi.png" alt="사진" width="200px;" height="200px;"/>
 					<br><br>
@@ -272,7 +272,7 @@ div.chat.ch2{
 					<br><br>
 					<button type="button" class="btn btn-danger btn-lg">신고 하기</button>
 					<br><br>
-					<button type="button" class="btn btn-warning btn-lg" id="getin">나가기</button>
+					<button type="button" class="btn btn-warning btn-lg" id="getin" onClick="">나가기</button>
 				</td>
 			</tr>
 			<tr>
@@ -289,7 +289,6 @@ div.chat.ch2{
 							<button class="btn btn-success btn-lg sendText" style="height:80px; width:120px;">전송</button>
 							<div class="clearfix"></div>
 						</div>
-					
 				</div>
 				</td>
 			</tr>

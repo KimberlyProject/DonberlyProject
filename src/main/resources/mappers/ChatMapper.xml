@@ -98,9 +98,11 @@
 	<!-- artNo으로 articleVO끌어오기 (buy) -->
 	<select id="findArticleVOFromArtNoB" parameterType="int" resultType="articleVO">
 		<![CDATA[
+		
 			SELECT	*
-			FROM	article_sale
+			FROM	article_buy
 			WHERE	articleNO = #{artNo}
+			
 		]]>
 	</select>
 	
@@ -108,7 +110,7 @@
 	<select id="findArticleVOFromArtNoS" parameterType="int" resultType="articleVO">
 		<![CDATA[
 			SELECT	*
-			FROM	article_buy
+			FROM	article_sale
 			WHERE	articleNO = #{artNo}
 		]]>
 	</select>
