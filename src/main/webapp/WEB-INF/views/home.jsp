@@ -88,7 +88,7 @@
 	</div>
 	
 	<section>
-	  <h1>돈이 되는. <span class="sig">돈벌리!</span></h1>
+	  <h1>돈이 되는 <span class="sig">돈벌리!</span></h1>
 	  <p><span class="sig">중고 거래</span>와 <span class="sig">경매</span>로, 당신의 물건을 <span class="sig">거래</span>해보세요</p>
 	</section>
 	
