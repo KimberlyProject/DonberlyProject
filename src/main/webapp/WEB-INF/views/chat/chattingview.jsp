@@ -259,10 +259,18 @@ div.chat.ch2{
     				</div>
 				</td>
 				<td class="chat_detail" rowspan="2">
-					
+					<c:set var="getArtNickname" value="${session.nickname }"/>
+					<c:set var="seller" value="${chatList.seller}"/>
+					<c:set var="buyer" value="${chatList.buyer }"/>
 					<div>제목 : ${session.title }</div>
-					<div>판매자: ${chatList.seller}</div>
-					<div>구매자: ${chatList.buyer }</div>
+					<c:if test="${seller eq  getArtNickname}">
+						<div>판매자: ${session.nickname}</div>
+						<div>구매자: ${member.nickname }</div>
+					</c:if>
+					<c:if test="${buyer eq  getArtNickname}">
+						<div>판매자: ${member.nickname }</div>
+						<div>구매자: ${session.nickname }</div>
+					</c:if>
 					<div>코드 : ${session.p_code }</div>
 					<div style="padding-bottom: 10px;">가격: ${session.price}원</div>
 					
