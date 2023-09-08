@@ -37,7 +37,7 @@
 		
 		SELECT	*
 		FROM		ask
-		
+		ORDER BY 	articleNo desc
 	</select>
 	
 	
