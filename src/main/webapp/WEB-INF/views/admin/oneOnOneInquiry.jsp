@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
 <html>
 <head>
 	<title>Home</title>
 	<%@ include file="../include/header.jsp" %>
-	<%@ include file="../include/profileModal.jsp" %>
 	<style>
 		th {
 			text-align:			center;
@@ -53,11 +53,18 @@
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-	<c:set var="menu" value="admin" />
-	<%@ include file="../include/sidebar.jsp" %>
-     <div class="page_dir container">
+	<aside id="sideMenu">
+      <ul>
+        <li><a href="./oneOnOneInquiry">1:1 문의</a></li>
+        <li><a href="./memberList">회원 목록</a></li>
+      </ul>
+      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
+    </aside>
+    <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      홈 &gt; 관리자 &gt; 1:1 문의
+      <span><a href="./oneOnOneInquiry">관리자</a></span>
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span><a href="./oneOnOneInquiry">1:1 문의</a></span>
     </div>
     <h1 class="pageTitle"><div>1:1 문의</div></h1>
 	
@@ -115,6 +122,25 @@
 						${ask.content}
 						<br/>
 						<br/>
+						1대1 문의사항 입니다. <br/>
+						답변주세요
+						<div>
+							<button id ="searchbtn" class="btn btn-success col-sm-1" type="button">답변하기</button>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" style="width: 100%;"/></td>
+					<td>3</td>
+					<td class="title">제목자리입니다.</td>
+					<td>gildong</td>
+					<td>2023.08.23</td>
+				</tr>
+				<tr>
+					<td class="content" colspan="5">
+						1대1 문의사항 입니다. <br/>
+						답변주세요
+
 						<div>
 							<button id ="searchbtn" class="btn btn-success col-sm-1" type="button">답변하기</button>
 						</div>

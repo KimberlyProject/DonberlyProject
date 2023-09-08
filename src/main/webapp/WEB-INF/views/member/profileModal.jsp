@@ -43,9 +43,9 @@
                     <div class="row">
                         <div class="row-md-offset-2">
                             <p class="info"><strong>닉네임:</strong> <span id="modalNickname"></span></p>
+		                    <p class="info"><strong>이메일:</strong> <span id="modalEmail"></span></p>
                         </div>
                     </div>
-                    <p class="info"><strong>이메일:</strong> <span id="modalEmail"></span></p>
                 </div>
             </div>
             <div class="modal-footer">
@@ -80,12 +80,29 @@
 
 <script>
     function openModal(member) {
-        // 여기서 member는 해당 회원의 정보 객체입니다.
-        // 모달 내용을 동적으로 채워 넣는 코드를 추가합니다.
-        document.getElementById('modalNickname').innerText = member.nickname;
-        document.getElementById('modalEmail').innerText = member.email;
+        $.ajax({
+            type: "POST",
+            url: "/member/profileModal",
+            data: {
+                nickname: member.nickname,
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data) {
+                    // 모달 내용을 동적으로 채웁니다.
+                    document.getElementById('modalNickname').innerText = member.nickname;
+                    document.getElementById('modalEmail').innerText = member.email;
 
-        // 모달을 활성화합니다.
-        $('#memberModal').modal('show');
+                    // 모달을 활성화합니다.
+                    $('#memberModal').modal('show');
+                } else {
+                    alert('회원 정보를 찾을 수 없습니다.');
+                }
+            },
+            error: function (error) {
+                console.error('오류 발생: ', error);
+                alert('회원 정보를 가져오는 중 오류가 발생했습니다.');
+            }
+        });
     }
 </script>
