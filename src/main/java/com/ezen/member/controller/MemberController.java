@@ -237,7 +237,7 @@ public class MemberController {
     @RequestMapping(value = "/memberUpdate", method = RequestMethod.POST)
     public String memberUpdate(@ModelAttribute("editor") MemberDTO memberDTO, Model model) throws Exception {
         memberService.memberUpdate(memberDTO);
-        return "redirect:/myPage/myInfo"; // 수정이 완료되면 프로필 페이지로 이동하도록 수정
+        return "redirect:/myPage/myInfo.do"; // 수정이 완료되면 프로필 페이지로 이동하도록 수정
     }
   	
     // 회원탈퇴
@@ -256,7 +256,7 @@ public class MemberController {
             } else {
                 model.addAttribute("message", "비밀번호와 비밀번호 확인이 일치하지 않습니다.");
                 // 비밀번호와 비밀번호 확인이 일치하지 않는 경우 메시지를 모델에 추가하고 다시 입력 화면으로 이동
-                return "myPage/myInfo"; // 수정이 실패한 경우 원래 페이지로 이동하도록 수정
+                return "mypage/myInfo"; // 수정이 실패한 경우 원래 페이지로 이동하도록 수정
             }
         } else {
             // 로그인한 회원과 입력한 회원 아이디가 일치하지 않는 경우에는 처리하지 않고 홈페이지로 이동
