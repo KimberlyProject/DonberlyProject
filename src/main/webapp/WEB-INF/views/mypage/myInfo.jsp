@@ -130,7 +130,13 @@
         <%@ include file="../include/topMenu.jsp" %>
     </div>
     
-      
+    	<c:set var="menu" value="mypage" />
+	<%@ include file="../include/sidebar.jsp" %>
+    <div class="page_dir container">
+      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+      홈 &gt;
+      내정보보기
+    </div> 
 
 	<!-- 배너 타이틀 -->
   <h1 class="pageTitle"><div>내정보</div></h1>

@@ -112,7 +112,7 @@ if("${memberlevel.userStatus}" == "N1"){
 	                       ${ member.nickname } 님                     
 	                   </button>
 	                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-	                     <li><a href="/myPage/myInfo">내 정보 보기</a></li>                          
+	                     <li><a href="/myPage/myInfo.do">내 정보 보기</a></li>                          
 	                     <li><a href="/member/logout">로그 아웃</a></li>                          
 	                   </ul>
 	               </div>
