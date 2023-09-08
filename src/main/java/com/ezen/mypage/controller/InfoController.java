@@ -41,7 +41,7 @@ public class InfoController {
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 목록 (페이징) 화면 보여주기 + 검색조건(SearchCriteria)
 	//-----------------------------------------------------------------------------------------------------------
-	@RequestMapping(value="/myPage/marketInfo.do", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/mypage/salesHistory.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listArticlesPaging(HttpServletRequest request, HttpServletResponse response, SearchCriteria cri)
 			throws Exception {
 
