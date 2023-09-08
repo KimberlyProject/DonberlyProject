@@ -136,7 +136,7 @@
 					            구매완료!
 					          </li>
 					          <li class="product-seller">
-					          	<a href="javascript:void(0);" onclick="openModal({nickname: '${article.userId}', email: '${article.title}'})">${article.userId}</a>
+					          	<a>${article.nickname}</a>
 					          </li>
 					          <li class="product-date">
 					          	${article.write_date}
@@ -157,7 +157,7 @@
 					            ${article.price}원 <!-- 여기에 가격 표시 -->
 					          </li>
 					          <li class="product-seller">
-					          	${article.nickname}
+					          	<a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}'})">${article.nickname}</a>
 					          </li>
 					          <li class="product-date">
 					          	${article.write_date}

@@ -19,6 +19,8 @@
 		<result property="thumbnail"		column="thumbnail"/>
 		<result property="price"			column="price"/>
 		<result property="nickname"			column="nickname"/>
+		<result property="email"			column="email"/>
+		<result property="nickname"			column="nickname"/>
 	</resultMap>
 	
 	<resultMap id="saleArticlesResult" type="saleArticleVO">
@@ -185,9 +187,9 @@
 	<![CDATA[
 	SELECT	*
 	FROM	(
-		SELECT  ROWNUM AS recNum, articleNO, userId, write_date, title, content, purpose, thumbnail, price, nickname
-		FROM article_buy 
-        WHERE		1=1
+		SELECT  ROWNUM AS recNum, a.*, m.email
+		FROM article_buy a, members m
+        WHERE		a.userId=m.userId
  	]]>
  		<include refid='search'/>
  	<![CDATA[
@@ -200,9 +202,9 @@
 	<![CDATA[
 	SELECT	*
 	FROM	(
-		SELECT  ROWNUM AS recNum, articleNO, userId, write_date, title, content, purpose, thumbnail, price, nickname
-		FROM article_sale
-        WHERE		1=1
+		SELECT  ROWNUM AS recNum, a.*, m.email
+		FROM article_buy a, members m
+        WHERE		a.userId=m.userId
  	]]>
  		<include refid='search'/>
  	<![CDATA[

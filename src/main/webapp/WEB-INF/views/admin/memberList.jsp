@@ -98,6 +98,7 @@
 						<th><span class="glyphicon glyphicon-ok"></span></th>
 						<th>No</th>
 						<th>아이디</th>
+						<th>닉네임</th>
 						<th>연락처</th>
 						<th>주소</th>
 						<th>가입일자</th>
@@ -109,6 +110,7 @@
 							<td><input type="checkBox" name="checkBox" style="width: 100%;"/></td>
 							<td onclick="location.href='/admin/memberDetail?userId=${list.userId}'">${memberNum.count}</td>
 							<td onclick="location.href='/admin/memberDetail?userId=${list.userId}'">${list.userId}</a></td>
+							<td><a href="javascript:void(0);" onclick="openModal({nickname: '${list.nickname}', email: '${list.email}'})">${list.nickname}</a></td>
 							<td onclick="location.href='/admin/memberDetail?userId=${list.userId}'">${list.tel}</a></td>
 							<td class="addr" onclick="location.href='/admin/memberDetail?userId=${list.userId}'">${list.address}</a></td>
 							<td onclick="location.href='/admin/memberDetail?userId=${list.userId}'"><fmt:formatDate value="${list.regDate}" pattern="yyyy년 MM월 dd일"/></a></td>
