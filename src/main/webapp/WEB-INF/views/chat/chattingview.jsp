@@ -241,6 +241,11 @@ div.chat.ch2{
 	background-color: #F0FFF0;
 }
 
+.chat_detail{
+	position: relative;
+	z-index: 10;
+}
+
 </style>
 </head>
 <body>
@@ -250,7 +255,7 @@ div.chat.ch2{
 	
 		<table border="1" style="margin: 0px; padding: 0px;">
 			<tr>
-				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">과의 채팅창</td>
+				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${session.nickname }&gt;님과의 채팅창</td>
 			</tr>
 			<tr>
 				<td class="chat_area">
@@ -274,13 +279,13 @@ div.chat.ch2{
 					<div>코드 : ${session.p_code }</div>
 					<div style="padding-bottom: 10px;">가격: ${session.price}원</div>
 					
-					<img src="${path}/resources/images/kuromi.png" alt="사진" width="200px;" height="200px;"/>
+					<img src="${path}/resources/images/board/article_image/${session.articleNO }/${session.thumbnail}" alt="사진" width="200px;" height="200px;"/>
 					<br><br>
 					<button type="button" class="btn btn-success btn-lg">일정 추가</button>
 					<br><br>
 					<button type="button" class="btn btn-danger btn-lg">신고 하기</button>
 					<br><br>
-					<button type="button" class="btn btn-warning btn-lg" id="getin" onClick="">나가기</button>
+					<button type="button" class="btn btn-warning btn-lg" id="getin" onClick="chatOut()">채팅방 나가기</button>
 				</td>
 			</tr>
 			<tr>
@@ -394,7 +399,27 @@ $(document).ready(function(){
 	});
 });
 
-
+function chatOut(){
+	alert("정말 채팅방에서 나가시겠습니까?");
+	
+	$.ajax({
+		 url:	"/chat/outChat",
+		 type:	"post",
+		 dataType:"text",
+		 data:	{
+				 "chatId" : $('#chatId').val()
+		 },	
+		 success: function(){
+			window.close();
+		 },
+		 error:function(request,status,error){
+			 console.log("실패");
+		 },
+		 complete:function(){
+			 $('#chatContent').val('');
+		 }
+	 });
+}
 
 
 </script>

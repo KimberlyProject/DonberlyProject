@@ -31,6 +31,8 @@ public interface ChatDAO {
 	
 	public ArticleVO findArticleVOFromArtNo(int artNo,String status) throws Exception;
 	
-	public List<ChatDTO> findLastChat(String userId)throws Exception;
+	public List<ChatDTO> findLastChat()throws Exception;
+	
+	public void deleteChatRoom(int chatId) throws Exception;
 }
 

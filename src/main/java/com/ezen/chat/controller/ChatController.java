@@ -117,18 +117,22 @@ public class ChatController {
 		//챗 아이디로 챗리스트 가져오기
 		//List<ChatListDTO> artNoAndStatus = new ArrayList<ChatListDTO>();
 		
+		//최근한거 가져오기 채팅방 넘버 별로 최근꺼
+		
+		
 		
 		//int chid = chatListDTO.getChatId();
 		//System.out.println("***********************************여기까지는 나오려나");
-		//List <ChatDTO> lastchat =chatService.findLastChat(userId);
+		//ChatListDTO lastchat = new ChatListDTO();
+		List<ChatDTO> lastchat = chatService.findLastChat(); 
         //System.out.println("여기까지는 나오나" + lastchat);
-		
+		System.out.println("마지막 채팅*******************"+lastchat);
 		
 		ModelAndView mav = new ModelAndView(viewName);
-		//mav.addObject("lastChat", lastchat);
+		//mav.addObject("lastChat", lastchat.getLastChat());
 		//System.out.println(lastchat);
 		mav.addObject("chatList",chatList);//넘겨줄 이름, 데이터
-		
+		mav.addObject("lastChat",lastchat);
 		
 		//닉네임 찾기
 		
@@ -177,6 +181,14 @@ public class ChatController {
 		return list;
 		
 		
+	}
+	
+	//채팅방과 채팅내용 지우기
+	@ResponseBody
+	@RequestMapping(value="/outChat", method=RequestMethod.POST)
+	public void outChat(@RequestParam(value="chatId", required=false) String chatId) throws Exception{
+		int ch = Integer.parseInt(chatId);
+		chatService.deleteChatRoom(ch);
 	}
 	
 }

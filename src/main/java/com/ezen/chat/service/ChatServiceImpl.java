@@ -79,9 +79,15 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public List<ChatDTO> findLastChat(String userId) throws Exception {
-		// TODO Auto-generated method stub
-		return findLastChat(userId);
+	public List<ChatDTO> findLastChat() throws Exception {
+		System.out.println("서버스*******************************");
+		return chatDAO.findLastChat();
+	}
+
+	@Override
+	public void deleteChatRoom(int chatId) throws Exception {
+		chatDAO.deleteChatRoom(chatId);
+		
 	}
 
 	

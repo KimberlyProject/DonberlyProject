@@ -65,8 +65,9 @@
 	</select>
 	
 	<!-- 채팅한 내용 다 리스트에 넣어서 보내기 -->
-	<select id="chatView" parameterType="int" resultType="chatDTO">
-		select * from chat
+	<select id="chatView" parameterType="int" resultType="chatDTO"><!-- 여기 수정함 TO_CHAR(chatTime,'HH24:MI:SS')-->
+		select chatId, artNo, fromId, toId, chatContent, chatTime
+		from chat
 		where chatId=#{chatId}
 		order by chatTime
 	</select>
@@ -118,14 +119,29 @@
 	<!-- chatid로 마지막 컨텐트 찾기 -->
 	<select id="findLastChat" resultType="chatDTO">
 	<![CDATA[
-		select *
-		from (select *
-	        from chat
-	        where fromId = #{userId} or toId = #{userId}
-	        order by chatTime desc)
-	    where rownum<=1
+		select chatid, chatcontent, chatTime 
+            from chat 
+            where (chatid, chatTime) 
+            in (
+                select chatid, max(chatTime) as chatTime 
+                from chat group by chatid 
+             )
+            order by chatid
 	 ]]>
 	</select>
+	
+	<!-- 채팅방 지우기 -->
+	<delete id="deleteChatRoom">
+	 	delete from chatlist
+    	where chatid=#{chatId}
+	</delete>
+	
+	<!-- 채팅 내용 지우기 -->
+	<delete id="deleteChatting">
+		delete from chat
+		where chatid=#{chatId}
+	
+	</delete>
 	
 	
 	
