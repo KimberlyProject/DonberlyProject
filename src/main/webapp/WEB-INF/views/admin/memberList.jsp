@@ -6,7 +6,7 @@
 <head>
 	<title>Home</title>
 	<%@ include file="../include/header.jsp" %>
-	<%@ include file="../include/profileModal.jsp" %>
+	<%@ include file="../member/profileModal.jsp" %>
 	<style>
 		th {
 			text-align:			center;
@@ -130,5 +130,7 @@
 			});
 		});
 	</script>
+	
+	
 </body>
 </html>

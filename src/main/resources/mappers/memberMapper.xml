@@ -69,10 +69,10 @@
 	</update>
 	
 	<!-- 09-04 -->
-   <select id="profile" parameterType="String" resultType="com.ezen.member.dto.MemberDTO">
-		SELECT	* 
+   <select id="profile" parameterType="com.ezen.member.dto.MemberDTO" resultType="com.ezen.member.dto.MemberDTO">
+		SELECT	userId, nickname, email
 		FROM	members
-		WHERE	userId = #{userId}
+		WHERE	nickname = #{nickname}
 	</select>
 
 	<!-- 회원탈퇴 -->

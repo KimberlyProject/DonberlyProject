@@ -40,6 +40,10 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne(namespace + ".findId", memberDTO);
 	}
 	
+	public MemberDTO profileModal(MemberDTO memberDTO) throws Exception {
+		return sqlSession.selectOne(namespace + ".profile", memberDTO);
+	}
+	
 	// 비밀번호 찾기
 	@Override
 	public String findPasswd(MemberDTO memberDTO) throws Exception {		
@@ -62,14 +66,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne(namespace + ".nickCheck", memberDTO);
 	}
 	
-	
 	@Override
 	public void memberDelete(MemberDTO memberDTO) throws Exception {
 		sqlSession.delete(namespace + ".delete", memberDTO.getUserId());
 	}
 
-
-	// 11:52
 	@Override
 	public MemberDTO userProfileEditor(String id) throws Exception {
 		return sqlSession.selectOne(namespace + ".editor", id);
@@ -81,8 +82,9 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 	
 	// 09-04
-	@Override
-	public MemberDTO memberProfile(String userId) throws Exception {
-		return sqlSession.selectOne(namespace + ".profile", userId);
-	}
+	/*
+	 * @Override public MemberDTO getProfileData(MemberDTO memberDTO) { return
+	 * sqlSession.selectOne(namespace + ".profile", memberDTO); }
+	 */
+
 }

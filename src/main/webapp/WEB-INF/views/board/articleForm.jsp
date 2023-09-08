@@ -67,7 +67,7 @@
 <%@ include file="../include/topMenu.jsp" %>
 <div class="container">
 		<br/><br/><br/><br/>
-   <form  class="conta" name="articleForm" method="post"   action="${contextPath}/board/addNewArticleMulti.do"   enctype="multipart/form-data">
+   <form  class="conta" name="articleForm" method="post"   action="${contextPath}/board/addNewArticle.do"   enctype="multipart/form-data">
        <!-- <div border="0" align="center"> -->   
       <div class="item image" id="d_file">
          <ul class= "item">

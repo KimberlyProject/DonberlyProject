@@ -38,6 +38,11 @@ public class MemberServiceImpl implements MemberService {
 	public String findId(MemberDTO memberDTO) throws Exception {		
 		return memberDAO.findId(memberDTO);
 	}
+	
+	public MemberDTO profileModal(MemberDTO memberDTO) throws Exception {
+		return memberDAO.profileModal(memberDTO);
+	}
+	
 	@Override
 	public String findPasswd(MemberDTO memberDTO) throws Exception {		
 		return memberDAO.findPasswd(memberDTO);
@@ -69,11 +74,10 @@ public class MemberServiceImpl implements MemberService {
     }
 
     // 09-04
-    @Override
-	public MemberDTO memberProfile(String userId) throws Exception {
-		
-		return memberDAO.memberProfile(userId);
-	}
+	/*
+	 * @Override public MemberDTO getProfileData(MemberDTO memberDTO) { // 데이터베이스에서
+	 * MemberDTO를 조회하고 반환합니다. return memberDAO.getProfileData(memberDTO); }
+	 */
 
 	@Override
 	public void memberDelete(MemberDTO memberDTO) throws Exception {
