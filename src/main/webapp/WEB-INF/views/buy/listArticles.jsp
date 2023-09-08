@@ -136,7 +136,7 @@
 					            구매완료!
 					          </li>
 					          <li class="product-seller">
-					          	<a href="javascript:void(0);" onclick="openModal({nickname: '${article.userId}', email: '${article.title}'})">${article.userId}</a>
+					          	<a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.title}'})">${article.nickname}</a>
 					          </li>
 					          <li class="product-date">
 					          	${article.write_date}
