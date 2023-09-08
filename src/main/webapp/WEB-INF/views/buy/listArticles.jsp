@@ -94,7 +94,7 @@
 	<h1 align="center">게시글</h1>
 	
 	<!-- 검색 조건 -->
-	<div class="col-sm-offset-6">
+	<div class="col-sm-offset-7">
 		<span class="label label-info" style="font-size:17px;">검색조건</span>
 		
 		<select id="searchType" style="font-size:18px;">
