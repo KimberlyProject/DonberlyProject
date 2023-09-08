@@ -41,7 +41,7 @@
 <%@ include file="../include/topMenu.jsp" %>
 
 
-	<c:set var="menu" value="sale" />
+	<c:set var="menu" value="board" />
 	<%@ include file="../include/sidebar.jsp" %>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
@@ -151,7 +151,7 @@
 							<!-- 로그인한 아이디와 게시글을 쓴 사람의 아이디가 같다면, 글쓴 본인이므로 수정/삭제가 가능하다. -->
 							<c:if test="${member.userId == article.userId}">
 								<input type="button" class="btn btn-warning" value="수정하기" onClick="fn_enable(this.form)"/>
-								<input type="button" class="btn btn-danger"  value="삭제하기" onClick="fn_remove('${path}/board/removeArticle.do', ${article.articleNO})"/>
+								<input type="button" class="btn btn-danger"  value="삭제하기" onClick="fn_remove('${path}/sale/removeArticle.do', ${article.articleNO})"/>
 								<input type="button" class="btn btn-warning" value="구매완료" id="buyEnd"/>
 							</c:if>
 						<li>
@@ -216,7 +216,7 @@ function readURL(input) {
 
 // 게시글 수정하기
 function fn_modify_article(obj) {
-	obj.action = "${page}/board/modArticle.do";
+	obj.action = "${page}/sale/modArticle.do";
 	obj.submit();
 }
 

@@ -2,7 +2,9 @@ package com.ezen.admin.service;
 
 import java.util.List;
 
+import com.ezen.ccenter.dto.CcenterDTO;
 import com.ezen.member.dto.MemberDTO;
+
 
 public interface AdminService {
 	
@@ -35,4 +37,6 @@ public interface AdminService {
 	// 회원 영구 정지
 	//--------------------------------------------------------------------------------------------------
 	public void Psuspension(String userId) throws Exception;
+	
+	public List<CcenterDTO> listOneOnOne() throws Exception;
 }

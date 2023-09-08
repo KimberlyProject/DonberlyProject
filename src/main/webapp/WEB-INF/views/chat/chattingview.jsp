@@ -259,15 +259,15 @@ div.chat.ch2{
     				</div>
 				</td>
 				<td class="chat_detail" rowspan="2">
-					<c:set var="getArtNickname" value="${session.nickname }"/>
+					<c:set var="userId" value="${session.userId }"/>
 					<c:set var="seller" value="${chatList.seller}"/>
 					<c:set var="buyer" value="${chatList.buyer }"/>
-					<div>제목 : ${session.title }</div>
-					<c:if test="${seller eq  getArtNickname}">
+					<div>제목 : ${session.title}</div>
+					<c:if test="${seller eq  userId}">
 						<div>판매자: ${session.nickname}</div>
 						<div>구매자: ${member.nickname }</div>
 					</c:if>
-					<c:if test="${buyer eq  getArtNickname}">
+					<c:if test="${buyer eq userId}">
 						<div>판매자: ${member.nickname }</div>
 						<div>구매자: ${session.nickname }</div>
 					</c:if>
@@ -349,7 +349,6 @@ function getChat(){
 	 });
 }
 $(document).ready(function(){
-	
 	
 	setInterval(getChat,500);
 	

@@ -112,7 +112,6 @@ label{
 	function make_chat(chatId){	
 		//location.href="${path}/chat/chattingview?articleNo="+status+artNo;
 	 	window.open("${path}/chat/chattingview?chatId="+chatId , "_blank", "width=940, height=750");
-		
 	}
 	
 	

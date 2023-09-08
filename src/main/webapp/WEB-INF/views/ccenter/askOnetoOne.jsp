@@ -1,34 +1,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ <%@ page import="java.io.*" %>
+    <%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>1:1 문의하기</title>
     <%@ include file="../include/header.jsp" %>
-    <style>
-    	#inquiry-form table tr>td:nth-child(1){
-    		text-align: center; 
-    		width: 20%;
-    	}
-    	#inquiry-form table tr>td:nth-child(2) input {
-    		width: 100%;
-    	}
-    	#inquiry-form table tr>td:nth-child(2) textarea{
-    		width: 100%;
-    		height: 200px;
-    	}
-    	
-    	#title::placeholder, #content::placeholder {
-        color: lightgray; /* 연한 회색으로 변경 */
-    	}
-    	
+
+<style>
+   	.container table tr>td:nth-child(1){
+   		text-align: center; 
+   		width: 20%;
+   	}
+   	.container table tr>td:nth-child(2) input {
+   		width: 100%;
+   	}
+   	.container table tr>td:nth-child(2) textarea{
+   		width: 100%;
+   		height: 200px;
+   	}
+   	
+   	#title::placeholder, #content::placeholder {
+       color: lightgray; /* 연한 회색으로 변경 */
+   	}
+   	
     
    
-    </style>
+</style>
+
 </head>
 <body>
 
 <%@ include file="../include/topMenu.jsp" %>
+
+<!-- 비로그인 상태에서 1:1 문의하기 클릭했을 때 로그인 창으로 보내는 펑션 -->
+<%
+	if(session.getAttribute("isLogOn") == null) {%>
+	<!-- 
+		<script>
+			alert("먼저 로그인을 하셔야 글을 쓰실 수 있습니다!");
+			location.href="/member/login";
+		</script>
+	 -->	
+		<%
+		PrintWriter pw = response.getWriter();
+		pw.println("<script>");
+		pw.println("alert('먼저 로그인을 하셔야 글을 쓰실 수 있습니다!');");
+		pw.println("location.href='/member/login?action=/ccenter/askOnetoOne';");
+		pw.println("</script>");
+		pw.flush();
+		pw.close();
+		// out.println("<script>alert("먼저 로그인을 해주세요!");</script>");
+		// response.sendRedirect("/member/login");
+	}
+%>
 
    <aside id="sideMenu">
       <ul>
@@ -39,6 +65,7 @@
       </ul>
       <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
     </aside>
+    
     <div class="page_dir container">
 
 	<c:set var="menu" value="ccenter" />
@@ -50,16 +77,17 @@
     </div>
     <h1 class="pageTitle"><div>1:1 문의하기</div></h1>
     
-    <div id="inquiry-form" class="container">
-        <form id="inquiry-form">
+    <div class="container">
+        <form name="askOnetoOne" method="post" action="${path }/ccenter/addNewAsk.do" enctype="multipart/form-data">
             <table style="width: 100%;" class="table" id="table" >
+                            
                 <tr>
                     <td><label for="title">제목</label></td>
                     <td><input type="text" id="title" name="title" placeholder="제목을 입력하세요"></td>
                 </tr>
                 <tr>
                     <td><label for="nickname">작성자</label></td>
-                    <td><input type="text" id="nickname" name="nickname"></td>
+                    <td><input type="text" id="nickname" name="nickname" value="${member.userId}" readonly></td>
                 </tr>
                 <tr>
                     <td><label for="content">문의내용</label></td>
@@ -67,57 +95,17 @@
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: center;">
-                        <button type="submit" class="btn btn-success" id="submit-button">문의하기</button>
-                        <button type="reset" class="btn btn-danger" id="reset-button">취소</button>
+                        <button class="btn btn-success" type="submit" id="submit-button">문의하기</button>
+                        <button class="btn btn-danger" type="reset" id="reset-button">취소</button>
                     </td>
                 </tr>
             </table>
         </form>
     </div>
+
+
 <script>
-    const submitButton = document.getElementById('submit-button');
-    const tableBody = document.getElementById('table-body');
-
-    submitButton.addEventListener('click', submitInquiry);
-
-    function submitInquiry() {
-        const title = document.getElementById('title').value;
-        const nickname = document.getElementById('nickname').value;
-        const content = document.getElementById('content').value;
-
-        if (title.trim() === '' || nickname.trim() === '' || content.trim() === '') {
-            alert('모든 필드를 입력해주세요.');
-            return;
-        }
-
-        // 서버로 데이터를 전송하고, 테이블에 추가하는 로직을 구현해야 합니다.
-
-        const newRow = createTableRow(title, nickname, content);
-        tableBody.appendChild(newRow);
-
-        // 입력 필드 초기화
-        document.getElementById('title').value = '';
-        document.getElementById('nickname').value = '';
-        document.getElementById('content').value = '';
-    }
-
-    function createTableRow(title, nickname, content) {
-        const newRow = document.createElement('tr');
-
-        const titleCell = document.createElement('td');
-        titleCell.textContent = title;
-        newRow.appendChild(titleCell);
-
-        const nicknameCell = document.createElement('td');
-        nicknameCell.textContent = nickname;
-        newRow.appendChild(nicknameCell);
-
-        const contentCell = document.createElement('td');
-        contentCell.textContent = content;
-        newRow.appendChild(contentCell);
-
-        return newRow;
-    }
+   
 </script>
 
 

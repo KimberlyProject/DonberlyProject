@@ -83,7 +83,9 @@
     </article>
     
    	<c:if test="${ member != null }">
-   	<script>location.href = "/myPage/myInfo"</script>
+   	<script>location.href = '/member/login?action=/ccenter/askOnetoOne'
+   	
+   	</script>
     </c:if>
     
     <script>
