@@ -65,17 +65,83 @@
 	</select>
 	
 	<!-- 채팅한 내용 다 리스트에 넣어서 보내기 -->
-	<select id="chatView" parameterType="int" resultType="chatDTO">
-		select * from chat
+	<select id="chatView" parameterType="int" resultType="chatDTO"><!-- 여기 수정함 TO_CHAR(chatTime,'HH24:MI:SS')-->
+		select chatId, artNo, fromId, toId, chatContent, chatTime
+		from chat
 		where chatId=#{chatId}
+		order by chatTime
 	</select>
 	
-	<!--  -->
+	<!-- 챗 아이디 찾기 -->
 	<select id="findChatId" resultType="int">
 		SELECT	chatId
 		FROM	chatlist
 		WHERE	artNo = #{artNo} and seller = #{seller} and buyer=#{buyer}
 	</select>
+	
+	<!-- 아티클 넘버 챗아이디로 찾기 -->
+	<select id="findChatListFromChatId" resultType="chatListDTO">
+		select *
+		from chatlist
+		where chatId = #{chatId}
+	</select>
+	
+	<!-- fromId로 chatDTO 찾기 -->
+	
+	<select id="findContent" resultType="chatDTO">
+		<![CDATA[
+		select *
+		from (select * from chat where toid = #{fromId} and chatid=#{chatId} order by chattime desc)
+		where rownum <= 1
+		]]>
+	</select>
+	
+	<!-- artNo으로 articleVO끌어오기 (buy) -->
+	<select id="findArticleVOFromArtNoB" parameterType="int" resultType="articleVO">
+		<![CDATA[
+		
+			SELECT	*
+			FROM	article_buy
+			WHERE	articleNO = #{artNo}
+			
+		]]>
+	</select>
+	
+	<!-- artNo으로 articleVO끌어오기 (sale) 누군가가 반대로 해놔서 반대로 해야함-->
+	<select id="findArticleVOFromArtNoS" parameterType="int" resultType="articleVO">
+		<![CDATA[
+			SELECT	*
+			FROM	article_sale
+			WHERE	articleNO = #{artNo}
+		]]>
+	</select>
+	
+	<!-- chatid로 마지막 컨텐트 찾기 -->
+	<select id="findLastChat" resultType="chatDTO">
+	<![CDATA[
+		select chatid, chatcontent, chatTime 
+            from chat 
+            where (chatid, chatTime) 
+            in (
+                select chatid, max(chatTime) as chatTime 
+                from chat group by chatid 
+             )
+            order by chatid
+	 ]]>
+	</select>
+	
+	<!-- 채팅방 지우기 -->
+	<delete id="deleteChatRoom">
+	 	delete from chatlist
+    	where chatid=#{chatId}
+	</delete>
+	
+	<!-- 채팅 내용 지우기 -->
+	<delete id="deleteChatting">
+		delete from chat
+		where chatid=#{chatId}
+	
+	</delete>
 	
 	
 	

@@ -60,6 +60,36 @@ public class ChatServiceImpl implements ChatService {
 		return chatDAO.chatView(chatId);
 	}
 
+	@Override
+	public ChatListDTO findChatListFromChatId(int chatId) throws Exception {
+		
+		return chatDAO.findChatListFromChatId(chatId);
+	}
+
+	@Override
+	public ChatDTO findContent(ChatDTO chatDTO) throws Exception {
+		
+		return chatDAO.findContent(chatDTO);
+	}
+
+	@Override
+	public ArticleVO findArticleVOFromArtNo(int artNo,String status) throws Exception {
+		
+		return chatDAO.findArticleVOFromArtNo(artNo,status);
+	}
+
+	@Override
+	public List<ChatDTO> findLastChat() throws Exception {
+		System.out.println("서버스*******************************");
+		return chatDAO.findLastChat();
+	}
+
+	@Override
+	public void deleteChatRoom(int chatId) throws Exception {
+		chatDAO.deleteChatRoom(chatId);
+		
+	}
+
 	
 	
 	

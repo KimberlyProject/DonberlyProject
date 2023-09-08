@@ -123,11 +123,12 @@ public class AdminController {
 		adminService.Psuspension(userId);
 		return "redirect:/admin/memberList";
 	}
-	
+
 	//-----------------------------------------------------------------------------------------------------------
 	// 1:1 문의하기 리스트 생성
 	//-----------------------------------------------------------------------------------------------------------
-	@RequestMapping(value="/oneOnOneInquiry.do", method={RequestMethod.GET, RequestMethod.POST})
+
+	@RequestMapping(value="/oneOnOneInquiry.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listOneOnOne(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		System.out.println("시작");

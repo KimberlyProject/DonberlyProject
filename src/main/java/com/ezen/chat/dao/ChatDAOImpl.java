@@ -99,6 +99,50 @@ public class ChatDAOImpl implements ChatDAO {
 		return sqlSession.selectList(namespace+".chatView",chatId);
 	}
 
+	@Override
+	public ChatListDTO findChatListFromChatId(int chatId) throws Exception {
+		
+		return sqlSession.selectOne(namespace+".findChatListFromChatId",chatId);
+	}
+
+	@Override
+	public ChatDTO findContent(ChatDTO chatDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".findContent",chatDTO);
+	}
+
+	@Override
+	public ArticleVO findArticleVOFromArtNo(int artNo,String status) throws Exception {
+		if(status.equals("s")) {
+			return sqlSession.selectOne(namespace+".findArticleVOFromArtNoS",artNo);
+			
+		}
+		else if(status.equals("b")) {
+			return sqlSession.selectOne(namespace+".findArticleVOFromArtNoB",artNo);
+		}
+		
+		else {
+			return null;
+		}
+		
+	}
+
+	@Override
+	public List<ChatDTO> findLastChat() throws Exception {
+		// TODO Auto-generated method stub
+		
+		return sqlSession.selectList(namespace+".findLastChat");
+	}
+
+	@Override
+	public void deleteChatRoom(int chatId) throws Exception {
+		sqlSession.delete(namespace+".deleteChatRoom", chatId);
+		sqlSession.delete(namespace+".deleteChatting", chatId);
+		
+	}
+
+	
+
 	
 	
 	

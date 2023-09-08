@@ -7,7 +7,6 @@
 	<%@ include file="../include/header.jsp" %>
 	<%@ include file="../member/profileModal.jsp" %>
 	<style>
-			
 		.imgsize {
 		width: 180px;
 		height: 155px;

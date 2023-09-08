@@ -50,7 +50,7 @@
       상세페이지
     </div> 
     <h1 class="pageTitle">
-    	<div>판매장터</div>
+    	<div>판매장터</div> <!-- 팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다 -->
     </h1>
 	
 <div class="container">
@@ -137,14 +137,15 @@
 							<input type="button" class="btn btn-info" value="목록으로 돌아가기" onClick="backToList(this.form)"/>
 							<input type="hidden" class="seller" name="seller" value="${article.userId}"/>
 							<input type="hidden" class="buyer" name="buyer" value="${member.userId}"/>
-							<input type="hidden" class="article" name="article" value="${article.articleNO}"/>	
+
+							<input type="hidden" class="article" name="article" value="${article.articleNO}"/>
 							<c:choose>
 								<c:when test="${member.userId == article.userId}">
 									<input type="button" class="btn btn-primary" id="chat" value="1:1채팅" 
-										style="display:none" onClick="fn_reply_form('${path}/sale/replyForm.do)', ${article.articleNO})"/>
+										style="display:none" onClick="fn_chat(${article.articleNO})"/>
 								</c:when>
 								<c:otherwise>
-									<input type="button" class="btn btn-primary" id="chat" value="1:1채팅" onClick="fn_reply_form('${path}/sale/replyForm.do)', ${article.articleNO})"/>
+									<input type="button" class="btn btn-primary" id="chat" value="1:1채팅" onClick="fn_chat(${article.articleNO})"/>
 								</c:otherwise>
 							</c:choose>
 							<!-- 로그인한 아이디와 게시글을 쓴 사람의 아이디가 같다면, 글쓴 본인이므로 수정/삭제가 가능하다. -->
@@ -229,6 +230,39 @@ $("#buyEnd").on("click", function() {
 	alert("구매가 완료되었습니다.");
 	}
 });//#buyNow
+
+//1:1 채팅 방만들기
+function fn_chat(artNo){
+	$.ajax({
+		 url:	"/chat/makeRoom",
+		 type:	"post",
+		 dataType: "text",
+		 contentType: 'application/json',
+		 data:	JSON.stringify({"seller":$('.seller').val(),
+			 	"buyer" : $('.buyer').val(),
+			 	"artNo" : artNo,
+			 	"status" : "s"
+				 
+		 
+		 }),	
+		 success: function(data){
+			 console.log(data);
+			 window.open(data, "_blank", "width=940, height=750");
+			//location.href=data;
+			
+		 },
+		 error:function(request,status,error){
+			 console.log("실패");
+			 
+			 
+		 },
+		 complete:function(){
+			 $('#chatContent').val('');
+		 }
+	 });
+	
+	//window.open("${path}/chat/chattingview?articleNo=s"+articleNO, "_blank", "width=940, height=750");
+}
 
 </script>
 

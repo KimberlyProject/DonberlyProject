@@ -51,6 +51,7 @@
 				(userId, 	  pw,    name,    nickname, regDate,   tel,     email,    address,    repw, zipCode)
 		VALUES	(#{userId},#{pw}, #{name}, #{nickname}, sysdate, #{tel},  #{email}, #{address}, #{repw}, #{zipCode} )
 	</insert>
+
 	
 	<!-- 12:11 -->	
 	<select id="selectMember" resultType="com.ezen.member.dto.MemberDTO">
@@ -87,4 +88,5 @@
 		DELETE	FROM	members
 		WHERE	userId		= #{userId}
 	</delete>
+
 </mapper>
