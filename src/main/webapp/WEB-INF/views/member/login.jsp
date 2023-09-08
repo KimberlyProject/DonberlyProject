@@ -80,13 +80,7 @@
       </div>
     </c:if>
     
-    </article>
-    
-   	<c:if test="${ member != null }">
-   	<script>location.href = '/member/login?action=/ccenter/askOnetoOne'
-   	
-   	</script>
-    </c:if>
+    </article> 
     
     <script>
 		$('#eye').on('mousedown',function(){

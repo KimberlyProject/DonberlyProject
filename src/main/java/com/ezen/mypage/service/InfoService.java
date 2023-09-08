@@ -27,9 +27,6 @@ public class InfoService {
 	public List<ArticleVO> infoListPaging(SearchCriteria cri, int i) throws Exception {
 		return infoDAO.infoListPaging(cri, i);
 	}
-	
-	
-
-	
+		
 	
 }

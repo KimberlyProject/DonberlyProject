@@ -76,19 +76,21 @@
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
 	
-	<div class="container">
 		<br/><br/>
 	
-		<div class="myroot">
-			<a href="#">홈</a> >
-			<a href="#">마이페이지</a> >
-			<a href="#">장터</a> >
-			<a href="#">거래내역</a>
-		</div>
-		<br/><br/>
+		 	<c:set var="menu" value="mypage" />
+	<%@ include file="../include/sidebar.jsp" %>
+    <div class="page_dir container">
+      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+      홈 &gt;
+      내정보보기
+    </div> 
 		
-		<img src="/resources/images/banner.jpeg" alt="배너" style="width: 1150px;">
+	<!-- 배너 타이틀 -->
+  <h1 class="pageTitle"><div>내정보</div></h1>
+  
 		<br><br><br>
+	<div class="container">
 		<!-- 좌측 상단 팝니다/삽니다 구분 -->
 		<div class= "selectBox" align="left" style="vertical-align:middle;">
 			<div>
