@@ -59,7 +59,7 @@ if("${memberlevel.userStatus}" == "N1"){
                     <li><a href="/chat/chattingview">1:1 채팅하기</a></li>
                     <li><a href="/chat/chat_list">채팅 리스트</a></li>
                     <li><a href="/myPage/calendar">캘린더</a></li>
-                    <li><a href="../myPage/marketInfo.do">장터</a></li>
+                    <li><a href="/mypage/marketInfo.do">장터</a></li>
                 </ul>
               </li>
               <c:if test="${ memberlevel.userStatus == 'A' }">
@@ -112,7 +112,7 @@ if("${memberlevel.userStatus}" == "N1"){
 	                       ${ member.nickname } 님                     
 	                   </button>
 	                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-	                     <li><a href="/myPage/myInfo">내 정보 보기</a></li>                          
+	                     <li><a href="/myPage/myInfo.do">내 정보 보기</a></li>                          
 	                     <li><a href="/member/logout">로그 아웃</a></li>                          
 	                   </ul>
 	               </div>

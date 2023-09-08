@@ -91,7 +91,9 @@
                 </tr>
                 <tr>
                     <td><label for="content">문의내용</label></td>
-                    <td><textarea id="content" name="content" placeholder="자세한 내용을 함께 보내주시면 더욱 신속히 답변드릴수 있습니다.&#13;&#10;&#13;&#10;10월 18일부터 산업안전보건법에 고객응대 근로자 보호조치가 시행됩니다. 고객응대근로자에게 폭언, 욕설 등을 하지 말아주세요." rows="4" style="resize: none;"></textarea></td>
+                    <td><textarea id="content" 
+                    name="content" 
+                    placeholder="자세한 내용을 함께 보내주시면 더욱 신속히 답변드릴수 있습니다.&#13;&#10;&#13;&#10;10월 18일부터 산업안전보건법에 고객응대 근로자 보호조치가 시행됩니다. 고객응대근로자에게 폭언, 욕설 등을 하지 말아주세요." rows="4" style="resize: none;"></textarea></td>
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: center;">
