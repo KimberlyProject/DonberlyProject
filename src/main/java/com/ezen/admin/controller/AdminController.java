@@ -122,12 +122,12 @@ public class AdminController {
 		logger.info("회원 3일정지 POST " + userId);
 		adminService.Psuspension(userId);
 		return "redirect:/admin/memberList";
+	}
 	
 	//-----------------------------------------------------------------------------------------------------------
-	// 게시글 목록
+	// 1:1 문의하기 리스트 생성
 	//-----------------------------------------------------------------------------------------------------------
-
-	@RequestMapping(value="/oneOnOneInquiry.do", method= {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value="/oneOnOneInquiry.do", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listOneOnOne(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		System.out.println("시작");
@@ -135,12 +135,12 @@ public class AdminController {
 		String viewName = (String) request.getAttribute("viewName");
 	    ModelAndView   mav   = new ModelAndView(viewName);
 		
-		//화면에 출력한 데이터를 가져온다.
+		// 화면에 출력한 데이터를 가져온다.
 		List<CcenterDTO> listOneOnOne = adminService.listOneOnOne();
 		
 		System.out.println(listOneOnOne);
 		
-		//mav에 object를 추가
+		// mav에 object를 추가
 		mav.addObject("ask", listOneOnOne);
 		
 		return mav;
