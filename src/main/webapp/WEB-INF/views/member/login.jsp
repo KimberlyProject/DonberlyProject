@@ -60,9 +60,9 @@
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
     <article class="Loginbox container">
-      <h1><a href="#"><img src="${ path }/resources/images/logo_g.png" alt="logo"/></a></h1>
+      <h1><a href="${ path }"><img src="${ path }/resources/images/logo_g.png" alt="logo"/></a></h1>
       <c:if test="${ member == null }">
-      <form action="/member/login.do" method="post">
+      <form action="${ path }/member/login.do" method="post">
         <input type="text" class="form-control" placeholder="아 이 디" id="userId" name="userId">
         <div class="input-group" style="margin-bottom:10px;">
           <input type="password" class="form-control" placeholder="패 스 워 드" id="pw" name="pw">
@@ -75,15 +75,15 @@
       </form>    
       <div class="searchBox">
         <a href="membership">회원가입</a> |
-        <a href="./findId">아이디 찾기</a> |
-        <a href="./findPasswd">비밀번호 찾기</a>
+        <a href="findId">아이디 찾기</a> |
+        <a href="findPasswd">비밀번호 찾기</a>
       </div>
     </c:if>
     
     </article>
     
    	<c:if test="${ member != null }">
-   	<script>location.href = "/myPage/myInfo"</script>
+   	<script>location.href = "${ path }/mypage/myInfo.do"</script>
     </c:if>
   <%--  	<c:if test="${ member != null }">
    	<script>location.href = '/member/login?action=/ccenter/askOnetoOne'

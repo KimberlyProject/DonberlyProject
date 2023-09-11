@@ -190,7 +190,7 @@
 		const insertMonth = new Date(list.schedule).getMonth() + 1;
 		let insertDate = new Date(list.schedule).getDate();      
 		if(currentYear == insertYear && currentMonth == insertMonth && i == insertDate){	
-			contentstag.innerHTML = "<a href=/" + (list.status == 's' ? 'sale' : 'buy' ) + "/viewArticle.do?articleNO=" + list.articleId + ">" + list.contents + "</a>";	      
+			contentstag.innerHTML = "<a href=${path}/" + (list.status == 's' ? 'sale' : 'buy' ) + "/viewArticle.do?articleNO=" + list.articleId + ">" + list.contents + "</a>";	      
 		}
 	  })
 		  
