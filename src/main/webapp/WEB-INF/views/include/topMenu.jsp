@@ -50,11 +50,12 @@ if("${memberlevel.userStatus}" == "N1"){
                     <li><a href="/ccenter/askOnetoOne">1:1 문의하기</a></li>
                     <li><a href="/ccenter/report">신고하기</a></li>
                 </ul>
-              </li>
+              </li>              
+              <c:if test="${ member != null }">
               <li>
                 <a href="/myPage/myInfo">마이페이지</a>                
                 <ul> 
-                	<li><a href="/auction/auctionDealList?aucId=${member.userId}">경매내역</a></li>
+                	<li><a href="/auction/myAuction">경매내역</a></li>
                     <li><a href="/myPage/salesHistory">판매내역</a></li>
                     <li><a href="/chat/chattingview">1:1 채팅하기</a></li>
                     <li><a href="/chat/chat_list">채팅 리스트</a></li>
@@ -62,6 +63,7 @@ if("${memberlevel.userStatus}" == "N1"){
                     <li><a href="/mypage/marketInfo.do">장터</a></li>
                 </ul>
               </li>
+              </c:if>
               <c:if test="${ memberlevel.userStatus == 'A' }">
               <li>
                 <a href="/admin/oneOnOneInquiry">관리자</a>                

@@ -153,11 +153,9 @@
 						<br/><br/><br/><br/>
 						<br/><input type="button" value="사진 추가" onClick="fn_addFiles()"/>	
 					</td>	
-					<th align="right">
+					<th>
 						<div id="d_file">
-							<input type="file" name="imageFileName"  onchange="readAndResize(this)" accept="image/*"/><br/>
-							<img  class="preview" src="#" width=200 height=200/><br/><br/>
-							<button type="button" id="imgDelBtn">사진 삭제</button>
+							<input type="file" name="imageFileName"  onchange="readAndResize(this)"><br/>
 						</div>
 					</th>
 				<tr>
@@ -181,7 +179,20 @@
 
 <script>
 
+	//버튼 중복클릭 방지
+	var doubleSubmitFlag = false;
+	function doubleSubmitCheck(){
+	    if(doubleSubmitFlag){
+	        return doubleSubmitFlag;
+	    }else{
+	        doubleSubmitFlag = true;
+	        return false;
+	    }
+	}
+
 	$("#submit").on("click", function() {
+		if(doubleSubmitCheck()) return;
+		
 		if($("#title").val() == "") {
 			alert("제목을 입력해주세요.");
 			$("#title").focus();
@@ -237,81 +248,10 @@
 	//이미지 추가하기
    	var cnt=1;
 	function fn_addFiles() {
-		//$("#d_file").append("<br>"+"<input type='file' name='file" +cnt + "' onchange='readURL(this);' />");
 		$("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
-		$("#d_file").append("<br>"+"<img  class='preview' src='#'   width='200' height='200' />"+"<br/>"+"<br/>");
 		cnt++;
 	}  
 	
-	//이미지 삭제하기
-	$('#imgDelBtn').on('click', function () {
-	    var imageInput = $('#imageFileName');
-	    imageInput.val(''); // 파일 선택 해제
-	
-	    // 이미지 미리보기 초기화
-	    var previewImage = $('#preview');
-	    previewImage.attr('src', ''); // 이미지 경로 초기화
-	});
-
-    //이미지 미리보기
-	function readAndResize(input) {
-	    if (input.files && input.files[0]) {
-	        var reader = new FileReader();
-	
-	        reader.onload = function (e) {
-	            var img = new Image();
-	            img.src = e.target.result;
-	
-	            img.onload = function () {
-	                var maxWidth = 200; 
-	                var maxHeight = 200;
-	
-	                var width = img.width;
-	                var height = img.height;
-	
-	                //이미지 크기를 조정
-	                if (width > maxWidth || height > maxHeight) {
-	                    var ratio = Math.min(maxWidth / width, maxHeight / height);
-	                    width *= ratio;
-	                    height *= ratio;
-	                }
-	                
-	                //조정된 사이즈로 form에 보내기
-	                var formData = new FormData(document.getElementById("formgroup"));
-	                formData.append("resizedImage", dataURItoBlob(previewImage.src), "resized_image.jpg"); // 조정된 이미지를 "resizedImage" 필드에 추가
-
-	                //미리보기
-	                var previewImage = document.querySelector(".preview");
-	                previewImage.src = resizeImage(img, width, height);
-	            };
-	        };
-	
-	        reader.readAsDataURL(input.files[0]);
-	    }
-	}
-    
-    //이미지 크기조정 함수
-    function resizeImage(img, width, height) {
-    	var canvas = document.createElement("canvas");
-    	var ctx = canvas.getContext("2d");
-    	canvas.width = width;
-    	canvas.height = height;
-    	ctx.drawImage(img, 0, 0, width, height);
-    	return canvas.toDataURL("image/jpeg"); 
-    }
-    
-	//Data URI를 Blob으로 변환
-	function dataURItoBlob(dataURI) {
-	    var byteString = atob(dataURI.split(',')[1]);
-	    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-	    var ab = new ArrayBuffer(byteString.length);
-	    var ia = new Uint8Array(ab);
-	    for (var i = 0; i < byteString.length; i++) {
-	        ia[i] = byteString.charCodeAt(i);
-	    }
-	    var blob = new Blob([ab], { type: mimeString });
-	    return blob;
-	}
 
 </script>
 </body>

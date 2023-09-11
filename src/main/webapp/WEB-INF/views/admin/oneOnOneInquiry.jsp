@@ -114,7 +114,7 @@
 						${ask.userId}
 					</td>
 					<td>
-						<fmt:formatDate value="${ask.writeDate}" pattern="yyyy년 MM월 dd일"/><br/>
+						<fmt:formatDate value="${ask.writeDate}" pattern="yy년 MM월 dd일"/><br/>
 					</td>
 				</tr>
 				<tr>
@@ -122,25 +122,6 @@
 						${ask.content}
 						<br/>
 						<br/>
-						1대1 문의사항 입니다. <br/>
-						답변주세요
-						<div>
-							<button id ="searchbtn" class="btn btn-success col-sm-1" type="button">답변하기</button>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" style="width: 100%;"/></td>
-					<td>3</td>
-					<td class="title">제목자리입니다.</td>
-					<td>gildong</td>
-					<td>2023.08.23</td>
-				</tr>
-				<tr>
-					<td class="content" colspan="5">
-						1대1 문의사항 입니다. <br/>
-						답변주세요
-
 						<div>
 							<button id ="searchbtn" class="btn btn-success col-sm-1" type="button">답변하기</button>
 						</div>

@@ -61,6 +61,7 @@
 		<![CDATA[
 			SELECT  *
 			FROM   AUCTION
+			ORDER BY writeDate desc
 		]]>
     </select>
     
