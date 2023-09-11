@@ -73,7 +73,7 @@ label{
 	<!-- 검색창 끝-->
 	<br><br>
 	<!-- 채팅한 사람들 목록 -->
-	<c:forEach var="chatList" items="${chatList }" varStatus="chatId">
+	<c:forEach var="chatList" items="${chatList }" varStatus="chatId" >
 	<div class="col-sm-6">
 	<table class="table table-bordered table-striped table-hover" onClick="make_chat('${chatList.chatId}')">
 		<tr>
@@ -85,11 +85,14 @@ label{
 				<c:set var="seller" value="${chatList.seller}"/>
 				<c:set var="buyer" value="${chatList.buyer}"/> 
 				<c:if test="${myname != seller}">
-				${chatList.seller }	 <!--상대방 닉네임 들어가야함-->
+					<span class="sellernick" id="${chatList.seller}"></span>
+					<!-- <input class="nickname" type="hidden" value="${chatList.seller }"> -->	 <!--상대방 닉네임 들어가야함-->
 				</c:if>
 				<c:if test="${myname != buyer}">
-				${chatList.buyer }   <!-- 상대방 닉네임 -->
+				${chatList.buyer }
+					<!--<input class="nickname" type="hidden" value="${chatList.buyer } "> -->  <!-- 상대방 닉네임 -->
 				</c:if>
+				
 				</label>
 			</th>
 		</tr>
@@ -121,6 +124,41 @@ label{
 	 	window.open("${path}/chat/chattingview?chatId="+chatId , "_blank", "width=940, height=750");
 		
 	}
+	
+	const sellers = document.querySelectorAll(".sellernick");
+	sellers.forEach(item => {
+		const userId = item.id;
+		console.log(item);
+		item.innerText = find_nickname(userId);
+		
+	})
+	
+	function find_nickname(memberId){
+		var dd="";
+		 $.ajax({
+			 url:	"/chat/find_nickname",
+			 type:	"post",
+			 dataType: "text",
+			 data:	{
+				 "memberId" : memberId
+			 },	
+			 success: function(data){
+				dd=data;
+			 },
+			 error:function(request,status,error){
+				console.log(request,status,error);
+			 },
+			 complete:function(){ 
+				
+			 }
+		 });
+		 console.log(dd);
+		 return dd;
+	}
+	
+	$(document).ready(function(){
+		find_nickname($('.nickname').val());
+	});
 	
 	
 	</script>

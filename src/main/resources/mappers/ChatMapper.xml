@@ -143,6 +143,13 @@
 	
 	</delete>
 	
+	<!-- 멤버 아이디로 닉네임 찾기 -->
+	<select id="find_nickname" resultType="String">
+	select nickname
+	from members
+	where userId = #{memberId}
+	</select>
+	
 	
 	
 	

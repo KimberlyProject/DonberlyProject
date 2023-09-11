@@ -593,7 +593,7 @@ public class BoardController {
 		// pageMaker의 정보를 콘솔에 보여준다.
 		System.out.println("###### PageMaker ==> " + pageMaker);
 		
-		mav.addObject("articlesList", 	list);   // >> list를 담아서 넘김
+		mav.addObject("saleArticlesList", 	list);   // >> list를 담아서 넘김
 		mav.addObject("pageMaker",		pageMaker);
 		mav.addObject("cri",			cri);
 		
