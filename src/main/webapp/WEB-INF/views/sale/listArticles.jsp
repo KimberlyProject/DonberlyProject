@@ -107,7 +107,7 @@
 	</div>
 		
 		<c:choose>
-			<c:when test="${articlesList == null}"> <!-- 게시글이 하나도 없는 경우 -->
+			<c:when test="${saleArticlesList == null}"> <!-- 게시글이 하나도 없는 경우 -->
 				<div>
 					<div>
 						<p align="center">
@@ -116,9 +116,9 @@
 					</div>
 				</div>
 			</c:when>
-			<c:when test="${articlesList != null}"> <!-- 게시글이 하나라도 있는 경우 -->
+			<c:when test="${saleArticlesList != null}"> <!-- 게시글이 하나라도 있는 경우 -->
 						<div class="products">
-				<c:forEach var="article" items="${articlesList }" varStatus="articleNum">
+				<c:forEach var="article" items="${saleArticlesList }" varStatus="articleNum">
 					<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
 					<c:choose>
 						<c:when test = "${article.purpose == 1 }">

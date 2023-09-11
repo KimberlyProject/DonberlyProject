@@ -90,6 +90,12 @@ public class ChatServiceImpl implements ChatService {
 		
 	}
 
+	@Override
+	public String find_nickname(String memberId) throws Exception {
+		
+		return chatDAO.find_nickname(memberId);
+	}
+
 	
 	
 	

@@ -203,7 +203,7 @@
 	SELECT	*
 	FROM	(
 		SELECT  ROWNUM AS recNum, a.*, m.email
-		FROM article_buy a, members m
+		FROM article_sale a, members m
         WHERE		a.userId=m.userId
  	]]>
  		<include refid='search'/>

@@ -126,7 +126,7 @@ public class ChatController {
 		//ChatListDTO lastchat = new ChatListDTO();
 		List<ChatDTO> lastchat = chatService.findLastChat(); 
         //System.out.println("여기까지는 나오나" + lastchat);
-		System.out.println("마지막 채팅*******************"+lastchat);
+		System.out.println("채팅 리스트*******************"+lastchat);
 		
 		ModelAndView mav = new ModelAndView(viewName);
 		//mav.addObject("lastChat", lastchat.getLastChat());
@@ -139,7 +139,7 @@ public class ChatController {
 		
 		//viewName이 없기 때문에 URL로 부터 뷰 이름을 검색한다.
 		// /board/listArticlres.do => /vboard/listArticles
-		System.out.println("채팅 입장");
+		//System.out.println("채팅 입장");
 		return mav;		//리턴에 경로 없으면 value값에 do빼서 알아서 찾아간다.
 		
 	}
@@ -177,7 +177,7 @@ public class ChatController {
 		//System.out.println(chatDTO2);
 		
 		List<ChatDTO> list =  chatService.chatView(ch);
-		
+		System.out.println(list);
 		return list;
 		
 		
@@ -190,5 +190,15 @@ public class ChatController {
 		int ch = Integer.parseInt(chatId);
 		chatService.deleteChatRoom(ch);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/find_nickname", method=RequestMethod.POST, produces = "application/text; charset=utf8" )
+	public String find_nickname(@RequestParam(value="memberId", required=false) String memberId) throws Exception{
+		String nickname = chatService.find_nickname(memberId);
+		System.out.println("----------------------------------------------------------" + memberId);
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + nickname);
+		return nickname;
+	}
+	
 	
 }

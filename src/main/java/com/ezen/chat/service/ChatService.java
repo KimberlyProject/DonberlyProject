@@ -30,4 +30,6 @@ public interface ChatService {
 	public List<ChatDTO> findLastChat() throws Exception;
 	
 	public void deleteChatRoom(int chatId) throws Exception;
+	
+	public String find_nickname(String memberId) throws Exception;
 }

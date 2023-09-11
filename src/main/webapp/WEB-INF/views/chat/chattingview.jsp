@@ -261,6 +261,7 @@ div.chat.ch2{
 				<td class="chat_area">
 				
 					<div class="wrap"  style="overflow:auto; width:599px; height:600px;">
+						
     				</div>
 				</td>
 				<td class="chat_detail" rowspan="2">
@@ -325,16 +326,22 @@ function getChat(){
 		 success: function(data){
 			 console.log(data);
 			 var html="";
+			 
 			 for(var i=0 ; i<data.length;i++){
+				 	var dd = data[i].chatTime;
+				 	const date = new Date(dd);
+				 	var month = Number(date.getDate());
+				 	month = month - 2;
+				 
 					if(data[i].fromId == $('#userId').val()){
 						html+=
 						"<div class='chat ch2'><div class='textbox'>"+data[i].chatContent+"</div></div>"+
-						"<div class='time2' >"+data[i].chatTime+"</div>";
+						"<div class='time2' >"+month+"월"+date.getDate()+"일 "+date.getHours()+":"+date.getMinutes()+"</div>";
 					}
 					else{
 						html+=
 						"<div class='chat ch1'><div class='textbox'>"+data[i].chatContent+"</div></div>"+
-						"<div class='time1' >"+data[i].chatTime+"</div>";
+						"<div class='time1' >"+month+"월"+date.getDate()+"일 "+date.getHours()+":"+date.getMinutes()+"</div>";
 					} 
 			}
 			 console.log(html);
@@ -378,11 +385,11 @@ $(document).ready(function(){
 						 "chatId" : $('#chatId').val()
 				 },	
 				 success: function(){
-					 
+					 /*
 					$(".wrap").append(
 						"<div class='chat ch2'><div class='textbox'>"+$('#chatContent').val()+"</div></div>"+
 						"<div class='time2' >"+now.getHours()+"시"+now.getMinutes()+"분"+"</div>"
-					);
+					);*/
 					
 				 },
 				 error:function(request,status,error){

@@ -141,6 +141,12 @@ public class ChatDAOImpl implements ChatDAO {
 		
 	}
 
+	@Override
+	public String find_nickname(String memberId) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".find_nickname",memberId);
+	}
+
 	
 
 	
