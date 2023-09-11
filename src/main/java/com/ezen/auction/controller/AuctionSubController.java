@@ -47,7 +47,7 @@ public class AuctionSubController {
 		    List<AuctionDTO> articles = auctionService.auctionPaging(cri);
 		    
 		    // 이미지 리스트를 담을 새로운 리스트 생성
-		    List<List<AucImgDTO>> imgLists = new ArrayList<>();
+		    List<List<AucImgDTO>> imgLists = new ArrayList<List<AucImgDTO>>();
 		    
 		    for (AuctionDTO auctionDTO : articles) {
 		        int aucCode = auctionDTO.getAucCode();

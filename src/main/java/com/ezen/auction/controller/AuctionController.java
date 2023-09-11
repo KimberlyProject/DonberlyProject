@@ -95,7 +95,7 @@ public class AuctionController {
 	//-------------------------------------------------------------------------------------------------------------//
 	
 	//글쓰기화면
-	@RequestMapping(value="/auction_write", method=RequestMethod.GET)
+	@RequestMapping(value="/auction_wirte", method=RequestMethod.GET)
 	public String auctionWrite(Model model) {
 		System.out.println("경매 글쓰기 화면");
 		return "/auction/auction_write";
