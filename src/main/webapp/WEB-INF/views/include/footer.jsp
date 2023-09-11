@@ -4,7 +4,7 @@
 </footer>
 <script>
 	function action_path(){
-		location.href = "/member/login?action=" + location.pathname;
+		location.href = "${path}/member/login?action=" + location.pathname;
 		return false;
 	}
 	 $(function(){
