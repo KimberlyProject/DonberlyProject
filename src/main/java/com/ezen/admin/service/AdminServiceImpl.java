@@ -83,7 +83,9 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 	
-	
+	//--------------------------------------------------------------------------------------------------
+	// 1:1 문의하기 리스트 생성
+	//--------------------------------------------------------------------------------------------------
 	@Override
 	public List<CcenterDTO> listOneOnOne() throws Exception {
 		List<CcenterDTO> listOneOnOne = adminDAO.listOneOnOne();

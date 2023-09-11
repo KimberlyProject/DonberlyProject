@@ -2,7 +2,9 @@ package com.ezen.member.dto;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
 
+@Component("memberDTO")
 public class MemberDTO {
 
 	private String userId;

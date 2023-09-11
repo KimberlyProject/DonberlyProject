@@ -5,9 +5,8 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<%@ include file="../include/header.jsp" %>
-	
+	<%@ include file="../member/profileModal.jsp" %>
 	<style>
-			
 		.imgsize {
 		width: 180px;
 		height: 155px;
@@ -136,7 +135,7 @@
 					            구매완료!
 					          </li>
 					          <li class="product-seller">
-					          	${article.userId}
+					          	<a>${article.nickname}</a>
 					          </li>
 					          <li class="product-date">
 					          	${article.write_date}
@@ -157,7 +156,7 @@
 					            ${article.price}원 <!-- 여기에 가격 표시 -->
 					          </li>
 					          <li class="product-seller">
-					          	${article.nickname}
+					          	<a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}'})">${article.nickname}</a>
 					          </li>
 					          <li class="product-date">
 					          	${article.write_date}

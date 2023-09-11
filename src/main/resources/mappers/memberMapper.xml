@@ -51,6 +51,7 @@
 				(userId, 	  pw,    name,    nickname, regDate,   tel,     email,    address,    repw, zipCode)
 		VALUES	(#{userId},#{pw}, #{name}, #{nickname}, sysdate, #{tel},  #{email}, #{address}, #{repw}, #{zipCode} )
 	</insert>
+
 	
 	<!-- 12:11 -->	
 	<select id="selectMember" resultType="com.ezen.member.dto.MemberDTO">
@@ -76,10 +77,10 @@
 	</update>
 	
 	<!-- 09-04 -->
-   <select id="profile" parameterType="String" resultType="com.ezen.member.dto.MemberDTO">
-		SELECT	* 
+   <select id="profile" parameterType="com.ezen.member.dto.MemberDTO" resultType="com.ezen.member.dto.MemberDTO">
+		SELECT	userId, nickname, email
 		FROM	members
-		WHERE	userId = #{userId}
+		WHERE	nickname = #{nickname}
 	</select>
 
 	<!-- 회원탈퇴 -->
@@ -87,4 +88,5 @@
 		DELETE	FROM	members
 		WHERE	userId		= #{userId}
 	</delete>
+
 </mapper>

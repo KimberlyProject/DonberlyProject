@@ -57,6 +57,12 @@
 	        background-color: #e0e0e0; /* 더 연한 그레이 배경색 */
 	        cursor: not-allowed;
 	    }
+	    
+	    #membership form > div > .btn[value="회원탈퇴"] {
+		    background-color: red;
+		    /* 원하는 배경 색상으로 변경 (예: 빨간색) */
+		    /* 다른 스타일 속성 (텍스트 색상 등)도 필요에 따라 수정 가능 */
+		}
         
 	</style>
 </head>
@@ -129,8 +135,11 @@
 			<input type="hidden" id="regdate" name="regdate"  value="${editor.regDate}"/>
 		</div>
         <div class="submit">
-          <input type="submit" class="btn" value="수정"/>
-        </div>
+		    <input type="submit" class="btn" value="수정"/>
+		</div>
+        <div class="submit">
+		    <input type="button" class="btn" value="회원탈퇴" onclick="btn_click('delete')"/>
+		</div>
       </form>
     </div>
 
@@ -182,24 +191,21 @@
     </script>
     
     <script>
-	//위의 폼의 이름을 기술하고, 여기서 위의 폼 이름을 사용해야 한다.
-	function btn_click(str) {
-		// alert(frm.id.value);
-		
-		if(str == "update") {
-			$("#address").val($("#address1").val() + $("#address2").val());
-			frm.action = "/member/memberUpdate";
-		} else if(str == "delete") {
-			frm.action = "/member/memberDelete";
-		} else {
-			alert("키를 잘못 누르셨습니다.");
-		}
-		
-		//frm.setAttribute('method', post);
-		frm.method = "post";
-		frm.submit();
-		
-	}
+    function btn_click(str) {
+        if (str == "update") {
+            $("#address").val($("#address1").val() + $("#address2").val());
+            frm.action = "/member/memberUpdate";
+        } else if (str == "delete") {
+            if (confirm("정말로 회원탈퇴하시겠습니까?")) {
+                frm.action = "/member/memberDelete";
+                frm.method = "post";
+                frm.submit();
+            }
+        } else {
+            alert("키를 잘못 누르셨습니다.");
+        }
+    }
+
 	</script>
     
 	<%@ include file="../include/footer.jsp" %>

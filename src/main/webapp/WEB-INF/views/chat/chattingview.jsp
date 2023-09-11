@@ -55,7 +55,7 @@ html{
 	overflow: hidden;
 }
 
-<!---->
+<!-- -->
 .chat_title{
 	background-color:rgb(73, 124, 64);
 	color:#ffffff;
@@ -241,6 +241,11 @@ div.chat.ch2{
 	background-color: #F0FFF0;
 }
 
+.chat_detail{
+	position: relative;
+	z-index: 10;
+}
+
 </style>
 </head>
 <body>
@@ -250,36 +255,37 @@ div.chat.ch2{
 	
 		<table border="1" style="margin: 0px; padding: 0px;">
 			<tr>
-				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">과의 채팅창</td>
+				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${session.nickname }&gt;님과의 채팅창</td>
 			</tr>
 			<tr>
 				<td class="chat_area">
 				
 					<div class="wrap"  style="overflow:auto; width:599px; height:600px;">
-						<c:forEach var="chatView" items="${session }">
-				        	<div class="chat ch2">
-				            	<div class="textbox">${chatView.chatContent }</div>
-				        	</div>
-				        	<div class="time2" >${chatView.chatTime}</div>
-				        </c:forEach>
-						
     				</div>
 				</td>
 				<td class="chat_detail" rowspan="2">
+					<c:set var="userId" value="${session.userId }"/>
+					<c:set var="seller" value="${chatList.seller}"/>
+					<c:set var="buyer" value="${chatList.buyer }"/>
+					<div>제목 : ${session.title}</div>
+					<c:if test="${seller eq  userId}">
+						<div>판매자: ${session.nickname}</div>
+						<div>구매자: ${member.nickname }</div>
+					</c:if>
+					<c:if test="${buyer eq userId}">
+						<div>판매자: ${member.nickname }</div>
+						<div>구매자: ${session.nickname }</div>
+					</c:if>
+					<div>코드 : ${session.p_code }</div>
+					<div style="padding-bottom: 10px;">가격: ${session.price}원</div>
 					
-					<div>제목</div>
-					<div>판매자: ${artData}</div>
-					<div>구매자: ${member.nickname }</div>
-					<div>코드</div>
-					<div style="padding-bottom: 10px;">${a.price}</div>
-					
-					<img src="${path}/resources/images/kuromi.png" alt="사진" width="200px;" height="200px;"/>
+					<img src="${path}/resources/images/board/article_image/${session.articleNO }/${session.thumbnail}" alt="사진" width="200px;" height="200px;"/>
 					<br><br>
 					<button type="button" class="btn btn-success btn-lg">일정 추가</button>
 					<br><br>
 					<button type="button" class="btn btn-danger btn-lg">신고 하기</button>
 					<br><br>
-					<button type="button" class="btn btn-warning btn-lg" id="getin">나가기</button>
+					<button type="button" class="btn btn-warning btn-lg" id="getin" onClick="chatOut()">채팅방 나가기</button>
 				</td>
 			</tr>
 			<tr>
@@ -296,37 +302,60 @@ div.chat.ch2{
 							<button class="btn btn-success btn-lg sendText" style="height:80px; width:120px;">전송</button>
 							<div class="clearfix"></div>
 						</div>
-					
 				</div>
 				</td>
 			</tr>
 		</table>
 	</div>
 	<br><br>
-	
 <script>
-function lastDateAjax(){
-	/*$.ajax({
-		method: "POST",
-		url: "/chat/chattingview",
-		cache:false,
-		async: false,
-		success: function(data){
-			if(lastDateTime < data){
-				readAjax(lastDateTime);
-				lastDateTime = data;
-			}else{
-				lastDateTime = data;
+</script>
+<script>
+
+
+function getChat(){
+	 $.ajax({
+		 url:	"/chat/getChat",
+		 type:	"post",
+		 dataType: "json",
+		 data:	{
+			 "fromId" : $('#userId').val(),
+			 "chatId" : $('#chatId').val()
+		 },	
+		 success: function(data){
+			 console.log(data);
+			 var html="";
+			 for(var i=0 ; i<data.length;i++){
+					if(data[i].fromId == $('#userId').val()){
+						html+=
+						"<div class='chat ch2'><div class='textbox'>"+data[i].chatContent+"</div></div>"+
+						"<div class='time2' >"+data[i].chatTime+"</div>";
+					}
+					else{
+						html+=
+						"<div class='chat ch1'><div class='textbox'>"+data[i].chatContent+"</div></div>"+
+						"<div class='time1' >"+data[i].chatTime+"</div>";
+					} 
 			}
-		}
-	});*/
-	$(".wrap").append(
-			"<div class='chat ch2'><div class='textbox'>야호</div></div>"
+			 console.log(html);
+			 $('.wrap').html(
+				html
+			 );
+			 const chatbox = document.querySelector(".wrap");
+			 //chatbox.scrollTop = chatbox.scrollHeight;
+		 },
+		 error:function(request,status,error){
+			 console.log("실패");
+			 
+		 },
+		 complete:function(){ 
 			
-		);
-	
+		 }
+	 });
 }
 $(document).ready(function(){
+	
+	setInterval(getChat,500);
 	
 	var sin = $('#chatContent').val();
 	//setInterval(lastDataAjax, 3000);
@@ -343,15 +372,13 @@ $(document).ready(function(){
 			 $.ajax({
 				 url:	"/chat/chattingview",
 				 type:	"post",
-				 dataType:	"text",
+				 dataType:"text",
 				 data:	{"content" : $('#chatContent').val(),
 						 "fromId" : $('#userId').val(),
 						 "chatId" : $('#chatId').val()
-						 
-				 
 				 },	
 				 success: function(){
-					 //console.log(data);
+					 
 					$(".wrap").append(
 						"<div class='chat ch2'><div class='textbox'>"+$('#chatContent').val()+"</div></div>"+
 						"<div class='time2' >"+now.getHours()+"시"+now.getMinutes()+"분"+"</div>"
@@ -360,7 +387,6 @@ $(document).ready(function(){
 				 },
 				 error:function(request,status,error){
 					 console.log("실패");
-					 
 				 },
 				 complete:function(){
 					 $('#chatContent').val('');
@@ -373,30 +399,26 @@ $(document).ready(function(){
 	});
 });
 
-
-
-
-
-function readAjax(compareTime){
+function chatOut(){
+	alert("정말 채팅방에서 나가시겠습니까?");
+	
 	$.ajax({
-		method: "POST",
-		url:"/chat/chattingview",
-		dataType:"json",
-		cache:false,
-		async: false,
-		data:{
-			"lastDate":compareTime
-		},
-		success: function(data){
-			if(data.length==0){
-				return;
-			}else{
-				$.each(data, function(index,entry){
-					
-				});
-			}
-		}
-	});
+		 url:	"/chat/outChat",
+		 type:	"post",
+		 dataType:"text",
+		 data:	{
+				 "chatId" : $('#chatId').val()
+		 },	
+		 success: function(){
+			window.close();
+		 },
+		 error:function(request,status,error){
+			 console.log("실패");
+		 },
+		 complete:function(){
+			 $('#chatContent').val('');
+		 }
+	 });
 }
 
 

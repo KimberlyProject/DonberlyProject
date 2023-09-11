@@ -80,14 +80,15 @@ label{
 			<th rowspan="2" class="info-img"><img style="width:100px; height:100px;" src="${path}/resources/images/kuromi.png" alt="프로필 사진"></th>
 			<th class="pw">
 				<label>
+				<c:set var="chatid1" value="${chatList.chatId }"/>
 				<c:set var="myname" value="${member.userId}"/>
 				<c:set var="seller" value="${chatList.seller}"/>
-				<c:set var="buyer" value="${chatList.buyer}"/>
+				<c:set var="buyer" value="${chatList.buyer}"/> 
 				<c:if test="${myname != seller}">
-				${chatList.seller }
+				${chatList.seller }	 <!--상대방 닉네임 들어가야함-->
 				</c:if>
 				<c:if test="${myname != buyer}">
-				${chatList.buyer }
+				${chatList.buyer }   <!-- 상대방 닉네임 -->
 				</c:if>
 				</label>
 			</th>
@@ -98,7 +99,14 @@ label{
 		<tr>
 			<th colspan="2">
 				<div class="row" style="word-break:break-al; margin:0;">
-					<div class="col-sm-10 new_message">안녕하세요</div><!-- 여기에 새로운 메시지 넣으면 됨 -->
+					<div class="col-sm-10 new_message">
+					<c:forEach var="lastchat" items="${lastChat }">
+					<c:set var="chatid2" value="${lastchat.chatId}"/>
+					<c:if test="${chatid1 == chatid2}">
+					${lastchat.chatContent}
+					</c:if>
+					</c:forEach>
+					</div><!-- 여기에 새로운 메시지 넣으면 됨 -->
 					<button style="float: right;" type="button" class="btn btn-warning" disabled="disabled">1</button>
 				</div>
 			</th>
