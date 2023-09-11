@@ -136,25 +136,8 @@
 	     <div class="dateBoard"></div>
 	   </article> 
 	 </div>
-   
-	<script>    
-	  // ---------------------------json 임시데이터
-	  const calendar = [{
-	    userId : 'a100',
-	    articleId : 1,
-	    status : 's',
-	    schedule : '23/09/10',
-	    contents:'물건 구매하는 날짜 메모함'
-	  },
-	  {
-	    userId : 'a200',
-	    articleId : 2,
-	    status : 'b',
-	    schedule : '23/10/09',
-	    contents:'이날 젤리 판매'
-	  }];
-	  // --------------------------임시데이터 E
-	  
+	<script>	   
+	  const calendar = ${calendar};	  
 	  let weekCount = 1;
 	  const makeCalendar = (date) => {
 	    
@@ -200,23 +183,24 @@
 	    }
 	 	// 날짜 html에 데이터 삽입
 	    datetag.innerText = i;
-	 	// 데이터 일치하는 날짜에 컨텐츠, 링크 표시
-	    const yearstr = currentYear.toString().substr(0, 2);  
-	    calendar.forEach(list => {
-	    const insertYear = new Date(yearstr + list.schedule).getFullYear();
-	    const insertMonth = new Date(yearstr + list.schedule).getMonth() + 1;
-	    let insertDate = new Date(yearstr + list.schedule).getDate();
-	    if(currentYear == insertYear && currentMonth == insertMonth && i == insertDate){	      
-	    	contentstag.innerHTML = "<a href=/" + (list.status == 's' ? 'sale' : 'buy' ) + "/viewArticle.do?articleNO=" + list.articleId + ">" + list.contents + "</a>";	      
-	    }
-	    })
-	    
+
+	  // 데이터 일치하는 날짜에 컨텐츠, 링크 표시  
+	  calendar.forEach(list => {
+		const insertYear = new Date(list.schedule).getFullYear();
+		const insertMonth = new Date(list.schedule).getMonth() + 1;
+		let insertDate = new Date(list.schedule).getDate();      
+		if(currentYear == insertYear && currentMonth == insertMonth && i == insertDate){	
+			contentstag.innerHTML = "<a href=/" + (list.status == 's' ? 'sale' : 'buy' ) + "/viewArticle.do?articleNO=" + list.articleId + ">" + list.contents + "</a>";	      
+		}
+	  })
+		  
 	    cell.appendChild(datetag);
 	    cell.appendChild(contentstag);
 	    document.querySelector(".dateBoard").appendChild(cell);
 	
 	    weekCount++
 	  }
+	    
 	  // 이번 달 끝나고 남은 캘린더 더미데이터로
 	  for (let i = limitDay; i < nextDay; i++) {
 	    let nodata = document.createElement("div");
