@@ -1,8 +1,12 @@
 package com.ezen.auction.controller;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
-
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -11,6 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -211,11 +216,27 @@ public class AuctionController {
 				if(!file.exists()) { //경로에 파일이 없는 경우
 					file.getParentFile().mkdirs(); //경로에 해당하는 디렉토리 생성
 					mFile.transferTo(new File(IMGROOT + "\\" + "temp" + "\\" + imgName));
+					
+					String targetPath = IMGROOT + "\\" + "temp" + "\\" + imgName;
+		            resizeImage(file.getAbsolutePath(), targetPath, 200, 200); // 원하는 크기로 조절
 				}
 			}
 		}
 		return fileList;
-	}//upload
+	}//upload	
+
+	//이미지 리사이징 메서드
+	private void resizeImage(String sourcePath, String targetPath, int targetWidth, int targetHeight) throws IOException {
+	    BufferedImage originalImage = ImageIO.read(new File(sourcePath));
+	    int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+
+	    BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, type);
+	    Graphics2D g = resizedImage.createGraphics();
+	    g.drawImage(originalImage, 0, 0, targetWidth, targetHeight, null);
+	    g.dispose();
+
+	    ImageIO.write(resizedImage, "jpg", new File(targetPath));
+	}
 
 	//-------------------------------------------------------------------------------------------------------------//
 	

@@ -124,9 +124,9 @@
 			<tr>
 				<!-- 사진이 없는 경우 -->
 				<c:choose>
-				<c:when test="${imgs == null}">
+				<c:when test="${empty imgs}">
 					<th>
-						<div id="imgnull" colspan="4">
+						<div id="imgnull">
 							<p align="center">상품 이미지가 존재하지 않습니다.</p>
 						</div>
 					</th>
@@ -187,14 +187,14 @@
 			<tr><!-- 현재입찰가 -->
 				<th class="cate">현재입찰가 &nbsp; [${article.cstmId}]님</th>
 				<th class="colon">:</th>
-				<th colspan="4"><span id="aaa"/><fmt:formatNumber type="number" value="${article.nowBid}" pattern="#,##0"/> 원
+				<th colspan="4"><fmt:formatNumber type="number" value="${article.nowBid}" pattern="#,##0"/> 원
 					<c:choose>
 					<c:when test="${member.userId != article.aucId}">
 						<input id="tryBid" type="button" class="btn btn-success buyBtn" style="color:#FFFFFF;" value="입찰하기">  														
 					</c:when>
 					</c:choose>
 					<c:choose>
-					<c:when test="${member.userId == article.aucId}">
+					<c:when test="${member.userId == article.aucId && article.cstmId != null}">
 						<input id="saleNow" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="바로판매">
 					</c:when>
 					</c:choose>
@@ -208,7 +208,7 @@
 			<tr><!-- 상한금액 -->
 				<th class="cate">상한금액</th>
 				<th class="colon">:</th>
-				<th colspan="4"><span id="bbb"/><fmt:formatNumber type="number" value="${article.maxPrice}" pattern="#,##0"/> 원
+				<th colspan="4"><fmt:formatNumber type="number" value="${article.maxPrice}" pattern="#,##0"/> 원
 					<c:choose>
 					<c:when test="${member.userId != article.aucId}">
 						<input id="buyNow" type="button" class="btn btn-warning buyBtn" style="color:#FFFFFF;" value="바로구매">
@@ -264,14 +264,10 @@ $(document).ready(function () {
 		    var cstmId = "${article.cstmId}";
 		    var price = ${article.nowBid + article.bidRate};
 		    
-		    if(cstmId == null) {
-		    	laert("아직 입찰되지 않았습니다. 조금만 더 기다려주세요.")
-		    	return;
-		    } else if(confirm(cstmId + "님에게 " + price + "원에 판매하시겠습니까? 거래가 완료되면 취소할 수 없습니다.")) {
+		    if(confirm(cstmId + "님에게 " + price + "원에 판매하시겠습니까? 거래가 완료되면 취소할 수 없습니다.")) {
 		        location.href = "/auction/saleNow?aucCode=" + aucCode + "&cstmId=" + cstmId;
 		        alert("판매가 완료되었습니다.");
-		    } else {
-		        return;
+		    }   return;
 		    }
 		});//#saleNow
 		
