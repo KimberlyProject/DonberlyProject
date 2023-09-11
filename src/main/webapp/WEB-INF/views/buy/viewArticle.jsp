@@ -232,8 +232,7 @@ function fn_chat(artNo){
 			 	"buyer" : $('.buyer').val(),
 			 	"artNo" : artNo,
 			 	"status" : "b"
-				 
-		 
+		 		
 		 }),	
 		 success: function(data){
 			 console.log(data);
