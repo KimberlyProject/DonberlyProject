@@ -63,11 +63,11 @@
     </aside>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <span><a href="./oneOnOneInquiry">관리자</a></span>
+      <span><a href="./reportAnswer">관리자</a></span>
       <span class="glyphicon glyphicon-chevron-right"></span>
-      <span><a href="./oneOnOneInquiry">1:1 문의하기 내역</a></span>
+      <span><a href="./reportAnswer">신고하기 내역</a></span>
     </div>
-    <h1 class="pageTitle"><div>1:1 문의하기 내역</div></h1>
+    <h1 class="pageTitle"><div>신고하기 내역</div></h1>
 	
 	<div class="container">
 		<!-- 삭제버튼 -->
@@ -96,35 +96,35 @@
 				<tr class="head" style="background: rgb(73, 124, 64); color: #FFF;">
 					<th><span class="glyphicon glyphicon-ok"></span></th>
 					<th>NO</th>
-					<th>TITLE</th>
-					<th>USER ID</th>
-					<th>EMAIL</th>
+					<th>작성자</th>
+					<th>신고대상</th>
+					<th>사유</th>
 					<th>DATE</th>
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="ask" items="${ask}" varStatus="articleNum">
+			<c:forEach var="report" items="${report}" varStatus="articleNum">
 				<tr>
 					<td><input type="checkbox" style="width: 100%;"/></td>
 					<td>
-						${ask.articleNo}
+						${report.articleNo}
 					</td>
 					<td>
-						${ask.title}
+						${report.reporter}
 					</td>
 					<td>
-						${ask.userId}
+						${report.reportedUser}
 					</td>
 					<td>
-						${ask.email}
+						${report.reason}
 					</td>
 					<td>
-						<fmt:formatDate value="${ask.writeDate}" pattern="yy년 MM월 dd일"/><br/>
+						<fmt:formatDate value="${report.writeDate}" pattern="yy년 MM월 dd일"/><br/>
 					</td>
 				</tr>
 				<tr>
 					<td class="content" colspan="6">
-						${ask.content}
+						${report.content}
 						<br/>
 						<br/>
 						<div>

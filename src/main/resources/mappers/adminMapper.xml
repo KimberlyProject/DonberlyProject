@@ -25,6 +25,7 @@
 	<resultMap id="articlesResult" type="ccenterDTO">
 		<result property="articleNo"		column="articleno"/>
 		<result property="userId"			column="userid"/>
+		<result property="email"			column="email"/>
 		<result property="writeDate"		column="writedate"/>
 		<result property="title"			column="title"/>
 		<result property="content"			column="content"/>
@@ -32,7 +33,7 @@
 	</resultMap>	
 		
 	
-		<!-- 게시물 목록 : 계층상태로 추출하기 -->
+		<!-- 1:1 문의하기 목록 출력 -->
 	<select id="listOneOnOne" resultMap="articlesResult">
 		
 		SELECT	*

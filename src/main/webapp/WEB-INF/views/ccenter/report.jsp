@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.io.PrintWriter" %>
 <!DOCTYPE html>
 <html>
 
@@ -32,7 +32,31 @@
 </head>
 
 <body>
+
 <%@ include file="../include/topMenu.jsp" %>
+
+<!-- 비로그인 상태에서 1:1 문의하기 클릭했을 때 로그인 창으로 보내는 펑션 -->
+<%
+	if(session.getAttribute("isLogOn") == null) {%>
+	<!-- 
+		<script>
+			alert("먼저 로그인을 하셔야 글을 쓰실 수 있습니다!");
+			location.href="/member/login";
+		</script>
+	 -->	
+		<%
+		PrintWriter pw = response.getWriter();
+		pw.println("<script>");
+		pw.println("alert('먼저 로그인을 하셔야 글을 쓰실 수 있습니다!');");
+		pw.println("location.href='/member/login?action=/ccenter/askOnetoOne';");
+		pw.println("</script>");
+		pw.flush();
+		pw.close();
+		// out.println("<script>alert("먼저 로그인을 해주세요!");</script>");
+		// response.sendRedirect("/member/login");
+	}
+%>
+
 <div id="content-wrapper">
 
 <aside id="sideMenu">
@@ -55,20 +79,20 @@
 	</div>
     <h1 class="pageTitle"><div>신고하기</div></h1>
     
-    <div id="report-form" class="container">
-    <form id="report-form">
+    <div class="container">
+   	 	<form name="reportAnswer" method="post" action="${path }/ccenter/addNewReport.do" enctype="multipart/form-data">
             <table style="width: 100%;" class="table" id="table" >
                 <tr>
                     <td><label for="reporter">신고자</label></td>
-                    <td><input type="text" id="reporter" name="reporter" value="피해자"></td>
+                    <td><input type="text" id="reporter" name="reporter" value="${member.userId}" readonly></td>
                 </tr>
                 <tr>
                     <td><label for="reportedUser">신고대상</label></td>
-                    <td><input type="text" id="reportedUser" name="reportedUser" value="김종민"></td>
+                    <td><input type="text" id="reportedUser" name="reportedUser" ></td>
                 </tr>
                 <tr>
-                    <td><label for="reason">사유</label></td>
-                    <td><select id="reason" name="reason">
+                    <td><label for="reason">신고사유</label></td>
+                    <td><select id="reason">
 				            <option value="비매너">비매너(욕설/비방, 기만, 노쇼, 음란/선정성 개인정보유출 등)</option>
 				            <option value="허위매물">허위매물</option>
 				            <option value="상품상태불량">상품 상태 불량</option>
@@ -84,14 +108,39 @@
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: center;">
-                        <button type="submit" class="btn btn-success" id="submit-button">신고하기</button>
+                        <button type="submit" class="btn btn-success" id="report-button">신고하기</button>
                         <button type="reset" class="btn btn-danger" id="reset-button">취소</button>
                     </td>
                 </tr>
             </table>
         </form>
+        
+        <form id="formList">
+        	<input type="hidden" name="reason"/>
+        </form>
     </div> 
   </div>
 <%@ include file="../include/footer.jsp" %>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	var formObj = $("#formList");
+	var reasonSelect = $("#reason");
+	
+	// 셀렉박스 값 변경 이벤트 핸들러
+    reasonSelect.on("change", function() {
+        var reasonValue = reasonSelect.val();
+        if(reasonValue == "모두") {
+            formObj.find("[name='reason']").val(reasonValue);
+            formObj.submit();          
+        }
+        formObj.find("[name='reason']").val(reasonValue);
+        formObj.submit();
+    });
+});
+</script>
+
+
 </body>
 </html>
+

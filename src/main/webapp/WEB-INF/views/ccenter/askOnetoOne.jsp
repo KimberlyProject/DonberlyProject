@@ -90,6 +90,10 @@
                     <td><input type="text" id="nickname" name="nickname" value="${member.userId}" readonly></td>
                 </tr>
                 <tr>
+                    <td><label for="email">답변 받으실 e-mail</label></td>
+                    <td><input type="text" id="email" name="email" value="${member.email}" ></td>
+                </tr>
+                <tr>
                     <td><label for="content">문의내용</label></td>
                     <td><textarea id="content" 
                     name="content" 
@@ -107,7 +111,32 @@
 
 
 <script>
-   
+	$(document).ready(function() {
+	    
+		// 문의하기 버튼을 눌렀을 경우 공백있을 때 채워달라는 알림
+	    $("#submit-button").on("click", function() {
+	    	
+	       if($("#title").val() == "") {
+	          alert("제목을 입력해주세요.");
+	          $("#title").focus();
+	          return false;
+	       }
+	       if($("#email").val() == "") {
+	          alert("email을 입력해주세요.");
+	          $("#email").focus();
+	          return false;
+	       }
+	       if($("#content").val() == "") {
+	          alert("내용을 입력해주세요.");
+	          $("#content").focus();
+	          return false;
+	       }
+	       
+	      
+	    });
+	    
+	    
+	 });
 </script>
 
 

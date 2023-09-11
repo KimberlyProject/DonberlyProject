@@ -66,7 +66,8 @@ if("${memberlevel.userStatus}" == "N1"){
               <li>
                 <a href="/admin/oneOnOneInquiry">관리자</a>                
                 <ul> 
-                    <li><a href="/admin/oneOnOneInquiry.do">1:1문의</a></li>
+                    <li><a href="/admin/oneOnOneInquiry.do">1:1 문의 내역</a></li>
+                    <li><a href="/admin/reportAnswer.do">신고하기 내역</a></li>
                     <li><a href="/admin/memberList">회원 목록</a></li>
                 </ul>
               </li>
