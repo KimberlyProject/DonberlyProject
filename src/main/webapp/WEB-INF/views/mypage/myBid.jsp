@@ -120,9 +120,6 @@
     
 	<div class="container">
 		<br/><br/>
-	
-		<a href="/auction/myAuction">내가 올린 상품만 보기</a><br/> 
-		<a href="/auction/myBid">내가 입찰한 상품만 보기</a><br/>
 		
 		<%
 		//현재시간 밀리초,
@@ -137,7 +134,7 @@
 		<!-- 경매 게시글 -->
 		<!-- 게시글이 하나도 없는 경우 -->
 		<c:choose>
-		<c:when test="${empty article.aucId == member.userId}">
+		<c:when test="${empty article.cstmId == member.userId}">
 			<div>
 				<div>
 					<p align="center">
@@ -155,7 +152,7 @@
 			<table class="table table-bordered table-striped" id="ta">
 				<c:forEach var="article" items="${articles}" varStatus="articleNum">
 				<c:choose>
-				<c:when test="${article.aucId == member.userId}"> <!-- 내가 올린 내역만 보여주기 -->
+				<c:when test="${article.cstmId == member.userId}"> <!-- 내가 입찰한 글만 보여주기 -->
 			    <tr>
 			        <th rowspan="4" class="innerimg">
 			            <c:forEach var="img" items="${imgs}" varStatus="imgNum">

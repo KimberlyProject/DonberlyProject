@@ -377,34 +377,5 @@ public class AuctionController {
 		out.close();	
 	}//pullImgFiles
 		
-	//-------------------------------------------------------------------------------------------------------------//
-
-	//게시글 페이징, 검색조건
-	@RequestMapping(value="auction_main.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView auctionPaing(HttpServletRequest req, HttpServletResponse res, SearchCriteria cri)
-			throws Exception {
-		
-		System.out.println("페이징 검색조건 Controller");
-		
-		String viewName = (String)req.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(auctionService.auctionTotalCount(cri));
-		
-		List<AuctionDTO> articles = auctionService.auctionPaging(cri);
-		
-		for (AuctionDTO auctionDTO : articles) {
-			int aucCode = auctionDTO.getAucCode();
-			List<AucImgDTO> imgs = auctionService.auctionPagingImg(aucCode);
-			mav.addObject("imgs", imgs);
-		}
-		mav.addObject("articles", articles);
-		mav.addObject("pageMaker", pageMaker);
-		mav.addObject("cri", cri);
-		
-		return mav;
-	}
 	
 }
