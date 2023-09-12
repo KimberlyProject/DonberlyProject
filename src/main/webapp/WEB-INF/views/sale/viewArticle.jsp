@@ -19,6 +19,7 @@
 		#preview {
 			width: 450px;
 			height:500px;
+			border-radius: 50%;
 		}
 		
 		.grid-second {
@@ -34,6 +35,12 @@
 		
 		#i_price{
 			text-align: right;
+		}
+		
+		#i_thumbnail{
+			margin-top : 20px;
+			margin: 20px 50px; 
+			
 		}
 	</style>
 </head>
