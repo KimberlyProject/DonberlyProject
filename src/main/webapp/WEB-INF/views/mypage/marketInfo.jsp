@@ -90,23 +90,20 @@
   <h1 class="pageTitle"><div>내정보</div></h1>
   
 		<br><br><br>
-	<div class="container">
-		<!-- 좌측 상단 팝니다/삽니다 구분 -->
-		<div class= "selectBox" style="float: right;" style="vertical-align:middle;">
-
-			<div>
-				<select class="searchgroup" id="searchType" style="font-size: 18px; width: 100px;">
-					<option value="t" <c:if test="{searchType} == 't'">selected</c:if>>작성자</option>
-					<option value="c" <c:if test="{searchType} == 'c'">selected</c:if>>내용</option>
-					<option value="w" <c:if test="{searchType} == 'w'">selected</c:if>>상품번호</option>
-				</select>
-	 			<input  class="searchgroup" type="text" class="form-control" style="width:250px;" placeholder="검색하기">
-				<button id ="searchbtn" class="btn btn-secondary" type="button" style="background-color:rgb(73, 124, 64); color:#FFFFFF;">
-					<span class="glyphicon glyphicon-search"/>
-				</button>	
-			</div>
+		<div class="container">
+			<!-- 좌측 상단 팝니다/삽니다 구분 -->
+			<div style="float: right;">
+			
+			<select id="searchType" style="font-size:18px;">
+				<option>검색종류</option>
+				<option value="t" <c:if test="{pageVO.type} == 't'">selected</c:if>>제목</option>
+				<option value="c" <c:if test="{pageVO.type} == 'c'">selected</c:if>>내용</option>
+				<option value="w" <c:if test="{pageVO.type} == 'w'">selected</c:if>>글쓴이</option>
+			</select>
+			<input type="text" id="searchKeyword" value="${pageVO.keyword }" placeholder="검색값"/>
+			<button id="searchBtn" class="btn btn-warning btn-sm">검&nbsp;색</button>
 		</div><!-- 검색창 -->
-		<br><br><br>
+			<br><br><br>
 	
 		<h2>팝니다에 올린 나의 글</h2>
 		<c:choose>
@@ -250,7 +247,7 @@
 		<br/><br/><br/>
 
 		
-		<form id="formList" action="/board/listArticlesPaging.do" method="get">
+		<form id="formList" action="/mypage/marketInfo.do" method="get">
 			<input type="hidden" name="page">
 			<input type="hidden" name="searchType">
 			<input type="hidden" name="keyword">
@@ -258,5 +255,24 @@
 	</div><!-- <div class="container"> -->
 
 <%@ include file="../include/footer.jsp" %>
+
+
+<script>
+$(document).ready(function() {
+	var formObj = $("#formList");
+	
+	// 검색버튼을 눌렀을 경우
+	$("#searchBtn").click(function(e) {
+		var	typeStr		= $("#searchType").find(":selected").val();
+		var	keywordStr	= $("#searchKeyword").val();
+		console.log(typeStr, "", keywordStr);
+		
+		formObj.find("[name='searchType']").val(typeStr);
+		formObj.find("[name='keyword']").val(keywordStr);
+		formObj.find("[name='page']").val("1");
+		formObj.submit();
+	});
+});
+</script>
 </body>
 </html>

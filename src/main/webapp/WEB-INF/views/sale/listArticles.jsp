@@ -108,7 +108,6 @@
 	
 	<!-- 검색 조건 -->
 	<div style="float: right;">
-		<span class="label label-info" style="font-size:17px;">검색조건</span>
 		
 		<select id="searchType" style="font-size:18px;">
 			<option>검색종류</option>
