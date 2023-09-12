@@ -4,8 +4,7 @@
 
 <mapper namespace="com.ezen.board.mappers.boardMapper">
 
-	<!-- <resultMap id="articlesResult" type="com.ezen.board.dto.ArticleVO"> -->
-	<resultMap id="articlesResult" type="articleVO">
+	<resultMap id="buyArticlesResult" type="buyArticleVO">
 		<result property="rnum"				column="recNum"/>
 		<result property="level"			column="lvl"/>
 		<result property="articleNO"		column="articleNO"/>
@@ -89,7 +88,7 @@
 	</insert>
 
 	<!-- 게시글 번호에 해당하는 상세 정보 -->
-	<select id="selectArticle" parameterType="int" resultType="articleVO">
+	<select id="selectArticle" parameterType="int" resultType="buyArticleVO">
 		<![CDATA[
 			SELECT	*
 			FROM	article_buy
@@ -156,7 +155,7 @@
 		<if test="searchType != null">
 			<if test="searchType == 't'.toString()">AND TITLE	LIKE '%' || #{keyword} || '%'</if>
 			<if test="searchType == 'c'.toString()">AND CONTENT	LIKE '%' || #{keyword} || '%'</if>
-			<if test="searchType == 'w'.toString()">AND ID		LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'w'.toString()">AND nickname LIKE '%' || #{keyword} || '%'</if>
 		</if>
 	</sql>
 	
@@ -183,7 +182,7 @@
 	<!-- 게시글 목록 가져오기 (Paging) -->
 	<!-- ROWNUM 을 가장 안 쪽에 사용하면 Mapper에서 인식을 못하기 때문에 바깥쪽에 사용하였다. -->
 	<!-- rownum, level 이름으로 인해서 resultMap articlesResult 로 사용한다. -->
-	<select id="boardListPaging" parameterType="com.ezen.board.dto.Criteria" resultMap="articlesResult">
+	<select id="boardListPaging" parameterType="com.ezen.board.dto.Criteria" resultMap="buyArticlesResult">
 	<![CDATA[
 	SELECT	*
 	FROM	(
@@ -191,7 +190,9 @@
 		FROM article_buy a, members m
         WHERE		a.userId=m.userId
  	]]>
- 		<include refid='search'/>
+ 		<if test="searchType == 't'.toString()">AND TITLE	LIKE '%' || #{keyword} || '%'</if>
+		<if test="searchType == 'c'.toString()">AND CONTENT	LIKE '%' || #{keyword} || '%'</if>
+		<if test="searchType == 'w'.toString()">AND a.nickname		LIKE '%' || #{keyword} || '%'</if>
  	<![CDATA[
      )       
 	where recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
@@ -206,7 +207,9 @@
 		FROM article_sale a, members m
         WHERE		a.userId=m.userId
  	]]>
- 		<include refid='search'/>
+ 		<if test="searchType == 't'.toString()">AND TITLE	LIKE '%' || #{keyword} || '%'</if>
+		<if test="searchType == 'c'.toString()">AND CONTENT	LIKE '%' || #{keyword} || '%'</if>
+		<if test="searchType == 'w'.toString()">AND a.nickname		LIKE '%' || #{keyword} || '%'</if>
  	<![CDATA[
      )       
 	where recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.ezen.board.dto.ArticleVO;
+import com.ezen.board.dto.BuyArticleVO;
 import com.ezen.board.dto.SearchCriteria;
 
 @Repository("infoDAO")
@@ -28,7 +28,7 @@ public class InfoDAO {
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 목록 가져오기 (Paging)
 	//-----------------------------------------------------------------------------------------------------------
-	public List<ArticleVO> infoListPaging(SearchCriteria cri, int i) throws DataAccessException {
+	public List<BuyArticleVO> infoListPaging(SearchCriteria cri, int i) throws DataAccessException {
 		return sqlSession.selectList(namespace + ".infoListPaging"+ i, cri);
 	}
 	

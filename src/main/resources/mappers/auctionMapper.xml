@@ -175,6 +175,7 @@
 			SELECT *
 			FROM aucImg
 			WHERE aucCode = #{aucCode}
+			AND imgNo = (SELECT MIN(imgNo) FROM aucImg WHERE aucCode = #{aucCode})
 		]]>
  	</select>
  	

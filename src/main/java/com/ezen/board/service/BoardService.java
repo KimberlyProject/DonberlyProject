@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ezen.board.dao.BoardDAO;
-import com.ezen.board.dto.ArticleVO;
+import com.ezen.board.dto.BuyArticleVO;
 import com.ezen.board.dto.Criteria;
 import com.ezen.board.dto.SaleArticleVO;
 import com.ezen.board.dto.SearchCriteria;
@@ -20,23 +20,7 @@ public class BoardService {
 
 	@Autowired
 	BoardDAO boardDAO;
-	
-	//-----------------------------------------------------------------------------------------------------------
-	// 게시글 목록
-	//-----------------------------------------------------------------------------------------------------------
-	
-	public List<ArticleVO> buyListArticles() throws Exception {
-		List<ArticleVO> articleList = boardDAO.selectAllArticlesList();
-		return articleList;
-	} // End - public List<ArticleVO> listArticles()
-	
-	
-	public List<SaleArticleVO> saleListArticles() throws Exception {
-		List<SaleArticleVO> saleArticleList = boardDAO.saleSelectAllArticlesList();
-		return saleArticleList;
-	}
-
-	
+		
 	//-----------------------------------------------------------------------------------------------------------
 	// 새로운 게시글 쓰기
 	//-----------------------------------------------------------------------------------------------------------
@@ -54,8 +38,8 @@ public class BoardService {
 	// 게시글 번호에 해당하는 상세 정보
 	//-----------------------------------------------------------------------------------------------------------
 	
-	public ArticleVO buyViewArticle(int articleNO) throws Exception {
-		ArticleVO articleVO = boardDAO.selectArticle(articleNO);
+	public BuyArticleVO buyViewArticle(int articleNO) throws Exception {
+		BuyArticleVO articleVO = boardDAO.selectArticle(articleNO);
 		return articleVO;
 	}
 
@@ -107,7 +91,7 @@ public class BoardService {
 	// 게시글 목록 가져오기 (Paging)
 	//-----------------------------------------------------------------------------------------------------------
 	
-	public List<ArticleVO> buyListPaging(SearchCriteria cri) throws Exception {
+	public List<BuyArticleVO> buyListPaging(SearchCriteria cri) throws Exception {
 		return boardDAO.boardListPaging(cri);
 	}
 

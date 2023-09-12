@@ -33,7 +33,7 @@
 	</insert>
 	
 	<!-- 채팅누른 아티클번호 가져오기 -->
-	<select id="getArticle" parameterType="int" resultType="com.ezen.board.dto.ArticleVO">
+	<select id="getArticle" parameterType="int" resultType="com.ezen.board.dto.BuyArticleVO">
 		select * from article_buy
 		where articleNo = #{artNo}
 	</select>
@@ -97,7 +97,7 @@
 	</select>
 	
 	<!-- artNo으로 articleVO끌어오기 (buy) -->
-	<select id="findArticleVOFromArtNoB" parameterType="int" resultType="articleVO">
+	<select id="findArticleVOFromArtNoB" parameterType="int" resultType="buyArticleVO">
 		<![CDATA[
 		
 			SELECT	*
@@ -108,7 +108,7 @@
 	</select>
 	
 	<!-- artNo으로 articleVO끌어오기 (sale) -->
-	<select id="findArticleVOFromArtNoS" parameterType="int" resultType="articleVO">
+	<select id="findArticleVOFromArtNoS" parameterType="int" resultType="buyArticleVO">
 		<![CDATA[
 			SELECT	*
 			FROM	article_sale

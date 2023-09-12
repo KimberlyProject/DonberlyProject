@@ -23,6 +23,7 @@
 		display:grid;
 		grid-template-columns: 1fr 1fr 1fr;
 	    border: 1px solid #ccc; /* 테이블 경계 설정 */
+	    border-radius: 20px;
 	    padding: 10px; /* 테이블 내부 여백 설정 */
 	    margin-bottom: 20px; /* 테이블 간격 설정 */
 	  	}
@@ -67,8 +68,17 @@
 	margin-bottom: 10px;
 	}
 	
+	.jung{
+		text-align: center;
+		font-size: 20px;
+		margin-bottom: 20px;
+	}
 	.searchgroup {
 	padding: 5px;
+	}
+	
+	.arti {
+		margin-top : 50px;
 	}
 			
 	</style>
@@ -90,11 +100,15 @@
 
 
 <div class="container">
-	<h1 align="center">게시글</h1>
+	
+	<p style="float: left;">
+		<a class="btn btn-primary" 
+		href="javascript:fn_articleForm('${isLogOn}', '${page}/sale/articleForm.do', '${page}/member/login')">상품등록</a>
+	</p>
+	
 	
 	<!-- 검색 조건 -->
-	<div class="col-sm-offset-6">
-		<span class="label label-info" style="font-size:17px;">검색조건</span>
+	<div style="float: right;">
 		
 		<select id="searchType" style="font-size:18px;">
 			<option>검색종류</option>
@@ -105,7 +119,7 @@
 		<input type="text" id="searchKeyword" value="${pageVO.keyword }" placeholder="검색값"/>
 		<button id="searchBtn" class="btn btn-warning btn-sm">검&nbsp;색</button>
 	</div>
-		
+		<div class="arti">
 		<c:choose>
 			<c:when test="${saleArticlesList == null}"> <!-- 게시글이 하나도 없는 경우 -->
 				<div>
@@ -125,7 +139,7 @@
 							<ul class="product">
 					          <li>
 					            <a>
-									<img id="i" src="${path}/download.do?articleNO=${article.articleNO }&thumbnail=${article.thumbnail}" class="imgsize"/>
+									<img id="i" style="border-radius: 50%;" src="${path}/download.do?articleNO=${article.articleNO }&thumbnail=${article.thumbnail}" class="imgsize"/>
 								</a><br/>
 					          </li>
 					          <li class="product-title">
@@ -146,7 +160,7 @@
 							<ul class="product">
 					          <li>
 					            <a href="${page}/sale/viewArticle.do?articleNO=${article.articleNO}">
-									<img id="i" src="${path}/download.do?articleNO=${article.articleNO }&thumbnail=${article.thumbnail}" class="imgsize"/>
+									<img id="i" style="border-radius: 50%;" src="${path}/download.do?articleNO=${article.articleNO }&thumbnail=${article.thumbnail}" class="imgsize"/>
 								</a><br/>
 					          </li>
 					          <li class="product-title">
@@ -168,12 +182,12 @@
 						</div>
 			</c:when>
 		</c:choose>
-	
+	</div>
 	
 	
 	<!-- 화면 하단의 페이지 영역 -->
-	<div class="col-sm-offset-3">
-		<ul class="btn-group pagination">
+	<div class="jung">
+		<ul class="btn-group">
 			<c:if test="${pageMaker.prev }"><!-- 이전 -->
 				<li>
 					<a href='<c:url value="/sale/listArticles.do?page=${pageMaker.startPage-1 }&searchType=${cri.searchType }&keyword=${cri.keyword }"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
@@ -207,10 +221,7 @@
 		
 		
 		<!-- 로그인이 되었나? 않되었나? 에 따라서 넘어가는 페이지가 다르도록 하기위해서 function()에 세가지 값을 넘겨준다. -->
-	<p class="text-center">
-		<a class="btn btn-primary" 
-		href="javascript:fn_articleForm('${isLogOn}', '${page}/sale/articleForm.do', '${page}/member/login')">상품등록</a>
-	</p>
+	
 	</div>
 
 <%@ include file="../include/footer.jsp" %>

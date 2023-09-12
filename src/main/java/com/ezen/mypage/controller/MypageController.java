@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @Controller
-@RequestMapping("/myPage")
+@RequestMapping("/mypage")
 public class MypageController {
 
 	@Autowired

@@ -15,8 +15,8 @@
 	<aside id="sideMenu">
 		<h2>경매</h2>
 		<ul>	
-			<li><a href="${path}/auction/">?</a></li> 
-			<li><a href="${path}/auction/">?</a></li>	
+			<li><a href="${path}/auction/howtouse">경매장 이용방법</a></li>
+            <li><a href="${path}/auction/auction_write">경매상품 올리기</a></li>
 		</ul>
 	  	<button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
 	</aside>
@@ -26,14 +26,14 @@
 	<c:if test="${member == null}">
 		<script>
 			alert("로그인이 필요합니다");
-			location.href = "/member/login?action=" + location.pathname;
+			location.href = "${path}/member/login?action=" + location.pathname;
 		</script>
 	</c:if> 
 	<aside id="sideMenu">
 		<h2>마이페이지</h2>
 		<ul>
-		  <li><a href="${path}/myPage/myInfo">내 정보</a></li>
-		  <li><a href="${path}/myPage/marketInfo.do">내 장터</a></li>
+		  <li><a href="${path}/mypage/myInfo">내 정보</a></li>
+		  <li><a href="${path}/mypage/marketInfo.do">내 장터</a></li>
 		  <li><a href="${path}/auction/">내 경매</a>          
 		    <ul>
 		      <li><a href="${path}/auction/">판매</a></li>
@@ -64,14 +64,14 @@
 	<c:if test="${member == null}">
 		<script>
 			alert("로그인이 필요합니다");
-			location.href = "/member/login?action=" + location.pathname;
+			location.href = "${path}/member/login?action=" + location.pathname;
 		</script>
 	</c:if> 
 	
     <c:if test="${ memberlevel.userStatus != 'A' }">
 		<script>
 			alert("권한이 없습니다.");
-			location.href = "/";
+			location.href = "${path}/";
 		</script>
 	</c:if>
 	

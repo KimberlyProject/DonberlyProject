@@ -29,14 +29,13 @@ public class AuctionSubController {
 		AuctionDTO auctionDTO;
 	
 		//-------------------------------------------------------------------------------------------------------------//
-
+		
 		//게시글 페이징, 검색조건
 		@RequestMapping(value="auction_main.do", method= {RequestMethod.GET, RequestMethod.POST})
 		public ModelAndView auctionPaging(HttpServletRequest req, HttpServletResponse res, SearchCriteria cri)
 		        throws Exception {
 		    
 		    System.out.println("페이징 검색조건 Controller");
-		    
 		    String viewName = "/auction/auction_search";
 		    ModelAndView mav = new ModelAndView(viewName);
 		    
@@ -55,9 +54,10 @@ public class AuctionSubController {
 		        
 		        // 각 이미지 리스트를 imgLists에 추가
 		        imgLists.add(imgs);
+		        mav.addObject("imgs", imgs);
 		    }
 		    
-		    mav.addObject("imgs", imgLists); // 이미지 리스트들을 전달
+		    mav.addObject("imgs", imgLists); //이중리스트, jsp에서 ${imgs[articleNum.index]}로 출력
 		    mav.addObject("articles", articles);
 		    mav.addObject("pageMaker", pageMaker);
 		    mav.addObject("cri", cri);

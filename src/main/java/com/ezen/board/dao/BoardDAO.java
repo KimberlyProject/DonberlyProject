@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.ezen.board.dto.ArticleVO;
-import com.ezen.board.dto.Criteria;
+import com.ezen.board.dto.BuyArticleVO;
+
 import com.ezen.board.dto.SaleArticleVO;
 import com.ezen.board.dto.SearchCriteria;
 
@@ -24,20 +24,6 @@ public class BoardDAO {
 	
 	private static final String namespace ="com.ezen.board.mappers.boardMapper";
 	
-	//-----------------------------------------------------------------------------------------------------------
-	// 게시글 목록
-	//-----------------------------------------------------------------------------------------------------------
-	
-	public List selectAllArticlesList() throws DataAccessException {
-		List<ArticleVO> articlesList = sqlSession.selectList(namespace + ".selectAllArticleList");
-		return articlesList;
-	} // End - public List selectAllArticlesList()
-
-	
-	public List saleSelectAllArticlesList() throws DataAccessException {
-		List<SaleArticleVO> saleArticlesList = sqlSession.selectList(namespace + ".saleSelectAllArticleList");
-		return saleArticlesList;
-	}
 	//-----------------------------------------------------------------------------------------------------------
 	// 새로운 게시글 쓰기
 	//-----------------------------------------------------------------------------------------------------------
@@ -111,7 +97,7 @@ public class BoardDAO {
 	// 게시글 번호에 해당하는 상세 정보
 	//-----------------------------------------------------------------------------------------------------------
 	
-	public ArticleVO selectArticle(int articleNO) throws DataAccessException {
+	public BuyArticleVO selectArticle(int articleNO) throws DataAccessException {
 		return sqlSession.selectOne(namespace + ".selectArticle", articleNO);
 	}
 	
@@ -162,7 +148,7 @@ public class BoardDAO {
 	// 게시글 목록 가져오기 (Paging)
 	//-----------------------------------------------------------------------------------------------------------
 	
-	public List<ArticleVO> boardListPaging(SearchCriteria cri) throws DataAccessException {
+	public List<BuyArticleVO> boardListPaging(SearchCriteria cri) throws DataAccessException {
 		return sqlSession.selectList(namespace + ".boardListPaging", cri);
 	}
 
