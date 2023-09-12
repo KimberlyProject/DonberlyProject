@@ -75,6 +75,9 @@
 			width: 200px;
 			height: 200px;
 		}
+		#textBox {
+			heigth: 300px;
+		}
 	
 	</style>
 </head>
@@ -225,9 +228,9 @@
 			</tr>
 			<tr>	
 				<th id="textbox" colspan="4">
-					<textarea rows=15>
+					<div id="textBox">
 						${article.content}
-					</textarea>
+					</div>
 				</th>
 			</tr>
 		</table>

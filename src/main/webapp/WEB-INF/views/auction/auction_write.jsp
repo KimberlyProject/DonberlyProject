@@ -59,6 +59,13 @@
 		#maxPrice {
 		text-align: right;
 		}
+		#imgAdd {
+			width: 90px;
+		}
+		#imgInfo {
+			color: gray;
+		}
+	
 	</style>
 </head>
 <body>
@@ -145,23 +152,26 @@
 					</th>
 				</tr>
 				<tr>
-					<td class="cate">
-						사진첨부<br/>
-						(1번 사진이<br/>
-						썸네일로<br/> 
-						설정됩니다.)<br/>
-						<br/><br/><br/><br/>
-						<br/><input type="button" value="사진 추가" onClick="fn_addFiles()"/>	
-					</td>	
+					<th class="cate">사진첨부<br/><br/><br/><br/><br/>
+						<input id="imgAdd" type="button" value="사진 추가" onClick="fn_addFiles()"/>
+					</th>	
 					<th>
-						<div id="d_file">
-							<input type="file" name="imageFileName"  onchange="readAndResize(this)"><br/>
+						<div id="d_file" style="overflow-y: scroll; height: 150px; max-height: 200px;">
+						 	<span id="imgInfo"> 
+						 	첫번째 사진이 썸네일로 설정됩니다.<br/> 원활한 경매 진행을 최소 2장 이상의 사진을 올려주세요. &nbsp;&nbsp;</span>
+						 	
+						 	<br/><br/>
+							<input type="file" name="imageFileName" onchange="readAndResize(this)"><br/>
+							<input type="file" name="imageFileName" onchange="readAndResize(this)">
 						</div>
 					</th>
 				<tr>
 					<th class="cate">제품 설명</th><!-- 내용 -->
 					<th colspan="2">
-						<textarea name="content" id="content" placeholder="제품에 대한 상세 내용을 입력해주세요."></textarea>
+					 <div>
+						<textarea name="content" id="content" placeholder="판매하실 상품에 대한 상세한 설명을 입력해주세요." 
+						style="overflow-y: hidden; height: 300px;"></textarea>
+					</div>
 					</th>
 				</tr>	
 			</table> <!-- 글쓰기 -->
