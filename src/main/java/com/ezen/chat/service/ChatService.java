@@ -3,7 +3,7 @@ package com.ezen.chat.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ezen.board.dto.ArticleVO;
+import com.ezen.board.dto.BuyArticleVO;
 import com.ezen.chat.dto.ChatDTO;
 import com.ezen.chat.dto.ChatListDTO;
 
@@ -13,7 +13,7 @@ public interface ChatService {
 	
 	public void insertContent(ChatDTO chatDTO) throws Exception;
 	
-	public List<ArticleVO> getArtDTO(int artNo) throws Exception;
+	public List<BuyArticleVO> getArtDTO(int artNo) throws Exception;
 	
 	public int insertChatList(ChatListDTO chatListDTO) throws Exception;
 	
@@ -25,7 +25,7 @@ public interface ChatService {
 	
 	public ChatDTO findContent(ChatDTO chatDTO) throws Exception;
 	
-	public ArticleVO findArticleVOFromArtNo(int artNo,String status) throws Exception;
+	public BuyArticleVO findArticleVOFromArtNo(int artNo,String status) throws Exception;
 	
 	public List<ChatDTO> findLastChat() throws Exception;
 	

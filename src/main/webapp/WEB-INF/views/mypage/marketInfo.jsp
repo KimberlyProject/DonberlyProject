@@ -92,21 +92,13 @@
 		<br><br><br>
 	<div class="container">
 		<!-- 좌측 상단 팝니다/삽니다 구분 -->
-		<div class= "selectBox" align="left" style="vertical-align:middle;">
+		<div class= "selectBox" style="float: right;" style="vertical-align:middle;">
+
 			<div>
-				<select class="searchgroup" id="searchType" style="font-size: 15px; width: 100px;">
-					<option value="i" <c:if test="{searchType} == 'i'">selected</c:if>>전체</option>
-					<option value="o" <c:if test="{searchType} == 'o'">selected</c:if>>팝니다</option>
-					<option value="p" <c:if test="{searchType} == 'p'">selected</c:if>>삽니다</option>
-				</select>	
-			</div>
-			
-			<div>
-				<select class="searchgroup" id="searchType" style="font-size: 15px; width: 100px;">
-					<option value="a" <c:if test="{searchType} == 'a'">selected</c:if>>전체</option>
-					<option value="w" <c:if test="{searchType} == 'w'">selected</c:if>>작성자</option>
+				<select class="searchgroup" id="searchType" style="font-size: 18px; width: 100px;">
+					<option value="t" <c:if test="{searchType} == 't'">selected</c:if>>작성자</option>
 					<option value="c" <c:if test="{searchType} == 'c'">selected</c:if>>내용</option>
-					<option value="p" <c:if test="{searchType} == 'p'">selected</c:if>>상품번호</option>
+					<option value="w" <c:if test="{searchType} == 'w'">selected</c:if>>상품번호</option>
 				</select>
 	 			<input  class="searchgroup" type="text" class="form-control" style="width:250px;" placeholder="검색하기">
 				<button id ="searchbtn" class="btn btn-secondary" type="button" style="background-color:rgb(73, 124, 64); color:#FFFFFF;">
@@ -115,8 +107,77 @@
 			</div>
 		</div><!-- 검색창 -->
 		<br><br><br>
+	
+		<h2>팝니다에 올린 나의 글</h2>
+		<c:choose>
+			<c:when test="${articlesList2 == null}"> <!-- 게시글이 하나도 없는 경우 -->
+				<c:if test="${member.userId != articlesList2.userId}">
+				<div>
+					<div colspan="4">
+						<p align="center">
+							<b><span style="font-size:22px;">등록된 게시글이 없습니다.</span></b>
+						</p>
+					</div>
+				</div>
+				</c:if>
+			</c:when>
+			<c:when test="${articlesList2 != null}"> <!-- 게시글이 하나라도 있는 경우 -->
+				<div class="products">
+					<c:forEach var="salearticle" items="${articlesList2 }" varStatus="articleNum">
+						<c:if test="${member.userId == salearticle.userId}">
+						<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
+						
+								<ul class="product">
+						          <li>
+						            <img src="${path}/download.do?articleNO=${salearticle.articleNO }&thumbnail=${salearticle.thumbnail}" class="imgsize"/>
+						          </li>
+						          <li class="product-title">
+						            ${salearticle.title} <!-- 여기에 게시글 제목 -->
+						          </li>
+						          <li class="product-price">
+						            ${salearticle.price}원 <!-- 여기에 가격 표시 -->
+						          </li>
+						          <li class="product-seller">
+						          	${salearticle.nickname}
+						          </li>
+						          <li class="product-date">
+						          	${salearticle.write_date}
+						          </li>
+						        </ul>
+						</c:if>
+					</c:forEach>
+				</div>
+			</c:when>
+		</c:choose>
+				<table align="center">
+			<tr> <!-- 페이징 -->
+				<td>
+					<div class="col-sm-offset-3"><!-- 숫자 버튼 -->
+						<ul class="btn-group pagination">
+							<c:if test="${pageMaker2.prev}">
+								<li>
+									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageMaker2.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
+										<span class="glyphicon glyphicon-chevron-left"></span></a>
+								</li>
+							</c:if>
+							<c:forEach begin="${pageMaker2.startPage}" end="${pageMaker2.endPage}" var="pageNum">
+								<li>
+									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
+								</li>
+							</c:forEach>
+							<c:if test="${pageMaker2.next && pageMaker2.endPage > 0}">
+								<li>
+									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageMaker2.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
+										<span class="glyphicon glyphicon-chevron-right"></span></a>
+								</li>
+							</c:if>
+						</ul>
+					</div><!-- 숫자 버튼 -->
+				</td>
+			</tr>
+		</table> <br/><hr>
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->		
-		
+		<h2>삽니다에 올린 나의 글</h2>
 		<c:choose>
 			<c:when test="${articlesList1 == null}"> <!-- 게시글이 하나도 없는 경우 -->
 			<c:if test="${member.userId != articlesList1.userId}">
@@ -145,7 +206,7 @@
 						            ${article.price}원 <!-- 여기에 가격 표시 -->
 						          </li>
 						          <li class="product-seller">
-						          	${article.userId}
+						          	${article.nickname}
 						          </li>
 						          <li class="product-date">
 						          	${article.write_date}
@@ -185,77 +246,8 @@
 		</table> <br/>
 		
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->		
-		
-		
-		<br/><br/><hr/><br/><br/>
-		<c:choose>
-			<c:when test="${articlesList2 == null}"> <!-- 게시글이 하나도 없는 경우 -->
-				<c:if test="${member.userId != articlesList2.userId}">
-				<div>
-					<div colspan="4">
-						<p align="center">
-							<b><span style="font-size:22px;">등록된 게시글이 없습니다.</span></b>
-						</p>
-					</div>
-				</div>
-				</c:if>
-			</c:when>
-			<c:when test="${articlesList2 != null}"> <!-- 게시글이 하나라도 있는 경우 -->
-				<div class="products">
-					<c:forEach var="salearticle" items="${articlesList2 }" varStatus="articleNum">
-						<c:if test="${member.userId == salearticle.userId}">
-						<!-- 게시글 목록에서 한 건씩 추출하여 화면에 출력시킨다. -->
-						
-								<ul class="product">
-						          <li>
-						            <img src="${path}/download.do?articleNO=${salearticle.articleNO }&thumbnail=${salearticle.thumbnail}" class="imgsize"/>
-						          </li>
-						          <li class="product-title">
-						            ${salearticle.title} <!-- 여기에 게시글 제목 -->
-						          </li>
-						          <li class="product-price">
-						            ${salearticle.price}원 <!-- 여기에 가격 표시 -->
-						          </li>
-						          <li class="product-seller">
-						          	${salearticle.userId}
-						          </li>
-						          <li class="product-date">
-						          	${salearticle.write_date}
-						          </li>
-						        </ul>
-						</c:if>
-					</c:forEach>
-				</div>
-			</c:when>
-		</c:choose>
-				<table align="center">
-			<tr> <!-- 페이징 -->
-				<td>
-					<div class="col-sm-offset-3"><!-- 숫자 버튼 -->
-						<ul class="btn-group pagination">
-							<c:if test="${pageMaker2.prev}">
-								<li>
-									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageMaker2.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
-										<span class="glyphicon glyphicon-chevron-left"></span></a>
-								</li>
-							</c:if>
-							<c:forEach begin="${pageMaker2.startPage}" end="${pageMaker2.endPage}" var="pageNum">
-								<li>
-									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
-								</li>
-							</c:forEach>
-							<c:if test="${pageMaker2.next && pageMaker2.endPage > 0}">
-								<li>
-									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageMaker2.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
-										<span class="glyphicon glyphicon-chevron-right"></span></a>
-								</li>
-							</c:if>
-						</ul>
-					</div><!-- 숫자 버튼 -->
-				</td>
-			</tr>
-		</table> <br/>
-		
+
+		<br/><br/><br/>
 
 		
 		<form id="formList" action="/board/listArticlesPaging.do" method="get">
