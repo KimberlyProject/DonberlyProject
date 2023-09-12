@@ -71,52 +71,39 @@
 			text-align: center;
 			vertical-align: middle;
 		}
+		.item {
+			width: 200px;
+			height: 200px;
+		}
 	
 	</style>
 </head>
 <body>
-	<%@ include file="../include/topMenu.jsp" %>
-	 <aside id="sideMenu">
-      <h2>마이페이지</h2>
-      <ul>
-        <li><a href="#">내 정보 수정</a></li>
-        <li>
-          <a href="#">거래내역</a>
-          <ul>
-            <li><a href="#">삽니다</a></li>
-            <li><a href="#">팝니다</a></li>
-          </ul>
-        </li>
-        <li><a href="#">경매</a>          
-          <ul>
-            <li><a href="#">판매</a></li>
-            <li><a href="#">구매</a></li>
-          </ul>
-        </li>
-        <li><a href="#">캘린더</a></li>
-        <li><a href="#">채팅목록</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
-    <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <a href="/">홈</a> &gt;
-      <a href="/auction/auction_main">경매장</a> &gt;
-      <a href="#">자세히보기</a>
-    </div>
-    <h1 class="pageTitle"><div>경매장</div></h1>
-	 <%
-	//로그인 세션 없으면 로그인을 먼저 하도록 한다.
-	if(session.getAttribute("isLogOn") == null) {
-		PrintWriter pw = response.getWriter();
-		pw.println("<script>");
-		pw.println("alert('로그인이 필요합니다.');");
-		pw.println("location.href='/member/login?action=/auction/auction_wirte';");
-		pw.println("</script>");
-		pw.flush();
-		pw.close();
-	}
+	<%//로그인 세션
+		if(session.getAttribute("isLogOn") == null) {
+			PrintWriter pw = response.getWriter();
+			pw.println("<script>");
+			pw.println("alert('로그인이 필요합니다.');");
+			pw.println("location.href='/member/login?action=/auction/auction_wirte';");
+			pw.println("</script>");
+			pw.flush();
+			pw.close();
+		}
 	%>	
+	
+	<%@ include file="../include/topMenu.jsp" %>
+	
+	<c:set var="menu" value="auction" />
+	<%@ include file="../include/sidebar.jsp" %>
+	
+	<!-- 배너 -->
+	<div class="page_dir container">
+		<button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+		<a href="/">홈</a> &gt;
+		<a href="/auction/auction_main">경매장</a> &gt;
+		<a href="#">자세히보기</a>
+	</div>
+	<h1 class="pageTitle"><div>경매장</div></h1>
 
 		<div class="container">
 		<br/><br/>
@@ -178,16 +165,18 @@
 				<th class="colon">:</th>
 				<th colspan="4">${article.aucId}님
 					<c:choose>
-					<c:when test="${member.userId != article.aucId}">
+					<c:when test="${member.userId != article.aucId}"> <!-- 판매자와 채팅하기 -->
 						<input id="chat" type="button" class="btn btn-primary buyBtn" style="color:#FFFFFF;" value="채팅하기">
 					</c:when>
 					</c:choose>
 				</th>
 			</tr>
 			<tr><!-- 현재입찰가 -->
-				<th class="cate">현재입찰가 &nbsp; [${article.cstmId}]님</th>
+				<th class="cate">현재입찰가</th>
 				<th class="colon">:</th>
-				<th colspan="4"><fmt:formatNumber type="number" value="${article.nowBid}" pattern="#,##0"/> 원
+				<th colspan="4">
+					<c:choose><c:when test="${article.cstmId != null}">[${article.cstmId}]님&nbsp;&nbsp;</c:when></c:choose>
+					<fmt:formatNumber type="number" value="${article.nowBid}" pattern="#,##0"/> 원
 					<c:choose>
 					<c:when test="${member.userId != article.aucId}">
 						<input id="tryBid" type="button" class="btn btn-success buyBtn" style="color:#FFFFFF;" value="입찰하기">  														
@@ -221,7 +210,7 @@
 				<th class="colon">:</th>
 				<th colspan="4">${article.deadline}
 					<c:choose>
-					<c:when test="${member.userId == article.aucId}">
+					<c:when test="${member.userId == article.aucId && article.cstmId == null}">
 						<input id="auctionOff" type="button" class="btn btn-danger saleBtn" style="color:#FFFFFF;" value="경매취소">  																			
 					</c:when>
 					</c:choose>
@@ -267,7 +256,8 @@ $(document).ready(function () {
 		    if(confirm(cstmId + "님에게 " + price + "원에 판매하시겠습니까? 거래가 완료되면 취소할 수 없습니다.")) {
 		        location.href = "/auction/saleNow?aucCode=" + aucCode + "&cstmId=" + cstmId;
 		        alert("판매가 완료되었습니다.");
-		    }   return;
+		    } else {
+		    	return;
 		    }
 		});//#saleNow
 		
@@ -276,7 +266,6 @@ $(document).ready(function () {
 			var aucCode = ${article.aucCode};
 			var cstmId = "${member.userId}";
 			var price = ${article.nowBid + article.bidRate};
-			if(price )
 			
 			if(confirm(price + "원으로 입찰하시겠습니까? 입찰 후 판매자가 경매를 종료하면 즉시 구매가 진행됩니다.")) {
 				location.href = "/auction/tryBid?aucCode=" + aucCode + "&cstmId=" + cstmId + "&nowBid=" + price; 
@@ -294,6 +283,8 @@ $(document).ready(function () {
 			if(confirm("상한가 " + price + "원에 바로 구매하시겠습니까? 경매가 종료되면 취소할 수 없습니다.")) {
 				location.href = "/auction/buyNow?aucCode=" + aucCode + "&cstmId=" + cstmId + "&maxPrice=" + price;
 				alert("구매가 완료되었습니다.");
+			} else {
+				return;
 			}
 		});//#buyNow
 		

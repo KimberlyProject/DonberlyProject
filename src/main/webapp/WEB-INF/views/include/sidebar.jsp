@@ -15,8 +15,8 @@
 	<aside id="sideMenu">
 		<h2>경매</h2>
 		<ul>	
-			<li><a href="${path}/auction/">?</a></li> 
-			<li><a href="${path}/auction/">?</a></li>	
+			<li><a href="${path}/auction/howtouse">경매장 이용방법</a></li>
+            <li><a href="${path}/auction/auction_write">경매상품 올리기</a></li>
 		</ul>
 	  	<button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
 	</aside>

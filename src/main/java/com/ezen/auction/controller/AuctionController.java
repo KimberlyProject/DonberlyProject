@@ -63,12 +63,13 @@ public class AuctionController {
 	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("경매장 메인 리스트불러오기 컨트롤러");
 		String viewName = (String) request.getAttribute("viewName");
-		List<AuctionDTO> articlesList	= auctionService.listArticles(); //게시글 여러개 forEach문으로 출력
-		List<AucImgDTO> articlesList2 = auctionService.listArticlesImg(); //이미지 여러개 forEach문으로 출력
+		List<AuctionDTO> articles	= auctionService.listArticles(); //게시글 여러개 forEach문으로 출력
+		List<AucImgDTO> imgs = auctionService.listArticlesImg(); //이미지 여러개 forEach문으로 출력
 		
 		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("articles", articlesList);	
-		mav.addObject("imgs", articlesList2);
+		mav.addObject("articles", articles);	
+		mav.addObject("imgs", imgs);
+
 		return mav;
 	}	
 	
@@ -93,9 +94,35 @@ public class AuctionController {
 	}// viewArticle
 	
 	//-------------------------------------------------------------------------------------------------------------//
+
+	//저장된 이미지 모두 가져오기 컨트롤러
+	@RequestMapping("/pullAuctionImges")
+	protected void pullImgFiles(@RequestParam("imgName") String imgName, @RequestParam("aucCode") int aucCode,
+			HttpServletResponse response)	throws Exception {
+								
+		OutputStream out = response.getOutputStream();
+		String downFile	 = IMGROOT + "\\" + aucCode + "\\" + imgName;
+		File file = new File(downFile);
+	
+		response.setHeader("Cache-Control", "no-cache");
+		response.addHeader("Content-disposition", "attachement; fileName=" + imgName);
+	
+		FileInputStream in = new FileInputStream(file);
+		byte[] buffer = new byte[1024 * 8];
+		while(true) {
+			int count = in.read(buffer);
+			if(count == -1)
+				break;
+			out.write(buffer, 0, count);
+		}
+		in.close();
+		out.close();	
+	}//pullImgFiles
+	
+	//-------------------------------------------------------------------------------------------------------------//
 	
 	//글쓰기화면
-	@RequestMapping(value="/auction_wirte", method=RequestMethod.GET)
+	@RequestMapping(value="/auction_write", method=RequestMethod.GET)
 	public String auctionWrite(Model model) {
 		System.out.println("경매 글쓰기 화면");
 		return "/auction/auction_write";
@@ -103,7 +130,6 @@ public class AuctionController {
 
 	//게시글 업로드
 	@RequestMapping(value="/addNewArticle", method = RequestMethod.POST)
-	@ResponseBody
 	public ResponseEntity addNewArticle(MultipartHttpServletRequest req, HttpServletResponse res) throws Exception {
 		
 		
@@ -370,33 +396,6 @@ public class AuctionController {
 		auctionService.buyNow(articleMap);
 		
 		return "auction/auction_main";
-	}//buyNow
-		
-	//-------------------------------------------------------------------------------------------------------------//
-
-	//저장된 이미지 모두 가져오기 컨트롤러
-	@RequestMapping("/pullAuctionImges")
-	protected void pullImgFiles(@RequestParam("imgName") String imgName, @RequestParam("aucCode") int aucCode,
-			HttpServletResponse response)	throws Exception {
-								
-		OutputStream out = response.getOutputStream();
-		String downFile	 = IMGROOT + "\\" + aucCode + "\\" + imgName;
-		File file = new File(downFile);
-	
-		response.setHeader("Cache-Control", "no-cache");
-		response.addHeader("Content-disposition", "attachement; fileName=" + imgName);
-	
-		FileInputStream in = new FileInputStream(file);
-		byte[] buffer = new byte[1024 * 8];
-		while(true) {
-			int count = in.read(buffer);
-			if(count == -1)
-				break;
-			out.write(buffer, 0, count);
-		}
-		in.close();
-		out.close();	
-	}//pullImgFiles
-		
+	}//buyNow		
 	
 }

@@ -36,8 +36,7 @@ public class AuctionSubController {
 		        throws Exception {
 		    
 		    System.out.println("페이징 검색조건 Controller");
-		    
-		    String viewName = "/auction/auction_search";
+		    String viewName = (String) req.getAttribute("viewName");
 		    ModelAndView mav = new ModelAndView(viewName);
 		    
 		    PageMaker pageMaker = new PageMaker();

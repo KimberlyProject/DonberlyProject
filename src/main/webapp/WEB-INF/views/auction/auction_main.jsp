@@ -65,6 +65,13 @@
         .gray {
         	color: gray;
         }
+        #i {
+        	width: 200px;
+        	height: 200px;
+        }
+        #imgNull {
+        	text-align: center;
+        }
       
      
 
@@ -147,17 +154,26 @@
 		<c:when test="${articles != null}">
 			<!-- 경매게시글 -->
 			<table class="table table-bordered table-striped" id="ta">
-				<c:forEach var="article" items="${articles}" varStatus="articleNum">
-			    <tr>
-			        <th rowspan="4" class="innerimg">
-			            <c:forEach var="img" items="${imgs}" varStatus="imgNum">
-			                <c:if test="${articleNum.index == imgNum.index}"> <!-- 첫번째 사진만 출력 -->
-			                    <div class="item">
-			                      <img id="i" src="${path}/auction/pullAuctionImges?imgName=${img.imgName}&aucCode=${img.aucCode}"/>
-			                    </div>
-			                </c:if>
-			            </c:forEach>
-			        </th>
+		    <c:forEach var="article" items="${articles}" varStatus="articleNum">
+		        <tr>
+		            <c:set var="firstImg" value="false" /> <!-- 첫 번째 이미지를 출력했는지 여부를 나타내는 변수 -->
+		            <c:forEach var="img" items="${imgs}" varStatus="imgNum">
+		       			
+		              
+		                <c:if test="${article.aucCode == img.aucCode && !firstImg}">
+		                    <th rowspan="4" class="innerimg">
+		                        <div class="item">
+		                            <c:choose><c:when test="${img.imgName == null}">
+					       				<div><br><br/><br/><br/><p id="imgNull">등록된 사진이 없습니다.</p></div>
+					               	</c:when></c:choose>
+					               	<c:choose><c:when test="${img.imgName != null}">
+		                            <img id="i" src="${path}/auction/pullAuctionImges?imgName=${img.imgName}&aucCode=${img.aucCode}"/>
+					               	</c:when></c:choose>
+		                        </div>
+		                    </th>
+		                    <c:set var="firstImg" value="true" /> <!-- 첫 번째 이미지를 출력한 후 변수 값을 변경 -->
+		               	</c:if>
+		            </c:forEach>
 					<th class="cate">제목</th><th class="colon">:</th><th colspan="4">${article.title}</th>
 					<th rowspan="4" id="detailarea">
 						<br/>
@@ -170,7 +186,7 @@
 							</c:choose>
 							<c:choose>
 							<c:when test="${article.deadline < today || article.status == 1 }">
-								<button class="btn detailBtn" type="submit">자세히 보기</button>
+								<button class="btn detailBtn" type="submit">자세히 보기</button> 
 							</c:when>
 							</c:choose>
 						</form>
@@ -219,8 +235,9 @@
 							<th colspan="4"><span class="gray">경매종료</span></th>
 						</c:when></c:choose>
 				</tr>
-				</c:forEach>
-			</table><br/><br/><!--  경매 게시글 -->
+			</c:forEach>
+			</table>
+			<br/><br/><!--  경매 게시글 -->
 		</c:when>
 		</c:choose>
 	
