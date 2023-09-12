@@ -105,7 +105,7 @@
 		</div><!-- 검색창 -->
 			<br><br><br>
 	
-		<h2>팝니다에 올린 나의 글</h2>
+		<h2>팝니다에 올린 ${member.nickname }님의 글</h2>
 		<c:choose>
 			<c:when test="${articlesList2 == null}"> <!-- 게시글이 하나도 없는 경우 -->
 				<c:if test="${member.userId != articlesList2.userId}">
@@ -174,7 +174,7 @@
 			</tr>
 		</table> <br/><hr>
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->		
-		<h2>삽니다에 올린 나의 글</h2>
+		<h2>삽니다에 올린 ${member.nickname }님의 글</h2>
 		<c:choose>
 			<c:when test="${articlesList1 == null}"> <!-- 게시글이 하나도 없는 경우 -->
 			<c:if test="${member.userId != articlesList1.userId}">

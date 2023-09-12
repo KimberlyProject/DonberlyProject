@@ -155,7 +155,7 @@
 		<if test="searchType != null">
 			<if test="searchType == 't'.toString()">AND TITLE	LIKE '%' || #{keyword} || '%'</if>
 			<if test="searchType == 'c'.toString()">AND CONTENT	LIKE '%' || #{keyword} || '%'</if>
-			<if test="searchType == 'w'.toString()">AND ID		LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'w'.toString()">AND nickname LIKE '%' || #{keyword} || '%'</if>
 		</if>
 	</sql>
 	
@@ -190,7 +190,9 @@
 		FROM article_buy a, members m
         WHERE		a.userId=m.userId
  	]]>
- 		<include refid='search'/>
+ 		<if test="searchType == 't'.toString()">AND TITLE	LIKE '%' || #{keyword} || '%'</if>
+		<if test="searchType == 'c'.toString()">AND CONTENT	LIKE '%' || #{keyword} || '%'</if>
+		<if test="searchType == 'w'.toString()">AND a.nickname		LIKE '%' || #{keyword} || '%'</if>
  	<![CDATA[
      )       
 	where recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
@@ -205,7 +207,9 @@
 		FROM article_sale a, members m
         WHERE		a.userId=m.userId
  	]]>
- 		<include refid='search'/>
+ 		<if test="searchType == 't'.toString()">AND TITLE	LIKE '%' || #{keyword} || '%'</if>
+		<if test="searchType == 'c'.toString()">AND CONTENT	LIKE '%' || #{keyword} || '%'</if>
+		<if test="searchType == 'w'.toString()">AND a.nickname		LIKE '%' || #{keyword} || '%'</if>
  	<![CDATA[
      )       
 	where recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
