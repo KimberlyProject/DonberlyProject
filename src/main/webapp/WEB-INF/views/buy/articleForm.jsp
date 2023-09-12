@@ -54,7 +54,8 @@
       }
       
       #d{
-      border : 1px solid #00ff00;
+      border : 3px solid #00ff00;
+      border-radius: 20px;
       margin-top : 50px;
       margin-bottom: 50px;
       }
@@ -103,7 +104,7 @@
          <ul class= "item">
             <li>이미지파일 첨부:  </li>
             <li>
-            <img  id="preview" src="#"   width=350 height=350/>
+            <img  id="preview" src="#" style="border-radius: 50%; "  width=350 height=350/>
               <%--  이미지를 2개 이상 올릴 때 사용한다.  --%>
               <input type="file" name="imageFileName"  onchange="readURL(this);" /><br/>
             </li>

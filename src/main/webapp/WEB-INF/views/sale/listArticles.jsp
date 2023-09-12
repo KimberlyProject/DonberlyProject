@@ -23,6 +23,7 @@
 		display:grid;
 		grid-template-columns: 1fr 1fr 1fr;
 	    border: 1px solid #ccc; /* 테이블 경계 설정 */
+	    border-radius: 20px;
 	    padding: 10px; /* 테이블 내부 여백 설정 */
 	    margin-bottom: 20px; /* 테이블 간격 설정 */
 	  	}
@@ -138,7 +139,7 @@
 							<ul class="product">
 					          <li>
 					            <a>
-									<img id="i" src="${path}/download.do?articleNO=${article.articleNO }&thumbnail=${article.thumbnail}" class="imgsize"/>
+									<img id="i" style="border-radius: 50%;" src="${path}/download.do?articleNO=${article.articleNO }&thumbnail=${article.thumbnail}" class="imgsize"/>
 								</a><br/>
 					          </li>
 					          <li class="product-title">
@@ -159,7 +160,7 @@
 							<ul class="product">
 					          <li>
 					            <a href="${page}/sale/viewArticle.do?articleNO=${article.articleNO}">
-									<img id="i" src="${path}/download.do?articleNO=${article.articleNO }&thumbnail=${article.thumbnail}" class="imgsize"/>
+									<img id="i" style="border-radius: 50%;" src="${path}/download.do?articleNO=${article.articleNO }&thumbnail=${article.thumbnail}" class="imgsize"/>
 								</a><br/>
 					          </li>
 					          <li class="product-title">
