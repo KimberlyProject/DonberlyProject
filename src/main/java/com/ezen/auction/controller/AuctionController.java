@@ -63,13 +63,14 @@ public class AuctionController {
 	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("경매장 메인 리스트불러오기 컨트롤러");
 		String viewName = (String) request.getAttribute("viewName");
-		List<AuctionDTO> articles	= auctionService.listArticles(); //게시글 여러개 forEach문으로 출력
+	
+		
+		List<AuctionDTO> articles	= auctionService.listArticles();; //게시글 여러개 forEach문으로 출력
 		List<AucImgDTO> imgs = auctionService.listArticlesImg(); //이미지 여러개 forEach문으로 출력
 		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("articles", articles);	
 		mav.addObject("imgs", imgs);
-
 		return mav;
 	}	
 	

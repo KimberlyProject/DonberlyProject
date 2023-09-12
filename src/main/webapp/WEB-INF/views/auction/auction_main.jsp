@@ -157,9 +157,7 @@
 		    <c:forEach var="article" items="${articles}" varStatus="articleNum">
 		        <tr>
 		            <c:set var="firstImg" value="false" /> <!-- 첫 번째 이미지를 출력했는지 여부를 나타내는 변수 -->
-		            <c:forEach var="img" items="${imgs}" varStatus="imgNum">
-		       			
-		              
+		            <c:forEach var="img" items="${imgs}" varStatus="imgNum"> 
 		                <c:if test="${article.aucCode == img.aucCode && !firstImg}">
 		                    <th rowspan="4" class="innerimg">
 		                        <div class="item">
