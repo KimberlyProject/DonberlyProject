@@ -29,7 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ezen.board.dto.ArticleVO;
+import com.ezen.board.dto.BuyArticleVO;
 import com.ezen.board.dto.Criteria;
 import com.ezen.board.dto.PageMaker;
 import com.ezen.board.dto.SaleArticleVO;
@@ -81,7 +81,7 @@ public class BoardController {
 	@Autowired	
 	private BoardService boardService;
 	@Inject		// Java에서 지원하는 어노테이션
-	private ArticleVO articleVO;
+	private BuyArticleVO articleVO;
 	@Inject		// Java에서 지원하는 어노테이션
 	private SaleArticleVO saleArticleVO;
 
@@ -557,7 +557,7 @@ public class BoardController {
 		logger.info("게시물의 총 건수 : " + pageMaker.getTotalCount());
 		
 		// 화면에 출력할 데이터를 가져온다.
-		List<ArticleVO> list = boardService.buyListPaging(cri);
+		List<BuyArticleVO> list = boardService.buyListPaging(cri);
 		System.out.println("리스트:" + list);
 		
 		// pageMaker의 정보를 콘솔에 보여준다.

@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.ezen.board.dto.ArticleVO;
+import com.ezen.board.dto.BuyArticleVO;
 import com.ezen.chat.controller.ChatController;
 import com.ezen.chat.dto.ChatDTO;
 import com.ezen.chat.dto.ChatListDTO;
@@ -45,7 +45,7 @@ public class ChatDAOImpl implements ChatDAO {
 	}
 
 	@Override
-	public List<ArticleVO> getArtDTO(int artNo) throws Exception {
+	public List<BuyArticleVO> getArtDTO(int artNo) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".getArticle", artNo);
 	}
@@ -112,7 +112,7 @@ public class ChatDAOImpl implements ChatDAO {
 	}
 
 	@Override
-	public ArticleVO findArticleVOFromArtNo(int artNo,String status) throws Exception {
+	public BuyArticleVO findArticleVOFromArtNo(int artNo,String status) throws Exception {
 		if(status.equals("s")) {
 			return sqlSession.selectOne(namespace+".findArticleVOFromArtNoS",artNo);
 			

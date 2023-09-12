@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ezen.board.dto.ArticleVO;
+import com.ezen.board.dto.BuyArticleVO;
 import com.ezen.chat.dao.ChatDAO;
 import com.ezen.chat.dto.ChatDTO;
 import com.ezen.chat.dto.ChatListDTO;
@@ -54,7 +54,7 @@ public class ChatController {
 		int artNo = chatListDTO.getArtNo();
 		
 		//아티클 넘버로 아티클VO 가져오기
-		ArticleVO articleVO = chatService.findArticleVOFromArtNo(artNo,chatListDTO.getStatus());
+		BuyArticleVO articleVO = chatService.findArticleVOFromArtNo(artNo,chatListDTO.getStatus());
 		System.out.println("************************************"+articleVO);
 		session.setAttribute("session",articleVO);
 		session.setAttribute("chatList", chatListDTO);
@@ -95,8 +95,8 @@ public class ChatController {
 	}
 	
 	//값으로 articleDTO가져오기
-	public List<ArticleVO> getArtDTO(int artNo)  throws Exception{
-		List<ArticleVO> articleList = chatService.getArtDTO(artNo);
+	public List<BuyArticleVO> getArtDTO(int artNo)  throws Exception{
+		List<BuyArticleVO> articleList = chatService.getArtDTO(artNo);
 		System.out.println("######################"+articleList);
 		return articleList;
 	}

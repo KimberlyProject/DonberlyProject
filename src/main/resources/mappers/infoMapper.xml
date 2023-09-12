@@ -5,7 +5,7 @@
 <mapper namespace="com.ezen.board.mappers.infoMapper">
 
 	<!-- <resultMap id="articlesResult" type="com.ezen.board.dto.ArticleVO"> -->
-	<resultMap id="articlesResult" type="articleVO">
+	<resultMap id="articlesResult" type="buyArticleVO">
 		<result property="rnum"				column="recNum"/>
 		<result property="level"			column="lvl"/>
 		<result property="articleNO"		column="articleNO"/>
@@ -46,9 +46,9 @@
 	<![CDATA[
 	SELECT	*
 	FROM	(
-		SELECT  ROWNUM AS recNum, articleNO, userId, write_date, title, content, thumbnail, price
-		FROM article_buy
-        WHERE		1=1
+		SELECT  ROWNUM AS recNum, a.*, m.email
+		FROM article_buy a, members m
+        WHERE		a.userId=m.userId
  	]]>
  		<include refid='search'/>
  	<![CDATA[
@@ -76,9 +76,9 @@
 	<![CDATA[
 	SELECT	*
 	FROM	(
-		SELECT  ROWNUM AS recNum, articleNO, userId, write_date, title, content, thumbnail, price
-		FROM article_sale
-        WHERE		1=1
+		SELECT  ROWNUM AS recNum, a.*, m.email
+		FROM article_sale a, members m
+        WHERE		a.userId=m.userId
  	]]>
  		<include refid='search'/>
  	<![CDATA[

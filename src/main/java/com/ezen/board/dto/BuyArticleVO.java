@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 //-----------------------------------------------------------------------------------------------------------
 // 게시글
 //-----------------------------------------------------------------------------------------------------------
-@Component("articleVO")
-public class ArticleVO {
+@Component("buyArticleVO")
+public class BuyArticleVO {
 	private	int		rnum;
 	private	int		level;
 	private	int		articleNO;
