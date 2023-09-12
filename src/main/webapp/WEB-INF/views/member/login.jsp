@@ -60,7 +60,7 @@
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
     <article class="Loginbox container">
-      <h1><a href="${ path }"><img src="${ path }/resources/images/logo_g.png" alt="logo"/></a></h1>
+      <h1><a href="${ path }/"><img src="${ path }/resources/images/logo_g.png" alt="logo"/></a></h1>
       <c:if test="${ member == null }">
       <form action="${ path }/member/login.do" method="post">
         <input type="text" class="form-control" placeholder="아 이 디" id="userId" name="userId">

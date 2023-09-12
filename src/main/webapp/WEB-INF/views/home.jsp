@@ -8,7 +8,6 @@
         #mainBanner{
           height:500px;
           overflow:hidden;
-          margin-bottom:30px;
         }
         section>h1 .sig{
           position:relative;
@@ -50,6 +49,26 @@
           100%{
             bottom:8px;
           }
+        }
+        @media all and (max-width:920px) {
+        	#mainBanner{
+        		height:initial;
+        	}
+        }
+        @media all and (max-width:480px) {
+        	section {
+        		padding: 5% 0;
+        	}
+        	section h1, section h2{
+        		font-size:24px;
+        	}
+        	section p{
+        		font-size:16px;
+        		margin:3% 0;
+        	}
+        	footer{
+        		font-size:14px;
+        	}
         }
     </style>
 </head>

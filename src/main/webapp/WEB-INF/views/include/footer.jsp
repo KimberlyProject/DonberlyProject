@@ -1,9 +1,16 @@
-<!-- footer -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <footer>
     <small>&copy;2023. Donberly. All rights reserved.</small>
 </footer>
 <script>
 	function action_path(){
+		const prevpath = location.pathname;
+		const new_prevpath = prevpath.substr(0, prevpath.length-1);
+		if("${path}" === new_prevpath){
+			location.href = "${path}/member/login?action=/";
+			return false;
+		}
 		location.href = "${path}/member/login?action=" + location.pathname;
 		return false;
 	}

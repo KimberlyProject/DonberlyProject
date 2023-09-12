@@ -2,6 +2,7 @@
 <%@ taglib prefix="fmt"	uri="http://java.sun.com/jsp/jstl/fmt"  %>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <!-- Latest compiled and minified CSS -->
