@@ -261,7 +261,6 @@ function fn_chat(artNo){
 		 }
 	 });
 	
-	//window.open("${path}/chat/chattingview?articleNo=s"+articleNO, "_blank", "width=940, height=750");
 }
 
 </script>

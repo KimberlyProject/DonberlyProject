@@ -107,7 +107,7 @@
 		]]>
 	</select>
 	
-	<!-- artNo으로 articleVO끌어오기 (sale) 누군가가 반대로 해놔서 반대로 해야함-->
+	<!-- artNo으로 articleVO끌어오기 (sale) -->
 	<select id="findArticleVOFromArtNoS" parameterType="int" resultType="articleVO">
 		<![CDATA[
 			SELECT	*
@@ -150,8 +150,18 @@
 	where userId = #{memberId}
 	</select>
 	
+	<!-- 회원 목록 다 가져와 -->
+	<select id="findAllMemeber" resultType="MemberDTO">
+		select *
+		from members
+	</select>
 	
-	
+	<!-- auctionDTO artNo으로 가져오기 -->
+	<select id="findAuctionDTOFromArtNoS" resultType="auctionDTO">
+		select *
+		from auction
+		where aucCode = #{artNo}
+	</select>
 	
 	
 	

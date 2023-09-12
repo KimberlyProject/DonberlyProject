@@ -179,7 +179,11 @@
 				<th colspan="4">${article.aucId}님
 					<c:choose>
 					<c:when test="${member.userId != article.aucId}">
+						<input type="hidden" class="seller" value="${article.aucId }"/>
+						<input type="hidden" class="buyer" value="${member.userId }"/>
+						<input type="hidden" class="artNo" value="${article.aucCode }"/>
 						<input id="chat" type="button" class="btn btn-primary buyBtn" style="color:#FFFFFF;" value="채팅하기">
+						
 					</c:when>
 					</c:choose>
 				</th>
@@ -267,7 +271,7 @@ $(document).ready(function () {
 		    if(confirm(cstmId + "님에게 " + price + "원에 판매하시겠습니까? 거래가 완료되면 취소할 수 없습니다.")) {
 		        location.href = "/auction/saleNow?aucCode=" + aucCode + "&cstmId=" + cstmId;
 		        alert("판매가 완료되었습니다.");
-		    }   return;
+		       return;
 		    }
 		});//#saleNow
 		
@@ -300,8 +304,71 @@ $(document).ready(function () {
 		//롤링 첫번째 이미지에만 active주기
 		$(".carousel-inner>div").eq(0).addClass("active");
 		
+		$('#chat').on("click", function(){
+			console.log("판매자 : "+$('.seller').val()+"구매자 : "+$('.buyer').val()+"넘버 : "+$('.artNo').val());
+			$.ajax({
+				 url:	"/chat/makeRoom",
+				 type:	"post",
+				 dataType: "text",
+				 contentType: 'application/json',
+				 data:	JSON.stringify({"seller":$('.seller').val(),
+					 	"buyer" : $('.buyer').val(),
+					 	"artNo" : $('.artNo').val(),
+					 	"status" : "a"
+						 
+				 
+				 }),	
+				 success: function(data){
+					 console.log(data);
+					 window.open(data, "_blank", "width=940, height=750");
+					//location.href=data;
+					
+				 },
+				 error:function(request,status,error){
+					 console.log("실패");
+					 
+					 
+				 },
+				 complete:function(){
+					 $('#chatContent').val('');
+				 }
+			 });
+		})
+		
 
+//1:1 채팅 방만들기
+/*function fn_chat(artNo){
+	$.ajax({
+		 url:	"/chat/makeRoom",
+		 type:	"post",
+		 dataType: "text",
+		 contentType: 'application/json',
+		 data:	JSON.stringify({"seller":$('.seller').val(),
+			 	"buyer" : $('.buyer').val(),
+			 	"artNo" : artNo,
+			 	"status" : "a"
+				 
+		 
+		 }),	
+		 success: function(data){
+			 console.log(data);
+			 window.open(data, "_blank", "width=940, height=750");
+			//location.href=data;
+			
+		 },
+		 error:function(request,status,error){
+			 console.log("실패");
+			 
+			 
+		 },
+		 complete:function(){
+			 $('#chatContent').val('');
+		 }
+	 });
+	
+}*/
 }); //$(document).ready(function () {
+	
 </script>
 
 	<%@ include file="../include/footer.jsp" %>

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.ezen.auction.dto.AuctionDTO;
 import com.ezen.board.dto.ArticleVO;
 import com.ezen.chat.controller.ChatController;
 import com.ezen.chat.dto.ChatDTO;
@@ -145,6 +146,24 @@ public class ChatDAOImpl implements ChatDAO {
 	public String find_nickname(String memberId) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".find_nickname",memberId);
+	}
+
+	@Override
+	public List<ArticleVO> findAllMemeber() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".findAllMemeber");
+	}
+
+	@Override
+	public AuctionDTO findAuctionDTOFromArtNo(int artNo, String status) throws Exception {
+		
+		if(status.equals("a")) {
+			System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa래요");
+			return sqlSession.selectOne(namespace+".findAuctionDTOFromArtNoS",artNo);
+		}
+		else {
+			return null;
+		}
 	}
 
 	

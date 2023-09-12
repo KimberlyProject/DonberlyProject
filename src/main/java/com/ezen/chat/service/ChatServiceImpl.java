@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.ezen.auction.dto.AuctionDTO;
 import com.ezen.board.dto.ArticleVO;
 import com.ezen.chat.controller.ChatController;
 import com.ezen.chat.dao.ChatDAO;
@@ -94,6 +95,18 @@ public class ChatServiceImpl implements ChatService {
 	public String find_nickname(String memberId) throws Exception {
 		
 		return chatDAO.find_nickname(memberId);
+	}
+
+	@Override
+	public List<ArticleVO> findAllMemeber() throws Exception {
+		
+		return chatDAO.findAllMemeber();
+	}
+
+	@Override
+	public AuctionDTO findAuctionDTOFromArtNo(int artNo, String status) throws Exception {
+		System.out.println("서비스에요!!!!!!!!!!!!!!!!!!!aaaaaaaaaaaaaaaaaaaa");
+		return chatDAO.findAuctionDTOFromArtNo(artNo,status);
 	}
 
 	
