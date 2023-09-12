@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.admin.service.AdminService;
 import com.ezen.ccenter.dto.CcenterDTO;
+import com.ezen.ccenter.dto.ReportDTO;
 //import com.ezen.member.dto.MemberDTO;
 import com.ezen.member.dto.MemberDTO;
 
@@ -35,7 +36,7 @@ public class AdminController {
 	private AdminService adminService;
 	
 	//--------------------------------------------------------------------------------------------------
-	// 관리자 1:1 문의화면 접속
+	// 관리자 > 1:1 문의화면 접속
 	//--------------------------------------------------------------------------------------------------
 	@RequestMapping(value="/oneOnOneInquiry", method=RequestMethod.GET)
 	public String getOneOnOneInquiry(Model model) throws Exception {
@@ -48,6 +49,68 @@ public class AdminController {
 		model.addAttribute("memberList", memberList);
 		
 		return "/admin/oneOnOneInquiry";
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	// 1:1 문의하기 리스트 생성
+	//-----------------------------------------------------------------------------------------------------------
+	
+	@RequestMapping(value="/oneOnOneInquiry.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView listOneOnOne(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		System.out.println("시작");
+		
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView   mav   = new ModelAndView(viewName);
+		
+		// 화면에 출력한 데이터를 가져온다.
+		List<CcenterDTO> listOneOnOne = adminService.listOneOnOne();
+		
+		System.out.println(listOneOnOne);
+		
+		// mav에 object를 추가
+		mav.addObject("ask", listOneOnOne);
+		
+		return mav;
+	}
+	
+	//--------------------------------------------------------------------------------------------------
+	// 관리자 > 신고하기 목록 화면 접속
+	//--------------------------------------------------------------------------------------------------
+	@RequestMapping(value="/reportAnswer", method=RequestMethod.GET)
+	public String getreportAnswer(Model model) throws Exception {
+		System.out.println("관리자 신고하기 화면 접속!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		
+		List<MemberDTO> memberList = adminService.selectMember();
+		System.out.println("회원목록 화면 접속 memberList ==> " + memberList);
+		
+		// 찾아온 데이터를 Model에 담아 View로 보낸다.
+		model.addAttribute("memberList", memberList);
+		
+		return "/admin/reportAnswer";
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	// 신고하기 리스트 생성
+	//-----------------------------------------------------------------------------------------------------------
+	
+	@RequestMapping(value="/reportAnswer.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView listReportAnswer(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		System.out.println("시작");
+		
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView   mav   = new ModelAndView(viewName);
+		
+		// 화면에 출력한 데이터를 가져온다.
+		List<ReportDTO> listReportAnswer = adminService.listReportAnswer();
+		
+		System.out.println(listReportAnswer);
+		
+		// mav에 object를 추가
+		mav.addObject("report", listReportAnswer);
+		
+		return mav;
 	}
 	
 	//--------------------------------------------------------------------------------------------------
@@ -124,42 +187,4 @@ public class AdminController {
 		return "redirect:/admin/memberList";
 	}
 
-	//-----------------------------------------------------------------------------------------------------------
-	// 1:1 문의하기 리스트 생성
-	//-----------------------------------------------------------------------------------------------------------
-
-	@RequestMapping(value="/oneOnOneInquiry.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView listOneOnOne(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		System.out.println("시작");
-		
-		String viewName = (String) request.getAttribute("viewName");
-	    ModelAndView   mav   = new ModelAndView(viewName);
-		
-		// 화면에 출력한 데이터를 가져온다.
-		List<CcenterDTO> listOneOnOne = adminService.listOneOnOne();
-		
-		System.out.println(listOneOnOne);
-		
-		// mav에 object를 추가
-		mav.addObject("ask", listOneOnOne);
-		
-		return mav;
-	}
-	
-	//--------------------------------------------------------------------------------------------------
-	// 관리자 > 신고하기 목록 화면 접속
-	//--------------------------------------------------------------------------------------------------
-	@RequestMapping(value="/reportAnswer", method=RequestMethod.GET)
-	public String getreportAnswer(Model model) throws Exception {
-		System.out.println("관리자 신고하기 화면 접속!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		
-		List<MemberDTO> memberList = adminService.selectMember();
-		System.out.println("회원목록 화면 접속 memberList ==> " + memberList);
-		
-		// 찾아온 데이터를 Model에 담아 View로 보낸다.
-		model.addAttribute("memberList", memberList);
-		
-		return "/admin/reportAnswer";
-	}
 }

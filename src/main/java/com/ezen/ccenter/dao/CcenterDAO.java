@@ -15,7 +15,7 @@ public class CcenterDAO {
 	
 	private static final String namespace ="com.ezen.ccenter.mappers.ccenterMapper";
 	
-	// 1대1 문의하기 DAO
+	// 1:1 문의하기 DAO
 	private int selectNewArticleNO() throws DataAccessException {
 		System.out.println("1대1문의 번호 생성 실행");
 		return sqlSession.selectOne(namespace + ".selectNewArticleNO");
@@ -50,7 +50,7 @@ public class CcenterDAO {
 		
 		System.out.println("정보들" + articleMap);
 		
-		sqlSession.insert(namespace + ".addNewReport", articleMap); //article>> 보내는 데이터 타입
+		sqlSession.insert(namespace + ".addNewReport", articleMap); // article >> 보내는 데이터 타입
 		
 		return articleNo;
 	}

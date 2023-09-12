@@ -16,7 +16,7 @@ public class ReportDTO {
 	// 작성 일자 
 	private Date writeDate;
 	
-	// 신고사유
+	// 신고 사유
 	private String reason;
 	
 	// 게시글 내용

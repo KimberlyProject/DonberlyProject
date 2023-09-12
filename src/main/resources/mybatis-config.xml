@@ -12,5 +12,6 @@
 		<typeAlias type="com.ezen.auction.dto.AucImgDTO" alias="aucImgDTO"/>
 		<typeAlias type="com.ezen.member.dto.MemberDTO" alias="memberDTO"/>
 		<typeAlias type="com.ezen.ccenter.dto.CcenterDTO" alias="ccenterDTO"/>
+		<typeAlias type="com.ezen.ccenter.dto.ReportDTO" alias="reportDTO"/>
 	</typeAliases>
 </configuration>

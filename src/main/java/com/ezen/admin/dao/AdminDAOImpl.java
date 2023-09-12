@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.ezen.ccenter.dto.CcenterDTO;
+import com.ezen.ccenter.dto.ReportDTO;
 import com.ezen.member.dto.MemberDTO;
 
 @Repository
@@ -81,13 +82,26 @@ public class AdminDAOImpl implements AdminDAO {
 		
 	}
 	
-
+	//--------------------------------------------------------------------------------------------------
+	// 1:1 문의 내역 리스트 생성
+	//--------------------------------------------------------------------------------------------------
 	@Override
 	public List<CcenterDTO> listOneOnOne() throws Exception {
 		List<CcenterDTO> listOneOnOne = sqlSession.selectList(namespace + ".listOneOnOne");
 		
 		System.out.println("1:1문의 정보: " + listOneOnOne);
 		return listOneOnOne;
+	}
+	
+	//--------------------------------------------------------------------------------------------------
+	// 1:1 문의 내역 리스트 생성
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public List<ReportDTO> listReportAnswer() throws Exception {
+		List<ReportDTO> listReportAnswer = sqlSession.selectList(namespace + ".listReportAnswer");
+		
+		System.out.println("신고하기 정보: " + listReportAnswer);
+		return listReportAnswer;
 	}
 	
 }

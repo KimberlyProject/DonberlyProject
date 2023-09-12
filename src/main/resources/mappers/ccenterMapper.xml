@@ -4,11 +4,11 @@
 	
 <mapper namespace="com.ezen.ccenter.mappers.ccenterMapper">
 
-	 <!-- 1대1 문의글 등록 -->
+	 <!-- 1:1 문의글 등록 -->
     <insert id="addNewAsk" parameterType="java.util.Map">
 		<![CDATA[
 			insert into 
-			ask	(articleNo, userId, email, writedate, title, content) 
+			ask	(articleNo, userId, email, writeDate, title, content) 
 			values (#{articleNo}, #{userId}, #{email}, sysdate, #{title}, #{content})
 		]]>
 	</insert>
@@ -25,7 +25,7 @@
     <insert id="addNewReport" parameterType="java.util.Map">
 		<![CDATA[
 			insert into 
-			report	(articleNo, reporter, reportedUser, writedate, reason, content) 
+			report	(articleNo, reporter, reportedUser, writeDate, reason, content) 
 			values (#{articleNo}, #{reporter}, #{reportedUser}, sysdate, #{reason}, #{content})
 		]]>
 	</insert>

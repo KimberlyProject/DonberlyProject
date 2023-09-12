@@ -22,7 +22,7 @@
 		<result property="price"			column="price"/>
 	</resultMap>
 	
-	<resultMap id="articlesResult" type="ccenterDTO">
+	<resultMap id="oneononeResult" type="ccenterDTO">
 		<result property="articleNo"		column="articleno"/>
 		<result property="userId"			column="userid"/>
 		<result property="email"			column="email"/>
@@ -30,18 +30,34 @@
 		<result property="title"			column="title"/>
 		<result property="content"			column="content"/>
 
+	</resultMap>
+	
+	<resultMap id="reportResult" type="reportDTO">
+		<result property="articleNo"		column="articleno"/>
+		<result property="reporter"			column="reporter"/>
+		<result property="reportedUser"		column="reportedUser"/>
+		<result property="writeDate"		column="writedate"/>
+		<result property="reason"			column="reason"/>
+		<result property="content"			column="content"/>
+
 	</resultMap>	
 		
 	
-		<!-- 1:1 문의하기 목록 출력 -->
-	<select id="listOneOnOne" resultMap="articlesResult">
+	<!-- 1:1 문의하기 목록 출력 -->
+	<select id="listOneOnOne" resultMap="oneononeResult">
 		
 		SELECT	*
 		FROM		ask
 		ORDER BY 	articleNo desc
 	</select>
 	
-	
+	<!-- 신고하기 목록 출력 -->
+	<select id="listReportAnswer" resultMap="reportResult">
+		
+		SELECT	*
+		FROM		report
+		ORDER BY 	articleNo desc
+	</select>
 	
 	
 	
