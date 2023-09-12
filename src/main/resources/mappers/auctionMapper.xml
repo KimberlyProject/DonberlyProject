@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezen.auction.mappers.auctionMapper">
+ 
+   	<!-- 새로운 게시글 사용할 번호 추출하기  -->
+ 	<select id ="selectNewAucCode" resultType="int">
+ 		<![CDATA[
+ 			SELECT	NVL(MAX(aucCode), 0) + 1
+			FROM	AUCTION
+ 		]]>
+ 	</select>
+ 	
+   	<!-- 새로운 게시글 추가하기 -->
+  	<insert id="insertNewArticle" parameterType="java.util.Map">
+  		<![CDATA[
+  			INSERT INTO
+  			AUCTION (aucCode, minPrice, maxPrice, writeDate, title, content, nowBid, 
+  					bidRate, aucId, status, deadline)
+  			VALUES (#{aucCode}, #{minPrice}, #{maxPrice}, sysdate, #{title}, #{content}, #{minPrice}, 
+  					#{bidRate}, #{aucId}, 0, sysdate+#{deadlineRate})
+  		]]>
+  	</insert>
+  	
+   	<!-- 새로운 게시글 이미지에 사용할 번호 추출하기  -->
+ 	<select id ="selectNewImgFileNo" resultType="int">
+ 		<![CDATA[
+ 			SELECT NVL(MAX(imgNo), 0) + 1 
+ 			FROM AUCIMG
+ 		]]>
+ 	</select>
+  	
+  	<!-- 새로운 게시글에 이미지 추가하기 -->
+ 	<insert id="insertNewImg" parameterType="java.util.Map">
+	  <foreach item="item"  collection="list"   open="INSERT ALL" 
+ 			separator=" " close="SELECT * FROM DUAL" >
+ 			INTO AUCIMG (imgNo, imgName, aucCode)
+ 			VALUES (#{item.imgNo}, #{item.imgName}, #{item.aucCode})	
+ 	  </foreach>
+ 	</insert>
+ 	
+	<!-- 메인페이지 게시글 resultType -->
+	<resultMap id="aucArticle" type="auctionDTO">
+		<result property="aucCode" column="aucCode"/>
+		<result property="minPrice" column="minPrice"/>
+		<result property="maxPrice" column="maxPrice"/>
+		<result property="writeDate" column="writeDate"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="nowBid" column="nowBid"/>
+		<result property="bidRate" column="bidRate"/>
+		<result property="aucId" column="aucId"/>
+		<result property="status" column="status"/>
+		<result property="deadline" column="deadline"/>	
+		<result property="cstmId" column="cstmId"/>
+	</resultMap>
+	
+	<!-- 메인페이지 게시글 Query -->
+    <select id="pullArticleInfo" resultMap="aucArticle">
+		<![CDATA[
+			SELECT  *
+			FROM   AUCTION
+			ORDER BY writeDate desc
+		]]>
+    </select>
+    
+	<!-- 메인페이지 image resultType -->
+	<resultMap id="aucImage" type="aucImgDTO">
+		<result property="imgNo" column="imgNo"/>
+		<result property="imgName" column="imgName"/>
+		<result property="aucCode" column="aucCode"/>
+	</resultMap>
+   
+	<!-- 메인페이지 image Query -->
+    <select id="pullArticleImg" resultMap="aucImage">
+		<![CDATA[
+			SELECT *
+			FROM AUCIMG
+		]]>
+    </select>
+ 
+   <!-- 디테일페이지 게시글 Query -->
+   <select id="pullArticleInfoDetail" parameterType="int" resultType="auctionDTO">
+   		<![CDATA[
+   			SELECT *
+   			FROM AUCTION
+   			WHERE aucCode = #{aucCode}
+   		]]>
+   </select>
+   
+   <!-- 디테일페이지 image Query -->
+   <select id="pullArticleImgDetail" parameterType="int" resultType="aucImgDTO">
+	     <![CDATA[
+	     	SELECT *
+	     	FROM AUCIMG
+	     	WHERE aucCode = #{aucCode} 
+	     ]]>
+   </select>
+   
+   <!-- auctionOff Query -->
+	<delete id="auctionOff" parameterType="int">
+		<![CDATA[
+			DELETE FROM AUCTION
+			WHERE  aucCode = #{aucCode}
+		]]>
+	</delete>
+	
+	<!-- saleNow Query -->
+	<update id="saleNow" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE	AUCTION
+			SET		status		= 1,
+					cstmId		= #{cstmId}
+			WHERE	aucCode	= #{aucCode}
+		]]>
+	</update>
+	
+	<!-- tryBid Query -->
+	<update id="tryBid" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE	AUCTION
+			SET		cstmId = #{cstmId},
+					nowBid = #{nowBid}
+			WHERE	aucCode	= #{aucCode}
+		]]>
+	</update>
+	
+	<!-- buyNow Query -->
+	<update id="buyNow" parameterType="java.util.Map">
+		<![CDATA[
+			UPDATE	AUCTION
+			SET		cstmId = #{cstmId},
+					nowBid = #{maxPrice},
+					status = 1
+			WHERE	aucCode	= #{aucCode}
+		]]>
+	</update>
+	
+	<!-- 게시글 검색 조건 -->
+	<sql id="search">
+		<if test="searchType != null"> <!-- 값이 있는 경우에만 -->
+			<if test="searchType == 't'.toString()">AND title LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'c'.toString()">AND content LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'w'.toString()">AND aucID LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'p'.toString()">AND aucCode LIKE '%' || #{keyword} || '%'</if>	
+		</if>
+	</sql> 
+	
+	<!-- 전체 게시글 수 구하기(paging) -->
+	<select id="auctionTotalCount" parameterType="com.ezen.auction.dto.SearchCriteria" resultType="integer">
+		<![CDATA[
+			 SELECT COUNT(*)
+			 FROM auction
+			 WHERE 1=1
+		]]> <include refid="search"/>	
+	</select>
+	
+	<!-- 게시글 목록 가져오기(paging) -->
+	<select id="auctionPaging" parameterType="com.ezen.auction.dto.SearchCriteria" resultMap="aucArticle">
+		<![CDATA[
+	        SELECT *
+	        FROM auction
+	        WHERE 1=1
+	    ]]> <include refid="search"/>
+	    <![CDATA[
+	        ORDER BY aucCode DESC
+	        OFFSET #{perPageNum} * (#{page} - 1) ROWS FETCH NEXT #{perPageNum} ROWS ONLY
+	    ]]>
+	</select>
+	
+	<!-- 이미지 목록 가져오기(paging) -->
+	<select id="auctionPagingImg" parameterType="int" resultMap="aucImage">
+		<![CDATA[
+			SELECT *
+			FROM aucImg
+			WHERE aucCode = #{aucCode}
+		]]>
+ 	</select>
+ 	
+ 	<!-- 마이페이지 게시글 Query -->
+    <select id="myPageArticles" parameterType="String" resultMap="aucArticle">
+		<![CDATA[
+			SELECT  *
+			FROM   AUCTION
+			WHERE aucId = #{aucId}
+		]]>
+    </select>
+    
+    <!-- 마이페이지 image Query -->
+    <select id="myPageImgs" parameterType="int" resultMap="aucImage">
+		<![CDATA[
+			SELECT *
+			FROM AUCIMG
+			WHERE aucCode = #{aucCode}
+		]]>
+    </select>
+	
+</mapper>

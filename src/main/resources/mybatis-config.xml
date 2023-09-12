@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>		
+		<typeAlias type="com.ezen.chat.dto.ChatListDTO" alias="chatListDTO"/>
+		<typeAlias type="com.ezen.chat.dto.ChatDTO" alias="chatDTO"/>
+		<typeAlias type="com.ezen.board.dto.BuyArticleVO"	alias="buyArticleVO"/>
+		<typeAlias type="com.ezen.board.dto.SaleArticleVO"	alias="saleArticleVO"/>
+		<typeAlias type="com.ezen.auction.dto.AuctionDTO" alias="auctionDTO"/>
+		<typeAlias type="com.ezen.auction.dto.AucImgDTO" alias="aucImgDTO"/>
+		<typeAlias type="com.ezen.member.dto.MemberDTO" alias="memberDTO"/>
+		<typeAlias type="com.ezen.ccenter.dto.CcenterDTO" alias="ccenterDTO"/>
+	</typeAliases>
+</configuration>

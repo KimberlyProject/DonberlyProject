@@ -1,0 +1,118 @@
+package com.ezen.board.service;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ezen.board.dao.BoardDAO;
+import com.ezen.board.dto.BuyArticleVO;
+import com.ezen.board.dto.Criteria;
+import com.ezen.board.dto.SaleArticleVO;
+import com.ezen.board.dto.SearchCriteria;
+
+//-----------------------------------------------------------------------------------------------------------
+// 게시글
+//-----------------------------------------------------------------------------------------------------------
+@Service("boardService")
+public class BoardService {
+
+	@Autowired
+	BoardDAO boardDAO;
+		
+	//-----------------------------------------------------------------------------------------------------------
+	// 새로운 게시글 쓰기
+	//-----------------------------------------------------------------------------------------------------------
+	
+	public int buyAddNewArticle(Map articleMap) throws Exception {
+		return boardDAO.insertNewArticle(articleMap);
+	}
+	
+	
+	public int saleAddNewArticle(Map articleMap) throws Exception {
+		return boardDAO.saleInsertNewArticle(articleMap);
+	}
+
+	//-----------------------------------------------------------------------------------------------------------
+	// 게시글 번호에 해당하는 상세 정보
+	//-----------------------------------------------------------------------------------------------------------
+	
+	public BuyArticleVO buyViewArticle(int articleNO) throws Exception {
+		BuyArticleVO articleVO = boardDAO.selectArticle(articleNO);
+		return articleVO;
+	}
+
+	
+	public SaleArticleVO saleViewArticle(int articleNO) throws Exception {
+		SaleArticleVO SaleArticleVO = boardDAO.saleSelectArticle(articleNO);
+		return SaleArticleVO;
+	}
+	//-----------------------------------------------------------------------------------------------------------
+	// 게시글 번호에 해당하는 글 삭제하기
+	//-----------------------------------------------------------------------------------------------------------
+	
+	public void buyRemoveArticle(int articleNO) throws Exception {
+		boardDAO.deleteArticle(articleNO);
+	}
+	
+	
+	public void saleRemoveArticle(int articleNO) throws Exception {
+		boardDAO.saleDeleteArticle(articleNO);
+	}
+
+	//-----------------------------------------------------------------------------------------------------------
+	// 게시글 번호에 해당하는 정보수정하기
+	//-----------------------------------------------------------------------------------------------------------
+	
+	public void buyModArticle(Map articleMap) throws Exception {
+		boardDAO.updateArticle(articleMap);
+	}
+	
+	
+	public void saleModArticle(Map articleMap) throws Exception {
+		boardDAO.saleUpdateArticle(articleMap);
+	}	
+
+	//-----------------------------------------------------------------------------------------------------------
+	// 전체 게시글 수 구하기 (Paging 처리)
+	//-----------------------------------------------------------------------------------------------------------
+	
+	public int buyListTotalCount(SearchCriteria cri) throws Exception {
+		return boardDAO.boardListTotalCount(cri);
+	}
+	
+	
+	public int saleListTotalCount(SearchCriteria cri) throws Exception {
+		return boardDAO.saleBoardListTotalCount(cri);
+	}
+
+	//-----------------------------------------------------------------------------------------------------------
+	// 게시글 목록 가져오기 (Paging)
+	//-----------------------------------------------------------------------------------------------------------
+	
+	public List<BuyArticleVO> buyListPaging(SearchCriteria cri) throws Exception {
+		return boardDAO.boardListPaging(cri);
+	}
+
+	
+	public List<SaleArticleVO> saleListPaging(SearchCriteria cri) throws Exception {
+		return boardDAO.saleBoardListPaging(cri);
+	}
+
+
+
+	public void buyNow(Map articleMap) throws Exception {
+		boardDAO.buyNow(articleMap);
+	}
+	
+	public void saleNow(Map articleMap) throws Exception {
+		boardDAO.saleNow(articleMap);
+	}
+	
+	
+	
+} // End - public class BoardServiceImpl implements BoardService
+
+
+
