@@ -170,15 +170,14 @@ header .dropdown.calicon .dropdown-menu{
     width: 50px;
     height: 50px;
     z-index: 10;
-    margin-right:10px;
+	font-size:20px;
     border-radius: 50%;
-}
-.page_dir>button{    
-    color:#fff;
     border:0;
     background:none;
     background-color:rgb(73, 124, 64);
     transition:0.3s;
+	font-size:20px;
+    color:#fff;
 }
 .page_dir>button:hover,.page_dir>button:focus{
     color:#fff;
@@ -209,9 +208,7 @@ footer{
 }
 
 @media all and (max-width:780px){
-    body{
-        padding-top:55px;
-    }
+    
     header nav{
         font-size:21px;
     }
@@ -270,4 +267,17 @@ footer{
     header .dropdown.calicon img{
         width:100%;
     }
+    .page_dir{
+    	text-align:center;
+    	padding:5px 0;
+    }
+    .page_dir>button{
+	    top: 70px;
+	    left: 10px;
+	}
+	.pageTitle{
+	    font-size:20px;
+     	height:120px;
+     	background-position:1333px 1113px;
+	}
 }

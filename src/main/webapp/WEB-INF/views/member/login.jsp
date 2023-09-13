@@ -55,6 +55,12 @@
 	  	bottom:0px;
 	  	width:100%;
 	  }
+	  
+      @media all and (max-width:420px) {
+      	.Loginbox{
+      	width: 100%;
+      	}
+      }
 	</style>
 </head>
 <body>

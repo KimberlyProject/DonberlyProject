@@ -55,6 +55,11 @@
 	  	bottom:0px;
 	  	width:100%;
 	  }
+	  @media all and (max-width:420px) {
+      	.Loginbox{
+      	width: 100%;
+      	}
+      }
 	</style>
 </head>
 <body>
@@ -72,9 +77,9 @@
         <input type="button" class="btn" value="아이디 찾기" onClick="find();">
       </form>    
       <div>
-        <a href="">회원가입</a> |
-        <a href="./findId">아이디 찾기</a> |
-        <a href="./findPasswd">비밀번호 찾기</a>
+        <a href="membership">회원가입</a> |
+        <a href="findId">아이디 찾기</a> |
+        <a href="findPasswd">비밀번호 찾기</a>
       </div>
     </article>
     <script>

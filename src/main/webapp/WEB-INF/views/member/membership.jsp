@@ -76,6 +76,13 @@
           font-weight:bold;
           background-color:rgb(73, 124, 64);
         }
+        @media all and (max-width:420px) {
+	      	#membership{
+		      	width:100%;
+		      	max-width:480px;
+		      	padding:0 10px;
+	      	}
+      }
     </style>
 	
 </head>
@@ -85,8 +92,8 @@
 <%@ include file="../include/sidebar.jsp" %>
 
     <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      회원 가입
+      <button class="btn glyphicon glyphicon-th-large" id="sideMenu_open"></button>
+      홈 > 회원 가입
     </div>
     <h1 class="pageTitle"><div>회원 가입</div></h1>
 

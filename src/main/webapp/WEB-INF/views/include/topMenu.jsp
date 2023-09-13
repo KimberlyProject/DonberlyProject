@@ -82,7 +82,7 @@ if("${memberlevel.userStatus}" == "N1"){
             <!-- 로그인 했을 때 -->
 	            <div class="navbar-text navbar-right loginbtn">
 	            
-                   	<a href="${path}/myPage/calendar"><span class="glyphicon glyphicon-calendar"></span></a>    
+                   	<a href="${path}/mypage/calendar"><span class="glyphicon glyphicon-calendar"></span></a>    
 	
 	                <div class="dropdown alermicon">
 	                    <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
