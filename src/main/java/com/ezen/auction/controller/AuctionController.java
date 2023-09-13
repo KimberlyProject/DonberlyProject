@@ -68,17 +68,22 @@ public class AuctionController {
 	
 	//메인페이지 게시글 리스트 전부 불러오기
 	@RequestMapping(value="/auction_main", method=RequestMethod.GET)
-	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response, SearchCriteria cri) throws Exception {
 		System.out.println("경매장 메인 리스트불러오기 컨트롤러");
 		String viewName = (String) request.getAttribute("viewName");
-	
+		ModelAndView mav = new ModelAndView(viewName);
+		
+		PageMaker pageMaker = new PageMaker();
+	    pageMaker.setCri(cri);
+	    pageMaker.setTotalCount(auctionService.auctionTotalCount(cri));	
 		
 		List<AuctionDTO> articles	= auctionService.listArticles();; //게시글 여러개 forEach문으로 출력
 		List<AucImgDTO> imgs = auctionService.listArticlesImg(); //이미지 여러개 forEach문으로 출력
 		
-		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("articles", articles);	
 		mav.addObject("imgs", imgs);
+		 mav.addObject("pageMaker", pageMaker);
+		    mav.addObject("cri", cri);
 		return mav;
 	}	
 	
