@@ -1,8 +1,12 @@
 package com.ezen.auction.controller;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
-
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -11,6 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,6 +56,14 @@ public class AuctionController {
 	@Inject
 	private AuctionService auctionService;
 
+	
+	//-------------------------------------------------------------------------------------------------------------//
+	//경매장 이용방법
+	@RequestMapping(value="/howToUse", method=RequestMethod.GET)
+	public String howToUseAuction(Model model) {
+		return "/auction/howToUse";
+	}
+	
 	//-------------------------------------------------------------------------------------------------------------//
 	
 	//메인페이지 게시글 리스트 전부 불러오기
@@ -58,12 +71,14 @@ public class AuctionController {
 	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("경매장 메인 리스트불러오기 컨트롤러");
 		String viewName = (String) request.getAttribute("viewName");
-		List<AuctionDTO> articlesList	= auctionService.listArticles(); //게시글 여러개 forEach문으로 출력
-		List<AucImgDTO> articlesList2 = auctionService.listArticlesImg(); //이미지 여러개 forEach문으로 출력
+	
+		
+		List<AuctionDTO> articles	= auctionService.listArticles();; //게시글 여러개 forEach문으로 출력
+		List<AucImgDTO> imgs = auctionService.listArticlesImg(); //이미지 여러개 forEach문으로 출력
 		
 		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("articles", articlesList);	
-		mav.addObject("imgs", articlesList2);
+		mav.addObject("articles", articles);	
+		mav.addObject("imgs", imgs);
 		return mav;
 	}	
 	
@@ -88,6 +103,32 @@ public class AuctionController {
 	}// viewArticle
 	
 	//-------------------------------------------------------------------------------------------------------------//
+
+	//저장된 이미지 모두 가져오기 컨트롤러
+	@RequestMapping("/pullAuctionImges")
+	protected void pullImgFiles(@RequestParam("imgName") String imgName, @RequestParam("aucCode") int aucCode,
+			HttpServletResponse response)	throws Exception {
+								
+		OutputStream out = response.getOutputStream();
+		String downFile	 = IMGROOT + "\\" + aucCode + "\\" + imgName;
+		File file = new File(downFile);
+	
+		response.setHeader("Cache-Control", "no-cache");
+		response.addHeader("Content-disposition", "attachement; fileName=" + imgName);
+	
+		FileInputStream in = new FileInputStream(file);
+		byte[] buffer = new byte[1024 * 8];
+		while(true) {
+			int count = in.read(buffer);
+			if(count == -1)
+				break;
+			out.write(buffer, 0, count);
+		}
+		in.close();
+		out.close();	
+	}//pullImgFiles
+	
+	//-------------------------------------------------------------------------------------------------------------//
 	
 	//글쓰기화면
 	@RequestMapping(value="/auction_write", method=RequestMethod.GET)
@@ -98,7 +139,6 @@ public class AuctionController {
 
 	//게시글 업로드
 	@RequestMapping(value="/addNewArticle", method = RequestMethod.POST)
-	@ResponseBody
 	public ResponseEntity addNewArticle(MultipartHttpServletRequest req, HttpServletResponse res) throws Exception {
 		
 		
@@ -131,7 +171,9 @@ public class AuctionController {
 		HttpSession session = req.getSession();
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		String aucId = memberDTO.getUserId(); //여기 오류는 로그인이 안된것!
+		String aucNick = memberDTO.getNickname();
 		articleMap.put("aucId", aucId);
+		articleMap.put("aucNick", aucNick);
 		articleMap.put("minPrice", minPrice);
 		articleMap.put("maxPrice", maxPrice);
 		System.out.println("세션이랑 멤버디티오 실행" + aucId);
@@ -211,11 +253,27 @@ public class AuctionController {
 				if(!file.exists()) { //경로에 파일이 없는 경우
 					file.getParentFile().mkdirs(); //경로에 해당하는 디렉토리 생성
 					mFile.transferTo(new File(IMGROOT + "\\" + "temp" + "\\" + imgName));
+					
+					String targetPath = IMGROOT + "\\" + "temp" + "\\" + imgName;
+		            resizeImage(file.getAbsolutePath(), targetPath, 200, 200); // 원하는 크기로 조절
 				}
 			}
 		}
 		return fileList;
-	}//upload
+	}//upload	
+
+	//이미지 리사이징 메서드
+	private void resizeImage(String sourcePath, String targetPath, int targetWidth, int targetHeight) throws IOException {
+	    BufferedImage originalImage = ImageIO.read(new File(sourcePath));
+	    int type = originalImage.getType() == 0 ? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
+
+	    BufferedImage resizedImage = new BufferedImage(targetWidth, targetHeight, type);
+	    Graphics2D g = resizedImage.createGraphics();
+	    g.drawImage(originalImage, 0, 0, targetWidth, targetHeight, null);
+	    g.dispose();
+
+	    ImageIO.write(resizedImage, "jpg", new File(targetPath));
+	}
 
 	//-------------------------------------------------------------------------------------------------------------//
 	
@@ -349,62 +407,6 @@ public class AuctionController {
 		auctionService.buyNow(articleMap);
 		
 		return "auction/auction_main";
-	}//buyNow
-		
-	//-------------------------------------------------------------------------------------------------------------//
-
-	//저장된 이미지 모두 가져오기 컨트롤러
-	@RequestMapping("/pullAuctionImges")
-	protected void pullImgFiles(@RequestParam("imgName") String imgName, @RequestParam("aucCode") int aucCode,
-			HttpServletResponse response)	throws Exception {
-								
-		OutputStream out = response.getOutputStream();
-		String downFile	 = IMGROOT + "\\" + aucCode + "\\" + imgName;
-		File file = new File(downFile);
-	
-		response.setHeader("Cache-Control", "no-cache");
-		response.addHeader("Content-disposition", "attachement; fileName=" + imgName);
-	
-		FileInputStream in = new FileInputStream(file);
-		byte[] buffer = new byte[1024 * 8];
-		while(true) {
-			int count = in.read(buffer);
-			if(count == -1)
-				break;
-			out.write(buffer, 0, count);
-		}
-		in.close();
-		out.close();	
-	}//pullImgFiles
-		
-	//-------------------------------------------------------------------------------------------------------------//
-
-	//게시글 페이징, 검색조건
-	@RequestMapping(value="auction_main.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView auctionPaing(HttpServletRequest req, HttpServletResponse res, SearchCriteria cri)
-			throws Exception {
-		
-		System.out.println("페이징 검색조건 Controller");
-		
-		String viewName = (String)req.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(auctionService.auctionTotalCount(cri));
-		
-		List<AuctionDTO> articles = auctionService.auctionPaging(cri);
-		
-		for (AuctionDTO auctionDTO : articles) {
-			int aucCode = auctionDTO.getAucCode();
-			List<AucImgDTO> imgs = auctionService.auctionPagingImg(aucCode);
-			mav.addObject("imgs", imgs);
-		}
-		mav.addObject("articles", articles);
-		mav.addObject("pageMaker", pageMaker);
-		mav.addObject("cri", cri);
-		
-		return mav;
-	}
+	}//buyNow		
 	
 }

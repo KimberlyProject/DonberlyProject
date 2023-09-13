@@ -19,6 +19,7 @@
 		#preview {
 			width: 450px;
 			height:500px;
+			border-radius: 50%;
 		}
 		
 		.grid-second {
@@ -34,6 +35,12 @@
 		
 		#i_price{
 			text-align: right;
+		}
+		
+		#i_thumbnail{
+			margin-top : 20px;
+			margin: 20px 50px; 
+			
 		}
 	</style>
 </head>
@@ -261,7 +268,6 @@ function fn_chat(artNo){
 		 }
 	 });
 	
-	//window.open("${path}/chat/chattingview?articleNo=s"+articleNO, "_blank", "width=940, height=750");
 }
 
 </script>

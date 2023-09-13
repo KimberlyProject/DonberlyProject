@@ -252,18 +252,29 @@ div.chat.ch2{
 
 	
 	<div class="container">
+					<c:set var="s" value="s"/>
+					<c:set var="b" value="b"/>
+					<c:set var="a" value="a"/>
 	
 		<table border="1" style="margin: 0px; padding: 0px;">
 			<tr>
+				<c:if test="${chatList.status eq 's' || chatList.status eq 'b'}">
 				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${session.nickname }&gt;님과의 채팅창</td>
+				</c:if>
+				<c:if test="${chatList.status eq a}">
+				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${session.aucId }&gt;님과의 채팅창</td>
+				</c:if>
 			</tr>
 			<tr>
 				<td class="chat_area">
 				
 					<div class="wrap"  style="overflow:auto; width:599px; height:600px;">
+						
     				</div>
 				</td>
 				<td class="chat_detail" rowspan="2">
+					<!-- 게시판에서 만들어진 채팅방일 때 -->
+					<c:if test="${chatList.status eq 's' || chatList.status eq 'b'}">
 					<c:set var="userId" value="${session.userId }"/>
 					<c:set var="seller" value="${chatList.seller}"/>
 					<c:set var="buyer" value="${chatList.buyer }"/>
@@ -281,6 +292,29 @@ div.chat.ch2{
 					
 					<img src="${path}/resources/images/board/article_image/${session.articleNO }/${session.thumbnail}" alt="사진" width="200px;" height="200px;"/>
 					<br><br>
+					</c:if>
+					<!-- 경매장에서 만들어진 채팅방일 때 -->
+					<c:if test="${chatList.status eq 'a'}">
+					<c:set var="userId" value="${session.aucId }"/>
+					<c:set var="seller" value="${chatList.seller}"/>
+					<c:set var="buyer" value="${chatList.buyer }"/>
+					<div>제목 : ${session.title}</div>
+					<c:if test="${seller eq  userId}">
+						<div>판매자: ${session.aucId}</div>
+						<div>구매자: ${member.nickname }</div>
+					</c:if>
+					<c:if test="${buyer eq userId}">
+						<div>판매자: ${member.nickname }</div>
+						<div>구매자: ${session.aucId }</div>
+					</c:if>
+					<div>코드 : ${session.aucCode }</div>
+					<div style="padding-bottom: 10px;">가격: ${session.nowBid}원</div>
+					<img src="#" alt="사진" width="200px;" height="200px;"/><!-- 경은 언니가 해준다!! -->
+					
+					<br><br>
+					</c:if>
+					<!-- 끝 -->
+					
 					<button type="button" class="btn btn-success btn-lg">일정 추가</button>
 					<br><br>
 					<button type="button" class="btn btn-danger btn-lg">신고 하기</button>
@@ -325,16 +359,22 @@ function getChat(){
 		 success: function(data){
 			 console.log(data);
 			 var html="";
+			 
 			 for(var i=0 ; i<data.length;i++){
+				 	var dd = data[i].chatTime;
+				 	const date = new Date(dd);
+				 	var month = Number(date.getDate());
+				 	month = month - 2;
+				 
 					if(data[i].fromId == $('#userId').val()){
 						html+=
 						"<div class='chat ch2'><div class='textbox'>"+data[i].chatContent+"</div></div>"+
-						"<div class='time2' >"+data[i].chatTime+"</div>";
+						"<div class='time2' >"+month+"월"+date.getDate()+"일 "+date.getHours()+":"+date.getMinutes()+"</div>";
 					}
 					else{
 						html+=
 						"<div class='chat ch1'><div class='textbox'>"+data[i].chatContent+"</div></div>"+
-						"<div class='time1' >"+data[i].chatTime+"</div>";
+						"<div class='time1' >"+month+"월"+date.getDate()+"일 "+date.getHours()+":"+date.getMinutes()+"</div>";
 					} 
 			}
 			 console.log(html);
@@ -378,11 +418,11 @@ $(document).ready(function(){
 						 "chatId" : $('#chatId').val()
 				 },	
 				 success: function(){
-					 
+					 /*
 					$(".wrap").append(
 						"<div class='chat ch2'><div class='textbox'>"+$('#chatContent').val()+"</div></div>"+
 						"<div class='time2' >"+now.getHours()+"시"+now.getMinutes()+"분"+"</div>"
-					);
+					);*/
 					
 				 },
 				 error:function(request,status,error){

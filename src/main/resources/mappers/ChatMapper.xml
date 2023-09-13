@@ -33,7 +33,7 @@
 	</insert>
 	
 	<!-- 채팅누른 아티클번호 가져오기 -->
-	<select id="getArticle" parameterType="int" resultType="com.ezen.board.dto.ArticleVO">
+	<select id="getArticle" parameterType="int" resultType="com.ezen.board.dto.BuyArticleVO">
 		select * from article_buy
 		where articleNo = #{artNo}
 	</select>
@@ -97,7 +97,7 @@
 	</select>
 	
 	<!-- artNo으로 articleVO끌어오기 (buy) -->
-	<select id="findArticleVOFromArtNoB" parameterType="int" resultType="articleVO">
+	<select id="findArticleVOFromArtNoB" parameterType="int" resultType="buyArticleVO">
 		<![CDATA[
 		
 			SELECT	*
@@ -107,8 +107,9 @@
 		]]>
 	</select>
 	
-	<!-- artNo으로 articleVO끌어오기 (sale) 누군가가 반대로 해놔서 반대로 해야함-->
-	<select id="findArticleVOFromArtNoS" parameterType="int" resultType="articleVO">
+
+	<!-- artNo으로 articleVO끌어오기 (sale)-->
+	<select id="findArticleVOFromArtNoS" parameterType="int" resultType="buyArticleVO">
 		<![CDATA[
 			SELECT	*
 			FROM	article_sale
@@ -143,8 +144,25 @@
 	
 	</delete>
 	
+	<!-- 멤버 아이디로 닉네임 찾기 -->
+	<select id="find_nickname" resultType="String">
+	select nickname
+	from members
+	where userId = #{memberId}
+	</select>
 	
+	<!-- 회원 목록 다 가져와 -->
+	<select id="findAllMemeber" resultType="MemberDTO">
+		select *
+		from members
+	</select>
 	
+	<!-- auctionDTO artNo으로 가져오기 -->
+	<select id="findAuctionDTOFromArtNoS" resultType="auctionDTO">
+		select *
+		from auction
+		where aucCode = #{artNo}
+	</select>
 	
 	
 	

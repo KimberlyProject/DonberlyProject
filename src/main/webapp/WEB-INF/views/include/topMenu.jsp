@@ -5,10 +5,10 @@
 <script>
 if("${memberlevel.userStatus}" == "N1"){
 	alert("${memberlevel.downTime}까지 정지상태입니다.");
-	location.href = '/member/logout';
+	location.href = '${path}/member/logout';
 }else if("${memberlevel.userStatus}" == "N2"){
 	alert("영구 정지 처리 되셨습니다.");
-	location.href = '/member/logout';
+	location.href = '${path}/member/logout';
 }
 
 </script>
@@ -22,53 +22,55 @@ if("${memberlevel.userStatus}" == "N1"){
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/"><img src="/resources/images/logo.png" alt="logo"/></a>
+            <a class="navbar-brand" href="${path}/"><img src="${path}/resources/images/logo.png" alt="logo"/></a>
           </div>
       
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li class="active">
-                <a href="/sale/listArticles.do">장터 <span class="sr-only">(current)</span></a>
+                <a href="${path}/sale/listArticles.do">장터 <span class="sr-only">(current)</span></a>
                 <ul>
-                    <li><a href="/sale/listArticles.do">팝니다</a></li>
-                    <li><a href="/buy/listArticles.do">삽니다</a></li>                   
+                    <li><a href="${path}/sale/listArticles.do">팝니다</a></li>
+                    <li><a href="${path}/buy/listArticles.do">삽니다</a></li>                   
                 </ul>
               </li>
               <li>
-                <a href="/auction/auction_main">경매장</a>
+                <a href="${path}/auction/auction_main">경매장</a>
                 <ul>
-                	<li><a href="/auction/howtouse">경매장 이용방법</a></li>
-                    <li><a href="/auction/auction_write">경매상품 올리기</a></li>
+                	<li><a href="${path}/auction/howToUse">경매장 이용방법</a></li>
+                    <li><a href="${path}/auction/auction_write">경매상품 올리기</a></li>
               	</ul>
               </li>                  
               <li>
-                <a href="/ccenter/notice">고객센터</a>                
+                <a href="${path}/ccenter/notice">고객센터</a>                
                 <ul> 
-                    <li><a href="/ccenter/notice">공지사항</a></li>
-                    <li><a href="/ccenter/qna">Q & A</a></li>
-                    <li><a href="/ccenter/askOnetoOne">1:1 문의하기</a></li>
-                    <li><a href="/ccenter/report">신고하기</a></li>
+                    <li><a href="${path}/ccenter/notice">공지사항</a></li>
+                    <li><a href="${path}/ccenter/qna">Q & A</a></li>
+                    <li><a href="${path}/ccenter/askOnetoOne">1:1 문의하기</a></li>
+                    <li><a href="${path}/ccenter/report">신고하기</a></li>
                 </ul>
-              </li>
+              </li>              
+              <c:if test="${ member != null }">
               <li>
-                <a href="/myPage/myInfo">마이페이지</a>                
+                <a href="${path}/mypage/myInfo.do">마이페이지</a>                
                 <ul> 
-                	<li><a href="/auction/auctionDealList?aucId=${member.userId}">경매내역</a></li>
-                    <li><a href="/myPage/salesHistory">판매내역</a></li>
-                    <li><a href="/chat/chattingview">1:1 채팅하기</a></li>
-                    <li><a href="/chat/chat_list">채팅 리스트</a></li>
-                    <li><a href="/myPage/calendar">캘린더</a></li>
-                    <li><a href="/mypage/marketInfo.do">장터</a></li>
+                	<li><a href="${path}/auction/myAuction">경매내역</a></li>
+                    <li><a href="${path}/mypage/salesHistory">판매내역</a></li>
+                    <li><a href="${path}/chat/chattingview">1:1 채팅하기</a></li>
+                    <li><a href="${path}/chat/chat_list">채팅 리스트</a></li>
+                    <li><a href="${path}/mypage/calendar">캘린더</a></li>
+                    <li><a href="${path}/mypage/marketInfo.do">장터</a></li>
                 </ul>
               </li>
+              </c:if>
               <c:if test="${ memberlevel.userStatus == 'A' }">
               <li>
-                <a href="/admin/oneOnOneInquiry">관리자</a>                
+                <a href="${path}/admin/oneOnOneInquiry">관리자</a>                
                 <ul> 
-                    <li><a href="/admin/oneOnOneInquiry.do">1:1 문의 내역</a></li>
-                    <li><a href="/admin/reportAnswer.do">신고하기 내역</a></li>
-                    <li><a href="/admin/memberList">회원 목록</a></li>
+                    <li><a href="${path}/admin/oneOnOneInquiry.do">1:1 문의 내역</a></li>
+                    <li><a href="${path}/admin/reportAnswer.do">신고하기 내역</a></li>
+                    <li><a href="${path}/admin/memberList">회원 목록</a></li>
                 </ul>
               </li>
               </c:if>
@@ -81,15 +83,7 @@ if("${memberlevel.userStatus}" == "N1"){
             <!-- 로그인 했을 때 -->
 	            <div class="navbar-text navbar-right loginbtn">
 	            
-                   	<a href="/myPage/calendar"><span class="glyphicon glyphicon-calendar"></span></a>    
-	                <!--<div class="dropdown calicon">
-	                    <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-	                        <span class="glyphicon glyphicon-calendar"></span>                     
-	                    </button>
-	                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-	                      <li><img src="./images/cal.jpeg" alt="달력"></li>                          
-	                    </ul>
-	                </div> -->
+                   	<a href="${path}/myPage/calendar"><span class="glyphicon glyphicon-calendar"></span></a>    
 	
 	                <div class="dropdown alermicon">
 	                    <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -113,8 +107,8 @@ if("${memberlevel.userStatus}" == "N1"){
 	                       ${ member.nickname } 님                     
 	                   </button>
 	                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-	                     <li><a href="/myPage/myInfo.do">내 정보 보기</a></li>                          
-	                     <li><a href="/member/logout">로그 아웃</a></li>                          
+	                     <li><a href="${path}/mypage/myInfo.do">내 정보 보기</a></li>                          
+	                     <li><a href="${path}/member/logout">로그 아웃</a></li>          
 	                   </ul>
 	               </div>
 	                

@@ -15,11 +15,18 @@ public class AuctionDTO {
 	private Date deadline;
 	private int deadlineRate;
 	private String aucId; 
+	private String aucNick;
 	private int status;
 	private String cstmId;
 	
 	public String getCstmId() {
 		return cstmId;
+	}
+	public String getAucNick() {
+		return aucNick;
+	}
+	public void setAucNick(String aucNick) {
+		this.aucNick = aucNick;
 	}
 	public void setCstmId(String cstmId) {
 		this.cstmId = cstmId;
@@ -102,9 +109,10 @@ public class AuctionDTO {
 		return "AuctionDTO [aucCode=" + aucCode + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + ", writeDate="
 				+ writeDate + ", title=" + title + ", content=" + content + ", nowBid=" + nowBid + ", bidRate="
 				+ bidRate + ", deadline=" + deadline + ", deadlineRate=" + deadlineRate + ", aucId=" + aucId
-				+ ", status=" + status + ", cstmId=" + cstmId + "]";
+				+ ", aucNick=" + aucNick + ", status=" + status + ", cstmId=" + cstmId + "]";
 	}
-
+	
+	
 	
 	
 	

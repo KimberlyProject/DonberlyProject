@@ -19,6 +19,8 @@
 		#preview {
 			width: 450px;
 			height:500px;
+			border-radius: 50%;
+			text-align: center;
 		}
 		
 		.grid-second {
@@ -34,6 +36,11 @@
 		
 		#i_price{
 			text-align: right;
+		}
+		#i_thumbnail{
+			margin-top : 20px;
+			margin: 20px 50px; 
+			
 		}
 	</style>
 </head>
@@ -68,7 +75,7 @@
 				<li>
 			</ul>
 			<ul class="item">
-				<li id="a"><input type="file" class="btn btn-primary" name="thumbnail" id="i_thumbnail" disabled onchange="readURL(this);" /><li>
+				<li><input type="file" class="btn btn-primary" name="thumbnail" id="i_thumbnail" disabled onchange="readURL(this);" /><li>
 			</ul>
 		</c:when>
 		<c:otherwise>
@@ -232,8 +239,7 @@ function fn_chat(artNo){
 			 	"buyer" : $('.buyer').val(),
 			 	"artNo" : artNo,
 			 	"status" : "b"
-				 
-		 
+		 		
 		 }),	
 		 success: function(data){
 			 console.log(data);

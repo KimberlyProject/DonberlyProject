@@ -86,8 +86,8 @@
         </li>
         <li><a href="#">경매</a>          
           <ul>
-            <li><a href="#">판매</a></li>
-            <li><a href="#">구매</a></li>
+            <li><a href="/auction/myAuction">내가 올린 상품만 보기</a></li>
+            <li><a href="/auction/myBid">내가 입찰한 상품만 보기</a></li>
           </ul>
         </li>
         <li><a href="#">캘린더</a></li>
@@ -120,21 +120,7 @@
     
 	<div class="container">
 		<br/><br/>
-	
-		<!-- 검색창 -->
-      <div class= "row" align="right" style=" vertical-align:middle; float:right;">
-         <select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
-            <option value="t" <c:if test="{searchType} == 't'">selected</c:if>>제목</option>
-            <option value="c" <c:if test="{searchType} == 'c'">selected</c:if>>내용</option>
-            <option value="w" <c:if test="{searchType} == 'w'">selected</c:if>>작성자</option>
-            <option value="p" <c:if test="{searchType} == 'p'">selected</c:if>>글번호</option>
-         </select>
-         <input  id="searchKeyword" value="${keyword}" class="col-sm-2 searchgroup form-control" type="text" class="form-control" style="width:200px;" placeholder="검색하기"/>
-         <button id ="keywordBtn" class="btn btn-secondary" type="button">
-            <span class="glyphicon glyphicon-search"/>
-         </button>   
-      </div><br><br><br>
-		
+			<a href="/auction/myAuction">내가 올린 상품만 보기</a><br/><br/><br/>
 		<%
 		//현재시간 밀리초,
 		long currentTimeMillis = System.currentTimeMillis();
@@ -148,7 +134,7 @@
 		<!-- 경매 게시글 -->
 		<!-- 게시글이 하나도 없는 경우 -->
 		<c:choose>
-		<c:when test="${empty articles}">
+		<c:when test="${empty article.cstmId == member.userId}">
 			<div>
 				<div>
 					<p align="center">
@@ -165,6 +151,8 @@
 			<!-- 경매게시글 -->
 			<table class="table table-bordered table-striped" id="ta">
 				<c:forEach var="article" items="${articles}" varStatus="articleNum">
+				<c:choose>
+				<c:when test="${article.cstmId == member.userId}"> <!-- 내가 입찰한 글만 보여주기 -->
 			    <tr>
 			        <th rowspan="4" class="innerimg">
 			            <c:forEach var="img" items="${imgs}" varStatus="imgNum">
@@ -186,7 +174,7 @@
 							</c:when>
 							</c:choose>
 							<c:choose>
-							<c:when test="${article.deadline < today || article.status == 1 }">
+							<c:when test="${article.status == 1 }">
 								<button class="btn detailBtn" type="submit">자세히 보기</button>
 							</c:when>
 							</c:choose>
@@ -232,38 +220,12 @@
 							<th colspan="4"><span id="gray"><span class="gray">판매완료</span>&nbsp;&nbsp;&nbsp;[${article.cstmId}]님</span></th>
 						</c:when></c:choose>	
 				</tr>
+				</c:when>
+				</c:choose>
 				</c:forEach>
 			</table><br/><br/><!--  경매 게시글 -->
 		</c:when>
 		</c:choose>
-	
-		<table>
-			<tr> <!-- 페이징 -->
- 				<td>
-					<div class="col-sm-offset-3"><!-- 숫자 버튼 -->
-						<ul class="btn-group pagination">
-							<c:if test="${pageMaker.prev}">
-								<li>
-									<a href='<c:url value="/auction/auction_main.do?page=${pageMaker.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
-										<span class="glyphicon glyphicon-chevron-left"></span></a>
-								</li>
-							</c:if>
-							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-								<li>
-									<a href='<c:url value="/auction/auction_main.do?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
-								</li>
-							</c:forEach>
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li>
-									<a href='<c:url value="/auction/auction_main.do?page=${pageMaker.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
-										<span class="glyphicon glyphicon-chevron-right"></span></a>
-								</li>
-							</c:if>
-						</ul>
-					</div><!-- 숫자 버튼 -->
-				</td>
-			</tr>
-		</table> <br/>
 	
 		<br/><br/>
 		

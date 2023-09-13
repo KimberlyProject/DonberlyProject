@@ -22,12 +22,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.ezen.board.dto.ArticleVO;
+
+import com.ezen.board.dto.BuyArticleVO;
+
+import com.ezen.auction.dto.AuctionDTO;
+
 import com.ezen.chat.dao.ChatDAO;
 import com.ezen.chat.dto.ChatDTO;
 import com.ezen.chat.dto.ChatListDTO;
 import com.ezen.chat.service.ChatService;
 import com.ezen.member.dto.MemberDTO;
+
+
 
 
 @Controller
@@ -48,17 +54,28 @@ public class ChatController {
 	@RequestMapping(value="/chattingview", method=RequestMethod.GET)
 	public String chattingview(String chatId, HttpServletRequest request) throws Exception{
 		
+		
+		
 		HttpSession session= request.getSession();
 		int ch = Integer.parseInt(chatId);
 		ChatListDTO chatListDTO = chatService.findChatListFromChatId(ch); //chatList 옮김
 		int artNo = chatListDTO.getArtNo();
 		
 		//아티클 넘버로 아티클VO 가져오기
-		ArticleVO articleVO = chatService.findArticleVOFromArtNo(artNo,chatListDTO.getStatus());
-		System.out.println("************************************"+articleVO);
-		session.setAttribute("session",articleVO);
+
+		if(chatListDTO.getStatus().equals("s") || chatListDTO.getStatus().equals("b")) {
+			BuyArticleVO articleVO = chatService.findArticleVOFromArtNo(artNo,chatListDTO.getStatus()); // 여기 dao에서 s b a 구별해서 가져옴
+			System.out.println("************************************"+articleVO);
+			session.setAttribute("session",articleVO);			
+		}
+		else if(chatListDTO.getStatus().equals("a")) {
+			System.out.println("************************************"+"여기와라66666666666666");
+			AuctionDTO auctionDTO = chatService.findAuctionDTOFromArtNo(artNo,chatListDTO.getStatus());// 여기 dao에서 s b a 구별해서 가져옴
+			System.out.println("************************************"+auctionDTO);
+			session.setAttribute("session",auctionDTO);
+		}
+
 		session.setAttribute("chatList", chatListDTO);
-		
 		System.out.println("채팅 입장");
 		return "/chat/chattingview";
 	}
@@ -95,8 +112,8 @@ public class ChatController {
 	}
 	
 	//값으로 articleDTO가져오기
-	public List<ArticleVO> getArtDTO(int artNo)  throws Exception{
-		List<ArticleVO> articleList = chatService.getArtDTO(artNo);
+	public List<BuyArticleVO> getArtDTO(int artNo)  throws Exception{
+		List<BuyArticleVO> articleList = chatService.getArtDTO(artNo);
 		System.out.println("######################"+articleList);
 		return articleList;
 	}
@@ -113,33 +130,26 @@ public class ChatController {
 		
 		
 		List<ChatListDTO> chatList = chatService.listChat(userId); //chatList 옮김
-		//List <ChatDTO>lastchat  = new ArrayList();
-		//챗 아이디로 챗리스트 가져오기
-		//List<ChatListDTO> artNoAndStatus = new ArrayList<ChatListDTO>();
 		
 		//최근한거 가져오기 채팅방 넘버 별로 최근꺼
-		
-		
-		
-		//int chid = chatListDTO.getChatId();
-		//System.out.println("***********************************여기까지는 나오려나");
-		//ChatListDTO lastchat = new ChatListDTO();
 		List<ChatDTO> lastchat = chatService.findLastChat(); 
         //System.out.println("여기까지는 나오나" + lastchat);
-		System.out.println("마지막 채팅*******************"+lastchat);
+		//System.out.println("채팅 리스트*******************"+lastchat);
 		
+		//닉네임 찾기
+		List<BuyArticleVO> memberList = chatService.findAllMemeber();
+		
+		System.out.println(memberList);
 		ModelAndView mav = new ModelAndView(viewName);
 		//mav.addObject("lastChat", lastchat.getLastChat());
 		//System.out.println(lastchat);
 		mav.addObject("chatList",chatList);//넘겨줄 이름, 데이터
-		mav.addObject("lastChat",lastchat);
-		
-		//닉네임 찾기
-		
-		
+		mav.addObject("lastChat",lastchat);//마지막 채팅
+		mav.addObject("nickname",memberList);
+		//mav.addObject("",);
 		//viewName이 없기 때문에 URL로 부터 뷰 이름을 검색한다.
 		// /board/listArticlres.do => /vboard/listArticles
-		System.out.println("채팅 입장");
+		//System.out.println("채팅 입장");
 		return mav;		//리턴에 경로 없으면 value값에 do빼서 알아서 찾아간다.
 		
 	}
@@ -177,7 +187,7 @@ public class ChatController {
 		//System.out.println(chatDTO2);
 		
 		List<ChatDTO> list =  chatService.chatView(ch);
-		
+		System.out.println(list);
 		return list;
 		
 		
@@ -190,5 +200,15 @@ public class ChatController {
 		int ch = Integer.parseInt(chatId);
 		chatService.deleteChatRoom(ch);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/find_nickname", method=RequestMethod.POST, produces = "application/text; charset=utf8" )
+	public String find_nickname(@RequestParam(value="memberId", required=false) String memberId) throws Exception{
+		String nickname = chatService.find_nickname(memberId);
+		System.out.println("----------------------------------------------------------" + memberId);
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + nickname);
+		return nickname;
+	}
+	
 	
 }

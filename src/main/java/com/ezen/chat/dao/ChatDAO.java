@@ -5,7 +5,11 @@ import java.util.List;
 
 import javax.swing.text.DefaultEditorKit.InsertContentAction;
 
-import com.ezen.board.dto.ArticleVO;
+
+import com.ezen.board.dto.BuyArticleVO;
+
+import com.ezen.auction.dto.AuctionDTO;
+
 import com.ezen.chat.dto.ChatDTO;
 import com.ezen.chat.dto.ChatListDTO;
 
@@ -17,7 +21,7 @@ public interface ChatDAO {
 	
 	public void insertContent(ChatDTO chatDTO) throws Exception;
 	
-	public List<ArticleVO> getArtDTO(int artNo) throws Exception;
+	public List<BuyArticleVO> getArtDTO(int artNo) throws Exception;
 	
 	public int insertChatList(ChatListDTO chatListDTO) throws Exception;
 	
@@ -29,10 +33,16 @@ public interface ChatDAO {
 	
 	public ChatDTO findContent(ChatDTO chatDTO) throws Exception;
 	
-	public ArticleVO findArticleVOFromArtNo(int artNo,String status) throws Exception;
+	public BuyArticleVO findArticleVOFromArtNo(int artNo,String status) throws Exception;
 	
 	public List<ChatDTO> findLastChat()throws Exception;
 	
 	public void deleteChatRoom(int chatId) throws Exception;
+	
+	public String find_nickname(String memberId) throws Exception;
+	
+	public List<ArticleVO> findAllMemeber() throws Exception;
+	
+	public AuctionDTO findAuctionDTOFromArtNo(int artNo, String status) throws Exception;
 }
 

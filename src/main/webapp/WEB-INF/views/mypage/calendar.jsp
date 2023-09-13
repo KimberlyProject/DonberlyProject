@@ -107,30 +107,6 @@
 </head>
 <body>
 <%@ include file="../include/topMenu.jsp" %>
-
-    <aside id="sideMenu">
-      <h2>마이페이지</h2>
-      <ul>
-        <li><a href="#">내 정보 수정</a></li>
-        <li>
-          <a href="#">거래내역</a>
-          <ul>
-            <li><a href="#">삽니다</a></li>
-            <li><a href="#">팝니다</a></li>
-          </ul>
-        </li>
-        <li><a href="#">경매</a>          
-          <ul>
-            <li><a href="#">판매</a></li>
-            <li><a href="#">구매</a></li>
-          </ul>
-        </li>
-        <li><a href="#">캘린더</a></li>
-        <li><a href="/chat/chat_list">채팅목록</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
-
 <c:set var="menu" value="mypage" />
 <%@ include file="../include/sidebar.jsp" %>
 
@@ -160,33 +136,37 @@
 	     <div class="dateBoard"></div>
 	   </article> 
 	 </div>
-   
-	<script>    
+	<script>	   
+	  const calendar = ${calendar};	  
 	  let weekCount = 1;
 	  const makeCalendar = (date) => {
 	    
-	  document.querySelector(`.dateBoard`).innerHTML = '';
+	  // 파라미터로 받아온 날짜 조회
+	  document.querySelector(".dateBoard").innerHTML = '';
 	  const currentYear = new Date(date).getFullYear();
 	  const currentMonth = new Date(date).getMonth() + 1;
 	  let currentDate = new Date(date).getDate();
+	  // 받아온 날짜와 현재날짜 비교해서 일치하지않으면 date 0으로 고정
 	  if(currentMonth != new Date().getMonth() + 1){
 	    currentDate = 0;
 	  }else{    
 	    currentDate = new Date().getDate();
-	    console.log(currentDate)
 	  }
+	  // 이번 달 시작하는 요일과 마지막일 조회
 	  const firstDay = new Date(date.setDate(1)).getDay();
 	  const lastDay = new Date(currentYear, currentMonth, 0).getDate();
 	
 	  const limitDay = firstDay + lastDay;
-	  const nextDay = Math.ceil(limitDay / 7) * 7;
-	
+	  const nextDay = Math.ceil(limitDay / 7) * 7;	  
+	  // 이번 달 시작하는 요일까지는 더미데이터생성 
 	  for (let i = 0; i < firstDay; i++) {
 	    let nodata = document.createElement("div");
 	    nodata.classList.add('nodata');
-	    document.querySelector(`.dateBoard`).appendChild(nodata);
+	    document.querySelector(".dateBoard").appendChild(nodata);
 	    weekCount ++;
 	  }
+	  //weekCount(주말체크 변수) 
+	  // 이 달의 마지막 일수까지 캘린더 생성
 	  for (let i = 1; i <= lastDay; i++) {    
 	    if(weekCount > 7){
 	      weekCount = 1
@@ -194,43 +174,54 @@
 	    let cell = document.createElement("div");
 	    let datetag = document.createElement("p");
 	    let contentstag = document.createElement("div");
+	 	// 오늘이면 강조, 주말이면 색 변형
 	    if(i == currentDate){
 	      cell.classList.add('date'); 
 	    }
 	    if(weekCount == 1 || weekCount == 7){      
 	      cell.classList.add('week'); 
 	    }
-	   
+	 	// 날짜 html에 데이터 삽입
 	    datetag.innerText = i;
+
+	  // 데이터 일치하는 날짜에 컨텐츠, 링크 표시  
+	  calendar.forEach(list => {
+		const insertYear = new Date(list.schedule).getFullYear();
+		const insertMonth = new Date(list.schedule).getMonth() + 1;
+		let insertDate = new Date(list.schedule).getDate();      
+		if(currentYear == insertYear && currentMonth == insertMonth && i == insertDate){	
+			contentstag.innerHTML = "<a href=${path}/" + (list.status == 's' ? 'sale' : 'buy' ) + "/viewArticle.do?articleNO=" + list.articleId + ">" + list.contents + "</a>";	      
+		}
+	  })
+		  
 	    cell.appendChild(datetag);
 	    cell.appendChild(contentstag);
-	    document.querySelector(`.dateBoard`).appendChild(cell);
+	    document.querySelector(".dateBoard").appendChild(cell);
 	
-	    // htmlDummy += `<div>
-	    //                 <p class="date">${i}</p>
-	    //                 <div class="contents">일정</div>
-	    //               </div>`;
 	    weekCount++
 	  }
-	  
+	    
+	  // 이번 달 끝나고 남은 캘린더 더미데이터로
 	  for (let i = limitDay; i < nextDay; i++) {
 	    let nodata = document.createElement("div");
 	    nodata.classList.add('nodata');
-	    document.querySelector(`.dateBoard`).appendChild(nodata);    
+	    document.querySelector(".dateBoard").appendChild(nodata);    
 	    weekCount ++;
 	  }
-	  document.querySelector(`.dateTitle`).innerText = `\${currentYear}년 \${currentMonth}월`;
+	  // 제목에 날짜 넣고 주말체크 변수 초기화
+	  document.querySelector(".dateTitle").innerText = currentYear + "년" + currentMonth + "월";
 	  weekCount = 1;
 	  }
+	  
 	  const date = new Date();
 	  makeCalendar(date);
 	
 	  // 이전달 이동
-	  document.querySelector(`.prevDay`).onclick = () => {
+	  document.querySelector(".prevDay").onclick = () => {
 	  makeCalendar(new Date(date.setMonth(date.getMonth() - 1)));
 	  }	
 	  // 다음달 이동
-	  document.querySelector(`.nextDay`).onclick = () => {
+	  document.querySelector(".nextDay").onclick = () => {
 	  makeCalendar(new Date(date.setMonth(date.getMonth() + 1)));
 	  }
 	</script>

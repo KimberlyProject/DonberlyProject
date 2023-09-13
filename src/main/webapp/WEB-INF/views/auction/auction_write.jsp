@@ -59,6 +59,13 @@
 		#maxPrice {
 		text-align: right;
 		}
+		#imgAdd {
+			width: 90px;
+		}
+		#imgInfo {
+			color: gray;
+		}
+	
 	</style>
 </head>
 <body>
@@ -81,12 +88,15 @@
       </ul>
       <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
     </aside>
-    <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <a href="/">홈</a> &gt;
-      <a href="/auction/auction_main">경매장</a> &gt;
-      <a href="#">경매올리기</a>
-    </div>
+    
+    <!-- 배너 -->
+	<div class="page_dir container">
+		<button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+		<a href="/">홈</a> &gt;
+		<a href="/auction/auction_main">경매장</a> &gt;
+		<a href="#">경매상품 올리기</a>
+	</div>
+	<h1 class="pageTitle"><div>경매 상품 올리기</div></h1>
     
    <%
 	//로그인 세션 없으면 로그인을 먼저 하도록 한다.
@@ -103,12 +113,11 @@
 		
 	<div class="container">
 		<form id="formgroup" name="aucArticle" method="post" action="${path}/auction/addNewArticle" enctype="multipart/form-data">
-			<input type="hidden" name="aucId" ${member.userId}/>
 			<!-- 글쓰기 -->
 			<table id="tb1" class="row table table-bordered table-striped">
 				<tr><!-- 사진, 제목 -->  
 					<th class="cate">제목</th> 
-					<th colspan="2"><input id="title" type="text" maxlength="500" name="title" placeholder="예) 상품명"> &nbsp;&nbsp;&nbsp; 판매자 [${member.userId}] 님</th>
+					<th colspan="2"><input id="title" type="text" maxlength="500" name="title" placeholder="예) 상품명"> &nbsp;&nbsp;&nbsp; 판매자 [${member.nickname}] 님</th>
 				<tr> <!-- 최소금액 -->
 					<th id="minprice" class="cate">최소 금액</th>					
 					<th colspan="2"><input id="minPrice" class="commas" onkeyup="addCommas(this)" type="text" maxlength="10" name="minPrice" placeholder="숫자만 입력하세요">원</th>
@@ -145,32 +154,34 @@
 					</th>
 				</tr>
 				<tr>
-					<td class="cate">
-						사진첨부<br/>
-						(1번 사진이<br/>
-						썸네일로<br/> 
-						설정됩니다.)<br/>
-						<br/><br/><br/><br/>
-						<br/><input type="button" value="사진 추가" onClick="fn_addFiles()"/>	
-					</td>	
-					<th align="right">
-						<div id="d_file">
-							<input type="file" name="imageFileName"  onchange="readAndResize(this)" accept="image/*"/><br/>
-							<img  class="preview" src="#" width=200 height=200/><br/><br/>
-							<button type="button" id="imgDelBtn">사진 삭제</button>
+					<th class="cate">사진첨부<br/><br/><br/><br/><br/><br/><br/>
+						<input id="imgAdd" type="button" value="사진 추가" onClick="fn_addFiles()"/>
+					</th>	
+					<th>
+						<div id="d_file" style="overflow-y: scroll; height: 200px; ">
+						 	<span id="imgInfo"> 
+						 	첫번째 사진이 썸네일로 설정됩니다.<br/> 원활한 경매 진행을 최소 2장 이상의 사진을 올려주세요.<br/>
+						 	사진이 없을 시 입찰자 없이 경매가 종료될 수 있습니다.</span>
+						 	
+						 	<br/><br/>
+							<input type="file" name="imageFileName" onchange="readAndResize(this)"><br/>
+							<input type="file" name="imageFileName2" onchange="readAndResize(this)">
 						</div>
 					</th>
 				<tr>
 					<th class="cate">제품 설명</th><!-- 내용 -->
 					<th colspan="2">
-						<textarea name="content" id="content" placeholder="제품에 대한 상세 내용을 입력해주세요."></textarea>
+					 <div>
+						<textarea name="content" id="content" placeholder="판매하실 상품에 대한 상세한 설명을 입력해주세요." 
+						style="overflow-y: hidden; height: 300px;"></textarea>
+					</div>
 					</th>
 				</tr>	
 			</table> <!-- 글쓰기 -->
 			<br/>
 			<br/>
-			<div id="submit">
-			<input class="btn btn-success" type="submit" id="submit" value="상품 올리기"/>
+			<div>
+			<input class="btn btn-success" type="submit" value="상품 올리기" onclick="disableButton(this)"/>
 			</div>
 		</form>
 		<br/>
@@ -180,6 +191,7 @@
 	<%@ include file="../include/footer.jsp" %>
 
 <script>
+
 
 	$("#submit").on("click", function() {
 		if($("#title").val() == "") {
@@ -237,81 +249,10 @@
 	//이미지 추가하기
    	var cnt=1;
 	function fn_addFiles() {
-		//$("#d_file").append("<br>"+"<input type='file' name='file" +cnt + "' onchange='readURL(this);' />");
 		$("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
-		$("#d_file").append("<br>"+"<img  class='preview' src='#'   width='200' height='200' />"+"<br/>"+"<br/>");
 		cnt++;
 	}  
 	
-	//이미지 삭제하기
-	$('#imgDelBtn').on('click', function () {
-	    var imageInput = $('#imageFileName');
-	    imageInput.val(''); // 파일 선택 해제
-	
-	    // 이미지 미리보기 초기화
-	    var previewImage = $('#preview');
-	    previewImage.attr('src', ''); // 이미지 경로 초기화
-	});
-
-    //이미지 미리보기
-	function readAndResize(input) {
-	    if (input.files && input.files[0]) {
-	        var reader = new FileReader();
-	
-	        reader.onload = function (e) {
-	            var img = new Image();
-	            img.src = e.target.result;
-	
-	            img.onload = function () {
-	                var maxWidth = 200; 
-	                var maxHeight = 200;
-	
-	                var width = img.width;
-	                var height = img.height;
-	
-	                //이미지 크기를 조정
-	                if (width > maxWidth || height > maxHeight) {
-	                    var ratio = Math.min(maxWidth / width, maxHeight / height);
-	                    width *= ratio;
-	                    height *= ratio;
-	                }
-	                
-	                //조정된 사이즈로 form에 보내기
-	                var formData = new FormData(document.getElementById("formgroup"));
-	                formData.append("resizedImage", dataURItoBlob(previewImage.src), "resized_image.jpg"); // 조정된 이미지를 "resizedImage" 필드에 추가
-
-	                //미리보기
-	                var previewImage = document.querySelector(".preview");
-	                previewImage.src = resizeImage(img, width, height);
-	            };
-	        };
-	
-	        reader.readAsDataURL(input.files[0]);
-	    }
-	}
-    
-    //이미지 크기조정 함수
-    function resizeImage(img, width, height) {
-    	var canvas = document.createElement("canvas");
-    	var ctx = canvas.getContext("2d");
-    	canvas.width = width;
-    	canvas.height = height;
-    	ctx.drawImage(img, 0, 0, width, height);
-    	return canvas.toDataURL("image/jpeg"); 
-    }
-    
-	//Data URI를 Blob으로 변환
-	function dataURItoBlob(dataURI) {
-	    var byteString = atob(dataURI.split(',')[1]);
-	    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-	    var ab = new ArrayBuffer(byteString.length);
-	    var ia = new Uint8Array(ab);
-	    for (var i = 0; i < byteString.length; i++) {
-	        ia[i] = byteString.charCodeAt(i);
-	    }
-	    var blob = new Blob([ab], { type: mimeString });
-	    return blob;
-	}
 
 </script>
 </body>
