@@ -245,7 +245,9 @@ div.chat.ch2{
 	position: relative;
 	z-index: 10;
 }
-
+span{
+	color:yellow;
+}
 </style>
 </head>
 <body>
@@ -362,19 +364,25 @@ function getChat(){
 			 
 			 for(var i=0 ; i<data.length;i++){
 				 	var dd = data[i].chatTime;
+				 	var read = "";
 				 	const date = new Date(dd);
 				 	var month = Number(date.getDate());
 				 	month = month - 2;
-				 
+				 	if(data[i].chatRead==0){
+				 		read = "";
+				 	}
+				 	else{
+				 		read=data[i].chatRead;
+				 	}
 					if(data[i].fromId == $('#userId').val()){
 						html+=
 						"<div class='chat ch2'><div class='textbox'>"+data[i].chatContent+"</div></div>"+
-						"<div class='time2' >"+month+"월"+date.getDate()+"일 "+date.getHours()+":"+date.getMinutes()+"</div>";
+						"<div class='time2' ><span>"+read+"</span> &nbsp;&nbsp;"+month+"월"+date.getDate()+"일 "+date.getHours()+":"+date.getMinutes()+"</div>";
 					}
 					else{
 						html+=
 						"<div class='chat ch1'><div class='textbox'>"+data[i].chatContent+"</div></div>"+
-						"<div class='time1' >"+month+"월"+date.getDate()+"일 "+date.getHours()+":"+date.getMinutes()+"</div>";
+						"<div class='time1' >"+month+"월"+date.getDate()+"일 "+date.getHours()+":"+date.getMinutes()+"<span>&nbsp;&nbsp;"+read+"</span></div>";
 					} 
 			}
 			 console.log(html);
@@ -460,6 +468,8 @@ function chatOut(){
 		 }
 	 });
 }
+
+
 
 
 </script>

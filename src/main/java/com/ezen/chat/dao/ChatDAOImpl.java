@@ -168,6 +168,20 @@ public class ChatDAOImpl implements ChatDAO {
 		}
 	}
 
+	//채팅 읽은거 확인하고 변경
+	@Override
+	public void readChat(ChatDTO chatDTO) throws Exception {
+		sqlSession.update(namespace+".readChat", chatDTO);
+	}
+
+	//채팅 안읽은거 개수
+	@Override
+	public int countChat(String userId, int chatId) throws Exception {
+		
+		//return sqlSession.selectOne(namespace+".countChat",userId,chatId);
+		return 0;
+	}
+
 	
 
 	

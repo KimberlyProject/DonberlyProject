@@ -41,4 +41,8 @@ public interface ChatService {
 	public List<BuyArticleVO> findAllMemeber() throws Exception;
 	
 	public AuctionDTO findAuctionDTOFromArtNo(int artNo, String status) throws Exception;
+	
+	public void readChat(ChatDTO chatDTO) throws Exception;
+	
+	public int countChat(String userId, int chatId) throws Exception;
 }

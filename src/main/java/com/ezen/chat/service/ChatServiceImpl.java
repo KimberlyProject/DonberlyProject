@@ -110,6 +110,18 @@ public class ChatServiceImpl implements ChatService {
 		return chatDAO.findAuctionDTOFromArtNo(artNo,status);
 	}
 
+	@Override
+	public void readChat(ChatDTO chatDTO) throws Exception {
+		chatDAO.readChat(chatDTO);
+		
+	}
+
+	@Override
+	public int countChat(String userId, int chatId) throws Exception {
+		
+		return chatDAO.countChat(userId,chatId);
+	}
+
 	
 	
 	
