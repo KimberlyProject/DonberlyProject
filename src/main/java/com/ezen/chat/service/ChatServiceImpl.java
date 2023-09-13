@@ -9,10 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.ezen.auction.dto.AuctionDTO;
-
 
 import com.ezen.board.dto.BuyArticleVO;
+import com.ezen.auction.dto.AuctionDTO;
 
 import com.ezen.chat.controller.ChatController;
 import com.ezen.chat.dao.ChatDAO;

@@ -168,8 +168,7 @@
 				<th class="colon">:</th>
 				<th colspan="4">${article.aucId}님
 					<c:choose>
-
-					<c:when test="${member.userId != article.aucId}">
+					<c:when test="${member.userId != article.aucId}"> <!-- 판매자와 채팅하기 -->
 						<input type="hidden" class="seller" value="${article.aucId }"/>
 						<input type="hidden" class="buyer" value="${member.userId }"/>
 						<input type="hidden" class="artNo" value="${article.aucCode }"/>
@@ -265,8 +264,6 @@ $(document).ready(function () {
 		    if(confirm(cstmId + "님에게 " + price + "원에 판매하시겠습니까? 거래가 완료되면 취소할 수 없습니다.")) {
 		        location.href = "/auction/saleNow?aucCode=" + aucCode + "&cstmId=" + cstmId;
 		        alert("판매가 완료되었습니다.");
-		       return;
-
 		    } else {
 		    	return;
 		    }
@@ -365,7 +362,7 @@ $(document).ready(function () {
 	 });
 	
 }*/
-}); //$(document).ready(function () {
+}); //$(document).ready(function () { 
 	
 </script>
 

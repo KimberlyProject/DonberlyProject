@@ -23,9 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-import com.ezen.auction.dto.AuctionDTO;
-
 import com.ezen.board.dto.BuyArticleVO;
+import com.ezen.auction.dto.AuctionDTO;
 
 import com.ezen.chat.dao.ChatDAO;
 import com.ezen.chat.dto.ChatDTO;

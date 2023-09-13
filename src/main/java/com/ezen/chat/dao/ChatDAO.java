@@ -6,9 +6,10 @@ import java.util.List;
 import javax.swing.text.DefaultEditorKit.InsertContentAction;
 
 
-import com.ezen.auction.dto.AuctionDTO;
 
+import com.ezen.auction.dto.AuctionDTO;
 import com.ezen.board.dto.BuyArticleVO;
+
 import com.ezen.chat.dto.ChatDTO;
 import com.ezen.chat.dto.ChatListDTO;
 

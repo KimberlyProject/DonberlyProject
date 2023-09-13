@@ -107,7 +107,7 @@
 		]]>
 	</select>
 	
-	<!-- artNo으로 articleVO끌어오기 (sale) -->
+	<!-- artNo으로 articleVO끌어오기 (sale)-->
 	<select id="findArticleVOFromArtNoS" parameterType="int" resultType="buyArticleVO">
 		<![CDATA[
 			SELECT	*
