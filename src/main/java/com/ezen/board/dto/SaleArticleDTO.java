@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 // 게시글
 //-----------------------------------------------------------------------------------------------------------
 @Component("saleArticleVO")
-public class SaleArticleVO {
+public class SaleArticleDTO {
 	private	int		rnum;
 	private	int		level;
 	private	int		articleNO;

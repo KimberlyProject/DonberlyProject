@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<%@ include file="../include/header.jsp" %>
+	<%@ include file="../../../include/header.jsp" %>
 	<style>
 		.colon{
 			width: 4px;

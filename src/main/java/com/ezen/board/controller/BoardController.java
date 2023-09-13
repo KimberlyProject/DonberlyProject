@@ -29,10 +29,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ezen.board.dto.BuyArticleVO;
+import com.ezen.board.dto.BuyArticleDTO;
 import com.ezen.board.dto.Criteria;
 import com.ezen.board.dto.PageMaker;
-import com.ezen.board.dto.SaleArticleVO;
+import com.ezen.board.dto.SaleArticleDTO;
 import com.ezen.board.dto.SearchCriteria;
 import com.ezen.board.service.BoardService;
 import com.ezen.member.dto.MemberDTO;
@@ -81,9 +81,9 @@ public class BoardController {
 	@Autowired	
 	private BoardService boardService;
 	@Inject		// Java에서 지원하는 어노테이션
-	private BuyArticleVO articleVO;
+	private BuyArticleDTO articleVO;
 	@Inject		// Java에서 지원하는 어노테이션
-	private SaleArticleVO saleArticleVO;
+	private SaleArticleDTO saleArticleVO;
 
 	//-----------------------------------------------------------------------------------------------------------
 	// 게시글 쓰기 화면
@@ -557,7 +557,7 @@ public class BoardController {
 		logger.info("게시물의 총 건수 : " + pageMaker.getTotalCount());
 		
 		// 화면에 출력할 데이터를 가져온다.
-		List<BuyArticleVO> list = boardService.buyListPaging(cri);
+		List<BuyArticleDTO> list = boardService.buyListPaging(cri);
 		System.out.println("리스트:" + list);
 		
 		// pageMaker의 정보를 콘솔에 보여준다.
@@ -587,7 +587,7 @@ public class BoardController {
 		logger.info("게시물의 총 건수 : " + pageMaker.getTotalCount());
 		
 		// 화면에 출력할 데이터를 가져온다.
-		List<SaleArticleVO> list = boardService.saleListPaging(cri);
+		List<SaleArticleDTO> list = boardService.saleListPaging(cri);
 		System.out.println("리스트:" + list);
 		
 		// pageMaker의 정보를 콘솔에 보여준다.

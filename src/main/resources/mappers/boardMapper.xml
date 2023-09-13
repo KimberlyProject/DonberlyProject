@@ -4,7 +4,7 @@
 
 <mapper namespace="com.ezen.board.mappers.boardMapper">
 
-	<resultMap id="buyArticlesResult" type="buyArticleVO">
+	<resultMap id="buyArticlesResult" type="buyArticleDTO">
 		<result property="rnum"				column="recNum"/>
 		<result property="level"			column="lvl"/>
 		<result property="articleNO"		column="articleNO"/>
@@ -22,7 +22,7 @@
 		<result property="nickname"			column="nickname"/>
 	</resultMap>
 	
-	<resultMap id="saleArticlesResult" type="saleArticleVO">
+	<resultMap id="saleArticlesResult" type="saleArticleDTO">
 		<result property="rnum"				column="recNum"/>
 		<result property="level"			column="lvl"/>
 		<result property="articleNO"		column="articleNO"/>
@@ -88,7 +88,7 @@
 	</insert>
 
 	<!-- 게시글 번호에 해당하는 상세 정보 -->
-	<select id="selectArticle" parameterType="int" resultType="buyArticleVO">
+	<select id="selectArticle" parameterType="int" resultType="buyArticleDTO">
 		<![CDATA[
 			SELECT	*
 			FROM	article_buy
@@ -96,7 +96,7 @@
 		]]>
 	</select>
 	
-	<select id="saleSelectArticle" parameterType="int" resultType="saleArticleVO">
+	<select id="saleSelectArticle" parameterType="int" resultType="saleArticleDTO">
 		<![CDATA[
 			SELECT	*
 			FROM	article_sale

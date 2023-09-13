@@ -7,7 +7,7 @@
 	<!-- <resultMap id="articlesResult" type="com.ezen.board.dto.ArticleVO"> -->
 
 	
-	<resultMap id="saleArticlesResult" type="saleArticleVO">
+	<resultMap id="saleArticlesResult" type="saleArticleDTO">
 		<result property="rnum"				column="recNum"/>
 		<result property="level"			column="lvl"/>
 		<result property="articleNO"		column="articleNO"/>

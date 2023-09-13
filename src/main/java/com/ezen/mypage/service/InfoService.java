@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ezen.board.dto.BuyArticleVO;
+import com.ezen.board.dto.BuyArticleDTO;
 import com.ezen.board.dto.SearchCriteria;
 import com.ezen.mypage.dao.InfoDAO;
 
@@ -24,7 +24,7 @@ public class InfoService {
 		return infoDAO.infoListTotalCount(cri, i);
 	}
 	
-	public List<BuyArticleVO> infoListPaging(SearchCriteria cri, int i) throws Exception {
+	public List<BuyArticleDTO> infoListPaging(SearchCriteria cri, int i) throws Exception {
 		return infoDAO.infoListPaging(cri, i);
 	}
 		
