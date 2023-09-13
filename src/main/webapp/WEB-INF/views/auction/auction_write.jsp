@@ -161,7 +161,7 @@
 						 	
 						 	<br/><br/>
 							<input type="file" name="imageFileName" onchange="readAndResize(this)"><br/>
-							<input type="file" name="imageFileName" onchange="readAndResize(this)">
+							<input type="file" name="imageFileName2" onchange="readAndResize(this)">
 						</div>
 					</th>
 				<tr>
@@ -176,8 +176,8 @@
 			</table> <!-- 글쓰기 -->
 			<br/>
 			<br/>
-			<div id="submit">
-			<input class="btn btn-success" type="submit" id="submit" value="상품 올리기"/>
+			<div>
+			<input class="btn btn-success" type="submit" value="상품 올리기" onclick="disableButton(this)"/>
 			</div>
 		</form>
 		<br/>
@@ -188,20 +188,8 @@
 
 <script>
 
-	//버튼 중복클릭 방지
-	var doubleSubmitFlag = false;
-	function doubleSubmitCheck(){
-	    if(doubleSubmitFlag){
-	        return doubleSubmitFlag;
-	    }else{
-	        doubleSubmitFlag = true;
-	        return false;
-	    }
-	}
 
 	$("#submit").on("click", function() {
-		if(doubleSubmitCheck()) return;
-		
 		if($("#title").val() == "") {
 			alert("제목을 입력해주세요.");
 			$("#title").focus();
