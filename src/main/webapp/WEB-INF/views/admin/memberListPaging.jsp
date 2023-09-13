@@ -6,7 +6,6 @@
 <head>
 	<title>Home</title>
 	<%@ include file="../include/header.jsp" %>
-	<%@ include file="../include/profileModal.jsp" %>
 	<style>
 		th {
 			text-align:			center;
