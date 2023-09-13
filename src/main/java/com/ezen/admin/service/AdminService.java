@@ -45,7 +45,7 @@ public interface AdminService {
 	public List<CcenterDTO> listOneOnOne() throws Exception;
 	
 	//--------------------------------------------------------------------------------------------------
-	// 1:1 문의하기 리스트 생성
+	// 신고하기 리스트 생성
 	//--------------------------------------------------------------------------------------------------
 	public List<ReportDTO> listReportAnswer() throws Exception;
 }
