@@ -70,7 +70,7 @@ public class ChatController {
 		}
 		else if(chatListDTO.getStatus().equals("a")) {
 			System.out.println("************************************"+"여기와라66666666666666");
-			BuyArticleVO auctionDTO = chatService.findAuctionDTOFromArtNo(artNo,chatListDTO.getStatus());// 여기 dao에서 s b a 구별해서 가져옴
+			AuctionDTO auctionDTO = chatService.findAuctionDTOFromArtNo(artNo,chatListDTO.getStatus());// 여기 dao에서 s b a 구별해서 가져옴
 			System.out.println("************************************"+auctionDTO);
 			session.setAttribute("session",auctionDTO);
 		}

@@ -173,8 +173,7 @@
 						<input type="hidden" class="seller" value="${article.aucId }"/>
 						<input type="hidden" class="buyer" value="${member.userId }"/>
 						<input type="hidden" class="artNo" value="${article.aucCode }"/>
-						<input id="chat" type="button" class="btn btn-primary buyBtn" style="color:#FFFFFF;" value="채팅하기">
-						
+						<input id="chat" type="button" class="btn btn-primary buyBtn" style="color:#FFFFFF;" value="채팅하기">					
 					</c:when>
 					</c:choose>
 				</th>
