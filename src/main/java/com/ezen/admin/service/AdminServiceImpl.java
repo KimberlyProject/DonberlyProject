@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.ezen.admin.dao.AdminDAO;
 import com.ezen.ccenter.dto.CcenterDTO;
+import com.ezen.ccenter.dto.ReportDTO;
 import com.ezen.member.dto.MemberDTO;
 
 @Service
@@ -92,5 +93,13 @@ public class AdminServiceImpl implements AdminService {
 		return listOneOnOne;
 	}
 	
+	//--------------------------------------------------------------------------------------------------
+	// 신고하기 리스트 생성
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public List<ReportDTO> listReportAnswer() throws Exception {
+		List<ReportDTO> listReportAnswer = adminDAO.listReportAnswer();
+		return listReportAnswer;
+	}
 
 }
