@@ -88,12 +88,15 @@
       </ul>
       <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
     </aside>
-    <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <a href="/">홈</a> &gt;
-      <a href="/auction/auction_main">경매장</a> &gt;
-      <a href="#">경매올리기</a>
-    </div>
+    
+    <!-- 배너 -->
+	<div class="page_dir container">
+		<button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+		<a href="/">홈</a> &gt;
+		<a href="/auction/auction_main">경매장</a> &gt;
+		<a href="#">경매상품 올리기</a>
+	</div>
+	<h1 class="pageTitle"><div>경매 상품 올리기</div></h1>
     
    <%
 	//로그인 세션 없으면 로그인을 먼저 하도록 한다.
@@ -151,13 +154,14 @@
 					</th>
 				</tr>
 				<tr>
-					<th class="cate">사진첨부<br/><br/><br/><br/><br/>
+					<th class="cate">사진첨부<br/><br/><br/><br/><br/><br/><br/>
 						<input id="imgAdd" type="button" value="사진 추가" onClick="fn_addFiles()"/>
 					</th>	
 					<th>
-						<div id="d_file" style="overflow-y: scroll; height: 150px; max-height: 200px;">
+						<div id="d_file" style="overflow-y: scroll; height: 200px; ">
 						 	<span id="imgInfo"> 
-						 	첫번째 사진이 썸네일로 설정됩니다.<br/> 원활한 경매 진행을 최소 2장 이상의 사진을 올려주세요. &nbsp;&nbsp;</span>
+						 	첫번째 사진이 썸네일로 설정됩니다.<br/> 원활한 경매 진행을 최소 2장 이상의 사진을 올려주세요.<br/>
+						 	사진이 없을 시 입찰자 없이 경매가 종료될 수 있습니다.</span>
 						 	
 						 	<br/><br/>
 							<input type="file" name="imageFileName" onchange="readAndResize(this)"><br/>

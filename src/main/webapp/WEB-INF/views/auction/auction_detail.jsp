@@ -59,13 +59,17 @@
 		.saleBtn {
 			width: 100px;
 		}
-		#aaa {
+		.green {
 			font-style: bold;
 			color: green;
 		}
-		#bbb {
+		.orange {
 			font-style: bold;
 			color: orange;
+		}
+		.red {
+			font-style: bold;
+			color: red;
 		}
 		#imgnull {
 			text-align: center;
@@ -79,6 +83,13 @@
 			heigth: 300px;
 		}
 	
+		
+      	#aucImg {
+      		width: 240px;
+      		text-align: center;
+      		vertical-align: middle;
+      	}
+     
 	</style>
 </head>
 <body>
@@ -126,7 +137,7 @@
 				<!-- 사진이 있는 경우 -->
 				<c:choose>
 				<c:when test="${imgs != null}">
-					<th  rowspan="7" id="aucImg"><!-- 롤링이미지 -->
+					<th rowspan="7" id="aucImg"><!-- 롤링이미지 -->
 					    <div id="myCarousel" class="carousel slide" data-ride="carousel">
 					        <!--인디케이터-->
 					        <ol class="carousel-indicators">
@@ -166,7 +177,7 @@
 			<tr> <!-- 판매자 -->
 				<th class="cate">판매자</th>
 				<th class="colon">:</th>
-				<th colspan="4">${article.aucNick}님
+				<th colspan="4">[${article.aucNick}]님
 					<c:choose>
 
 					<c:when test="${member.userId != article.aucId}"> <!-- 판매자와 채팅하기 -->
@@ -179,11 +190,10 @@
 				</th>
 			</tr>
 			<tr><!-- 현재입찰가 -->
-				<th class="cate">현재입찰가</th>
+				<th class="cate">현재입찰가<c:choose><c:when test="${article.cstmId != null}"><br/>[${article.cstmId}]님&nbsp;&nbsp;</c:when></c:choose></th>
 				<th class="colon">:</th>
 				<th colspan="4">
-					<c:choose><c:when test="${article.cstmId != null}">[${article.cstmId}]님&nbsp;&nbsp;</c:when></c:choose>
-					<fmt:formatNumber type="number" value="${article.nowBid}" pattern="#,##0"/> 원
+					<span class="green"><fmt:formatNumber type="number" value="${article.nowBid}" pattern="#,##0"/> 원</span>
 					<c:choose>
 					<c:when test="${member.userId != article.aucId}">
 						<input id="tryBid" type="button" class="btn btn-success buyBtn" style="color:#FFFFFF;" value="입찰하기">  														
@@ -191,7 +201,7 @@
 					</c:choose>
 					<c:choose>
 					<c:when test="${member.userId == article.aucId && article.cstmId != null}">
-						<input id="saleNow" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="바로판매">
+						<input id="saleNow" type="button" class="btn btn-success saleBtn" style="color:#FFFFFF;" value="바로판매">
 					</c:when>
 					</c:choose>
 				</th>
@@ -204,7 +214,8 @@
 			<tr><!-- 상한금액 -->
 				<th class="cate">상한금액</th>
 				<th class="colon">:</th>
-				<th colspan="4"><fmt:formatNumber type="number" value="${article.maxPrice}" pattern="#,##0"/> 원
+				<th colspan="4">
+					<span class="orange"><fmt:formatNumber type="number" value="${article.maxPrice}" pattern="#,##0"/> 원</span>
 					<c:choose>
 					<c:when test="${member.userId != article.aucId}">
 						<input id="buyNow" type="button" class="btn btn-warning buyBtn" style="color:#FFFFFF;" value="바로구매">
@@ -215,7 +226,7 @@
 			<tr><!-- 경매기간 -->
 				<th class="cate">마감기한</th>
 				<th class="colon">:</th>
-				<th colspan="4">${article.deadline}
+				<th colspan="4"><span class="red">${article.deadline}</span>
 					<c:choose>
 					<c:when test="${member.userId == article.aucId && article.cstmId == null}">
 						<input id="auctionOff" type="button" class="btn btn-danger saleBtn" style="color:#FFFFFF;" value="경매취소">  																			
@@ -232,7 +243,7 @@
 			</tr>
 			<tr>	
 				<th id="textbox" colspan="4">
-					<div id="textBox">
+					<div id="textBox" style="overflow-y: hidden; height: 300px;">
 						${article.content}
 					</div>
 				</th>
