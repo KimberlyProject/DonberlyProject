@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.io.PrintWriter" %>
+ <%@ page import="java.io.*" %>
+    <%@ page session="true" %>
 <!DOCTYPE html>
 <html>
 
@@ -58,12 +59,9 @@
 	}
 %>
 
-<div id="content-wrapper">
-
-
     <div class="page_dir container">
 
-<c:set var="menu" value="ccenter" />
+	<c:set var="menu" value="ccenter" />
 <%@ include file="../include/sidebar.jsp" %>
      <div class="page_dir container">
 
@@ -106,14 +104,9 @@
                     </td>
                 </tr>
             </table>
-        </form>
-        
-       
-        
-        
+        </form>    
     </div> 
-  </div>
-<%@ include file="../include/footer.jsp" %>
+</div>
 
 <script>
 	$(document).ready(function() {
@@ -141,6 +134,7 @@
 
 
 
+<%@ include file="../include/footer.jsp" %>
 </body>
 </html>
 

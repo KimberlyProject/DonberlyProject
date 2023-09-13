@@ -79,10 +79,8 @@
 		<div class="row" style="vertical-align: middle; float:right;">
 			<select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
 				<option value="a" <c:if test="{searchType} == 'a'">selected</c:if>>전체</option>
-				<option value="t" <c:if test="{searchType} == 't'">selected</c:if>>제목</option>
-				<option value="c" <c:if test="{searchType} == 'c'">selected</c:if>>내용</option>
-				<option value="w" <c:if test="{searchType} == 'w'">selected</c:if>>작성자</option>
-				<option value="p" <c:if test="{searchType} == 'p'">selected</c:if>>상품번호</option>
+				<option value="b" <c:if test="{searchType} == 'b'">selected</c:if>>제목</option>
+				<option value="c" <c:if test="{searchType} == 'c'">selected</c:if>>작성자</option>
 			</select>
 			<input  class="col-sm-2 searchgroup form-control" type="text" class="form-control" style="width:200px;" placeholder="검색하기">
 			<button id ="searchbtn" class="btn btn-success" type="button">

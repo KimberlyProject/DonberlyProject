@@ -59,9 +59,7 @@
 		ORDER BY 	articleNo desc
 	</select>
 	
-	
-	
-	
+
 	<select id="selectMember" resultType="com.ezen.member.dto.MemberDTO">
 		SELECT	* 
 		FROM	members

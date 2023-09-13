@@ -30,6 +30,7 @@
 </style>
 
 </head>
+
 <body>
 
 <%@ include file="../include/topMenu.jsp" %>
@@ -55,21 +56,11 @@
 		// response.sendRedirect("/member/login");
 	}
 %>
-
-   <aside id="sideMenu">
-      <ul>
-        <li><a href="./notice">공지사항</a></li>
-        <li><a href="./qna">Q & A</a></li>
-        <li><a href="./askOnetoOne">1:1 문의하기</a></li>
-        <li><a href="./report">신고하기</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
     
     <div class="page_dir container">
 
 	<c:set var="menu" value="ccenter" />
-	<%@ include file="../include/sidebar.jsp" %>
+<%@ include file="../include/sidebar.jsp" %>
      <div class="page_dir container">
 
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
@@ -108,7 +99,7 @@
             </table>
         </form>
     </div>
-
+</div>
 
 <script>
 	$(document).ready(function() {
