@@ -128,7 +128,7 @@ public class BoardDAO {
 	
 	
 	public void saleUpdateArticle(Map articleMap) throws DataAccessException {
-		sqlSession.update(namespace + ".saleupdateArticle", articleMap);
+		sqlSession.update(namespace + ".saleUpdateArticle", articleMap);
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------

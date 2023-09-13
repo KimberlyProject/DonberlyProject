@@ -261,7 +261,7 @@ public class BoardController {
 		
 		String thumbnail = null;
 		Iterator<String> fileNames = multipartRequest.getFileNames();
-		
+			System.out.println("------------fileNames ==> " + fileNames);
 		while(fileNames.hasNext()) {
 			String fileName = fileNames.next();
 			MultipartFile mFile	= multipartRequest.getFile(fileName);
@@ -426,13 +426,16 @@ public class BoardController {
 			articleMap.put(name, value);
 		}
 		
+		
 		String thumbnail	= upload(multipartRequest);
 		articleMap.put("thumbnail", thumbnail);
+		
+		System.out.printf("1thumbnail : %s", thumbnail);
 		
 		String 	articleNO	= (String) articleMap.get("articleNO");
 		String	message;
 		
-		System.out.printf("thumbnail : %s", thumbnail);
+		System.out.printf("2thumbnail : %s", thumbnail);
 		
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
