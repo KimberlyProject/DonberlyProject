@@ -156,21 +156,19 @@
 			<table class="table table-bordered table-striped" id="ta">
 		    <c:forEach var="article" items="${articles}" varStatus="articleNum">
 		        <tr>
-		            <c:set var="firstImg" value="false" /> <!-- 첫 번째 이미지를 출력했는지 여부를 나타내는 변수 -->
-		            <c:forEach var="img" items="${imgs}" varStatus="imgNum">  
-		                <c:if test="${img.aucCode && !firstImg}">
+		           <c:forEach var="img" items="${imgs[articleNum.index]}" varStatus="imgNum"> <!-- 이중리스트 -->
+		            <c:if test="${article.aucCode == img.aucCode}">
 		                    <th rowspan="4" class="innerimg">
 		                        <div class="item">
 		                            <c:choose><c:when test="${img.imgName == null}">
 					       				<div><br><br/><br/><br/><p id="imgNull">등록된 사진이 없습니다.</p></div>
 					               	</c:when></c:choose>
 					               	<c:choose><c:when test="${img.imgName != null}">
-		                            <img id="i" src="${path}/auction/pullAuctionImges?imgName=${img.imgName}&aucCode=${img.aucCode}"/>
+					               	<img id="i" src="${path}/auction/pullAuctionImges?imgName=${img.imgName}&aucCode=${img.aucCode}"/>
 					               	</c:when></c:choose>
 		                        </div>
-		                    </th>
-		                    <c:set var="firstImg" value="true" /> <!-- 첫 번째 이미지를 출력한 후 변수 값을 변경 -->
-		               	</c:if>
+		                    </th>    
+                    </c:if>	
 		            </c:forEach>
 					<th class="cate">제목</th><th class="colon">:</th><th colspan="4">${article.title}</th>
 					<th rowspan="4" id="detailarea">

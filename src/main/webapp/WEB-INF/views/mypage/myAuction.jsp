@@ -66,7 +66,9 @@
         .gray {
         	color: gray;
         }
-      
+      	.saleBtn {
+      		width: 100px;
+      	}
      
 
 	</style>
@@ -214,12 +216,15 @@
 							<th clospan="4"><span class="blue">입찰 진행중</span>
 								<c:choose><c:when test="${article.cstmId != null}">
 									&nbsp;&nbsp;&nbsp;[${article.cstmId}]님
+									<input id="chat" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="채팅하기">		
 								</c:when></c:choose>
 							</th>
 						</c:when></c:choose>
 						<!-- 판매 완료 orange-->
 						<c:choose><c:when test="${article.status == 1}">
-							<th colspan="4"><span id="gray"><span class="gray">판매완료</span>&nbsp;&nbsp;&nbsp;[${article.cstmId}]님</span></th>
+							<th colspan="4"><span id="gray"><span class="gray">판매완료</span>&nbsp;&nbsp;&nbsp;[${article.cstmId}]님</span>
+							<input id="chat" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="채팅하기">
+							</th>
 						</c:when></c:choose>	
 				</tr>
 				</c:when>

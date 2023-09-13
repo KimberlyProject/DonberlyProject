@@ -63,13 +63,14 @@ public class AuctionController {
 	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("경매장 메인 리스트불러오기 컨트롤러");
 		String viewName = (String) request.getAttribute("viewName");
-		List<AuctionDTO> articles	= auctionService.listArticles(); //게시글 여러개 forEach문으로 출력
+	
+		
+		List<AuctionDTO> articles	= auctionService.listArticles();; //게시글 여러개 forEach문으로 출력
 		List<AucImgDTO> imgs = auctionService.listArticlesImg(); //이미지 여러개 forEach문으로 출력
 		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("articles", articles);	
 		mav.addObject("imgs", imgs);
-
 		return mav;
 	}	
 	
@@ -162,7 +163,9 @@ public class AuctionController {
 		HttpSession session = req.getSession();
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		String aucId = memberDTO.getUserId(); //여기 오류는 로그인이 안된것!
+		String aucNick = memberDTO.getNickname();
 		articleMap.put("aucId", aucId);
+		articleMap.put("aucNick", aucNick);
 		articleMap.put("minPrice", minPrice);
 		articleMap.put("maxPrice", maxPrice);
 		System.out.println("세션이랑 멤버디티오 실행" + aucId);
