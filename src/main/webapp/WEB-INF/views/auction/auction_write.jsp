@@ -110,12 +110,11 @@
 		
 	<div class="container">
 		<form id="formgroup" name="aucArticle" method="post" action="${path}/auction/addNewArticle" enctype="multipart/form-data">
-			<input type="hidden" name="aucId" ${member.userId}/>
 			<!-- 글쓰기 -->
 			<table id="tb1" class="row table table-bordered table-striped">
 				<tr><!-- 사진, 제목 -->  
 					<th class="cate">제목</th> 
-					<th colspan="2"><input id="title" type="text" maxlength="500" name="title" placeholder="예) 상품명"> &nbsp;&nbsp;&nbsp; 판매자 [${member.userId}] 님</th>
+					<th colspan="2"><input id="title" type="text" maxlength="500" name="title" placeholder="예) 상품명"> &nbsp;&nbsp;&nbsp; 판매자 [${member.nickname}] 님</th>
 				<tr> <!-- 최소금액 -->
 					<th id="minprice" class="cate">최소 금액</th>					
 					<th colspan="2"><input id="minPrice" class="commas" onkeyup="addCommas(this)" type="text" maxlength="10" name="minPrice" placeholder="숫자만 입력하세요">원</th>

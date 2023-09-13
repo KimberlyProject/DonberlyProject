@@ -163,7 +163,9 @@ public class AuctionController {
 		HttpSession session = req.getSession();
 		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
 		String aucId = memberDTO.getUserId(); //여기 오류는 로그인이 안된것!
+		String aucNick = memberDTO.getNickname();
 		articleMap.put("aucId", aucId);
+		articleMap.put("aucNick", aucNick);
 		articleMap.put("minPrice", minPrice);
 		articleMap.put("maxPrice", maxPrice);
 		System.out.println("세션이랑 멤버디티오 실행" + aucId);

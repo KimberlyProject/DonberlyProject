@@ -191,7 +191,7 @@
 					</th>
 				</tr>
 				<tr>
-					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">[${article.aucId}]님</th>
+					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">[${article.aucNick}]님</th>
 				</tr>
 				<tr>
 					<th class="cate">현재 입찰가</th><th class="colon">:</th>
@@ -226,7 +226,8 @@
 						</c:when></c:choose>
 						<!-- 판매 완료 gray-->    <!-- 마감지났는데 입찰중인 경우 -->
 						<c:choose><c:when test="${article.status == 1 || (article.deadline < today && article.cstmId != null)}">
-							<th colspan="4"><span class="gray"><span class="gray">판매완료</span>&nbsp;&nbsp;&nbsp;[${article.cstmId}]님</span></th>
+							<th colspan="4"><span class="gray"><span class="gray">판매완료</span>&nbsp;&nbsp;&nbsp;[${article.cstmId}]님</span>
+							</th>
 						</c:when></c:choose>	
 						<!-- 경매 종료 gray-->    <!-- 마감지났는데 입찰안된 경우 -->
 						<c:choose><c:when test="${article.deadline < today && article.cstmId == null}">

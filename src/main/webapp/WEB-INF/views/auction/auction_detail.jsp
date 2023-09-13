@@ -166,7 +166,7 @@
 			<tr> <!-- 판매자 -->
 				<th class="cate">판매자</th>
 				<th class="colon">:</th>
-				<th colspan="4">${article.aucId}님
+				<th colspan="4">${article.aucNick}님
 					<c:choose>
 					<c:when test="${member.userId != article.aucId}"> <!-- 판매자와 채팅하기 -->
 						<input id="chat" type="button" class="btn btn-primary buyBtn" style="color:#FFFFFF;" value="채팅하기">
@@ -267,7 +267,7 @@ $(document).ready(function () {
 		//구매자 입찰하기
 		$("#tryBid").on("click", function() {
 			var aucCode = ${article.aucCode};
-			var cstmId = "${member.userId}";
+			var cstmId = "${member.nickname}";
 			var price = ${article.nowBid + article.bidRate};
 			
 			if(confirm(price + "원으로 입찰하시겠습니까? 입찰 후 판매자가 경매를 종료하면 즉시 구매가 진행됩니다.")) {
@@ -281,7 +281,7 @@ $(document).ready(function () {
 		//구매자 상한가구매하기
 		$("#buyNow").on("click", function() {
 			var aucCode = ${article.aucCode};
-			var cstmId = "${member.userId}";
+			var cstmId = "${member.nickname}";
 			var price = ${article.maxPrice};
 			if(confirm("상한가 " + price + "원에 바로 구매하시겠습니까? 경매가 종료되면 취소할 수 없습니다.")) {
 				location.href = "/auction/buyNow?aucCode=" + aucCode + "&cstmId=" + cstmId + "&maxPrice=" + price;
