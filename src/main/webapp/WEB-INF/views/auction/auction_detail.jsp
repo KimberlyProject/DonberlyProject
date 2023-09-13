@@ -265,12 +265,10 @@ $(document).ready(function () {
 		    if(confirm(cstmId + "님에게 " + price + "원에 판매하시겠습니까? 거래가 완료되면 취소할 수 없습니다.")) {
 		        location.href = "/auction/saleNow?aucCode=" + aucCode + "&cstmId=" + cstmId;
 		        alert("판매가 완료되었습니다.");
-<<<<<<< HEAD
 		       return;
-=======
+
 		    } else {
 		    	return;
->>>>>>> d9db979c8a030158493b991bcaff962f8d1db76b
 		    }
 		});//#saleNow
 		
