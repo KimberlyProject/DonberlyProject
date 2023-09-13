@@ -116,7 +116,7 @@
             <li><h3>작성자 : <input type="text" class="line" maxlength="50" id="nickname" name="nickname" value="${member.nickname }" readonly/></h3> </li>
          </ul>
          <ul class="item">
-            <li>상품 : &nbsp;<input type="text" class="a"  maxlength="20" name="title" /></li>
+            <li><c:out value="${boardInfo.brdmemo}" escapeXml="false"/>상품 : &nbsp;<input type="text" class="a"  maxlength="20" name="title" /></li>
          </ul>
          <ul class="item">
 			<li>가격 : &nbsp;<input type="text" class="a" id="price" maxlength="10" name="price"/>원</li>
