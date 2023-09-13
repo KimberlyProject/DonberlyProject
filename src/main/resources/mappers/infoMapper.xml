@@ -5,7 +5,7 @@
 <mapper namespace="com.ezen.board.mappers.infoMapper">
 
 	<!-- <resultMap id="articlesResult" type="com.ezen.board.dto.ArticleVO"> -->
-	<resultMap id="articlesResult" type="buyArticleVO">
+	<resultMap id="articlesResult" type="buyArticleDTO">
 		<result property="rnum"				column="recNum"/>
 		<result property="level"			column="lvl"/>
 		<result property="articleNO"		column="articleNO"/>

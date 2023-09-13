@@ -12,7 +12,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 
-import com.ezen.board.dto.BuyArticleVO;
+import com.ezen.board.dto.BuyArticleDTO;
 
 import com.ezen.auction.dto.AuctionDTO;
 
@@ -50,7 +50,7 @@ public class ChatDAOImpl implements ChatDAO {
 	}
 
 	@Override
-	public List<BuyArticleVO> getArtDTO(int artNo) throws Exception {
+	public List<BuyArticleDTO> getArtDTO(int artNo) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".getArticle", artNo);
 	}
@@ -117,7 +117,7 @@ public class ChatDAOImpl implements ChatDAO {
 	}
 
 	@Override
-	public BuyArticleVO findArticleVOFromArtNo(int artNo,String status) throws Exception {
+	public BuyArticleDTO findArticleVOFromArtNo(int artNo,String status) throws Exception {
 		if(status.equals("s")) {
 			return sqlSession.selectOne(namespace+".findArticleVOFromArtNoS",artNo);
 			
@@ -153,7 +153,7 @@ public class ChatDAOImpl implements ChatDAO {
 	}
 
 	@Override
-	public List<BuyArticleVO> findAllMemeber() throws Exception {
+	public List<BuyArticleDTO> findAllMemeber() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".findAllMemeber");
 	}

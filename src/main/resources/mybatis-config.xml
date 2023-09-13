@@ -6,8 +6,8 @@
 	<typeAliases>		
 		<typeAlias type="com.ezen.chat.dto.ChatListDTO" alias="chatListDTO"/>
 		<typeAlias type="com.ezen.chat.dto.ChatDTO" alias="chatDTO"/>
-		<typeAlias type="com.ezen.board.dto.BuyArticleVO"	alias="buyArticleVO"/>
-		<typeAlias type="com.ezen.board.dto.SaleArticleVO"	alias="saleArticleVO"/>
+		<typeAlias type="com.ezen.board.dto.BuyArticleDTO"	alias="buyArticleDTO"/>
+		<typeAlias type="com.ezen.board.dto.SaleArticleDTO"	alias="saleArticleDTO"/>
 		<typeAlias type="com.ezen.auction.dto.AuctionDTO" alias="auctionDTO"/>
 		<typeAlias type="com.ezen.auction.dto.AucImgDTO" alias="aucImgDTO"/>
 		<typeAlias type="com.ezen.member.dto.MemberDTO" alias="memberDTO"/>

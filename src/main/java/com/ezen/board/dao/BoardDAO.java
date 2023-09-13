@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.ezen.board.dto.BuyArticleVO;
+import com.ezen.board.dto.BuyArticleDTO;
 
-import com.ezen.board.dto.SaleArticleVO;
+import com.ezen.board.dto.SaleArticleDTO;
 import com.ezen.board.dto.SearchCriteria;
 
 //-----------------------------------------------------------------------------------------------------------
@@ -97,11 +97,11 @@ public class BoardDAO {
 	// 게시글 번호에 해당하는 상세 정보
 	//-----------------------------------------------------------------------------------------------------------
 	
-	public BuyArticleVO selectArticle(int articleNO) throws DataAccessException {
+	public BuyArticleDTO selectArticle(int articleNO) throws DataAccessException {
 		return sqlSession.selectOne(namespace + ".selectArticle", articleNO);
 	}
 	
-	public SaleArticleVO saleSelectArticle(int articleNO) throws DataAccessException {
+	public SaleArticleDTO saleSelectArticle(int articleNO) throws DataAccessException {
 		return sqlSession.selectOne(namespace + ".saleSelectArticle", articleNO);
 	}
 
@@ -128,7 +128,7 @@ public class BoardDAO {
 	
 	
 	public void saleUpdateArticle(Map articleMap) throws DataAccessException {
-		sqlSession.update(namespace + ".saleupdateArticle", articleMap);
+		sqlSession.update(namespace + ".saleUpdateArticle", articleMap);
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -148,12 +148,12 @@ public class BoardDAO {
 	// 게시글 목록 가져오기 (Paging)
 	//-----------------------------------------------------------------------------------------------------------
 	
-	public List<BuyArticleVO> boardListPaging(SearchCriteria cri) throws DataAccessException {
+	public List<BuyArticleDTO> boardListPaging(SearchCriteria cri) throws DataAccessException {
 		return sqlSession.selectList(namespace + ".boardListPaging", cri);
 	}
 
 	
-	public List<SaleArticleVO> saleBoardListPaging(SearchCriteria cri) throws DataAccessException {
+	public List<SaleArticleDTO> saleBoardListPaging(SearchCriteria cri) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace + ".saleBoardListPaging", cri);
 	}

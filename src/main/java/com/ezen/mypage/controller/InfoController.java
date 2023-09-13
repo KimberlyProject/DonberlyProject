@@ -18,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ezen.board.dto.BuyArticleVO;
+import com.ezen.board.dto.BuyArticleDTO;
 import com.ezen.board.dto.PageMaker;
 import com.ezen.board.dto.SearchCriteria;
 import com.ezen.mypage.service.InfoService;
@@ -35,7 +35,7 @@ public class InfoController {
 	@Autowired	
 	private InfoService infoService;
 	@Autowired	
-	private BuyArticleVO artivleVO;
+	private BuyArticleDTO artivleVO;
 	
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ public class InfoController {
 			logger.info("게시물의 총 건수 : " + pageMaker.getTotalCount());
 			
 			// 화면에 출력할 데이터를 가져온다.
-			List<BuyArticleVO> list = infoService.infoListPaging(cri, i);
+			List<BuyArticleDTO> list = infoService.infoListPaging(cri, i);
 			System.out.println("리스트:" + i + list);
 			
 			// pageMaker의 정보를 콘솔에 보여준다.

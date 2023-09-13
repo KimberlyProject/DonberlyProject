@@ -98,7 +98,7 @@
 				<div class="grid-second">
 					<input type="hidden" value="${article.articleNO }" name="articleNO"/>
 					<input type="hidden" value="${article.p_code }" name="p_code"/>
-					<input type="hidden"   value="${article.nickname }" name="writer"/>
+					<input type="hidden"   value="${article.nickname }" name="nickname"/>
 					<input type="hidden" value="${article.purpose }" name="purpose"/>
 					
 					<ul class="item">
@@ -106,11 +106,12 @@
 						<li><h2><input type="text" class="line"  value="${article.title }" name="title" id="i_title" disabled/></h2><li>
 					</ul> 
 					<ul class="item">
-						<li><input id="i_price" type="text" class="line" value="${article.price }" name="price" disabled/>원
+						<li>가격 : <input id="i_price" type="text" class="line" width=10px; value="${article.price }" name="price" disabled/>원
 						</li>
 					</ul>
 					<ul class="item">
-						<li>작성자 : ${article.nickname }<li>
+						<li>작성자 : <input id="i_price" type="text" class="line" width=10px; value="${article.nickname }" disabled/>
+						<li>
 						
 					</ul>
 					
@@ -126,11 +127,6 @@
 						<li>
 						
 					</ul> 
-					
-					<ul class="item">
-						<li>조회수<li>
-						<li><input type="text" class="line"  value="${article.view }" name="view" id="i_view" disabled><li>
-					</ul>
 					
 					<ul class="item" id="trBtn_modify">
 						<li>

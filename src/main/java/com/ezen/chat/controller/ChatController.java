@@ -23,7 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-import com.ezen.board.dto.BuyArticleVO;
+import com.ezen.board.dto.BuyArticleDTO;
 
 import com.ezen.auction.dto.AuctionDTO;
 
@@ -64,7 +64,7 @@ public class ChatController {
 		//아티클 넘버로 아티클VO 가져오기
 
 		if(chatListDTO.getStatus().equals("s") || chatListDTO.getStatus().equals("b")) {
-			BuyArticleVO articleVO = chatService.findArticleVOFromArtNo(artNo,chatListDTO.getStatus()); // 여기 dao에서 s b a 구별해서 가져옴
+			BuyArticleDTO articleVO = chatService.findArticleVOFromArtNo(artNo,chatListDTO.getStatus()); // 여기 dao에서 s b a 구별해서 가져옴
 			System.out.println("************************************"+articleVO);
 			session.setAttribute("session",articleVO);			
 		}
@@ -112,8 +112,8 @@ public class ChatController {
 	}
 	
 	//값으로 articleDTO가져오기
-	public List<BuyArticleVO> getArtDTO(int artNo)  throws Exception{
-		List<BuyArticleVO> articleList = chatService.getArtDTO(artNo);
+	public List<BuyArticleDTO> getArtDTO(int artNo)  throws Exception{
+		List<BuyArticleDTO> articleList = chatService.getArtDTO(artNo);
 		System.out.println("######################"+articleList);
 		return articleList;
 	}
@@ -137,7 +137,7 @@ public class ChatController {
 		//System.out.println("채팅 리스트*******************"+lastchat);
 		
 		//닉네임 찾기
-		List<BuyArticleVO> memberList = chatService.findAllMemeber();
+		List<BuyArticleDTO> memberList = chatService.findAllMemeber();
 		
 		System.out.println(memberList);
 		ModelAndView mav = new ModelAndView(viewName);
