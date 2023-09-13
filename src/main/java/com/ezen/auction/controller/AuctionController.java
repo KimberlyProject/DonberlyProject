@@ -56,6 +56,14 @@ public class AuctionController {
 	@Inject
 	private AuctionService auctionService;
 
+	
+	//-------------------------------------------------------------------------------------------------------------//
+	//경매장 이용방법
+	@RequestMapping(value="/howToUse", method=RequestMethod.GET)
+	public String howToUseAuction(Model model) {
+		return "/auction/howToUse";
+	}
+	
 	//-------------------------------------------------------------------------------------------------------------//
 	
 	//메인페이지 게시글 리스트 전부 불러오기
