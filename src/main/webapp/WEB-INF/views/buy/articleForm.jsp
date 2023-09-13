@@ -40,8 +40,7 @@
       
       .con {
          display: grid;
-         grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-         gap: 1px;
+         
       }
       .image {
         display: grid;
@@ -104,7 +103,7 @@
          <ul class= "item">
             <li>이미지파일 첨부:  </li>
             <li>
-            <img  id="preview" src="#" style="border-radius: 50%; "  width=350 height=350/>
+            <img  id="preview" src="#"   width=350 height=350/>
               <%--  이미지를 2개 이상 올릴 때 사용한다.  --%>
               <input type="file" name="imageFileName"  onchange="readURL(this);" /><br/>
             </li>
@@ -123,7 +122,7 @@
 		</ul>
          <ul class="item">
             <li>사고자 하는 것에 대해</li>
-            <li><textarea name="content" rows="3" cols="35" maxlength="4000"></textarea></li>
+            <li><textarea name="content" rows="6" cols="35" maxlength="4000"></textarea></li>
          </ul>
          <ul class="item">
             <li> </li>
