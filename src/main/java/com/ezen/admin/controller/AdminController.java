@@ -2,6 +2,7 @@ package com.ezen.admin.controller;
 
 import java.util.List;
 
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ezen.admin.service.AdminService;
 import com.ezen.ccenter.dto.CcenterDTO;
 import com.ezen.ccenter.dto.ReportDTO;
+import com.ezen.admin.dto.PageMaker;
+import com.ezen.admin.dto.SearchCriteria;
 import com.ezen.member.dto.MemberDTO;
 
 
@@ -82,21 +85,35 @@ public class AdminController {
 	}
 	
 	//--------------------------------------------------------------------------------------------------
-	// 회원 전체 조회
+	// 회원 전체 조회 + 페이징 + 검색
 	//--------------------------------------------------------------------------------------------------
-	@RequestMapping(value="/memberList", method=RequestMethod.GET)
-	public String getMemberList(Model model) throws Exception {
-		System.out.println("회원목록 화면 접속!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	@RequestMapping(value="/memberList", method={RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView memberListPaging(HttpServletRequest request, HttpServletResponse response, SearchCriteria cri) throws Exception {
+			
+		String viewName = (String)request.getAttribute("viewName");
 		
-		List<MemberDTO> memberList = adminService.selectMember();
-		System.out.println("회원목록 화면 접속 memberList ==> " + memberList);
+		ModelAndView	mav			= new ModelAndView(viewName);
 		
-		// 찾아온 데이터를 Model에 담아 View로 보낸다.
-		model.addAttribute("memberList", memberList);
+		PageMaker		pageMaker	= new PageMaker();
+		pageMaker.setCri(cri);
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ cri ==> " + cri);
+		// cri를 가지고 검색한 총 건수를 TotalCount 변수에 저장한다.
+		pageMaker.setTotalCount(adminService.memberListTotalCount(cri));	
+		logger.info("게시물의 총 건수 : " + pageMaker.getTotalCount());
+		
+		// 화면에 출력할 데이터를 가져온다.
+		List<MemberDTO> list = adminService.memberListPaging(cri);
 
 		
-		return "/admin/memberList";
-	} // End - public String getMemberList(Model model) throws Exception
+		// pageMaker의 정보를 콘솔에 보여준다.
+		System.out.println("################################ pageMaker ==> " + pageMaker);
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ list ==> " + list);
+		mav.addObject("memberList",		list);
+		mav.addObject("pageMaker",		pageMaker);
+		mav.addObject("cri",			cri);
+		
+		return mav;
+	}
 	
 	//--------------------------------------------------------------------------------------------------
 	// 회원아이디에 대한 상세 정보 조회
@@ -155,4 +172,5 @@ public class AdminController {
 		return "redirect:/admin/memberList";
 	}
 	
+
 }

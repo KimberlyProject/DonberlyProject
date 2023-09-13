@@ -69,10 +69,6 @@
     </div>
     <h1 class="pageTitle"><div>공지사항</div></h1>
 	<div class="container">
-		<!-- 글쓰기버튼 -->
-		<div>
-			<button class="btn btn-success col-sm-1" style="float:left; ">글쓰기</button>
-		</div>
 		<!-- 검색창 -->
 		<div class="row" style="vertical-align: middle; float:right;">
 			<select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
@@ -98,47 +94,14 @@
 			<tbody>
 				<tr>
 					<td>1</td>
-					<td class="title">GRAND OPEN!</td>
+					<td class="title">Donberly w1.0 GRAND OPEN!</td>
 					<td>admin1234</td>
 					<td>2023.08.23</td>
 				</tr>
 				<tr>
 					<td class="content" colspan="4">
-						우리 오픈했어요 짝짝짝!!!<br/>
-						축하해주세요!!
-					</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td class="title">공지사항 입니다.</td>
-					<td>admin1234</td>
-					<td>2023.08.23</td>
-				</tr>
-				<tr>
-					<td class="content" colspan="4">
-						누르지 마세요!!
-					</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td class="title">공지사항 입니다.</td>
-					<td>admin1234</td>
-					<td>2023.08.23</td>
-				</tr>
-				<tr>
-					<td class="content" colspan="4">
-						내용이 없어서
-					</td>
-				</tr>
-				<tr>
-					<td>4</td>
-					<td class="title">공지사항 입니다.</td>
-					<td>admin1234</td>
-					<td>2023.08.23</td>
-				</tr>
-				<tr>
-					<td class="content" colspan="4">
-						부끄러워욧!
+						Donberly w1.0이 오픈되었습니다!!!<br/>
+						많은 이용 부탁드립니다!!!
 					</td>
 				</tr>
 			</tbody>

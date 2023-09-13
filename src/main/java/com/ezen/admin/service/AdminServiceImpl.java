@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.ezen.admin.dao.AdminDAO;
 import com.ezen.ccenter.dto.CcenterDTO;
 import com.ezen.ccenter.dto.ReportDTO;
+import com.ezen.admin.dto.Criteria;
 import com.ezen.member.dto.MemberDTO;
 
 @Service
@@ -100,6 +101,24 @@ public class AdminServiceImpl implements AdminService {
 	public List<ReportDTO> listReportAnswer() throws Exception {
 		List<ReportDTO> listReportAnswer = adminDAO.listReportAnswer();
 		return listReportAnswer;
+	}
+
+	//--------------------------------------------------------------------------------------------------
+	// cri를 가지고 검색한 총 건수의 전체 게시글 수 구하기(paging 처리)
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public int memberListTotalCount(Criteria cri) throws Exception {
+		return adminDAO.memberListTotalCount(cri);
+		
+	}
+
+	//--------------------------------------------------------------------------------------------------
+	// 게시글 목록 가져오기(paging)
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public List<MemberDTO> memberListPaging(Criteria cri) throws Exception {
+		return adminDAO.memberListPaging(cri);
+		
 	}
 
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ezen.ccenter.dto.CcenterDTO;
 import com.ezen.ccenter.dto.ReportDTO;
+import com.ezen.admin.dto.Criteria;
 import com.ezen.member.dto.MemberDTO;
 
 @Repository
@@ -80,6 +81,24 @@ public class AdminDAOImpl implements AdminDAO {
 		logger.info("회원 3일 정지 DAO ==> " + userId);
 		sqlSession.insert(namespace + ".Psuspension", userId);
 		
+	}
+
+	//--------------------------------------------------------------------------------------------------
+	// cri를 가지고 검색한 총 건수의 전체 게시글 수 구하기(paging 처리)
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public int memberListTotalCount(Criteria cri) throws Exception {
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ cri ==> " + cri);
+		return sqlSession.selectOne(namespace + ".memberListTotalCount", cri);
+	}
+
+	//--------------------------------------------------------------------------------------------------
+	// 게시글 목록 가져오기(paging)
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public List<MemberDTO> memberListPaging(Criteria cri) throws Exception {
+		System.out.println("###################### cri ==> " + cri);
+		return sqlSession.selectList(namespace + ".memberListPaging", cri);
 	}
 	
 	//--------------------------------------------------------------------------------------------------
