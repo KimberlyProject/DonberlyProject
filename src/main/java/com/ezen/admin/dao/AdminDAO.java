@@ -2,6 +2,7 @@ package com.ezen.admin.dao;
 
 import java.util.List;
 
+import com.ezen.admin.dto.Criteria;
 import com.ezen.member.dto.MemberDTO;
 
 public interface AdminDAO {
@@ -35,4 +36,15 @@ public interface AdminDAO {
 	// 회원 영구 정지
 	//--------------------------------------------------------------------------------------------------
 	public void Psuspension(String userId) throws Exception;
+	
+	//--------------------------------------------------------------------------------------------------
+	// cri를 가지고 검색한 총 건수의 전체 게시글 수 구하기(paging 처리)
+	//--------------------------------------------------------------------------------------------------
+	public int memberListTotalCount(Criteria cri) throws Exception;
+	
+	//--------------------------------------------------------------------------------------------------
+	// 게시글 목록 가져오기(paging)
+	//--------------------------------------------------------------------------------------------------
+	public List<MemberDTO> memberListPaging(Criteria cri) throws Exception;
+
 }

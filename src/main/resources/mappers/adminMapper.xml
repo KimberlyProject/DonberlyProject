@@ -1,51 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper
-	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ezen.member.mepper.adminMapper">
 
-	<!-- <resultMap id="articlesResult" type="com.ezen.board.dto.ArticleVO"> -->
-	<resultMap id="articlesResult" type="articleVO">
-		<result property="rnum"				column="recNum"/>
-		<result property="level"			column="lvl"/>
-		<result property="articleNO"		column="articleNO"/>
-		<result property="userId"			column="userId"/>
-		<result property="write_date"		column="write_date"/>
-		<result property="title"			column="title"/>
-		<result property="content"			column="content"/>
-		<result property="p_code"			column="p_code"/>
-		<result property="purpose"			column="purpose"/>
-		<result property="view"				column="view"/>
-		<result property="thumbnail"		column="thumbnail"/>
-		<result property="price"			column="price"/>
-	</resultMap>
+	<!-- re -->
 	
-	<resultMap id="saleArticlesResult" type="saleArticleVO">
-		<result property="rnum"				column="recNum"/>
-		<result property="level"			column="lvl"/>
-		<result property="articleNO"		column="articleNO"/>
-		<result property="userId"			column="userId"/>
-		<result property="write_date"		column="write_date"/>
-		<result property="title"			column="title"/>
-		<result property="content"			column="content"/>
-		<result property="p_code"			column="p_code"/>
-		<result property="purpose"			column="purpose"/>
-		<result property="view"				column="view"/>
-		<result property="thumbnail"		column="thumbnail"/>
-		<result property="price"			column="price"/>
-	</resultMap>
-	
+	<!-- 관리자 회원목록 불러오기 -->
 	<select id="selectMember" resultType="com.ezen.member.dto.MemberDTO">
 		SELECT	* 
 		FROM	members
 	</select>
 	
+	<!-- 관리자 회원목록 상세정보 불러오기 -->
 	<select id="detail" parameterType="String" resultType="com.ezen.member.dto.MemberDTO">
 		SELECT	* 
 		FROM	members
 		WHERE	userId = #{userId}
 	</select>
 	
+	<!-- 관리자 회원목록 상세정보 수정하기 -->
 	<update id="update" parameterType="com.ezen.member.dto.MemberDTO">
 		UPDATE	members
 		SET		pw			= #{pw},
@@ -58,17 +30,64 @@
 		WHERE	userId		= #{userId}
 	</update>
 	
+	<!-- 관리자 회원 삭제하기 -->
 	<delete id="delete" parameterType="com.ezen.member.dto.MemberDTO">
 		DELETE FROM members WHERE userId = #{userId}
 	</delete>
 	
+	<!-- 관리자탭 회원 7일 정지 버튼 -->
 	<insert id="Asuspension" parameterType="String">
 		INSERT INTO accountStatus VALUES (#{userId}, 'N1', SYSDATE+7)
 	</insert>
-		
+	
+	<!-- 관리자탭 회원 영구 정지 버튼 -->
 	<insert id="Psuspension" parameterType="String">
 		INSERT INTO accountStatus VALUES (#{userId}, 'N2', SYSDATE)
 	</insert>
+	
+	<!-- 게시글 검색조건 -->
+	<sql id="memberListSearch">
+		<if test="searchType != null">
+			<if test="searchType == 'a'.toString()">AND (
+															userId	LIKE '%' || #{keyword} || '%' OR
+															tel 	LIKE '%' || #{keyword} || '%' OR
+															address	LIKE '%' || #{keyword} || '%' OR
+															regDate	LIKE '%' || #{keyword} || '%'
+													)
+			</if>
+			<if test="searchType == 'i'.toString()">AND		userId	LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'tel'.toString()">AND	tel		LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'addr'.toString()">AND	address	LIKE '%' || #{keyword} || '%'</if>
+			<if test="searchType == 'd'.toString()">AND		regDate	LIKE '%' || #{keyword} || '%'</if>
+		</if>
+	</sql>
+	
+	<!-- cri를 가지고 검색한 총 건수의 전체 게시글 수 구하기(paging 처리) -->
+	<select id="memberListTotalCount" parameterType="com.ezen.admin.dto.Criteria" resultType="Integer">
+		<![CDATA[
+			SELECT COUNT(*)
+			FROM members
+			WHERE 1=1
+		]]>
+			<include refid="memberListSearch"/>
+	</select>
+	
+	<!-- 게시글 목록 가져오기(Paging) -->
+	<select id="memberListPaging" parameterType="com.ezen.admin.dto.Criteria" resultType="com.ezen.member.dto.MemberDTO">
+		<![CDATA[
+			
+				SELECT	 userId, pw, repw, name, nickName, regDate, tel, email, address, zipCode
+				FROM(
+					SELECT	ROWNUM AS recNum, userId, pw, repw, name, nickName, regDate, tel, email, address, zipCode
+					FROM	members
+					WHERE	1=1
+		]]>
+					<include refid='memberListSearch'/>
+		<![CDATA[
+					ORDER BY recNum)
+			WHERE recNum BETWEEN (#{page}-1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
+		]]>
+	</select>
 </mapper>
 
 

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.ezen.admin.dao.AdminDAO;
+import com.ezen.admin.dto.Criteria;
 import com.ezen.member.dto.MemberDTO;
 
 @Service
@@ -79,6 +80,24 @@ public class AdminServiceImpl implements AdminService {
 		logger.info("회원 3일 정지 Service ==> " + userId);
 		
 		adminDAO.Psuspension(userId);
+		
+	}
+
+	//--------------------------------------------------------------------------------------------------
+	// cri를 가지고 검색한 총 건수의 전체 게시글 수 구하기(paging 처리)
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public int memberListTotalCount(Criteria cri) throws Exception {
+		return adminDAO.memberListTotalCount(cri);
+		
+	}
+
+	//--------------------------------------------------------------------------------------------------
+	// 게시글 목록 가져오기(paging)
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public List<MemberDTO> memberListPaging(Criteria cri) throws Exception {
+		return adminDAO.memberListPaging(cri);
 		
 	}
 
