@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 //-----------------------------------------------------------------------------------------------------------
 // 게시글
 //-----------------------------------------------------------------------------------------------------------
-@Component("buyArticleVO")
+@Component("buyArticleDTO")
 public class BuyArticleDTO {
 	private	int		rnum;
 	private	int		level;
@@ -161,7 +161,7 @@ public class BuyArticleDTO {
 
 	@Override
 	public String toString() {
-		return "ArticleVO [rnum=" + rnum + ", level=" + level + ", articleNO=" + articleNO + ", userId=" + userId
+		return "BuyArticleDTO [rnum=" + rnum + ", level=" + level + ", articleNO=" + articleNO + ", userId=" + userId
 				+ ", write_date=" + write_date + ", title=" + title + ", content=" + content + ", p_code=" + p_code
 				+ ", purpose=" + purpose + ", view=" + view + ", thumbnail=" + thumbnail + ", price=" + price
 				+ ", nickname=" + nickname + ", email=" + email + "]";
