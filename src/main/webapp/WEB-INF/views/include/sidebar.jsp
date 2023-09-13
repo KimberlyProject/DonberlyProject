@@ -26,7 +26,7 @@
 	<c:if test="${member == null}">
 		<script>
 			alert("로그인이 필요합니다");
-			location.href = "${path}/member/login?action=" + location.pathname;
+			action_path();
 		</script>
 	</c:if> 
 	<aside id="sideMenu">
@@ -64,7 +64,7 @@
 	<c:if test="${member == null}">
 		<script>
 			alert("로그인이 필요합니다");
-			location.href = "${path}/member/login?action=" + location.pathname;
+			action_path();
 		</script>
 	</c:if> 
 	

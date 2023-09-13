@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page session="true" %>
 <html>
 <head>
 	<title>Home</title>
@@ -22,17 +22,28 @@
       	input {
         	width:				500px;
       	}
+		.btnbox{
+			display:flex;
+			justify-content:space-between;
+			flex-direction: row-reverse;
+			margin-bottom:10px;
+		}		
+		.btnbox>div>input{
+			width:200px;
+		}
       	#searchbtn {
         	height: 			2.4em;
         	color:				#FFFFFF;
-        	margin-right:		15px;
+      	}
+      	#searchType{
+      		height:34px;
+      		width:150px;
       	}
       	.searchgroup {
         	padding:			3px 3px 6px 3px;
-        	margin-bottom:			10px;
       	}
-      	.title {
-      		text-align:			left;
+      	.table{
+      		margin-bottom:50px;
       	}
       	.head > th:first-child {
 			width:				5%;
@@ -49,6 +60,68 @@
 		.head > th:last-child {
 			width:				15%;
 		}
+		
+		@media all and (max-width:780px){		
+			.btnbox{
+				display:block;
+			}
+			.btnbox>div{			
+				display:flex;
+				margin-bottom:10px;
+			}
+			.btnbox>div>input{
+				width:calc(100% - 40px);
+			}
+	      	#searchType{
+	      		width:100px;
+	      	}
+	      	.table{
+	      		font-size:15px;
+	      	}
+	      	thead{
+	      		display:none;
+	      	}
+	      	.table, tbody, td, tr{
+	      		display:block;
+	      	}
+	      	.table>tbody>tr:nth-of-type(odd){
+	      		display:grid;
+	      		grid-template-columns: 30px 30px 1fr;
+	      		border-top::1px solid rgb(73, 124, 64);
+	      		border-left::1px solid rgb(73, 124, 64);
+	      		border-right::1px solid rgb(73, 124, 64);	
+      		}
+      		.table>tbody>tr:last-child{
+				border-bottom::1px solid rgb(73, 124, 64);      			
+      		}
+      		.table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>td, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th{
+      			border:0;
+      		}
+      		.table>tbody>tr:nth-of-type(odd)>td{      		
+      			padding:0;
+    		}
+      		.table>tbody>tr:nth-of-type(odd)>td:nth-of-type(1)>input{
+      			margin-top:12px;
+      		}
+	      	.table>tbody>tr:nth-of-type(odd)>td:nth-of-type(4){	      		
+      			grid-column: 1 / span 2;	
+      			padding-left:10px;
+      		}
+	      	.table>tbody>tr:nth-of-type(odd)>td:nth-of-type(1), .table>tbody>tr>td:nth-of-type(2), .table>tbody>tr>td:nth-of-type(3){	      		
+      			background-color: rgb(73, 124, 64);
+      			color:#fff;
+      			height:40px;
+      			line-height:40px;
+      		}
+	      	.table>tbody>tr:nth-of-type(odd)>td:nth-of-type(4), .table>tbody>tr>td:nth-of-type(5){	      		
+      			font-size:14px;
+      			color:#999;
+      		}
+      		.content.on{
+      			display:block;
+      		}
+		}
+	    
 	</style>
 </head>
 <body>
@@ -62,37 +135,37 @@
       <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
     </aside>
     <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <span><a href="./oneOnOneInquiry">관리자</a></span>
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      <span><a href="./oneOnOneInquiry">1:1 문의하기 내역</a></span>
+      <button class="btn glyphicon glyphicon-th-large" id="sideMenu_open"></button>
+      관리자 &gt; 1:1 문의</a></span>
     </div>
-    <h1 class="pageTitle"><div>1:1 문의하기 내역</div></h1>
+    
+    <h1 class="pageTitle"><div>1:1 문의</div></h1>
 	
 	<div class="container">
+		<div class="btnbox">
+			<!-- 검색창 -->
+			<div>
+				<select class="col-sm-2 searchgroup" id="searchType">
+					<option value="a" <c:if test="{searchType} == 'a'">selected</c:if>>전체</option>
+					<option value="t" <c:if test="{searchType} == 't'">selected</c:if>>제목</option>
+					<option value="c" <c:if test="{searchType} == 'c'">selected</c:if>>내용</option>
+					<option value="w" <c:if test="{searchType} == 'w'">selected</c:if>>작성자</option>
+					<option value="p" <c:if test="{searchType} == 'p'">selected</c:if>>상품번호</option>
+				</select>
+				<input  class="col-sm-2 searchgroup form-control" type="text" class="form-control" placeholder="검색하기">
+				<button id ="searchbtn" class="btn btn-success" type="button">
+					<span class="glyphicon glyphicon-search"/>
+				</button>   
+			</div>
+			<button class="btn btn-danger col-sm-1">삭제하기</button>
+		</div>
 		<!-- 삭제버튼 -->
-		<div>
-			<button class="btn btn-danger col-sm-1" style="float:left; ">삭제하기</button>
-		</div>
-		
-		<!-- 검색창 -->
-		<div class="row" style="vertical-align: middle; float:right;">
-			<select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
-				<option value="a" <c:if test="{searchType} == 'a'">selected</c:if>>전체</option>
-				<option value="b" <c:if test="{searchType} == 'b'">selected</c:if>>제목</option>
-				<option value="c" <c:if test="{searchType} == 'c'">selected</c:if>>작성자</option>
-			</select>
-			<input  class="col-sm-2 searchgroup form-control" type="text" class="form-control" style="width:200px;" placeholder="검색하기">
-			<button id ="searchbtn" class="btn btn-success" type="button">
-				<span class="glyphicon glyphicon-search"/>
-			</button>   
-		</div>
       	
       	<!-- 검색창 -->
 		<table class="table table-bordered table-striped table-hover">
 			<thead>
 				<tr class="head" style="background: rgb(73, 124, 64); color: #FFF;">
-					<th><span class="glyphicon glyphicon-ok"></span></th>
+					<th style="vertical-align:middle;"><span class="glyphicon glyphicon-ok"></span></th>
 					<th>NO</th>
 					<th>TITLE</th>
 					<th>USER ID</th>
@@ -135,7 +208,6 @@
 			</tbody>
 		</table>
 	</div>
-	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	<%@ include file="../include/footer.jsp" %>
 	<script>
 		$(document).ready(function(){
