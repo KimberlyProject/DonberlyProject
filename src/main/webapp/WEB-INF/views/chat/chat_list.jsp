@@ -39,6 +39,9 @@ label{
 .pw{
 	vertical-align: center;
 }
+.hid{
+	visibility : hidden;
+}
 
 </style>
 </head>
@@ -121,7 +124,7 @@ label{
 					<c:forEach var="lastchat" items="${lastChat }">
 					<c:set var="chatid2" value="${lastchat.chatId}"/>
 					<c:if test="${chatid1 == chatid2}">
-					<div>${lastchat.chatContent}</div>
+					<div style="height: 25px;">${lastchat.chatContent}</div>
 					</c:if>
 					</c:forEach>
 					</div><!-- 여기에 새로운 메시지 넣으면 됨 -->
@@ -129,6 +132,9 @@ label{
 					<c:if test="${count.chatId eq chatList.chatId }">
 					<c:if test="${ count.chatRead != 0}">
 					<button style="float: right;" type="button" class="btn btn-warning" disabled="disabled">${count.chatRead}</button>
+					</c:if>
+					<c:if test="${ count.chatRead == 0}">
+					<button style="float: right;" class="btn btn-warning hid" disabled="disabled">${count.chatRead}</button>
 					</c:if>
 					</c:if>
 					</c:forEach>

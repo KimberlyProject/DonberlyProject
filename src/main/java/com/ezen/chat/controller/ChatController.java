@@ -185,6 +185,27 @@ public class ChatController {
 		
 		
 	}
+	//방 만들기 makeRoom2 (auction 버전)
+		@ResponseBody
+		@RequestMapping(value="/makeRoom2", method=RequestMethod.POST)
+		public String makeRoom2(@RequestBody ChatListDTO chatListDTO)throws Exception{
+				//채팅방 만들기
+				System.out.println("#################여기로 와"+chatListDTO);
+				//닉네임으로 id찾기 구매자가 닉네임으로 되어있어서
+				String userId = chatService.finduserIdFromNickname(chatListDTO.getBuyer());
+				chatListDTO.setBuyer(userId);
+				System.out.println("찾은 userId"+userId);
+				if(chatListDTO.getSeller()!=null && chatListDTO.getBuyer()!=null) {
+					int chatId = chatService.insertChatList(chatListDTO);//채팅방 번호 내놓기				
+					//System.out.println("이거다####################################"+chatId);
+					return "/chat/chattingview?chatId="+chatId;
+				}
+				else {
+					return "";
+				}
+			
+			
+		}
 	//getChat
 	@ResponseBody
 	@RequestMapping(value="/getChat", method=RequestMethod.POST)

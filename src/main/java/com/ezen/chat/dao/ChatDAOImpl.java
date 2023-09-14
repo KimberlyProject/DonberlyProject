@@ -182,6 +182,12 @@ public class ChatDAOImpl implements ChatDAO {
 		return sqlSession.selectList(namespace+".countChat",userId);
 	}
 
+	@Override
+	public String finduserIdFromNickname(String nickName) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".finduserIdFromNickname",nickName);
+	}
+
 	
 
 	

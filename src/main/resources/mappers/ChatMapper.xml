@@ -178,6 +178,12 @@
 		group by chatid
 	</select>
 	
+	<!-- 닉네임으로 아이디 찾기 -->
+	<select id="finduserIdFromNickname" resultType="String">
+		select userId
+		from members
+		where nickName=#{nickName}
+	</select>
 	
 	
 </mapper>

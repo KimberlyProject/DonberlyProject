@@ -264,7 +264,7 @@ span{
 				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${session.nickname }&gt;님과의 채팅창</td>
 				</c:if>
 				<c:if test="${chatList.status eq a}">
-				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${session.aucId }&gt;님과의 채팅창</td>
+				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${session.cstmId }&gt;님과의 채팅창</td>
 				</c:if>
 			</tr>
 			<tr>
@@ -302,12 +302,12 @@ span{
 					<c:set var="buyer" value="${chatList.buyer }"/>
 					<div>제목 : ${session.title}</div>
 					<c:if test="${seller eq  userId}">
-						<div>판매자: ${session.aucId}</div>
-						<div>구매자: ${member.nickname }</div>
+						<div>판매자: ${session.aucNick}</div>
+						<div>구매자: ${session.cstmId }</div>
 					</c:if>
 					<c:if test="${buyer eq userId}">
-						<div>판매자: ${member.nickname }</div>
-						<div>구매자: ${session.aucId }</div>
+						<div>판매자: ${session.aucNick }</div>
+						<div>구매자: ${session.cstmId }</div>
 					</c:if>
 					<div>코드 : ${session.aucCode }</div>
 					<div style="padding-bottom: 10px;">가격: ${session.nowBid}원</div>

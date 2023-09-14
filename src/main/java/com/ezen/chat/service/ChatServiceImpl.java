@@ -122,6 +122,12 @@ public class ChatServiceImpl implements ChatService {
 		return chatDAO.countChat(userId);
 	}
 
+	@Override
+	public String finduserIdFromNickname(String nickName) throws Exception {
+		
+		return chatDAO.finduserIdFromNickname(nickName);
+	}
+
 	
 	
 	

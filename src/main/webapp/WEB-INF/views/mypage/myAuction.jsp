@@ -213,12 +213,20 @@
 							<th clospan="4"><span class="blue">입찰 진행중</span>
 								<c:choose><c:when test="${article.cstmId != null}">
 									&nbsp;&nbsp;&nbsp;[${article.cstmId}]님
-									<input id="chat" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="채팅하기">		
+									<!-- hidden 추가 이태림 -->
+									<input type="hidden" class="seller" value="${article.aucId }"/>
+									<input type="hidden" class="buyer" value="${article.cstmId }"/>
+									<input type="hidden" class="artNo" value="${article.aucCode }"/>
+									<input id="chat" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="채팅하기">
 								</c:when></c:choose>
 							</th>
 						</c:when></c:choose>
 						<!-- 판매 완료 orange-->
-						<c:choose><c:when test="${article.status == 1}">
+						<c:choose><c:when test="${article.status == 1}">aucNick
+							<!-- hidden 추가 이태림 -->
+							<input type="hidden" class="seller" value="${article.aucId }"/>
+							<input type="hidden" class="buyer" value="${article.cstmId }"/>
+							<input type="hidden" class="artNo" value="${article.aucCode }"/>
 							<th colspan="4"><span id="gray"><span class="gray">판매완료</span>&nbsp;&nbsp;&nbsp;[${article.cstmId}]님</span>
 							<input id="chat" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="채팅하기">
 							</th>
@@ -284,6 +292,37 @@
 			form.find("[name='page']").val("1");
 			form.submit();
 		});
+		
+		$('#chat').on("click", function(){
+			console.log("판매자 : "+$('.seller').val()+"구매자 : "+$('.buyer').val()+"넘버 : "+$('.artNo').val());
+			$.ajax({
+				 url:	"/chat/makeRoom2",
+				 type:	"post",
+				 dataType: "text",
+				 contentType: 'application/json',
+				 data:	JSON.stringify({"seller":$('.seller').val(),
+					 	"buyer" : $('.buyer').val(),
+					 	"artNo" : $('.artNo').val(),
+					 	"status" : "a"
+						 
+				 
+				 }),	
+				 success: function(data){
+					 console.log(data);
+					 window.open(data, "_blank", "width=940, height=750");
+					//location.href=data;
+					
+				 },
+				 error:function(request,status,error){
+					 console.log("실패");
+					 
+					 
+				 },
+				 complete:function(){
+					 $('#chatContent').val('');
+				 }
+			 });
+		})
 	});
 	
 	//경매끝난 게시글 버튼비활성화
@@ -292,7 +331,40 @@
 	  detailBtn.css("background-color", "gray");
 	  detailBtn.css("color", "white");
 	  detailBtn.prop("disabled", true);
+	  
+	  $('#chat').on("click", function(){
+			console.log("판매자 : "+$('.seller').val()+"구매자 : "+$('.buyer').val()+"넘버 : "+$('.artNo').val());
+			$.ajax({
+				 url:	"/chat/makeRoom2",
+				 type:	"post",
+				 dataType: "text",
+				 contentType: 'application/json',
+				 data:	JSON.stringify({"seller":$('.seller').val(),
+					 	"buyer" : $('.buyer').val(),
+					 	"artNo" : $('.artNo').val(),
+					 	"status" : "a"
+						 
+				 
+				 }),	
+				 success: function(data){
+					 console.log(data);
+					 window.open(data, "_blank", "width=940, height=750");
+					//location.href=data;
+					
+				 },
+				 error:function(request,status,error){
+					 console.log("실패");
+					 
+					 
+				 },
+				 complete:function(){
+					 $('#chatContent').val('');
+				 }
+			 });
+		})
 	});
+	
+	
 	
 </script>
 

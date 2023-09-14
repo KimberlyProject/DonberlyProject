@@ -47,5 +47,7 @@ public interface ChatDAO {
 	public void readChat(ChatDTO chatDTO) throws Exception;
 	
 	public List countChat(String userId) throws Exception;
+	
+	public String finduserIdFromNickname(String nickName) throws Exception;
 }
 
