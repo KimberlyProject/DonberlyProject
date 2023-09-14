@@ -146,7 +146,6 @@ public class AuctionController {
 	@RequestMapping(value="/addNewArticle", method = RequestMethod.POST)
 	public ResponseEntity addNewArticle(MultipartHttpServletRequest req, HttpServletResponse res) throws Exception {
 		
-		
 		System.out.println("게시글 업로드 컨트롤러 시작");
 		req.setCharacterEncoding("UTF-8");
 		

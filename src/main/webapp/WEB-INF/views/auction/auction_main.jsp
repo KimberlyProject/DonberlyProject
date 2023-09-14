@@ -247,18 +247,21 @@
 							<c:if test="${pageMaker.prev}">
 								<li>
 									<a href='<c:url value="/auction/auction_maintosearch?page=${pageMaker.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
-										<span class="glyphicon glyphicon-chevron-left"></span></a>
+										<span class="glyphicon glyphicon-chevron-left"></span>
+									</a>
 								</li>
 							</c:if>
 							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
 								<li>
-									<a href='<c:url value="/auction/auction_maintosearch?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
+									<a href='<c:url value="/auction/auction_maintosearch?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i>
+									</a>
 								</li>
 							</c:forEach>
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 								<li>
 									<a href='<c:url value="/auction/auction_maintosearch?page=${pageMaker.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
-										<span class="glyphicon glyphicon-chevron-right"></span></a>
+										<span class="glyphicon glyphicon-chevron-right"></span>
+									</a>
 								</li>
 							</c:if>
 						</ul>
