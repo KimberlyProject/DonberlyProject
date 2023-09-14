@@ -82,8 +82,8 @@ public class AuctionController {
 		
 		mav.addObject("articles", articles);	
 		mav.addObject("imgs", imgs);
-		 mav.addObject("pageMaker", pageMaker);
-		    mav.addObject("cri", cri);
+		mav.addObject("pageMaker", pageMaker);
+		mav.addObject("cri", cri);
 		return mav;
 	}	
 	
@@ -145,7 +145,6 @@ public class AuctionController {
 	//게시글 업로드
 	@RequestMapping(value="/addNewArticle", method = RequestMethod.POST)
 	public ResponseEntity addNewArticle(MultipartHttpServletRequest req, HttpServletResponse res) throws Exception {
-		
 		
 		System.out.println("게시글 업로드 컨트롤러 시작");
 		req.setCharacterEncoding("UTF-8");

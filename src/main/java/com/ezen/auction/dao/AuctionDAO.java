@@ -137,20 +137,31 @@ public class AuctionDAO {
 	
 	//-------------------------------------------------------------------------------------------------------------//		
 	
-	//마이페이지 게시글 불러오기
-	public List myPageArticles(String aucId) throws DataAccessException {
-		System.out.println("------------------------------------------경메장 메인페이지 dao------------------------------------------");
-		List<AuctionDTO> articles = sqlSession.selectList(namespace + ".myPageArticles", aucId);
-		System.out.println("------------------------------------------디비야 마이페이지 정보내놔" + articles);
+	//마이페이지 MyAuction 게시글 가져오기
+	public List<AuctionDTO> myauctionArticles(String aucId) throws DataAccessException {
+		System.out.println("------------------------------------------마이페이지 myAuction 게시글 dao------------------------------------------");
+		List<AuctionDTO> articles = sqlSession.selectList(namespace + ".myauctionArticles", aucId);
+		System.out.println("------------------------------------------디비야 myAuction 정보내놔" + articles);
 		return articles;
 	}
 
-	//마이페이지 image 불러오기
-	public List myPageImgs(int aucCode) throws DataAccessException {
-		System.out.println("------------------------------------------경매장 메인 image dao------------------------------------------");
-		List<AucImgDTO> imgs = sqlSession.selectList(namespace + ".myPageImgs", aucCode);
+	//마이페이지 MyBid 게시글 가져오기
+	public List<AuctionDTO> mybidArticles(String cstmId) throws DataAccessException {
+		System.out.println("------------------------------------------마이페이지 myAuction 게시글 dao------------------------------------------");
+		List<AuctionDTO> articles = sqlSession.selectList(namespace + ".mybidArticles", cstmId);
+		System.out.println("------------------------------------------디비야 myBid 정보내놔" + articles);
+		return articles;
+	}
+	
+	//마이페이지 MyAuction image 가져오기
+	public List<AucImgDTO> mypageImg(int aucCode) throws DataAccessException {
+		System.out.println("------------------------------------------마이페이지 myAuction image dao------------------------------------------");
+		List<AucImgDTO> imgs = sqlSession.selectList(namespace + ".mypageImg", aucCode);
 		System.out.println("------------------------------------------디비야 마이페이지 이미지 정보내놔" + imgs);
 		return imgs;
 	}
+	
+	
+	
 	
 }//class
