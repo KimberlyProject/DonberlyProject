@@ -186,6 +186,7 @@
 			SELECT  *
 			FROM   AUCTION
 			WHERE aucId = #{aucId}
+			ORDER BY writeDate desc
 		]]>
     </select>
     
@@ -195,6 +196,7 @@
 			SELECT  *
 			FROM   AUCTION
 			WHERE cstmId = #{cstmId}
+			ORDER BY writeDate desc
 		]]>
     </select>
     
@@ -206,5 +208,22 @@
 			WHERE aucCode = #{aucCode}
 		]]>
     </select>
+    
+    <!-- 마이페이지 myAuction(paging) -->
+	<select id="myauctionTotalCount" parameterType="com.ezen.auction.dto.SearchCriteria" resultType="integer">
+		<![CDATA[
+			 SELECT COUNT(*)
+			 FROM auction
+			 WHERE aucId = #{aucId}
+		]]>
+	</select>
 	
+	<!-- 마이페이지 myBid(paging) -->
+	<select id="mybidTotalCount" parameterType="com.ezen.auction.dto.SearchCriteria" resultType="integer">
+		<![CDATA[
+			 SELECT COUNT(*)
+			 FROM auction
+			 WHERE cstmId = #{cstmId}
+		]]>
+	</select>
 </mapper>

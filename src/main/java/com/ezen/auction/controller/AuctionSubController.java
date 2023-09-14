@@ -16,7 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.auction.dto.AucImgDTO;
 import com.ezen.auction.dto.AuctionDTO;
+import com.ezen.auction.dto.MypageCriteria;
 import com.ezen.auction.dto.PageMaker;
+import com.ezen.auction.dto.PageMaker2;
 import com.ezen.auction.dto.SearchCriteria;
 import com.ezen.auction.service.AuctionService;
 
@@ -63,15 +65,16 @@ public class AuctionSubController {
 
 		//마이페이지 내가 올린 경매글
 		@RequestMapping(value="/myAuction", method=RequestMethod.GET)
-		public ModelAndView myAuction(@RequestParam("aucId") String aucId, HttpServletRequest request, HttpServletResponse response, SearchCriteria cri) 
+		public ModelAndView myAuction(@RequestParam("aucId") String aucId, HttpServletRequest request, HttpServletResponse response, MypageCriteria cri) 
 				throws Exception {
 			System.out.println("마이페이지 경매내역 게시글 불러오기 Controller");
 			String viewName = "/mypage/myAuction";
 			ModelAndView mav = new ModelAndView(viewName);
 			
-			PageMaker pageMaker = new PageMaker();
+			cri.setAucId(aucId);
+			PageMaker2 pageMaker = new PageMaker2();
 		    pageMaker.setCri(cri);
-		    pageMaker.setTotalCount(auctionService.auctionTotalCount(cri));	
+		    pageMaker.setTotalCount(auctionService.myauctionTotalCount(cri));	
 			
 			List<AuctionDTO> articles	= auctionService.myauctionArticles(aucId);
 			List<List<AucImgDTO>> imgLists = new ArrayList<List<AucImgDTO>>();
@@ -93,14 +96,15 @@ public class AuctionSubController {
 
 		//마이페이지 내가 입찰한 경매글
 		@RequestMapping(value="/myBid", method=RequestMethod.GET)
-		public ModelAndView myBid(@RequestParam("cstmId") String cstmId, HttpServletRequest request, HttpServletResponse response, SearchCriteria cri)
+		public ModelAndView myBid(@RequestParam("cstmId") String cstmId, HttpServletRequest request, HttpServletResponse response, MypageCriteria cri)
 			throws Exception {
 			String viewName = "/mypage/myBid";
 			ModelAndView mav = new ModelAndView(viewName);
 			
-			PageMaker pageMaker = new PageMaker();
+			cri.setCstmId(cstmId);
+			PageMaker2 pageMaker = new PageMaker2();
 		    pageMaker.setCri(cri);
-		    pageMaker.setTotalCount(auctionService.auctionTotalCount(cri));	
+		    pageMaker.setTotalCount(auctionService.mybidTotalCount(cri));	
 			
 			List<AuctionDTO> articles	= auctionService.mybidArticles(cstmId);
 			List<List<AucImgDTO>> imgLists = new ArrayList<List<AucImgDTO>>();

@@ -235,18 +235,18 @@
 						<ul class="btn-group pagination">
 							<c:if test="${pageMaker.prev}">
 								<li>
-									<a href='<c:url value="/auction/auction_main.do?page=${pageMaker.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
+									<a href='<c:url value="/auction/myBid?cstmId=${article.cstmId}"/>'>
 										<span class="glyphicon glyphicon-chevron-left"></span></a>
 								</li>
 							</c:if>
 							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
 								<li>
-									<a href='<c:url value="/auction/auction_main.do?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
+									<a href='<c:url value="/auction/myBid?cstmId=${article.cstmId}"/>'><i>${pageNum}</i></a>
 								</li>
 							</c:forEach>
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 								<li>
-									<a href='<c:url value="/auction/auction_main.do?page=${pageMaker.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
+									<a href='<c:url value="/auction/myBid?cstmId=${article.cstmId}"/>'>
 										<span class="glyphicon glyphicon-chevron-right"></span></a>
 								</li>
 							</c:if>
