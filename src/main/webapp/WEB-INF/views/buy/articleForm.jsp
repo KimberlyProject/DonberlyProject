@@ -5,7 +5,6 @@
 <%
   request.setCharacterEncoding("UTF-8");
 %> 
-
 <head>
    <meta charset="UTF-8">
    <title>글쓰기창</title>

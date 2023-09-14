@@ -144,7 +144,7 @@
 							<c:choose>
 								<c:when test="${member.userId == article.userId}">
 									<input type="button" class="btn btn-primary" id="chat" value="1:1채팅" 
-										style="display:none" onClick="fn_reply_form('${path}/buy/replyForm.do)', ${article.articleNO})"/>
+										style="display:none" onClick="fn_chat(${article.articleNO})"/>
 								</c:when>
 								<c:otherwise>
 									<input type="button" class="btn btn-primary" id="chat" value="1:1채팅" onClick="fn_chat(${article.articleNO})"/>

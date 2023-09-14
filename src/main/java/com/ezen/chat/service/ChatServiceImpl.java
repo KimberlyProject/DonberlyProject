@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.ezen.board.dto.BuyArticleDTO;
 import com.ezen.auction.dto.AuctionDTO;
 
-
 import com.ezen.chat.controller.ChatController;
 import com.ezen.chat.dao.ChatDAO;
 import com.ezen.chat.dto.ChatDTO;
@@ -23,7 +22,6 @@ import com.ezen.chat.dto.ChatListDTO;
 public class ChatServiceImpl implements ChatService {
 
 	private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
-	
 	
 	@Inject
 	private ChatDAO chatDAO;
@@ -110,6 +108,24 @@ public class ChatServiceImpl implements ChatService {
 	public AuctionDTO findAuctionDTOFromArtNo(int artNo, String status) throws Exception {
 		System.out.println("서비스에요!!!!!!!!!!!!!!!!!!!aaaaaaaaaaaaaaaaaaaa");
 		return chatDAO.findAuctionDTOFromArtNo(artNo,status);
+	}
+
+	@Override
+	public void readChat(ChatDTO chatDTO) throws Exception {
+		chatDAO.readChat(chatDTO);
+		
+	}
+
+	@Override
+	public List countChat(String userId) throws Exception {
+		
+		return chatDAO.countChat(userId);
+	}
+
+	@Override
+	public String finduserIdFromNickname(String nickName) throws Exception {
+		
+		return chatDAO.finduserIdFromNickname(nickName);
 	}
 
 	
