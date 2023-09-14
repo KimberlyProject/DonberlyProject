@@ -8,6 +8,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<%@ include file="../include/header.jsp" %>
+	<%@ include file="../member/profileModal.jsp" %>
 	<style>
 		.colon{
 			width: 4px;
@@ -177,14 +178,13 @@
 			<tr> <!-- 판매자 -->
 				<th class="cate">판매자</th>
 				<th class="colon">:</th>
-				<th colspan="4">[${article.aucNick}]님
+				<th colspan="4"><a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}'})">${article.nickname}</a>
 					<c:choose>
-
 					<c:when test="${member.userId != article.aucId}"> <!-- 판매자와 채팅하기 -->
 						<input type="hidden" class="seller" value="${article.aucId }"/>
 						<input type="hidden" class="buyer" value="${member.userId }"/>
 						<input type="hidden" class="artNo" value="${article.aucCode }"/>
-						<input id="chat" type="button" class="btn btn-primary buyBtn" style="color:#FFFFFF;" value="채팅하기">					
+						<input id="chat" type="button" class="btn btn-primary buyBtn" style="color:#FFFFFF;" value="채팅하기">	
 					</c:when>
 					</c:choose>
 				</th>
@@ -274,9 +274,8 @@ $(document).ready(function () {
 		    if(confirm(cstmId + "님에게 " + price + "원에 판매하시겠습니까? 거래가 완료되면 취소할 수 없습니다.")) {
 		        location.href = "/auction/saleNow?aucCode=" + aucCode + "&cstmId=" + cstmId;
 		        alert("판매가 완료되었습니다.");
-		    	//여기에 return이 있는지 없는지
 		    } else {
-		       return;
+		    	return;
 		    }
 		});//#saleNow
 		
@@ -342,37 +341,6 @@ $(document).ready(function () {
 		})
 		
 
-//1:1 채팅 방만들기
-/*function fn_chat(artNo){
-	$.ajax({
-		 url:	"/chat/makeRoom",
-		 type:	"post",
-		 dataType: "text",
-		 contentType: 'application/json',
-		 data:	JSON.stringify({"seller":$('.seller').val(),
-			 	"buyer" : $('.buyer').val(),
-			 	"artNo" : artNo,
-			 	"status" : "a"
-				 
-		 
-		 }),	
-		 success: function(data){
-			 console.log(data);
-			 window.open(data, "_blank", "width=940, height=750");
-			//location.href=data;
-			
-		 },
-		 error:function(request,status,error){
-			 console.log("실패");
-			 
-			 
-		 },
-		 complete:function(){
-			 $('#chatContent').val('');
-		 }
-	 });
-	
-}*/
 }); //$(document).ready(function () { 
 	
 </script>

@@ -23,10 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
+
 import com.ezen.board.dto.BuyArticleDTO;
-
 import com.ezen.auction.dto.AuctionDTO;
-
 import com.ezen.chat.dao.ChatDAO;
 import com.ezen.chat.dto.ChatDTO;
 import com.ezen.chat.dto.ChatListDTO;
@@ -57,6 +56,7 @@ public class ChatController {
 		
 		
 		HttpSession session= request.getSession();
+		
 		int ch = Integer.parseInt(chatId);
 		ChatListDTO chatListDTO = chatService.findChatListFromChatId(ch); //chatList 옮김
 		int artNo = chatListDTO.getArtNo();
@@ -76,12 +76,13 @@ public class ChatController {
 		}
 
 		session.setAttribute("chatList", chatListDTO);
+		
 		System.out.println("채팅 입장");
 		return "/chat/chattingview";
 	}
 	
 	
-	//채팅창 POST
+	//채팅창 POST chatRead()넣기
 	@RequestMapping(value="/chattingview", method=RequestMethod.POST)
 	public void chattingview(@RequestParam(value="content", required=false) String content,
 			@RequestParam(value="fromId", required=false) String fromId,
@@ -89,6 +90,10 @@ public class ChatController {
 			Model model,HttpServletRequest request, HttpServletResponse response,RedirectAttributes attr) throws Exception{
 
 		System.out.println(content+fromId+chatId);
+		
+		//세션 가져오기***************************
+		HttpSession session	= request.getSession();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
 		
 		int ch = Integer.parseInt(chatId);
 		//ch로 chatListDTO 찾기 찾아서 스테이터스로 구별해서 to랑 from 넣기
@@ -99,6 +104,8 @@ public class ChatController {
 		chatDTO.setChatId(ch);
 		chatDTO.setFromId(fromId);
 		chatDTO.setChatContent(content);
+		chatDTO.setChatRead(1);
+		System.out.println("************************************************sksksksksksksk"+memberDTO.getUserId());
 		//파는사람과 내가 같으면 사는사람이 
 		if(fromId.equals(chatListDTO.getSeller())) {
 			chatDTO.setToId(chatListDTO.getBuyer());
@@ -106,8 +113,11 @@ public class ChatController {
 		else if(fromId.equals(chatListDTO.getBuyer())) {
 			chatDTO.setToId(chatListDTO.getSeller());
 		}
-		//System.out.println("################################chatDTO"+chatDTO);
+		System.out.println("************************************************sksksksksksksk"+memberDTO.getUserId()+" :"+chatDTO.getToId());
+		
+		System.out.println("################################chatDTO"+chatDTO);
 		chatService.insertContent(chatDTO);  //db에 채팅DTO 넣기
+		
 		
 	}
 	
@@ -138,6 +148,7 @@ public class ChatController {
 		
 		//닉네임 찾기
 		List<BuyArticleDTO> memberList = chatService.findAllMemeber();
+		List<ChatDTO> count= chatService.countChat(userId);
 		
 		System.out.println(memberList);
 		ModelAndView mav = new ModelAndView(viewName);
@@ -145,7 +156,9 @@ public class ChatController {
 		//System.out.println(lastchat);
 		mav.addObject("chatList",chatList);//넘겨줄 이름, 데이터
 		mav.addObject("lastChat",lastchat);//마지막 채팅
-		mav.addObject("nickname",memberList);
+		mav.addObject("nickname",memberList);//닉네임 담은 리스트
+		mav.addObject("count",count);
+		System.out.println("카운트야야야야야야야****************"+count);
 		//mav.addObject("",);
 		//viewName이 없기 때문에 URL로 부터 뷰 이름을 검색한다.
 		// /board/listArticlres.do => /vboard/listArticles
@@ -172,10 +185,33 @@ public class ChatController {
 		
 		
 	}
+	//방 만들기 makeRoom2 (auction 버전)
+		@ResponseBody
+		@RequestMapping(value="/makeRoom2", method=RequestMethod.POST)
+		public String makeRoom2(@RequestBody ChatListDTO chatListDTO)throws Exception{
+				//채팅방 만들기
+				System.out.println("#################여기로 와"+chatListDTO);
+				//닉네임으로 id찾기 구매자가 닉네임으로 되어있어서
+				String userId = chatService.finduserIdFromNickname(chatListDTO.getBuyer());
+				chatListDTO.setBuyer(userId);
+				System.out.println("찾은 userId"+userId);
+				if(chatListDTO.getSeller()!=null && chatListDTO.getBuyer()!=null) {
+					int chatId = chatService.insertChatList(chatListDTO);//채팅방 번호 내놓기				
+					//System.out.println("이거다####################################"+chatId);
+					return "/chat/chattingview?chatId="+chatId;
+				}
+				else {
+					return "";
+				}
+			
+			
+		}
 	//getChat
 	@ResponseBody
 	@RequestMapping(value="/getChat", method=RequestMethod.POST)
-	public List<ChatDTO> getChat(@RequestParam(value="chatId", required=false) String chatId,@RequestParam(value="fromId", required=false) String fromId)throws Exception {
+	public List<ChatDTO> getChat(@RequestParam(value="chatId", required=false) String chatId,@RequestParam(value="fromId", required=false) String fromId,HttpServletRequest request)throws Exception {
+		HttpSession session= request.getSession();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
 		ChatDTO chatDTO1 = new ChatDTO();
 		ChatDTO chatDTO2 = new ChatDTO(); //chatDTO2가 최근 녀석
 		int ch = Integer.parseInt(chatId);
@@ -185,7 +221,7 @@ public class ChatController {
 		chatDTO2 = chatService.findContent(chatDTO1);
 		//System.out.println("**************************챗아이디="+chatId+"프롬아이디="+fromId+"가장 최근 컨텐츠"+newchatDTO.getChatContent()+"이번에 쓴 컨텐츠"+chatDTO2.getChatContent());
 		//System.out.println(chatDTO2);
-		
+		readChat(memberDTO.getUserId(), ch);
 		List<ChatDTO> list =  chatService.chatView(ch);
 		System.out.println(list);
 		return list;
@@ -201,6 +237,7 @@ public class ChatController {
 		chatService.deleteChatRoom(ch);
 	}
 	
+	//게시판 닉네임 가져오기
 	@ResponseBody
 	@RequestMapping(value="/find_nickname", method=RequestMethod.POST, produces = "application/text; charset=utf8" )
 	public String find_nickname(@RequestParam(value="memberId", required=false) String memberId) throws Exception{
@@ -209,6 +246,25 @@ public class ChatController {
 		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + nickname);
 		return nickname;
 	}
+	
+	//채팅 읽었는지 확인하기 db에 칼럼 넣기
+	public void readChat(String toId, int chatId) throws Exception{
+		//채팅 버튼을 누르면 이 클래스 호출
+		System.out.println("&&&&&&&&&&&&&readChat이 실행되었다&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+		ChatDTO chatDTO = new ChatDTO();
+		
+		chatDTO.setToId(toId);
+		chatDTO.setChatId(chatId);
+		chatService.readChat(chatDTO);
+	}
+	//안읽은 채팅의 개수
+	public List countChat(String userId) throws Exception{
+		List count = chatService.countChat(userId); //안읽은 채팅 개수 전부 가져오기
+		System.out.println("안읽은 개수!!!!!!!!!*********"+count);
+		
+		return count;
+	}
+	
 	
 	
 }

@@ -18,6 +18,8 @@ public class AuctionDTO {
 	private String aucNick;
 	private int status;
 	private String cstmId;
+	private String nickname;
+	private String email;
 	
 	public String getCstmId() {
 		return cstmId;
@@ -109,7 +111,19 @@ public class AuctionDTO {
 		return "AuctionDTO [aucCode=" + aucCode + ", minPrice=" + minPrice + ", maxPrice=" + maxPrice + ", writeDate="
 				+ writeDate + ", title=" + title + ", content=" + content + ", nowBid=" + nowBid + ", bidRate="
 				+ bidRate + ", deadline=" + deadline + ", deadlineRate=" + deadlineRate + ", aucId=" + aucId
-				+ ", aucNick=" + aucNick + ", status=" + status + ", cstmId=" + cstmId + "]";
+				+ ", status=" + status + ", cstmId=" + cstmId + ", nickname=" + nickname + ", email=" + email + "]";
+	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	
