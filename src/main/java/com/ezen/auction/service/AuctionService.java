@@ -97,15 +97,21 @@ public class AuctionService {
 	
 	//-------------------------------------------------------------------------------------------------------------//
 	
-	//마이페이지 게시글 가져오기
-	public List<AuctionDTO> myPageArticles(String aucId) throws Exception {
-		List<AuctionDTO> articles = auctionDAO.myPageArticles(aucId);
+	//마이페이지 MyAuction 게시글 가져오기
+	public List<AuctionDTO> myauctionArticles(String aucId) throws Exception {
+		List<AuctionDTO> articles = auctionDAO.myauctionArticles(aucId);
+		return articles;
+	}
+	
+	//마이페이지 MyBid 게시글 가져오기
+	public List<AuctionDTO> mybidArticles(String cstmId) throws Exception {
+		List<AuctionDTO> articles = auctionDAO.mybidArticles(cstmId);
 		return articles;
 	}
 	
 	//마이페이지 image 가져오기
-	public List<AucImgDTO> myPageImgs(int aucCode) throws Exception {
-		List<AucImgDTO> imgs = auctionDAO.myPageImgs(aucCode);
+	public List<AucImgDTO> mypageImg(int aucCode) throws Exception {
+		List<AucImgDTO> imgs = auctionDAO.mypageImg(aucCode);
 		return imgs;
 	}
 }

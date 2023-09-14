@@ -180,8 +180,8 @@
 		]]>
  	</select>
  	
- 	<!-- 마이페이지 게시글 Query -->
-    <select id="myPageArticles" parameterType="String" resultMap="aucArticle">
+ 	<!-- 마이페이지 myAuction 게시글 Query -->
+    <select id="myauctionArticles" parameterType="String" resultMap="aucArticle">
 		<![CDATA[
 			SELECT  *
 			FROM   AUCTION
@@ -189,8 +189,17 @@
 		]]>
     </select>
     
+    <!-- 마이페이지 myBid 게시글 Query -->
+    <select id="mybidArticles" parameterType="String" resultMap="aucArticle">
+		<![CDATA[
+			SELECT  *
+			FROM   AUCTION
+			WHERE cstmId = #{cstmId}
+		]]>
+    </select>
+    
     <!-- 마이페이지 image Query -->
-    <select id="myPageImgs" parameterType="int" resultMap="aucImage">
+    <select id="mypageImg" parameterType="int" resultMap="aucImage">
 		<![CDATA[
 			SELECT *
 			FROM AUCIMG
