@@ -128,7 +128,7 @@
     
     
 	<div class="container">
-    	<a href="/auction/myAuction"> > 내가 올린 상품만 보기</a><br/><br/><br/>
+    	<a href="/auction/myAuction?aucId=${member.userId}"> > 내가 올린 상품만 보기</a><br/><br/><br/>
 		<!-- 경매 게시글 -->
 		<!-- 게시글이 하나도 없는 경우 -->
 
@@ -227,6 +227,34 @@
 		</c:choose>
 	
 		<br/><br/>
+		
+		<table>
+		<tr> <!-- 페이징 -->
+				<td>
+				<div class="col-sm-offset-3"><!-- 숫자 버튼 -->
+					<ul class="btn-group pagination">
+						<c:if test="${pageMaker.prev}">
+							<li>
+								<a href='<c:url value="/auction/auction_main.do?page=${pageMaker.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
+									<span class="glyphicon glyphicon-chevron-left"></span></a>
+							</li>
+						</c:if>
+						<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
+							<li>
+								<a href='<c:url value="/auction/auction_main.do?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
+							</li>
+						</c:forEach>
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+							<li>
+								<a href='<c:url value="/auction/auction_main.do?page=${pageMaker.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
+									<span class="glyphicon glyphicon-chevron-right"></span></a>
+							</li>
+						</c:if>
+					</ul>
+				</div><!-- 숫자 버튼 -->
+			</td>
+		</tr>
+		</table> <br/>
 		
 		<form id="formList" action="/auction/auction_main.do" method="get">
 			<input type="hidden" name="page" value="${result.currentPageNum}">
