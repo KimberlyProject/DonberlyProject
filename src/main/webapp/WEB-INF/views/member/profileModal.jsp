@@ -27,6 +27,7 @@
     }
 </style>
 <!-- 모달 시작 -->
+<form name="modalform" method="post"   action="${Path}/ccenter/report" >
 <div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="memberModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -55,7 +56,7 @@
         </div>
     </div>
 </div>
-
+</form>
 <script>
     function chat() {
         var confirmChat = confirm("1대1 채팅을 시작하시겠습니까?");
@@ -70,7 +71,7 @@
         var confirmReport = confirm("신고하시겠습니까?");
         if (confirmReport) {
             // 신고 처리 로직을 여기에 추가
-            window.location.href = "../ccenter/report";
+            window.location.href = "../ccenter/report?report=" + document.getElementById('modalNickname').innerText;
         } else {
             alert("신고가 취소되었습니다.");
         }
@@ -78,31 +79,26 @@
 </script>
 <!-- 모달 끝 -->
 
-<script>
-    function openModal(member) {
-        $.ajax({
-            type: "POST",
-            url: "/member/profileModal",
-            data: {
-                nickname: member.nickname,
-            },
-            dataType: "json",
-            success: function (data) {
-                if (data) {
-                    // 모달 내용을 동적으로 채웁니다.
-                    document.getElementById('modalNickname').innerText = member.nickname;
-                    document.getElementById('modalEmail').innerText = member.email;
 
-                    // 모달을 활성화합니다.
-                    $('#memberModal').modal('show');
-                } else {
-                    alert('회원 정보를 찾을 수 없습니다.');
-                }
-            },
-            error: function (error) {
-                console.error('오류 발생: ', error);
-                alert('회원 정보를 가져오는 중 오류가 발생했습니다.');
-            }
-        });
+<script>
+function openModal(member) {
+    document.getElementById('modalNickname').innerText = member.nickname;
+    document.getElementById('modalEmail').innerText = member.email;
+
+    // 현재 로그인된 세션의 정보 가져오기 (예: 세션에 저장된 닉네임)
+    var loggedInNickname = "${sessionScope.member.nickname}";
+
+    // 클릭한 닉네임과 세션의 닉네임이 같은 경우에만 버튼을 숨깁니다.
+    if (member.nickname === loggedInNickname) {
+        document.querySelector('.btn-success').style.display = 'none'; // 1대1 채팅하기 버튼 숨기기
+        document.querySelector('.btn-danger').style.display = 'none';  // 신고하기 버튼 숨기기
+    } else {
+        document.querySelector('.btn-success').style.display = 'inline'; // 1대1 채팅하기 버튼 표시하기
+        document.querySelector('.btn-danger').style.display = 'inline';  // 신고하기 버튼 표시하기
     }
+
+    // 모달을 열기
+    $('#memberModal').modal('show');
+}
+
 </script>

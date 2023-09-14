@@ -74,13 +74,13 @@
    	 	<form name="reportAnswer" method="post" action="${path }/ccenter/addNewReport.do" enctype="multipart/form-data">
             <table style="width: 100%;" class="table" id="table" >
                 <tr>
-                    <td><label for="reporter">작성자</label></td>
-                    <td><input type="text" id="reporter" name="reporter" value="${member.userId}" readonly></td>
+                    <td><label for="reporter">신고자</label></td>
+                    <td><input type="text" id="reporter" name="reporter" value=${member.userId} readonly></td>
                 </tr>
                 <tr>
-                    <td><label for="reportedUser">신고대상</label></td>
-                    <td><input type="text" id="reportedUser" name="reportedUser" ></td>
-                </tr>
+				    <td><label for="reportedUser">신고대상</label></td>
+				    <td><input type="text" id="reportedUser" name="reportedUser" value=${report}></td>
+				</tr>
                 <tr>
                     <td><label for="reason">신고사유</label></td>
                     <td><select name="reason" id="reason">
@@ -135,6 +135,21 @@
 
 
 <%@ include file="../include/footer.jsp" %>
+
+<script>
+    // 클라이언트 측에서 다른 사용자의 프로필 정보를 클릭할 때 호출됩니다.
+    function openModal(member) {
+        // 클릭한 사용자의 정보를 JavaScript 변수에 저장합니다.
+        var reportedUserInput = document.getElementById('reportedUser');
+        
+        // 클릭한 사용자의 아이디를 신고대상 필드에 설정합니다.
+        reportedUserInput.value = member.userId;
+
+        // 모달을 활성화합니다.
+        $('#memberModal').modal('show');
+    }
+</script>
+
 </body>
 </html>
 

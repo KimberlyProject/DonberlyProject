@@ -90,17 +90,20 @@
 	<!-- 게시글 번호에 해당하는 상세 정보 -->
 	<select id="selectArticle" parameterType="int" resultType="buyArticleDTO">
 		<![CDATA[
-			SELECT	*
-			FROM	article_buy
-			WHERE	articleNO = #{articleNO}
+		
+			SELECT  a.*, m.email
+			FROM article_buy a, members m
+	        WHERE		a.userId=m.userId
+			and	articleNO = #{articleNO}
 		]]>
 	</select>
 	
 	<select id="saleSelectArticle" parameterType="int" resultType="saleArticleDTO">
 		<![CDATA[
-			SELECT	*
-			FROM	article_sale
-			WHERE	articleNO = #{articleNO}
+			SELECT  a.*, m.email
+			FROM article_buy a, members m
+	        WHERE		a.userId=m.userId
+			and	articleNO = #{articleNO}
 		]]>
 	</select>
 	
