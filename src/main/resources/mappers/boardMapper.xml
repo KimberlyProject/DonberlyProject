@@ -196,6 +196,7 @@
  	<![CDATA[
      )       
 	where recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
+	ORDER BY write_Date desc
 	]]>
 	</select>
 	
@@ -213,6 +214,7 @@
  	<![CDATA[
      )       
 	where recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
+	ORDER BY write_Date desc
 	]]>
 	</select>
 	

@@ -146,6 +146,8 @@
 				</div>
 			</c:when>
 		</c:choose>
+		
+							<button onClick="moreCount('sale')">더보기</button>
 				<table align="center">
 			<tr> <!-- 페이징 -->
 				<td>
@@ -153,18 +155,18 @@
 						<ul class="btn-group pagination">
 							<c:if test="${pageMaker2.prev}">
 								<li>
-									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageMaker2.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
+									<a href='<c:url value="/mypage/marketInfo.do?page=${pageMaker2.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
 										<span class="glyphicon glyphicon-chevron-left"></span></a>
 								</li>
 							</c:if>
 							<c:forEach begin="${pageMaker2.startPage}" end="${pageMaker2.endPage}" var="pageNum">
 								<li>
-									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
+									<a href='<c:url value="/mypage/marketInfo.do?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
 								</li>
 							</c:forEach>
 							<c:if test="${pageMaker2.next && pageMaker2.endPage > 0}">
 								<li>
-									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageMaker2.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
+									<a href='<c:url value="/mypage/marketInfo.do?page=${pageMaker2.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
 										<span class="glyphicon glyphicon-chevron-right"></span></a>
 								</li>
 							</c:if>
@@ -219,23 +221,12 @@
 				<td>
 					<div class="col-sm-offset-3"><!-- 숫자 버튼 -->
 						<ul class="btn-group pagination">
-							<c:if test="${pageMaker1.prev}">
-								<li>
-									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageMaker1.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
-										<span class="glyphicon glyphicon-chevron-left"></span></a>
-								</li>
-							</c:if>
-							<c:forEach begin="${pageMaker1.startPage}" end="${pageMaker1.endPage}" var="pageNum">
-								<li>
-									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
-								</li>
-							</c:forEach>
-							<c:if test="${pageMaker1.next && pageMaker1.endPage > 0}">
-								<li>
-									<a href='<c:url value="/board/listArticlesPaging.do?page=${pageMaker1.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
-										<span class="glyphicon glyphicon-chevron-right"></span></a>
-								</li>
-							</c:if>
+							
+						<li>
+							<button onClick="moreCount('buy')">더보기</button>
+						</li>
+							
+							
 						</ul>
 					</div><!-- 숫자 버튼 -->
 				</td>
@@ -248,6 +239,7 @@
 
 		
 		<form id="formList" action="/mypage/marketInfo.do" method="get">
+			<input type="hidden" name="userId">
 			<input type="hidden" name="page">
 			<input type="hidden" name="searchType">
 			<input type="hidden" name="keyword">
@@ -273,6 +265,20 @@ $(document).ready(function() {
 		formObj.submit();
 	});
 });
+</script>
+
+<script>
+let bc = ${buycount};
+let sc = ${salecount};
+
+function moreCount(type){
+	if (type == 'buy'){
+		bc ++;
+		location.href = "/mypage/marketInfo.do?buycount=" + bc + "&salecount=" + sc;
+	} else if(type == 'sale')
+		sc ++;
+		location.href = "/mypage/marketInfo.do?buycount=" + bc + "&salecount=" + sc;
+}
 </script>
 </body>
 </html>

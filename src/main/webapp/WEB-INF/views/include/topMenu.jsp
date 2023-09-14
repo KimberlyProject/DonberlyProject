@@ -112,6 +112,8 @@ if("${memberlevel.userStatus}" == "N1"){
 	                   </ul>
 	               </div>
 	                
+	                
+	                
 	                <%-- <a href="${path}/myPage/myPage" class="navbar-link"></span><span class="glyphicon glyphicon-user"></span> ${ member.nickname } 님</a> --%>
 	            </div>
             </c:if>
