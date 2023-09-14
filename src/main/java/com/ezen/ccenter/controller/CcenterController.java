@@ -62,9 +62,17 @@ public class CcenterController {
 	// 신고하기 화면 접속
 	//---------------------------------------------------------------------------------------------------------------------------------------	
 	@RequestMapping(value="/report", method=RequestMethod.GET)
-	public String getReport(Model model) {
-		System.out.println("신고하기 화면 접속!!!!!!!!!!!!!!!!!");
-		return "/ccenter/report";
+	public ModelAndView getReport(String report) {
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/ccenter/report");
+
+		System.out.println(report);
+		
+		mav.addObject("report", report);
+		
+		
+		return mav;
 	}
 	
 	//---------------------------------------------------------------------------------------------------------------------------------------

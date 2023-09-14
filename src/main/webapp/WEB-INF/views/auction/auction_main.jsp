@@ -10,6 +10,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<%@ include file="../include/header.jsp" %>
+	<%@ include file="../member/profileModal.jsp" %>
 	<style>
 		.colon{
 			width: 4px;
@@ -177,7 +178,8 @@
 					</th>
 				</tr>
 				<tr>
-					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">[${article.aucId}]님</th>
+					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4"><a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}'})">${article.nickname}</a>
+						</th>
 				</tr>
 				<tr>
 					<th class="cate">현재 입찰가</th><th class="colon">:</th>

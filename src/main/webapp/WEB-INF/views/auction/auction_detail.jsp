@@ -8,6 +8,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<%@ include file="../include/header.jsp" %>
+	<%@ include file="../member/profileModal.jsp" %>
 	<style>
 		.colon{
 			width: 4px;
@@ -176,7 +177,7 @@
 			<tr> <!-- 판매자 -->
 				<th class="cate">판매자</th>
 				<th class="colon">:</th>
-				<th colspan="4">${article.aucId}님
+				<th colspan="4"><a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}'})">${article.nickname}</a>
 					<c:choose>
 					<c:when test="${member.userId != article.aucId}">
 						<input id="chat" type="button" class="btn btn-primary buyBtn" style="color:#FFFFFF;" value="채팅하기">
@@ -185,7 +186,7 @@
 				</th>
 			</tr>
 			<tr><!-- 현재입찰가 -->
-				<th class="cate">현재입찰가 &nbsp; [${article.cstmId}]님</th>
+				<th class="cate">현재입찰가 &nbsp;[${article.cstmId}]님</th>
 				<th class="colon">:</th>
 				<th colspan="4"><fmt:formatNumber type="number" value="${article.nowBid}" pattern="#,##0"/> 원
 					<c:choose>
