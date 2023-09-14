@@ -59,7 +59,25 @@ public class AdminController {
 		return mav;
 	}
 	
-
+	//-----------------------------------------------------------------------------------------------------------
+	// 1:1 문의하기 리스트 삭제
+	//-----------------------------------------------------------------------------------------------------------
+	@RequestMapping(value="/delArticle", method=RequestMethod.POST)
+	public ModelAndView delArticle(HttpServletRequest request) throws Exception {
+		int articleNo[] = Integer.parseInt(request.getParameterValues("num"));
+		
+		logger.info("articleNo : " + articleNo);
+		
+		ModelAndView mav = new ModelAndView();
+		String viewName = "redirect:/admin/oneOnOneInquiry";
+		
+		for(int i = 0; i < articleNo.length; i++) {
+			adminService.deleteArticle(Integer.parseInt(articleNo[i]));
+		}
+		
+		mav.setViewName(viewName);
+		return mav;
+	}
 	
 	//-----------------------------------------------------------------------------------------------------------
 	// 신고하기 리스트 생성

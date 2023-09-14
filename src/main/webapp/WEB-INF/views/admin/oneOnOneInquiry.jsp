@@ -148,23 +148,22 @@
 				<select class="col-sm-2 searchgroup" id="searchType">
 					<option value="a" <c:if test="{searchType} == 'a'">selected</c:if>>전체</option>
 					<option value="t" <c:if test="{searchType} == 't'">selected</c:if>>제목</option>
-					<option value="c" <c:if test="{searchType} == 'c'">selected</c:if>>내용</option>
 					<option value="w" <c:if test="{searchType} == 'w'">selected</c:if>>작성자</option>
-					<option value="p" <c:if test="{searchType} == 'p'">selected</c:if>>상품번호</option>
 				</select>
 				<input  class="col-sm-2 searchgroup form-control" type="text" class="form-control" placeholder="검색하기">
 				<button id ="searchbtn" class="btn btn-success" type="button">
 					<span class="glyphicon glyphicon-search"/>
 				</button>   
 			</div>
-			<button class="btn btn-danger col-sm-1">삭제하기</button>
+			<button class="btn btn-danger col-sm-1" id="delArticle">삭제하기</button>
 		</div>
 		<!-- 삭제버튼 -->
       	
       	<!-- 검색창 -->
+      	<form>
 		<table class="table table-bordered table-striped table-hover">
 			<thead>
-				<tr class="head" style="background: rgb(73, 124, 64); color: #FFF;">
+				<tr id="head" style="background: rgb(73, 124, 64); color: #FFF;">
 					<th style="vertical-align:middle;"><span class="glyphicon glyphicon-ok"></span></th>
 					<th>NO</th>
 					<th>TITLE</th>
@@ -175,9 +174,10 @@
 			</thead>
 			<tbody>
 			<c:forEach var="ask" items="${ask}" varStatus="articleNum">
-				<tr>
-					<td><input type="checkbox" style="width: 100%;"/></td>
-					<td>
+				<tr class="article">
+					<td><input class="check" type="checkbox" style="width: 100%;"/></td>
+					<td class="articleNo">
+						<input class="num" name="num" type="hidden">
 						${ask.articleNo}
 					</td>
 					<td>
@@ -207,12 +207,34 @@
 			</c:forEach>
 			</tbody>
 		</table>
+		</form>
 	</div>
 	<%@ include file="../include/footer.jsp" %>
 	<script>
 		$(document).ready(function(){
 			$("tr").on("click", function() {
 				$(this).next("tr").find(".content").toggleClass("on");
+			});
+			
+			$("#delArticle").on("click", function() {
+				const frm = $("#head").closest("form");
+				let articleNo = [];
+				
+				//$(".article", ".check", ".articleNo").each(function() {
+					
+				//});
+				for(let i = 0; i < $(".article").length; i++){
+					console.log($(".article").find(".check:eq(" + i + ")").is(":checked"));
+					if($(".article:eq(" + i + ")").find(".check").is(":checked")){
+						articleNo[i] = $(".article:eq(" + i + ")").find(".articleNo").text();
+					}
+					$(".num:eq(" + i + ")").prop("value", articleNo[i]);
+					console.log($(".num:eq(" + i + ")").val());
+				}
+				
+				frm.prop("action", "/admin/delArticle");
+				frm.prop("method", "post");
+				frm.submit();
 			});
 		});
 	</script>

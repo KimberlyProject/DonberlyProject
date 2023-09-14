@@ -111,6 +111,14 @@ public class AdminDAOImpl implements AdminDAO {
 		System.out.println("1:1문의 정보: " + listOneOnOne);
 		return listOneOnOne;
 	}
+
+	//--------------------------------------------------------------------------------------------------
+	// 1:1 문의하기 리스트 삭제
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public void deleteArticle(int articleNo) throws Exception {
+		sqlSession.delete(namespace + ".deleteArticle", articleNo);
+	}
 	
 	//--------------------------------------------------------------------------------------------------
 	// 신고하기 내역 리스트 생성

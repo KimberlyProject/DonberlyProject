@@ -51,6 +51,14 @@
 		ORDER BY 	articleNo desc
 	</select>
 	
+	<!-- 1:1 문의하기 글 삭제 -->
+	<delete id="deleteArticle" parameterType="int">
+		<![CDATA[
+			DELETE FROM ask
+			WHERE articleNo = #{articleNo}
+		]]>
+	</delete>
+	
 	<!-- 신고하기 목록 출력 -->
 	<select id="listReportAnswer" resultMap="reportResult">
 		
