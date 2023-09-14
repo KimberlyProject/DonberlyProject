@@ -82,8 +82,8 @@ public class AuctionController {
 		
 		mav.addObject("articles", articles);	
 		mav.addObject("imgs", imgs);
-		 mav.addObject("pageMaker", pageMaker);
-		    mav.addObject("cri", cri);
+		mav.addObject("pageMaker", pageMaker);
+		mav.addObject("cri", cri);
 		return mav;
 	}	
 	
