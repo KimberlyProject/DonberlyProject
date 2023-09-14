@@ -8,7 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.ezen.board.dto.BuyArticleDTO;
-import com.ezen.board.dto.SearchCriteria;
+import com.ezen.mypage.dto.SearchCriteria;
 
 @Repository("infoDAO")
 public class InfoDAO {
@@ -30,6 +30,13 @@ public class InfoDAO {
 	//-----------------------------------------------------------------------------------------------------------
 	public List<BuyArticleDTO> infoListPaging(SearchCriteria cri, int i) throws DataAccessException {
 		return sqlSession.selectList(namespace + ".infoListPaging"+ i, cri);
+	}
+	public List<BuyArticleDTO> infoList(int i, int ibuycount, int isalecount) throws DataAccessException {
+		if(i == 1) {
+			return sqlSession.selectList(namespace + ".infoList"+ i, ibuycount);			
+		}else {
+			return sqlSession.selectList(namespace + ".infoList"+ i, isalecount);
+		}
 	}
 	
 }
