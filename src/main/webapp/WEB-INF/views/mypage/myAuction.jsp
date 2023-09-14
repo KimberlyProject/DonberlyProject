@@ -66,7 +66,12 @@
         .gray {
         	color: gray;
         }
-      
+      	.saleBtn {
+      		width: 100px;
+      	}
+      	.title {
+      		text-align: center;
+      	}
      
 
 	</style>
@@ -101,7 +106,7 @@
       <a href="#">마이페이지</a> &gt;
        <a href="#">경매내역</a> &gt;
     </div>
-    <h1 class="pageTitle"><div>경매내역</div></h1>
+    <h1 class="pageTitle"><div>내가 올린 경매 상품</div></h1>
     
     
     <%
@@ -117,30 +122,27 @@
 	}
 	%>
     
-    
-	<div class="container">
-		<br/><br/>
+	<%
+	//현재시간 밀리초,
+	long currentTimeMillis = System.currentTimeMillis();
+	//데이터형식 변환
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	String formattedDate = dateFormat.format(new java.util.Date(currentTimeMillis));
+	%>
+	<!-- EL식 조건문을 위한 변수설정 -->
+	<c:set var="today" value="<%= formattedDate %>" />
+		
 	
-		<a href="/auction/myBid">내가 입찰한 상품만 보기</a><br/><br/><br/>
-		
-		<%
-		//현재시간 밀리초,
-		long currentTimeMillis = System.currentTimeMillis();
-		//데이터형식 변환
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String formattedDate = dateFormat.format(new java.util.Date(currentTimeMillis));
-		%>
-		<!-- EL식 조건문을 위한 변수설정 -->
-		<c:set var="today" value="<%= formattedDate %>" />
-		
+	<div class="container">
+   		<a href="/auction/myBid"> > 내가 입찰한 경매 상품만 보기</a><br/><br/><br/>
 		<!-- 경매 게시글 -->
 		<!-- 게시글이 하나도 없는 경우 -->
 		<c:choose>
-		<c:when test="${empty article.aucId == member.userId}">
+		<c:when test="${empty articles}">
 			<div>
 				<div>
 					<p align="center">
-						<b><span style="font-size:22px;">등록된 게시글이 없습니다.</span></b>
+						<b><span style="font-size:22px;">아직 경매에 참여하지 않았습니다.</span></b>
 					</p>
 				</div>
 			</div>
@@ -214,12 +216,15 @@
 							<th clospan="4"><span class="blue">입찰 진행중</span>
 								<c:choose><c:when test="${article.cstmId != null}">
 									&nbsp;&nbsp;&nbsp;[${article.cstmId}]님
+									<input id="chat" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="채팅하기">		
 								</c:when></c:choose>
 							</th>
 						</c:when></c:choose>
 						<!-- 판매 완료 orange-->
 						<c:choose><c:when test="${article.status == 1}">
-							<th colspan="4"><span id="gray"><span class="gray">판매완료</span>&nbsp;&nbsp;&nbsp;[${article.cstmId}]님</span></th>
+							<th colspan="4"><span id="gray"><span class="gray">판매완료</span>&nbsp;&nbsp;&nbsp;[${article.cstmId}]님</span>
+							<input id="chat" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="채팅하기">
+							</th>
 						</c:when></c:choose>	
 				</tr>
 				</c:when>

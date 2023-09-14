@@ -19,44 +19,65 @@ public class CcenterDTO {
 	// 게시글 내용
 	private String content;
 	
-	
+	// 답변 받을 이메일
+	private String email;
+
 	
 	public int getArticleNo() {
 		return articleNo;
 	}
+
 	public void setArticleNo(int articleNo) {
 		this.articleNo = articleNo;
 	}
+
 	public String getUserId() {
 		return userId;
 	}
+
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
+
 	public Date getWriteDate() {
 		return writeDate;
 	}
+
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
 		return "CcenterDTO [articleNo=" + articleNo + ", userId=" + userId + ", writeDate=" + writeDate + ", title="
-				+ title + ", content=" + content + "]";
-	} 
+				+ title + ", content=" + content + ", email=" + email + "]";
+	}
+	
+	
 	
 	
 	

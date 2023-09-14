@@ -4,15 +4,14 @@
 	
 <mapper namespace="com.ezen.ccenter.mappers.ccenterMapper">
 
-	 <!-- 1대1 문의글 등록 -->
+	 <!-- 1:1 문의글 등록 -->
     <insert id="addNewAsk" parameterType="java.util.Map">
 		<![CDATA[
 			insert into 
-			ask	(articleNo, userId, writedate, title, content) 
-			values (#{articleNo}, #{userId}, sysdate, #{title}, #{content})
+			ask	(articleNo, userId, email, writeDate, title, content) 
+			values (#{articleNo}, #{userId}, #{email}, sysdate, #{title}, #{content})
 		]]>
 	</insert>
-	
 	
 	<select id="selectNewArticleNO" resultType="int">
 		<![CDATA[
@@ -22,4 +21,20 @@
 	
 	</select>
 	
+	 <!-- 신고하기 문의글 등록 -->
+    <insert id="addNewReport" parameterType="java.util.Map">
+		<![CDATA[
+			insert into 
+			report	(articleNo, reporter, reportedUser, writeDate, reason, content) 
+			values (#{articleNo}, #{reporter}, #{reportedUser}, sysdate, #{reason}, #{content})
+		]]>
+	</insert>
+	
+	<select id="selectArticleNO" resultType="int">
+		<![CDATA[
+		SELECT	NVL(MAX(articleNo), 0) + 1
+		FROM	report
+		]]>
+	
+	</select>
 </mapper>

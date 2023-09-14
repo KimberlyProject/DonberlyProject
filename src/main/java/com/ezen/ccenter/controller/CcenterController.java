@@ -155,4 +155,73 @@ public class CcenterController {
 		return "/ccenter/askOnetoOneAnswer";
 	}
 	
+	
+	//---------------------------------------------------------------------------------------------------------------------------------------
+	// 신고하기 문의 글 -> 관리자 페이지로 작성
+	//---------------------------------------------------------------------------------------------------------------------------------------
+	@RequestMapping(value="/addNewReport.do", method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity addNewReport(HttpServletRequest Request, HttpServletResponse response)
+			throws Exception {
+			
+		Map<String, Object> articleMap = new HashMap<String, Object>();
+		
+		// pom.xml에 업로드관련 라이브러리를 추가한다.
+		// 먼저 servlet-xml에 파일 업로드 관련 설정을 해야 한다.
+		// 파일업로드에 대한 규칙(multipartResolver)을 적용한다. 
+
+		System.out.println("신고하기 Controller 시작");
+		
+		HttpSession session	= Request.getSession();
+		MemberDTO memberDTO	= (MemberDTO) session.getAttribute("member");
+		String	userId = memberDTO.getUserId();
+		
+		logger.info("3333333333333333333333333333333333333333333333333333333333333333333333");
+		logger.info("userId : " + userId);
+		
+		articleMap.put("userId", 	userId);
+		System.out.println("id 보여줘" + userId);
+		
+		String	message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-type", "text/html;charset=UTF-8");
+		
+		//
+		Enumeration enu = Request.getParameterNames();
+	    System.out.println("enu : " + enu);
+		
+		while(enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+			String value = Request.getParameter(name);
+			System.out.println("name: " + name);
+			System.out.println("value: " + value);
+			articleMap.put(name, value);
+		}
+	
+		//
+		
+		try {
+			int articleNo = ccenterService.addNewReport(articleMap);
+			
+			System.out.println(articleNo);
+			
+			message	 = "<script>";
+			message	+= "alert('새로운 글을 추가하였습니다.');";
+			message	+= "location.href='" + Request.getContextPath() + "/';";
+			message	+= "</script>";
+			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		} catch (Exception e) {
+			
+			message	 = "<script>";
+			message	+= "alert('오류가 발생하였습니다.\n다시 시도해 주십시오.');";
+			message	+= "location.href='" + Request.getContextPath() + "/';";
+			message	+= "</script>";
+			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		System.out.println("신고하기 Controller 끝");
+		return resEnt;
+		
+	}
 }

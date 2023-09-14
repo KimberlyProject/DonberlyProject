@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
 <html>
 <head>
 	<title>Home</title>
@@ -37,10 +38,16 @@
 			width:				5%;
 		}
 		.head > th:nth-child(2) {
-			width:				65%;
+			width:				5%;
 		}
 		.head > th:nth-child(3) {
-			width:				15%;
+			width:				10%;
+		}
+		.head > th:nth-child(4) {
+			width:				10%;
+		}
+		.head > th:nth-child(5) {
+			width:				55%;
 		}
 		.head > th:last-child {
 			width:				15%;
@@ -49,61 +56,87 @@
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-
 	<aside id="sideMenu">
       <ul>
-        <li><a href="./notice">공지사항</a></li>
-        <li><a href="./qna">Q & A</a></li>
-        <li><a href="./askOnetoOne">1:1문의하기</a></li>
-        <li><a href="./report">신고하기</a></li>
+        <li><a href="./oneOnOneInquiry">1:1 문의하기 내역</a></li>
+        <li><a href="./reportAnswer">신고하기 내역</a></li>
+        <li><a href="./memberList">회원 목록</a></li>
       </ul>
       <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
     </aside>
-
-	<c:set var="menu" value="ccenter" />
-	<%@ include file="../include/sidebar.jsp" %>
-
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      홈 &gt; 고객센터 &gt; 공지사항
+      <span><a href="./reportAnswer">관리자</a></span>
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span><a href="./reportAnswer">신고하기 내역</a></span>
     </div>
-    <h1 class="pageTitle"><div>공지사항</div></h1>
+    <h1 class="pageTitle"><div>신고하기 내역</div></h1>
+	
 	<div class="container">
+
+		<!-- 내역 나열 방식(최신순,오래된순) -->
+		<select>
+			<option>최신순</option>
+			<option>오래된순</option>
+		</select>
+		
 		<!-- 검색창 -->
 		<div class="row" style="vertical-align: middle; float:right;">
 			<select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
 				<option value="a" <c:if test="{searchType} == 'a'">selected</c:if>>전체</option>
 				<option value="t" <c:if test="{searchType} == 't'">selected</c:if>>제목</option>
-				<option value="c" <c:if test="{searchType} == 'c'">selected</c:if>>내용</option>
+				<option value="w" <c:if test="{searchType} == 'w'">selected</c:if>>작성자</option>
 			</select>
 			<input  class="col-sm-2 searchgroup form-control" type="text" class="form-control" style="width:200px;" placeholder="검색하기">
 			<button id ="searchbtn" class="btn btn-success" type="button">
 				<span class="glyphicon glyphicon-search"/>
 			</button>   
 		</div>
+      	
       	<!-- 검색창 -->
 		<table class="table table-bordered table-striped table-hover">
 			<thead>
 				<tr class="head" style="background: rgb(73, 124, 64); color: #FFF;">
-					<th>No</th>
-					<th>Title</th>
-					<th>Id</th>
-					<th>Date</th>
+					<th><span class="glyphicon glyphicon-ok"></span></th>
+					<th>NO</th>
+					<th>작성자</th>
+					<th>신고대상</th>
+					<th>사유</th>
+					<th>DATE</th>
 				</tr>
 			</thead>
 			<tbody>
+			<c:forEach var="report" items="${report}" varStatus="articleNum">
 				<tr>
-					<td>1</td>
-					<td class="title">Donberly w1.0 GRAND OPEN!</td>
-					<td>admin1234</td>
-					<td>2023.08.23</td>
-				</tr>
-				<tr>
-					<td class="content" colspan="4">
-						Donberly w1.0이 오픈되었습니다!!!<br/>
-						많은 이용 부탁드립니다!!!
+					<td><input type="checkbox" style="width: 100%;"/></td>
+					<td>
+						${report.articleNo}
+					</td>
+					<td>
+						${report.reporter}
+					</td>
+					<td>
+						${report.reportedUser}
+					</td>
+					<td>
+						${report.reason}
+					</td>
+					<td>
+						<fmt:formatDate value="${report.writeDate}" pattern="yy년 MM월 dd일"/><br/>
 					</td>
 				</tr>
+				<tr>
+					<td class="content" colspan="6">
+						${report.content}
+						<br/>
+						<br/>
+						<div>
+							<button id ="replybtn" class="btn btn-success col-sm-1" type="button">답변하기</button>
+						</div>
+					</td>
+					
+				</tr>
+			</c:forEach>
 			</tbody>
 		</table>
 	</div>

@@ -23,9 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-import com.ezen.board.dto.BuyArticleVO;
-import com.ezen.auction.dto.AuctionDTO;
 
+import com.ezen.board.dto.BuyArticleDTO;
+import com.ezen.auction.dto.AuctionDTO;
 import com.ezen.chat.dao.ChatDAO;
 import com.ezen.chat.dto.ChatDTO;
 import com.ezen.chat.dto.ChatListDTO;
@@ -64,7 +64,7 @@ public class ChatController {
 		//아티클 넘버로 아티클VO 가져오기
 
 		if(chatListDTO.getStatus().equals("s") || chatListDTO.getStatus().equals("b")) {
-			BuyArticleVO articleVO = chatService.findArticleVOFromArtNo(artNo,chatListDTO.getStatus()); // 여기 dao에서 s b a 구별해서 가져옴
+			BuyArticleDTO articleVO = chatService.findArticleVOFromArtNo(artNo,chatListDTO.getStatus()); // 여기 dao에서 s b a 구별해서 가져옴
 			System.out.println("************************************"+articleVO);
 			session.setAttribute("session",articleVO);			
 		}
@@ -122,8 +122,8 @@ public class ChatController {
 	}
 	
 	//값으로 articleDTO가져오기
-	public List<BuyArticleVO> getArtDTO(int artNo)  throws Exception{
-		List<BuyArticleVO> articleList = chatService.getArtDTO(artNo);
+	public List<BuyArticleDTO> getArtDTO(int artNo)  throws Exception{
+		List<BuyArticleDTO> articleList = chatService.getArtDTO(artNo);
 		System.out.println("######################"+articleList);
 		return articleList;
 	}
@@ -147,7 +147,8 @@ public class ChatController {
 		//System.out.println("채팅 리스트*******************"+lastchat);
 		
 		//닉네임 찾기
-		List<BuyArticleVO> memberList = chatService.findAllMemeber();
+		List<BuyArticleDTO> memberList = chatService.findAllMemeber();
+		List<ChatDTO> count= chatService.countChat(userId);
 		
 		System.out.println(memberList);
 		ModelAndView mav = new ModelAndView(viewName);
@@ -155,7 +156,9 @@ public class ChatController {
 		//System.out.println(lastchat);
 		mav.addObject("chatList",chatList);//넘겨줄 이름, 데이터
 		mav.addObject("lastChat",lastchat);//마지막 채팅
-		mav.addObject("nickname",memberList);
+		mav.addObject("nickname",memberList);//닉네임 담은 리스트
+		mav.addObject("count",count);
+		System.out.println("카운트야야야야야야야****************"+count);
 		//mav.addObject("",);
 		//viewName이 없기 때문에 URL로 부터 뷰 이름을 검색한다.
 		// /board/listArticlres.do => /vboard/listArticles
@@ -234,10 +237,11 @@ public class ChatController {
 		chatService.readChat(chatDTO);
 	}
 	//안읽은 채팅의 개수
-	public int countChat(String userId,int chatId) {
+	public List countChat(String userId) throws Exception{
+		List count = chatService.countChat(userId); //안읽은 채팅 개수 전부 가져오기
+		System.out.println("안읽은 개수!!!!!!!!!*********"+count);
 		
-		//chatService.countChat(userId,chatId);
-		return 0;
+		return count;
 	}
 	
 	

@@ -1,15 +1,16 @@
-package com.ezen.auction.dto;
+package com.ezen.admin.dto;
 
 public class PageMaker {
 	
-	private	SearchCriteria	cri;
-	private	int			totalCount;				
-	private	int			startPage;				
-	private	int			endPage;				
-	private	boolean		prev;					
-	private	boolean		next;					
-	private	int			displayPageNum = 5;
+	private SearchCriteria	cri;
+	private int				totalCount;			// 전체 페이지 개수
+	private int				startPage;			// 현재 화면에서 보이는 startPage 번호
+	private int				endPage;			// 현재 화면에서 보이는 endPage 번호
+	private boolean			prev;				// 페이징 이전 버튼 활성화 여부
+	private boolean			next;				// 페이징 다음 버튼 활성화 여부
+	private int				displayPageNum = 3;	// 화면 하단에 보여줄 페이지 개수(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 	
+	// getters and setters
 	public SearchCriteria getCri() {
 		return cri;
 	}
@@ -24,25 +25,28 @@ public class PageMaker {
 		calculatePages();
 	}
 	
+	// 화면 하단에 보여줄 페이지를 계산한다.
 	private void calculatePages() {
-		endPage = (int) (Math.ceil(cri.getPage() / (double)displayPageNum) * displayPageNum);
+		endPage = (int)(Math.ceil(cri.getPage() / (double)displayPageNum) * displayPageNum);
+		// ceil 무조건 올림
+		// floor 무조건 내림
 		
-		startPage	= (endPage - displayPageNum) + 1;
-		if(startPage <= 0)	startPage = 1;
+		startPage = (endPage - displayPageNum) + 1;
+		if(startPage <= 0) startPage = 1;
 		
+		// 보여줄 총 페이지 건수를 계산한다.
+		int realEndPage = (int)(Math.ceil(totalCount / (double)cri.getPerPageNum()));
 		
-		int realEndPage	= (int) (Math.ceil(totalCount / (double)cri.getPerPageNum())); 
 		if(endPage > realEndPage) {
 			endPage = realEndPage;
 		}
 		
+		// 이전 페이지(prev) : startPage가 1이 아닌 경우에만 활성화 시킨다.
 		prev = startPage == 1 ? false : true;
 		
-	
+		// 다음 페이지(next)
 		next = endPage * cri.getPerPageNum() < totalCount ? true : false;
 	}
-	
-	
 	public int getStartPage() {
 		return startPage;
 	}
@@ -74,10 +78,12 @@ public class PageMaker {
 		this.displayPageNum = displayPageNum;
 	}
 	
+	// toString
 	@Override
 	public String toString() {
 		return "PageMaker [cri=" + cri + ", totalCount=" + totalCount + ", startPage=" + startPage + ", endPage="
 				+ endPage + ", prev=" + prev + ", next=" + next + ", displayPageNum=" + displayPageNum + "]";
 	}
+	
 	
 }

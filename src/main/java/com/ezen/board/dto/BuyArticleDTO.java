@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 //-----------------------------------------------------------------------------------------------------------
 // 게시글
 //-----------------------------------------------------------------------------------------------------------
-@Component("buyArticleVO")
-public class BuyArticleVO {
+@Component("buyArticleDTO")
+public class BuyArticleDTO {
 	private	int		rnum;
 	private	int		level;
 	private	int		articleNO;
@@ -95,7 +95,7 @@ public class BuyArticleVO {
 	}
 
 	public String getTitle() {
-		return title;
+		return title.replaceAll("(?i)<script", "&lt;script");
 	}
 
 	public void setTitle(String title) {
@@ -103,7 +103,7 @@ public class BuyArticleVO {
 	}
 
 	public String getContent() {
-		return content;
+		return content.replaceAll("(?i)<script", "&lt;script");
 	}
 
 	public void setContent(String content) {
@@ -161,7 +161,7 @@ public class BuyArticleVO {
 
 	@Override
 	public String toString() {
-		return "ArticleVO [rnum=" + rnum + ", level=" + level + ", articleNO=" + articleNO + ", userId=" + userId
+		return "BuyArticleDTO [rnum=" + rnum + ", level=" + level + ", articleNO=" + articleNO + ", userId=" + userId
 				+ ", write_date=" + write_date + ", title=" + title + ", content=" + content + ", p_code=" + p_code
 				+ ", purpose=" + purpose + ", view=" + view + ", thumbnail=" + thumbnail + ", price=" + price
 				+ ", nickname=" + nickname + ", email=" + email + "]";

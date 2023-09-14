@@ -12,8 +12,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 
+
+import com.ezen.board.dto.BuyArticleDTO;
 import com.ezen.auction.dto.AuctionDTO;
-import com.ezen.board.dto.BuyArticleVO;
 
 import com.ezen.chat.controller.ChatController;
 import com.ezen.chat.dto.ChatDTO;
@@ -48,7 +49,7 @@ public class ChatDAOImpl implements ChatDAO {
 	}
 
 	@Override
-	public List<BuyArticleVO> getArtDTO(int artNo) throws Exception {
+	public List<BuyArticleDTO> getArtDTO(int artNo) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".getArticle", artNo);
 	}
@@ -115,7 +116,7 @@ public class ChatDAOImpl implements ChatDAO {
 	}
 
 	@Override
-	public BuyArticleVO findArticleVOFromArtNo(int artNo,String status) throws Exception {
+	public BuyArticleDTO findArticleVOFromArtNo(int artNo,String status) throws Exception {
 		if(status.equals("s")) {
 			return sqlSession.selectOne(namespace+".findArticleVOFromArtNoS",artNo);
 			
@@ -151,7 +152,7 @@ public class ChatDAOImpl implements ChatDAO {
 	}
 
 	@Override
-	public List<BuyArticleVO> findAllMemeber() throws Exception {
+	public List<BuyArticleDTO> findAllMemeber() throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".findAllMemeber");
 	}
@@ -176,10 +177,9 @@ public class ChatDAOImpl implements ChatDAO {
 
 	//채팅 안읽은거 개수
 	@Override
-	public int countChat(String userId, int chatId) throws Exception {
+	public List countChat(String userId) throws Exception {
 		
-		//return sqlSession.selectOne(namespace+".countChat",userId,chatId);
-		return 0;
+		return sqlSession.selectList(namespace+".countChat",userId);
 	}
 
 	

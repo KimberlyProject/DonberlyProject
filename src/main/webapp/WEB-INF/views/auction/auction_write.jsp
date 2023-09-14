@@ -88,12 +88,15 @@
       </ul>
       <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
     </aside>
-    <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <a href="/">홈</a> &gt;
-      <a href="/auction/auction_main">경매장</a> &gt;
-      <a href="#">경매올리기</a>
-    </div>
+    
+    <!-- 배너 -->
+	<div class="page_dir container">
+		<button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+		<a href="/">홈</a> &gt;
+		<a href="/auction/auction_main">경매장</a> &gt;
+		<a href="#">경매상품 올리기</a>
+	</div>
+	<h1 class="pageTitle"><div>경매 상품 올리기</div></h1>
     
    <%
 	//로그인 세션 없으면 로그인을 먼저 하도록 한다.
@@ -110,12 +113,11 @@
 		
 	<div class="container">
 		<form id="formgroup" name="aucArticle" method="post" action="${path}/auction/addNewArticle" enctype="multipart/form-data">
-			<input type="hidden" name="aucId" ${member.userId}/>
 			<!-- 글쓰기 -->
 			<table id="tb1" class="row table table-bordered table-striped">
 				<tr><!-- 사진, 제목 -->  
 					<th class="cate">제목</th> 
-					<th colspan="2"><input id="title" type="text" maxlength="500" name="title" placeholder="예) 상품명"> &nbsp;&nbsp;&nbsp; 판매자 [${member.userId}] 님</th>
+					<th colspan="2"><input id="title" type="text" maxlength="500" name="title" placeholder="예) 상품명"> &nbsp;&nbsp;&nbsp; 판매자 [${member.nickname}] 님</th>
 				<tr> <!-- 최소금액 -->
 					<th id="minprice" class="cate">최소 금액</th>					
 					<th colspan="2"><input id="minPrice" class="commas" onkeyup="addCommas(this)" type="text" maxlength="10" name="minPrice" placeholder="숫자만 입력하세요">원</th>
@@ -152,17 +154,18 @@
 					</th>
 				</tr>
 				<tr>
-					<th class="cate">사진첨부<br/><br/><br/><br/><br/>
+					<th class="cate">사진첨부<br/><br/><br/><br/><br/><br/><br/>
 						<input id="imgAdd" type="button" value="사진 추가" onClick="fn_addFiles()"/>
 					</th>	
 					<th>
-						<div id="d_file" style="overflow-y: scroll; height: 150px; max-height: 200px;">
+						<div id="d_file" style="overflow-y: scroll; height: 200px; ">
 						 	<span id="imgInfo"> 
-						 	첫번째 사진이 썸네일로 설정됩니다.<br/> 원활한 경매 진행을 최소 2장 이상의 사진을 올려주세요. &nbsp;&nbsp;</span>
+						 	첫번째 사진이 썸네일로 설정됩니다.<br/> 원활한 경매 진행을 최소 2장 이상의 사진을 올려주세요.<br/>
+						 	사진이 없을 시 입찰자 없이 경매가 종료될 수 있습니다.</span>
 						 	
 						 	<br/><br/>
 							<input type="file" name="imageFileName" onchange="readAndResize(this)"><br/>
-							<input type="file" name="imageFileName" onchange="readAndResize(this)">
+							<input type="file" name="imageFileName2" onchange="readAndResize(this)">
 						</div>
 					</th>
 				<tr>
@@ -177,8 +180,8 @@
 			</table> <!-- 글쓰기 -->
 			<br/>
 			<br/>
-			<div id="submit">
-			<input class="btn btn-success" type="submit" id="submit" value="상품 올리기"/>
+			<div>
+			<input class="btn btn-success" type="submit" value="상품 올리기" onclick="disableButton(this)"/>
 			</div>
 		</form>
 		<br/>
@@ -189,20 +192,8 @@
 
 <script>
 
-	//버튼 중복클릭 방지
-	var doubleSubmitFlag = false;
-	function doubleSubmitCheck(){
-	    if(doubleSubmitFlag){
-	        return doubleSubmitFlag;
-	    }else{
-	        doubleSubmitFlag = true;
-	        return false;
-	    }
-	}
 
 	$("#submit").on("click", function() {
-		if(doubleSubmitCheck()) return;
-		
 		if($("#title").val() == "") {
 			alert("제목을 입력해주세요.");
 			$("#title").focus();

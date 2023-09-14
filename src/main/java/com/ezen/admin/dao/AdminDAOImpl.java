@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.ezen.ccenter.dto.CcenterDTO;
+import com.ezen.ccenter.dto.ReportDTO;
+import com.ezen.admin.dto.Criteria;
 import com.ezen.member.dto.MemberDTO;
 
 @Repository
@@ -80,14 +82,45 @@ public class AdminDAOImpl implements AdminDAO {
 		sqlSession.insert(namespace + ".Psuspension", userId);
 		
 	}
-	
 
+	//--------------------------------------------------------------------------------------------------
+	// cri를 가지고 검색한 총 건수의 전체 게시글 수 구하기(paging 처리)
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public int memberListTotalCount(Criteria cri) throws Exception {
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ cri ==> " + cri);
+		return sqlSession.selectOne(namespace + ".memberListTotalCount", cri);
+	}
+
+	//--------------------------------------------------------------------------------------------------
+	// 게시글 목록 가져오기(paging)
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public List<MemberDTO> memberListPaging(Criteria cri) throws Exception {
+		System.out.println("###################### cri ==> " + cri);
+		return sqlSession.selectList(namespace + ".memberListPaging", cri);
+	}
+	
+	//--------------------------------------------------------------------------------------------------
+	// 1:1 문의 내역 리스트 생성
+	//--------------------------------------------------------------------------------------------------
 	@Override
 	public List<CcenterDTO> listOneOnOne() throws Exception {
 		List<CcenterDTO> listOneOnOne = sqlSession.selectList(namespace + ".listOneOnOne");
 		
 		System.out.println("1:1문의 정보: " + listOneOnOne);
 		return listOneOnOne;
+	}
+	
+	//--------------------------------------------------------------------------------------------------
+	// 1:1 문의 내역 리스트 생성
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public List<ReportDTO> listReportAnswer() throws Exception {
+		List<ReportDTO> listReportAnswer = sqlSession.selectList(namespace + ".listReportAnswer");
+		
+		System.out.println("신고하기 정보: " + listReportAnswer);
+		return listReportAnswer;
 	}
 	
 }

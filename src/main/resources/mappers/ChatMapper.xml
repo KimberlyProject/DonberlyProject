@@ -33,7 +33,7 @@
 	</insert>
 	
 	<!-- 채팅누른 아티클번호 가져오기 -->
-	<select id="getArticle" parameterType="int" resultType="com.ezen.board.dto.BuyArticleVO">
+	<select id="getArticle" parameterType="int" resultType="com.ezen.board.dto.BuyArticleDTO">
 		select * from article_buy
 		where articleNo = #{artNo}
 	</select>
@@ -97,7 +97,7 @@
 	</select>
 	
 	<!-- artNo으로 articleVO끌어오기 (buy) -->
-	<select id="findArticleVOFromArtNoB" parameterType="int" resultType="buyArticleVO">
+	<select id="findArticleVOFromArtNoB" parameterType="int" resultType="buyArticleDTO">
 		<![CDATA[
 		
 			SELECT	*
@@ -108,7 +108,7 @@
 	</select>
 	
 	<!-- artNo으로 articleVO끌어오기 (sale)-->
-	<select id="findArticleVOFromArtNoS" parameterType="int" resultType="buyArticleVO">
+	<select id="findArticleVOFromArtNoS" parameterType="int" resultType="buyArticleDTO">
 		<![CDATA[
 			SELECT	*
 			FROM	article_sale
@@ -171,7 +171,12 @@
 	</update>
 	
 	<!-- chatRead의 갯수를 더하여 보여주기 -->
-	
+	<select id="countChat" resultType="chatDTO">
+		select chatid, sum(chatRead) as chatRead
+		from chat
+		where toid=#{userId}
+		group by chatid
+	</select>
 	
 	
 	

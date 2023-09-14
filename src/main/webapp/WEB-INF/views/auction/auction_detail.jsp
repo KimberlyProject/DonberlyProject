@@ -59,13 +59,17 @@
 		.saleBtn {
 			width: 100px;
 		}
-		#aaa {
+		.green {
 			font-style: bold;
 			color: green;
 		}
-		#bbb {
+		.orange {
 			font-style: bold;
 			color: orange;
+		}
+		.red {
+			font-style: bold;
+			color: red;
 		}
 		#imgnull {
 			text-align: center;
@@ -79,6 +83,13 @@
 			heigth: 300px;
 		}
 	
+		
+      	#aucImg {
+      		width: 240px;
+      		text-align: center;
+      		vertical-align: middle;
+      	}
+     
 	</style>
 </head>
 <body>
@@ -126,7 +137,7 @@
 				<!-- 사진이 있는 경우 -->
 				<c:choose>
 				<c:when test="${imgs != null}">
-					<th  rowspan="7" id="aucImg"><!-- 롤링이미지 -->
+					<th rowspan="7" id="aucImg"><!-- 롤링이미지 -->
 					    <div id="myCarousel" class="carousel slide" data-ride="carousel">
 					        <!--인디케이터-->
 					        <ol class="carousel-indicators">
@@ -166,25 +177,22 @@
 			<tr> <!-- 판매자 -->
 				<th class="cate">판매자</th>
 				<th class="colon">:</th>
-				<th colspan="4">${article.aucId}님
+				<th colspan="4">[${article.aucNick}]님
 					<c:choose>
 					<c:when test="${member.userId != article.aucId}"> <!-- 판매자와 채팅하기 -->
 						<input type="hidden" class="seller" value="${article.aucId }"/>
 						<input type="hidden" class="buyer" value="${member.userId }"/>
 						<input type="hidden" class="artNo" value="${article.aucCode }"/>
-
-						<input id="chat" type="button" class="btn btn-primary buyBtn" style="color:#FFFFFF;" value="채팅하기">
-						
+						<input id="chat" type="button" class="btn btn-primary buyBtn" style="color:#FFFFFF;" value="채팅하기">	
 					</c:when>
 					</c:choose>
 				</th>
 			</tr>
 			<tr><!-- 현재입찰가 -->
-				<th class="cate">현재입찰가</th>
+				<th class="cate">현재입찰가<c:choose><c:when test="${article.cstmId != null}"><br/>[${article.cstmId}]님&nbsp;&nbsp;</c:when></c:choose></th>
 				<th class="colon">:</th>
 				<th colspan="4">
-					<c:choose><c:when test="${article.cstmId != null}">[${article.cstmId}]님&nbsp;&nbsp;</c:when></c:choose>
-					<fmt:formatNumber type="number" value="${article.nowBid}" pattern="#,##0"/> 원
+					<span class="green"><fmt:formatNumber type="number" value="${article.nowBid}" pattern="#,##0"/> 원</span>
 					<c:choose>
 					<c:when test="${member.userId != article.aucId}">
 						<input id="tryBid" type="button" class="btn btn-success buyBtn" style="color:#FFFFFF;" value="입찰하기">  														
@@ -192,7 +200,7 @@
 					</c:choose>
 					<c:choose>
 					<c:when test="${member.userId == article.aucId && article.cstmId != null}">
-						<input id="saleNow" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="바로판매">
+						<input id="saleNow" type="button" class="btn btn-success saleBtn" style="color:#FFFFFF;" value="바로판매">
 					</c:when>
 					</c:choose>
 				</th>
@@ -205,7 +213,8 @@
 			<tr><!-- 상한금액 -->
 				<th class="cate">상한금액</th>
 				<th class="colon">:</th>
-				<th colspan="4"><fmt:formatNumber type="number" value="${article.maxPrice}" pattern="#,##0"/> 원
+				<th colspan="4">
+					<span class="orange"><fmt:formatNumber type="number" value="${article.maxPrice}" pattern="#,##0"/> 원</span>
 					<c:choose>
 					<c:when test="${member.userId != article.aucId}">
 						<input id="buyNow" type="button" class="btn btn-warning buyBtn" style="color:#FFFFFF;" value="바로구매">
@@ -216,7 +225,7 @@
 			<tr><!-- 경매기간 -->
 				<th class="cate">마감기한</th>
 				<th class="colon">:</th>
-				<th colspan="4">${article.deadline}
+				<th colspan="4"><span class="red">${article.deadline}</span>
 					<c:choose>
 					<c:when test="${member.userId == article.aucId && article.cstmId == null}">
 						<input id="auctionOff" type="button" class="btn btn-danger saleBtn" style="color:#FFFFFF;" value="경매취소">  																			
@@ -233,7 +242,7 @@
 			</tr>
 			<tr>	
 				<th id="textbox" colspan="4">
-					<div id="textBox">
+					<div id="textBox" style="overflow-y: hidden; height: 300px;">
 						${article.content}
 					</div>
 				</th>
@@ -272,7 +281,7 @@ $(document).ready(function () {
 		//구매자 입찰하기
 		$("#tryBid").on("click", function() {
 			var aucCode = ${article.aucCode};
-			var cstmId = "${member.userId}";
+			var cstmId = "${member.nickname}";
 			var price = ${article.nowBid + article.bidRate};
 			
 			if(confirm(price + "원으로 입찰하시겠습니까? 입찰 후 판매자가 경매를 종료하면 즉시 구매가 진행됩니다.")) {
@@ -286,7 +295,7 @@ $(document).ready(function () {
 		//구매자 상한가구매하기
 		$("#buyNow").on("click", function() {
 			var aucCode = ${article.aucCode};
-			var cstmId = "${member.userId}";
+			var cstmId = "${member.nickname}";
 			var price = ${article.maxPrice};
 			if(confirm("상한가 " + price + "원에 바로 구매하시겠습니까? 경매가 종료되면 취소할 수 없습니다.")) {
 				location.href = "/auction/buyNow?aucCode=" + aucCode + "&cstmId=" + cstmId + "&maxPrice=" + price;

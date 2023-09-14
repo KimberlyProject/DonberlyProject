@@ -121,11 +121,17 @@ label{
 					<c:forEach var="lastchat" items="${lastChat }">
 					<c:set var="chatid2" value="${lastchat.chatId}"/>
 					<c:if test="${chatid1 == chatid2}">
-					${lastchat.chatContent}
+					<div>${lastchat.chatContent}</div>
 					</c:if>
 					</c:forEach>
 					</div><!-- 여기에 새로운 메시지 넣으면 됨 -->
-					<button style="float: right;" type="button" class="btn btn-warning" disabled="disabled">1</button>
+					<c:forEach var="count" items="${count }">
+					<c:if test="${count.chatId eq chatList.chatId }">
+					<c:if test="${ count.chatRead != 0}">
+					<button style="float: right;" type="button" class="btn btn-warning" disabled="disabled">${count.chatRead}</button>
+					</c:if>
+					</c:if>
+					</c:forEach>
 				</div>
 			</th>
 		</tr>

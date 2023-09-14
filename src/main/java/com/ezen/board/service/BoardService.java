@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ezen.board.dao.BoardDAO;
-import com.ezen.board.dto.BuyArticleVO;
+import com.ezen.board.dto.BuyArticleDTO;
 import com.ezen.board.dto.Criteria;
-import com.ezen.board.dto.SaleArticleVO;
+import com.ezen.board.dto.SaleArticleDTO;
 import com.ezen.board.dto.SearchCriteria;
 
 //-----------------------------------------------------------------------------------------------------------
@@ -38,14 +38,14 @@ public class BoardService {
 	// 게시글 번호에 해당하는 상세 정보
 	//-----------------------------------------------------------------------------------------------------------
 	
-	public BuyArticleVO buyViewArticle(int articleNO) throws Exception {
-		BuyArticleVO articleVO = boardDAO.selectArticle(articleNO);
+	public BuyArticleDTO buyViewArticle(int articleNO) throws Exception {
+		BuyArticleDTO articleVO = boardDAO.selectArticle(articleNO);
 		return articleVO;
 	}
 
 	
-	public SaleArticleVO saleViewArticle(int articleNO) throws Exception {
-		SaleArticleVO SaleArticleVO = boardDAO.saleSelectArticle(articleNO);
+	public SaleArticleDTO saleViewArticle(int articleNO) throws Exception {
+		SaleArticleDTO SaleArticleVO = boardDAO.saleSelectArticle(articleNO);
 		return SaleArticleVO;
 	}
 	//-----------------------------------------------------------------------------------------------------------
@@ -91,12 +91,12 @@ public class BoardService {
 	// 게시글 목록 가져오기 (Paging)
 	//-----------------------------------------------------------------------------------------------------------
 	
-	public List<BuyArticleVO> buyListPaging(SearchCriteria cri) throws Exception {
+	public List<BuyArticleDTO> buyListPaging(SearchCriteria cri) throws Exception {
 		return boardDAO.boardListPaging(cri);
 	}
 
 	
-	public List<SaleArticleVO> saleListPaging(SearchCriteria cri) throws Exception {
+	public List<SaleArticleDTO> saleListPaging(SearchCriteria cri) throws Exception {
 		return boardDAO.saleBoardListPaging(cri);
 	}
 

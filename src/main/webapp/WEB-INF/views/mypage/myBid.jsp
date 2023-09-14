@@ -101,7 +101,7 @@
       <a href="#">마이페이지</a> &gt;
        <a href="#">경매내역</a> &gt;
     </div>
-    <h1 class="pageTitle"><div>경매내역</div></h1>
+    <h1 class="pageTitle"><div>내가 입찰한 경매 상품</div></h1>
     
     
     <%
@@ -116,29 +116,28 @@
 		pw.close();
 	}
 	%>
+	<%
+	//현재시간 밀리초,
+	long currentTimeMillis = System.currentTimeMillis();
+	//데이터형식 변환
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	String formattedDate = dateFormat.format(new java.util.Date(currentTimeMillis));
+	%>
+	<!-- EL식 조건문을 위한 변수설정 -->
+	<c:set var="today" value="<%= formattedDate %>" />
     
     
 	<div class="container">
-		<br/><br/>
-			<a href="/auction/myAuction">내가 올린 상품만 보기</a><br/><br/><br/>
-		<%
-		//현재시간 밀리초,
-		long currentTimeMillis = System.currentTimeMillis();
-		//데이터형식 변환
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String formattedDate = dateFormat.format(new java.util.Date(currentTimeMillis));
-		%>
-		<!-- EL식 조건문을 위한 변수설정 -->
-		<c:set var="today" value="<%= formattedDate %>" />
-		
+    	<a href="/auction/myAuction"> > 내가 올린 상품만 보기</a><br/><br/><br/>
 		<!-- 경매 게시글 -->
 		<!-- 게시글이 하나도 없는 경우 -->
+
 		<c:choose>
-		<c:when test="${empty article.cstmId == member.userId}">
+		<c:when test="${empty articles}">
 			<div>
 				<div>
 					<p align="center">
-						<b><span style="font-size:22px;">등록된 게시글이 없습니다.</span></b>
+						<b><span style="font-size:22px;">아직 경매에 참여하지 않았습니다.</span></b>
 					</p>
 				</div>
 			</div>

@@ -38,7 +38,7 @@ if("${memberlevel.userStatus}" == "N1"){
               <li>
                 <a href="${path}/auction/auction_main">경매장</a>
                 <ul>
-                	<li><a href="${path}/auction/howtouse">경매장 이용방법</a></li>
+                	<li><a href="${path}/auction/howToUse">경매장 이용방법</a></li>
                     <li><a href="${path}/auction/auction_write">경매상품 올리기</a></li>
               	</ul>
               </li>                  
@@ -68,7 +68,8 @@ if("${memberlevel.userStatus}" == "N1"){
               <li>
                 <a href="${path}/admin/oneOnOneInquiry">관리자</a>                
                 <ul> 
-                    <li><a href="${path}/admin/oneOnOneInquiry.do">1:1문의</a></li>
+                    <li><a href="${path}/admin/oneOnOneInquiry">1:1 문의 내역</a></li>
+                    <li><a href="${path}/admin/reportAnswer">신고하기 내역</a></li>
                     <li><a href="${path}/admin/memberList">회원 목록</a></li>
                 </ul>
               </li>
@@ -76,13 +77,13 @@ if("${memberlevel.userStatus}" == "N1"){
             </ul>               
             <!-- 로그인안 했을 때  -->
             <c:if test="${ member == null }">
-            	<p class="navbar-text navbar-right loginbtn"><a href="${path}/member/login" class="navbar-link" onClick="return action_path();"><span class="glyphicon glyphicon-user"></span> 로그인</a></p>            	 
+            	<p class="navbar-text navbar-right loginbtn"><a href="#" class="navbar-link" onClick="return action_path();"><span class="glyphicon glyphicon-user"></span> 로그인</a></p>            	 
             </c:if>
             <c:if test="${ member != null }">
             <!-- 로그인 했을 때 -->
 	            <div class="navbar-text navbar-right loginbtn">
 	            
-                   	<a href="${path}/myPage/calendar"><span class="glyphicon glyphicon-calendar"></span></a>    
+                   	<a href="${path}/mypage/calendar"><span class="glyphicon glyphicon-calendar"></span></a>    
 	
 	                <div class="dropdown alermicon">
 	                    <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
