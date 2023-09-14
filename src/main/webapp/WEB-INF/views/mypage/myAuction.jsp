@@ -245,18 +245,18 @@
 						<ul class="btn-group pagination">
 							<c:if test="${pageMaker.prev}">
 								<li>
-									<a href='<c:url value="/auction/auction_main.do?page=${pageMaker.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
+									<a href='<c:url value="/auction//myAuction?aucId=${member.userId}"/>'>
 										<span class="glyphicon glyphicon-chevron-left"></span></a>
 								</li>
 							</c:if>
 							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
 								<li>
-									<a href='<c:url value="/auction/auction_main.do?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
+									<a href='<c:url value="/auction//myAuction?aucId=${member.userId}"/>'><i>${pageNum}</i></a>
 								</li>
 							</c:forEach>
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 								<li>
-									<a href='<c:url value="/auction/auction_main.do?page=${pageMaker.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
+									<a href='<c:url value="/auction//myAuction?aucId=${member.userId}"/>'>
 										<span class="glyphicon glyphicon-chevron-right"></span></a>
 								</li>
 							</c:if>
@@ -266,7 +266,7 @@
 			</tr>
 		</table> <br/>
 		
-		<form id="formList" action="/auction/auction_main.do" method="get">
+		<form id="formList" action="/auction/myAuction" method="get">
 			<input type="hidden" name="page" value="${result.currentPageNum}">
 			<input type="hidden" name="size" value="${result.currentPage.pageSize}">
 			<input type="hidden" name="searchType" value="${searchType}">
