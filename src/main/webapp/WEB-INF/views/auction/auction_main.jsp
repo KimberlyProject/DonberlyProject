@@ -173,7 +173,7 @@
 					</th>
 				</tr>
 				<tr>
-					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4"><a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}'})">${article.nickname}</a>
+					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">[<a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}'})">${article.nickname}</a>]님
 						</th>
 				</tr>
 				<tr>
