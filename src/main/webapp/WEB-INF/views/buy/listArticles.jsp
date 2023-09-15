@@ -82,6 +82,12 @@
 	.arti {
 		margin-top : 50px;
 	}
+	
+	.btn-group {
+	 	display: flex;
+	 	justify-content: center;
+	 	gap: 20px;
+	}
 	</style>
 	
 </head>
@@ -189,26 +195,26 @@
 	
 	<!-- 화면 하단의 페이지 영역 -->
 	<div class="jung">
-		<ul class="btn-group">
+		<div class="btn-group">
 			<c:if test="${pageMaker.prev }"><!-- 이전 -->
-				<li>
+				<div class="item">
 					<a href='<c:url value="/buy/listArticles.do?page=${pageMaker.startPage-1 }&searchType=${cri.searchType }&keyword=${cri.keyword }"/>'><span class="glyphicon glyphicon-chevron-left"></span></a>
-				</li>
+				</div>
 			</c:if>
 		
 			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-				<li>
+				<div class="item">
 					<a href='<c:url value="/buy/listArticles.do?page=${pageNum }&searchType=${cri.searchType }&keyword=${cri.keyword }"/>'><i></i>${pageNum }</a>
-				</li>
+				</div>
 			</c:forEach>
 			
 			<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
-				<li>
+				<div class="item">
 					<a href='<c:url value="/buy/listArticles.do?page=${pageMaker.endPage+1 }&searchType=${cri.searchType }&keyword=${cri.keyword }"/>'><span class="glyphicon glyphicon-chevron-right"></span></a>
-				</li>
+				</div>
 			</c:if>
 		
-		</ul>
+		</div>
 	</div>
 	
 	

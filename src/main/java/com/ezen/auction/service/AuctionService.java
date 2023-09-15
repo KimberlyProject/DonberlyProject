@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.ezen.auction.dao.AuctionDAO;
 import com.ezen.auction.dto.AucImgDTO;
 import com.ezen.auction.dto.AuctionDTO;
+import com.ezen.auction.dto.MypageCriteria;
 import com.ezen.auction.dto.SearchCriteria;
 
 @Service("AuctionService")
@@ -113,5 +114,13 @@ public class AuctionService {
 	public List<AucImgDTO> mypageImg(int aucCode) throws Exception {
 		List<AucImgDTO> imgs = auctionDAO.mypageImg(aucCode);
 		return imgs;
+	}
+	
+	public int myauctionTotalCount(MypageCriteria cri) throws Exception {
+		return auctionDAO.myauctionTotalCount(cri);
+	}
+	
+	public int mybidTotalCount(MypageCriteria cri) throws Exception {
+		return auctionDAO.mybidTotalCount(cri);
 	}
 }

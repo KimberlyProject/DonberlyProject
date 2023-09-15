@@ -79,33 +79,13 @@
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-	    <aside id="sideMenu">
-      <h2>마이페이지</h2>
-      <ul>
-        <li><a href="#">내 정보 수정</a></li>
-        <li>
-          <a href="#">거래내역</a>
-          <ul>
-            <li><a href="#">삽니다</a></li>
-            <li><a href="#">팝니다</a></li>
-          </ul>
-        </li>
-        <li><a href="#">경매</a>          
-          <ul>
-            <li><a href="#">판매</a></li>
-            <li><a href="#">구매</a></li>
-          </ul>
-        </li>
-        <li><a href="#">캘린더</a></li>
-        <li><a href="#">채팅목록</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
+	<c:set var="menu" value="mypage" />
+	<%@ include file="../include/sidebar.jsp" %>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       <a href="/">홈</a> &gt;
       <a href="#">마이페이지</a> &gt;
-       <a href="#">내가 올린 경매 상품</a> &gt;
+       <a href="#">내가 입찰한 경매 상품</a> &gt;
     </div>
     <h1 class="pageTitle"><div>내가 입찰한 경매 상품</div></h1>
     
@@ -235,18 +215,18 @@
 						<ul class="btn-group pagination">
 							<c:if test="${pageMaker.prev}">
 								<li>
-									<a href='<c:url value="/auction/auction_main.do?page=${pageMaker.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
+									<a href='<c:url value="/auction/myBid?cstmId=${article.cstmId}"/>'>
 										<span class="glyphicon glyphicon-chevron-left"></span></a>
 								</li>
 							</c:if>
 							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
 								<li>
-									<a href='<c:url value="/auction/auction_main.do?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
+									<a href='<c:url value="/auction/myBid?cstmId=${article.cstmId}"/>'><i>${pageNum}</i></a>
 								</li>
 							</c:forEach>
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 								<li>
-									<a href='<c:url value="/auction/auction_main.do?page=${pageMaker.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
+									<a href='<c:url value="/auction/myBid?cstmId=${article.cstmId}"/>'>
 										<span class="glyphicon glyphicon-chevron-right"></span></a>
 								</li>
 							</c:if>

@@ -245,7 +245,9 @@ div.chat.ch2{
 	position: relative;
 	z-index: 10;
 }
-
+span{
+	color:yellow;
+}
 </style>
 </head>
 <body>
@@ -262,7 +264,7 @@ div.chat.ch2{
 				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${session.nickname }&gt;님과의 채팅창</td>
 				</c:if>
 				<c:if test="${chatList.status eq a}">
-				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${session.aucId }&gt;님과의 채팅창</td>
+				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${session.cstmId }&gt;님과의 채팅창</td>
 				</c:if>
 			</tr>
 			<tr>
@@ -300,17 +302,18 @@ div.chat.ch2{
 					<c:set var="buyer" value="${chatList.buyer }"/>
 					<div>제목 : ${session.title}</div>
 					<c:if test="${seller eq  userId}">
-						<div>판매자: ${session.aucId}</div>
-						<div>구매자: ${member.nickname }</div>
+						<div>판매자: ${session.aucNick}</div>
+						<div>구매자: ${session.cstmId }</div>
 					</c:if>
 					<c:if test="${buyer eq userId}">
-						<div>판매자: ${member.nickname }</div>
-						<div>구매자: ${session.aucId }</div>
+						<div>판매자: ${session.aucNick }</div>
+						<div>구매자: ${session.cstmId }</div>
 					</c:if>
 					<div>코드 : ${session.aucCode }</div>
 					<div style="padding-bottom: 10px;">가격: ${session.nowBid}원</div>
-					<img src="#" alt="사진" width="200px;" height="200px;"/><!-- 경은 언니가 해준다!! -->
-					
+					<!-- 경은 테스트 -->	
+					<img id="i" src="${path}/auction/pullAuctionImges?imgName=${aucimgsession.imgName}&aucCode=${session.aucCode}"/>			   
+					<!-- 경은 테스트 끝 -->
 					<br><br>
 					</c:if>
 					<!-- 끝 -->
@@ -362,19 +365,25 @@ function getChat(){
 			 
 			 for(var i=0 ; i<data.length;i++){
 				 	var dd = data[i].chatTime;
+				 	var read = "";
 				 	const date = new Date(dd);
 				 	var month = Number(date.getDate());
 				 	month = month - 2;
-				 
+				 	if(data[i].chatRead==0){
+				 		read = "";
+				 	}
+				 	else{
+				 		read=data[i].chatRead;
+				 	}
 					if(data[i].fromId == $('#userId').val()){
 						html+=
 						"<div class='chat ch2'><div class='textbox'>"+data[i].chatContent+"</div></div>"+
-						"<div class='time2' >"+month+"월"+date.getDate()+"일 "+date.getHours()+":"+date.getMinutes()+"</div>";
+						"<div class='time2' ><span>"+read+"</span> &nbsp;&nbsp;"+month+"월"+date.getDate()+"일 "+date.getHours()+":"+date.getMinutes()+"</div>";
 					}
 					else{
 						html+=
 						"<div class='chat ch1'><div class='textbox'>"+data[i].chatContent+"</div></div>"+
-						"<div class='time1' >"+month+"월"+date.getDate()+"일 "+date.getHours()+":"+date.getMinutes()+"</div>";
+						"<div class='time1' >"+month+"월"+date.getDate()+"일 "+date.getHours()+":"+date.getMinutes()+"<span>&nbsp;&nbsp;"+read+"</span></div>";
 					} 
 			}
 			 console.log(html);
@@ -460,6 +469,8 @@ function chatOut(){
 		 }
 	 });
 }
+
+
 
 
 </script>

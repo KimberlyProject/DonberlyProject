@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<%@ include file="../include/header.jsp" %>
+	<%@ include file="../member/profileModal.jsp" %>
 	<style>
 		
 		#trBtn_modify {
@@ -110,8 +111,9 @@
 						</li>
 					</ul>
 					<ul class="item">
-						<li>작성자 : <input id="i_price" type="text" class="line" width=10px; value="${article.nickname }" disabled/>
-						<li>
+						<li>작성자<li>
+							<input id="i_price" type="hidden" class="line" width=10px; value="${article.nickname }" disabled/>
+						<a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}'})">${article.nickname}</a>
 						
 					</ul>
 					

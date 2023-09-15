@@ -29,7 +29,7 @@
 	
 	<!-- 채팅넣기 -->
 	<insert id="insertContent" parameterType="com.ezen.chat.dto.ChatDTO">
-		insert into chat values(#{chatId},#{artNo},#{fromId},#{toId},#{chatContent},sysdate)
+		insert into chat values(#{chatId},#{artNo},#{fromId},#{toId},#{chatContent},sysdate,#{chatRead})
 	</insert>
 	
 	<!-- 채팅누른 아티클번호 가져오기 -->
@@ -66,7 +66,7 @@
 	
 	<!-- 채팅한 내용 다 리스트에 넣어서 보내기 -->
 	<select id="chatView" parameterType="int" resultType="chatDTO"><!-- 여기 수정함 TO_CHAR(chatTime,'HH24:MI:SS')-->
-		select chatId, artNo, fromId, toId, chatContent, chatTime
+		select chatId, artNo, fromId, toId, chatContent, chatTime, chatRead
 		from chat
 		where chatId=#{chatId}
 		order by chatTime
@@ -107,7 +107,6 @@
 		]]>
 	</select>
 	
-
 	<!-- artNo으로 articleVO끌어오기 (sale)-->
 	<select id="findArticleVOFromArtNoS" parameterType="int" resultType="buyArticleDTO">
 		<![CDATA[
@@ -164,6 +163,35 @@
 		where aucCode = #{artNo}
 	</select>
 	
+	<!-- 경은추가 aucImgDTO 가져오기 -->
+	<select id="findAucImgDTOFromAucCode" parameterType="int" resultType="aucImgDTO">
+		SELECT *
+		FROM aucImg
+		WHERE aucCode = #{aucCode}
+		AND imgNo = (SELECT MIN(imgNo) FROM aucImg WHERE aucCode = #{aucCode})
+	</select>
+	
+	<!-- readChat 수정하기 읽으면 1에서 0으로-->
+	<update id="readChat">
+		update chat
+		set chatRead = 0
+		where toId=#{toId} and chatId=#{chatId}
+	</update>
+	
+	<!-- chatRead의 갯수를 더하여 보여주기 -->
+	<select id="countChat" resultType="chatDTO">
+		select chatid, sum(chatRead) as chatRead
+		from chat
+		where toid=#{userId}
+		group by chatid
+	</select>
+	
+	<!-- 닉네임으로 아이디 찾기 -->
+	<select id="finduserIdFromNickname" resultType="String">
+		select userId
+		from members
+		where nickName=#{nickName}
+	</select>
 	
 	
 </mapper>

@@ -30,11 +30,12 @@
 	</sql>
 	
 	<!-- 전체 게시글 수 구하기 (Paging 처리) -->
-	<select id="infoListTotalCount1" parameterType="com.ezen.board.dto.Criteria" resultType="Integer">
+	<select id="infoListTotalCount1" parameterType="com.ezen.mypage.dto.Criteria" resultType="Integer">
 		<![CDATA[
 		 	SELECT	COUNT(*)
 		 	FROM	article_buy
 		 	WHERE	1=1
+		 	AND 	userId = 'a300'
 		]]>
 			<include refid="search"/>
 	</select>
@@ -42,7 +43,7 @@
 	<!-- 게시글 목록 가져오기 (Paging) -->
 	<!-- ROWNUM 을 가장 안 쪽에 사용하면 Mapper에서 인식을 못하기 때문에 바깥쪽에 사용하였다. -->
 	<!-- rownum, level 이름으로 인해서 resultMap articlesResult 로 사용한다. -->
-	<select id="infoListPaging1" parameterType="com.ezen.board.dto.Criteria" resultMap="articlesResult">
+	<select id="infoListPaging1" parameterType="com.ezen.mypage.dto.Criteria" resultMap="articlesResult">
 	<![CDATA[
 	SELECT	*
 	FROM	(
@@ -53,18 +54,21 @@
  		<include refid='search'/>
  	<![CDATA[
      )       
-	where recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
+	where ROWNUM BETWEEN 1 AND #{page} * #{perPageNum}
+	AND 	userId = 'a300'
+	
 	]]>
 	</select>
 	
 	<!-- ==================================================================================================================================================== -->
 	
 	<!-- 전체 게시글 수 구하기 (Paging 처리) -->
-	<select id="infoListTotalCount2" parameterType="com.ezen.board.dto.Criteria" resultType="Integer">
+	<select id="infoListTotalCount2" parameterType="com.ezen.mypage.dto.Criteria" resultType="Integer">
 		<![CDATA[
 		 	SELECT	COUNT(*)
 		 	FROM	article_sale
 		 	WHERE	1=1
+		 	AND 	userId = 'a300'
 		]]>
 			<include refid="search"/>
 	</select>
@@ -72,7 +76,7 @@
 	<!-- 게시글 목록 가져오기 (Paging) -->
 	<!-- ROWNUM 을 가장 안 쪽에 사용하면 Mapper에서 인식을 못하기 때문에 바깥쪽에 사용하였다. -->
 	<!-- rownum, level 이름으로 인해서 resultMap articlesResult 로 사용한다. -->
-	<select id="infoListPaging2" parameterType="com.ezen.board.dto.Criteria" resultMap="articlesResult">
+	<select id="infoListPaging2" parameterType="com.ezen.mypage.dto.Criteria" resultMap="articlesResult">
 	<![CDATA[
 	SELECT	*
 	FROM	(
@@ -83,8 +87,28 @@
  		<include refid='search'/>
  	<![CDATA[
      )       
-	where recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
+	where ROWNUM BETWEEN  1 AND #{page} * #{perPageNum}
+	AND 	userId = 'a300'
 	]]>
+	
+	
+	</select>
+	
+	<select id="infoList1" parameterType="int" resultMap="articlesResult">
+	<![CDATA[
+	SELECT	*
+	FROM	article_buy
+	WHERE userId = 'a300'
+	and rownum BETWEEN 1 and 3 * #{ibuycount}
+ 	]]>
+	</select>
+	<select id="infoList2" parameterType="int" resultMap="articlesResult">
+	<![CDATA[
+	SELECT	*
+	FROM	article_sale
+	WHERE userId = 'a300'
+	and rownum BETWEEN 1 and 3 * #{isalecount}
+ 	]]>
 	</select>
 	
 	

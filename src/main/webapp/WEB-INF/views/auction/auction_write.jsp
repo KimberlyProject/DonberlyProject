@@ -70,24 +70,8 @@
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-	    <aside id="sideMenu">
-      <h2>마이페이지</h2>
-      <ul>
-        <li><a href="#">내 정보 수정</a></li>
-        <li>
-          <a href="#">거래내역</a>
-          <ul>
-            <li><a href="#">삽니다</a></li>
-            <li><a href="#">팝니다</a></li>
-          </ul>
-        </li>
-        <li><a href="/auction/auction_main">경매</a>          
-        </li>
-        <li><a href="#">캘린더</a></li>
-        <li><a href="#">채팅목록</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
+	<c:set var="menu" value="auction" />
+	<%@ include file="../include/sidebar.jsp" %>
     
     <!-- 배너 -->
 	<div class="page_dir container">
@@ -160,12 +144,13 @@
 					<th>
 						<div id="d_file" style="overflow-y: scroll; height: 200px; ">
 						 	<span id="imgInfo"> 
-						 	첫번째 사진이 썸네일로 설정됩니다.<br/> 원활한 경매 진행을 최소 2장 이상의 사진을 올려주세요.<br/>
+						 	첫번째 사진이 썸네일로 설정됩니다.<br/> 원활한 경매 진행을 <span id="imageUploadError">최소 2장 이상의 사진을 올려주세요.</span><br/>
 						 	사진이 없을 시 입찰자 없이 경매가 종료될 수 있습니다.</span>
 						 	
 						 	<br/><br/>
-							<input type="file" name="imageFileName" onchange="readAndResize(this)"><br/>
-							<input type="file" name="imageFileName2" onchange="readAndResize(this)">
+							<input type="file" name="imageFileName" onchange="readAndResize(this)"/><br/>
+							<input type="file" name="imageFileName2" onchange="readAndResize(this)"/>
+							
 						</div>
 					</th>
 				<tr>
@@ -181,7 +166,7 @@
 			<br/>
 			<br/>
 			<div>
-			<input class="btn btn-success" type="submit" value="상품 올리기" onclick="disableButton(this)"/>
+			<input id="submit" class="btn btn-success" type="submit" value="상품 올리기"/>
 			</div>
 		</form>
 		<br/>
@@ -191,7 +176,6 @@
 	<%@ include file="../include/footer.jsp" %>
 
 <script>
-
 
 	$("#submit").on("click", function() {
 		if($("#title").val() == "") {
@@ -208,7 +192,8 @@
 			alert("상한금액을 입력해주세요");
 			$("#maxPrice").focus();
 			return false;
-		}		
+		}	
+		
 		var minPrice = parseFloat($("#minPrice").val().replace(/,/g, ''));
 		var maxPrice = parseFloat($("#maxPrice").val().replace(/,/g, ''));
 		var bidRate = $("#searchType").val();
@@ -232,6 +217,18 @@
 			$("#searchType").focus();
 			return false;
 		}	
+
+		var image1 = $("#imageFileName1").val();
+	    var image2 = $("#imageFileName2").val();
+
+	    
+	    if (!image1 || !image2) {
+	        $("#imageUploadError").css("color", "red");
+	        return false;
+	    } else {
+	        $("#imageUploadError").text("");
+	    }
+	    	    
 		if($("#content").val() == "") {
 			alert("제품에 대한 상세설명을 입력해주세요.");
 			$("#content").focus();
@@ -244,7 +241,6 @@
       	var num = input.value.replace(/,/g, '');
        input.value = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
-	
 	
 	//이미지 추가하기
    	var cnt=1;

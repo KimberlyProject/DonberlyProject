@@ -10,6 +10,7 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<%@ include file="../include/header.jsp" %>
+	<%@ include file="../member/profileModal.jsp" %>
 	<style>
 		.colon{
 			width: 4px;
@@ -78,26 +79,8 @@
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-	    <aside id="sideMenu">
-      <h2>마이페이지</h2>
-      <ul>
-        <li><a href="#">내 정보 수정</a></li>
-        <li>
-          <a href="#">거래내역</a>
-          <ul>
-            <li><a href="#">삽니다</a></li>
-            <li><a href="#">팝니다</a></li>
-          </ul>
-        </li>
-        <li><a href="#">경매</a>          
-          <ul>
-            <li><a href="#">판매</a></li>
-            <li><a href="#">구매</a></li>
-          </ul>
-        </li>
-        <li><a href="#">캘린더</a></li>
-        <li><a href="#">채팅목록</a></li>
-      </ul>
+	<c:set var="menu" value="auction" />
+	<%@ include file="../include/sidebar.jsp" %>
       <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
     </aside>
     <div class="page_dir container">
@@ -190,7 +173,8 @@
 					</th>
 				</tr>
 				<tr>
-					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">[${article.aucNick}]님</th>
+					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">[<a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}'})">${article.nickname}</a>]님
+						</th>
 				</tr>
 				<tr>
 					<th class="cate">현재 입찰가</th><th class="colon">:</th>

@@ -189,7 +189,7 @@
 					</th>
 				</tr>
 				<tr>
-					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">[${article.aucId}]님</th>
+					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">[${article.aucNick}]님</th>
 				</tr>
 				<tr>
 					<th class="cate">현재 입찰가</th><th class="colon">:</th>
@@ -244,18 +244,18 @@
 						<ul class="btn-group pagination">
 							<c:if test="${pageMaker.prev}">
 								<li>
-									<a href='<c:url value="/auction/auction_main.do?page=${pageMaker.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
+									<a href='<c:url value="/auction/auction_maintosearch?page=${pageMaker.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
 										<span class="glyphicon glyphicon-chevron-left"></span></a>
 								</li>
 							</c:if>
 							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
 								<li>
-									<a href='<c:url value="/auction/auction_main.do?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
+									<a href='<c:url value="/auction/auction_maintosearch?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
 								</li>
 							</c:forEach>
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 								<li>
-									<a href='<c:url value="/auction/auction_main.do?page=${pageMaker.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
+									<a href='<c:url value="/auction/auction_maintosearch?page=${pageMaker.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
 										<span class="glyphicon glyphicon-chevron-right"></span></a>
 								</li>
 							</c:if>
@@ -267,7 +267,7 @@
 		<button class="btn btn-success col-sm-offset-6"><a style="color:#FFFFFF;" href="/auction/auction_write">상품 등록</a></button>
 		<br/><br/>
 		
-		<form id="formList" action="/auction/auction_main.do" method="get">
+		<form id="formList" action="/auction/auction_maintosearch" method="get">
 			<input type="hidden" name="page" value="${result.currentPageNum}">
 			<input type="hidden" name="size" value="${result.currentPage.pageSize}">
 			<input type="hidden" name="searchType" value="${searchType}">

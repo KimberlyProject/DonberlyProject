@@ -49,9 +49,6 @@ import com.ezen.member.dto.MemberDTO;
 public class AuctionController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AuctionController.class);
-	//컴퓨터 경로
-	//private static final String IMGROOT = "C:\\data\\workspace\\imgfiles";
-	//프로젝트 경로 (임시경로temp생성후 실제저장경로 새성까지 됨, refresh 필수)
 	private static final String IMGROOT = "C:\\data\\workspace\\DonberlyProject\\src\\main\\webapp\\resources\\images\\auction\\auction_image";
 	@Inject
 	private AuctionService auctionService;
@@ -315,14 +312,14 @@ public class AuctionController {
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
 		}
-		return "auction/auction_main";
+		return "/auction/auction_main";
 	}//removeAuction
 
 	//판매자 현재입찰가로 판매하기
 	@RequestMapping(value="/saleNow", method=RequestMethod.GET)
 	public String saleNow(@RequestParam("aucCode") int aucCode,
 								  @RequestParam("cstmId") String cstmId,
-			HttpServletRequest Request, HttpServletResponse response)
+			HttpServletRequest Request, HttpServletResponse response)          
 			throws Exception {
 
 		System.out.println("판매자 현재입찰가로 판매하기 Controller");
@@ -346,7 +343,7 @@ public class AuctionController {
 		
 		auctionService.saleNow(articleMap);
 		
-		return "auction/auction_main";
+		return "/auction/auction_main";
 	}//saleNow
 	
 	//구매자 입찰하기
@@ -378,7 +375,7 @@ public class AuctionController {
 		
 		auctionService.tryBid(articleMap);
 		
-		return "auction/auction_main";
+		return "/auction/auction_main";
 	}//tryBid
 	
 	//구매자 상한가 구매하기
@@ -410,7 +407,7 @@ public class AuctionController {
 		
 		auctionService.buyNow(articleMap);
 		
-		return "auction/auction_main";
+		return "/auction/auction_main";
 	}//buyNow		
 	
 }
