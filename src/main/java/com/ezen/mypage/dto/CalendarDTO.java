@@ -3,12 +3,19 @@ package com.ezen.mypage.dto;
 import java.sql.Date;
 
 public class CalendarDTO {
+	private int calendarId;
 	private String userId;
 	private int articleId;
-	private Date schedule;
+	private String schedule;
 	private String status;
 	private String contents;
 	
+	public int getCalendarId() {
+		return calendarId;
+	}
+	public void setCalendarId(int calendarId) {
+		this.calendarId = calendarId;
+	}
 	public String getUserId() {
 		return userId;
 	}
@@ -21,10 +28,10 @@ public class CalendarDTO {
 	public void setArticleId(int articleId) {
 		this.articleId = articleId;
 	}
-	public Date getSchedule() {
+	public String getSchedule() {
 		return schedule;
 	}
-	public void setSchedule(Date schedule) {
+	public void setSchedule(String schedule) {
 		this.schedule = schedule;
 	}
 	public String getStatus() {
@@ -42,8 +49,9 @@ public class CalendarDTO {
 	
 	@Override
 	public String toString() {
-		return "CalendarDTO [userId=" + userId + ", articleId=" + articleId + ", schedule=" + schedule + ", status="
-				+ status + ", contents=" + contents + "]";
+		return "CalendarDTO [calendarId=" + calendarId + ", userId=" + userId + ", articleId=" + articleId
+				+ ", schedule=" + schedule + ", status=" + status + ", contents=" + contents + "]";
 	}
+		
 	
 }
