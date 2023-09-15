@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page session="true" %>
 <html>
 <head>
@@ -176,10 +177,7 @@
 			<c:forEach var="ask" items="${ask}" varStatus="articleNum">
 				<tr class="article">
 					<td><input class="check" type="checkbox" style="width: 100%;"/></td>
-					<td class="articleNo">
-						<input class="num" name="num" type="hidden">
-						${ask.articleNo}
-					</td>
+					<td class="articleNo">${articleNum.count}<input class="num" name="num" type="hidden" value="${ask.articleNo}"></td>
 					<td>
 						${ask.title}
 					</td>
@@ -211,11 +209,14 @@
 	</div>
 	<%@ include file="../include/footer.jsp" %>
 	<script>
-		$(document).ready(function(){
+	
+	$(document).ready(function(){
+			
 			$("tr").on("click", function() {
 				$(this).next("tr").find(".content").toggleClass("on");
 			});
 			
+	// 삭제하기	
 			$("#delArticle").on("click", function() {
 				const frm = $("#head").closest("form");
 				let articleNo = [];
@@ -224,9 +225,10 @@
 					
 				//});
 				for(let i = 0; i < $(".article").length; i++){
-					console.log($(".article").find(".check:eq(" + i + ")").is(":checked"));
-					if($(".article:eq(" + i + ")").find(".check").is(":checked")){
-						articleNo[i] = $(".article:eq(" + i + ")").find(".articleNo").text();
+					console.log($(".article:eq(" + i + ")").find(".check").is(":checked"));
+					
+					if(!$(".article:eq(" + i + ")").find(".check").is(":checked")){
+						articleNo[i] = $(".article:eq(" + i + ")").find(".articleNo").val();
 					}
 					$(".num:eq(" + i + ")").prop("value", articleNo[i]);
 					console.log($(".num:eq(" + i + ")").val());

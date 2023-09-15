@@ -59,14 +59,13 @@
 		]]>
 	</delete>
 	
-	<!-- 신고하기 목록 출력 -->
+	<!-- 신고하기 목록 출력 --> 
 	<select id="listReportAnswer" resultMap="reportResult">
 		
 		SELECT	*
 		FROM		report
 		ORDER BY 	articleNo desc
-	</select>
-	<!-- re -->
+	</select> 
 	
 	<!-- 관리자 회원목록 불러오기 -->
 	<select id="selectMember" resultType="com.ezen.member.dto.MemberDTO">

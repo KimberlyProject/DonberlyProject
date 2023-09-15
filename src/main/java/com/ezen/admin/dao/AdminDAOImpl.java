@@ -1,6 +1,8 @@
 package com.ezen.admin.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -120,8 +122,9 @@ public class AdminDAOImpl implements AdminDAO {
 		sqlSession.delete(namespace + ".deleteArticle", articleNo);
 	}
 	
+	
 	//--------------------------------------------------------------------------------------------------
-	// 신고하기 내역 리스트 생성
+	// 신고하기 내역 리스트 생성 (원본)
 	//--------------------------------------------------------------------------------------------------
 	@Override
 	public List<ReportDTO> listReportAnswer() throws Exception {
@@ -130,5 +133,6 @@ public class AdminDAOImpl implements AdminDAO {
 		System.out.println("신고하기 정보: " + listReportAnswer);
 		return listReportAnswer;
 	}
+	
 	
 }

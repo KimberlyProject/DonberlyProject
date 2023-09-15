@@ -105,11 +105,13 @@ public class AdminServiceImpl implements AdminService {
 	//--------------------------------------------------------------------------------------------------
 	// 신고하기 리스트 생성
 	//--------------------------------------------------------------------------------------------------
+	
 	@Override
 	public List<ReportDTO> listReportAnswer() throws Exception {
 		List<ReportDTO> listReportAnswer = adminDAO.listReportAnswer();
 		return listReportAnswer;
 	}
+	
 
 	//--------------------------------------------------------------------------------------------------
 	// cri를 가지고 검색한 총 건수의 전체 게시글 수 구하기(paging 처리)

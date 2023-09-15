@@ -1,7 +1,8 @@
 package com.ezen.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.ezen.admin.service.AdminService;
 import com.ezen.ccenter.dto.CcenterDTO;
@@ -22,7 +24,7 @@ import com.ezen.admin.dto.PageMaker;
 import com.ezen.admin.dto.SearchCriteria;
 import com.ezen.member.dto.MemberDTO;
 
-
+import java.util.Collections;
 
 @Controller
 @RequestMapping("/admin")
@@ -51,6 +53,10 @@ public class AdminController {
 		// 화면에 출력한 데이터를 가져온다.
 		List<CcenterDTO> listOneOnOne = adminService.listOneOnOne();
 		
+		//추가
+		//Collections.reverse(listOneOnOne);
+
+		
 		System.out.println(listOneOnOne);
 		
 		// mav에 object를 추가
@@ -64,15 +70,23 @@ public class AdminController {
 	//-----------------------------------------------------------------------------------------------------------
 	@RequestMapping(value="/delArticle", method=RequestMethod.POST)
 	public ModelAndView delArticle(HttpServletRequest request) throws Exception {
-		int articleNo[] = Integer.parseInt(request.getParameterValues("num"));
+		String articleNo[] = request.getParameterValues("num");
 		
-		logger.info("articleNo : " + articleNo);
+		for (int i = 0; i < articleNo.length; i++) {
+			logger.info(" " + articleNo[i]);
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		String viewName = "redirect:/admin/oneOnOneInquiry";
 		
 		for(int i = 0; i < articleNo.length; i++) {
-			adminService.deleteArticle(Integer.parseInt(articleNo[i]));
+			//Map map = new HashMap("articleNo", articleNo[i]);
+			
+			if(!articleNo[i].isEmpty()) {
+				logger.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + articleNo[i].getClass().getName());
+				logger.info("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc" + articleNo[i]);
+				adminService.deleteArticle(Integer.parseInt(articleNo[i]));
+			}
 		}
 		
 		mav.setViewName(viewName);
@@ -80,9 +94,8 @@ public class AdminController {
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
-	// 신고하기 리스트 생성
+	// 신고하기 리스트 생성 (원본)
 	//-----------------------------------------------------------------------------------------------------------
-	
 	@RequestMapping(value="/reportAnswer", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView listReportAnswer(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
@@ -101,6 +114,11 @@ public class AdminController {
 		
 		return mav;
 	}
+	
+	
+	
+	
+	
 	
 	//--------------------------------------------------------------------------------------------------
 	// 회원 전체 조회 + 페이징 + 검색
