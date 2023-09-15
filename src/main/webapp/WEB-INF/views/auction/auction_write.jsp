@@ -144,12 +144,13 @@
 					<th>
 						<div id="d_file" style="overflow-y: scroll; height: 200px; ">
 						 	<span id="imgInfo"> 
-						 	첫번째 사진이 썸네일로 설정됩니다.<br/> 원활한 경매 진행을 최소 2장 이상의 사진을 올려주세요.<br/>
+						 	첫번째 사진이 썸네일로 설정됩니다.<br/> 원활한 경매 진행을 <span id="imageUploadError">최소 2장 이상의 사진을 올려주세요.</span><br/>
 						 	사진이 없을 시 입찰자 없이 경매가 종료될 수 있습니다.</span>
 						 	
 						 	<br/><br/>
 							<input type="file" name="imageFileName" onchange="readAndResize(this)"><br/>
 							<input type="file" name="imageFileName2" onchange="readAndResize(this)">
+							
 						</div>
 					</th>
 				<tr>
@@ -191,7 +192,8 @@
 			alert("상한금액을 입력해주세요");
 			$("#maxPrice").focus();
 			return false;
-		}		
+		}	
+		
 		var minPrice = parseFloat($("#minPrice").val().replace(/,/g, ''));
 		var maxPrice = parseFloat($("#maxPrice").val().replace(/,/g, ''));
 		var bidRate = $("#searchType").val();
@@ -215,11 +217,23 @@
 			$("#searchType").focus();
 			return false;
 		}	
+		
 		if($("#content").val() == "") {
 			alert("제품에 대한 상세설명을 입력해주세요.");
 			$("#content").focus();
 			return false;
 		}	
+
+		var image1 = $("#imageFileName1").val();
+	    var image2 = $("#imageFileName2").val();
+
+	    if (!image1 || !image2) {
+	        $("#imageUploadError").css("color", "red");
+	        return false;
+	    } else {
+	        $("#imageUploadError").text("");
+	    }
+	    
 	});
 	
 	//숫자 입력창 100단위 콤마(,)추가하기
