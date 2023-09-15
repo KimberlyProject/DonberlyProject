@@ -304,25 +304,12 @@ span{
 					<c:set var="userId" value="${session.userId }"/>
 					<c:set var="seller" value="${chatList.seller}"/>
 					<c:set var="buyer" value="${chatList.buyer }"/>
-<<<<<<< HEAD
 					<div>제목 : ${session.title} (게시판)</div>
 					
 						<div>판매자: ${sel}</div>
 						<div>구매자: ${buy}</div>
 					
 					<div>코드 : ${session.p_code }</div>
-=======
-					<div>제목 : ${session.title}</div>
-					<c:if test="${seller eq  userId}">
-						<div>판매자: ${session.nickname}</div>
-						<div>구매자: ${member.nickname }</div>
-					</c:if>
-					<c:if test="${buyer eq userId}">
-						<div>판매자: ${member.nickname }</div>
-						<div>구매자: ${session.nickname }</div>
-					</c:if>
-					<div>코드 : ${session.p_code } <input type="hidden" value="${session.p_code}" class="code"></div>
->>>>>>> 361a527b31013c9513bb8c0539fbb0615618b90a
 					<div style="padding-bottom: 10px;">가격: ${session.price}원</div>
 					
 					<img src="${path}/resources/images/board/article_image/${session.articleNO }/${session.thumbnail}" alt="사진" width="200px;" height="200px;"/>
@@ -349,7 +336,7 @@ span{
 						<div>현재 채팅자: ${member.nickname }</div>
 					</c:if>
 
-					<div>코드 : ${session.aucCode } <input type="hidden" value="${session.aucCode}" class="code"></div>
+					<!-- <div>코드 : ${session.aucCode } <input type="hidden" value="${session.aucCode}" class="code"></div> -->
 					<div style="padding-bottom: 10px;">가격: ${session.nowBid}원</div>
 					<!-- 경은 테스트 -->	
 					<img id="i" src="${path}/auction/pullAuctionImges?imgName=${aucimgsession.imgName}&aucCode=${session.aucCode}"/>			   
@@ -368,7 +355,7 @@ span{
 						</div>
 					</div>
 					<br>
-					<button type="button" class="btn btn-danger btn-lg">신고 하기</button>
+					<button type="button" class="btn btn-danger btn-lg" onclick="linkToOpener()">신고 하기</button>
 					<br><br>
 					<button type="button" class="btn btn-warning btn-lg" id="getin" onClick="chatOut()">채팅방 나가기</button>
 				</td>
