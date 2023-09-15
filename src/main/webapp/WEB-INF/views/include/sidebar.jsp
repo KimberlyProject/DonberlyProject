@@ -15,7 +15,8 @@
 	<aside id="sideMenu">
 		<h2>경매</h2>
 		<ul>	
-			<li><a href="${path}/auction/howtouse">경매장 이용방법</a></li>
+			<li><a href="${path}/auction/auction_main">경매장 메인</a></li>
+			<li><a href="${path}/auction/howToUse">경매장 이용방법</a></li>
             <li><a href="${path}/auction/auction_write">경매상품 올리기</a></li>
 		</ul>
 	  	<button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
@@ -34,12 +35,7 @@
 		<ul>
 		  <li><a href="${path}/mypage/myInfo">내 정보</a></li>
 		  <li><a href="${path}/mypage/marketInfo.do">내 장터</a></li>
-		  <li><a href="${path}/auction/">내 경매</a>          
-		    <ul>
-		      <li><a href="${path}/auction/">판매</a></li>
-		      <li><a href="${path}/auction/">구매</a></li>
-		    </ul>
-		  </li>
+		  <li><a href="${path}/auction/myAuction?aucId=${member.userId}">내 경매</a></li>
 		  <li><a href="${path}/myPage/calendar">캘린더</a></li>
 		  <li><a href="${path}/chat/chat_list">채팅목록</a></li>
 		</ul>

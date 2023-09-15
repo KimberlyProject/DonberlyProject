@@ -70,24 +70,8 @@
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-	    <aside id="sideMenu">
-      <h2>마이페이지</h2>
-      <ul>
-        <li><a href="#">내 정보 수정</a></li>
-        <li>
-          <a href="#">거래내역</a>
-          <ul>
-            <li><a href="#">삽니다</a></li>
-            <li><a href="#">팝니다</a></li>
-          </ul>
-        </li>
-        <li><a href="/auction/auction_main">경매</a>          
-        </li>
-        <li><a href="#">캘린더</a></li>
-        <li><a href="#">채팅목록</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
+	<c:set var="menu" value="auction" />
+	<%@ include file="../include/sidebar.jsp" %>
     
     <!-- 배너 -->
 	<div class="page_dir container">
@@ -181,7 +165,7 @@
 			<br/>
 			<br/>
 			<div>
-			<input class="btn btn-success" type="submit" value="상품 올리기" onclick="disableButton(this)"/>
+			<input id="submit" class="btn btn-success" type="submit" value="상품 올리기"/>
 			</div>
 		</form>
 		<br/>
@@ -192,8 +176,7 @@
 
 <script>
 
-
-	$("#submit").on("click", function() {
+	$("#submit").on("click", function(s) {
 		if($("#title").val() == "") {
 			alert("제목을 입력해주세요.");
 			$("#title").focus();
@@ -244,7 +227,6 @@
       	var num = input.value.replace(/,/g, '');
        input.value = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
-	
 	
 	//이미지 추가하기
    	var cnt=1;
