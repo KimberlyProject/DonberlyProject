@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.ezen.board.dto.BuyArticleDTO;
+import com.ezen.auction.dto.AucImgDTO;
 import com.ezen.auction.dto.AuctionDTO;
 
 import com.ezen.chat.controller.ChatController;
@@ -109,6 +110,12 @@ public class ChatServiceImpl implements ChatService {
 		System.out.println("서비스에요!!!!!!!!!!!!!!!!!!!aaaaaaaaaaaaaaaaaaaa");
 		return chatDAO.findAuctionDTOFromArtNo(artNo,status);
 	}
+	
+	//경은추가
+	@Override
+	public AucImgDTO findAucImgDTOFromAucCode(int aucCode) throws Exception {
+		return chatDAO.findAucImgDTOFromAucCode(aucCode);
+	}
 
 	@Override
 	public void readChat(ChatDTO chatDTO) throws Exception {
@@ -127,6 +134,7 @@ public class ChatServiceImpl implements ChatService {
 		
 		return chatDAO.finduserIdFromNickname(nickName);
 	}
+
 
 	
 	

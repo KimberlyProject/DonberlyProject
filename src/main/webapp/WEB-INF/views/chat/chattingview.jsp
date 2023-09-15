@@ -311,8 +311,9 @@ span{
 					</c:if>
 					<div>코드 : ${session.aucCode }</div>
 					<div style="padding-bottom: 10px;">가격: ${session.nowBid}원</div>
-					<img src="#" alt="사진" width="200px;" height="200px;"/><!-- 경은 언니가 해준다!!  -->
-					
+					<!-- 경은 테스트 -->	
+					<img id="i" src="${path}/auction/pullAuctionImges?imgName=${aucimgsession.imgName}&aucCode=${session.aucCode}"/>			   
+					<!-- 경은 테스트 끝 -->
 					<br><br>
 					</c:if>
 					<!-- 끝 -->
