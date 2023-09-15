@@ -197,7 +197,7 @@
 									<input type="hidden" class="seller" value="${article.aucId }"/>
 									<input type="hidden" class="buyer" value="${article.cstmId }"/>
 									<input type="hidden" class="artNo" value="${article.aucCode }"/>
-									<input id="chat" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="채팅하기">
+									<input type="button" class="btn btn-primary saleBtn chat" style="color:#FFFFFF;" value="채팅하기">
 								</c:when></c:choose>
 							</th>
 						</c:when></c:choose>
@@ -208,7 +208,7 @@
 							<input type="hidden" class="buyer" value="${article.cstmId }"/>
 							<input type="hidden" class="artNo" value="${article.aucCode }"/>
 							<th colspan="4"><span id="gray"><span class="gray">판매완료</span>&nbsp;&nbsp;&nbsp;[${article.cstmId}]님</span>
-							<input id="chat2" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="채팅하기">
+							<input type="button" class="btn btn-primary saleBtn chat" style="color:#FFFFFF;" value="채팅하기">
 							</th>
 						</c:when></c:choose>	
 				</tr>
@@ -273,7 +273,7 @@
 			form.submit();
 		});
 		
-		$('#chat').on("click", function(){
+		$('.chat').on("click", function(){
 			console.log("판매자 : "+$('.seller').val()+"구매자 : "+$('.buyer').val()+"넘버 : "+$('.artNo').val());
 			$.ajax({
 				 url:	"/chat/makeRoom2",
@@ -312,7 +312,7 @@
 	  detailBtn.css("color", "white");
 	  detailBtn.prop("disabled", true);
 	  
-	  $('#chat2').on("click", function(){
+	  $('.chat').on("click", function(){
 			console.log("판매자 : "+$('.seller').val()+"구매자 : "+$('.buyer').val()+"넘버 : "+$('.artNo').val());
 			$.ajax({
 				 url:	"/chat/makeRoom2",
