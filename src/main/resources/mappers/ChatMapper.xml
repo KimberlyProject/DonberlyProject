@@ -185,5 +185,11 @@
 		where nickName=#{nickName}
 	</select>
 	
+	<!-- 멤버DTO 다 가져오기 -->
+	<select id="findMemberDTO" resultType="memberDTO">
+		select userId, nickname
+		from members
+	</select>
+	
 	
 </mapper>

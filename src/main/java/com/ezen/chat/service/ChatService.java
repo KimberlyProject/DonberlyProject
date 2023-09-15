@@ -8,6 +8,7 @@ import com.ezen.board.dto.BuyArticleDTO;
 import com.ezen.auction.dto.AuctionDTO;
 import com.ezen.chat.dto.ChatDTO;
 import com.ezen.chat.dto.ChatListDTO;
+import com.ezen.member.dto.MemberDTO;
 
 public interface ChatService {
 
@@ -44,4 +45,6 @@ public interface ChatService {
 	public List countChat(String userId) throws Exception;
 	
 	public String finduserIdFromNickname(String nickName) throws Exception;
+	
+	public List<MemberDTO> findMemberDTO() throws Exception;
 }

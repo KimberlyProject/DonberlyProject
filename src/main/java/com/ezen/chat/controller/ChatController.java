@@ -61,6 +61,8 @@ public class ChatController {
 		ChatListDTO chatListDTO = chatService.findChatListFromChatId(ch); //chatList 옮김
 		int artNo = chatListDTO.getArtNo();
 		
+		List<MemberDTO> memberDTO = chatService.findMemberDTO();
+		
 		//아티클 넘버로 아티클VO 가져오기
 
 		if(chatListDTO.getStatus().equals("s") || chatListDTO.getStatus().equals("b")) {
@@ -76,7 +78,7 @@ public class ChatController {
 		}
 
 		session.setAttribute("chatList", chatListDTO);
-		
+		session.setAttribute("findNickname", memberDTO);
 		System.out.println("채팅 입장");
 		return "/chat/chattingview";
 	}
@@ -146,7 +148,7 @@ public class ChatController {
         //System.out.println("여기까지는 나오나" + lastchat);
 		//System.out.println("채팅 리스트*******************"+lastchat);
 		
-		//닉네임 찾기
+		//닉네임 찾기 이게 왜 buyArticleDTO인데
 		List<BuyArticleDTO> memberList = chatService.findAllMemeber();
 		List<ChatDTO> count= chatService.countChat(userId);
 		

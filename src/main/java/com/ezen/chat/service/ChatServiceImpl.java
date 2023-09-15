@@ -17,6 +17,7 @@ import com.ezen.chat.controller.ChatController;
 import com.ezen.chat.dao.ChatDAO;
 import com.ezen.chat.dto.ChatDTO;
 import com.ezen.chat.dto.ChatListDTO;
+import com.ezen.member.dto.MemberDTO;
 
 @Service
 public class ChatServiceImpl implements ChatService {
@@ -126,6 +127,12 @@ public class ChatServiceImpl implements ChatService {
 	public String finduserIdFromNickname(String nickName) throws Exception {
 		
 		return chatDAO.finduserIdFromNickname(nickName);
+	}
+
+	@Override
+	public List<MemberDTO> findMemberDTO() throws Exception {
+		
+		return chatDAO.findMemberDTO();
 	}
 
 	

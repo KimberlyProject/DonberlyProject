@@ -170,7 +170,7 @@
 					            ${article.price}원 <!-- 여기에 가격 표시 -->
 					          </li>
 					          <li class="product-seller">
-					          	<a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}'})">${article.nickname}</a>
+					          	<a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}', artNo: '${article.articleNO }'})">${article.nickname}</a>
 					          </li>
 					          <li class="product-date">
 					          	${article.write_date}

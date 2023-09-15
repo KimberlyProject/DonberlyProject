@@ -19,6 +19,7 @@ import com.ezen.auction.dto.AuctionDTO;
 import com.ezen.chat.controller.ChatController;
 import com.ezen.chat.dto.ChatDTO;
 import com.ezen.chat.dto.ChatListDTO;
+import com.ezen.member.dto.MemberDTO;
 
 @Repository
 public class ChatDAOImpl implements ChatDAO {
@@ -186,6 +187,12 @@ public class ChatDAOImpl implements ChatDAO {
 	public String finduserIdFromNickname(String nickName) throws Exception {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".finduserIdFromNickname",nickName);
+	}
+
+	@Override
+	public List<MemberDTO> findMemberDTO() throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".findMemberDTO");
 	}
 
 	

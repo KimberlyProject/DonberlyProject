@@ -260,18 +260,36 @@ span{
 	
 		<table border="1" style="margin: 0px; padding: 0px;">
 			<tr>
-				<c:if test="${chatList.status eq 's' || chatList.status eq 'b'}">
-				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${session.nickname }&gt;님과의 채팅창</td>
+					<c:forEach var="ni" items="${findNickname }">
+						<c:if test="${ni.userId == chatList.buyer }">
+							<c:set var="buy" value="${ni.nickname }"/>
+						</c:if>
+						<c:if test="${ni.userId == chatList.seller }">
+							<c:set var="sel" value="${ni.nickname }"/>
+						</c:if>
+					</c:forEach>
+				<c:if test="${chatList.status eq 's' || chatList.status eq 'b'}"><!-- 상대방 닉네임을 가져와야함 -->
+					<c:if test="${member.userId == chatList.seller}">
+						<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${buy }&gt;님과의 채팅창</td>
+					</c:if>
+					<c:if test="${member.userId == chatList.buyer}">
+						<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${sel }&gt;님과의 채팅창</td>
+					</c:if>
+					
 				</c:if>
-				<c:if test="${chatList.status eq a}">
-				<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${session.cstmId }&gt;님과의 채팅창</td>
+				<c:if test="${chatList.status eq 'a'}"><!-- 상대방 닉네임을 가져와야함 -->
+					<c:if test="${member.userId == chatList.seller}">
+						<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${buy }&gt;님과의 채팅창</td>
+					</c:if>
+					<c:if test="${member.userId == chatList.buyer}">
+						<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${sel }&gt;님과의 채팅창</td>
+					</c:if>
 				</c:if>
 			</tr>
 			<tr>
 				<td class="chat_area">
-				
 					<div class="wrap"  style="overflow:auto; width:599px; height:600px;">
-						
+					
     				</div>
 				</td>
 				<td class="chat_detail" rowspan="2">
@@ -280,15 +298,11 @@ span{
 					<c:set var="userId" value="${session.userId }"/>
 					<c:set var="seller" value="${chatList.seller}"/>
 					<c:set var="buyer" value="${chatList.buyer }"/>
-					<div>제목 : ${session.title}</div>
-					<c:if test="${seller eq  userId}">
-						<div>판매자: ${session.nickname}</div>
-						<div>구매자: ${member.nickname }</div>
-					</c:if>
-					<c:if test="${buyer eq userId}">
-						<div>판매자: ${member.nickname }</div>
-						<div>구매자: ${session.nickname }</div>
-					</c:if>
+					<div>제목 : ${session.title} (게시판)</div>
+					
+						<div>판매자: ${sel}</div>
+						<div>구매자: ${buy}</div>
+					
 					<div>코드 : ${session.p_code }</div>
 					<div style="padding-bottom: 10px;">가격: ${session.price}원</div>
 					
@@ -300,26 +314,31 @@ span{
 					<c:set var="userId" value="${session.aucId }"/>
 					<c:set var="seller" value="${chatList.seller}"/>
 					<c:set var="buyer" value="${chatList.buyer }"/>
-					<div>제목 : ${session.title}</div>
-					<c:if test="${seller eq  userId}">
+					<div>제목 : ${session.title} (경매장)</div>
+					<c:if test="${seller eq  userId}"><!-- 판매자 시점에서 현재 채팅자는 chatList에 들어있는 buyer -->
 						<div>판매자: ${session.aucNick}</div>
-						<div>구매자: ${session.cstmId }</div>
+						<div>현재 구매자: ${session.cstmId }</div>
+						<c:forEach var="nickname" items="${findNickname}">
+							<c:if test="${chatList.buyer == nickname.userId }">
+								<div>현재 채팅자: ${nickname.nickname }</div><!-- 여기만 닉네임으로 바꿔주면됨 -->
+							</c:if>
+						</c:forEach>
 					</c:if>
-					<c:if test="${buyer eq userId}">
+					<c:if test="${buyer eq userId}"> <!-- 구매자 시점에서 현재 채팅자는 본인 -->
 						<div>판매자: ${session.aucNick }</div>
-						<div>구매자: ${session.cstmId }</div>
+						<div>현재 구매자: ${session.cstmId }</div>
+						<div>현재 채팅자: ${member.nickname }</div>
 					</c:if>
-					<div>코드 : ${session.aucCode }</div>
+					<!-- <div>코드 : ${session.aucCode }</div> -->
 					<div style="padding-bottom: 10px;">가격: ${session.nowBid}원</div>
 					<img src="#" alt="사진" width="200px;" height="200px;"/><!-- 경은 언니가 해준다!! -->
-					
 					<br><br>
 					</c:if>
 					<!-- 끝 -->
 					
 					<button type="button" class="btn btn-success btn-lg">일정 추가</button>
 					<br><br>
-					<button type="button" class="btn btn-danger btn-lg">신고 하기</button>
+					<button type="button" class="btn btn-danger btn-lg" onclick="linkToOpener()">신고 하기</button>
 					<br><br>
 					<button type="button" class="btn btn-warning btn-lg" id="getin" onClick="chatOut()">채팅방 나가기</button>
 				</td>
@@ -347,6 +366,17 @@ span{
 <script>
 </script>
 <script>
+
+
+
+function linkToOpener(){
+if (window.opener && !window.opener.closed)
+window.opener.location = "${path}/ccenter/report";
+window.close();
+}
+
+
+
 
 
 function getChat(){
