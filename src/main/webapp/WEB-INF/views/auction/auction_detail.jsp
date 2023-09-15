@@ -178,7 +178,7 @@
 			<tr> <!-- 판매자 -->
 				<th class="cate">판매자</th>
 				<th class="colon">:</th>
-				<th colspan="4"><a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}'})">${article.nickname}</a>
+				<th colspan="4">[<a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}'})">${article.aucNick}</a>]님
 					<c:choose>
 					<c:when test="${member.userId != article.aucId}"> <!-- 판매자와 채팅하기 -->
 						<input type="hidden" class="seller" value="${article.aucId }"/>
