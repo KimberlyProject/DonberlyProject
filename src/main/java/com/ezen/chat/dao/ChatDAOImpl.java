@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 
 import com.ezen.board.dto.BuyArticleDTO;
+import com.ezen.auction.dto.AucImgDTO;
 import com.ezen.auction.dto.AuctionDTO;
 
 import com.ezen.chat.controller.ChatController;
@@ -169,6 +170,13 @@ public class ChatDAOImpl implements ChatDAO {
 			return null;
 		}
 	}
+	
+	//경은추가
+	@Override
+	public AucImgDTO findAucImgDTOFromAucCode(int aucCode) throws Exception {
+		System.out.println("가져와줘...제발");
+		return sqlSession.selectOne(namespace+".findAucImgDTOFromAucCode", aucCode);
+	}
 
 	//채팅 읽은거 확인하고 변경
 	@Override
@@ -208,4 +216,7 @@ public class ChatDAOImpl implements ChatDAO {
 	
 	
 
-}
+}	
+
+
+

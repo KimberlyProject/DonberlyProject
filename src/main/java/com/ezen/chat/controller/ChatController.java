@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import com.ezen.board.dto.BuyArticleDTO;
+import com.ezen.auction.dto.AucImgDTO;
 import com.ezen.auction.dto.AuctionDTO;
 import com.ezen.chat.dao.ChatDAO;
 import com.ezen.chat.dto.ChatDTO;
@@ -74,7 +75,11 @@ public class ChatController {
 			System.out.println("************************************"+"여기와라66666666666666");
 			AuctionDTO auctionDTO = chatService.findAuctionDTOFromArtNo(artNo,chatListDTO.getStatus());// 여기 dao에서 s b a 구별해서 가져옴
 			System.out.println("************************************"+auctionDTO);
-			session.setAttribute("session",auctionDTO);
+			session.setAttribute("session",auctionDTO); 
+			//경은추가
+			int aucCode = auctionDTO.getAucCode();
+			AucImgDTO aucImgDTO = chatService.findAucImgDTOFromAucCode(aucCode);
+			session.setAttribute("aucimgsession", aucImgDTO);
 		}
 
 		session.setAttribute("chatList", chatListDTO);

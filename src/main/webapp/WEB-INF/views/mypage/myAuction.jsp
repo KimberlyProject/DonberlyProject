@@ -82,28 +82,8 @@
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-	    <aside id="sideMenu">
-      <h2>마이페이지</h2>
-      <ul>
-        <li><a href="#">내 정보 수정</a></li>
-        <li>
-          <a href="#">거래내역</a>
-          <ul>
-            <li><a href="#">삽니다</a></li>
-            <li><a href="#">팝니다</a></li>
-          </ul>
-        </li>
-        <li><a href="#">경매</a>          
-          <ul>
-            <li><a href="#">판매</a></li>
-            <li><a href="#">구매</a></li>
-          </ul>
-        </li>
-        <li><a href="#">캘린더</a></li>
-        <li><a href="#">채팅목록</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
+    <c:set var="menu" value="mypage" />
+	<%@ include file="../include/sidebar.jsp" %>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       <a href="/">홈</a> &gt;
@@ -218,17 +198,18 @@
 									<input type="hidden" class="buyer" value="${article.cstmId }"/>
 									<input type="hidden" class="artNo" value="${article.aucCode }"/>
 									<input id="chat" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="채팅하기" onclick="chat('${article.aucId }','${article.cstmId }','${article.aucCode }')">
+
 								</c:when></c:choose>
 							</th>
 						</c:when></c:choose>
 						<!-- 판매 완료 orange-->
-						<c:choose><c:when test="${article.status == 1}">aucNick
+						<c:choose><c:when test="${article.status == 1}">
 							<!-- hidden 추가 이태림 -->
 							<input type="hidden" class="seller" value="${article.aucId }"/>
 							<input type="hidden" class="buyer" value="${article.cstmId }"/>
 							<input type="hidden" class="artNo" value="${article.aucCode }"/>
 							<th colspan="4"><span id="gray"><span class="gray">판매완료</span>&nbsp;&nbsp;&nbsp;[${article.cstmId}]님</span>
-							<input id="chat" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="채팅하기">
+							<input type="button" class="btn btn-primary saleBtn chat" style="color:#FFFFFF;" value="채팅하기">
 							</th>
 						</c:when></c:choose>	
 				</tr>
@@ -293,6 +274,7 @@
 			form.submit();
 		});
 		
+
 		$('#chat').on("click", function(seller,buyer,artNo){
 			console.log("판매자 : "+$('.seller').val()+"구매자 : "+$('.buyer').val()+"넘버 : "+$('.artNo').val());
 			$.ajax({
@@ -332,7 +314,7 @@
 	  detailBtn.css("color", "white");
 	  detailBtn.prop("disabled", true);
 	  
-	  $('#chat').on("click", function(){
+	  $('.chat').on("click", function(){
 			console.log("판매자 : "+$('.seller').val()+"구매자 : "+$('.buyer').val()+"넘버 : "+$('.artNo').val());
 			$.ajax({
 				 url:	"/chat/makeRoom2",

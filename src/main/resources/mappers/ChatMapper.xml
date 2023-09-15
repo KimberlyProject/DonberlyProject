@@ -163,6 +163,14 @@
 		where aucCode = #{artNo}
 	</select>
 	
+	<!-- 경은추가 aucImgDTO 가져오기 -->
+	<select id="findAucImgDTOFromAucCode" parameterType="int" resultType="aucImgDTO">
+		SELECT *
+		FROM aucImg
+		WHERE aucCode = #{aucCode}
+		AND imgNo = (SELECT MIN(imgNo) FROM aucImg WHERE aucCode = #{aucCode})
+	</select>
+	
 	<!-- readChat 수정하기 읽으면 1에서 0으로-->
 	<update id="readChat">
 		update chat

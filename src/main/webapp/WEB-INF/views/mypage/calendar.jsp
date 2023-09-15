@@ -49,6 +49,8 @@
 		  height:200px;        
 		  transition:0.3s;
 		  border-radius:10px;
+		  overflow-y:auto;
+		  word-break:break-all;
 		}
 		#calendarPage .calendar>.dateBoard>div:hover{
 		   background-color:rgb(234, 255, 228);
@@ -101,6 +103,15 @@
 		  font-size:18px;
 		  color:rgb(63, 102, 56);
 		  font-weight:bold;
+		}
+		#calendarPage .calendar>div>div>div>p>a{
+			text-decoration:underline;			
+		}
+		#calendarPage .calendar .glyphicon{
+			border:0;
+			background:none;
+			color:#aaa;
+			font-size:14px;
 		}
 		#calendarPage .calendar>div>div .contents{}
 	</style>
@@ -186,11 +197,23 @@
 
 	  // 데이터 일치하는 날짜에 컨텐츠, 링크 표시  
 	  calendar.forEach(list => {
+		
 		const insertYear = new Date(list.schedule).getFullYear();
 		const insertMonth = new Date(list.schedule).getMonth() + 1;
 		let insertDate = new Date(list.schedule).getDate();      
-		if(currentYear == insertYear && currentMonth == insertMonth && i == insertDate){	
-			contentstag.innerHTML = "<a href=${path}/" + (list.status == 's' ? 'sale' : 'buy' ) + "/viewArticle.do?articleNO=" + list.articleId + ">" + list.contents + "</a>";	      
+		if(currentYear == insertYear && currentMonth == insertMonth && i == insertDate){
+			if(list.status == 'a'){				
+				contentstag.innerHTML += "<p>"
+									  + "<a href=${path}/auction/auction_detail?aucCode=" + list.articleId + ">" + list.contents + "</a>"
+									  + "<button class='glyphicon glyphicon-remove' onClick='delete_calrender(" + list.calendarId + ")'></button>"
+									  + "</p>";
+			}else{
+				contentstag.innerHTML += "<p>"
+									  + "<a href=${path}/" + (list.status == 's' ? 'sale' : 'buy') + "/viewArticle.do?articleNO=" + list.articleId + ">" + list.contents + "</a>"
+									  + "<button class='glyphicon glyphicon-remove' onClick='delete_calrender(" + list.calendarId + ")'></button>"
+									  + "</p>";	
+			}
+			
 		}
 	  })
 		  
@@ -223,6 +246,27 @@
 	  // 다음달 이동
 	  document.querySelector(".nextDay").onclick = () => {
 	  makeCalendar(new Date(date.setMonth(date.getMonth() + 1)));
+	  }
+	  
+	  function delete_calrender(calId){
+		  //console.log(calId, typeof calId);
+		  if(confirm("메모를 삭제하시겠습니까?")){
+			  $.ajax({
+				 url:	"/mypage/calendarDelete",
+				 type:	"post",
+				 data:	{ "calId" :  calId },	
+				 success: function(data){
+					//console.log(data);
+					alert("메모가 삭제되었습니다.");
+					location.href = location.href;
+				 },
+				 error:function(request,status,error){
+					 console.log("실패");
+				 },
+				 complete:function(){
+				 }
+			 });			  
+		  }
 	  }
 	</script>
 

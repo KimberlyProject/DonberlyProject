@@ -26,4 +26,12 @@ public class MypageDAO {
 		logger.info("Calendar 리스트가져오기 DAO");
 		return sqlSession.selectList(namespace + ".calendarlist", userId);
 	}
+	public int inserCalendar(CalendarDTO calendarDTO)  throws DataAccessException{
+		logger.info("Calendar 일정추가 DAO");
+		return sqlSession.insert(namespace + ".insertcalendar", calendarDTO);
+	}
+	public int DeleteCalendar(int calId)  throws DataAccessException{
+		logger.info("Calendar 일정삭제 DAO");
+		return sqlSession.delete(namespace + ".deletecalendar", calId);
+	}
 }

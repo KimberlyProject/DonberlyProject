@@ -189,7 +189,7 @@
 					</th>
 				</tr>
 				<tr>
-					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">[${article.aucId}]님</th>
+					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">[${article.aucNick}]님</th>
 				</tr>
 				<tr>
 					<th class="cate">현재 입찰가</th><th class="colon">:</th>
