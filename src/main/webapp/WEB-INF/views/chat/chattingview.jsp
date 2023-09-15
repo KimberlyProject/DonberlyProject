@@ -105,10 +105,16 @@ html{
 	padding-left:20px;
 	padding-top: 20px;
 }
-.chat_detail>button{
+.chat_detail>button, .chat_detail>.dropdown>button{
 	text-align: center;
-	width:300px;
-	
+	width:300px;	
+}
+.chat_detail>.dropdown>div{
+	padding:10px;
+}
+.chat_detail>.dropdown>div>input, .chat_detail>.dropdown>div>textarea, .chat_detail>.dropdown>div>button{
+	display:block;
+	width:100%;
 }
 .col-xs-3{
 	margin-left: 0;
@@ -287,7 +293,7 @@ div.chat.ch2{
 						<div>판매자: ${member.nickname }</div>
 						<div>구매자: ${session.nickname }</div>
 					</c:if>
-					<div>코드 : ${session.p_code }</div>
+					<div>코드 : ${session.p_code } <input type="hidden" value="${session.p_code}" class="code"></div>
 					<div style="padding-bottom: 10px;">가격: ${session.price}원</div>
 					
 					<img src="${path}/resources/images/board/article_image/${session.articleNO }/${session.thumbnail}" alt="사진" width="200px;" height="200px;"/>
@@ -307,7 +313,7 @@ div.chat.ch2{
 						<div>판매자: ${member.nickname }</div>
 						<div>구매자: ${session.aucId }</div>
 					</c:if>
-					<div>코드 : ${session.aucCode }</div>
+					<div>코드 : ${session.aucCode } <input type="hidden" value="${session.aucCode}" class="code"></div>
 					<div style="padding-bottom: 10px;">가격: ${session.nowBid}원</div>
 					<img src="#" alt="사진" width="200px;" height="200px;"/><!-- 경은 언니가 해준다!! -->
 					
@@ -315,8 +321,15 @@ div.chat.ch2{
 					</c:if>
 					<!-- 끝 -->
 					
-					<button type="button" class="btn btn-success btn-lg">일정 추가</button>
-					<br><br>
+					<div class="dropdown">
+						<button type="button" class="btn btn-success btn-lg" id="schedule" data-toggle="dropdown">일정 추가</button>
+						<div class="dropdown-menu" aria-labelledby="schedule">
+						  <input type="date" id="scheduleData">
+						  <textarea id="contents"></textarea>
+						  <button class="btn btn-success" onClick="calendar_insert()">일정 추가</button>
+						</div>
+					</div>
+					<br>
 					<button type="button" class="btn btn-danger btn-lg">신고 하기</button>
 					<br><br>
 					<button type="button" class="btn btn-warning btn-lg" id="getin" onClick="chatOut()">채팅방 나가기</button>
@@ -357,7 +370,7 @@ function getChat(){
 			 "chatId" : $('#chatId').val()
 		 },	
 		 success: function(data){
-			 console.log(data);
+			 //console.log(data);
 			 var html="";
 			 
 			 for(var i=0 ; i<data.length;i++){
@@ -377,7 +390,7 @@ function getChat(){
 						"<div class='time1' >"+month+"월"+date.getDate()+"일 "+date.getHours()+":"+date.getMinutes()+"</div>";
 					} 
 			}
-			 console.log(html);
+			 
 			 $('.wrap').html(
 				html
 			 );
@@ -406,7 +419,6 @@ $(document).ready(function(){
 		
 		var con = $('#chatContent').val();
 		var now = new Date();
-		console.log($('#chatContent').val());
 		//예약 확정/취소를 선택한다.
 		if($('#chatContent').val()){
 			 $.ajax({
@@ -461,6 +473,31 @@ function chatOut(){
 	 });
 }
 
+function calendar_insert(){
+	console.log("${member.userId}");
+	if(confirm("일정을 등록하시겠습니까?")){
+		$.ajax({
+			 url:	"/mypage/calendar",
+			 type:	"post",
+			 data:	{
+					 "userId" :  $('#userId').val(),
+					 "articleId" : "${session.aucCode}",
+					 "status" : "${chatList.status}",
+					 "schedule" : $('#scheduleData').val(),
+					 "contents" : $('#contents').val()
+			 },	
+			 success: function(data){
+				 console.log(data);
+				alert("일정에 추가되었습니다.");
+			 },
+			 error:function(request,status,error){
+				 console.log("실패");
+			 },
+			 complete:function(){
+			 }
+		 });		
+	}
+}
 
 </script>
 

@@ -9,4 +9,12 @@
 		SELECT * FROM Calendar 
 		WHERE userid = #{userId}
    </select>
+   
+   <insert id="insertcalendar" parameterType="com.ezen.mypage.dto.CalendarDTO">
+   		INSERT INTO Calendar 
+   		VALUES ( (SELECT NVL(max(CALENDARID),0) FROM Calendar) + 1, #{userId}, #{articleId}, #{status}, #{schedule}, #{contents})   		
+   </insert>
+   <delete id="deletecalendar" parameterType="int">
+   		DELETE FROM Calendar WHERE calendarId = #{calId}
+   </delete>
 </mapper>

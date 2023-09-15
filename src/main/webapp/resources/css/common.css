@@ -11,7 +11,7 @@
     font-style: normal;
 }
 body{
-    padding-top:70px;
+    padding-top:60px;
 }
 ul{
     padding:0;
@@ -207,7 +207,7 @@ footer{
     padding:30px;
 }
 
-@media all and (max-width:780px){
+@media all and (max-width:760px){
     
     header nav{
         font-size:21px;

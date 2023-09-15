@@ -22,5 +22,13 @@ public class MypageService {
 		logger.info("Calendar 리스트가져오기 Service");
 		return mypageDAO.calendarList(userId);
 	}
+	public int inserCalendar(CalendarDTO calendarDTO) throws Exception{
+		logger.info("Calendar 일정추가 Service");
+		return mypageDAO.inserCalendar(calendarDTO);
+	}
+	public int DeleteCalendar(int calId) throws Exception{
+		logger.info("Calendar 일정삭제 Service");
+		return mypageDAO.DeleteCalendar(calId);
+	}
 
 }

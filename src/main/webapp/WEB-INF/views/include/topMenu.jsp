@@ -68,9 +68,9 @@ if("${memberlevel.userStatus}" == "N1"){
               <li>
                 <a href="${path}/admin/oneOnOneInquiry">관리자</a>                
                 <ul> 
-                    <li><a href="${path}/admin/oneOnOneInquiry">1:1 문의 내역</a></li>
-                    <li><a href="${path}/admin/reportAnswer">신고하기 내역</a></li>
+                    <li><a href="${path}/admin/oneOnOneInquiry">1:1 문의 내역</a></li>                    
                     <li><a href="${path}/admin/memberList">회원 목록</a></li>
+                    <li><a href="${path}/admin/reportAnswer">신고 내역</a></li>
                 </ul>
               </li>
               </c:if>
