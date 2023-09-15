@@ -85,7 +85,7 @@
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       <a href="/">홈</a> &gt;
       <a href="#">마이페이지</a> &gt;
-       <a href="#">내가 올린 경매 상품</a> &gt;
+       <a href="#">내가 입찰한 경매 상품</a> &gt;
     </div>
     <h1 class="pageTitle"><div>내가 입찰한 경매 상품</div></h1>
     

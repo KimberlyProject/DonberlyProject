@@ -202,7 +202,7 @@
 							</th>
 						</c:when></c:choose>
 						<!-- 판매 완료 orange-->
-						<c:choose><c:when test="${article.status == 1}">aucNick
+						<c:choose><c:when test="${article.status == 1}">
 							<!-- hidden 추가 이태림 -->
 							<input type="hidden" class="seller" value="${article.aucId }"/>
 							<input type="hidden" class="buyer" value="${article.cstmId }"/>
