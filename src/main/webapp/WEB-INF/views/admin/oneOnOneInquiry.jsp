@@ -174,12 +174,12 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="ask" items="${ask}" varStatus="articleNum">
+			<c:forEach var="ask" items="${asks}" varStatus="articleNum">
 				<tr class="article">
 					<td><input class="check" type="checkbox" style="width: 100%;"/></td>
-					<td class="articleNo">${articleNum.count}<input class="num" name="num" type="hidden" value="${ask.articleNo}"></td>
+					<td class="articleNo">${fn:length(asks) - articleNum.index}<input class="num" name="num" type="hidden" value="${ask.articleNo}"></td>
 					<td>
-						${ask.title}
+						${ask.title} 
 					</td>
 					<td>
 						${ask.userId}

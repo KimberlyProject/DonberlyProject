@@ -53,14 +53,10 @@ public class AdminController {
 		// 화면에 출력한 데이터를 가져온다.
 		List<CcenterDTO> listOneOnOne = adminService.listOneOnOne();
 		
-		//추가
-		//Collections.reverse(listOneOnOne);
-
-		
 		System.out.println(listOneOnOne);
 		
 		// mav에 object를 추가
-		mav.addObject("ask", listOneOnOne);
+		mav.addObject("asks", listOneOnOne);
 		
 		return mav;
 	}
