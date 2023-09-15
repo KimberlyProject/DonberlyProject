@@ -148,8 +148,8 @@
 						 	사진이 없을 시 입찰자 없이 경매가 종료될 수 있습니다.</span>
 						 	
 						 	<br/><br/>
-							<input type="file" name="imageFileName" onchange="readAndResize(this)"><br/>
-							<input type="file" name="imageFileName2" onchange="readAndResize(this)">
+							<input type="file" name="imageFileName" onchange="readAndResize(this)"/><br/>
+							<input type="file" name="imageFileName2" onchange="readAndResize(this)"/>
 							
 						</div>
 					</th>
@@ -177,7 +177,7 @@
 
 <script>
 
-	$("#submit").on("click", function(s) {
+	$("#submit").on("click", function() {
 		if($("#title").val() == "") {
 			alert("제목을 입력해주세요.");
 			$("#title").focus();
@@ -217,23 +217,23 @@
 			$("#searchType").focus();
 			return false;
 		}	
-		
-		if($("#content").val() == "") {
-			alert("제품에 대한 상세설명을 입력해주세요.");
-			$("#content").focus();
-			return false;
-		}	
 
 		var image1 = $("#imageFileName1").val();
 	    var image2 = $("#imageFileName2").val();
 
+	    
 	    if (!image1 || !image2) {
 	        $("#imageUploadError").css("color", "red");
 	        return false;
 	    } else {
 	        $("#imageUploadError").text("");
 	    }
-	    
+	    	    
+		if($("#content").val() == "") {
+			alert("제품에 대한 상세설명을 입력해주세요.");
+			$("#content").focus();
+			return false;
+		}	
 	});
 	
 	//숫자 입력창 100단위 콤마(,)추가하기
