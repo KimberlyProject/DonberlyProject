@@ -109,12 +109,18 @@ html{
 	text-align: center;
 	width:300px;	
 }
+
 .chat_detail>.dropdown>div{
 	padding:10px;
+	left:20px;
+	width:300px;
 }
 .chat_detail>.dropdown>div>input, .chat_detail>.dropdown>div>textarea, .chat_detail>.dropdown>div>button{
 	display:block;
 	width:100%;
+}
+.chat_detail>.dropdown>div>textarea{
+	margin:10px 0;
 }
 .col-xs-3{
 	margin-left: 0;
@@ -483,7 +489,16 @@ function chatOut(){
 }
 
 function calendar_insert(){
-	console.log("${member.userId}");
+	console.log($('#scheduleData').val());
+	
+	if($('#scheduleData').val()){
+		alert("날짜를 선택해 주세요.");
+		return false;		
+	}
+	if(!$('#contents').val()){
+		alert("일정 내용을 입력해 주세요.");
+	}
+	 
 	if(confirm("일정을 등록하시겠습니까?")){
 		$.ajax({
 			 url:	"/mypage/calendar",

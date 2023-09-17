@@ -113,7 +113,17 @@
 			color:#aaa;
 			font-size:14px;
 		}
-		#calendarPage .calendar>div>div .contents{}
+		@media all and (max-width:760px) {
+	      	#calendarPage .calendar>.dataHead, #calendarPage .calendar>.dateBoard .nodata{
+		      	display:none;
+	      	}
+	      	#calendarPage .calendar>div{
+	      		grid-template-columns: 1fr;
+	      	}
+	      	#calendarPage .calendar>div>div{
+	      		border-left:1px solid #333;
+	      	}
+   		}      
 	</style>
 </head>
 <body>
