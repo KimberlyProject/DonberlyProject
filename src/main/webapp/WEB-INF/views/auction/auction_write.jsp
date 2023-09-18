@@ -176,8 +176,9 @@
 	<%@ include file="../include/footer.jsp" %>
 
 <script>
-	
-	//유효성 검사
+
+
+
 	$("#submit").on("click", function() {
 		if($("#title").val() == "") {
 			alert("제목을 입력해주세요.");

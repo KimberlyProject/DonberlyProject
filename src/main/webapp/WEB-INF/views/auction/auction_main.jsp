@@ -157,7 +157,7 @@
 					<th class="cate">제목</th><th class="colon">:</th><th colspan="4">${article.title}</th>
 					<th rowspan="4" id="detailarea">
 						<br/>
-						<form action="${path}auction_detail" method="get">
+						<form action="${path}/auction/auction_detail" method="get">
 							<input type="hidden" name="aucCode" value="${article.aucCode}"/>
 							<c:choose>
 							<c:when test="${article.status == 0 && (article.deadline > today || article.deadline == today)}">
