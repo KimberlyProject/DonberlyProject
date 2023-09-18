@@ -19,6 +19,8 @@ import com.ezen.admin.service.AdminService;
 import com.ezen.ccenter.dto.CcenterDTO;
 import com.ezen.ccenter.dto.ReportDTO;
 import com.ezen.admin.dto.PageMaker;
+import com.ezen.admin.dto.ReportCriteria;
+import com.ezen.admin.dto.ReportPageMaker;
 import com.ezen.admin.dto.SearchCriteria;
 import com.ezen.member.dto.MemberDTO;
 
@@ -34,27 +36,29 @@ public class AdminController {
 	@Inject
 	private AdminService adminService;
 	
-
-	
 	//-----------------------------------------------------------------------------------------------------------
-	// 1:1 문의하기 리스트 생성
+	// 관리자 탭: 1:1 문의하기 전체 조회 + 검색
 	//-----------------------------------------------------------------------------------------------------------
-	
 	@RequestMapping(value="/oneOnOneInquiry", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView listOneOnOne(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView listOneOnOne(HttpServletRequest request, HttpServletResponse response, SearchCriteria cri) throws Exception {
 		
 		System.out.println("시작");
 		
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView   mav   = new ModelAndView(viewName);
 		
+		SearchCriteria	scri	= new SearchCriteria();
+		scri = (cri);
+		
 		// 화면에 출력한 데이터를 가져온다.
-		List<CcenterDTO> listOneOnOne = adminService.listOneOnOne();
+		List<CcenterDTO> listOneOnOne = adminService.listOneOnOne(cri);
 		
 		System.out.println(listOneOnOne);
 		
 		// mav에 object를 추가
-		mav.addObject("ask", listOneOnOne);
+		mav.addObject("ask", 	listOneOnOne);
+		mav.addObject("scri",	scri);
+		mav.addObject("cri",	cri);
 		
 		return mav;
 	}
@@ -62,30 +66,38 @@ public class AdminController {
 
 	
 	//-----------------------------------------------------------------------------------------------------------
-	// 신고하기 리스트 생성
+	// 관리자 탭: 신고하기 전체 조회 + 페이징
 	//-----------------------------------------------------------------------------------------------------------
-	
 	@RequestMapping(value="/reportAnswer", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView listReportAnswer(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView listReportAnswer(HttpServletRequest request, HttpServletResponse response, ReportCriteria rcri) throws Exception {
 		
 		System.out.println("시작");
 		
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView   mav   = new ModelAndView(viewName);
 		
+		ReportPageMaker reportPageMaker = new ReportPageMaker();
+		reportPageMaker.setRcri(rcri);
+		System.out.println("################################# Controller rcri => " + rcri);
+		
+		// rcri를 가지고 검색한 총 건수를 TotalCount 변수에 저장한다.
+		reportPageMaker.setTotalCount(adminService.reportAnswerTotalCount(rcri));
+		
 		// 화면에 출력한 데이터를 가져온다.
-		List<ReportDTO> listReportAnswer = adminService.listReportAnswer();
+		List<ReportDTO> listReportAnswer = adminService.listReportAnswer(rcri);
 		
 		System.out.println(listReportAnswer);
 		
 		// mav에 object를 추가
-		mav.addObject("report", listReportAnswer);
+		mav.addObject("report",				listReportAnswer);
+		mav.addObject("reportPageMaker",	reportPageMaker);
+		mav.addObject("rcri",				rcri);
 		
 		return mav;
 	}
 	
 	//--------------------------------------------------------------------------------------------------
-	// 회원 전체 조회 + 페이징 + 검색
+	// 관리자 탭: 회원 전체 조회 + 페이징 + 검색
 	//--------------------------------------------------------------------------------------------------
 	@RequestMapping(value="/memberList", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView memberListPaging(HttpServletRequest request, HttpServletResponse response, SearchCriteria cri) throws Exception {
@@ -97,12 +109,13 @@ public class AdminController {
 		PageMaker		pageMaker	= new PageMaker();
 		pageMaker.setCri(cri);
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ cri ==> " + cri);
+		
 		// cri를 가지고 검색한 총 건수를 TotalCount 변수에 저장한다.
 		pageMaker.setTotalCount(adminService.memberListTotalCount(cri));	
 		logger.info("게시물의 총 건수 : " + pageMaker.getTotalCount());
 		
 		// 화면에 출력할 데이터를 가져온다.
-		List<MemberDTO> list = adminService.memberListPaging(cri);
+		List<MemberDTO> list = adminService.memberList(cri);
 
 		
 		// pageMaker의 정보를 콘솔에 보여준다.
@@ -116,7 +129,7 @@ public class AdminController {
 	}
 	
 	//--------------------------------------------------------------------------------------------------
-	// 회원아이디에 대한 상세 정보 조회
+	// 관리자 탭: 회원아이디에 대한 상세 정보 조회
 	//--------------------------------------------------------------------------------------------------
 	@RequestMapping(value="/memberDetail", method=RequestMethod.GET)
 	public void memberDetail(@RequestParam("userId") String userId, Model model) throws Exception {
@@ -129,7 +142,7 @@ public class AdminController {
 	}
 	
 	//--------------------------------------------------------------------------------------------------
-	// 회원 정보 수정
+	// 관리자 탭: 회원 정보 수정
 	//--------------------------------------------------------------------------------------------------
 	@RequestMapping(value="/memberUpdate", method=RequestMethod.POST)
 	public String memberUpdate(MemberDTO memberDTO) throws Exception {
@@ -141,7 +154,7 @@ public class AdminController {
 	}
 	
 	//--------------------------------------------------------------------------------------------------
-	// 회원 정보 삭제
+	// 관리자 탭: 회원 정보 삭제
 	//--------------------------------------------------------------------------------------------------
 	@RequestMapping(value="/memberDelete", method=RequestMethod.POST)
 	public String memberDelete(MemberDTO memberDTO, Model model) throws Exception {
@@ -153,7 +166,7 @@ public class AdminController {
 	}
 	
 	//--------------------------------------------------------------------------------------------------
-	// 회원 7일 정지
+	// 관리자 탭: 회원 7일 정지
 	//--------------------------------------------------------------------------------------------------
 	@RequestMapping(value="/Asuspension", method=RequestMethod.POST)
 	public String Asuspension(String userId) throws Exception {
@@ -163,7 +176,7 @@ public class AdminController {
 	}
 	
 	//--------------------------------------------------------------------------------------------------
-	// 회원 영구 정지
+	// 관리자 탭: 회원 영구 정지
 	//--------------------------------------------------------------------------------------------------
 	@RequestMapping(value="/Psuspension", method=RequestMethod.POST)
 	public String Psuspension(String userId) throws Exception {

@@ -13,6 +13,7 @@
 		}
 		td {
 			text-align:			center;
+			text-overflow: 		ellipsis;
 		}
 		.content {
 			display:			none;
@@ -56,21 +57,38 @@
 		.head > th:last-child {
 			width:				15%;
 		}
+		table {
+			margin-bottom:		100px;
+		}
 		td > a {
 			font-color:			#000;
-		}
-		#Asbtn {
-			margin:				25px;
-		}
-		#Psbtn {
-			margin:				25px;
 		}
 		ul > li > a {
 			height:				34px;
 		}
-		ul {
+		.form-group {
+			width:				100%;
+			height:				50px;
+			
+		}
+		#Asbtn {
+			margin:				10px 25px 10px 25px;
+		}
+		#Psbtn {
+			margin:				10px 25px 10px 25px;
+		}
+		.pagearea {
 			text-align: center;
 		}
+		#sbtn {
+			vertical-align:		middle;
+			text-align: 		center;
+		}
+		.sbtn {
+			width:				20%;
+			height:				50px;
+		}
+		
 	</style>
 </head>
 <body>
@@ -78,7 +96,7 @@
 	<c:set var="menu" value="admin" />
 	<%@ include file="../include/sidebar.jsp" %>	
    <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
       홈 &gt; 관리자 &gt; 회원 목록
     </div>
     
@@ -88,7 +106,7 @@
 		<!-- 검색창 -->
 		<div class="row" style="vertical-align: middle; float:right;">
 			<select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
-				<option value="a" <c:if test="{searchType} == 'a'">selected</c:if>>전체</option>
+				<option value="memberListAll" <c:if test="{searchType} == 'memberListAll'">selected</c:if>>전체</option>
 				<option value="i" <c:if test="{searchType} == 'i'">selected</c:if>>아이디</option>
 				<option value="tel" <c:if test="{searchType} == 'tel'">selected</c:if>>연락처</option>
 				<option value="addr" <c:if test="{searchType} == 'addr'">selected</c:if>>주소</option>
@@ -115,50 +133,49 @@
 				<c:forEach var="list" items="${memberList}" varStatus="memberNum">
 					<tr id="tr">
 						<td><input type="checkBox" name="checkBox" style="width: 100%;"/></td>
-						<td onclick="location.href='/admin/memberDetail?userId=${list.userId}'">${memberNum.count}</td>
-						<td onclick="location.href='/admin/memberDetail?userId=${list.userId}'">${list.userId}</td>
-						<td onclick="location.href='/admin/memberDetail?userId=${list.userId}'">${list.tel}</td>
-						<td class="addr" onclick="location.href='/admin/memberDetail?userId=${list.userId}'">${list.address}</td>
-						<td onclick="location.href='/admin/memberDetail?userId=${list.userId}'"><fmt:formatDate value="${list.regDate}" pattern="yyyy년 MM월 dd일"/></td>
+						<td onclick="location.href='${path}/admin/memberDetail?userId=${list.userId}'">${memberNum.count}</td>
+						<td onclick="location.href='${path}/admin/memberDetail?userId=${list.userId}'">${list.userId}</td>
+						<td onclick="location.href='${path}/admin/memberDetail?userId=${list.userId}'">${list.tel}</td>
+						<td class="addr" onclick="location.href='${path}/admin/memberDetail?userId=${list.userId}'">${list.address}</td>
+						<td onclick="location.href='${path}/admin/memberDetail?userId=${list.userId}'"><fmt:formatDate value="${list.regDate}" pattern="yyyy년 MM월 dd일"/></td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
+		<br/>
 		<!-- 기능 버튼 -->
-		<div class="form-group">
-			<div class="col-sm-offset-3 center">
-				<!-- 스크립트를 통한 수정 -->
-				<input class="btn btn-success col-sm-2" type="button" value="7일 정지" id="Asbtn"/>
-				<!-- 스크립트를 통한 삭제 -->
-				<input class="btn btn-danger col-sm-2" type="button" value="영구 정지" id="psbtn"/>
-			</div>
+		<div id="sbtn" class="form-group">
+			<!-- 7일 정지 버튼 -->
+			<input class="btn btn-success sbtn" type="button" value="7일 정지" id="Asbtn"/>
+			<!-- 영구 정지 버튼 -->
+			<input class="btn btn-danger sbtn" type="button" value="영구 정지" id="psbtn"/>
 		</div>
-		<br/>
-		<br/>
 		<!-- 화면 하단의 페이지 영역 -->
-		<div class="col-sm-offset-3 memberListPage">
-			<ul class="btn-group pagination">
+		<div class="pagearea">
+			<ul class="btn-group pagination" >
 				<c:if test="${pageMaker.prev}">
 					<li>
-						<a href="<c:url value='/admin/memberList?page=${pageMaker.startPage-1}&searchType=${cri.searchType}&keyword=${cri.keyword}'/>"><span class="glyphicon glyphicon-chevron-left"></span></a>
+						<a href="<c:url value='/admin/memberList?page=${pageMaker.startPage-1}&searchType=${cri.searchType}&keyword=${cri.keyword}'/>"><span class="glyphicon glyphicon-chevron-left"></span><span class="glyphicon glyphicon-chevron-left"></span></a>
 					</li>
 				</c:if>
 				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="pageNum">
-					<li><a href="<c:url value='/admin/memberList?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}'/>">${pageNum}</a></li>
+					<li>
+						<a href="<c:url value='/admin/memberList?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}'/>">${pageNum}</a>
+					</li>
 				</c:forEach>
 				<c:if test="${pageMaker.next}">
 					<li>
-						<a href="<c:url value='/admin/memberList?page=${pageMaker.endPage+1}&searchType=${cri.searchType}&keyword=${cri.keyword}'/>"><span class="glyphicon glyphicon-chevron-right"></span></a>
+						<a href="<c:url value='/admin/memberList?page=${pageMaker.endPage+1}&searchType=${cri.searchType}&keyword=${cri.keyword}'/>"><span class="glyphicon glyphicon-chevron-right"></span><span class="glyphicon glyphicon-chevron-right"></span></a>
 					</li>
 				</c:if>
 			</ul>
 		</div>
 		
 		<!-- 검색부분 -->
-		<form id="formList" action="/admin/memberList" method="GET">
+		<form id="formList" action="${path}/admin/memberList" method="GET">
 			<input type="hidden" name="page"		value="${result.currentPageNum}"/>
 			<input type="hidden" name="size"		value="${result.currentPage.pageSize}"/>
-			<input type="hidden" name="searchType"	value="${pageVO.type}">
+			<input type="hidden" name="searchType"	value="${pageVO.type}"/>
 			<input type="hidden" name="keyword"		value="${pageVO.keyword}"/>
 		</form>
 	</div>
@@ -167,7 +184,8 @@
 
     <script>
         $(document).ready(function() {
-
+        	
+        	// 7일 정지: 7일정지 버튼을 누를 경우
 		    $("#Asbtn").on("click", function() {
 				var inputID = [];
 				$('input:checkbox[name="checkBox"]').each(function(index, item){
@@ -178,7 +196,7 @@
 		                alert(idSelect);
 	
 		                $.ajax({
-		    				url:		"/admin/Asuspension",
+		    				url:		"${path}/admin/Asuspension",
 		    				type:		"post",
 		    				dataType:	"text",
 		    				data:		{"userId" : idSelect},
@@ -197,6 +215,7 @@
 				
 			});
 		    
+        	// 영구정지: 영구정지 버튼을 누를 경우
 		    $("#psbtn").on("click", function() {
 				var inputID = [];
 				$('input:checkbox[name="checkBox"]').each(function(index, item){
@@ -207,7 +226,7 @@
 		                alert(idSelect);
 	
 		                $.ajax({
-		    				url:		"/admin/Psuspension",
+		    				url:		"${path}/admin/Psuspension",
 		    				type:		"post",
 		    				dataType:	"text",
 		    				data:		{"userId" : idSelect},
@@ -227,7 +246,7 @@
 			});
 	    	var formObj = $("#formList");
 	    	
-	    	// 검색버튼을 눌렀을 경우
+	    	// 검색: 검색버튼을 누를 경우
 	    	$("#searchBtn").click(function(e) {
 	    		var typeStr = $("#searchType").find(":selected").val();
 	    		var keywordStr = $("#searchKeyword").val();

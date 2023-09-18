@@ -4,7 +4,7 @@
 ## 로드맵
 ### 홈
 1. [로그인](http://localhost:8099/member/login)
-2. [홈](http://localhost:8099/)http://localhost:8099/)
+2. [홈](http://localhost:8099/)
 ### 장터
 3. [팝니다](http://localhost:8099/board/listArticles.do)
 4. [삽니다](http://localhost:8099/sale/listArticles.do)

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page session="true" %>
 <html>
 <head>
 	<title>Home</title>
@@ -52,23 +52,21 @@
 		.head > th:last-child {
 			width:				15%;
 		}
+		ul > li > a {
+			height:				34px;
+		}
+		.pagearea {
+			text-align: center;
+		}
 	</style>
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-	<aside id="sideMenu">
-      <ul>
-        <li><a href="./oneOnOneInquiry">1:1 문의하기 내역</a></li>
-        <li><a href="./reportAnswer">신고하기 내역</a></li>
-        <li><a href="./memberList">회원 목록</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
-    <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <span><a href="./reportAnswer">관리자</a></span>
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      <span><a href="./reportAnswer">신고하기 내역</a></span>
+	<c:set var="menu" value="admin" />
+	<%@ include file="../include/sidebar.jsp" %>	
+   <div class="page_dir container">
+      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
+      홈 &gt; 관리자 &gt; 신고하기
     </div>
     <h1 class="pageTitle"><div>신고하기 내역</div></h1>
 	
@@ -108,7 +106,9 @@
 			<tbody>
 			<c:forEach var="report" items="${report}" varStatus="articleNum">
 				<tr>
-					<td><input type="checkbox" style="width: 100%;"/></td>
+					<td>
+						<input type="checkbox" style="width: 100%;"/>
+					</td>
 					<td>
 						${report.articleNo}
 					</td>
@@ -139,6 +139,27 @@
 			</c:forEach>
 			</tbody>
 		</table>
+		<!-- 화면 하단의 페이지 영역 start -->
+		<div class="pagearea">
+			<ul class="btn-group pagination">
+				<c:if test="${reportPageMaker.prev}">
+					<li>
+						<a href="<c:url value='/admin/reportAnswer?page=${reportPageMaker.startPage-1}'/>"><span class="glyphicon glyphicon-chevron-left"></span></a>
+					</li>
+				</c:if>
+				<c:forEach begin="${reportPageMaker.startPage}" end="${reportPageMaker.endPage}" var="pageNum">
+					<li>
+						<a href="<c:url value='/admin/reportAnswer?page=${pageNum}'/>">${pageNum}</a>
+					</li>
+				</c:forEach>
+				<c:if test="${reportPageMaker.next}">
+					<li>
+						<a href="<c:url value='/admin/reportAnswer?page=${reportPageMaker.endPage+1}'/>"><span class="glyphicon glyphicon-chevron-right"></span></a>
+					</li>
+				</c:if>
+			</ul>
+		</div>
+		<!-- 화면 하단의 페이지 영역 end -->
 	</div>
 	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	<%@ include file="../include/footer.jsp" %>

@@ -12,6 +12,8 @@ import com.ezen.admin.dao.AdminDAO;
 import com.ezen.ccenter.dto.CcenterDTO;
 import com.ezen.ccenter.dto.ReportDTO;
 import com.ezen.admin.dto.Criteria;
+import com.ezen.admin.dto.ReportCriteria;
+import com.ezen.admin.dto.SearchCriteria;
 import com.ezen.member.dto.MemberDTO;
 
 @Service
@@ -23,12 +25,12 @@ public class AdminServiceImpl implements AdminService {
 	private AdminDAO adminDAO;
 	
 	//--------------------------------------------------------------------------------------------------
-	// 회원 전체 목록
-	//--------------------------------------------------------------------------------------------------	
+	// 회원 전체 조회 + 페이징 + 검색
+	//--------------------------------------------------------------------------------------------------
 	@Override
-	public List<MemberDTO> selectMember() throws Exception {
+	public List<MemberDTO> memberList(Criteria cri) throws Exception {
+		return adminDAO.memberList(cri);
 		
-		return adminDAO.selectMember();
 	}
 	
 	//--------------------------------------------------------------------------------------------------
@@ -86,39 +88,39 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	//--------------------------------------------------------------------------------------------------
-	// 1:1 문의하기 리스트 생성
+	// 1:1 문의하기 전체 조회 + 검색
 	//--------------------------------------------------------------------------------------------------
 	@Override
-	public List<CcenterDTO> listOneOnOne() throws Exception {
-		List<CcenterDTO> listOneOnOne = adminDAO.listOneOnOne();
+	public List<CcenterDTO> listOneOnOne(SearchCriteria cri) throws Exception {
+		List<CcenterDTO> listOneOnOne = adminDAO.listOneOnOne(cri);
 		return listOneOnOne;
 	}
 	
 	//--------------------------------------------------------------------------------------------------
-	// 신고하기 리스트 생성
+	// 신고하기 전체 조회
 	//--------------------------------------------------------------------------------------------------
 	@Override
-	public List<ReportDTO> listReportAnswer() throws Exception {
-		List<ReportDTO> listReportAnswer = adminDAO.listReportAnswer();
-		return listReportAnswer;
+	public List<ReportDTO> listReportAnswer(ReportCriteria rcri) throws Exception {
+		System.out.println("################################# Service listReportAnwer => " + rcri);
+		
+		return adminDAO.listReportAnswer(rcri);
+	}
+	
+	//--------------------------------------------------------------------------------------------------
+	// 신고하기 페이징(게시글수 구하기: rcri를 가지고 검색한 총 게시글의 수)
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public int reportAnswerTotalCount(ReportCriteria rcri) throws Exception {
+		System.out.println("################################# Service reportAnswerTotalCount => " + rcri);
+		return adminDAO.reportAnswerTotalCount(rcri);
 	}
 
 	//--------------------------------------------------------------------------------------------------
-	// cri를 가지고 검색한 총 건수의 전체 게시글 수 구하기(paging 처리)
+	// 회원목록 페이징(게시글수 구하기: cri를 가지고 검색한 총 게시글의 수)
 	//--------------------------------------------------------------------------------------------------
 	@Override
 	public int memberListTotalCount(Criteria cri) throws Exception {
 		return adminDAO.memberListTotalCount(cri);
 		
 	}
-
-	//--------------------------------------------------------------------------------------------------
-	// 게시글 목록 가져오기(paging)
-	//--------------------------------------------------------------------------------------------------
-	@Override
-	public List<MemberDTO> memberListPaging(Criteria cri) throws Exception {
-		return adminDAO.memberListPaging(cri);
-		
-	}
-
 }
