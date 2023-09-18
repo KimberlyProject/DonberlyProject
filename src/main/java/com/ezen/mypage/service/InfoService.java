@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ezen.board.dto.BuyArticleDTO;
-import com.ezen.mypage.dto.SearchCriteria;
 import com.ezen.mypage.dao.InfoDAO;
+import com.ezen.mypage.dto.MarketInfo;
 
 
 
@@ -20,16 +20,13 @@ public class InfoService {
 	//-----------------------------------------------------------------------------------------------------------
 	// 전체 게시글 수 구하기 (Paging 처리)
 	//-----------------------------------------------------------------------------------------------------------
-	public int infoListTotalCount(SearchCriteria cri, int i) throws Exception {
-		return infoDAO.infoListTotalCount(cri, i);
+	public int infoListTotalCount(int i, MarketInfo market) throws Exception {
+		return infoDAO.infoListTotalCount(i, market);
 	}
 	
-	public List<BuyArticleDTO> infoListPaging(SearchCriteria cri, int i) throws Exception {
-		return infoDAO.infoListPaging(cri, i);
-	}
-		
-	public List<BuyArticleDTO> infoList(int i, int ibuycount, int isalecount) throws Exception {
-		return infoDAO.infoList(i, ibuycount, isalecount);
+	
+	public List<BuyArticleDTO> infoList(int i, MarketInfo market) throws Exception {
+		return infoDAO.infoList(i, market);
 	}
 	
 	
