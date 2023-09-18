@@ -76,6 +76,7 @@
 	  <ul>
 	    <li><a href="${path}/admin/oneOnOneInquiry">1:1 문의</a></li>
 	    <li><a href="${path}/admin/memberList">회원 목록</a></li>
+	    <li><a href="${path}/admin/reportAnswer">신고 내역</a></li>
 	  </ul>
 	  <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
 	</aside>

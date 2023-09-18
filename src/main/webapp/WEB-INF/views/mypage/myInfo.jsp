@@ -33,7 +33,8 @@
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: black;
+            background-image: url("../../resources/images/profliebackground.jpeg");
             border: 1px solid #ccc;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -59,6 +60,7 @@
         .profile-info p {
             margin: 5px 0;
             font-size: 18px;
+            color: black;
         }
 
         /* Edit button */
@@ -123,6 +125,17 @@
 	        margin-left: 25px;
 	    }
 
+		/* 수정하기 버튼 스타일 */
+		.edit-button a.btn {
+		    background-color: rgb(73, 124, 64, 0.8); /* 원하는 배경 색상 설정 */
+		    color: black; /* 글자 색상 설정 */
+		}
+		
+		/* 수정하기 버튼에 호버 */
+		.edit-button a.btn:hover {
+		    background-color: rgb(73, 124, 65);
+		    color: white;
+		}
     </style>
 </head>
 <body>
@@ -143,7 +156,7 @@
     
     <div class="container my">
 	    <div class="profile-info">
-            <img src="../../resources/images/jjangu.png" alt="프로필 사진">
+            <img src="../../resources/images/profileimage.png" alt="프로필 사진">
             
             <div class="row">
             <div class="row-md-offset-2">
@@ -154,7 +167,7 @@
         </div>
 	    
 	     <div class="edit-button">
-	        <a href="javascript:void(0);" class="btn btn-success" onclick="confirmPassword()">수정하기</a>
+	        <a href="javascript:void(0);" class="btn" onclick="confirmPassword()">수정하기</a>
 	    </div>
 	</div>
 	

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.member.dto.MemberDTO;
@@ -40,7 +41,7 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value="/calendar", method=RequestMethod.GET)
-	public ModelAndView getcalendar(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView getCalendar(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		logger.info("마이페이지 캘린더");
 		String	viewName	= (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
@@ -61,6 +62,26 @@ public class MypageController {
 		mav.addObject("calendar", schedulelist);
 		
 		return mav;
+	}
+	@ResponseBody
+	@RequestMapping(value="/calendar", method=RequestMethod.POST)
+	public int postCalendar(HttpServletRequest request, HttpServletResponse response, CalendarDTO calendarDTO) throws Exception {
+		logger.info("마이페이지 캘린더 일정추가" + calendarDTO);
+		
+		int insertCalendar = mypageService.inserCalendar(calendarDTO);
+		logger.info("추가된 일정 : " + insertCalendar);
+		
+		return insertCalendar;		
+	}
+	
+	@RequestMapping(value="/calendarDelete", method=RequestMethod.POST)
+	public String calendarDelete(HttpServletRequest request, HttpServletResponse response, int calId) throws Exception {
+		logger.info("마이페이지 캘린더 일정삭제" + calId);
+		//int id = Integer.parseInt(calId); 
+		int DeleteCalendar = mypageService.DeleteCalendar(calId);
+		logger.info("삭제된 일정 : " + DeleteCalendar);
+		
+		return "/mypage/calendar";
 	}
 	
 	@RequestMapping(value="/myInfo.do", method=RequestMethod.GET)
