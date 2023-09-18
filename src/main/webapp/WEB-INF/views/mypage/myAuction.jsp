@@ -197,7 +197,8 @@
 									<input type="hidden" class="seller" value="${article.aucId }"/>
 									<input type="hidden" class="buyer" value="${article.cstmId }"/>
 									<input type="hidden" class="artNo" value="${article.aucCode }"/>
-									<input type="button" class="btn btn-primary saleBtn chat" style="color:#FFFFFF;" value="채팅하기">
+									<input id="chat" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="채팅하기" onclick="chat('${article.aucId }','${article.cstmId }','${article.aucCode }')">
+
 								</c:when></c:choose>
 							</th>
 						</c:when></c:choose>
@@ -273,16 +274,17 @@
 			form.submit();
 		});
 		
-		$('.chat').on("click", function(){
+
+		$('#chat').on("click", function(seller,buyer,artNo){
 			console.log("판매자 : "+$('.seller').val()+"구매자 : "+$('.buyer').val()+"넘버 : "+$('.artNo').val());
 			$.ajax({
 				 url:	"/chat/makeRoom2",
 				 type:	"post",
 				 dataType: "text",
 				 contentType: 'application/json',
-				 data:	JSON.stringify({"seller":$('.seller').val(),
-					 	"buyer" : $('.buyer').val(),
-					 	"artNo" : $('.artNo').val(),
+				 data:	JSON.stringify({"seller":seller,
+					 	"buyer" : buyer,
+					 	"artNo" : artNo,
 					 	"status" : "a"
 						 
 				 

@@ -3,6 +3,60 @@
 
 <!-- header -->
 <script>
+$(document).ready(function(){
+	console.log("시작");
+	alarm();
+	//setInterval(alarm,500);
+});
+function gochat(chatId){
+	window.open("${path}/chat/chattingview?chatId="+chatId , "_blank", "width=940, height=750");
+}
+function alarm(){
+	$.ajax({
+		 url:	"/chat/alarm",
+		 type:	"post",
+		 dataType: "json",
+		 data:	{
+			 
+		 },	
+		 success: function(data){
+			 //console.log(data);
+			 var html="";
+			 var cnt = data.length;
+			 for(var i=0 ; i<data.length;i++){
+				html+=
+					"<li><a onClick='gochat("+data[i].chatId+")'>"+ data[i].fromId +"님이 메시지를 보내셨습니다.</a></li>";
+			 }
+			 if(cnt==0){
+				 $('.chatAlarm').html(
+							html
+					  );
+			 }
+			 else{
+				 $('.chatAlarm').html(
+					html
+				 );	 
+			 }
+			 
+			 if(cnt==0){
+				 cnt=null;
+			 }
+			 
+			 $('.alerm_num').html(
+				cnt
+			 );
+		 },
+		 error:function(request,status,error){
+			 console.log("실패");
+			 
+		 },
+		 complete:function(){ 
+			
+		 }
+	 });
+}
+</script>
+<script>
 if("${memberlevel.userStatus}" == "N1"){
 	alert("${memberlevel.downTime}까지 정지상태입니다.");
 	location.href = '${path}/member/logout';
@@ -12,6 +66,7 @@ if("${memberlevel.userStatus}" == "N1"){
 }
 
 </script>
+
 <header>
     <nav class="navbar navbar-fixed-top">
         <div class="container-fluid">
@@ -88,18 +143,9 @@ if("${memberlevel.userStatus}" == "N1"){
 	                <div class="dropdown alermicon">
 	                    <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 	                        <span class="glyphicon glyphicon-envelope"></span>                               
-	                        <small class="alerm_num" style="margin-left:-3px;">12</small>                       
+	                        <small class="alerm_num" style="margin-left:-3px;"></small>  <!-- 알람 갯수 -->                     
 	                    </button>
-	                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-	                      <li><a href="#">''님이 댓글을 달았습니다</a></li>                          
-	                      <li><a href="#">''님이 댓글을 달았습니다</a></li>                          
-	                      <li><a href="#">''님이 댓글을 달았습니다</a></li>                          
-	                      <li><a href="#">''님이 댓글을 달았습니다</a></li>                          
-	                      <li><a href="#">''님이 댓글을 달았습니다</a></li>                          
-	                      <li><a href="#">''님이 댓글을 달았습니다</a></li>                          
-	                      <li><a href="#">''님이 댓글을 달았습니다</a></li>                          
-	                      <li><a href="#">''님이 댓글을 달았습니다</a></li>                          
-	                      <li><a href="#">''님이 댓글을 달았습니다</a></li>                          
+	                    <ul class="dropdown-menu chatAlarm" aria-labelledby="dropdownMenu1"><!-- 알람 들어가는 곳 -->
 	                    </ul>
 	                </div>
                     <div class="dropdown myinfo">
@@ -121,4 +167,5 @@ if("${memberlevel.userStatus}" == "N1"){
         </div><!-- /.container-fluid -->
       </nav>
 </header>
+
 <!-- header End -->

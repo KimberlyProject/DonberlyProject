@@ -70,6 +70,20 @@
 	padding: 5px;
 	}
 	
+	
+	.more {
+		display : block;
+		border-top : 3px solid rgb(73, 124, 64);
+		border-bottom : 3px solid rgb(73, 124, 64);
+		border-left : 0;
+		border-right : 0;
+		outline : none;
+		background : none;
+		width : 100%;
+		padding : 10px 0;
+		color: rgb(73, 124, 64);
+		
+	}
 	</style>
 	
 </head>
@@ -92,25 +106,13 @@
 		<br><br><br>
 		<div class="container">
 			<!-- 좌측 상단 팝니다/삽니다 구분 -->
-			<div style="float: right;">
-			
-			<select id="searchType" style="font-size:18px;">
-				<option>검색종류</option>
-				<option value="t" <c:if test="{pageVO.type} == 't'">selected</c:if>>제목</option>
-				<option value="c" <c:if test="{pageVO.type} == 'c'">selected</c:if>>내용</option>
-				<option value="w" <c:if test="{pageVO.type} == 'w'">selected</c:if>>글쓴이</option>
-			</select>
-			<input type="text" id="searchKeyword" value="${pageVO.keyword }" placeholder="검색값"/>
-			<button id="searchBtn" class="btn btn-warning btn-sm">검&nbsp;색</button>
-		</div><!-- 검색창 -->
-			<br><br><br>
 	
 		<h2>팝니다에 올린 ${member.nickname }님의 글</h2>
 		<c:choose>
 			<c:when test="${articlesList2 == null}"> <!-- 게시글이 하나도 없는 경우 -->
 				<c:if test="${member.userId != articlesList2.userId}">
 				<div>
-					<div colspan="4">
+					<div>
 						<p align="center">
 							<b><span style="font-size:22px;">등록된 게시글이 없습니다.</span></b>
 						</p>
@@ -147,41 +149,15 @@
 			</c:when>
 		</c:choose>
 		
-							<button onClick="moreCount('sale')">더보기</button>
-				<table align="center">
-			<tr> <!-- 페이징 -->
-				<td>
-					<div class="col-sm-offset-3"><!-- 숫자 버튼 -->
-						<ul class="btn-group pagination">
-							<c:if test="${pageMaker2.prev}">
-								<li>
-									<a href='<c:url value="/mypage/marketInfo.do?page=${pageMaker2.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
-										<span class="glyphicon glyphicon-chevron-left"></span></a>
-								</li>
-							</c:if>
-							<c:forEach begin="${pageMaker2.startPage}" end="${pageMaker2.endPage}" var="pageNum">
-								<li>
-									<a href='<c:url value="/mypage/marketInfo.do?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
-								</li>
-							</c:forEach>
-							<c:if test="${pageMaker2.next && pageMaker2.endPage > 0}">
-								<li>
-									<a href='<c:url value="/mypage/marketInfo.do?page=${pageMaker2.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
-										<span class="glyphicon glyphicon-chevron-right"></span></a>
-								</li>
-							</c:if>
-						</ul>
-					</div><!-- 숫자 버튼 -->
-				</td>
-			</tr>
-		</table> <br/><hr>
+			<button class="more" onClick="moreCount('sale')">더보기</button>
+		
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->		
 		<h2>삽니다에 올린 ${member.nickname }님의 글</h2>
 		<c:choose>
 			<c:when test="${articlesList1 == null}"> <!-- 게시글이 하나도 없는 경우 -->
 			<c:if test="${member.userId != articlesList1.userId}">
 				<div>
-					<div colspan="4">
+					<div>
 						<p align="center">
 							<b><span style="font-size:22px;">등록된 게시글이 없습니다.</span></b>
 						</p>
@@ -216,69 +192,38 @@
 				</div>
 			</c:when>
 		</c:choose>
-		<table align="center">
-			<tr> <!-- 페이징 -->
-				<td>
-					<div class="col-sm-offset-3"><!-- 숫자 버튼 -->
-						<ul class="btn-group pagination">
-							
-						<li>
-							<button onClick="moreCount('buy')">더보기</button>
-						</li>
-							
-							
-						</ul>
-					</div><!-- 숫자 버튼 -->
-				</td>
-			</tr>
-		</table> <br/>
 		
+		
+			<button class="more" onClick="moreCount('buy')">더보기</button>
+
 <!-- ------------------------------------------------------------------------------------------------------------------------------------------ -->		
 
 		<br/><br/><br/>
 
-		
-		<form id="formList" action="/mypage/marketInfo.do" method="get">
-			<input type="hidden" name="userId">
-			<input type="hidden" name="page">
-			<input type="hidden" name="searchType">
-			<input type="hidden" name="keyword">
-		</form>
+
 	</div><!-- <div class="container"> -->
 
 <%@ include file="../include/footer.jsp" %>
 
 
-<script>
-$(document).ready(function() {
-	var formObj = $("#formList");
-	
-	// 검색버튼을 눌렀을 경우
-	$("#searchBtn").click(function(e) {
-		var	typeStr		= $("#searchType").find(":selected").val();
-		var	keywordStr	= $("#searchKeyword").val();
-		console.log(typeStr, "", keywordStr);
-		
-		formObj.find("[name='searchType']").val(typeStr);
-		formObj.find("[name='keyword']").val(keywordStr);
-		formObj.find("[name='page']").val("1");
-		formObj.submit();
-	});
-});
-</script>
 
 <script>
-let bc = ${buycount};
-let sc = ${salecount};
 
+
+let bc = ${market.buycount};
+let sc = ${market.salecount};
+console.log(bc);
+console.log(sc);
 function moreCount(type){
 	if (type == 'buy'){
 		bc ++;
-		location.href = "/mypage/marketInfo.do?buycount=" + bc + "&salecount=" + sc;
+		location.href = "${path}/mypage/marketInfo.do?buycount=" + bc + "&salecount=" + sc;
 	} else if(type == 'sale')
 		sc ++;
-		location.href = "/mypage/marketInfo.do?buycount=" + bc + "&salecount=" + sc;
+		location.href = "${path}/mypage/marketInfo.do?buycount=" + bc + "&salecount=" + sc;
 }
+
+
 </script>
 </body>
 </html>
