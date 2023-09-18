@@ -152,45 +152,6 @@ label{
 	 	window.open("${path}/chat/chattingview?chatId="+chatId , "_blank", "width=940, height=750");
 		
 	}
-	/*
-	const sellers = document.querySelectorAll(".sellernick");
-	sellers.forEach(item => {
-		const userId = item.id;
-		console.log(item);
-		item.innerText = find_nickname(userId);
-		
-	})
-	*/
-	/*
-	function find_nickname(memberId){
-		
-		 $.ajax({
-			 url:	"/chat/find_nickname",
-			 type:	"post",
-			 dataType: "text",
-			 
-			 data:	{
-				 "memberId" : memberId
-			 },	
-			 success: function(data){
-				$('.pw').appeand("<label>"+data+"</label");
-			 },
-			 error:function(request,status,error){
-				console.log(request,status,error);
-			 },
-			 complete:function(){ 
-				
-			 }
-		 });
-		 console.log(dd);
-		 return dd;
-	}
-	
-	$(document).ready(function(){
-		find_nickname($('.nickname').val());
-	});
-	*/
-	
 	</script>
 
 	

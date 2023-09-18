@@ -203,6 +203,12 @@ public class ChatDAOImpl implements ChatDAO {
 		return sqlSession.selectList(namespace+".findMemberDTO");
 	}
 
+	@Override
+	public List<ChatDTO> getAlarm(String userId) throws Exception {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".getAlarm",userId);
+	}
+
 	
 
 	

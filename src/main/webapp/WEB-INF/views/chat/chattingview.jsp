@@ -283,7 +283,6 @@ span{
 						<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${sel }&gt;님과의 채팅창</td>
 						<input type="hidden" class="nicknick" value="${sel }"/>
 					</c:if>
-					
 				</c:if>
 				<c:if test="${chatList.status eq 'a'}"><!-- 상대방 닉네임을 가져와야함 -->
 					<c:if test="${member.userId == chatList.seller}">
@@ -299,7 +298,9 @@ span{
 			<tr>
 				<td class="chat_area">
 					<div class="wrap"  style="overflow:auto; width:599px; height:600px;">
-					
+						<div class='chat ch2'><div class='textbox'>
+						
+						</div></div>
     				</div>
 				</td>
 				<td class="chat_detail" rowspan="2">
@@ -446,7 +447,7 @@ function getChat(){
 				html
 			 );
 			 const chatbox = document.querySelector(".wrap");
-			 //chatbox.scrollTop = chatbox.scrollHeight;
+			 chatbox.scrollTop = chatbox.scrollHeight;
 		 },
 		 error:function(request,status,error){
 			 console.log("실패");

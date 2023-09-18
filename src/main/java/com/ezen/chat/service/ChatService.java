@@ -50,4 +50,6 @@ public interface ChatService {
 	public String finduserIdFromNickname(String nickName) throws Exception;
 	
 	public List<MemberDTO> findMemberDTO() throws Exception;
+	
+	public List<ChatDTO> getAlarm(String userId) throws Exception;
 }

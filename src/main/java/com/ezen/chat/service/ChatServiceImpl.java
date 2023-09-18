@@ -142,6 +142,12 @@ public class ChatServiceImpl implements ChatService {
 		return chatDAO.findMemberDTO();
 	}
 
+	@Override
+	public List<ChatDTO> getAlarm(String userId) throws Exception {
+		
+		return chatDAO.getAlarm(userId);
+	}
+
 
 	
 	

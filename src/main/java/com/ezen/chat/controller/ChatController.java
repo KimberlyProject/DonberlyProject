@@ -272,6 +272,23 @@ public class ChatController {
 		return count;
 	}
 	
+	//채팅 알람
+	@ResponseBody
+	@RequestMapping(value="/alarm", method=RequestMethod.POST)
+	public List<ChatDTO> chatAlarm(HttpServletRequest request, Model model) throws Exception{
+		HttpSession session= request.getSession();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+		String userId = memberDTO.getUserId();
+		List<ChatDTO> chatDTO = chatService.getAlarm(userId);
+		//model.addAttribute("alarm", chatDTO);
+		//System.out.println("왜 안돼애애애애애애애 챗디티오"+chatDTO);
+		return chatDTO;
+		
+		
+		
+		
+	}
+	
 	
 	
 }
