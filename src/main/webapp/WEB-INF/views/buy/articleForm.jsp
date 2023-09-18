@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath"  value="${pageContext.request.contextPath}"  /> 
 <%
   request.setCharacterEncoding("UTF-8");
 %> 
@@ -25,7 +24,7 @@
       } 
       
       function backToList(obj) {
-         obj.action="${contextPath}/buy/listArticlesPaging.do";
+         obj.action="${path}/buy/listArticlesPaging.do";
          obj.submit();
       }
           
@@ -52,7 +51,7 @@
       }
       
       #d{
-      border : 3px solid #00ff00;
+      border : 3px solid rgb(73, 124, 64);
       border-radius: 20px;
       margin-top : 50px;
       margin-bottom: 50px;
@@ -96,7 +95,7 @@
 
 <div class="container" id="d">
 		<br/><br/>
-   <form  class="conta" name="articleForm" method="post"   action="${contextPath}/buy/addNewArticle.do"   enctype="multipart/form-data">
+   <form  class="conta" name="articleForm" method="post"   action="${path}/buy/addNewArticle.do"   enctype="multipart/form-data">
        <!-- <div border="0" align="center"> -->   
       <div class="item image" id="d_file">
          <ul class= "item">
