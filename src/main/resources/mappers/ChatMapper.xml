@@ -193,5 +193,19 @@
 		where nickName=#{nickName}
 	</select>
 	
+	<!-- 멤버DTO 다 가져오기 -->
+	<select id="findMemberDTO" resultType="memberDTO">
+		select userId, nickname
+		from members
+	</select>
+	
+	<!-- 최근 안읽은거 가져오기 -->
+	<select id="getAlarm" resultType="chatDTO">
+		select nickname as fromId,chatcontent,chatId
+		from chat,members
+		where toId = #{userId} and chatRead = 1 and fromid=userid
+		order by chattime desc
+	</select>
+	
 	
 </mapper>

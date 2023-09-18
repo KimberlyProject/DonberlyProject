@@ -62,6 +62,8 @@ public class ChatController {
 		ChatListDTO chatListDTO = chatService.findChatListFromChatId(ch); //chatList 옮김
 		int artNo = chatListDTO.getArtNo();
 		
+		List<MemberDTO> memberDTO = chatService.findMemberDTO();
+		
 		//아티클 넘버로 아티클VO 가져오기
 
 		if(chatListDTO.getStatus().equals("s") || chatListDTO.getStatus().equals("b")) {
@@ -81,6 +83,7 @@ public class ChatController {
 		}
 
 		session.setAttribute("chatList", chatListDTO);
+		session.setAttribute("findNickname", memberDTO);
 		System.out.println("채팅 입장");
 		return "/chat/chattingview";
 	}
@@ -150,7 +153,7 @@ public class ChatController {
         //System.out.println("여기까지는 나오나" + lastchat);
 		//System.out.println("채팅 리스트*******************"+lastchat);
 		
-		//닉네임 찾기
+		//닉네임 찾기 이게 왜 buyArticleDTO인데
 		List<BuyArticleDTO> memberList = chatService.findAllMemeber();
 		List<ChatDTO> count= chatService.countChat(userId);
 		
@@ -267,6 +270,23 @@ public class ChatController {
 		System.out.println("안읽은 개수!!!!!!!!!*********"+count);
 		
 		return count;
+	}
+	
+	//채팅 알람
+	@ResponseBody
+	@RequestMapping(value="/alarm", method=RequestMethod.POST)
+	public List<ChatDTO> chatAlarm(HttpServletRequest request, Model model) throws Exception{
+		HttpSession session= request.getSession();
+		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
+		String userId = memberDTO.getUserId();
+		List<ChatDTO> chatDTO = chatService.getAlarm(userId);
+		//model.addAttribute("alarm", chatDTO);
+		//System.out.println("왜 안돼애애애애애애애 챗디티오"+chatDTO);
+		return chatDTO;
+		
+		
+		
+		
 	}
 	
 	
