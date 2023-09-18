@@ -387,9 +387,9 @@ span{
 
 
 function linkToOpener(){
-if (window.opener && !window.opener.closed)
-window.opener.location = "${path}/ccenter/report";
-window.close();
+	if (window.opener && !window.opener.closed)
+	window.opener.location = "${path}/ccenter/report";
+	window.close();
 }
 
 
@@ -431,7 +431,7 @@ function getChat(){
 						"<div class='chat ch1'><div class='textbox'>"+data[i].chatContent+"</div></div>"+
 						"<div class='time1' >"+month+"월"+date.getDate()+"일 "+date.getHours()+":"+date.getMinutes()+"<span>&nbsp;&nbsp;"+read+"</span></div>";
 					} 
-			}
+			 }
 			 
 			 $('.wrap').html(
 				html
