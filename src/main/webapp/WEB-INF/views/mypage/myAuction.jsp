@@ -113,7 +113,7 @@
 			<div>
 				<div>
 					<p align="center">
-						<b><span style="font-size:22px;">등록된 게시글이 없습니다.</span></b>
+						<b><span style="font-size:22px;">등록한 경매 상품이 없습니다.</span></b>
 					</p>
 				</div>
 			</div>
@@ -192,7 +192,7 @@
 						<c:choose><c:when test="${article.status == 0}"> 
 							<th clospan="4"><span class="blue">입찰 진행중</span>
 								<c:choose><c:when test="${article.cstmId != null}">
-									&nbsp;&nbsp;&nbsp;[${article.cstmId}]님
+									<br/>[${article.cstmId}]님
 									<!-- hidden 추가 이태림 -->
 									<input type="hidden" class="seller" value="${article.aucId }"/>
 									<input type="hidden" class="buyer" value="${article.cstmId }"/>
@@ -208,7 +208,7 @@
 							<input type="hidden" class="seller" value="${article.aucId }"/>
 							<input type="hidden" class="buyer" value="${article.cstmId }"/>
 							<input type="hidden" class="artNo" value="${article.aucCode }"/>
-							<th colspan="4"><span id="gray"><span class="gray">판매완료</span>&nbsp;&nbsp;&nbsp;[${article.cstmId}]님</span>
+							<th colspan="4"><span id="gray"><span class="gray">판매완료</span><br/>[${article.cstmId}]님</span>
 							<input type="button" class="btn btn-primary saleBtn chat" style="color:#FFFFFF;" value="채팅하기">
 							</th>
 						</c:when></c:choose>	

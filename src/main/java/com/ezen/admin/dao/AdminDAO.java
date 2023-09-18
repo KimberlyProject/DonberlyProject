@@ -5,14 +5,16 @@ import java.util.List;
 import com.ezen.ccenter.dto.CcenterDTO;
 import com.ezen.ccenter.dto.ReportDTO;
 import com.ezen.admin.dto.Criteria;
+import com.ezen.admin.dto.ReportCriteria;
+import com.ezen.admin.dto.SearchCriteria;
 import com.ezen.member.dto.MemberDTO;
 
 public interface AdminDAO {
-	
+
 	//--------------------------------------------------------------------------------------------------
-	// 회원 전체 목록
+	// 회원 전체 조회 + 페이징 + 검색
 	//--------------------------------------------------------------------------------------------------
-	public List<MemberDTO> selectMember() throws Exception;
+	public List<MemberDTO> memberList(Criteria cri) throws Exception;
 	
 	//--------------------------------------------------------------------------------------------------
 	// 회원 상세 목록
@@ -40,21 +42,24 @@ public interface AdminDAO {
 	public void Psuspension(String userId) throws Exception;
 	
 	//--------------------------------------------------------------------------------------------------
-	// 1:1 문의하기 리스트 생성
+	// 1:1 문의하기 전체 조회 + 검색
 	//--------------------------------------------------------------------------------------------------
-	public List<CcenterDTO> listOneOnOne() throws Exception;
+	public List<CcenterDTO> listOneOnOne(SearchCriteria cri) throws Exception;
 	
 	//--------------------------------------------------------------------------------------------------
 	// 신고하기 리스트 생성
 	//--------------------------------------------------------------------------------------------------
-	public List<ReportDTO> listReportAnswer() throws Exception;
-	// cri를 가지고 검색한 총 건수의 전체 게시글 수 구하기(paging 처리)
-	//--------------------------------------------------------------------------------------------------
-	public int memberListTotalCount(Criteria cri) throws Exception;
+	public List<ReportDTO> listReportAnswer(ReportCriteria rcri) throws Exception;
 	
 	//--------------------------------------------------------------------------------------------------
-	// 게시글 목록 가져오기(paging)
+	// 신고하기 페이징(게시글수 구하기: rcri를 가지고 검색한 총 게시글의 수)
 	//--------------------------------------------------------------------------------------------------
-	public List<MemberDTO> memberListPaging(Criteria cri) throws Exception;
+	public int reportAnswerTotalCount(ReportCriteria rcri) throws Exception;
+	
+	//--------------------------------------------------------------------------------------------------
+	// 회원목록 페이징(게시글수 구하기: cri를 가지고 검색한 총 게시글의 수)
+	//--------------------------------------------------------------------------------------------------
+	public int memberListTotalCount(Criteria cri) throws Exception;
+
 
 }

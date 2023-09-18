@@ -111,7 +111,7 @@
 		<!-- 로그인이 되었나? 않되었나? 에 따라서 넘어가는 페이지가 다르도록 하기위해서 function()에 세가지 값을 넘겨준다. -->
 	<p style="float: left;">
 		<a class="btn btn-primary" 
-		href="javascript:fn_articleForm('${isLogOn}', '${page}/buy/articleForm.do', '${page}/member/login')">상품등록</a>
+		href="javascript:fn_articleForm('${isLogOn}', '${path}/buy/articleForm.do', '${path}/member/login')">상품등록</a>
 	</p>
 	
 	
@@ -167,12 +167,12 @@
 						<c:otherwise>
 							<ul class="product">
 					          <li>
-					            <a href="${page}/buy/viewArticle.do?articleNO=${article.articleNO}">
+					            <a href="${path}/buy/viewArticle.do?articleNO=${article.articleNO}">
 									<img id="i" style="border-radius: 50%;" src="${path}/download.do?articleNO=${article.articleNO }&thumbnail=${article.thumbnail}" class="imgsize"/>
 								</a><br/>
 					          </li>
 					          <li class="product-title">
-					            <a href="${page}/buy/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a><br/>
+					            <a href="${path}/buy/viewArticle.do?articleNO=${article.articleNO}">${article.title}</a><br/>
 					          </li>
 					          <li class="product-price">
 					            ${article.price}원 <!-- 여기에 가격 표시 -->
@@ -218,7 +218,7 @@
 	</div>
 	
 	
-	<form id="formList" action="/buy/listArticles.do" method="get">
+	<form id="formList" action="${path}/buy/listArticles.do" method="get">
 		<input type="hidden" name="page"		value="${result.currentPageNum }">
 		<input type="hidden" name="size"		value="${result.currentPage.pageSize }">
 		<input type="hidden" name="searchType"	value="${pageVO.type }">

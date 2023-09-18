@@ -19,7 +19,6 @@
 		<result property="price"			column="price"/>
 		<result property="nickname"			column="nickname"/>
 		<result property="email"			column="email"/>
-		<result property="nickname"			column="nickname"/>
 	</resultMap>
 	
 	<resultMap id="saleArticlesResult" type="saleArticleDTO">
@@ -36,6 +35,7 @@
 		<result property="thumbnail"		column="thumbnail"/>
 		<result property="price"			column="price"/>
 		<result property="nickname"			column="nickname"/>
+		<result property="email"			column="email"/>
 	</resultMap>
 
 	
@@ -101,7 +101,7 @@
 	<select id="saleSelectArticle" parameterType="int" resultType="saleArticleDTO">
 		<![CDATA[
 			SELECT  a.*, m.email
-			FROM article_buy a, members m
+			FROM article_sale a, members m
 	        WHERE		a.userId=m.userId
 			and	articleNO = #{articleNO}
 		]]>

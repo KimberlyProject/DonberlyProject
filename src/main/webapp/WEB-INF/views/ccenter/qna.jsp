@@ -50,40 +50,15 @@
 <body>
 
 	<%@ include file="../include/topMenu.jsp" %>
-	<aside id="sideMenu">
-      <ul>
-        <li><a href="./notice">공지사항</a></li>
-        <li><a href="./qna">Q & A</a></li>
-        <li><a href="./askOnetoOne">1:1문의하기</a></li>
-        <li><a href="./report">신고하기</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
-    <div class="page_dir container">
-
-	<%@ include file="../include/topMenu.jsp" %>	
 	<c:set var="menu" value="ccenter" />
 	<%@ include file="../include/sidebar.jsp" %>	
      <div class="page_dir container">
-
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      홈 &gt; 고객센터 &gt; Q & A
+	      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+	      홈 &gt; 고객센터 &gt; Q & A
 	</div>
     <h1 class="pageTitle"><div>Q & A</div></h1>
 	<div class="container">
-		<!-- 검색창 -->
-		<div class="row" style="vertical-align: middle; float:right;">
-			<select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
-				<option value="a" <c:if test="{searchType} == 'a'">selected</c:if>>전체</option>
-				<option value="t" <c:if test="{searchType} == 't'">selected</c:if>>제목</option>
-				<option value="c" <c:if test="{searchType} == 'c'">selected</c:if>>내용</option>
-			</select>
-			<input  class="col-sm-2 searchgroup form-control" type="text" class="form-control" style="width:200px;" placeholder="검색하기">
-			<button id ="searchbtn" class="btn btn-success" type="button">
-				<span class="glyphicon glyphicon-search"/>
-			</button>   
-		</div>
-      	<!-- 검색창 -->
+		
 		<table class="table table-bordered table-striped table-hover">
 			<thead>
 				<tr class="head" style="background: rgb(73, 124, 64); color: #FFF;">

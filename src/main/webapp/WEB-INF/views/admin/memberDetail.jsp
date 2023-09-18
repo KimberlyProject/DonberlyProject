@@ -11,19 +11,18 @@
 	 .title {
 	 	text-align:right;
 	 }
-	 .btn {
-	 	margin:							20px;
+	 .fbtn {
+	 	width:		12%;
 	 }
 	</style>
 </head>
 <body>
-	<%@ include file="../include/topMenu.jsp" %>	
+	<%@ include file="../include/topMenu.jsp" %>
 	<c:set var="menu" value="admin" />
-	<%@ include file="../include/sidebar.jsp" %>
-	
-    <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      홈 &gt; 관리자 &gt; 회원 목록 &gt; 회원 상세 정보
+	<%@ include file="../include/sidebar.jsp" %>	
+   <div class="page_dir container">
+      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
+      홈 &gt; 관리자 &gt; 회원목록 &gt; 회원상세정보
     </div>
     
     <h1 class="pageTitle"><div>회원 상세 정보</div></h1>
@@ -68,11 +67,11 @@
 				</tr>
 			</table>
 			<div class="form-group">
-				<div class="col-sm-offset-3 center">
+				<div>
 					<!-- 스크립트를 통한 수정 -->
-					<input class="btn btn-primary col-sm-2" type="submit" value="수정" onClick='btn_click("update");'/>
+					<input class="btn btn-primary fbtn" type="submit" value="수정" onClick='btn_click("update");'/>
 					<!-- 스크립트를 통한 삭제 -->
-					<input class="btn btn-danger col-sm-2" type="submit" value="삭제(POST)" onClick='btn_click("delete");'/>
+					<input class="btn btn-danger fbtn" type="submit" value="삭제(POST)" onClick='btn_click("delete");'/>
 				</div>
 			</div>
 		</form>
