@@ -176,7 +176,8 @@
 	<%@ include file="../include/footer.jsp" %>
 
 <script>
-
+	
+	//유효성 검사
 	$("#submit").on("click", function() {
 		if($("#title").val() == "") {
 			alert("제목을 입력해주세요.");
@@ -194,6 +195,7 @@
 			return false;
 		}	
 		
+		//숫자로 검사 후 숫자인지 확인하기
 		var minPrice = parseFloat($("#minPrice").val().replace(/,/g, ''));
 		var maxPrice = parseFloat($("#maxPrice").val().replace(/,/g, ''));
 		var bidRate = $("#searchType").val();
@@ -202,6 +204,7 @@
 		    alert("숫자만 입력해주세요.");
 		    return false;
 		}
+		//입찰단위/상한금액 제한
 		if (minPrice >= maxPrice) {
 		    alert("최소금액보다 큰 상한금액을 입력해주세요.");
 		    $("#maxPrice").focus();
@@ -218,13 +221,21 @@
 			return false;
 		}	
 
+		//이미지 첨부 여부 확인하기
 		var image1 = $("#imageFileName1").val();
 	    var image2 = $("#imageFileName2").val();
 	    if (!image1 || !image2) {
 	        $("#imageUploadError").css("color", "red");
 	        return false;
 	    } else {
-	        $("#imageUploadError").css("color", "gray");
+	        // 이미지파일 확장자 검사하기
+	        if (!isImageFileName(image1) || !isImageFileName(image2)) {
+	            alert("이미지파일(jpg, jpeg, png, gif, pdf)만 올려주세요.");
+	            $("#imageUploadError").css("color", "red");
+	            return false;
+	        } else {
+	            $("#imageUploadError").css("color", "gray");
+	        }
 	    }
 	    	    
 		if($("#content").val() == "") {
@@ -233,6 +244,13 @@
 			return false;
 		}	
 	});
+	
+	//이미지파일 확장자 검사하기
+	function isImageFileName(fileName) {
+	    var allowedExtensions = ["jpg", "jpeg", "png", "gif", "pdf"];
+	    var fileExtension = fileName.split('.').pop().toLowerCase();	  
+	    return allowedExtensions.includes(fileExtension);
+	}
 	
 	//숫자 입력창 100단위 콤마(,)추가하기
 	function addCommas(input) {
