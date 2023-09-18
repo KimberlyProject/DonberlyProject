@@ -163,9 +163,10 @@
 	<!-- 게시글 목록 가져오기(paging) -->
 	<select id="auctionPaging" parameterType="com.ezen.auction.dto.SearchCriteria" resultMap="aucArticle">
 		<![CDATA[
-	        SELECT *
-	        FROM auction
-	        WHERE 1=1
+        	SELECT a.*, m.nickname, m.email
+			FROM AUCTION a, members m
+			WHERE 1=1
+			AND  a.aucId = m.userId
 	    ]]> <include refid="search"/>
 	    <![CDATA[
 	        ORDER BY aucCode DESC

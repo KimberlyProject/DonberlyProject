@@ -237,7 +237,7 @@ public class MemberController {
     @RequestMapping(value = "/memberUpdate", method = RequestMethod.POST)
     public String memberUpdate(@ModelAttribute("editor") MemberDTO memberDTO, Model model) throws Exception {
         memberService.memberUpdate(memberDTO);
-        return "redirect:/myPage/myInfo.do"; // 수정이 완료되면 프로필 페이지로 이동하도록 수정
+        return "redirect:/mypage/myInfo.do"; // 수정이 완료되면 프로필 페이지로 이동하도록 수정
     }
   	
     // 회원탈퇴

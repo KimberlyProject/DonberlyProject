@@ -503,9 +503,9 @@ function calendar_insert(){
 		$.ajax({
 			 url:	"/mypage/calendar",
 			 type:	"post",
-			 data:	{
+			 data:	{					 
 					 "userId" :  $('#userId').val(),
-					 "articleId" : "${session.aucCode}",
+					 "articleId" : $('.code').val(),
 					 "status" : "${chatList.status}",
 					 "schedule" : $('#scheduleData').val(),
 					 "contents" : $('#contents').val()
