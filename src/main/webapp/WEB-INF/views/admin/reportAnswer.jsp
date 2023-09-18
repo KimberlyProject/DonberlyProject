@@ -58,6 +58,11 @@
 		.pagearea {
 			text-align: center;
 		}
+		div > select {
+			width:				100px;
+			height:				40px;
+			margin-bottom:		10px;
+		}
 	</style>
 </head>
 <body>
@@ -74,24 +79,10 @@
 
 		<!-- 내역 나열 방식(최신순,오래된순) -->
 		<select id="sortOrder" name="sortOrder">
-		    <option value="latest">최신순</option>
-		    <option value="oldest">오래된순</option>
+		    <option value="latest">&nbsp;최신순</option>
+		    <option value="oldest">&nbsp;오래된순</option>
 		</select>
 		
-		<!-- 검색창 -->
-		<div class="row" style="vertical-align: middle; float:right;">
-			<select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
-				<option value="a" <c:if test="{searchType} == 'a'">selected</c:if>>전체</option>
-				<option value="t" <c:if test="{searchType} == 't'">selected</c:if>>제목</option>
-				<option value="w" <c:if test="{searchType} == 'w'">selected</c:if>>작성자</option>
-			</select>
-			<input  class="col-sm-2 searchgroup form-control" type="text" class="form-control" style="width:200px;" placeholder="검색하기">
-			<button id ="searchbtn" class="btn btn-success" type="button">
-				<span class="glyphicon glyphicon-search"/>
-			</button>   
-		</div>
-      	
-      	<!-- 검색창 -->
 		<table class="table table-bordered table-striped table-hover">
 			<thead>
 				<tr class="head" style="background: rgb(73, 124, 64); color: #FFF;">

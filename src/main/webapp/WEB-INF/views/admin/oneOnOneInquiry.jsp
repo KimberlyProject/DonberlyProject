@@ -36,6 +36,7 @@
       	#searchbtn {
         	height: 			2.4em;
         	color:				#FFFFFF;
+        	margin-right:		15px;
       	}
       	#searchType{
       		height:34px;
@@ -61,6 +62,11 @@
 		}
 		.head > th:last-child {
 			width:				15%;
+		}
+		.ooo {
+			width: 				100%;
+			height:				2.4em;
+			margin-bottom:		10px;
 		}
 		
 		@media all and (max-width:780px){		
@@ -138,25 +144,12 @@
     <h1 class="pageTitle"><div>1:1 문의</div></h1>
 	
 	<div class="container">
-		<div class="btnbox">
-			<!-- 검색창 -->
-			<div>
-				<select class="col-sm-2 searchgroup" id="searchType">
-					<option value="a" <c:if test="{searchType} == 'a'">selected</c:if>>전체</option>
-					<option value="t" <c:if test="{searchType} == 't'">selected</c:if>>제목</option>
-					<option value="w" <c:if test="{searchType} == 'w'">selected</c:if>>작성자</option>
-				</select>
-				<input  class="col-sm-2 searchgroup form-control" type="text" class="form-control" placeholder="검색하기">
-				<button id ="searchbtn" class="btn btn-success" type="button">
-					<span class="glyphicon glyphicon-search"/>
-				</button>   
-			</div>
-			<button class="btn btn-danger col-sm-1" id="delArticle">삭제하기</button>
-		</div>
+
 		<!-- 삭제버튼 -->
 		<div>
 			<button class="btn btn-danger col-sm-1" style="float:left; ">삭제하기</button>
 		</div>
+		<!-- 삭제버튼 끝 -->
 		
 		<!-- 검색창 -->
 		<div class="row" style="vertical-align: middle; float:right;">
@@ -216,7 +209,7 @@
 			</c:forEach>
 			</tbody>
 		</table>
-		<form id="formList" action="/admin/oneOnOneInquiry" method="GET">
+		<form id="formList" action="${path}/admin/oneOnOneInquiry" method="GET">
 			<input type="hidden" name="searchType"	value="${pageVO.type}"/>
 			<input type="hidden" name="keyword"		value="${pageVO.keyword}"/>
 		</form>
