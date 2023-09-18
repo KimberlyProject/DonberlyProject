@@ -216,7 +216,7 @@ public class AuctionController {
 				}
 			}
 			msg = "<script>";
-			msg += "alert('새 글을 추가했습니다.');";
+			msg += "alert('경매가 시작되었습니다.');";
 			msg += "location.href='" + req.getContextPath()+"/auction/auction_main';";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, resHds, HttpStatus.CREATED);
@@ -280,47 +280,24 @@ public class AuctionController {
 	
 	//판매자 경매취소 삭제하기
 	@RequestMapping(value="/auctionOff", method=RequestMethod.GET)
-	public String removeAuction(@RequestParam("aucCode") int aucCode, 
-			HttpServletRequest req, HttpServletResponse res)
+	public String removeAuction(@RequestParam("aucCode") int aucCode, HttpServletRequest req, HttpServletResponse res)
 			throws Exception {
-			System.out.println("경매종료 삭제하는 컨트롤러 " + aucCode);
-			
-		res.setContentType("text/html;charset=UTF-8");
-		String message;
-		ResponseEntity	resEnt			= null;
-		HttpHeaders		responseHeaders	= new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html;charset=UTF-8");
 		
+		System.out.println("경매종료, 게시글" + aucCode + "삭제 Controller");
 		try {
-			
 			auctionService.removeAuction(aucCode);
-			
 			File destDir = new File(IMGROOT + "\\" + aucCode);
 			FileUtils.deleteDirectory(destDir);
-		
-			message = "<script>";
-			message += " alert('글을 삭제했습니다.');";
-			message += " location.href='" + req.getContextPath()+"/auction/auction_main';";
-			message +=" </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
-	       
 		} catch(Exception e) {
-			message = "<script>";
-			message += " alert('작업중 오류가 발생했습니다.다시 시도해 주세요.');";
-			message += " location.href='"+ req.getContextPath()+"/auction/auction_detail?auction=${articlesList.aucCode}';";
-			message +=" </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 			e.printStackTrace();
 		}
-		return "/auction/auction_main";
+		return "redirect:/auction/auction_main";
 	}//removeAuction
 
 	//판매자 현재입찰가로 판매하기
 	@RequestMapping(value="/saleNow", method=RequestMethod.GET)
-	public String saleNow(@RequestParam("aucCode") int aucCode,
-								  @RequestParam("cstmId") String cstmId,
-			HttpServletRequest Request, HttpServletResponse response)          
-			throws Exception {
+	public String saleNow(@RequestParam("aucCode") int aucCode, @RequestParam("cstmId") String cstmId,
+			HttpServletRequest Request, HttpServletResponse response) throws Exception {
 
 		System.out.println("판매자 현재입찰가로 판매하기 Controller");
 		Request.setCharacterEncoding("UTF-8");
@@ -333,26 +310,15 @@ public class AuctionController {
 			System.out.println(name + ":" + value);
 			articleMap.put(name, value);
 		}
-		
-		String 	aucCode1	= (String)articleMap.get("aucCode");
-		String	message;
-		
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
-		
 		auctionService.saleNow(articleMap);
 		
-		return "/auction/auction_main";
+		return "redirect:/auction/auction_main";
 	}//saleNow
 	
 	//구매자 입찰하기
 	@RequestMapping(value="/tryBid", method=RequestMethod.GET)
-	public String tryBid(@RequestParam("aucCode") int aucCode,
-						 @RequestParam("cstmId") String cstmId,
-						 @RequestParam("nowBid") int nowBid,
-			HttpServletRequest Request, HttpServletResponse response)
-			throws Exception {
+	public String tryBid(@RequestParam("aucCode") int aucCode, @RequestParam("cstmId") String cstmId, @RequestParam("nowBid") int nowBid,
+			HttpServletRequest Request, HttpServletResponse response) throws Exception {
 
 		System.out.println("구매자 입찰하기 Controller");
 		Request.setCharacterEncoding("UTF-8");
@@ -365,26 +331,15 @@ public class AuctionController {
 			System.out.println(name + ":" + value);
 			articleMap.put(name, value);
 		}
-		
-		String 	aucCode1 = (String)articleMap.get("aucCode");
-		String	message;
-		
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
-		
 		auctionService.tryBid(articleMap);
 		
-		return "/auction/auction_main";
+		return "redirect:/auction/auction_main";
 	}//tryBid
 	
 	//구매자 상한가 구매하기
 	@RequestMapping(value="/buyNow", method=RequestMethod.GET)
-	public String buyNow(@RequestParam("aucCode") int aucCode,
-						 @RequestParam("cstmId") String cstmId,
-						 @RequestParam("maxPrice") int maxPrice,
-			HttpServletRequest Request, HttpServletResponse response)
-			throws Exception {
+	public String buyNow(@RequestParam("aucCode") int aucCode, @RequestParam("cstmId") String cstmId, @RequestParam("maxPrice") int maxPrice,
+			HttpServletRequest Request, HttpServletResponse response) throws Exception {
 
 		System.out.println("상한가 구매 Controller");
 		Request.setCharacterEncoding("UTF-8");
@@ -397,17 +352,9 @@ public class AuctionController {
 			System.out.println(name + ":" + value);
 			articleMap.put(name, value);
 		}
-		
-		String 	aucCode1	= (String)articleMap.get("aucCode");
-		String	message;
-		
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
-		
 		auctionService.buyNow(articleMap);
 		
-		return "/auction/auction_main";
+		return "redirect:/auction/auction_main";
 	}//buyNow		
 	
 }
