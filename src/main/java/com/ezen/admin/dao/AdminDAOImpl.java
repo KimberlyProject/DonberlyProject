@@ -12,6 +12,8 @@ import org.springframework.stereotype.Repository;
 import com.ezen.ccenter.dto.CcenterDTO;
 import com.ezen.ccenter.dto.ReportDTO;
 import com.ezen.admin.dto.Criteria;
+import com.ezen.admin.dto.ReportCriteria;
+import com.ezen.admin.dto.SearchCriteria;
 import com.ezen.member.dto.MemberDTO;
 
 @Repository
@@ -25,12 +27,11 @@ public class AdminDAOImpl implements AdminDAO {
 	private static final String namespace = "com.ezen.admin.mapper.adminMapper";
 	
 	//--------------------------------------------------------------------------------------------------
-	// 회원 전체 목록
-	//--------------------------------------------------------------------------------------------------	
+	// 회원 전체 조회 + 페이징 + 검색
+	//--------------------------------------------------------------------------------------------------
 	@Override
-	public List<MemberDTO> selectMember() throws Exception {
-		
-		return sqlSession.selectList(namespace + ".selectMember");
+	public List<MemberDTO> memberList(Criteria cri) throws Exception {
+		return sqlSession.selectList(namespace + ".memberList", cri);
 	}
 
 	//--------------------------------------------------------------------------------------------------
@@ -84,43 +85,43 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	//--------------------------------------------------------------------------------------------------
-	// cri를 가지고 검색한 총 건수의 전체 게시글 수 구하기(paging 처리)
+	// 회원목록 페이징(게시글수 구하기: cri를 가지고 검색한 총 게시글의 수)
 	//--------------------------------------------------------------------------------------------------
 	@Override
 	public int memberListTotalCount(Criteria cri) throws Exception {
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ cri ==> " + cri);
 		return sqlSession.selectOne(namespace + ".memberListTotalCount", cri);
 	}
-
-	//--------------------------------------------------------------------------------------------------
-	// 게시글 목록 가져오기(paging)
-	//--------------------------------------------------------------------------------------------------
-	@Override
-	public List<MemberDTO> memberListPaging(Criteria cri) throws Exception {
-		System.out.println("###################### cri ==> " + cri);
-		return sqlSession.selectList(namespace + ".memberListPaging", cri);
-	}
 	
 	//--------------------------------------------------------------------------------------------------
-	// 1:1 문의 내역 리스트 생성
+	// 1:1 문의하기 전체 조회 + 검색
 	//--------------------------------------------------------------------------------------------------
 	@Override
-	public List<CcenterDTO> listOneOnOne() throws Exception {
-		List<CcenterDTO> listOneOnOne = sqlSession.selectList(namespace + ".listOneOnOne");
+	public List<CcenterDTO> listOneOnOne(SearchCriteria cri) throws Exception {
+		List<CcenterDTO> listOneOnOne = sqlSession.selectList(namespace + ".listOneOnOne", cri);
 		
 		System.out.println("1:1문의 정보: " + listOneOnOne);
 		return listOneOnOne;
 	}
 	
 	//--------------------------------------------------------------------------------------------------
-	// 1:1 문의 내역 리스트 생성
+	// 신고하기 전체 내역 조회
 	//--------------------------------------------------------------------------------------------------
 	@Override
-	public List<ReportDTO> listReportAnswer() throws Exception {
-		List<ReportDTO> listReportAnswer = sqlSession.selectList(namespace + ".listReportAnswer");
-		
+	public List<ReportDTO> listReportAnswer(ReportCriteria rcri) throws Exception {
+		System.out.println("################################# DAO listReportAnswer => " + rcri);
+		List<ReportDTO> listReportAnswer = sqlSession.selectList(namespace + ".listReportAnswer", rcri);
 		System.out.println("신고하기 정보: " + listReportAnswer);
 		return listReportAnswer;
 	}
 	
+	//--------------------------------------------------------------------------------------------------
+	// 신고하기 페이징(게시글수 구하기: rcri를 가지고 검색한 총 게시글의 수)
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public int reportAnswerTotalCount(ReportCriteria rcri) throws Exception {
+		System.out.println("################################# DAO reportAnswerTotalCount => " + rcri);
+		return sqlSession.selectOne(namespace + ".reportAnswerTotalCount", rcri);
+	}
+
 }

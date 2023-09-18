@@ -160,6 +160,23 @@
 			<button class="btn btn-danger col-sm-1">삭제하기</button>
 		</div>
 		<!-- 삭제버튼 -->
+		<div>
+			<button class="btn btn-danger col-sm-1" style="float:left; ">삭제하기</button>
+		</div>
+		
+		<!-- 검색창 -->
+		<div class="row" style="vertical-align: middle; float:right;">
+			<select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
+				<option value="inquiryAll" <c:if test="{searchType} == 'inquiryAll'">selected</c:if>>전체</option>
+				<option value="t" <c:if test="{searchType} == 't'">selected</c:if>>제목</option>
+				<option value="c" <c:if test="{searchType} == 'c'">selected</c:if>>내용</option>
+				<option value="w" <c:if test="{searchType} == 'w'">selected</c:if>>작성자</option>
+			</select>
+			<input id="searchKeyword" class="col-sm-2 searchgroup form-control" type="text" class="form-control" style="width:200px;" value="${pageVO.keyword}" placeholder="검색하기">
+			<button id ="searchBtn" class="btn btn-success" type="button">
+				<span class="glyphicon glyphicon-search"/>
+			</button>   
+		</div>
       	
       	<!-- 검색창 -->
 		<table class="table table-bordered table-striped table-hover">
@@ -207,12 +224,31 @@
 			</c:forEach>
 			</tbody>
 		</table>
+		<form id="formList" action="/admin/oneOnOneInquiry" method="GET">
+			<input type="hidden" name="searchType"	value="${pageVO.type}"/>
+			<input type="hidden" name="keyword"		value="${pageVO.keyword}"/>
+		</form>
 	</div>
 	<%@ include file="../include/footer.jsp" %>
 	<script>
 		$(document).ready(function(){
+			// tr을 누를 경우
 			$("tr").on("click", function() {
 				$(this).next("tr").find(".content").toggleClass("on");
+			});
+			
+			var formObj = $("#formList");
+			
+			// 검색: 검색버튼을 누를 경우
+			$("#searchBtn").click(function(e) {
+				var typeStr = $("#searchType").find(":selected").val();
+				var keywordStr = $("#searchKeyword").val();
+				console.log(typeStr, "", keywordStr);
+				
+				formObj.find("[name='searchType']").val(typeStr);
+				formObj.find("[name='keyword']").val(keywordStr);
+				
+				formObj.submit();
 			});
 		});
 	</script>

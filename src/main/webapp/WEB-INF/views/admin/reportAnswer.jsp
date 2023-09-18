@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page session="true" %>
 <html>
 <head>
 	<title>Home</title>
@@ -51,6 +51,12 @@
 		}
 		.head > th:last-child {
 			width:				15%;
+		}
+		ul > li > a {
+			height:				34px;
+		}
+		.pagearea {
+			text-align: center;
 		}
 	</style>
 </head>
@@ -108,7 +114,9 @@
 			<tbody>
 			<c:forEach var="report" items="${report}" varStatus="articleNum">
 				<tr>
-					<td><input type="checkbox" style="width: 100%;"/></td>
+					<td>
+						<input type="checkbox" style="width: 100%;"/>
+					</td>
 					<td>
 						${report.articleNo}
 					</td>
@@ -139,6 +147,27 @@
 			</c:forEach>
 			</tbody>
 		</table>
+		<!-- 화면 하단의 페이지 영역 start -->
+		<div class="pagearea">
+			<ul class="btn-group pagination">
+				<c:if test="${reportPageMaker.prev}">
+					<li>
+						<a href="<c:url value='/admin/reportAnswer?page=${reportPageMaker.startPage-1}'/>"><span class="glyphicon glyphicon-chevron-left"></span></a>
+					</li>
+				</c:if>
+				<c:forEach begin="${reportPageMaker.startPage}" end="${reportPageMaker.endPage}" var="pageNum">
+					<li>
+						<a href="<c:url value='/admin/reportAnswer?page=${pageNum}'/>">${pageNum}</a>
+					</li>
+				</c:forEach>
+				<c:if test="${reportPageMaker.next}">
+					<li>
+						<a href="<c:url value='/admin/reportAnswer?page=${reportPageMaker.endPage+1}'/>"><span class="glyphicon glyphicon-chevron-right"></span></a>
+					</li>
+				</c:if>
+			</ul>
+		</div>
+		<!-- 화면 하단의 페이지 영역 end -->
 	</div>
 	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	<%@ include file="../include/footer.jsp" %>
