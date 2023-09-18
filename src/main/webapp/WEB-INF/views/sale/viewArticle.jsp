@@ -221,7 +221,7 @@ function readURL(input) {
 
 // 게시글 수정하기
 function fn_modify_article(obj) {
-	obj.action = "${page}/sale/modArticle.do";
+	obj.action = "${path}/sale/modArticle.do";
 	obj.submit();
 }
 
@@ -231,7 +231,7 @@ $("#buyEnd").on("click", function() {
 	var userId = "${member.userId}";
 	if(confirm("해당 상품을 구매 완료하시겠습니까?")) {
 	
-	location.href = "/sale/saleEnd?articleNO=" + articleNO + "&userId=" + userId;
+	location.href = "${path}/sale/saleEnd?articleNO=" + articleNO + "&userId=" + userId;
 	alert("구매가 완료되었습니다.");
 	}
 });//#buyNow
@@ -254,12 +254,9 @@ function fn_chat(artNo){
 			 console.log(data);
 			 window.open(data, "_blank", "width=940, height=750");
 			//location.href=data;
-			
 		 },
 		 error:function(request,status,error){
 			 console.log("실패");
-			 
-			 
 		 },
 		 complete:function(){
 			 $('#chatContent').val('');
