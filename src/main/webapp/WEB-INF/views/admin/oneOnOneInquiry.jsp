@@ -6,6 +6,7 @@
 <head>
 	<title>Home</title>
 	<%@ include file="../include/header.jsp" %>
+	<%@ include file="./mailSend.jsp" %>
 	<style>
 		th {
 			text-align:			center;
@@ -196,11 +197,10 @@
 						${ask.content}
 						<br/>
 						<br/>
-						<div>
-							<button id ="replybtn" class="btn btn-success col-sm-1" type="button">답변하기</button>
+						<div  align="right">
+							<a class="btn btn-success" href="javascript:void(0);" onclick="openModal({email: '${ask.email}'})">답변하기</a>
 						</div>
 					</td>
-					
 				</tr>
 			</c:forEach>
 			</tbody>
@@ -208,37 +208,39 @@
 		</form>
 	</div>
 	<%@ include file="../include/footer.jsp" %>
-	<script>
 	
-	$(document).ready(function(){
-			
-			$("tr").on("click", function() {
-				$(this).next("tr").find(".content").toggleClass("on");
-			});
-			
-	// 삭제하기	
-			$("#delArticle").on("click", function() {
-				const frm = $("#head").closest("form");
-				let articleNo = [];
-				
-				//$(".article", ".check", ".articleNo").each(function() {
-					
-				//});
-				for(let i = 0; i < $(".article").length; i++){
-					console.log($(".article:eq(" + i + ")").find(".check").is(":checked"));
-					
-					if(!$(".article:eq(" + i + ")").find(".check").is(":checked")){
-						articleNo[i] = $(".article:eq(" + i + ")").find(".articleNo").val();
-					}
-					$(".num:eq(" + i + ")").prop("value", articleNo[i]);
-					console.log($(".num:eq(" + i + ")").val());
-				}
-				
-				frm.prop("action", "/admin/delArticle");
-				frm.prop("method", "post");
-				frm.submit();
-			});
+<script>
+
+$(document).ready(function(){
+		
+		$("tr").on("click", function() {
+			$(this).next("tr").find(".content").toggleClass("on");
 		});
-	</script>
+		
+// 삭제하기	
+		$("#delArticle").on("click", function() {
+			const frm = $("#head").closest("form");
+			let articleNo = [];
+			
+			//$(".article", ".check", ".articleNo").each(function() {
+				
+			//});
+			for(let i = 0; i < $(".article").length; i++){
+				console.log($(".article:eq(" + i + ")").find(".check").is(":checked"));
+				
+				if(!$(".article:eq(" + i + ")").find(".check").is(":checked")){
+					articleNo[i] = $(".article:eq(" + i + ")").find(".articleNo").val();
+				}
+				$(".num:eq(" + i + ")").prop("value", articleNo[i]);
+				console.log($(".num:eq(" + i + ")").val());
+			}
+			
+			frm.prop("action", "/admin/delArticle");
+			frm.prop("method", "post");
+			frm.submit();
+		});
+	});
+</script>
+
 </body>
 </html>

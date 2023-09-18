@@ -10,7 +10,7 @@ import com.ezen.ccenter.dao.CcenterDAO;
 @Service("ccenterService")
 public class CcenterService{
 
-	// 1:1 문의 서비스
+	// 1:1 문의하기 서비스
 	@Autowired
 	CcenterDAO ccenterDAO;
 	
