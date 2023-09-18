@@ -216,7 +216,7 @@ public class AuctionController {
 				}
 			}
 			msg = "<script>";
-			msg += "alert('새 글을 추가했습니다.');";
+			msg += "alert('경매가 시작되었습니다.');";
 			msg += "location.href='" + req.getContextPath()+"/auction/auction_main';";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, resHds, HttpStatus.CREATED);

@@ -111,7 +111,7 @@
 			<div>
 				<div>
 					<p align="center">
-						<b><span style="font-size:22px;">등록된 게시글이 없습니다.</span></b>
+						<b><span style="font-size:22px;">입찰한 경매 상품이 없습니다.</span></b>
 					</p>
 				</div>
 			</div>
