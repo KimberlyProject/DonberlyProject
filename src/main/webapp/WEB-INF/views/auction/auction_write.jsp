@@ -49,10 +49,6 @@
 		.imgNoinput {
 			width: 10px;
 		}
-		#submit {
-			verticla-align: center;
-			text-align: center;
-		}
 		#minPrice {
 		text-align: right;
 		}
@@ -65,6 +61,13 @@
 		#imgInfo {
 			color: gray;
 		}
+		#gigi{
+            display: flex;
+            justify-content: center;
+        }
+        .addimg button {
+            display: inline-block; /* 버튼을 가로로 정렬 */
+        }
 	
 	</style>
 </head>
@@ -139,10 +142,10 @@
 				</tr>
 				<tr>
 					<th class="cate">사진첨부<br/><br/><br/><br/><br/><br/><br/>
-						<input id="imgAdd" type="button" value="사진 추가" onClick="fn_addFiles()"/>
+						<input class="btn btn-primary" id="imgAdd" type="button" value="사진 추가" onClick="fn_addFiles()"/>
 					</th>	
 					<th>
-						<div id="d_file" style="overflow-y: scroll; height: 200px; ">
+						<div id="d_file" style="overflow-y: scroll; height: 250px; ">
 						 	<span id="imgInfo"> 
 						 	첫번째 사진이 썸네일로 설정됩니다.<br/> 원활한 경매 진행을 <span id="imageUploadError">최소 2장 이상의 사진을 올려주세요.</span><br/>
 						 	사진이 없을 시 입찰자 없이 경매가 종료될 수 있습니다.</span>
@@ -165,8 +168,8 @@
 			</table> <!-- 글쓰기 -->
 			<br/>
 			<br/>
-			<div>
-			<input id="submit" class="btn btn-success" type="submit" value="상품 올리기"/>
+			<div id="gigi">
+			<button class="btn btn-success" type="button" id="gogo">상품 올리기</button>
 			</div>
 		</form>
 		<br/>
@@ -176,75 +179,82 @@
 	<%@ include file="../include/footer.jsp" %>
 
 <script>
-
-
-
-	$("#submit").on("click", function() {
-		if($("#title").val() == "") {
-			alert("제목을 입력해주세요.");
-			$("#title").focus();
-			return false;
-		}
-		if($("#minPrice").val() == "") {
-			alert("최소금액을 입력해주세요.");
-			$("#minPrice").focus();
-			return false;
-		}	
-		if($("#maxPrice").val() == "") {
-			alert("상한금액을 입력해주세요");
-			$("#maxPrice").focus();
-			return false;
-		}	
+	
+	$(document).ready(function() {
 		
-		//숫자로 검사 후 숫자인지 확인하기
-		var minPrice = parseFloat($("#minPrice").val().replace(/,/g, ''));
-		var maxPrice = parseFloat($("#maxPrice").val().replace(/,/g, ''));
-		var bidRate = $("#searchType").val();
-		var calPrice = maxPrice - minPrice; 		
-		if (isNaN(minPrice) || isNaN(maxPrice)) {
-		    alert("숫자만 입력해주세요.");
-		    return false;
-		}
-		//입찰단위/상한금액 제한
-		if (minPrice >= maxPrice) {
-		    alert("최소금액보다 큰 상한금액을 입력해주세요.");
-		    $("#maxPrice").focus();
-		    return false;
-		}		
-		if(maxPrice < bidRate) {
-			alert("입찰단위가 상한금액을 초과합니다. 적절한 입찰단위를 선택해주세요.");
-			$("#searchType").focus();
-			return false;
-		}	
-		if(calPrice < bidRate) {
-			alert("입찰단위가 상한금액을 초과합니다. 적절한 입찰단위를 선택해주세요.");
-			$("#searchType").focus();
-			return false;
-		}	
-
-		//이미지 첨부 여부 확인하기
-		var image1 = $("#imageFileName1").val();
-	    var image2 = $("#imageFileName2").val();
-	    if (!image1 || !image2) {
-	        $("#imageUploadError").css("color", "red");
-	        return false;
-	    } else {
-	        // 이미지파일 확장자 검사하기
-	        if (!isImageFileName(image1) || !isImageFileName(image2)) {
-	            alert("이미지파일(jpg, jpeg, png, gif, pdf)만 올려주세요.");
-	            $("#imageUploadError").css("color", "red");
-	            return false;
-	        } else {
-	            $("#imageUploadError").css("color", "gray");
-	        }
-	    }
-	    	    
-		if($("#content").val() == "") {
-			alert("제품에 대한 상세설명을 입력해주세요.");
-			$("#content").focus();
-			return false;
-		}	
+		$("#gogo").on("click", function() {
+			if($("#title").val() == "") {
+				alert("제목을 입력해주세요.");
+				$("#title").focus();
+				return false;
+			}
+			if($("#minPrice").val() == "") {
+				alert("최소금액을 입력해주세요.");
+				$("#minPrice").focus();
+				return false;
+			}	
+			if($("#maxPrice").val() == "") {
+				alert("상한금액을 입력해주세요");
+				$("#maxPrice").focus();
+				return false;
+			}	
+			
+			//숫자로 검사 후 숫자인지 확인하기
+			var minPrice = parseFloat($("#minPrice").val().replace(/,/g, ''));
+			var maxPrice = parseFloat($("#maxPrice").val().replace(/,/g, ''));
+			var bidRate = $("#searchType").val();
+			var calPrice = maxPrice - minPrice; 		
+			if (isNaN(minPrice) || isNaN(maxPrice)) {
+			    alert("숫자만 입력해주세요.");
+			    return false;
+			}
+			//입찰단위/상한금액 제한
+			if (minPrice >= maxPrice) {
+			    alert("최소금액보다 큰 상한금액을 입력해주세요.");
+			    $("#maxPrice").focus();
+			    return false;
+			}		
+			if(maxPrice < bidRate) {
+				alert("입찰단위가 상한금액을 초과합니다. 적절한 입찰단위를 선택해주세요.");
+				$("#searchType").focus();
+				return false;
+			}	
+			if(calPrice < bidRate) {
+				alert("입찰단위가 상한금액을 초과합니다. 적절한 입찰단위를 선택해주세요.");
+				$("#searchType").focus();
+				return false;
+			}	
+	
+			//이미지 첨부 여부 확인하기
+			var image1 = $("#imageFileName1").val();
+		    var image2 = $("#imageFileName2").val();
+		    if (!image1 || !image2) {
+		        $("#imageUploadError").css("color", "red");
+		        return false;
+		    } else {
+		        // 이미지파일 확장자 검사하기
+		        if (!isImageFileName(image1) || !isImageFileName(image2)) {
+		            alert("이미지파일(jpg, jpeg, png, gif, pdf)만 올려주세요.");
+		            $("#imageUploadError").css("color", "red");
+		            return false;
+		        } else {
+		            $("#imageUploadError").css("color", "gray");
+		        }
+		    }
+		    	    
+			if($("#content").val() == "") {
+				alert("제품에 대한 상세설명을 입력해주세요.");
+				$("#content").focus();
+				return false;
+			}	
+			
+			//제출 후 중복클릭 방지
+	        $("#gogo").prop("disabled", true);
+	        $("#formgroup").submit();
+		});
+		
 	});
+	
 	
 	//이미지파일 확장자 검사하기
 	function isImageFileName(fileName) {
@@ -262,10 +272,19 @@
 	//이미지 추가하기
    	var cnt=1;
 	function fn_addFiles() {
-		$("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
+		$("#d_file").append("<br>"+"<div class='addimg'><input type='file' name='file"+cnt+"' />"+"<button class='btn btn-danger'>삭제하기</button></div>");
 		cnt++;
 	}  
 	
+	//추가한 이미지 삭제하기
+	document.addEventListener("click", function(event) {
+    if (event.target.classList.contains("btn") && event.target.classList.contains("btn-danger")) {
+        var parent = event.target.closest(".addimg");
+        if (parent) {
+            parent.remove();
+        }
+    }
+	});
 
 </script>
 </body>
