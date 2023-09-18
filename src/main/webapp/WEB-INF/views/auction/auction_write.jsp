@@ -148,8 +148,8 @@
 						 	사진이 없을 시 입찰자 없이 경매가 종료될 수 있습니다.</span>
 						 	
 						 	<br/><br/>
-							<input type="file" name="imageFileName" onchange="readAndResize(this)"/><br/>
-							<input type="file" name="imageFileName2" onchange="readAndResize(this)"/>
+							<input type="file" id="imageFileName1" name="imageFileName1" onchange="readAndResize(this)"/><br/>
+							<input type="file" id="imageFileName2" name="imageFileName2" onchange="readAndResize(this)"/>
 							
 						</div>
 					</th>
@@ -203,30 +203,28 @@
 		    return false;
 		}
 		if (minPrice >= maxPrice) {
-		    alert("최소 금액보다 더 큰 상한 금액을 입력해주세요.");
+		    alert("최소금액보다 큰 상한금액을 입력해주세요.");
 		    $("#maxPrice").focus();
 		    return false;
 		}		
 		if(maxPrice < bidRate) {
-			alert("입찰단위는 상한금액보다 클 수 없습니다. 다시 선택해주세요.");
+			alert("입찰단위가 상한금액을 초과합니다. 적절한 입찰단위를 선택해주세요.");
 			$("#searchType").focus();
 			return false;
 		}	
 		if(calPrice < bidRate) {
-			alert("적절한 입찰단위를 선택해주세요.");
+			alert("입찰단위가 상한금액을 초과합니다. 적절한 입찰단위를 선택해주세요.");
 			$("#searchType").focus();
 			return false;
 		}	
 
 		var image1 = $("#imageFileName1").val();
 	    var image2 = $("#imageFileName2").val();
-
-	    
 	    if (!image1 || !image2) {
 	        $("#imageUploadError").css("color", "red");
 	        return false;
 	    } else {
-	        $("#imageUploadError").text("");
+	        $("#imageUploadError").css("color", "gray");
 	    }
 	    	    
 		if($("#content").val() == "") {
