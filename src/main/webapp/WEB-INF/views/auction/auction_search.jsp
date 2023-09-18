@@ -80,26 +80,8 @@
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-	    <aside id="sideMenu">
-      <h2>마이페이지</h2>
-      <ul>
-        <li><a href="#">내 정보 수정</a></li>
-        <li>
-          <a href="#">거래내역</a>
-          <ul>
-            <li><a href="#">삽니다</a></li>
-            <li><a href="#">팝니다</a></li>
-          </ul>
-        </li>
-        <li><a href="#">경매</a>          
-          <ul>
-            <li><a href="#">판매</a></li>
-            <li><a href="#">구매</a></li>
-          </ul>
-        </li>
-        <li><a href="#">캘린더</a></li>
-        <li><a href="#">채팅목록</a></li>
-      </ul>
+	  <c:set var="menu" value="auction" />
+	<%@ include file="../include/sidebar.jsp" %>
       <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
     </aside>
     <div class="page_dir container">
@@ -247,18 +229,18 @@
 						<ul class="btn-group pagination">
 							<c:if test="${pageMaker.prev}">
 								<li>
-									<a href='<c:url value="/auction/auction_maintosearch?page=${pageMaker.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
+									<a href='<c:url value="${path}/auction/auction_maintosearch?page=${pageMaker.startPage -1}&searchType=${cri.searchType}&keyworad=${cri.keyword}"/>'>
 										<span class="glyphicon glyphicon-chevron-left"></span></a>
 								</li>
 							</c:if>
 							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
 								<li>
-									<a href='<c:url value="/auction/auction_maintosearch?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
+									<a href='<c:url value="${path}/auction/auction_maintosearch?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
 								</li>
 							</c:forEach>
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 								<li>
-									<a href='<c:url value="/auction/auction_maintosearch?page=${pageMaker.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
+									<a href='<c:url value="${path}/auction/auction_maintosearch?page=${pageMaker.endPage + 1}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'>
 										<span class="glyphicon glyphicon-chevron-right"></span></a>
 								</li>
 							</c:if>
@@ -267,10 +249,10 @@
 				</td>
 			</tr>
 		</table> <br/>
-		<button class="btn btn-success col-sm-offset-6"><a style="color:#FFFFFF;" href="/auction/auction_write">상품 등록</a></button>
+		<button class="btn btn-success col-sm-offset-6"><a style="color:#FFFFFF;" href="${path}/auction/auction_write">상품 등록</a></button>
 		<br/><br/>
 		
-		<form id="formList" action="/auction/auction_maintosearch" method="get">
+		<form id="formList" action="${path}/auction/auction_maintosearch" method="get">
 			<input type="hidden" name="page" value="${result.currentPageNum}">
 			<input type="hidden" name="size" value="${result.currentPage.pageSize}">
 			<input type="hidden" name="searchType" value="${searchType}">

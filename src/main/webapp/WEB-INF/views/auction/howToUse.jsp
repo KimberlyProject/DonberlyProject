@@ -89,7 +89,7 @@
 		<h3>추가로 궁금하신 사항은 <a href="${path}/ccenter/notice">고객센터</a>를 통해 문의주시면 빠르게 도와드릴 수 있습니다.<br/>
 		'돈이되는 돈벌리'를 이용해주셔서 감사합니다.</h3><br/><br/><br/>
 		
-		 <p><a class="btn btn-success btn-lg" href="/auction/auction_main" role="button">경매장 바로가기</a></p>
+		 <p><a class="btn btn-success btn-lg" href="${path}/auction/auction_main" role="button">경매장 바로가기</a></p>
     </div>
     
     <br/><br/><br/>
