@@ -291,7 +291,7 @@ public class AuctionController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "/auction/auction_main";
+		return "redirect:/auction/auction_main";
 	}//removeAuction
 
 	//판매자 현재입찰가로 판매하기
@@ -312,7 +312,7 @@ public class AuctionController {
 		}
 		auctionService.saleNow(articleMap);
 		
-		return "/auction/auction_main";
+		return "redirect:/auction/auction_main";
 	}//saleNow
 	
 	//구매자 입찰하기
@@ -333,7 +333,7 @@ public class AuctionController {
 		}
 		auctionService.tryBid(articleMap);
 		
-		return "/auction/auction_main";
+		return "redirect:/auction/auction_main";
 	}//tryBid
 	
 	//구매자 상한가 구매하기
@@ -354,7 +354,7 @@ public class AuctionController {
 		}
 		auctionService.buyNow(articleMap);
 		
-		return "/auction/auction_main";
+		return "redirect:/auction/auction_main";
 	}//buyNow		
 	
 }
