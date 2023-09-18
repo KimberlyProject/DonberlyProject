@@ -62,19 +62,11 @@
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-	<aside id="sideMenu">
-      <ul>
-        <li><a href="./oneOnOneInquiry">1:1 문의하기 내역</a></li>
-        <li><a href="./reportAnswer">신고하기 내역</a></li>
-        <li><a href="./memberList">회원 목록</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
-    <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <span><a href="./reportAnswer">관리자</a></span>
-      <span class="glyphicon glyphicon-chevron-right"></span>
-      <span><a href="./reportAnswer">신고하기 내역</a></span>
+	<c:set var="menu" value="admin" />
+	<%@ include file="../include/sidebar.jsp" %>	
+   <div class="page_dir container">
+      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
+      홈 &gt; 관리자 &gt; 신고하기
     </div>
     <h1 class="pageTitle"><div>신고하기 내역</div></h1>
 	

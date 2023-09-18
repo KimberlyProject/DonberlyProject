@@ -13,6 +13,7 @@
 		}
 		td {
 			text-align:			center;
+			text-overflow: 		ellipsis;
 		}
 		.content {
 			display:			none;
@@ -95,7 +96,7 @@
 	<c:set var="menu" value="admin" />
 	<%@ include file="../include/sidebar.jsp" %>	
    <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
       홈 &gt; 관리자 &gt; 회원 목록
     </div>
     
@@ -132,11 +133,11 @@
 				<c:forEach var="list" items="${memberList}" varStatus="memberNum">
 					<tr id="tr">
 						<td><input type="checkBox" name="checkBox" style="width: 100%;"/></td>
-						<td onclick="location.href='/admin/memberDetail?userId=${list.userId}'">${memberNum.count}</td>
-						<td onclick="location.href='/admin/memberDetail?userId=${list.userId}'">${list.userId}</td>
-						<td onclick="location.href='/admin/memberDetail?userId=${list.userId}'">${list.tel}</td>
-						<td class="addr" onclick="location.href='/admin/memberDetail?userId=${list.userId}'">${list.address}</td>
-						<td onclick="location.href='/admin/memberDetail?userId=${list.userId}'"><fmt:formatDate value="${list.regDate}" pattern="yyyy년 MM월 dd일"/></td>
+						<td onclick="location.href='${path}/admin/memberDetail?userId=${list.userId}'">${memberNum.count}</td>
+						<td onclick="location.href='${path}/admin/memberDetail?userId=${list.userId}'">${list.userId}</td>
+						<td onclick="location.href='${path}/admin/memberDetail?userId=${list.userId}'">${list.tel}</td>
+						<td class="addr" onclick="location.href='${path}/admin/memberDetail?userId=${list.userId}'">${list.address}</td>
+						<td onclick="location.href='${path}/admin/memberDetail?userId=${list.userId}'"><fmt:formatDate value="${list.regDate}" pattern="yyyy년 MM월 dd일"/></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -154,7 +155,7 @@
 			<ul class="btn-group pagination" >
 				<c:if test="${pageMaker.prev}">
 					<li>
-						<a href="<c:url value='/admin/memberList?page=${pageMaker.startPage-1}&searchType=${cri.searchType}&keyword=${cri.keyword}'/>"><span class="glyphicon glyphicon-chevron-left"></span></a>
+						<a href="<c:url value='/admin/memberList?page=${pageMaker.startPage-1}&searchType=${cri.searchType}&keyword=${cri.keyword}'/>"><span class="glyphicon glyphicon-chevron-left"></span><span class="glyphicon glyphicon-chevron-left"></span></a>
 					</li>
 				</c:if>
 				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="pageNum">
@@ -164,14 +165,14 @@
 				</c:forEach>
 				<c:if test="${pageMaker.next}">
 					<li>
-						<a href="<c:url value='/admin/memberList?page=${pageMaker.endPage+1}&searchType=${cri.searchType}&keyword=${cri.keyword}'/>"><span class="glyphicon glyphicon-chevron-right"></span></a>
+						<a href="<c:url value='/admin/memberList?page=${pageMaker.endPage+1}&searchType=${cri.searchType}&keyword=${cri.keyword}'/>"><span class="glyphicon glyphicon-chevron-right"></span><span class="glyphicon glyphicon-chevron-right"></span></a>
 					</li>
 				</c:if>
 			</ul>
 		</div>
 		
 		<!-- 검색부분 -->
-		<form id="formList" action="/admin/memberList" method="GET">
+		<form id="formList" action="${path}/admin/memberList" method="GET">
 			<input type="hidden" name="page"		value="${result.currentPageNum}"/>
 			<input type="hidden" name="size"		value="${result.currentPage.pageSize}"/>
 			<input type="hidden" name="searchType"	value="${pageVO.type}"/>
@@ -195,7 +196,7 @@
 		                alert(idSelect);
 	
 		                $.ajax({
-		    				url:		"/admin/Asuspension",
+		    				url:		"${path}/admin/Asuspension",
 		    				type:		"post",
 		    				dataType:	"text",
 		    				data:		{"userId" : idSelect},
@@ -225,7 +226,7 @@
 		                alert(idSelect);
 	
 		                $.ajax({
-		    				url:		"/admin/Psuspension",
+		    				url:		"${path}/admin/Psuspension",
 		    				type:		"post",
 		    				dataType:	"text",
 		    				data:		{"userId" : idSelect},
