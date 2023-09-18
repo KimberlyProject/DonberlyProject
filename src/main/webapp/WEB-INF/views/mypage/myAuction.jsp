@@ -104,7 +104,7 @@
 	
 	<div class="container">
 	<br/><br/>
-	<a href="/auction/myBid?cstmId=${member.nickname}"> > 내가 입찰한 경매 상품만 보기</a><br/><br/><br/>
+	<a href="${path}/auction/myBid?cstmId=${member.nickname}"> > 내가 입찰한 경매 상품만 보기</a><br/><br/><br/>
 
 		<!-- 경매 게시글 -->
 		<!-- 게시글이 하나도 없는 경우 -->
@@ -225,18 +225,18 @@
 						<ul class="btn-group pagination">
 							<c:if test="${pageMaker.prev}">
 								<li>
-									<a href='<c:url value="/auction//myAuction?aucId=${member.userId}"/>'>
+									<a href='<c:url value="${path}/auction//myAuction?aucId=${member.userId}"/>'>
 										<span class="glyphicon glyphicon-chevron-left"></span></a>
 								</li>
 							</c:if>
 							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
 								<li>
-									<a href='<c:url value="/auction//myAuction?aucId=${member.userId}"/>'><i>${pageNum}</i></a>
+									<a href='<c:url value="${path}/auction//myAuction?aucId=${member.userId}"/>'><i>${pageNum}</i></a>
 								</li>
 							</c:forEach>
 							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 								<li>
-									<a href='<c:url value="/auction//myAuction?aucId=${member.userId}"/>'>
+									<a href='<c:url value="${path}/auction//myAuction?aucId=${member.userId}"/>'>
 										<span class="glyphicon glyphicon-chevron-right"></span></a>
 								</li>
 							</c:if>
@@ -246,7 +246,7 @@
 			</tr>
 		</table> <br/>
 		
-		<form id="formList" action="/auction/myAuction" method="get">
+		<form id="formList" action="${path}/auction/myAuction" method="get">
 			<input type="hidden" name="page" value="${result.currentPageNum}">
 			<input type="hidden" name="size" value="${result.currentPage.pageSize}">
 			<input type="hidden" name="searchType" value="${searchType}">

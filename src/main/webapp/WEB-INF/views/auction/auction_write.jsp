@@ -77,7 +77,7 @@
 	<div class="page_dir container">
 		<button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
 		<a href="/">홈</a> &gt;
-		<a href="/auction/auction_main">경매장</a> &gt;
+		<a href="${path}/auction/auction_main">경매장</a> &gt;
 		<a href="#">경매상품 올리기</a>
 	</div>
 	<h1 class="pageTitle"><div>경매 상품 올리기</div></h1>
