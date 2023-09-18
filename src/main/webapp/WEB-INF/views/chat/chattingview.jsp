@@ -516,14 +516,13 @@ function chatOut(){
 }
 
 function calendar_insert(){
-	console.log("${member.userId}");
 	if(confirm("일정을 등록하시겠습니까?")){
 		$.ajax({
 			 url:	"/mypage/calendar",
 			 type:	"post",
-			 data:	{
+			 data:	{					 
 					 "userId" :  $('#userId').val(),
-					 "articleId" : "${session.aucCode}",
+					 "articleId" : $('.code').val(),
 					 "status" : "${chatList.status}",
 					 "schedule" : $('#scheduleData').val(),
 					 "contents" : $('#contents').val()

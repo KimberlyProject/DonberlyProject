@@ -25,6 +25,10 @@
         margin: 5px 0;
         font-size: 18px;
     }
+    
+    .modal-body {
+    	background-image: url("../../resources/images/profliebackground.jpeg");
+    }
 </style>
 <!-- 모달 시작 -->
 <form name="modalform" method="post"   action="${Path}/ccenter/report" >
@@ -40,7 +44,7 @@
             <div class="modal-body">
                 <!-- 프로필 정보 영역 -->
                 <div class="profile-info">
-                    <img src="../../resources/images/jjangu.png" alt="프로필 사진">
+                    <img src="../../resources/images/profileimage.png" alt="프로필 사진">
                     <div class="row">
                         <div class="row-md-offset-2">
                             <p class="info"><strong>닉네임:</strong> <span id="modalNickname"></span></p>
