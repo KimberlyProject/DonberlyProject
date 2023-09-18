@@ -44,7 +44,6 @@
         .profile-info {
             text-align: center;
             padding: 20px;
-            background-color: #f9f9f9;
             border-radius: 5px;
             margin: 20px auto; /* 전체 간격을 조절합니다. */
             max-width: 600px; /* 가로 크기 제한 (선택 사항) */
@@ -127,8 +126,8 @@
 
 		/* 수정하기 버튼 스타일 */
 		.edit-button a.btn {
-		    background-color: rgb(73, 124, 64, 0.8); /* 원하는 배경 색상 설정 */
-		    color: black; /* 글자 색상 설정 */
+		    background-color: rgb(73, 124, 64); /* 원하는 배경 색상 설정 */
+		    color: white; /* 글자 색상 설정 */
 		}
 		
 		/* 수정하기 버튼에 호버 */
@@ -156,7 +155,7 @@
     
     <div class="container my">
 	    <div class="profile-info">
-            <img src="../../resources/images/profileimage.png" alt="프로필 사진">
+            <img src="${path}../../resources/images/profileimage.png" alt="프로필 사진">
             
             <div class="row">
             <div class="row-md-offset-2">
