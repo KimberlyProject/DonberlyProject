@@ -72,9 +72,17 @@
         #imgNull {
         	text-align: center;
         }
-      
+      	  .middlecenter{
+			text-align: center;
+			font-size: 20px;
+			margin-bottom: 20px;
+		}
+		.btngroup {
+		 	display: flex;
+		 	justify-content: center;
+		 	gap: 20px;
+		}
      
-
 	</style>
 </head>
 <body>
@@ -208,33 +216,30 @@
 		</c:when>
 		</c:choose>
 	
-		<table>
-			<tr> <!-- 페이징 -->
- 				<td>
-					<div class="col-sm-offset-3"><!-- 숫자 버튼 -->
-						<ul class="btn-group pagination">
-							<c:if test="${pageMaker.prev}">
-								<li>
-									<a href='<c:url value="${path}/auction/myBid?cstmId=${article.cstmId}"/>'>
-										<span class="glyphicon glyphicon-chevron-left"></span></a>
-								</li>
-							</c:if>
-							<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-								<li>
-									<a href='<c:url value="${path}/auction/myBid?cstmId=${article.cstmId}"/>'><i>${pageNum}</i></a>
-								</li>
-							</c:forEach>
-							<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-								<li>
-									<a href='<c:url value="${paht}/auction/myBid?cstmId=${article.cstmId}"/>'>
-										<span class="glyphicon glyphicon-chevron-right"></span></a>
-								</li>
-							</c:if>
-						</ul>
-					</div><!-- 숫자 버튼 -->
-				</td>
-			</tr>
-		</table> <br/>
+		<div class="middlecenter"> <!-- 페이징 -->
+				<div class="btngroup">
+				<c:if test="${pageMaker.prev}">				
+				<div class="item"><!-- 숫자 버튼 -->
+					<a href='<c:url value="${path}/auction/myBid?cstmId=${article.cstmId}"/>'>
+						<span class="glyphicon glyphicon-chevron-left"></span>
+					</a>
+				</div>				
+				</c:if>
+				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">						
+				<div class="item">
+					<a href='<c:url value="${path}/auction/myBid?cstmId=${article.cstmId}"/>'><i>${pageNum}</i></a>
+				</div>
+				</c:forEach>
+				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				<div class="item">
+					<a href='<c:url value="${paht}/auction/myBid?cstmId=${article.cstmId}"/>'>
+						<span class="glyphicon glyphicon-chevron-right"></span>
+					</a>
+				</div>
+				</c:if>
+				</div>
+			</div>
+		</div>
 		
 		<form id="formList" action="${path}/auction/auction_main.do" method="get">
 			<input type="hidden" name="page" value="${result.currentPageNum}">

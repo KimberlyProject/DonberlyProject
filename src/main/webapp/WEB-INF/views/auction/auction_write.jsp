@@ -145,7 +145,7 @@
 						<input class="btn btn-primary" id="imgAdd" type="button" value="사진 추가" onClick="fn_addFiles()"/>
 					</th>	
 					<th>
-						<div id="d_file" style="overflow-y: scroll; height: 250px; ">
+						<div id="d_file" style="overflow-y: scroll; height: 240px; ">
 						 	<span id="imgInfo"> 
 						 	첫번째 사진이 썸네일로 설정됩니다.<br/> 원활한 경매 진행을 <span id="imageUploadError">최소 2장 이상의 사진을 올려주세요.</span><br/>
 						 	사진이 없을 시 입찰자 없이 경매가 종료될 수 있습니다.</span>
