@@ -127,7 +127,7 @@
 		/* 수정하기 버튼 스타일 */
 		.edit-button a.btn {
 		    background-color: rgb(73, 124, 64); /* 원하는 배경 색상 설정 */
-		    color: black; /* 글자 색상 설정 */
+		    color: white; /* 글자 색상 설정 */
 		}
 		
 		/* 수정하기 버튼에 호버 */

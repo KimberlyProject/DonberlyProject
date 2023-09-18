@@ -97,7 +97,7 @@
         <div>
 		    <label for="pw">비밀번호</label>
 		    <input type="password" id="pw" name="pw" value="${editor.pw}" />
-			<button type="button" id="togglePassword" class="btn btn-light" onclick="togglePasswordVisibility()">보기</button>
+			<button type="button"  class="btn btn-light"  onclick="togglePasswordVisibility()"><span class="glyphicon glyphicon-refresh"></span><span id="togglePassword">보기</span></button>
 		</div>
 		<div>
 		    <label for="repw">비밀번호 확인</label>
