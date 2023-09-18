@@ -77,7 +77,7 @@
 				<li>
 			</ul>
 			<ul class="item">
-				<li id="a"><input type="file" class="btn btn-primary" name="thumbnail" id="i_thumbnail" disabled onchange="readURL(this);" /><li>
+				<li id="a"><input type="hidden" class="btn btn-primary" name="thumbnail" id="i_thumbnail" onchange="readURL(this);" /><li>
 			</ul>
 		</c:when>
 		<c:otherwise>
@@ -88,7 +88,7 @@
 			<ul class="item">
 				<li>
 					<img id="preview"/><br/>
-					<input type="file" name="thumbnail" id="i_thumbnail" disabled onchange="readURL(this);"/>
+					<input type="hidden" name="thumbnail" id="i_thumbnail" onchange="readURL(this);"/>
 				<li>
 			</ul>
 		</c:otherwise>
@@ -182,7 +182,7 @@ function fn_enable(obj) {
 	document.getElementById("i_title").disabled				= false;
 	document.getElementById("i_content").disabled			= false;
 	document.getElementById("i_price").disabled				= false;
-	document.getElementById("i_thumbnail").disabled			= false;
+	document.getElementById("i_thumbnail").type				= "file";
 	
 	document.getElementById("trBtn").style.display			= "none";
 	document.getElementById("trBtn_modify").style.display	= "block";
