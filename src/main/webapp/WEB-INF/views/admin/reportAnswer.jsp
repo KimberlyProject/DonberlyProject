@@ -73,9 +73,9 @@
 	<div class="container">
 
 		<!-- 내역 나열 방식(최신순,오래된순) -->
-		<select>
-			<option>최신순</option>
-			<option>오래된순</option>
+		<select id="sortOrder" name="sortOrder">
+		    <option value="latest">최신순</option>
+		    <option value="oldest">오래된순</option>
 		</select>
 		
 		<!-- 검색창 -->
@@ -163,12 +163,18 @@
 	</div>
 	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	<%@ include file="../include/footer.jsp" %>
-	<script>
-		$(document).ready(function(){
-			$("tr").on("click", function() {
-				$(this).next("tr").find(".content").toggleClass("on");
-			});
-		});
-	</script>
+	
+<script>
+$(document).ready(function() {
+
+
+    // 테이블 행 클릭 이벤트 처리
+    $("tr").on("click", function() {
+        $(this).next("tr").find(".content").toggleClass("on");
+    });
+});
+
+</script>
+
 </body>
 </html>

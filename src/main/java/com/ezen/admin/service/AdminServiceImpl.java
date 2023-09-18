@@ -97,8 +97,17 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	//--------------------------------------------------------------------------------------------------
+	// 1:1 문의하기 리스트 삭제
+	//--------------------------------------------------------------------------------------------------
+	@Override
+	public void deleteArticle(int articleNo) throws Exception {
+		adminDAO.deleteArticle(articleNo);
+	}
+	
+	//--------------------------------------------------------------------------------------------------
 	// 신고하기 전체 조회
 	//--------------------------------------------------------------------------------------------------
+	
 	@Override
 	public List<ReportDTO> listReportAnswer(ReportCriteria rcri) throws Exception {
 		System.out.println("################################# Service listReportAnwer => " + rcri);
@@ -114,6 +123,7 @@ public class AdminServiceImpl implements AdminService {
 		System.out.println("################################# Service reportAnswerTotalCount => " + rcri);
 		return adminDAO.reportAnswerTotalCount(rcri);
 	}
+	
 
 	//--------------------------------------------------------------------------------------------------
 	// 회원목록 페이징(게시글수 구하기: cri를 가지고 검색한 총 게시글의 수)

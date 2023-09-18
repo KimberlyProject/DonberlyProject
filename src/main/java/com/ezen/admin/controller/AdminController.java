@@ -1,7 +1,8 @@
 package com.ezen.admin.controller;
 
+import java.util.HashMap;
 import java.util.List;
-
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import com.ezen.admin.service.AdminService;
 import com.ezen.ccenter.dto.CcenterDTO;
@@ -24,7 +26,7 @@ import com.ezen.admin.dto.ReportPageMaker;
 import com.ezen.admin.dto.SearchCriteria;
 import com.ezen.member.dto.MemberDTO;
 
-
+import java.util.Collections;
 
 @Controller
 @RequestMapping("/admin")
@@ -63,7 +65,33 @@ public class AdminController {
 		return mav;
 	}
 	
-
+	//-----------------------------------------------------------------------------------------------------------
+	// 1:1 문의하기 리스트 삭제
+	//-----------------------------------------------------------------------------------------------------------
+	@RequestMapping(value="/delArticle", method=RequestMethod.POST)
+	public ModelAndView delArticle(HttpServletRequest request) throws Exception {
+		String articleNo[] = request.getParameterValues("num");
+		
+		for (int i = 0; i < articleNo.length; i++) {
+			logger.info(" " + articleNo[i]);
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		String viewName = "redirect:/admin/oneOnOneInquiry";
+		
+		for(int i = 0; i < articleNo.length; i++) {
+			//Map map = new HashMap("articleNo", articleNo[i]);
+			
+			if(!articleNo[i].isEmpty()) {
+				logger.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + articleNo[i].getClass().getName());
+				logger.info("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc" + articleNo[i]);
+				adminService.deleteArticle(Integer.parseInt(articleNo[i]));
+			}
+		}
+		
+		mav.setViewName(viewName);
+		return mav;
+	}
 	
 	//-----------------------------------------------------------------------------------------------------------
 	// 관리자 탭: 신고하기 전체 조회 + 페이징
@@ -95,6 +123,11 @@ public class AdminController {
 		
 		return mav;
 	}
+	
+	
+	
+	
+	
 	
 	//--------------------------------------------------------------------------------------------------
 	// 관리자 탭: 회원 전체 조회 + 페이징 + 검색
