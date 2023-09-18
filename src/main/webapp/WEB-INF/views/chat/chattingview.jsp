@@ -277,18 +277,22 @@ span{
 				<c:if test="${chatList.status eq 's' || chatList.status eq 'b'}"><!-- 상대방 닉네임을 가져와야함 -->
 					<c:if test="${member.userId == chatList.seller}">
 						<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${buy }&gt;님과의 채팅창</td>
+						<input type="hidden" class="nicknick" value="${buy }"/>
 					</c:if>
 					<c:if test="${member.userId == chatList.buyer}">
 						<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${sel }&gt;님과의 채팅창</td>
+						<input type="hidden" class="nicknick" value="${sel }"/>
 					</c:if>
 					
 				</c:if>
 				<c:if test="${chatList.status eq 'a'}"><!-- 상대방 닉네임을 가져와야함 -->
 					<c:if test="${member.userId == chatList.seller}">
 						<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${buy }&gt;님과의 채팅창</td>
+						<input type="hidden" class="nicknick" value="${buy }"/>
 					</c:if>
 					<c:if test="${member.userId == chatList.buyer}">
 						<td bordercolor="#DCFFDC" class="chat_title" colspan="2">&lt;${sel }&gt;님과의 채팅창</td>
+						<input type="hidden" class="nicknick" value="${sel }"/>
 					</c:if>
 				</c:if>
 			</tr>
@@ -305,10 +309,8 @@ span{
 					<c:set var="seller" value="${chatList.seller}"/>
 					<c:set var="buyer" value="${chatList.buyer }"/>
 					<div>제목 : ${session.title} (게시판)</div>
-					
 						<div>판매자: ${sel}</div>
 						<div>구매자: ${buy}</div>
-					
 					<div>코드 : ${session.p_code }</div>
 					<div style="padding-bottom: 10px;">가격: ${session.price}원</div>
 					
@@ -323,7 +325,12 @@ span{
 					<div>제목 : ${session.title} (경매장)</div>
 					<c:if test="${seller eq  userId}"><!-- 판매자 시점에서 현재 채팅자는 chatList에 들어있는 buyer -->
 						<div>판매자: ${session.aucNick}</div>
+						<c:if test="${session.cstmId == null }">
+						<div>현재 구매자: 없음</div>
+						</c:if>
+						<c:if test="${session.cstmId != null }">
 						<div>현재 구매자: ${session.cstmId }</div>
+						</c:if>
 						<c:forEach var="nickname" items="${findNickname}">
 							<c:if test="${chatList.buyer == nickname.userId }">
 								<div>현재 채팅자: ${nickname.nickname }</div><!-- 여기만 닉네임으로 바꿔주면됨 -->
@@ -387,8 +394,10 @@ span{
 
 
 function linkToOpener(){
-	if (window.opener && !window.opener.closed)
-	window.opener.location = "${path}/ccenter/report";
+	var nickname = $('.nicknick').val();
+	if (window.opener && !window.opener.closed){
+		window.opener.location = "${path}/ccenter/report?report="+nickname;
+	}
 	window.close();
 }
 
@@ -448,6 +457,7 @@ function getChat(){
 		 }
 	 });
 }
+
 $(document).ready(function(){
 	
 	setInterval(getChat,500);
