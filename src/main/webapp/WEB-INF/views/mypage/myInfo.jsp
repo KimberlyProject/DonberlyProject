@@ -211,7 +211,7 @@
             var storedPasswordFromDB = "${member.pw}"; // 데이터베이스에서 가져온 비밀번호
 
             if (enteredPassword === storedPasswordFromDB) {
-                window.location.href = "/member/userProfileEditor";
+                window.location.href = "${path}/member/userProfileEditor";
             } else {
                 alert("비밀번호가 일치하지 않습니다.");
             }

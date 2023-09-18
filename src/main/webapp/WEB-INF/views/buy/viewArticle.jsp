@@ -221,7 +221,7 @@ function readURL(input) {
 
 // 게시글 수정하기
 function fn_modify_article(obj) {
-	obj.action = "${page}/buy/modArticle.do";
+	obj.action = "${path}/buy/modArticle.do";
 	obj.submit();
 }
 
