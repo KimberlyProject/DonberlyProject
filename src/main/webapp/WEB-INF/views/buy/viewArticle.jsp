@@ -263,7 +263,7 @@ $("#buyEnd").on("click", function() {
 	var userId = "${member.userId}";
 	if(confirm("해당 상품을 구매 완료하시겠습니까?")) {
 	
-	location.href = "/borad/buyEnd?articleNO=" + articleNO + "&userId=" + userId;
+	location.href = "${path}/buy/buyEnd?articleNO=" + articleNO + "&userId=" + userId;
 	alert("구매가 완료되었습니다.");
 	}
 });//#buyNow
