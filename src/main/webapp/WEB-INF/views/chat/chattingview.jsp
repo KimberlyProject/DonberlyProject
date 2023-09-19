@@ -318,9 +318,9 @@ span{
 						<div>구매자: ${buy}</div>
 					<div>코드 : ${session.p_code }</div>
 					<div style="padding-bottom: 10px;">가격: ${session.price}원</div>
-					
+					<input type="hidden" value="${session.articleNO}" class="code">
 					<img src="${path}/resources/images/board/article_image/${session.articleNO }/${session.thumbnail}" alt="사진" width="200px;" height="200px;"/>
-					<br><br>
+					<br>
 					</c:if>
 					<!-- 경매장에서 만들어진 채팅방일 때 -->
 					<c:if test="${chatList.status eq 'a'}">
@@ -348,12 +348,12 @@ span{
 						<div>현재 채팅자: ${member.nickname }</div>
 					</c:if>
 
-					<!-- <div>코드 : ${session.aucCode } <input type="hidden" value="${session.aucCode}" class="code"></div> -->
+					<!-- <div>코드 : ${session.aucCode }--><input type="hidden" value="${session.aucCode}" class="code">
 					<div style="padding-bottom: 10px;">가격: ${session.nowBid}원</div>
 					<!-- 경은 테스트 -->	
 					<img id="i" src="${path}/auction/pullAuctionImges?imgName=${aucimgsession.imgName}&aucCode=${session.aucCode}"/>			   
 					<!-- 경은 테스트 끝 -->
-					<br><br>
+					<br>
 					</c:if>
 					<!-- 끝 -->
 					
@@ -400,10 +400,17 @@ span{
 
 function linkToOpener(){
 	var nickname = $('.nicknick').val();
-	if (window.opener && !window.opener.closed){
-		window.opener.location = "${path}/ccenter/report?report="+nickname;
-	}
-	window.close();
+	if (confirm("신고하시겠습니까?") == true){    //확인
+		if (window.opener && !window.opener.closed){
+			window.opener.location = "${path}/ccenter/report?report="+nickname;
+		}
+		window.close();
+	 }else{   //취소
+
+	     return false;
+
+	 }
+	
 }
 
 
@@ -454,8 +461,8 @@ function getChat(){
 			 chatbox.scrollTop = chatbox.scrollHeight;
 		 },
 		 error:function(request,status,error){
-			 alert("로그인이 필요합니다.");
-			 window.close();
+			 //alert("로그인이 필요합니다.");
+			 //window.close();
 			 console.log("실패");
 			 
 		 },
@@ -511,25 +518,32 @@ $(document).ready(function(){
 });
 
 function chatOut(){
-	alert("정말 채팅방에서 나가시겠습니까?");
+	 if (confirm("채팅방에서 나가시겠습니까? 나가면 모든 대화기록이 삭제 됩니다.") == true){    //확인
+		$.ajax({
+			 url:	"${path}/chat/outChat",
+			 type:	"post",
+			 dataType:"text",
+			 data:	{
+					 "chatId" : $('#chatId').val()
+			 },	
+			 success: function(){
+				window.close();
+			 },
+			 error:function(request,status,error){
+				 console.log("실패");
+			 },
+			 complete:function(){
+				 $('#chatContent').val('');
+			 }
+		 });
+ 
+	 }else{   //취소
+
+	     return false;
+
+	 }
+	 
 	
-	$.ajax({
-		 url:	"${path}/chat/outChat",
-		 type:	"post",
-		 dataType:"text",
-		 data:	{
-				 "chatId" : $('#chatId').val()
-		 },	
-		 success: function(){
-			window.close();
-		 },
-		 error:function(request,status,error){
-			 console.log("실패");
-		 },
-		 complete:function(){
-			 $('#chatContent').val('');
-		 }
-	 });
 }
 
 function calendar_insert(){
@@ -545,6 +559,7 @@ function calendar_insert(){
 	}
 	 
 	if(confirm("일정을 등록하시겠습니까?")){
+		console.log($('.code').val());
 		$.ajax({
 			 url:	"${path}/mypage/calendar",
 			 type:	"post",

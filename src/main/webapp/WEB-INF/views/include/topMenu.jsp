@@ -23,6 +23,7 @@ function alarm(){
 			 //console.log(data);
 			 var html="";
 			 var cnt = data.length;
+			 
 			 for(var i=0 ; i<data.length;i++){
 				html+=
 					"<li><a onClick='gochat("+data[i].chatId+")'>"+ data[i].fromId +"님이 메시지를 보내셨습니다.</a></li>";
@@ -47,11 +48,12 @@ function alarm(){
 			 );
 		 },
 		 error:function(request,status,error){
+			 
 			 console.log("실패");
 			 
 		 },
 		 complete:function(){ 
-			
+			 
 		 }
 	 });
 }
@@ -145,8 +147,10 @@ if("${memberlevel.userStatus}" == "N1"){
 	                        <span class="glyphicon glyphicon-envelope"></span>                               
 	                        <small class="alerm_num" style="margin-left:-3px;"></small>  <!-- 알람 갯수 -->                     
 	                    </button>
-	                    <ul class="dropdown-menu chatAlarm" aria-labelledby="dropdownMenu1"><!-- 알람 들어가는 곳 -->
-	                    </ul>
+	                     
+	                    <ul class="dropdown-menu chatAlarm" aria-labelledby="dropdownMenu1">
+	                    </ul> 
+	                    
 	                </div>
                     <div class="dropdown myinfo">
 	                   <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

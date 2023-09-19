@@ -282,6 +282,7 @@ public class ChatController {
 		List<ChatDTO> chatDTO = chatService.getAlarm(userId);
 		//model.addAttribute("alarm", chatDTO);
 		//System.out.println("왜 안돼애애애애애애애 챗디티오"+chatDTO);
+		//session.setAttribute("chatAlarm", chatDTO);
 		return chatDTO;
 		
 		
