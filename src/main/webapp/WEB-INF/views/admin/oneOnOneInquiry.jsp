@@ -138,7 +138,7 @@
 	<%@ include file="../include/sidebar.jsp" %>	
    <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
-      홈 &gt; 관리자 &gt; 1대1 문의하기
+      홈 &gt; 관리자 &gt; 1:1 문의
     </div>
     
     <h1 class="pageTitle"><div>1:1 문의</div></h1>
@@ -147,7 +147,7 @@
 
 		<!-- 삭제버튼 -->
 		<div>
-			<button class="btn btn-danger col-sm-1" style="float:left; ">삭제하기</button>
+			<button id="delArticle" class="btn btn-danger col-sm-1" style="float:left; ">삭제하기</button>
 		</div>
 		<!-- 삭제버튼 끝 -->
 		
@@ -166,7 +166,6 @@
 		</div>
       	
       	<!-- 검색창 -->
-      	<form>
 		<table class="table table-bordered table-striped table-hover">
 			<thead>
 				<tr id="head" style="background: rgb(73, 124, 64); color: #FFF;">
@@ -179,30 +178,30 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="ask" items="${asks}" varStatus="articleNum">
+			<c:forEach var="asks" items="${ask}" varStatus="articleNum">
 				<tr class="article">
 					<td><input class="check" type="checkbox" style="width: 100%;"/></td>
-					<td class="articleNo">${fn:length(asks) - articleNum.index}<input class="num" name="num" type="hidden" value="${ask.articleNo}"></td>
+					<td class="articleNo">${fn:length(ask) - articleNum.index}<input class="num" name="num" type="hidden" value="${asks.articleNo}"></td>
 					<td>
-						${ask.title} 
+						${asks.title} 
 					</td>
 					<td>
-						${ask.userId}
+						${asks.userId}
 					</td>
 					<td>
-						${ask.email}
+						${asks.email}
 					</td>
 					<td>
-						<fmt:formatDate value="${ask.writeDate}" pattern="yy년 MM월 dd일"/><br/>
+						<fmt:formatDate value="${asks.writeDate}" pattern="yy년 MM월 dd일"/><br/>
 					</td>
 				</tr>
 				<tr>
 					<td class="content" colspan="6">
-						${ask.content}
+						${asks.content}
 						<br/>
 						<br/>
 						<div  align="right">
-							<a class="btn btn-success" href="javascript:void(0);" onclick="openModal({email: '${ask.email}'})">답변하기</a>
+							<a class="btn btn-success" href="javascript:void(0);" onclick="openModal({email: '${asks.email}'})">답변하기</a>
 						</div>
 					</td>
 				</tr>
@@ -221,9 +220,9 @@
 			$("tr").on("click", function() {
 				$(this).next("tr").find(".content").toggleClass("on");
 			});
+			;
 			
-			var formObj = $("#formList");
-			
+			var formObj = $("#formList")
 			// 검색: 검색버튼을 누를 경우
 			$("#searchBtn").click(function(e) {
 				var typeStr = $("#searchType").find(":selected").val();
@@ -232,34 +231,32 @@
 				
 				formObj.find("[name='searchType']").val(typeStr);
 				formObj.find("[name='keyword']").val(keywordStr);
-				
 				formObj.submit();
+			});
+			
+			// 삭제하기	
+			$("#delArticle").on("click", function() {
+				const frm = $("#head").closest("form");
+				let articleNo = [];
+				//$(".article", ".check", ".articleNo").each(function() {
+					
+				//});
+				for(let i = 0; i < $(".article").length; i++) {
+					console.log($(".article:eq(" + i + ")").find(".check").is(":checked"));
+					
+					if(!$(".article:eq(" + i + ")").find(".check").is(":checked")){
+						articleNo[i] = $(".article:eq(" + i + ")").find(".articleNo").val();
+					}
+					$(".num:eq(" + i + ")").prop("value", articleNo[i]);
+					console.log($(".num:eq(" + i + ")").val());
+				}
+				
+				frm.prop("action", "${path}/admin/delArticle");
+				frm.prop("method", "post");
+				frm.submit();
 			});
 		});
 		
-// 삭제하기	
-		$("#delArticle").on("click", function() {
-			const frm = $("#head").closest("form");
-			let articleNo = [];
-			
-			//$(".article", ".check", ".articleNo").each(function() {
-				
-			//});
-			for(let i = 0; i < $(".article").length; i++){
-				console.log($(".article:eq(" + i + ")").find(".check").is(":checked"));
-				
-				if(!$(".article:eq(" + i + ")").find(".check").is(":checked")){
-					articleNo[i] = $(".article:eq(" + i + ")").find(".articleNo").val();
-				}
-				$(".num:eq(" + i + ")").prop("value", articleNo[i]);
-				console.log($(".num:eq(" + i + ")").val());
-			}
-			
-			frm.prop("action", "/admin/delArticle");
-			frm.prop("method", "post");
-			frm.submit();
-		});
-	});
 </script>
 
 </body>

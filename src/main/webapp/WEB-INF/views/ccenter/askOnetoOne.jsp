@@ -56,17 +56,15 @@
 		// response.sendRedirect("/member/login");
 	}
 %>
-    
-    <div class="page_dir container">
-
+	<%@ include file="../include/topMenu.jsp" %>
 	<c:set var="menu" value="ccenter" />
-<%@ include file="../include/sidebar.jsp" %>
-     <div class="page_dir container">
-
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      홈 &gt; 고객센터 &gt; 1:1 문의하기
+	<%@ include file="../include/sidebar.jsp" %>	
+   <div class="page_dir container">
+      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
+      홈 &gt; 고객센터 &gt; 1:1 문의
     </div>
-    <h1 class="pageTitle"><div>1:1 문의하기</div></h1>
+    
+    <h1 class="pageTitle"><div>1:1 문의</div></h1>
     
     <div class="container">
         <form name="askOnetoOne" method="post" action="${path }/ccenter/addNewAsk.do" enctype="multipart/form-data">

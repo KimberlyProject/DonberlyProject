@@ -48,14 +48,14 @@
 	</style>
 </head>
 <body>
-
 	<%@ include file="../include/topMenu.jsp" %>
 	<c:set var="menu" value="ccenter" />
 	<%@ include file="../include/sidebar.jsp" %>	
-     <div class="page_dir container">
-	      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-	      홈 &gt; 고객센터 &gt; Q & A
-	</div>
+   <div class="page_dir container">
+      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
+      홈 &gt; 고객센터 &gt; Q & A
+    </div>
+    
     <h1 class="pageTitle"><div>Q & A</div></h1>
 	<div class="container">
 		
