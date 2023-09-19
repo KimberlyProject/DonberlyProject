@@ -414,7 +414,7 @@ function linkToOpener(){
 
 function getChat(){
 	 $.ajax({
-		 url:	"/chat/getChat",
+		 url:	"${path}/chat/getChat",
 		 type:	"post",
 		 dataType: "json",
 		 data:	{
@@ -481,7 +481,7 @@ $(document).ready(function(){
 		//예약 확정/취소를 선택한다.
 		if($('#chatContent').val()){
 			 $.ajax({
-				 url:	"/chat/chattingview",
+				 url:	"${path}/chat/chattingview",
 				 type:	"post",
 				 dataType:"text",
 				 data:	{"content" : $('#chatContent').val(),
@@ -514,7 +514,7 @@ function chatOut(){
 	alert("정말 채팅방에서 나가시겠습니까?");
 	
 	$.ajax({
-		 url:	"/chat/outChat",
+		 url:	"${path}/chat/outChat",
 		 type:	"post",
 		 dataType:"text",
 		 data:	{
@@ -535,17 +535,18 @@ function chatOut(){
 function calendar_insert(){
 	console.log($('#scheduleData').val());
 	
-	if($('#scheduleData').val()){
+	if(!$('#scheduleData').val()){
 		alert("날짜를 선택해 주세요.");
 		return false;		
 	}
 	if(!$('#contents').val()){
 		alert("일정 내용을 입력해 주세요.");
+		return false;		
 	}
 	 
 	if(confirm("일정을 등록하시겠습니까?")){
 		$.ajax({
-			 url:	"/mypage/calendar",
+			 url:	"${path}/mypage/calendar",
 			 type:	"post",
 			 data:	{					 
 					 "userId" :  $('#userId').val(),

@@ -35,9 +35,14 @@
 		<ul>
 		  <li><a href="${path}/mypage/myInfo.do">내 정보</a></li>
 		  <li><a href="${path}/mypage/marketInfo.do">내 장터</a></li>
-		  <li><a href="${path}/auction/myAuction?aucId=${member.userId}">내 경매</a></li>
-		  <li><a href="${path}/myPage/calendar">캘린더</a></li>
+		  <li>
+		  	  <a href="${path}/auction/myAuction?aucId=${member.userId}">내 경매</a>
+			  <ul>
+			  	<li><a href="${path}/mypage/marketInfo.do">입찰 내역</a></li>
+			  </ul>
+		  </li>
 		  <li><a href="${path}/chat/chat_list">채팅목록</a></li>
+		  <li><a href="${path}/mypage/calendar">캘린더</a></li>
 		</ul>
 		<button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
 	</aside>
