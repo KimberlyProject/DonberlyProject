@@ -86,7 +86,10 @@
 	 	justify-content: center;
 	 	gap: 20px;
 	}
-			
+	
+	li a:hover {
+   		color:rgb(73, 124, 64);
+	}
 	</style>
 	
 </head>
