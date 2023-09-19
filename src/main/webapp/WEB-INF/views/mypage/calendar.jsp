@@ -62,7 +62,7 @@
 		   background-color:rgb(240, 204, 204)       
 		 }
 		 #calendarPage .calendar>.dateBoard>div.date{
-		   border:2px solid rgb(63, 102, 56);
+		   border:2px solid red;
 		   background-color:rgb(238, 253, 255); 
 		 }
 		 #calendarPage .calendar>.dateBoard>div.date:hover{

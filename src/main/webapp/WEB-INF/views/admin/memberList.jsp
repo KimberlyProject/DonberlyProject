@@ -182,7 +182,7 @@
 			<input type="hidden" name="keyword"		value="${pageVO.keyword}"/>
 		</form>
 	</div>
-	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	<%@ include file="../include/footer.jsp" %>
 
     <script>
