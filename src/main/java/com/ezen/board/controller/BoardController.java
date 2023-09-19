@@ -520,6 +520,8 @@ public class BoardController {
 				String	originalFileName = (String) articleMap.get("originalFileName");
 				File oldFile = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO + "\\" + originalFileName);
 				oldFile.delete();
+				
+				
 			}
 			message	 = "<script>";
 			message	+= "alert('게시글을 수정하였습니다.');";
