@@ -58,16 +58,14 @@
 		// response.sendRedirect("/member/login");
 	}
 %>
-
-    <div class="page_dir container">
-
+	<%@ include file="../include/topMenu.jsp" %>
 	<c:set var="menu" value="ccenter" />
-<%@ include file="../include/sidebar.jsp" %>
-     <div class="page_dir container">
-
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+	<%@ include file="../include/sidebar.jsp" %>	
+   <div class="page_dir container">
+      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
       홈 &gt; 고객센터 &gt; 신고하기
-	</div>
+    </div>
+    
     <h1 class="pageTitle"><div>신고하기</div></h1>
     
     <div class="container">

@@ -56,12 +56,13 @@ public class AdminController {
 		List<CcenterDTO> listOneOnOne = adminService.listOneOnOne(cri);
 		
 		System.out.println(listOneOnOne);
+		System.out.println("Controller ==================================> cri " + cri);
 		
 		// mav에 object를 추가
 		mav.addObject("ask", 	listOneOnOne);
 		mav.addObject("scri",	scri);
 		mav.addObject("cri",	cri);
-		
+		System.out.println("Controller2 ==================================> cri " + cri);
 		return mav;
 	}
 	

@@ -49,24 +49,13 @@
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-
-	<aside id="sideMenu">
-      <ul>
-        <li><a href="./notice">공지사항</a></li>
-        <li><a href="./qna">Q & A</a></li>
-        <li><a href="./askOnetoOne">1:1문의하기</a></li>
-        <li><a href="./report">신고하기</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
-
 	<c:set var="menu" value="ccenter" />
-	<%@ include file="../include/sidebar.jsp" %>
-
-    <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+	<%@ include file="../include/sidebar.jsp" %>	
+   <div class="page_dir container">
+      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
       홈 &gt; 고객센터 &gt; 공지사항
     </div>
+    
     <h1 class="pageTitle"><div>공지사항</div></h1>
 	<div class="container">
 		<table class="table table-bordered table-striped table-hover">
