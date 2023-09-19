@@ -11,7 +11,7 @@
     font-style: normal;
 }
 body{
-    padding-top:60px;
+    padding-top:70px;
 }
 ul{
     padding:0;
@@ -25,6 +25,9 @@ li{
 header nav{
     background-color :rgb(73, 124, 64);
     font-size:18px;
+}
+header nav .navbar-header{
+    height:70px;
 }
 header a{
     color:#fff;
@@ -165,7 +168,7 @@ header .dropdown.calicon .dropdown-menu{
 }
 .page_dir>button{
 	position: fixed;
-    top: 80px;
+    top: 75px;
     left: 20px;
     width: 50px;
     height: 50px;
@@ -178,6 +181,10 @@ header .dropdown.calicon .dropdown-menu{
     transition:0.3s;
 	font-size:20px;
     color:#fff;
+}
+.page_dir>button>span{
+	font-size: 25px;
+	vertical-align: middle;
 }
 .page_dir>button:hover,.page_dir>button:focus{
     color:#fff;
@@ -208,7 +215,6 @@ footer{
 }
 
 @media all and (max-width:760px){
-    
     header nav{
         font-size:21px;
     }
@@ -266,6 +272,9 @@ footer{
     }
     header .dropdown.calicon img{
         width:100%;
+    }
+    #sideMenu{
+    	top:62px;
     }
     .page_dir{
     	text-align:center;
