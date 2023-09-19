@@ -13,7 +13,7 @@ function gochat(chatId){
 }
 function alarm(){
 	$.ajax({
-		 url:	"/chat/alarm",
+		 url:	"${path}/chat/alarm",
 		 type:	"post",
 		 dataType: "json",
 		 data:	{
@@ -112,7 +112,6 @@ if("${memberlevel.userStatus}" == "N1"){
                 <ul> 
                 	<li><a href="${path}/auction/myAuction?aucId=${member.userId}">경매내역</a></li>
                     <li><a href="${path}/mypage/salesHistory">판매내역</a></li>
-                    <li><a href="${path}/chat/chattingview">1:1 채팅하기</a></li>
                     <li><a href="${path}/chat/chat_list">채팅 리스트</a></li>
                     <li><a href="${path}/mypage/calendar">캘린더</a></li>
                     <li><a href="${path}/mypage/marketInfo.do">장터</a></li>
