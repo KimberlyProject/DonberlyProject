@@ -200,7 +200,7 @@
 					<th class="cate">진행상태</th><th class="colon">:</th>
 						<!-- 입찰 진행중 blue -->
 						<c:choose><c:when test="${article.status == 0}"> 
-							<th clospan="4"><span class="blue">입찰 진행중</span>
+							<th><span class="blue">입찰 진행중</span>
 								<c:choose><c:when test="${article.cstmId != null}">
 									<br/>[${article.cstmId}]님
 									<!-- hidden 추가 이태림 -->

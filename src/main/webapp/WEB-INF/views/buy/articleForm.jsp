@@ -78,17 +78,13 @@
 <body>
 <%@ include file="../include/topMenu.jsp" %>
 
-	<c:set var="menu" value="board" />
+
+<c:set var="menu" value="board" />
 <%@ include file="../include/sidebar.jsp" %>
+
     <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      홈 &gt;
-      장터 &gt;
-      상품등록
-    </div> 
-    <h1 class="pageTitle">
-    	<div>구매장터</div>
-    </h1>
+      <button id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
+      홈 &gt; 장터 &gt; 상품등록    </div>
 
 
 
