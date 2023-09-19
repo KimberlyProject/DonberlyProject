@@ -13,7 +13,7 @@ function gochat(chatId){
 }
 function alarm(){
 	$.ajax({
-		 url:	"/chat/alarm",
+		 url:	"${path}/chat/alarm",
 		 type:	"post",
 		 dataType: "json",
 		 data:	{

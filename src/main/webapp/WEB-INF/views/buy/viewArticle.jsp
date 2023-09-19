@@ -228,7 +228,7 @@ function fn_modify_article(obj) {
 //1:1 채팅 방만들기
 function fn_chat(artNo){
 	$.ajax({
-		 url:	"/chat/makeRoom",
+		 url:	"${path}/chat/makeRoom",
 		 type:	"post",
 		 dataType: "text",
 		 contentType: 'application/json',
@@ -245,6 +245,8 @@ function fn_chat(artNo){
 			
 		 },
 		 error:function(request,status,error){
+			 alert("로그인이 필요한 서비스입니다.");
+			 location.href="${path}/member/login?action=/buy/viewArticle.do?articleNO="+artNo;
 			 console.log("실패");
 			 
 			 
