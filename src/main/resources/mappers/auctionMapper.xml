@@ -188,7 +188,7 @@
     <select id="myauctionArticles" parameterType="String" resultMap="aucArticle">
 		<![CDATA[
 			SELECT  *
-			FROM   AUCTION
+			FROM AUCTION
 			WHERE aucId = #{aucId}
 			ORDER BY writeDate desc
 		]]>
@@ -197,10 +197,9 @@
     <!-- 마이페이지 myBid 게시글 Query -->
     <select id="mybidArticles" parameterType="String" resultMap="aucArticle">
 		<![CDATA[
-			SELECT  a.*, m.nickname, m.email
-			FROM   AUCTION a, members m
+			SELECT *
+			FROM AUCTION
 			WHERE cstmId = #{cstmId}
-			AND		a.aucId = m.userId
 			ORDER BY writeDate desc
 		]]>
     </select>
@@ -214,21 +213,4 @@
 		]]>
     </select>
     
-    <!-- 마이페이지 myAuction(paging) -->
-	<select id="myauctionTotalCount" parameterType="com.ezen.auction.dto.SearchCriteria" resultType="integer">
-		<![CDATA[
-			 SELECT COUNT(*)
-			 FROM auction
-			 WHERE aucId = #{aucId}
-		]]>
-	</select>
-	
-	<!-- 마이페이지 myBid(paging) -->
-	<select id="mybidTotalCount" parameterType="com.ezen.auction.dto.SearchCriteria" resultType="integer">
-		<![CDATA[
-			 SELECT COUNT(*)
-			 FROM auction
-			 WHERE cstmId = #{cstmId}
-		]]>
-	</select>
 </mapper>

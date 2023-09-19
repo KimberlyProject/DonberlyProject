@@ -1,6 +1,7 @@
 package com.ezen.auction.controller;
 
 import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.auction.dto.AucImgDTO;
 import com.ezen.auction.dto.AuctionDTO;
-import com.ezen.auction.dto.MypageCriteria;
+import com.ezen.auction.dto.Criteria;
 import com.ezen.auction.dto.PageMaker;
 import com.ezen.auction.dto.PageMaker2;
 import com.ezen.auction.dto.SearchCriteria;
@@ -65,16 +66,11 @@ public class AuctionSubController {
 
 		//마이페이지 내가 올린 경매글
 		@RequestMapping(value="/myAuction", method=RequestMethod.GET)
-		public ModelAndView myAuction(@RequestParam("aucId") String aucId, HttpServletRequest request, HttpServletResponse response, MypageCriteria cri) 
+		public ModelAndView myAuction(@RequestParam("aucId") String aucId, HttpServletRequest request, HttpServletResponse response) 
 				throws Exception {
 			System.out.println("마이페이지 경매내역 게시글 불러오기 Controller");
 			String viewName = "/mypage/myAuction";
 			ModelAndView mav = new ModelAndView(viewName);
-			
-			cri.setAucId(aucId);
-			PageMaker2 pageMaker = new PageMaker2();
-		    pageMaker.setCri(cri);
-		    pageMaker.setTotalCount(auctionService.myauctionTotalCount(cri));	
 			
 			List<AuctionDTO> articles	= auctionService.myauctionArticles(aucId);
 			List<List<AucImgDTO>> imgLists = new ArrayList<List<AucImgDTO>>();
@@ -87,8 +83,6 @@ public class AuctionSubController {
 			
 			mav.addObject("imgs", imgLists);
 			mav.addObject("articles", articles);	
-			mav.addObject("pageMaker", pageMaker);
-			mav.addObject("cri", cri);
 			return mav;
 		}	
 		
@@ -96,15 +90,10 @@ public class AuctionSubController {
 
 		//마이페이지 내가 입찰한 경매글
 		@RequestMapping(value="/myBid", method=RequestMethod.GET)
-		public ModelAndView myBid(@RequestParam("cstmId") String cstmId, HttpServletRequest request, HttpServletResponse response, MypageCriteria cri)
+		public ModelAndView myBid(@RequestParam("cstmId") String cstmId, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 			String viewName = "/mypage/myBid";
 			ModelAndView mav = new ModelAndView(viewName);
-			
-			cri.setCstmId(cstmId);
-			PageMaker2 pageMaker = new PageMaker2();
-		    pageMaker.setCri(cri);
-		    pageMaker.setTotalCount(auctionService.mybidTotalCount(cri));	
 			
 			List<AuctionDTO> articles	= auctionService.mybidArticles(cstmId);
 			List<List<AucImgDTO>> imgLists = new ArrayList<List<AucImgDTO>>();
@@ -116,9 +105,7 @@ public class AuctionSubController {
 			}
 			
 			mav.addObject("imgs", imgLists);
-			mav.addObject("articles", articles);	
-			mav.addObject("pageMaker", pageMaker);
-			mav.addObject("cri", cri);
+			mav.addObject("articles", articles);				
 			return mav;
 		}	
 

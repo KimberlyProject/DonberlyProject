@@ -2,6 +2,7 @@ package com.ezen.auction.dao;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 import java.util.Map;
 
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Repository;
 
 import com.ezen.auction.dto.AucImgDTO;
 import com.ezen.auction.dto.AuctionDTO;
-import com.ezen.auction.dto.MypageCriteria;
 import com.ezen.auction.dto.SearchCriteria;
 
 @Repository
@@ -161,18 +161,5 @@ public class AuctionDAO {
 		System.out.println("------------------------------------------디비야 마이페이지 이미지 정보내놔" + imgs);
 		return imgs;
 	}
-	
-	public int myauctionTotalCount(MypageCriteria cri) throws DataAccessException {
-		System.out.println("마이페이지 myauction total count dao");
-		return sqlSession.selectOne(namespace + ".myauctionTotalCount", cri);
-	}
-	
-	public int mybidTotalCount(MypageCriteria cri) throws DataAccessException {
-		System.out.println("마이페이지 mybid total count dao");
-		return sqlSession.selectOne(namespace + ".mybidTotalCount", cri);
-	}
-	
-	
-	
-	
+
 }//class

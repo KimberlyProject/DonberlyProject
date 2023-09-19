@@ -228,43 +228,6 @@
 			<br/><br/><!--  경매 게시글 -->
 		</c:when>
 		</c:choose>
-		
-		<div class="middlecenter"> <!-- 페이징 -->
-				<div class="btngroup">
-				<c:if test="${pageMaker.prev}">				
-				<div class="item"><!-- 숫자 버튼 -->
-					<a href='<c:url value="${path}/auction/myAuction?aucId=${member.userId}"/>'>
-						<span class="glyphicon glyphicon-chevron-left"></span>
-					</a>
-				</div>				
-				</c:if>
-				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">						
-				<div class="item">
-					<a href='<c:url value="${path}/auction/myAuction?aucId=${member.userId}"/>'><i>${pageNum}</i></a>
-				</div>
-				</c:forEach>
-				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-				<div class="item">
-					<a href='<c:url value="${path}/auction/myAuction?aucId=${member.userId}"/>'>
-						<span class="glyphicon glyphicon-chevron-right"></span>
-					</a>
-				</div>
-				</c:if>
-				</div>
-			</div>
-		</div>
-		
-		
-		
-		<form id="formList" action="${path}/auction/myAuction" method="get">
-			<input type="hidden" name="page" value="${result.currentPageNum}">
-			<input type="hidden" name="size" value="${result.currentPage.pageSize}">
-			<input type="hidden" name="searchType" value="${searchType}">
-			<input type="hidden" name="keyword" value="${keyword}">
-		</form>
-	</div><!-- <div class="container"> -->
-
-
 
 <%@ include file="../include/footer.jsp" %>
 

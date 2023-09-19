@@ -85,7 +85,6 @@
 		 	gap: 20px;
 		}
 
-
 	</style>
 </head>
 <body>
@@ -98,7 +97,7 @@
       <a href="/">홈</a> &gt;
       <a href="#">경매장</a> &gt;
     </div>
-    <h1 class="pageTitle"><div>경매장</div></h1>
+    <h1 class="pageTitle">경매장</h1>
     
 	<div class="container">
 		<br/><br/>

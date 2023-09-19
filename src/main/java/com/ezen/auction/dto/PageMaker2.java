@@ -2,7 +2,7 @@ package com.ezen.auction.dto;
 
 public class PageMaker2 {
 	
-	private MypageCriteria cri;
+	private Criteria cri;
 	private	int			totalCount;				
 	private	int			startPage;				
 	private	int			endPage;				
@@ -10,10 +10,10 @@ public class PageMaker2 {
 	private	boolean		next;					
 	private	int			displayPageNum = 5;
 	
-	public MypageCriteria getCri() {
+	public Criteria getCri() {
 		return cri;
 	}
-	public void setCri(MypageCriteria cri) {
+	public void setCri(Criteria cri) {
 		this.cri = cri;
 	}
 	public int getTotalCount() {
