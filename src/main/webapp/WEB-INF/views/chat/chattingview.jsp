@@ -298,9 +298,7 @@ span{
 			<tr>
 				<td class="chat_area">
 					<div class="wrap"  style="overflow:auto; width:599px; height:600px;">
-						<div class='chat ch2'><div class='textbox'>
 						
-						</div></div>
     				</div>
 				</td>
 				<td class="chat_detail" rowspan="2">
@@ -408,7 +406,7 @@ function linkToOpener(){
 
 function getChat(){
 	 $.ajax({
-		 url:	"/chat/getChat",
+		 url:	"${path}/chat/getChat",
 		 type:	"post",
 		 dataType: "json",
 		 data:	{
@@ -424,7 +422,7 @@ function getChat(){
 				 	var read = "";
 				 	const date = new Date(dd);
 				 	var month = Number(date.getDate());
-				 	month = month - 2;
+				 	//month = month - 2;
 				 	if(data[i].chatRead==0){
 				 		read = "";
 				 	}
@@ -440,7 +438,7 @@ function getChat(){
 						html+=
 						"<div class='chat ch1'><div class='textbox'>"+data[i].chatContent+"</div></div>"+
 						"<div class='time1' >"+month+"월"+date.getDate()+"일 "+date.getHours()+":"+date.getMinutes()+"<span>&nbsp;&nbsp;"+read+"</span></div>";
-					} 
+					}
 			 }
 			 
 			 $('.wrap').html(
@@ -450,6 +448,8 @@ function getChat(){
 			 chatbox.scrollTop = chatbox.scrollHeight;
 		 },
 		 error:function(request,status,error){
+			 alert("로그인이 필요합니다.");
+			 window.close();
 			 console.log("실패");
 			 
 		 },
@@ -475,7 +475,7 @@ $(document).ready(function(){
 		//예약 확정/취소를 선택한다.
 		if($('#chatContent').val()){
 			 $.ajax({
-				 url:	"/chat/chattingview",
+				 url:	"${path}/chat/chattingview",
 				 type:	"post",
 				 dataType:"text",
 				 data:	{"content" : $('#chatContent').val(),
@@ -508,7 +508,7 @@ function chatOut(){
 	alert("정말 채팅방에서 나가시겠습니까?");
 	
 	$.ajax({
-		 url:	"/chat/outChat",
+		 url:	"${path}/chat/outChat",
 		 type:	"post",
 		 dataType:"text",
 		 data:	{
@@ -529,7 +529,7 @@ function chatOut(){
 function calendar_insert(){
 	if(confirm("일정을 등록하시겠습니까?")){
 		$.ajax({
-			 url:	"/mypage/calendar",
+			 url:	"${path}/mypage/calendar",
 			 type:	"post",
 			 data:	{					 
 					 "userId" :  $('#userId').val(),
