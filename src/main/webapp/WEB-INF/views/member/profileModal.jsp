@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" onclick="chat()">1대1 채팅하기</button>
+                <!--  <button type="button" class="btn btn-success" onclick="chat()">1대1 채팅하기</button> -->
                 <button type="button" class="btn btn-danger" onclick="report()">신고하기</button>
             </div>
         </div>
@@ -61,7 +61,7 @@
 </div>
 </form>
 <script>
-    function chat() {
+    /* function chat() {
         var confirmChat = confirm("1대1 채팅을 시작하시겠습니까?");
         if (confirmChat) {
             // 채팅 시작 로직을 여기에 추가
@@ -69,7 +69,7 @@
         } else {
             alert("채팅이 취소되었습니다.");
         }
-    }
+    } */
     function report() {
         var confirmReport = confirm("신고하시겠습니까?");
         if (confirmReport) {
@@ -93,10 +93,10 @@ function openModal(member) {
 
     // 클릭한 닉네임과 세션의 닉네임이 같은 경우에만 버튼을 숨깁니다.
     if (member.nickname === loggedInNickname) {
-        document.querySelector('.btn-success').style.display = 'none'; // 1대1 채팅하기 버튼 숨기기
+        // document.querySelector('.btn-success').style.display = 'none'; // 1대1 채팅하기 버튼 숨기기
         document.querySelector('.btn-danger').style.display = 'none';  // 신고하기 버튼 숨기기
     } else {
-        document.querySelector('.btn-success').style.display = 'inline'; // 1대1 채팅하기 버튼 표시하기
+        // document.querySelector('.btn-success').style.display = 'inline'; // 1대1 채팅하기 버튼 표시하기
         document.querySelector('.btn-danger').style.display = 'inline';  // 신고하기 버튼 표시하기
     }
 
