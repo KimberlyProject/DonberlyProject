@@ -188,27 +188,34 @@
 				$("#title").focus();
 				return false;
 			}
+			
+			//금액 숫자열로 변환
+			var minPrice = parseFloat($("#minPrice").val().replace(/,/g, ''));
+			var maxPrice = parseFloat($("#maxPrice").val().replace(/,/g, ''));	
 			if($("#minPrice").val() == "") {
 				alert("최소금액을 입력해주세요.");
 				$("#minPrice").focus();
 				return false;
 			}	
+			if (isNaN(minPrice)) {
+			    alert("숫자만 입력해주세요.");
+			    $("#minPrice").focus();
+			    return false;
+			}
 			if($("#maxPrice").val() == "") {
 				alert("상한금액을 입력해주세요");
 				$("#maxPrice").focus();
 				return false;
 			}	
-			
-			//숫자로 검사 후 숫자인지 확인하기
-			var minPrice = parseFloat($("#minPrice").val().replace(/,/g, ''));
-			var maxPrice = parseFloat($("#maxPrice").val().replace(/,/g, ''));
-			var bidRate = $("#searchType").val();
-			var calPrice = maxPrice - minPrice; 		
-			if (isNaN(minPrice) || isNaN(maxPrice)) {
+			if (isNaN(maxPrice)) {
 			    alert("숫자만 입력해주세요.");
+			    $("#maxPrice").focus();
 			    return false;
 			}
-			//입찰단위/상한금액 제한
+			
+			//입찰단위,상한금액 제한
+			var bidRate = $("#searchType").val();
+			var calPrice = maxPrice - minPrice; 		
 			if (minPrice >= maxPrice) {
 			    alert("최소금액보다 큰 상한금액을 입력해주세요.");
 			    $("#maxPrice").focus();
@@ -229,6 +236,7 @@
 			var image1 = $("#imageFileName1").val();
 		    var image2 = $("#imageFileName2").val();
 		    if (!image1 || !image2) {
+		    	alert("최소 두장 이상의 사진을 올려주세요.")
 		        $("#imageUploadError").css("color", "red");
 		        return false;
 		    } else {
@@ -254,8 +262,7 @@
 		});
 		
 	});
-	
-	
+		
 	//이미지파일 확장자 검사하기
 	function isImageFileName(fileName) {
 	    var allowedExtensions = ["jpg", "jpeg", "png", "gif", "pdf"];
@@ -272,7 +279,7 @@
 	//이미지 추가하기
    	var cnt=1;
 	function fn_addFiles() {
-		$("#d_file").append("<br>"+"<div class='addimg'><input type='file' name='file"+cnt+"' />"+"<button class='btn btn-danger'>삭제하기</button></div>");
+		$("#d_file").append("<div class='addimg'><br><input type='file' name='file"+cnt+"' />"+"<button class='btn btn-danger'>삭제하기</button></div>");
 		cnt++;
 	}  
 	

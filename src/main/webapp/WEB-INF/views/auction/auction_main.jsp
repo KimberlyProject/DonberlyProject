@@ -92,8 +92,7 @@
 	<%@ include file="../include/topMenu.jsp" %>
 	<c:set var="menu" value="auction" />
 	<%@ include file="../include/sidebar.jsp" %>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
+ 
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       <a href="/">홈</a> &gt;
@@ -260,21 +259,18 @@
 				</div>
 				</c:if>
 				</div>
+			 <br/><br/><p><a class="btn btn-success" href="${path}/auction/auction_write" role="button">경매 상품 올리기</a></p>
 			</div>
-		</div>
+		<br/><br/><br/>
 	 
-		<br/>
-		<button class="btn btn-success col-sm-offset-6"><a style="color:#FFFFFF;" href="${path}/auction/auction_write">상품 등록</a></button>
-		<br/><br/>
-		
-		<form id="formList" action="${path}/auction/auction_maintosearch" method="get">
-			<input type="hidden" name="page" value="${result.currentPageNum}">
-			<input type="hidden" name="size" value="${result.currentPage.pageSize}">
-			<input type="hidden" name="searchType" value="${searchType}">
-			<input type="hidden" name="keyword" value="${keyword}">
-		</form>
 	</div><!-- <div class="container"> -->
 
+	<form id="formList" action="${path}/auction/auction_maintosearch" method="get">
+		<input type="hidden" name="page" value="${result.currentPageNum}">
+		<input type="hidden" name="size" value="${result.currentPage.pageSize}">
+		<input type="hidden" name="searchType" value="${searchType}">
+		<input type="hidden" name="keyword" value="${keyword}">
+	</form>
 
 
 <%@ include file="../include/footer.jsp" %>
