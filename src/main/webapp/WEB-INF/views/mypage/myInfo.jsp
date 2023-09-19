@@ -101,10 +101,12 @@
 		}
 		
 		.close {
-		    color: #aaa;
+		    color: black;
 		    float: right;
 		    font-size: 28px;
 		    font-weight: bold;
+		    opacity: 1;
+    		cursor: pointer;
 		}
 		
 		.close:hover,
@@ -142,13 +144,12 @@
         <%@ include file="../include/topMenu.jsp" %>
     </div>
     
-    <c:set var="menu" value="mypage" />
+	<c:set var="menu" value="mypage" />
 	<%@ include file="../include/sidebar.jsp" %>
     <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      홈 &gt;
-      내정보보기
-    </div> 
+      <button id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
+      홈 &gt; 마이페이지 &gt; 내 정보 보기    
+    </div>
 
 	<h1 class="pageTitle"><div>내정보</div></h1>
     
