@@ -173,7 +173,7 @@
 					</th>
 				</tr>
 				<tr>
-					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">[${article.aucId}]님</th>
+					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">[${article.aucNick}]님</th>
 				</tr>
 				<tr>
 					<th class="cate">현재 입찰가</th><th class="colon">:</th>
@@ -221,15 +221,14 @@
 <%@ include file="../include/footer.jsp" %>
 
 <script>
-	$(document).ready(function() {
 
-		//경매끝난 게시글 버튼비활성화
-		$(document).ready(function() {
-		  var detailBtn = $(".detailBtn");
-		  detailBtn.css("background-color", "gray");
-		  detailBtn.css("color", "white");
-		  detailBtn.prop("disabled", true);
-  	
+	//경매끝난 게시글 버튼비활성화
+	$(document).ready(function() {
+	  var detailBtn = $(".detailBtn");
+	  detailBtn.css("background-color", "gray");
+	  detailBtn.css("color", "white");
+	  detailBtn.prop("disabled", true);
+	
 	});
 </script>
 

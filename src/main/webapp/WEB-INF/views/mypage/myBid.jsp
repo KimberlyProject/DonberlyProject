@@ -225,10 +225,12 @@
 	
 	//경매끝난 게시글 버튼비활성화
 	$(document).ready(function() {
+		
 	  var detailBtn = $(".detailBtn");
 	  detailBtn.css("background-color", "gray");
 	  detailBtn.css("color", "white");
 	  detailBtn.prop("disabled", true);
+
 	});
 	
 </script>
