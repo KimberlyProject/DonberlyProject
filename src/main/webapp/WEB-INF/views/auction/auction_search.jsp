@@ -134,7 +134,7 @@
 			<div>
 				<div>
 					<p align="center">
-						<b><span style="font-size:22px;">등록된 게시글이 없습니다.</span></b>
+						<b><span style="font-size:22px;">검색된 상품이 없습니다.</span></b>
 					</p>
 				</div>
 			</div>
@@ -254,11 +254,11 @@
 				</div>
 				</c:if>
 				</div>
+				 <br/><br/><p><a class="btn btn-success" href="${path}/auction/auction_write" role="button">경매 상품 올리기</a></p>
 			</div>
 		</div>
 		
-		<button class="btn btn-success col-sm-offset-6"><a style="color:#FFFFFF;" href="${path}/auction/auction_write">상품 등록</a></button>
-		<br/><br/>
+		<br/><br/><br/>
 		
 		<form id="formList" action="${path}/auction/auction_maintosearch" method="get">
 			<input type="hidden" name="page" value="${result.currentPageNum}">
