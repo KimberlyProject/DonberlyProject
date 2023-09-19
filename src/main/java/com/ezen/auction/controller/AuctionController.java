@@ -1,8 +1,7 @@
 package com.ezen.auction.controller;
 
-import java.awt.Graphics;
+
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,7 +31,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -55,6 +53,7 @@ public class AuctionController {
 
 	
 	//-------------------------------------------------------------------------------------------------------------//
+	
 	//경매장 이용방법
 	@RequestMapping(value="/howToUse", method=RequestMethod.GET)
 	public String howToUseAuction(Model model) {

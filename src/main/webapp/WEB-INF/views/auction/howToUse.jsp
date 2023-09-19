@@ -25,7 +25,7 @@
 	<%@ include file="../include/sidebar.jsp" %>
      
     <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+      <button id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
       <a href="/">홈</a> &gt;
       <a href="#">경매장 이용방법</a> &gt;
     </div>

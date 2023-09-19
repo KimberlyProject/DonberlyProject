@@ -10,7 +10,6 @@
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
 	<%@ include file="../include/header.jsp" %>
-	<%@ include file="../member/profileModal.jsp" %>
 	<style>
 		.colon{
 			width: 4px;
@@ -96,7 +95,7 @@
     <c:set var="menu" value="mypage" />
 	<%@ include file="../include/sidebar.jsp" %>
     <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+      <button id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
       <a href="/">홈</a> &gt;
       <a href="#">마이페이지</a> &gt;
        <a href="#">내가 올린 경매 상품</a> &gt;
@@ -174,9 +173,7 @@
 					</th>
 				</tr>
 				<tr>
-					<th class="cate">판매자</th>
-					<th class="colon">:</th>
-					<th colspan="4">[<a href="javascript:void(0);" onclick="openModal({nickname: '${member.nickname}', email: '${member.email}'})">${article.aucNick}</a>]님
+					<th class="cate">판매자</th><th class="colon">:</th><th colspan="4">[${article.aucId}]님</th>
 				</tr>
 				<tr>
 					<th class="cate">현재 입찰가</th><th class="colon">:</th>
@@ -203,7 +200,7 @@
 					<th class="cate">진행상태</th><th class="colon">:</th>
 						<!-- 입찰 진행중 blue -->
 						<c:choose><c:when test="${article.status == 0}"> 
-							<th clospan="4"><span class="blue">입찰 진행중</span>
+							<th><span class="blue">입찰 진행중</span>
 								<c:choose><c:when test="${article.cstmId != null}">
 									<br/>[${article.cstmId}]님
 									<!-- hidden 추가 이태림 -->
