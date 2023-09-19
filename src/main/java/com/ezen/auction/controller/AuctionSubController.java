@@ -37,8 +37,8 @@ public class AuctionSubController {
 		public ModelAndView auctionPaging(HttpServletRequest req, HttpServletResponse res, SearchCriteria cri)
 		        throws Exception {
 		    
-		    System.out.println("페이징 검색조건 Controller");
-		    String viewName = "/auction/auction_search";
+		    System.out.println("메인페이지 페이징/검색조건 Controller");
+		    String viewName = "/auction/auction_search"; //사진 배열로 다른jsp파일을 열어줌, 페이징버튼 정상
 		    ModelAndView mav = new ModelAndView(viewName);
 		    
 		    PageMaker pageMaker = new PageMaker();
