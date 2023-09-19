@@ -115,7 +115,7 @@
 	<div class="page_dir container">
 		<button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
 		<a href="/">홈</a> &gt;
-		<a href="${path}/auction/auction_main">경매장</a> &gt;
+		<a href="${path}/auction/auction_maintosearch?page=1&searchType=&keyword=">경매장</a> &gt;
 		<a href="#">자세히보기</a>
 	</div>
 	<h1 class="pageTitle"><div>경매장</div></h1>

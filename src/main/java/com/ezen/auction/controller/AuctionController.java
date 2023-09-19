@@ -64,6 +64,7 @@ public class AuctionController {
 	//-------------------------------------------------------------------------------------------------------------//
 	
 	//메인페이지 게시글 리스트 전부 불러오기
+	//페이징 실패...
 	@RequestMapping(value="/auction_main", method=RequestMethod.GET)
 	public ModelAndView listArticles(HttpServletRequest request, HttpServletResponse response, SearchCriteria cri) throws Exception {
 		System.out.println("경매장 메인 리스트불러오기 컨트롤러");

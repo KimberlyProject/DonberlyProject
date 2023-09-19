@@ -122,7 +122,7 @@
 	<section>
 	  <h2>경매장</h2>
 	  <p>중고 물품을 입찰하거나 판매 해 보세요</p>
-	  <p><a class="btn btn-success btn-lg" href="/auction/auction_main" role="button">경매장 바로가기</a></p>
+	  <p><a class="btn btn-success btn-lg" href="${path}/auction/auction_maintosearch?page=1&searchType=&keyword=" role="button">경매장 바로가기</a></p>
 	</section>
 	<%@ include file="./include/footer.jsp" %>
 </body>
