@@ -221,6 +221,9 @@ function readURL(input) {
 
 // 게시글 수정하기
 function fn_modify_article(obj) {
+	
+	
+	
 	obj.action = "${path}/sale/modArticle.do";
 	obj.submit();
 }
@@ -228,7 +231,7 @@ function fn_modify_article(obj) {
 
 $("#buyEnd").on("click", function() {
 	var articleNO = ${article.articleNO};
-	var userId = "${member.userId}";
+	var userId = ${member.userId};
 	if(confirm("해당 상품을 구매 완료하시겠습니까?")) {
 	
 	location.href = "${path}/sale/saleEnd?articleNO=" + articleNO + "&userId=" + userId;

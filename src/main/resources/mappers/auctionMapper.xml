@@ -197,9 +197,10 @@
     <!-- 마이페이지 myBid 게시글 Query -->
     <select id="mybidArticles" parameterType="String" resultMap="aucArticle">
 		<![CDATA[
-			SELECT  *
-			FROM   AUCTION
+			SELECT  a.*, m.nickname, m.email
+			FROM   AUCTION a, members m
 			WHERE cstmId = #{cstmId}
+			AND		a.aucId = m.userId
 			ORDER BY writeDate desc
 		]]>
     </select>

@@ -116,7 +116,7 @@
 
 	  <p>당신의 물건을 거래 해 보세요</p>
 
-	  <p><a class="btn btn-success btn-lg" href="#" role="button">장터 바로가기</a></p>
+	  <p><a class="btn btn-success btn-lg" href="${path}/buy/listArticles.do" role="button">장터 바로가기</a></p>
 	</section>
 	
 	<section>

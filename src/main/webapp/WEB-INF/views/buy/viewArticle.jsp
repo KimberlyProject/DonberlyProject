@@ -260,7 +260,7 @@ function fn_chat(artNo){
 
 $("#buyEnd").on("click", function() {
 	var articleNO = ${article.articleNO};
-	var userId = "${member.userId}";
+	var userId = ${member.userId};
 	if(confirm("해당 상품을 구매 완료하시겠습니까?")) {
 	
 	location.href = "${path}/buy/buyEnd?articleNO=" + articleNO + "&userId=" + userId;
