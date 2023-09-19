@@ -50,15 +50,15 @@
 
 
 	<c:set var="menu" value="board" />
-	<%@ include file="../include/sidebar.jsp" %>
+<%@ include file="../include/sidebar.jsp" %>
+
     <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      홈 &gt;
-      장터 &gt;
-      상세페이지
-    </div> 
+      <button id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
+      홈 &gt; 장터 &gt; 상세정보    
+    </div>
+    
     <h1 class="pageTitle">
-    	<div>판매장터</div> <!-- 팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다팝니다 -->
+    	<div>구매장터</div>
     </h1>
 	
 <div class="container">

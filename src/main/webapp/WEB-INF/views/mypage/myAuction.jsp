@@ -201,6 +201,7 @@
 						<!-- 입찰 진행중 blue -->
 						<c:choose><c:when test="${article.status == 0}"> 
 							<th><span class="blue">입찰 진행중</span>
+
 								<c:choose><c:when test="${article.cstmId != null}">&nbsp;[${article.cstmId}]님
 								</c:when></c:choose>
 							</th>
