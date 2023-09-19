@@ -92,8 +92,8 @@
 <%@ include file="../include/sidebar.jsp" %>
 
     <div class="page_dir container">
-      <button class="btn glyphicon glyphicon-th-large" id="sideMenu_open"></button>
-      홈 > 회원 가입
+      <button id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
+      홈 &gt; 회원 가입
     </div>
     <h1 class="pageTitle"><div>회원 가입</div></h1>
 
