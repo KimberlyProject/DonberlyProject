@@ -144,18 +144,17 @@
 						<c:when test = "${article.purpose == 1 }">
 							<ul class="product">
 					          <li>
-					            <a>
-									<img id="i" style="border-radius: 50%;" src="${path}/download.do?articleNO=${article.articleNO }&thumbnail=${article.thumbnail}" class="imgsize"/>
-								</a><br/>
+								<img id="i" style="border-radius: 50%;" src="${path}/download.do?articleNO=${article.articleNO }&thumbnail=${article.thumbnail}" class="imgsize"/>
+								<br/>
 					          </li>
 					          <li class="product-title">
-					            <a>${article.title}</a><br/>
+					            <font color="red">${article.title}</font><br/>
 					          </li>
 					          <li class="product-price">
-					            구매완료!
+					             <font color="red">구매완료!</font>
 					          </li>
 					          <li class="product-seller">
-					          	<a>${article.nickname}</a>
+					          	<a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}', artNo: '${article.articleNO }'})">${article.nickname}</a>
 					          </li>
 					          <li class="product-date">
 					          	${article.write_date}
