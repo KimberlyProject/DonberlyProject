@@ -203,7 +203,7 @@
 					<th class="cate">진행상태</th><th class="colon">:</th>
 						<!-- 입찰 진행중 blue -->
 						<c:choose><c:when test="${article.status == 0}"> 
-							<th clospan="4"><span class="blue">입찰 진행중</span>
+							<th><span class="blue">입찰 진행중</span>
 								<c:choose><c:when test="${article.cstmId != null}">
 									<br/>[${article.cstmId}]님
 									<!-- hidden 추가 이태림 -->
@@ -236,19 +236,19 @@
 				<div class="btngroup">
 				<c:if test="${pageMaker.prev}">				
 				<div class="item"><!-- 숫자 버튼 -->
-					<a href='<c:url value="${path}/auction//myAuction?aucId=${member.userId}"/>'>
+					<a href='<c:url value="${path}/auction/myAuction?aucId=${member.userId}"/>'>
 						<span class="glyphicon glyphicon-chevron-left"></span>
 					</a>
 				</div>				
 				</c:if>
 				<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">						
 				<div class="item">
-					<a href='<c:url value="${path}/auction//myAuction?aucId=${member.userId}"/>'><i>${pageNum}</i></a>
+					<a href='<c:url value="${path}/auction/myAuction?page=${pageNum}&searchType=${cri.searchType}&keyword=${cri.keyword}"/>'><i>${pageNum}</i></a>
 				</div>
 				</c:forEach>
 				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
 				<div class="item">
-					<a href='<c:url value="${path}/auction//myAuction?aucId=${member.userId}"/>'>
+					<a href='<c:url value="${path}/auction/myAuction?aucId=${member.userId}"/>'>
 						<span class="glyphicon glyphicon-chevron-right"></span>
 					</a>
 				</div>
