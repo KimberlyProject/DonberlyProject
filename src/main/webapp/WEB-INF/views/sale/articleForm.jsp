@@ -26,7 +26,7 @@
       
       function backToList(obj) {
          // obj.action="${path}/sale4/listArticles.do";
-         obj.action="${path}/sale/listArticlesPaging.do";
+         obj.action="${path}/buy/listArticles.do";
          obj.submit();
       }
           

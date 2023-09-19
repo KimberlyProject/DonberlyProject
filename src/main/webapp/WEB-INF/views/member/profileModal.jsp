@@ -8,7 +8,6 @@
     .profile-info {
         text-align: center;
         padding: 20px;
-        background-color: #f9f9f9;
         border-radius: 5px;
         margin: 20px auto;
         max-width: 400px;
@@ -27,7 +26,7 @@
     }
     
     .modal-body {
-    	background-image: url("../../resources/images/profliebackground.jpeg");
+    	background-image: url("${path}../../resources/images/profliebackground.jpeg");
     }
 </style>
 <!-- 모달 시작 -->
@@ -44,7 +43,7 @@
             <div class="modal-body">
                 <!-- 프로필 정보 영역 -->
                 <div class="profile-info">
-                    <img src="../../resources/images/profileimage.png" alt="프로필 사진">
+                    <img src="${path}../../resources/images/profileimage.png" alt="프로필 사진">
                     <div class="row">
                         <div class="row-md-offset-2">
                             <p class="info"><strong>닉네임:</strong> <span id="modalNickname"></span></p>
@@ -66,7 +65,7 @@
         var confirmChat = confirm("1대1 채팅을 시작하시겠습니까?");
         if (confirmChat) {
             // 채팅 시작 로직을 여기에 추가
-            window.location.href = "../chat/chattingview";
+            window.location.href = "${path}../chat/chattingview";
         } else {
             alert("채팅이 취소되었습니다.");
         }
@@ -75,7 +74,7 @@
         var confirmReport = confirm("신고하시겠습니까?");
         if (confirmReport) {
             // 신고 처리 로직을 여기에 추가
-            window.location.href = "../ccenter/report?report=" + document.getElementById('modalNickname').innerText;
+            window.location.href = "${path}../ccenter/report?report=" + document.getElementById('modalNickname').innerText;
         } else {
             alert("신고가 취소되었습니다.");
         }

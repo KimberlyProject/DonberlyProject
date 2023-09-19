@@ -320,7 +320,7 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addObject("article", saleArticleVO);
-
+		
 		return mav;
 	} // End - 게시글 번호에 해당하는 상세 정보
 

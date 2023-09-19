@@ -77,7 +77,7 @@
 				<li>
 			</ul>
 			<ul class="item">
-				<li id="a"><input type="file" class="btn btn-primary" name="thumbnail" id="i_thumbnail" disabled onchange="readURL(this);" /><li>
+				<li id="a"><input type="hidden" class="btn btn-primary" name="thumbnail" id="i_thumbnail" onchange="readURL(this);" /><li>
 			</ul>
 		</c:when>
 		<c:otherwise>
@@ -88,7 +88,7 @@
 			<ul class="item">
 				<li>
 					<img id="preview"/><br/>
-					<input type="file" name="thumbnail" id="i_thumbnail" disabled onchange="readURL(this);"/>
+					<input type="hidden" name="thumbnail" id="i_thumbnail" onchange="readURL(this);"/>
 				<li>
 			</ul>
 		</c:otherwise>
@@ -182,7 +182,7 @@ function fn_enable(obj) {
 	document.getElementById("i_title").disabled				= false;
 	document.getElementById("i_content").disabled			= false;
 	document.getElementById("i_price").disabled				= false;
-	document.getElementById("i_thumbnail").disabled			= false;
+	document.getElementById("i_thumbnail").type				= "file";
 	
 	document.getElementById("trBtn").style.display			= "none";
 	document.getElementById("trBtn_modify").style.display	= "block";
@@ -221,7 +221,7 @@ function readURL(input) {
 
 // 게시글 수정하기
 function fn_modify_article(obj) {
-	obj.action = "${page}/sale/modArticle.do";
+	obj.action = "${path}/sale/modArticle.do";
 	obj.submit();
 }
 
@@ -231,7 +231,7 @@ $("#buyEnd").on("click", function() {
 	var userId = "${member.userId}";
 	if(confirm("해당 상품을 구매 완료하시겠습니까?")) {
 	
-	location.href = "/sale/saleEnd?articleNO=" + articleNO + "&userId=" + userId;
+	location.href = "${path}/sale/saleEnd?articleNO=" + articleNO + "&userId=" + userId;
 	alert("구매가 완료되었습니다.");
 	}
 });//#buyNow
@@ -254,12 +254,9 @@ function fn_chat(artNo){
 			 console.log(data);
 			 window.open(data, "_blank", "width=940, height=750");
 			//location.href=data;
-			
 		 },
 		 error:function(request,status,error){
 			 console.log("실패");
-			 
-			 
 		 },
 		 complete:function(){
 			 $('#chatContent').val('');
