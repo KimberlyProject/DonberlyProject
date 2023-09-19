@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezen.chat.mapper.ChatMapper">
+
+	<resultMap id="chatResult" type="chatDTO">
+		<result property="chatId"				column="chatId"/>
+		<result property="artNo"			column="artNo"/>
+		<result property="fromId"		column="fromId"/>
+		<result property="toId"			column="toId"/>
+		<result property="chatContent"		column="chatContent"/>
+		<result property="chatTime"			column="chatTime"/>
+	</resultMap>
+	
+	<resultMap id="chatListResult" type="chatListDTO">
+		<result property="chatId"				column="chatId"/>
+		<result property="artNo"			column="artNo"/>
+		<result property="saler"		column="saler"/>
+		<result property="buyer"			column="buyer"/>
+		<result property="status"			column="status"/>
+	</resultMap>
+	
+	<select id="selectChat" resultType="com.ezen.chat.dto.ChatDTO">
+		select chatcontent
+		from chat
+		order by chattime
+	</select>
+	
+	<!-- 채팅넣기 -->
+	<insert id="insertContent" parameterType="com.ezen.chat.dto.ChatDTO">
+		insert into chat values(#{chatId},#{artNo},#{fromId},#{toId},#{chatContent},sysdate,#{chatRead})
+	</insert>
+	
+	<!-- 채팅누른 아티클번호 가져오기 -->
+	<select id="getArticle" parameterType="int" resultType="com.ezen.board.dto.BuyArticleDTO">
+		select * from article_buy
+		where articleNo = #{artNo}
+	</select>
+	
+	<!-- 채팅방 chatList에 정보넣기 -->
+	<insert id="insertChatList" parameterType="com.ezen.chat.dto.ChatListDTO">
+		insert into chatList values(#{chatId},#{artNo},#{seller},#{buyer},#{status})
+	</insert>
+	
+	<!-- 새로운 채팅방번호 번호 추출하기-->
+	<select id="selectNewChatId" resultType="int">
+		<![CDATA[
+		select nvl(max(chatid),0)+1
+		from chatlist
+		]]>
+	</select>
+	
+	<!-- 채팅방이 이미 있는지 검사 -->
+	<select id="checkChatId" resultType="int">
+		SELECT	COUNT(*)
+		FROM	chatlist
+		WHERE	artNo = #{artNo} and seller = #{seller} and buyer=#{buyer}
+	</select>
+	
+	<!-- 채팅방 목록 보여주기 -->
+	<select id="listChat" parameterType="chatListDTO" resultType="chatListDTO">
+		select * from chatlist
+		where seller=#{userId} or buyer=#{userId}
+	</select>
+	
+	<!-- 채팅한 내용 다 리스트에 넣어서 보내기 -->
+	<select id="chatView" parameterType="int" resultType="chatDTO"><!-- 여기 수정함 TO_CHAR(chatTime,'HH24:MI:SS')-->
+		select chatId, artNo, fromId, toId, chatContent, chatTime, chatRead
+		from chat
+		where chatId=#{chatId}
+		order by chatTime
+	</select>
+	
+	<!-- 챗 아이디 찾기 -->
+	<select id="findChatId" resultType="int">
+		SELECT	chatId
+		FROM	chatlist
+		WHERE	artNo = #{artNo} and seller = #{seller} and buyer=#{buyer}
+	</select>
+	
+	<!-- 아티클 넘버 챗아이디로 찾기 -->
+	<select id="findChatListFromChatId" resultType="chatListDTO">
+		select *
+		from chatlist
+		where chatId = #{chatId}
+	</select>
+	
+	<!-- fromId로 chatDTO 찾기 -->
+	
+	<select id="findContent" resultType="chatDTO">
+		<![CDATA[
+		select *
+		from (select * from chat where toid = #{fromId} and chatid=#{chatId} order by chattime desc)
+		where rownum <= 1
+		]]>
+	</select>
+	
+	<!-- artNo으로 articleVO끌어오기 (buy) -->
+	<select id="findArticleVOFromArtNoB" parameterType="int" resultType="buyArticleDTO">
+		<![CDATA[
+		
+			SELECT	*
+			FROM	article_buy
+			WHERE	articleNO = #{artNo}
+			
+		]]>
+	</select>
+	
+	<!-- artNo으로 articleVO끌어오기 (sale)-->
+	<select id="findArticleVOFromArtNoS" parameterType="int" resultType="buyArticleDTO">
+		<![CDATA[
+			SELECT	*
+			FROM	article_sale
+			WHERE	articleNO = #{artNo}
+		]]>
+	</select>
+	
+	<!-- chatid로 마지막 컨텐트 찾기 -->
+	<select id="findLastChat" resultType="chatDTO">
+	<![CDATA[
+		select chatid, chatcontent, chatTime 
+            from chat 
+            where (chatid, chatTime) 
+            in (
+                select chatid, max(chatTime) as chatTime 
+                from chat group by chatid 
+             )
+            order by chatid
+	 ]]>
+	</select>
+	
+	<!-- 채팅방 지우기 -->
+	<delete id="deleteChatRoom">
+	 	delete from chatlist
+    	where chatid=#{chatId}
+	</delete>
+	
+	<!-- 채팅 내용 지우기 -->
+	<delete id="deleteChatting">
+		delete from chat
+		where chatid=#{chatId}
+	
+	</delete>
+	
+	<!-- 멤버 아이디로 닉네임 찾기 -->
+	<select id="find_nickname" resultType="String">
+	select nickname
+	from members
+	where userId = #{memberId}
+	</select>
+	
+	<!-- 회원 목록 다 가져와 -->
+	<select id="findAllMemeber" resultType="MemberDTO">
+		select *
+		from members
+	</select>
+	
+	<!-- auctionDTO artNo으로 가져오기 -->
+	<select id="findAuctionDTOFromArtNoS" resultType="auctionDTO">
+		select *
+		from auction
+		where aucCode = #{artNo}
+	</select>
+	
+	<!-- 경은추가 aucImgDTO 가져오기 -->
+	<select id="findAucImgDTOFromAucCode" parameterType="int" resultType="aucImgDTO">
+		SELECT *
+		FROM aucImg
+		WHERE aucCode = #{aucCode}
+		AND imgNo = (SELECT MIN(imgNo) FROM aucImg WHERE aucCode = #{aucCode})
+	</select>
+	
+	<!-- readChat 수정하기 읽으면 1에서 0으로-->
+	<update id="readChat">
+		update chat
+		set chatRead = 0
+		where toId=#{toId} and chatId=#{chatId}
+	</update>
+	
+	<!-- chatRead의 갯수를 더하여 보여주기 -->
+	<select id="countChat" resultType="chatDTO">
+		select chatid, sum(chatRead) as chatRead
+		from chat
+		where toid=#{userId}
+		group by chatid
+	</select>
+	
+	<!-- 닉네임으로 아이디 찾기 -->
+	<select id="finduserIdFromNickname" resultType="String">
+		select userId
+		from members
+		where nickName=#{nickName}
+	</select>
+	
+	<!-- 멤버DTO 다 가져오기 -->
+	<select id="findMemberDTO" resultType="memberDTO">
+		select userId, nickname
+		from members
+	</select>
+	
+	<!-- 최근 안읽은거 가져오기 -->
+	<select id="getAlarm" resultType="chatDTO">
+		select nickname as fromId,chatcontent,chatId
+		from chat,members
+		where toId = #{userId} and chatRead = 1 and fromid=userid
+		order by chattime desc
+	</select>
+	
+	
+</mapper>
