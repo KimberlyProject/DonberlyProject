@@ -76,7 +76,7 @@
 				<li>
 			</ul>
 			<ul class="item">
-				<li><input type="file" class="btn btn-primary" name="thumbnail" id="i_thumbnail" disabled onchange="readURL(this);" /><li>
+				<li><input type="hidden" class="btn btn-primary" name="thumbnail" id="i_thumbnail" onchange="readURL(this);" /><li>
 			</ul>
 		</c:when>
 		<c:otherwise>
@@ -182,7 +182,7 @@ function fn_enable(obj) {
 	document.getElementById("i_title").disabled				= false;
 	document.getElementById("i_content").disabled			= false;
 	document.getElementById("i_price").disabled				= false;
-	document.getElementById("i_thumbnail").disabled			= false;
+	document.getElementById("i_thumbnail").type				= "file";
 	
 	document.getElementById("trBtn").style.display			= "none";
 	document.getElementById("trBtn_modify").style.display	= "block";
@@ -221,7 +221,7 @@ function readURL(input) {
 
 // 게시글 수정하기
 function fn_modify_article(obj) {
-	obj.action = "${page}/buy/modArticle.do";
+	obj.action = "${path}/buy/modArticle.do";
 	obj.submit();
 }
 
@@ -262,10 +262,10 @@ function fn_chat(artNo){
 
 $("#buyEnd").on("click", function() {
 	var articleNO = ${article.articleNO};
-	var userId = "${member.userId}";
+	var userId = ${member.userId};
 	if(confirm("해당 상품을 구매 완료하시겠습니까?")) {
 	
-	location.href = "/borad/buyEnd?articleNO=" + articleNO + "&userId=" + userId;
+	location.href = "${path}/buy/buyEnd?articleNO=" + articleNO + "&userId=" + userId;
 	alert("구매가 완료되었습니다.");
 	}
 });//#buyNow

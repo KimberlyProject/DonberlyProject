@@ -13,7 +13,9 @@
 		}
 		td {
 			text-align:			center;
-			text-overflow: 		ellipsis;
+			overflow:hidden;
+			white-space : nowrap;
+			text-overflow: ellipsis;
 		}
 		.content {
 			display:			none;
@@ -53,11 +55,13 @@
 		}
 		.head > th:nth-child(5) {
 			width:				45%;
+
 		}
 		.head > th:last-child {
 			width:				15%;
 		}
 		table {
+			table-layout:		fixed;
 			margin-bottom:		100px;
 		}
 		td > a {
@@ -69,7 +73,6 @@
 		.form-group {
 			width:				100%;
 			height:				50px;
-			
 		}
 		#Asbtn {
 			margin:				10px 25px 10px 25px;
@@ -136,7 +139,7 @@
 						<td onclick="location.href='${path}/admin/memberDetail?userId=${list.userId}'">${memberNum.count}</td>
 						<td onclick="location.href='${path}/admin/memberDetail?userId=${list.userId}'">${list.userId}</td>
 						<td onclick="location.href='${path}/admin/memberDetail?userId=${list.userId}'">${list.tel}</td>
-						<td class="addr" onclick="location.href='${path}/admin/memberDetail?userId=${list.userId}'">${list.address}</td>
+						<td id="td" class="addr" onclick="location.href='${path}/admin/memberDetail?userId=${list.userId}'">${list.address}</td>
 						<td onclick="location.href='${path}/admin/memberDetail?userId=${list.userId}'"><fmt:formatDate value="${list.regDate}" pattern="yyyy년 MM월 dd일"/></td>
 					</tr>
 				</c:forEach>

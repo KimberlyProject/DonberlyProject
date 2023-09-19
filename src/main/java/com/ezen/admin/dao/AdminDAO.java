@@ -47,7 +47,12 @@ public interface AdminDAO {
 	public List<CcenterDTO> listOneOnOne(SearchCriteria cri) throws Exception;
 	
 	//--------------------------------------------------------------------------------------------------
-	// 신고하기 리스트 생성
+	// 1:1 문의하기 리스트 삭제
+	//--------------------------------------------------------------------------------------------------
+	public void deleteArticle(int articleNo) throws Exception;
+	
+	//--------------------------------------------------------------------------------------------------
+	// 신고하기 리스트 생성 (원본)
 	//--------------------------------------------------------------------------------------------------
 	public List<ReportDTO> listReportAnswer(ReportCriteria rcri) throws Exception;
 	

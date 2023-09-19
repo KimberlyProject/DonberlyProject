@@ -20,29 +20,10 @@
 	</style>
 </head>
 <body>
-<%@ include file="../include/topMenu.jsp" %>
-	    <aside id="sideMenu">
-      <h2>마이페이지</h2>
-      <ul>
-        <li><a href="#">내 정보 수정</a></li>
-        <li>
-          <a href="#">거래내역</a>
-          <ul>
-            <li><a href="#">삽니다</a></li>
-            <li><a href="#">팝니다</a></li>
-          </ul>
-        </li>
-        <li><a href="#">경매</a>          
-          <ul>
-            <li><a href="#">판매</a></li>
-            <li><a href="#">구매</a></li>
-          </ul>
-        </li>
-        <li><a href="#">캘린더</a></li>
-        <li><a href="#">채팅목록</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
+	<%@ include file="../include/topMenu.jsp" %>
+	<c:set var="menu" value="auction" />
+	<%@ include file="../include/sidebar.jsp" %>
+     
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
       <a href="/">홈</a> &gt;
@@ -58,7 +39,7 @@
     	<h3>상품의 가격을 판매자가 미리 정하지 않고,<br/><br/>
     		구매 희망자(입찰자)들이 희망하는 가격을 적어내면<br/><br/>
     		그 중 최고가를 적은 입찰자에게 판매(낙찰)하는 방식을 말합니다. <br/><br/>
-    		우리, 돈벌리에서는 빠르고 안전한 경매중고거래를 제공하고 있습니다.<br/><br/>
+    		우리, 돈벌리에서는 빠르고 안전한 경매중고거래를 제공하고 있습니다.<br/><br/><br/><br/>
     	</h3>
     	
     	<h2>[경매 상품 올리기]</h2>
@@ -89,7 +70,7 @@
 		<h3>추가로 궁금하신 사항은 <a href="${path}/ccenter/notice">고객센터</a>를 통해 문의주시면 빠르게 도와드릴 수 있습니다.<br/>
 		'돈이되는 돈벌리'를 이용해주셔서 감사합니다.</h3><br/><br/><br/>
 		
-		 <p><a class="btn btn-success btn-lg" href="${path}/auction/auction_main" role="button">경매장 바로가기</a></p>
+		 <p><a class="btn btn-success btn-lg" href="${path}/auction/auction_maintosearch?page=1&searchType=&keyword=" role="button">경매장 바로가기</a></p>
     </div>
     
     <br/><br/><br/>

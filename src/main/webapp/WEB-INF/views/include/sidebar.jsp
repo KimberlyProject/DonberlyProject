@@ -2,7 +2,7 @@
 
 <c:if test="${menu == 'board'}">
 	<aside id="sideMenu">
-		<h2>장터</h2>
+		<h2>내 장터</h2>
 		<ul>	
 			<li><a href="${path}/sale/listArticles.do">삽니다</a></li> 
 			<li><a href="${path}/board/listArticles.do#">팝니다</a></li>	
@@ -13,9 +13,9 @@
 
 <c:if test="${menu == 'auction'}">
 	<aside id="sideMenu">
-		<h2>경매</h2>
+		<h2>내 경매</h2>
 		<ul>	
-			<li><a href="${path}/auction/auction_main">경매장 메인</a></li>
+			<li><a href="${path}/auction/auction_maintosearch?page=1&searchType=&keyword=">경매장 메인</a></li>
 			<li><a href="${path}/auction/howToUse">경매장 이용방법</a></li>
             <li><a href="${path}/auction/auction_write">경매상품 올리기</a></li>
 		</ul>
@@ -31,9 +31,9 @@
 		</script>
 	</c:if> 
 	<aside id="sideMenu">
-		<h2>마이페이지</h2>
+		<h2>마이 페이지</h2>
 		<ul>
-		  <li><a href="${path}/mypage/myInfo">내 정보</a></li>
+		  <li><a href="${path}/mypage/myInfo.do">내 정보</a></li>
 		  <li><a href="${path}/mypage/marketInfo.do">내 장터</a></li>
 		  <li><a href="${path}/auction/myAuction?aucId=${member.userId}">내 경매</a></li>
 		  <li><a href="${path}/myPage/calendar">캘린더</a></li>
@@ -45,7 +45,7 @@
 
 <c:if test="${menu == 'ccenter'}">
 	<aside id="sideMenu">
-	  <h2>고객센터</h2>
+	  <h2>고객 센터</h2>
 	  <ul>
 	    <li><a href="${path}/ccenter/notice">공지사항</a></li>
 	    <li><a href="${path}/ccenter/qna">Q & A</a></li>

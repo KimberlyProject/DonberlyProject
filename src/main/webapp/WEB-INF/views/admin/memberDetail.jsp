@@ -11,8 +11,14 @@
 	 .title {
 	 	text-align:right;
 	 }
+	 #fbtn {
+			vertical-align:		middle;
+			text-align: 		center;
+	}
 	 .fbtn {
-	 	width:		12%;
+	 	width:		20%;
+	 	height:		50px;
+	 	margin:		10px 20px 0 20px;
 	 }
 	</style>
 </head>
@@ -27,7 +33,7 @@
     
     <h1 class="pageTitle"><div>회원 상세 정보</div></h1>
 	<div class="container">
-		<form name="frm" action="/admin/memberUpdate" method="post">
+		<form name="frm" action="${path}/admin/memberUpdate" method="post">
 			<table class="table">
 				<tr>
 					<td class="title"><label>아이디</label></td>
@@ -67,7 +73,7 @@
 				</tr>
 			</table>
 			<div class="form-group">
-				<div>
+				<div id="fbtn">
 					<!-- 스크립트를 통한 수정 -->
 					<input class="btn btn-primary fbtn" type="submit" value="수정" onClick='btn_click("update");'/>
 					<!-- 스크립트를 통한 삭제 -->
@@ -84,10 +90,10 @@
 			
 			if(str == "update") {
 				console.log("1");
-				frm.action = "/admin/memberUpdate";
+				frm.action = "${path}/admin/memberUpdate";
 			} else if (str == "delete") {
 				console.log("2");
-				frm.action = "/admin/memberDelete";
+				frm.action = "${path}/admin/memberDelete";
 			} else {
 				console.log("3");
 				alert("키를 잘못누르셨다");

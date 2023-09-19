@@ -320,7 +320,7 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addObject("article", saleArticleVO);
-
+		
 		return mav;
 	} // End - 게시글 번호에 해당하는 상세 정보
 
@@ -520,6 +520,8 @@ public class BoardController {
 				String	originalFileName = (String) articleMap.get("originalFileName");
 				File oldFile = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO + "\\" + originalFileName);
 				oldFile.delete();
+				
+				
 			}
 			message	 = "<script>";
 			message	+= "alert('게시글을 수정하였습니다.');";

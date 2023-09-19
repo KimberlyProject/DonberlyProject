@@ -113,7 +113,20 @@
 			color:#aaa;
 			font-size:14px;
 		}
-		#calendarPage .calendar>div>div .contents{}
+		@media all and (max-width:760px) {
+	      	#calendarPage .calendar>.dataHead, #calendarPage .calendar>.dateBoard .nodata{
+		      	display:none;
+	      	}
+	      	#calendarPage .calendar>div{
+	      		grid-template-columns: 1fr;
+	      	}	      	
+	      	#calendarPage .calendar>.dateBoard>div{
+	      		height:100px;
+	      	}
+	      	#calendarPage .calendar>div>div{
+	      		border-left:1px solid #333;
+	      	}
+   		}      
 	</style>
 </head>
 <body>
@@ -122,10 +135,9 @@
 <%@ include file="../include/sidebar.jsp" %>
 
     <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+      <button id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
       홈 &gt; 마이페이지 &gt; 캘린더
     </div>
-    
     <h1 class="pageTitle"><div>캘린더</div></h1>
 	
 	<div class="container" id="calendarPage">     
