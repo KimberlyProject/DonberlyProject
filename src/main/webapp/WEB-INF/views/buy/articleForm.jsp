@@ -50,6 +50,7 @@
       	text-align: right;
       }
       
+      
       #d{
       border : 3px solid rgb(73, 124, 64);
       border-radius: 20px;
