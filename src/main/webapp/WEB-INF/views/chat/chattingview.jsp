@@ -535,12 +535,13 @@ function chatOut(){
 function calendar_insert(){
 	console.log($('#scheduleData').val());
 	
-	if($('#scheduleData').val()){
+	if(!$('#scheduleData').val()){
 		alert("날짜를 선택해 주세요.");
 		return false;		
 	}
 	if(!$('#contents').val()){
 		alert("일정 내용을 입력해 주세요.");
+		return false;		
 	}
 	 
 	if(confirm("일정을 등록하시겠습니까?")){

@@ -159,7 +159,11 @@ header .dropdown.calicon .dropdown-menu{
     padding:10px 0px 10px 10px;   
 }
 #sideMenu li>ul>li a{
-    font-size:14px;
+    font-size:13px;
+    box-sizing:border-box;
+}
+#sideMenu>ul>li>ul>li>a{
+	padding-left:20px;
 }
 
 .page_dir{
