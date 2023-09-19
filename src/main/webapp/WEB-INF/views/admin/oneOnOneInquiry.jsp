@@ -164,50 +164,51 @@
 				<span class="glyphicon glyphicon-search"/>
 			</button>   
 		</div>
-      	
-      	<!-- 검색창 -->
-		<table class="table table-bordered table-striped table-hover">
-			<thead>
-				<tr id="head" style="background: rgb(73, 124, 64); color: #FFF;">
-					<th style="vertical-align:middle;"><span class="glyphicon glyphicon-ok"></span></th>
-					<th>NO</th>
-					<th>TITLE</th>
-					<th>USER ID</th>
-					<th>EMAIL</th>
-					<th>DATE</th>
-				</tr>
-			</thead>
-			<tbody>
-			<c:forEach var="asks" items="${ask}" varStatus="articleNum">
-				<tr class="article">
-					<td><input class="check" type="checkbox" style="width: 100%;"/></td>
-					<td class="articleNo">${fn:length(ask) - articleNum.index}<input class="num" name="num" type="hidden" value="${asks.articleNo}"></td>
-					<td>
-						${asks.title} 
-					</td>
-					<td>
-						${asks.userId}
-					</td>
-					<td>
-						${asks.email}
-					</td>
-					<td>
-						<fmt:formatDate value="${asks.writeDate}" pattern="yy년 MM월 dd일"/><br/>
-					</td>
-				</tr>
-				<tr>
-					<td class="content" colspan="6">
-						${asks.content}
-						<br/>
-						<br/>
-						<div  align="right">
-							<a class="btn btn-success" href="javascript:void(0);" onclick="openModal({email: '${asks.email}'})">답변하기</a>
-						</div>
-					</td>
-				</tr>
-			</c:forEach>
-			</tbody>
-		</table>
+      	<form>
+	      	<!-- 검색창 -->
+			<table class="table table-bordered table-striped table-hover">
+				<thead>
+					<tr id="head" style="background: rgb(73, 124, 64); color: #FFF;">
+						<th style="vertical-align:middle;"><span class="glyphicon glyphicon-ok"></span></th>
+						<th>NO</th>
+						<th>TITLE</th>
+						<th>USER ID</th>
+						<th>EMAIL</th>
+						<th>DATE</th>
+					</tr>
+				</thead>
+				<tbody>
+				<c:forEach var="asks" items="${ask}" varStatus="articleNum">
+					<tr class="article">
+						<td><input class="check" type="checkbox" style="width: 100%;"/></td>
+						<td class="articleNo">${fn:length(ask) - articleNum.index}<input class="num" name="num" type="hidden" value="${asks.articleNo}"></td>
+						<td>
+							${asks.title} 
+						</td>
+						<td>
+							${asks.userId}
+						</td>
+						<td>
+							${asks.email}
+						</td>
+						<td>
+							<fmt:formatDate value="${asks.writeDate}" pattern="yy년 MM월 dd일"/><br/>
+						</td>
+					</tr>
+					<tr>
+						<td class="content" colspan="6">
+							${asks.content}
+							<br/>
+							<br/>
+							<div  align="right">
+								<a class="btn btn-success" href="javascript:void(0);" onclick="openModal({email: '${asks.email}'})">답변하기</a>
+							</div>
+						</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+		</form>
 		<form id="formList" action="${path}/admin/oneOnOneInquiry" method="GET">
 			<input type="hidden" name="searchType"	value="${pageVO.type}"/>
 			<input type="hidden" name="keyword"		value="${pageVO.keyword}"/>
@@ -231,6 +232,7 @@
 				
 				formObj.find("[name='searchType']").val(typeStr);
 				formObj.find("[name='keyword']").val(keywordStr);
+				
 				formObj.submit();
 			});
 			
