@@ -71,17 +71,11 @@
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-	<c:set var="menu" value="mypage" />
+	<c:set var="menu" value="member" />
 	<%@ include file="../include/sidebar.jsp" %>
-    <aside id="sideMenu">
-      <ul>
-        <li><a href="${path}/member/membership">회원가입</a></li>
-        <li><a href="${path}/member/login">로그인</a></li>
-      </ul>
-      <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
-    </aside>
+
     <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+      <button id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
       홈 &gt; 마이페이지 &gt; 내 정보 &gt; 회원정보수정
     </div>
     
@@ -97,7 +91,7 @@
         <div>
 		    <label for="pw">비밀번호</label>
 		    <input type="password" id="pw" name="pw" value="${editor.pw}" />
-			<button type="button"  class="btn btn-light"  onclick="togglePasswordVisibility()"><span class="glyphicon glyphicon-refresh"></span><span id="togglePassword">보기</span></button>
+			<button type="button"  class="btn btn-light"  onclick="togglePasswordVisibility()"><span class="glyphicon glyphicon-refresh"></span><span id="togglePassword"></span></button>
 		</div>
 		<div>
 		    <label for="repw">비밀번호 확인</label>
@@ -303,11 +297,11 @@
 	        if (passwordField.type === "password") {
 	            passwordField.type = "text";
 	            confirmPasswordField.type = "text";
-	            toggleButton.textContent = "숨기기";
+	            toggleButton.textContent = "";
 	        } else {
 	            passwordField.type = "password";
 	            confirmPasswordField.type = "password";
-	            toggleButton.textContent = "보기";
+	            toggleButton.textContent = "";
 	        }
 	    }
 	</script>
