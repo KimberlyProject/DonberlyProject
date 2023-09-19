@@ -97,7 +97,7 @@
       <a href="/">홈</a> &gt;
       <a href="#">경매장</a> &gt;
     </div>
-    <h1 class="pageTitle">경매장</h1>
+    <h1 class="pageTitle"><div>경매장</div></h1>
     
 	<div class="container">
 		<br/><br/>
@@ -112,7 +112,6 @@
          </select>
          <input  id="searchKeyword" value="${keyword}" class="col-sm-2 searchgroup form-control" type="text" class="form-control" style="width:200px;" placeholder="검색하기"/>
          <button id ="keywordBtn" class="btn btn-secondary" type="button">
-            <span class="glyphicon glyphicon-search"/>
          </button>   
       </div><br><br><br>
 		
@@ -212,7 +211,7 @@
 					<th class="cate">진행상태</th><th class="colon">:</th>
 						<!-- 입찰 진행중 blue -->
 						<c:choose><c:when test="${article.status == 0 && (article.deadline > today || article.deadline == today)}"> 
-							<th clospan="4"><span class="blue">입찰 진행중</span>
+							<th><span class="blue">입찰 진행중</span>
 								<c:choose><c:when test="${article.cstmId != null}">
 									&nbsp;&nbsp;&nbsp;[${article.cstmId}]님
 								</c:when></c:choose>

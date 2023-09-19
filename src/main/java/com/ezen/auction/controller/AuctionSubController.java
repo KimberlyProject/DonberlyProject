@@ -2,6 +2,7 @@ package com.ezen.auction.controller;
 
 import java.util.ArrayList;
 
+
 import java.util.Collection;
 import java.util.List;
 
@@ -19,7 +20,6 @@ import com.ezen.auction.dto.AucImgDTO;
 import com.ezen.auction.dto.AuctionDTO;
 import com.ezen.auction.dto.Criteria;
 import com.ezen.auction.dto.PageMaker;
-import com.ezen.auction.dto.PageMaker2;
 import com.ezen.auction.dto.SearchCriteria;
 import com.ezen.auction.service.AuctionService;
 

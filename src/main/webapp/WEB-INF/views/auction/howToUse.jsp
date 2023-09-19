@@ -71,15 +71,9 @@
 		'돈이되는 돈벌리'를 이용해주셔서 감사합니다.</h3><br/><br/><br/>
 		
 		 <p><a class="btn btn-success btn-lg" href="${path}/auction/auction_maintosearch?page=1&searchType=&keyword=" role="button">경매장 바로가기</a></p>
-    </div>
-    
+    </div>  
     <br/><br/><br/>
     
-    
-    
-
-
-
 <%@ include file="../include/footer.jsp" %>
 </body>
 </html>

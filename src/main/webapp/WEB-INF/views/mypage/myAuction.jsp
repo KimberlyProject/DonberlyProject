@@ -200,27 +200,14 @@
 					<th class="cate">진행상태</th><th class="colon">:</th>
 						<!-- 입찰 진행중 blue -->
 						<c:choose><c:when test="${article.status == 0}"> 
-							<th clospan="4"><span class="blue">입찰 진행중</span>
-								<c:choose><c:when test="${article.cstmId != null}">
-									<br/>[${article.cstmId}]님
-									<!-- hidden 추가 이태림 -->
-									<input type="hidden" class="seller" value="${article.aucId }"/>
-									<input type="hidden" class="buyer" value="${article.cstmId }"/>
-									<input type="hidden" class="artNo" value="${article.aucCode }"/>
-									<input id="chat" type="button" class="btn btn-primary saleBtn" style="color:#FFFFFF;" value="채팅하기" onclick="chat('${article.aucId }','${article.cstmId }','${article.aucCode }')">
-
+							<th><span class="blue">입찰 진행중</span>
+								<c:choose><c:when test="${article.cstmId != null}">&nbsp;[${article.cstmId}]님
 								</c:when></c:choose>
 							</th>
 						</c:when></c:choose>
 						<!-- 판매 완료 orange-->
 						<c:choose><c:when test="${article.status == 1}">
-							<!-- hidden 추가 이태림 -->
-							<input type="hidden" class="seller" value="${article.aucId }"/>
-							<input type="hidden" class="buyer" value="${article.cstmId }"/>
-							<input type="hidden" class="artNo" value="${article.aucCode }"/>
-							<th colspan="4"><span id="gray"><span class="gray">판매완료</span><br/>[${article.cstmId}]님</span>
-							<input type="button" class="btn btn-primary saleBtn chat" style="color:#FFFFFF;" value="채팅하기">
-							</th>
+							<th colspan="4"><span id="gray"><span class="gray">판매완료&nbsp;[${article.cstmId}]님</span></th>
 						</c:when></c:choose>	
 				</tr>
 			</c:forEach>
@@ -228,98 +215,21 @@
 			<br/><br/><!--  경매 게시글 -->
 		</c:when>
 		</c:choose>
-
+	</div>
+	
 <%@ include file="../include/footer.jsp" %>
 
 <script>
 	$(document).ready(function() {
-		var form = $("#formList");
-		
-		$("#keywordBtn").click(function(e) {
-			var searchType = $("#searchType").find(":selected").val();
-			var keyword = $("#searchKeyword").val();
-			console.log(searchType, "", keyword);
-			
-			form.find("[name='searchType']").val(searchType);
-			form.find("[name='keyword']").val(keyword);
-			form.find("[name='page']").val("1");
-			form.submit();
-		});
-		
 
-		$('#chat').on("click", function(seller,buyer,artNo){
-			console.log("판매자 : "+$('.seller').val()+"구매자 : "+$('.buyer').val()+"넘버 : "+$('.artNo').val());
-			$.ajax({
-				 url:	"/chat/makeRoom2",
-				 type:	"post",
-				 dataType: "text",
-				 contentType: 'application/json',
-				 data:	JSON.stringify({"seller":seller,
-					 	"buyer" : buyer,
-					 	"artNo" : artNo,
-					 	"status" : "a"
-						 
-				 
-				 }),	
-				 success: function(data){
-					 console.log(data);
-					 window.open(data, "_blank", "width=940, height=750");
-					//location.href=data;
-					
-				 },
-				 error:function(request,status,error){
-					 console.log("실패");
-					 
-					 
-				 },
-				 complete:function(){
-					 $('#chatContent').val('');
-				 }
-			 });
-		})
+		//경매끝난 게시글 버튼비활성화
+		$(document).ready(function() {
+		  var detailBtn = $(".detailBtn");
+		  detailBtn.css("background-color", "gray");
+		  detailBtn.css("color", "white");
+		  detailBtn.prop("disabled", true);
+  	
 	});
-	
-	//경매끝난 게시글 버튼비활성화
-	$(document).ready(function() {
-	  var detailBtn = $(".detailBtn");
-	  detailBtn.css("background-color", "gray");
-	  detailBtn.css("color", "white");
-	  detailBtn.prop("disabled", true);
-	  
-	  $('.chat').on("click", function(){
-			console.log("판매자 : "+$('.seller').val()+"구매자 : "+$('.buyer').val()+"넘버 : "+$('.artNo').val());
-			$.ajax({
-				 url:	"/chat/makeRoom2",
-				 type:	"post",
-				 dataType: "text",
-				 contentType: 'application/json',
-				 data:	JSON.stringify({"seller":$('.seller').val(),
-					 	"buyer" : $('.buyer').val(),
-					 	"artNo" : $('.artNo').val(),
-					 	"status" : "a"
-						 
-				 
-				 }),	
-				 success: function(data){
-					 console.log(data);
-					 window.open(data, "_blank", "width=940, height=750");
-					//location.href=data;
-					
-				 },
-				 error:function(request,status,error){
-					 console.log("실패");
-					 
-					 
-				 },
-				 complete:function(){
-					 $('#chatContent').val('');
-				 }
-			 });
-		})
-	});
-	
-	
-	
 </script>
 
 </body>

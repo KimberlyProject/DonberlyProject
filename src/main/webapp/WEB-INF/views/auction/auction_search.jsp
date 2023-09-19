@@ -112,7 +112,6 @@
          </select>
          <input  id="searchKeyword" value="${keyword}" class="col-sm-2 searchgroup form-control" type="text" class="form-control" style="width:200px;" placeholder="검색하기"/>
          <button id ="keywordBtn" class="btn btn-secondary" type="button">
-            <span class="glyphicon glyphicon-search"/>
          </button>   
       </div><br><br><br>
 		
@@ -209,7 +208,7 @@
 					<th class="cate">진행상태</th><th class="colon">:</th>
 						<!-- 입찰 진행중 blue -->
 						<c:choose><c:when test="${article.status == 0 && (article.deadline > today || article.deadline == today)}"> 
-							<th clospan="4"><span class="blue">입찰 진행중</span>
+							<th><span class="blue">입찰 진행중</span>
 								<c:choose><c:when test="${article.cstmId != null}">
 									&nbsp;&nbsp;&nbsp;[${article.cstmId}]님
 								</c:when></c:choose>
@@ -265,9 +264,6 @@
 			<input type="hidden" name="searchType" value="${searchType}">
 			<input type="hidden" name="keyword" value="${keyword}">
 		</form>
-	</div><!-- <div class="container"> -->
-
-
 
 <%@ include file="../include/footer.jsp" %>
 

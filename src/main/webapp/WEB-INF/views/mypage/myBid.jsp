@@ -198,15 +198,14 @@
 					<th class="cate">진행상태</th><th class="colon">:</th>
 						<!-- 입찰 진행중 blue -->
 						<c:choose><c:when test="${article.status == 0 && (article.deadline > today || article.deadline == today)}"> 
-							<th clospan="4"><span class="blue">입찰 진행중</span>
-								<c:choose><c:when test="${article.cstmId != null}">
-									&nbsp;&nbsp;&nbsp;[${article.cstmId}]님
+							<th><span class="blue">입찰 진행중</span>
+								<c:choose><c:when test="${article.cstmId != null}">&nbsp;[${article.cstmId}]님
 								</c:when></c:choose>
 							</th>
 						</c:when></c:choose>
 						<!-- 판매 완료 gray-->    <!-- 마감지났는데 입찰중인 경우 -->
 						<c:choose><c:when test="${article.status == 1 || (article.deadline < today && article.cstmId != null)}">
-							<th colspan="4"><span class="gray"><span class="gray">판매완료</span>&nbsp;&nbsp;&nbsp;[${article.cstmId}]님</span></th>
+							<th colspan="4"><span class="gray">판매완료>&nbsp;[${article.cstmId}]님</span></th>
 						</c:when></c:choose>	
 						<!-- 경매 종료 gray-->    <!-- 마감지났는데 입찰안된 경우 -->
 						<c:choose><c:when test="${article.deadline < today && article.cstmId == null}">

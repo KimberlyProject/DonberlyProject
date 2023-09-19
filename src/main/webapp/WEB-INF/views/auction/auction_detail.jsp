@@ -118,7 +118,7 @@
 		<a href="${path}/auction/auction_maintosearch?page=1&searchType=&keyword=">경매장</a> &gt;
 		<a href="#">자세히보기</a>
 	</div>
-	<h1 class="pageTitle"><div>경매장</div></h1>
+	<h1 class="pageTitle">경매장</h1>
 
 		<div class="container">
 		<br/><br/>
