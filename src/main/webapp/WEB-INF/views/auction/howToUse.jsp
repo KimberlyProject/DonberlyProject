@@ -64,6 +64,7 @@
 		<h2>[경매 관리하기]</h2>
 		<div class="title">
 			<h4>1. <a href="${path}/mypage/myInfo.do">마이페이지</a>로 이동하면 내가 올린 경매상품 및 입찰에 참여한 상품을 보실 수 있습니다.</h4>
+			<h4>2. <a href="${path}/mypage/myInfo.do">마이페이지</a>에는 가장 최근 게시물 5개까지 보여집니다.</h4>
 			<h4>2. 중고상품의 직접 거래를 원하시면 <a href="${path}/sale/listArticles.do">장터</a>를 이용해 주세요.</h4>
 		</div>
 		<br/><br/><br/>

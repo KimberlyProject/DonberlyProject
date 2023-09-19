@@ -208,7 +208,7 @@
 						</c:when></c:choose>
 						<!-- 판매 완료 orange-->
 						<c:choose><c:when test="${article.status == 1}">
-							<th colspan="4"><span id="gray"><span class="gray">판매완료&nbsp;[${article.cstmId}]님</span></th>
+							<th colspan="4"><span class="gray">판매완료&nbsp;[${article.cstmId}]님</span></th>
 						</c:when></c:choose>	
 				</tr>
 			</c:forEach>

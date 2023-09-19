@@ -187,20 +187,24 @@
  	<!-- 마이페이지 myAuction 게시글 Query -->
     <select id="myauctionArticles" parameterType="String" resultMap="aucArticle">
 		<![CDATA[
-			SELECT  *
-			FROM AUCTION
-			WHERE aucId = #{aucId}
-			ORDER BY writeDate desc
+		select *
+			from(select *
+				from auction
+				where aucId = #{aucId}
+				order by writeDate desc)
+			where rownum <= 5
 		]]>
     </select>
     
     <!-- 마이페이지 myBid 게시글 Query -->
     <select id="mybidArticles" parameterType="String" resultMap="aucArticle">
 		<![CDATA[
-			SELECT *
-			FROM AUCTION
-			WHERE cstmId = #{cstmId}
-			ORDER BY writeDate desc
+			select *
+			from(select *
+				from auction
+				where cstmId = #{cstmId}
+				order by writeDate desc)
+			where rownum <= 5	
 		]]>
     </select>
     
