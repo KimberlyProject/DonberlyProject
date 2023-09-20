@@ -114,9 +114,7 @@
 	<!-- 배너 -->
 	<div class="page_dir container">
 	  	<button id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
-		<a href="/">홈</a> &gt;
-		<a href="${path}/auction/auction_maintosearch?page=1&searchType=&keyword=">경매장</a> &gt;
-		<a href="#">자세히보기</a>
+		홈 &gt;경매장 &gt; 자세히보기
 	</div>
 	<h1 class="pageTitle"><div>경매 상품 올리기</div></h1>
 

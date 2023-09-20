@@ -95,8 +95,9 @@ if("${memberlevel.userStatus}" == "N1"){
               <li>
                 <a href="${path}/auction/auction_maintosearch?page=1&searchType=&keyword=">경매장</a>
                 <ul>
-                	<li><a href="${path}/auction/howToUse">경매장 이용방법</a></li>
+                	<li><a href="${path}/auction/auction_maintosearch?page=1&searchType=&keyword=">경매장 메인</a></li>
                     <li><a href="${path}/auction/auction_write">경매상품 올리기</a></li>
+                	<li><a href="${path}/auction/howToUse">경매장 이용방법</a></li>
               	</ul>
               </li>                  
               <li>
