@@ -136,7 +136,6 @@
 
 <script>
   $(document).ready(function() {
-    alert("시작");
 
     $("#into").on("click", function() {
 

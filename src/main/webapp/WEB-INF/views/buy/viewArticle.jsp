@@ -154,7 +154,7 @@
 							<c:if test="${member.userId == article.userId}">
 								<input type="button" class="btn btn-warning" value="수정하기" onClick="fn_enable(this.form)"/>
 								<input type="button" class="btn btn-danger"  value="삭제하기" onClick="fn_remove('${path}/buy/removeArticle.do', ${article.articleNO})"/>
-								<input type="button" class="btn btn-warning" value="구매완료" id="buyEnd"/>
+								<input type="button" class="btn btn-warning" value="판매완료" id="buyEnd"/>
 							</c:if>
 						<li>
 					</ul>
