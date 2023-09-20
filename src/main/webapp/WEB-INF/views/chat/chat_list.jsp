@@ -94,7 +94,7 @@ h2{
 				<c:set var="othername" value="${chatList.buyer }"/>
 					<c:forEach var="memList" items="${nickname }">
 						<c:if test="${memList.userId eq buyer }">
-							${memList.nickname }<c:if test="${chatList.status == 'a' }">&nbsp;(경매장)</c:if>
+							${memList.nickname }<c:if test="${chatList.status == 'a' }"></c:if>
 						</c:if>
 					</c:forEach>
 					<!--<input class="nickname" type="hidden" value="${chatList.buyer } "> -->  <!-- 상대방 닉네임 -->
