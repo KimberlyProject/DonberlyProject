@@ -138,10 +138,10 @@
 	<%@ include file="../include/sidebar.jsp" %>	
    <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
-      홈 &gt; 관리자 &gt; 1:1 문의
+      홈 &gt; 관리자 &gt; 1:1 문의 내역
     </div>
     
-    <h1 class="pageTitle"><div>1:1 문의</div></h1>
+    <h1 class="pageTitle"><div>1:1 문의 내역</div></h1>
 	
 	<div class="container">
 
@@ -152,8 +152,8 @@
 		<!-- 삭제버튼 끝 -->
 		
 		<!-- 검색창 -->
-		<div class="row" style="vertical-align: middle; float:right;">
-			<select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
+		<div class="row" style="vertical-align: middle; float:right; margin-bottom: 10px;">
+			<select class="col-sm-2 searchgroup" id="searchType" style="font-size: 15px; width: 75px; margin-right:10px; display: table-cell;">
 				<option value="inquiryAll" <c:if test="{searchType} == 'inquiryAll'">selected</c:if>>전체</option>
 				<option value="t" <c:if test="{searchType} == 't'">selected</c:if>>제목</option>
 				<option value="c" <c:if test="{searchType} == 'c'">selected</c:if>>내용</option>
@@ -214,8 +214,10 @@
 			<input type="hidden" name="keyword"		value="${pageVO.keyword}"/>
 		</form>
 	</div>
+	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	<%@ include file="../include/footer.jsp" %>
-	<script>
+
+<script>
 		$(document).ready(function(){
 			// tr을 누를 경우
 			$("tr").on("click", function() {

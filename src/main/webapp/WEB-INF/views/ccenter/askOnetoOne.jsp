@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>1:1 문의하기</title>
+    <title>1:1 문의</title>
     <%@ include file="../include/header.jsp" %>
 
 <style>
