@@ -50,11 +50,11 @@
 
 <c:if test="${menu == 'ccenter'}">
 	<aside id="sideMenu">
-	  <h2>고객 센터</h2>
+	  <h2>고객센터</h2>
 	  <ul>
 	    <li><a href="${path}/ccenter/notice">공지사항</a></li>
 	    <li><a href="${path}/ccenter/qna">Q & A</a></li>
-	    <li><a href="${path}/ccenter/askOnetoOne">1:1문의하기</a></li>
+	    <li><a href="${path}/ccenter/askOnetoOne">1:1 문의</a></li>
 	    <li><a href="${path}/ccenter/report">신고하기</a></li>
 	  </ul>
 	  <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
@@ -79,9 +79,9 @@
 	<aside id="sideMenu">
 	  <h2>관리자 페이지</h2>
 	  <ul>
-	    <li><a href="${path}/admin/oneOnOneInquiry">1:1 문의</a></li>
+	    <li><a href="${path}/admin/oneOnOneInquiry">1:1 문의 내역</a></li>
 	    <li><a href="${path}/admin/memberList">회원 목록</a></li>
-	    <li><a href="${path}/admin/reportAnswer">신고 내역</a></li>
+	    <li><a href="${path}/admin/reportAnswer">신고하기 내역</a></li>
 	  </ul>
 	  <button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
 	</aside>

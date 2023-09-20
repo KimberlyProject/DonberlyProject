@@ -31,6 +31,10 @@
         	color:				#FFFFFF;
         	margin-right:		15px;
       	}
+   		#searchType{
+	   		height:34px;
+	   		width:150px;
+     	}
       	.searchgroup {
         	padding:			3px 3px 6px 3px;
         	margin-bottom:			10px;
@@ -67,7 +71,7 @@
 		td > a {
 			font-color:			#000;
 		}
-		ul > li > a {
+		ul.pagination > li > a {
 			height:				34px;
 		}
 		.form-group {
@@ -107,8 +111,8 @@
     
 	<div class="container">
 		<!-- 검색창 -->
-		<div class="row" style="vertical-align: middle; float:right;">
-			<select class="col-sm-2 searchgroup" id="searchType" style="font-size: 18px; width: 150px; diplay: table-cell;">
+		<div class="row" style="vertical-align: middle; float:right; margin-bottom: 10px;">
+			<select class="col-sm-2 searchgroup" id="searchType" style="font-size: 15px; width: 75px; margin-right:10px; display: table-cell;">
 				<option value="memberListAll" <c:if test="{searchType} == 'memberListAll'">selected</c:if>>전체</option>
 				<option value="i" <c:if test="{searchType} == 'i'">selected</c:if>>아이디</option>
 				<option value="tel" <c:if test="{searchType} == 'tel'">selected</c:if>>연락처</option>
@@ -185,83 +189,83 @@
 	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	<%@ include file="../include/footer.jsp" %>
 
-    <script>
-        $(document).ready(function() {
-        	
-        	// 7일 정지: 7일정지 버튼을 누를 경우
-		    $("#Asbtn").on("click", function() {
-				var inputID = [];
-				$('input:checkbox[name="checkBox"]').each(function(index, item){
-		            /* 그 중에서도 체크박스에 check 되었을 경우 */
-		            if($(this).is(':checked', true)) {
-		                //console.log("체크");
-		                var idSelect = $(this).parent().next().next().text();
-		                alert(idSelect);
-	
-		                $.ajax({
-		    				url:		"${path}/admin/Asuspension",
-		    				type:		"post",
-		    				dataType:	"text",
-		    				data:		{"userId" : idSelect},
-		    				success:	function(data) {
-		    					alert(idSelect + "회원님께서 7일 정지 되었습니다.");
-		    				},
-		    				error:		function(data) {
-		    					alert("에러가 발생하였습니다!");
-		    				},
-		    				complete:	function(data) {
-		    					alert("작업을 완료하였습니다!");
-		    				}
-		    			});
-		    		};
-	        	})
-				
-			});
-		    
-        	// 영구정지: 영구정지 버튼을 누를 경우
-		    $("#psbtn").on("click", function() {
-				var inputID = [];
-				$('input:checkbox[name="checkBox"]').each(function(index, item){
-		            /* 그 중에서도 체크박스에 check 되었을 경우 */
-		            if($(this).is(':checked', true)) {
-		                //console.log("체크");
-		                var idSelect = $(this).parent().next().next().text();
-		                alert(idSelect);
-	
-		                $.ajax({
-		    				url:		"${path}/admin/Psuspension",
-		    				type:		"post",
-		    				dataType:	"text",
-		    				data:		{"userId" : idSelect},
-		    				success:	function(data) {
-		    					alert(idSelect + "회원님께서 영구 정지 되었습니다.");
-		    				},
-		    				error:		function(data) {
-		    					alert("에러가 발생하였습니다!");
-		    				},
-		    				complete:	function(data) {
-		    					alert("작업을 완료하였습니다!");
-		    				}
-		    			});
-		    		};
-	        	})
-				
-			});
-	    	var formObj = $("#formList");
-	    	
-	    	// 검색: 검색버튼을 누를 경우
-	    	$("#searchBtn").click(function(e) {
-	    		var typeStr = $("#searchType").find(":selected").val();
-	    		var keywordStr = $("#searchKeyword").val();
-	    		console.log(typeStr, "", keywordStr);
-	    		
-	    		formObj.find("[name='searchType']").val(typeStr);
-	    		formObj.find("[name='keyword']").val(keywordStr);
-	    		formObj.find("[name='page']").val("1");
-	    		formObj.submit();
-	    	});
-	    });
-	</script>
+<script>
+    $(document).ready(function() {
+      	
+      	// 7일 정지: 7일정지 버튼을 누를 경우
+    $("#Asbtn").on("click", function() {
+		var inputID = [];
+		$('input:checkbox[name="checkBox"]').each(function(index, item){
+            /* 그 중에서도 체크박스에 check 되었을 경우 */
+            if($(this).is(':checked', true)) {
+                //console.log("체크");
+                var idSelect = $(this).parent().next().next().text();
+                alert(idSelect);
+
+                $.ajax({
+    				url:		"${path}/admin/Asuspension",
+    				type:		"post",
+    				dataType:	"text",
+    				data:		{"userId" : idSelect},
+    				success:	function(data) {
+    					alert(idSelect + "회원님께서 7일 정지 되었습니다.");
+    				},
+    				error:		function(data) {
+    					alert("에러가 발생하였습니다!");
+    				},
+    				complete:	function(data) {
+    					alert("작업을 완료하였습니다!");
+    				}
+    			});
+    		};
+       	})
+		
+	});
+    
+      	// 영구정지: 영구정지 버튼을 누를 경우
+    $("#psbtn").on("click", function() {
+		var inputID = [];
+		$('input:checkbox[name="checkBox"]').each(function(index, item){
+            /* 그 중에서도 체크박스에 check 되었을 경우 */
+            if($(this).is(':checked', true)) {
+                //console.log("체크");
+                var idSelect = $(this).parent().next().next().text();
+                alert(idSelect);
+
+                $.ajax({
+    				url:		"${path}/admin/Psuspension",
+    				type:		"post",
+    				dataType:	"text",
+    				data:		{"userId" : idSelect},
+    				success:	function(data) {
+    					alert(idSelect + "회원님께서 영구 정지 되었습니다.");
+    				},
+    				error:		function(data) {
+    					alert("에러가 발생하였습니다!");
+    				},
+    				complete:	function(data) {
+    					alert("작업을 완료하였습니다!");
+    				}
+    			});
+    		};
+       	})
+		
+	});
+   	var formObj = $("#formList");
+   	
+   	// 검색: 검색버튼을 누를 경우
+   	$("#searchBtn").click(function(e) {
+   		var typeStr = $("#searchType").find(":selected").val();
+   		var keywordStr = $("#searchKeyword").val();
+   		console.log(typeStr, "", keywordStr);
+   		
+   		formObj.find("[name='searchType']").val(typeStr);
+   		formObj.find("[name='keyword']").val(keywordStr);
+   		formObj.find("[name='page']").val("1");
+   		formObj.submit();
+   	});
+});
+</script>
 	
 	
 </body>
