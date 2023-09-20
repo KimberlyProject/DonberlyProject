@@ -53,9 +53,7 @@ public class ChatController {
 	//채팅창 GET articleVO 세션으로 보여주기
 	@RequestMapping(value="/chattingview", method=RequestMethod.GET)
 	public String chattingview(String chatId, HttpServletRequest request) throws Exception{
-		
-		
-		
+
 		HttpSession session= request.getSession();
 		
 		int ch = Integer.parseInt(chatId);
@@ -66,15 +64,15 @@ public class ChatController {
 		
 		//아티클 넘버로 아티클VO 가져오기
 
-		if(chatListDTO.getStatus().equals("s") || chatListDTO.getStatus().equals("b")) {
+		if(chatListDTO.getStatus().equals("s") || chatListDTO.getStatus().equals("b")) { //status가 s,b인 경매장에서 생성된 채팅
 			BuyArticleDTO articleVO = chatService.findArticleVOFromArtNo(artNo,chatListDTO.getStatus()); // 여기 dao에서 s b a 구별해서 가져옴
 			System.out.println("************************************"+articleVO);
 			session.setAttribute("session",articleVO);			
 		}
-		else if(chatListDTO.getStatus().equals("a")) {
-			System.out.println("************************************"+"여기와라66666666666666");
+		else if(chatListDTO.getStatus().equals("a")) { //status가 a인 경매장에서 생성된 채팅
+			
 			AuctionDTO auctionDTO = chatService.findAuctionDTOFromArtNo(artNo,chatListDTO.getStatus());// 여기 dao에서 s b a 구별해서 가져옴
-			System.out.println("************************************"+auctionDTO);
+			
 			session.setAttribute("session",auctionDTO); 
 			//경은추가
 			int aucCode = auctionDTO.getAucCode();
@@ -94,16 +92,13 @@ public class ChatController {
 	public void chattingview(@RequestParam(value="content", required=false) String content,
 			@RequestParam(value="fromId", required=false) String fromId,
 			@RequestParam(value="chatId", required=false) String chatId,
-			Model model,HttpServletRequest request, HttpServletResponse response,RedirectAttributes attr) throws Exception{
-
-		System.out.println(content+fromId+chatId);
-		
-		//세션 가져오기***************************
+			Model model,HttpServletRequest request, HttpServletResponse response,RedirectAttributes attr) throws Exception{		
+		//세션 가져오기
 		HttpSession session	= request.getSession();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
 		
 		int ch = Integer.parseInt(chatId);
-		//ch로 chatListDTO 찾기 찾아서 스테이터스로 구별해서 to랑 from 넣기
+		//ch로 chatListDTO 찾기, status로 구별해서 to랑 from 넣기
 		ChatListDTO chatListDTO = chatService.findChatListFromChatId(ch);
 		
 		ChatDTO chatDTO = new ChatDTO();
@@ -111,20 +106,16 @@ public class ChatController {
 		chatDTO.setChatId(ch);
 		chatDTO.setFromId(fromId);
 		chatDTO.setChatContent(content);
-		chatDTO.setChatRead(1);
-		System.out.println("************************************************sksksksksksksk"+memberDTO.getUserId());
+		chatDTO.setChatRead(1); //chatRead는 1이 기본(보지 않은 상태)
 		//파는사람과 내가 같으면 사는사람이 
-		if(fromId.equals(chatListDTO.getSeller())) {
+		if(fromId.equals(chatListDTO.getSeller())) { 
 			chatDTO.setToId(chatListDTO.getBuyer());
 		}
 		else if(fromId.equals(chatListDTO.getBuyer())) {
 			chatDTO.setToId(chatListDTO.getSeller());
 		}
-		System.out.println("************************************************sksksksksksksk"+memberDTO.getUserId()+" :"+chatDTO.getToId());
 		
-		System.out.println("################################chatDTO"+chatDTO);
 		chatService.insertContent(chatDTO);  //db에 채팅DTO 넣기
-		
 		
 	}
 	
@@ -249,15 +240,15 @@ public class ChatController {
 	@RequestMapping(value="/find_nickname", method=RequestMethod.POST, produces = "application/text; charset=utf8" )
 	public String find_nickname(@RequestParam(value="memberId", required=false) String memberId) throws Exception{
 		String nickname = chatService.find_nickname(memberId);
-		System.out.println("----------------------------------------------------------" + memberId);
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + nickname);
+		//System.out.println("----------------------------------------------------------" + memberId);
+		//System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + nickname);
 		return nickname;
 	}
 	
 	//채팅 읽었는지 확인하기 db에 칼럼 넣기
 	public void readChat(String toId, int chatId) throws Exception{
 		//채팅 버튼을 누르면 이 클래스 호출
-		System.out.println("&&&&&&&&&&&&&readChat이 실행되었다&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+		//System.out.println("&&&&&&&&&&&&&readChat이 실행되었다&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 		ChatDTO chatDTO = new ChatDTO();
 		
 		chatDTO.setToId(toId);
@@ -267,7 +258,7 @@ public class ChatController {
 	//안읽은 채팅의 개수
 	public List countChat(String userId) throws Exception{
 		List count = chatService.countChat(userId); //안읽은 채팅 개수 전부 가져오기
-		System.out.println("안읽은 개수!!!!!!!!!*********"+count);
+		//System.out.println("안읽은 개수!!!!!!!!!*********"+count);
 		
 		return count;
 	}

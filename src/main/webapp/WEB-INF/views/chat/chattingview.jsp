@@ -445,12 +445,12 @@ function getChat(){
 					if(data[i].fromId == $('#userId').val()){
 						html+=
 						"<div class='chat ch2'><div class='textbox'>"+data[i].chatContent+"</div></div>"+
-						"<div class='time2' ><span>"+read+"</span> &nbsp;&nbsp;"+month+"월"+date.getDate()+"일 "+date.getHours()+":"+date.getMinutes()+"</div>";
+						"<div class='time2' ><span>"+read+"</span> &nbsp;&nbsp;"+date.getHours()+"시"+date.getMinutes()+"분</div>";
 					}
 					else{
 						html+=
 						"<div class='chat ch1'><div class='textbox'>"+data[i].chatContent+"</div></div>"+
-						"<div class='time1' >"+month+"월"+date.getDate()+"일 "+date.getHours()+":"+date.getMinutes()+"<span>&nbsp;&nbsp;"+read+"</span></div>";
+						"<div class='time1' >"+date.getHours()+"시"+date.getMinutes()+"분<span>&nbsp;&nbsp;"+read+"</span></div>";
 					}
 			 }
 			 
