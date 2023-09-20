@@ -114,8 +114,7 @@ if("${memberlevel.userStatus}" == "N1"){
                 <ul> 
                 	<li><a href="${path}/mypage/myInfo.do">내 정보 보기</a></li>             
                     <li><a href="${path}/mypage/marketInfo.do">내 장터</a></li>
-                	<li><a href="${path}/auction/myAuction?aucId=${member.userId}">내 경매</a></li>
-                    <li><a href="${path}/mypage/salesHistory">입찰내역</a></li> 
+                	<li><a href="${path}/auction/myAuction?aucId=${member.userId}">내 경매</a></li>                     
                     <li><a href="${path}/chat/chat_list">채팅 리스트</a></li>
                     <li><a href="${path}/mypage/calendar">캘린더</a></li>
                 </ul>
