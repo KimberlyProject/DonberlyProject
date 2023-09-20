@@ -111,7 +111,7 @@
             <option value="p" <c:if test="{searchType} == 'p'">selected</c:if>>글번호</option>
          </select>
          <input  id="searchKeyword" value="${keyword}" class="col-sm-2 searchgroup form-control" type="text" class="form-control" style="width:200px;" placeholder="검색하기"/>
-         <button id ="keywordBtn" class="btn btn-secondary" type="button">
+         <button id ="keywordBtn" class="btn btn-secondary" type="button"><span class="glyphicon glyphicon-search"></span>
          </button>   
       </div><br><br><br>
 		

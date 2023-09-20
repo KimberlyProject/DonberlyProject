@@ -26,7 +26,7 @@
       
       function backToList(obj) {
          // obj.action="${path}/sale4/listArticles.do";
-         obj.action="${path}/buy/listArticles.do";
+         obj.action="${path}/sale/listArticles.do";
          obj.submit();
       }
           
@@ -101,9 +101,8 @@
          <ul class= "item">
             <li>이미지파일 첨부:  </li>
             <li>
-            <img  id="preview" src="#"   width=350 height=350/>
-              <%--  이미지를 2개 이상 올릴 때 사용한다.  --%>
-              <input type="file" name="imageFileName"  onchange="readURL(this);" /><br/>
+            <img  id="preview" src="#" id="imge"  width=350 height=350/>
+              <input type="file" id="imge" name="imageFileName"  onchange="readURL(this);" /><br/>
             </li>
          </ul>
     
@@ -125,7 +124,7 @@
          <ul class="item">
             <li> </li>
             <li>
-               <button type="submit" class="btn btn-info" >글쓰기</button>
+               <button type="submit" id="into" class="btn btn-info" >글쓰기</button>
                <button type="button" class="btn btn-warning" onClick="backToList(this.form)" >목록보기</button>
             </li>
          </ul>
@@ -134,5 +133,39 @@
   
 </div>
 <%@ include file="../include/footer.jsp" %>
+
+<script>
+  $(document).ready(function() {
+
+    $("#into").on("click", function() {
+
+      if ($("#imge").val() == "") {
+        alert("그림을 올려주세요.");
+        return false;
+      }
+
+      if ($("#title").val() == "") {
+        alert("상품이름을 적어주세요.");
+        $("#title").focus();
+        return false;
+      }
+
+      // Parse the price as a number
+      var minPrice = parseFloat($("#price").val());
+      if (isNaN(minPrice)) {
+        alert("숫자만 입력해주세요.");
+        $("#price").focus();
+        return false;
+      }
+
+      if ($("#content").val() == "") {
+        alert("설명을 적어주세요.");
+        $("#content").focus();
+        return false;
+      }
+
+    });
+  });
+</script>
 </body>
 </html>

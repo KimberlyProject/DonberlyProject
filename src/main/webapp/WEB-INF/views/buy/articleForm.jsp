@@ -101,8 +101,7 @@
             <li>이미지파일 첨부:  </li>
             <li>
             <img  id="preview" src="#"   width=350 height=350/>
-              <%--  이미지를 2개 이상 올릴 때 사용한다.  --%>
-              <input type="file" name="imageFileName"  onchange="readURL(this);" /><br/>
+              <input type="file" id="imge" name="imageFileName"  onchange="readURL(this);" /><br/>
             </li>
          </ul>
     
@@ -112,24 +111,61 @@
             <li><h3>작성자 : <input type="text" class="line" maxlength="50" id="nickname" name="nickname" value="${member.nickname }" readonly/></h3> </li>
          </ul>
          <ul class="item">
-            <li><c:out value="${boardInfo.brdmemo}" escapeXml="false"/>상품 : &nbsp;<input type="text" class="a"  maxlength="20" name="title" /></li>
+            <li><c:out value="${boardInfo.brdmemo}" escapeXml="false"/>상품 : &nbsp;<input type="text" class="a" id="title" maxlength="20" name="title" /></li>
          </ul>
          <ul class="item">
 			<li>가격 : &nbsp;<input type="text" class="a" id="price" maxlength="10" name="price"/>원</li>
 		</ul>
          <ul class="item">
             <li>사고자 하는 것에 대해</li>
-            <li><textarea name="content" rows="6" cols="35" maxlength="4000"></textarea></li>
+            <li><textarea name="content" rows="6" id="content" cols="35" maxlength="4000"></textarea></li>
          </ul>
          <ul class="item">
             <li> </li>
             <li>
-               <button type="submit" class="btn btn-info" >글쓰기</button>
+               <button type="submit" id="into"class="btn btn-info" >글쓰기</button>
                <button type="button" class="btn btn-warning" onClick="backToList(this.form)" >목록보기</button>
             </li>
          </ul>
       </div>
    </form>
+  
+  
+<script>
+  $(document).ready(function() {
+
+    $("#into").on("click", function() {
+
+      if ($("#imge").val() == "") {
+        alert("그림을 올려주세요.");
+        return false;
+      }
+
+      if ($("#title").val() == "") {
+        alert("상품이름을 적어주세요.");
+        $("#title").focus();
+        return false;
+      }
+
+      // Parse the price as a number
+      var minPrice = parseFloat($("#price").val());
+      if (isNaN(minPrice)) {
+        alert("숫자만 입력해주세요.");
+        $("#price").focus();
+        return false;
+      }
+
+      if ($("#content").val() == "") {
+        alert("설명을 적어주세요.");
+        $("#content").focus();
+        return false;
+      }
+
+    });
+  });
+</script>
+  
+  
   
 </div>
 <%@ include file="../include/footer.jsp" %>

@@ -104,7 +104,7 @@ if("${memberlevel.userStatus}" == "N1"){
                 <ul> 
                     <li><a href="${path}/ccenter/notice">공지사항</a></li>
                     <li><a href="${path}/ccenter/qna">Q & A</a></li>
-                    <li><a href="${path}/ccenter/askOnetoOne">1:1 문의하기</a></li>
+                    <li><a href="${path}/ccenter/askOnetoOne">1:1 문의</a></li>
                     <li><a href="${path}/ccenter/report">신고하기</a></li>
                 </ul>
               </li>              
@@ -114,8 +114,7 @@ if("${memberlevel.userStatus}" == "N1"){
                 <ul> 
                 	<li><a href="${path}/mypage/myInfo.do">내 정보 보기</a></li>             
                     <li><a href="${path}/mypage/marketInfo.do">내 장터</a></li>
-                	<li><a href="${path}/auction/myAuction?aucId=${member.userId}">내 경매</a></li>
-                    <li><a href="${path}/mypage/salesHistory">입찰내역</a></li> 
+                	<li><a href="${path}/auction/myAuction?aucId=${member.userId}">내 경매</a></li>                     
                     <li><a href="${path}/chat/chat_list">채팅 리스트</a></li>
                     <li><a href="${path}/mypage/calendar">캘린더</a></li>
                 </ul>
@@ -127,7 +126,7 @@ if("${memberlevel.userStatus}" == "N1"){
                 <ul> 
                     <li><a href="${path}/admin/oneOnOneInquiry">1:1 문의 내역</a></li>                    
                     <li><a href="${path}/admin/memberList">회원 목록</a></li>
-                    <li><a href="${path}/admin/reportAnswer">신고 내역</a></li>
+                    <li><a href="${path}/admin/reportAnswer">신고하기 내역</a></li>
                 </ul>
               </li>
               </c:if>

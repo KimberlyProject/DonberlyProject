@@ -52,7 +52,7 @@
 		.head > th:last-child {
 			width:				15%;
 		}
-		ul > li > a {
+		ul.pagination > li > a {
 			height:				34px;
 		}
 		.pagearea {
@@ -71,7 +71,7 @@
 	<%@ include file="../include/sidebar.jsp" %>	
    <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
-      홈 &gt; 관리자 &gt; 신고하기
+      홈 &gt; 관리자 &gt; 신고하기 내역
     </div>
     <h1 class="pageTitle"><div>신고하기 내역</div></h1>
 	
