@@ -89,9 +89,6 @@
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
-	
-		<br/><br/>
-	
 		 	<c:set var="menu" value="mypage" />
 	<%@ include file="../include/sidebar.jsp" %>
     <div class="page_dir container">

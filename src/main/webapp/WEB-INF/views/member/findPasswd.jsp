@@ -64,6 +64,9 @@
 </head>
 <body>
 	<%@ include file="../include/topMenu.jsp" %>
+	<c:if test="${ member != null }">
+   	<script>location.href = "${ path }/mypage/myInfo.do"</script>
+    </c:if>
     <article class="Loginbox container">
       <h1><a href="#"><img src="${ path }/resources/images/logo_g.png" alt="logo"/></a></h1>
       <form action="" method="post">
