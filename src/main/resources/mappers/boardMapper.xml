@@ -195,7 +195,7 @@
 	   <![CDATA[
 	    select *
 	    from (
-	    SELECT   ROWNUM AS recNum, articleno, userid, write_date, title, content, p_code, purpose, thumbnail, price, email
+	    SELECT   ROWNUM AS recNum, articleno, userid, write_date, title, content, p_code, purpose, thumbnail, price, nickname, email
 	    FROM   (
 	            SELECT a.*, m.email
 	            FROM article_buy a, members m
@@ -217,7 +217,7 @@
 	   <![CDATA[
 	    select *
 	    from (
-	    SELECT   ROWNUM AS recNum, articleno, userid, write_date, title, content, p_code, purpose, thumbnail, price, email
+	    SELECT   ROWNUM AS recNum, articleno, userid, write_date, title, content, p_code, purpose, thumbnail, price, nickname, email
 	    FROM   (
 	            SELECT a.*, m.email
 	            FROM article_sale a, members m
