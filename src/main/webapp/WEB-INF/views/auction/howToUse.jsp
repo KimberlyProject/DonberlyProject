@@ -26,8 +26,7 @@
      
     <div class="page_dir container">
       <button id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
-      <a href="/">홈</a> &gt;
-      <a href="#">경매장 이용방법</a> &gt;
+      홈 &gt; 경매장 &gt; 경매장 이용방법
     </div>
     <h1 class="pageTitle"><div>경매장 이용방법</div></h1>
     
