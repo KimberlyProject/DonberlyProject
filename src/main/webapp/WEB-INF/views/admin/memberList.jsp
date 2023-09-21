@@ -155,7 +155,7 @@
 			<!-- 7일 정지 버튼 -->
 			<input class="btn btn-success sbtn" type="button" value="7일 정지" id="Asbtn"/>
 			<!-- 영구 정지 버튼 -->
-			<input class="btn btn-danger sbtn" type="button" value="영구 정지" id="Psbtn"/>
+			<input class="btn btn-danger sbtn" type="button" value="영구 정지" id="psbtn"/>
 		</div>
 		<!-- 화면 하단의 페이지 영역 -->
 		<div class="pagearea">
@@ -214,7 +214,7 @@
     					alert("에러가 발생하였습니다!");
     				},
     				complete:	function(data) {
-    					
+    					alert("작업을 완료하였습니다!");
     				}
     			});
     		};
@@ -223,7 +223,7 @@
 	});
     
       	// 영구정지: 영구정지 버튼을 누를 경우
-    $("#Psbtn").on("click", function() {
+    $("#psbtn").on("click", function() {
 		var inputID = [];
 		$('input:checkbox[name="checkBox"]').each(function(index, item){
             /* 그 중에서도 체크박스에 check 되었을 경우 */
@@ -244,7 +244,7 @@
     					alert("에러가 발생하였습니다!");
     				},
     				complete:	function(data) {
-    					
+    					alert("작업을 완료하였습니다!");
     				}
     			});
     		};

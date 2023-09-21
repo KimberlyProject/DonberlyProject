@@ -171,9 +171,6 @@
 		 	WHERE	1=1
 		]]>
 			<include refid="search"/>
-		<![CDATA[
-			ORDER BY write_Date desc, rownum
-		]]>
 	</select>
 	
 	<select id="saleListTotalCount" parameterType="com.ezen.board.dto.Criteria" resultType="Integer">
@@ -183,57 +180,46 @@
 		 	WHERE	1=1
 		]]>
 			<include refid="search"/>
-		<![CDATA[
-			ORDER BY write_Date desc, rownum
-		]]>
 	</select>
 	
 	<!-- 게시글 목록 가져오기 (Paging) -->
 	<!-- ROWNUM 을 가장 안 쪽에 사용하면 Mapper에서 인식을 못하기 때문에 바깥쪽에 사용하였다. -->
 	<!-- rownum, level 이름으로 인해서 resultMap articlesResult 로 사용한다. -->
 	<select id="boardListPaging" parameterType="com.ezen.board.dto.Criteria" resultMap="buyArticlesResult">
-	   <![CDATA[
-	    select *
-	    from (
-	    SELECT   ROWNUM AS recNum, articleno, userid, write_date, title, content, p_code, purpose, thumbnail, price, email
-	    FROM   (
-	            SELECT a.*, m.email
-	            FROM article_buy a, members m
-	            WHERE      a.userId=m.userId
-	    ]]>
-	       <if test="searchType == 't'.toString()">AND TITLE   LIKE '%' || #{keyword} || '%'</if>
-	      <if test="searchType == 'c'.toString()">AND CONTENT   LIKE '%' || #{keyword} || '%'</if>
-	      <if test="searchType == 'w'.toString()">AND a.nickname      LIKE '%' || #{keyword} || '%'</if>
-	    <![CDATA[
-	      ORDER BY write_Date desc
-	            ) 
-	        ORDER BY recNum
-	        )      
-	    where recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
-	   ]]>
-   </select>
+	<![CDATA[
+	SELECT	*
+	FROM	(
+		SELECT  ROWNUM AS recNum, a.*, m.email
+		FROM article_buy a, members m
+        WHERE		a.userId=m.userId
+ 	]]>
+ 		<if test="searchType == 't'.toString()">AND TITLE	LIKE '%' || #{keyword} || '%'</if>
+		<if test="searchType == 'c'.toString()">AND CONTENT	LIKE '%' || #{keyword} || '%'</if>
+		<if test="searchType == 'w'.toString()">AND a.nickname		LIKE '%' || #{keyword} || '%'</if>
+ 	<![CDATA[
+     )       
+	where recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
+	ORDER BY write_Date desc
+	]]>
+	</select>
 	
 	<select id="saleBoardListPaging" parameterType="com.ezen.board.dto.Criteria" resultMap="saleArticlesResult">
-	   <![CDATA[
-	    select *
-	    from (
-	    SELECT   ROWNUM AS recNum, articleno, userid, write_date, title, content, p_code, purpose, thumbnail, price, email
-	    FROM   (
-	            SELECT a.*, m.email
-	            FROM article_sale a, members m
-	            WHERE      a.userId=m.userId
-	    ]]>
-	       <if test="searchType == 't'.toString()">AND TITLE   LIKE '%' || #{keyword} || '%'</if>
-	      <if test="searchType == 'c'.toString()">AND CONTENT   LIKE '%' || #{keyword} || '%'</if>
-	      <if test="searchType == 'w'.toString()">AND a.nickname      LIKE '%' || #{keyword} || '%'</if>
-	    <![CDATA[
-	      ORDER BY write_Date desc
-	            ) 
-	        ORDER BY recNum
-	        )      
-	    where recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
-	   ]]>
-   </select>
+	<![CDATA[
+	SELECT	*
+	FROM	(
+		SELECT  ROWNUM AS recNum, a.*, m.email
+		FROM article_sale a, members m
+        WHERE		a.userId=m.userId
+ 	]]>
+ 		<if test="searchType == 't'.toString()">AND TITLE	LIKE '%' || #{keyword} || '%'</if>
+		<if test="searchType == 'c'.toString()">AND CONTENT	LIKE '%' || #{keyword} || '%'</if>
+		<if test="searchType == 'w'.toString()">AND a.nickname		LIKE '%' || #{keyword} || '%'</if>
+ 	<![CDATA[
+     )       
+	where recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
+	ORDER BY write_Date desc
+	]]>
+	</select>
 	
 	
 	
