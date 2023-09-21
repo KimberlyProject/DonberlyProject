@@ -48,6 +48,7 @@
                         <div class="row-md-offset-2">
                             <p class="info"><strong>닉네임:</strong> <span id="modalNickname"></span></p>
 		                    <p class="info"><strong>이메일:</strong> <span id="modalEmail"></span></p>
+		                    <p class="info"><strong>아이디:</strong> <span id="modalUserid"></span></p>
                         </div>
                     </div>
                 </div>
@@ -74,7 +75,7 @@
         var confirmReport = confirm("신고하시겠습니까?");
         if (confirmReport) {
             // 신고 처리 로직을 여기에 추가
-            window.location.href = "${path}../ccenter/report?report=" + document.getElementById('modalNickname').innerText;
+            window.location.href = "${path}../ccenter/report?report=" + document.getElementById('modalUserid').innerText;
         } else {
             alert("신고가 취소되었습니다.");
         }
@@ -87,9 +88,12 @@
 function openModal(member) {
     document.getElementById('modalNickname').innerText = member.nickname;
     document.getElementById('modalEmail').innerText = member.email;
+    document.getElementById('modalUserid').innerText = member.userId;
 
     // 현재 로그인된 세션의 정보 가져오기 (예: 세션에 저장된 닉네임)
     var loggedInNickname = "${sessionScope.member.nickname}";
+    var loggedInEmail = "${sessionScope.member.email}";
+    var loggedInUserid = "${sessionScope.member.userId}";
 
     // 클릭한 닉네임과 세션의 닉네임이 같은 경우에만 버튼을 숨깁니다.
     if (member.nickname === loggedInNickname) {

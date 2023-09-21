@@ -73,11 +73,11 @@
             <table style="width: 100%;" class="table" id="table" >
                 <tr>
                     <td><label for="reporter">신고자</label></td>
-                    <td><input type="text" id="reporter" name="reporter" value=${member.userId} readonly></td>
+                    <td><input type="text" id="reporter" name="reporter" value="${member.userId}" readonly></td>
                 </tr>
                 <tr>
 				    <td><label for="reportedUser">신고대상</label></td>
-				    <td><input type="text" id="reportedUser" name="reportedUser" value=${report}></td>
+				    <td><input type="text" id="reportedUser" name="reportedUser" value="${report}" disabled></td>
 				</tr>
                 <tr>
                     <td><label for="reason">신고사유</label></td>
@@ -109,6 +109,11 @@
 <script>
 	$(document).ready(function() {
 	    
+		if($("#reportedUser").val() == "") {
+	          
+	       document.getElementById("reportedUser").disabled	 = false;
+	       }
+		
 		// 문의하기 버튼을 눌렀을 경우 공백있을 때 채워달라는 알림
 	    $("#report-button").on("click", function() {
 	    	
@@ -148,6 +153,6 @@
     }
 </script>
 
+
 </body>
 </html>
-
