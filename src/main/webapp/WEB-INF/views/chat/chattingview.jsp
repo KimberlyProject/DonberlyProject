@@ -367,7 +367,7 @@ span{
 						</div>
 					</div>
 					<br>
-					<button type="button" class="btn btn-danger btn-lg" onclick="linkToOpener()">신고 하기</button>
+					<button type="button" class="btn btn-danger btn-lg" onclick="reportPerson()">신고 하기</button>
 					<br><br>
 					<button type="button" class="btn btn-warning btn-lg" id="getin" onClick="chatOut()">채팅방 나가기</button>
 				</td>
@@ -398,17 +398,18 @@ span{
 
 
 
-function linkToOpener(){
+function reportPerson(){
 	var nickname = $('.nicknick').val();
-	if (confirm("신고하시겠습니까?") == true){    //확인
+	if (confirm("신고하시겠습니까?") == true){//확인
 		if (window.opener && !window.opener.closed){
 			window.opener.location = "${path}/ccenter/report?report="+nickname;
 		}
+		else{
+			window.open("${path}/ccenter/report?report="+nickname);
+		}
 		window.close();
 	 }else{   //취소
-
 	     return false;
-
 	 }
 	
 }
@@ -427,21 +428,20 @@ function getChat(){
 			 "chatId" : $('#chatId').val()
 		 },	
 		 success: function(data){
-			 //console.log(data);
 			 var html="";
 			 
 			 for(var i=0 ; i<data.length;i++){
 				 	var dd = data[i].chatTime;
 				 	var read = "";
 				 	const date = new Date(dd);
-				 	var month = Number(date.getDate());
-				 	//month = month - 2;
+				 	
 				 	if(data[i].chatRead==0){
 				 		read = "";
 				 	}
 				 	else{
 				 		read=data[i].chatRead;
 				 	}
+				 	
 					if(data[i].fromId == $('#userId').val()){
 						html+=
 						"<div class='chat ch2'><div class='textbox'>"+data[i].chatContent+"</div></div>"+
@@ -461,10 +461,7 @@ function getChat(){
 			 chatbox.scrollTop = chatbox.scrollHeight;
 		 },
 		 error:function(request,status,error){
-			 //alert("로그인이 필요합니다.");
-			 //window.close();
 			 console.log("실패");
-			 
 		 },
 		 complete:function(){ 
 			
@@ -477,16 +474,15 @@ $(document).ready(function(){
 	setInterval(getChat,500);
 	
 	var sin = $('#chatContent').val();
-	//setInterval(lastDataAjax, 3000);
 	let count = 0;
 	setInterval(() => console.log(sin), 2000);
 	
-	$('.sendText').on('click',function(){
+	$('.sendText').on('click',function(){ //전송 버튼을 눌렀을 때
 		
 		var con = $('#chatContent').val();
 		var now = new Date();
-		//예약 확정/취소를 선택한다.
-		if($('#chatContent').val()){
+		
+		if($('#chatContent').val()){ //텍스트 박스에 값이 있을 때
 			 $.ajax({
 				 url:	"${path}/chat/chattingview",
 				 type:	"post",
@@ -496,22 +492,17 @@ $(document).ready(function(){
 						 "chatId" : $('#chatId').val()
 				 },	
 				 success: function(){
-					 /*
-					$(".wrap").append(
-						"<div class='chat ch2'><div class='textbox'>"+$('#chatContent').val()+"</div></div>"+
-						"<div class='time2' >"+now.getHours()+"시"+now.getMinutes()+"분"+"</div>"
-					);*/
 					
 				 },
 				 error:function(request,status,error){
 					 console.log("실패");
 				 },
 				 complete:function(){
-					 $('#chatContent').val('');
+					 $('#chatContent').val('');	//텍스트 박스 비우기
 				 }
 			 });
-		}else{//취소(아니오) 버튼을 눌렀을 경우
-			alert("예약을 취소합니다.");
+		}else{
+			alert("내용을 입력해주세요.");
 		}
 		
 	});

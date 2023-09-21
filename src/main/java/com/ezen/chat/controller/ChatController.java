@@ -92,21 +92,21 @@ public class ChatController {
 	public void chattingview(@RequestParam(value="content", required=false) String content,
 			@RequestParam(value="fromId", required=false) String fromId,
 			@RequestParam(value="chatId", required=false) String chatId,
-			Model model,HttpServletRequest request, HttpServletResponse response,RedirectAttributes attr) throws Exception{		
+			HttpServletRequest request, HttpServletResponse response) throws Exception{		
 		//세션 가져오기
 		HttpSession session	= request.getSession();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
 		
 		int ch = Integer.parseInt(chatId);
-		//ch로 chatListDTO 찾기, status로 구별해서 to랑 from 넣기
+		//채팅방 넘버로 chatListDTO 찾기, status로 구별해서 to랑 from 넣기
 		ChatListDTO chatListDTO = chatService.findChatListFromChatId(ch);
 		
 		ChatDTO chatDTO = new ChatDTO();
-		chatDTO.setArtNo(chatListDTO.getArtNo());
-		chatDTO.setChatId(ch);
-		chatDTO.setFromId(fromId);
-		chatDTO.setChatContent(content);
-		chatDTO.setChatRead(1); //chatRead는 1이 기본(보지 않은 상태)
+		chatDTO.setArtNo(chatListDTO.getArtNo());	//채팅이 연결된 게시판 번호 넣기
+		chatDTO.setChatId(ch);						//채팅 방 번호 넣기
+		chatDTO.setFromId(fromId);					//보내는 사람 넣기
+		chatDTO.setChatContent(content); 			//채팅 내용 넣기
+		chatDTO.setChatRead(1); 					//chatRead는 1이 기본(보지 않은 상태)
 		//파는사람과 내가 같으면 사는사람이 
 		if(fromId.equals(chatListDTO.getSeller())) { 
 			chatDTO.setToId(chatListDTO.getBuyer());
@@ -134,34 +134,26 @@ public class ChatController {
 		String viewName = (String) request.getAttribute("viewName");
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
 		String userId = memberDTO.getUserId();
-		System.out.println("###################"+userId);
-		
 		
 		List<ChatListDTO> chatList = chatService.listChat(userId); //chatList 옮김
 		
 		//최근한거 가져오기 채팅방 넘버 별로 최근꺼
 		List<ChatDTO> lastchat = chatService.findLastChat(); 
-        //System.out.println("여기까지는 나오나" + lastchat);
-		//System.out.println("채팅 리스트*******************"+lastchat);
 		
-		//닉네임 찾기 이게 왜 buyArticleDTO인데
+		//닉네임 찾기
 		List<BuyArticleDTO> memberList = chatService.findAllMemeber();
+		//채팅방마다 나에게 온 채팅의 개수
 		List<ChatDTO> count= chatService.countChat(userId);
 		
-		System.out.println(memberList);
+		
 		ModelAndView mav = new ModelAndView(viewName);
-		//mav.addObject("lastChat", lastchat.getLastChat());
-		//System.out.println(lastchat);
-		mav.addObject("chatList",chatList);//넘겨줄 이름, 데이터
+		
+		mav.addObject("chatList",chatList);//넘겨줄 이름, 데이터 채팅방 목록
 		mav.addObject("lastChat",lastchat);//마지막 채팅
 		mav.addObject("nickname",memberList);//닉네임 담은 리스트
 		mav.addObject("count",count);
-		System.out.println("카운트야야야야야야야****************"+count);
-		//mav.addObject("",);
-		//viewName이 없기 때문에 URL로 부터 뷰 이름을 검색한다.
-		// /board/listArticlres.do => /vboard/listArticles
-		//System.out.println("채팅 입장");
-		return mav;		//리턴에 경로 없으면 value값에 do빼서 알아서 찾아간다.
+		
+		return mav;		
 		
 	}
 	
@@ -207,24 +199,17 @@ public class ChatController {
 	//getChat
 	@ResponseBody
 	@RequestMapping(value="/getChat", method=RequestMethod.POST)
-	public List<ChatDTO> getChat(@RequestParam(value="chatId", required=false) String chatId,@RequestParam(value="fromId", required=false) String fromId,HttpServletRequest request)throws Exception {
+	public List<ChatDTO> getChat(@RequestParam(value="chatId", required=false) String chatId,
+			@RequestParam(value="fromId", required=false) String fromId,HttpServletRequest request)throws Exception {
 		HttpSession session= request.getSession();
 		MemberDTO memberDTO = (MemberDTO) session.getAttribute("member");
-		ChatDTO chatDTO1 = new ChatDTO();
-		ChatDTO chatDTO2 = new ChatDTO(); //chatDTO2가 최근 녀석
 		int ch = Integer.parseInt(chatId);
-		chatDTO1.setChatId(ch);
-		chatDTO1.setFromId(fromId);
-		//fromId가 toId인 chatDTO 찾기
-		chatDTO2 = chatService.findContent(chatDTO1);
-		//System.out.println("**************************챗아이디="+chatId+"프롬아이디="+fromId+"가장 최근 컨텐츠"+newchatDTO.getChatContent()+"이번에 쓴 컨텐츠"+chatDTO2.getChatContent());
-		//System.out.println(chatDTO2);
-		readChat(memberDTO.getUserId(), ch);
-		List<ChatDTO> list =  chatService.chatView(ch);
+		
+		//toId가 내 아이디인 데이터가 있다면 그걸 0으로 바꿔라(읽었단 뜻이니까)
+		readChat(memberDTO.getUserId(), ch); //읽었으면 chatRead를 0으로 바꿔줌
+		List<ChatDTO> list =  chatService.chatView(ch); //ch 채팅방에 있는 모든 내용 가져오기
 		System.out.println(list);
 		return list;
-		
-		
 	}
 	
 	//채팅방과 채팅내용 지우기
@@ -247,13 +232,12 @@ public class ChatController {
 	
 	//채팅 읽었는지 확인하기 db에 칼럼 넣기
 	public void readChat(String toId, int chatId) throws Exception{
-		//채팅 버튼을 누르면 이 클래스 호출
-		//System.out.println("&&&&&&&&&&&&&readChat이 실행되었다&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+		
 		ChatDTO chatDTO = new ChatDTO();
 		
 		chatDTO.setToId(toId);
 		chatDTO.setChatId(chatId);
-		chatService.readChat(chatDTO);
+		chatService.readChat(chatDTO); //chatRead를 0으로 바꿔줌
 	}
 	//안읽은 채팅의 개수
 	public List countChat(String userId) throws Exception{
@@ -275,12 +259,7 @@ public class ChatController {
 		//System.out.println("왜 안돼애애애애애애애 챗디티오"+chatDTO);
 		//session.setAttribute("chatAlarm", chatDTO);
 		return chatDTO;
-		
-		
-		
-		
 	}
-	
-	
+		
 	
 }
