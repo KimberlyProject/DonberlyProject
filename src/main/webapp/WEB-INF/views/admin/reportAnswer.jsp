@@ -122,7 +122,9 @@
 						<br/>
 						<br/>
 						<div>
-							<button id ="replybtn" class="btn btn-success col-sm-1" type="button">답변하기</button>
+							<button id ="replybtn" class="btn btn-success" type="button">답변하기</button>
+							<button id ="Asbtn" class="btn btn-warning" type="button">7일 정지 하기</button>
+							<button id ="Psbtn" class="btn btn-danger" type="button">영구 정지 하기</button>
 						</div>
 					</td>
 					
