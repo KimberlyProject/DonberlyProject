@@ -75,9 +75,10 @@
                     <td><label for="reporter">신고자</label></td>
                     <td><input type="text" id="reporter" name="reporter" value="${member.userId}" readonly></td>
                 </tr>
+                        
                 <tr>
 				    <td><label for="reportedUser">신고대상</label></td>
-				    <td><input type="text" id="reportedUser" name="reportedUser" value="${report}" disabled></td>
+				    <td><input type="text" id="reportedUser" name="reportedUser" value="${report}" readonly ></td>    
 				</tr>
                 <tr>
                     <td><label for="reason">신고사유</label></td>
@@ -104,14 +105,15 @@
             </table>
         </form>    
     </div> 
-</div>
+
 
 <script>
 	$(document).ready(function() {
 	    
 		if($("#reportedUser").val() == "") {
-	          
-	       document.getElementById("reportedUser").disabled	 = false;
+	       //$('#reportedUser').attr('readonly', false);
+	       $("#reportedUser").removeAttr("readonly");
+	       //document.getElementById("reportedUser").readonly	 = false;
 	       }
 		
 		// 문의하기 버튼을 눌렀을 경우 공백있을 때 채워달라는 알림
@@ -153,6 +155,6 @@
     }
 </script>
 
-
 </body>
 </html>
+
