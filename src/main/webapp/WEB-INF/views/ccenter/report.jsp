@@ -137,7 +137,7 @@
 	       
 	       if(confirem == 1) {
 	    	   
-		          alert("신고가 완료");
+		          alert("신고처리가 완료되었습니다.");
 		          $("#reportedUser").focus();
 		          
 		   } else {
