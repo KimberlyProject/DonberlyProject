@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ezen.ccenter.service.CcenterService;
 import com.ezen.member.dto.MemberDTO;
+import com.ezen.member.service.MemberService;
 
 
 
@@ -39,6 +40,9 @@ public class CcenterController {
 	@Inject
 	@Autowired
 	private CcenterService ccenterService;
+	
+	@Autowired
+	private MemberService memberService;
 	
 	//---------------------------------------------------------------------------------------------------------------------------------------
 	// 공지사항 화면 접속
@@ -222,4 +226,25 @@ public class CcenterController {
 		return resEnt;
 		
 	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+		// 아이디 중복 검사
+		//-----------------------------------------------------------------------------------------------------------
+		@ResponseBody
+		@RequestMapping(value="/idCheck", method=RequestMethod.POST)
+		public int idCheck(MemberDTO memberDTO) throws Exception {
+			
+			logger.info("아이디 중복 검사 : " + memberDTO);
+			
+			int result = memberService.idCheck(memberDTO);
+			logger.info("아이디 중복 검사 결과 : " + result);
+			
+			// result 값 : 1이면 아이디에 해당하는 정보가 이미 존재
+			//			   0이면 아이디에 해당하는 정보가 존재하지 않는다.
+			return result;
+				
+		} // End - public int idCheck(MemberDTO memberDTO)
+		
+	
+	
 }

@@ -78,7 +78,9 @@
                         
                 <tr>
 				    <td><label for="reportedUser">신고대상</label></td>
-				    <td><input type="text" id="reportedUser" name="reportedUser" value="${report}" readonly ></td>    
+				  
+				    <td><input type="text" id="reportedUser" name="reportedUser" value="${report}" readonly >&nbsp;&nbsp;<span id="msg"></span></td>
+						
 				</tr>
                 <tr>
                     <td><label for="reason">신고사유</label></td>
@@ -109,6 +111,8 @@
 
 <script>
 	$(document).ready(function() {
+		
+		var confirem;
 	    
 		if($("#reportedUser").val() == "") {
 	       //$('#reportedUser').attr('readonly', false);
@@ -124,17 +128,66 @@
 	          $("#reportedUser").focus();
 	          return false;
 	       }
+
 	       if($("#content").val() == "") {
 	          alert("내용을 입력해주세요.");
 	          $("#content").focus();
 	          return false;
 	       }
 	       
-	      
+	       if(confirem) {
+		          alert("신고가 완료,");
+		          $("#reportedUser").focus();
+		          
+		   } else {
+			   alert("확인된 아이디가 없습니다.");
+			   return false;
+		   }
 	    });
 	    
 	    
 	 });
+	
+	
+	
+	//-------------------------------------------------------------------------------------------------
+	// 아이디 입력란에 글자를 쓰면 실시간으로 사용이 가능한지 아닌지 검사한다.
+	//-------------------------------------------------------------------------------------------------
+	$("#reportedUser").on("input", function() {
+		var inputID = $('#reportedUser').val();
+		// alert(inputID);
+		
+		$.ajax({
+			url:			"/ccenter/idCheck",
+			type:			"post",
+			dataType:		"json",
+			data:			{"userId" : $('#reportedUser').val()},
+			success:		function(data) {
+				confirem = data   //confirem에 ajax가져온 data를 이용할수 있음.
+				// alert("중복검사결과 : " + data);
+				// if(inputID == "" && data == '0') {
+				if(data == 1) {
+					document.getElementById("msg").innerHTML =  " ";
+					$("#msg").css("color", "green");
+				}
+				if(inputID != "" && data == 0) {
+					document.getElementById("msg").innerHTML = "존재하지 않는 아이디입니다.";
+					$("#msg").css("color", "red");
+				} 
+				
+				
+			},
+			error: function(info) {
+				// alert("에러가 발생하였습니다!");
+			},
+			complete: function(info) {
+				// alert("작업을 완료하였습니다.");
+			}
+		});
+		
+	});
+	
+	
 </script>
 
 
