@@ -135,8 +135,9 @@
 	          return false;
 	       }
 	       
-	       if(confirem) {
-		          alert("신고가 완료,");
+	       if(confirem == 1) {
+	    	   
+		          alert("신고가 완료");
 		          $("#reportedUser").focus();
 		          
 		   } else {
@@ -146,7 +147,7 @@
 	    });
 	    
 	    
-	 });
+	
 	
 	
 	
@@ -186,7 +187,7 @@
 		});
 		
 	});
-	
+});	
 	
 </script>
 
