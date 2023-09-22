@@ -171,7 +171,7 @@
 				<tr>
 					<th class="cate">판매자</th>
 					<th class="colon">:</th>
-					<th colspan="4">[<a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}'})">${article.aucNick}</a>]님
+					<th colspan="4">[<a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}', userId: '${article.aucId }'})">${article.aucNick}</a>]님
 				</tr>
 				<tr>
 					<th class="cate">현재 입찰가</th><th class="colon">:</th>

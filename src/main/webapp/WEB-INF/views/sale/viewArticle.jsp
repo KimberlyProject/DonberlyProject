@@ -111,7 +111,7 @@
 						</li>
 					</ul>
 					<ul class="item">
-						<li>작성자 : <a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}'})">${article.nickname}</a><li>
+						<li>작성자 : <a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}', userId: '${article.userId }'})">${article.nickname}</a><li>
 							<input id="i_price" type="hidden" class="line" width=10px; value="${article.nickname }" disabled/>
 							
 					</ul>

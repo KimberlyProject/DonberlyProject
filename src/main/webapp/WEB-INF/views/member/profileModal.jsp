@@ -28,6 +28,10 @@
     .modal-body {
     	background-image: url("${path}../../resources/images/profliebackground.jpeg");
     }
+    
+    .a {
+    	
+    }
 </style>
 <!-- 모달 시작 -->
 <form name="modalform" method="post"   action="${Path}/ccenter/report" >
@@ -48,6 +52,7 @@
                         <div class="row-md-offset-2">
                             <p class="info"><strong>닉네임:</strong> <span id="modalNickname"></span></p>
 		                    <p class="info"><strong>이메일:</strong> <span id="modalEmail"></span></p>
+		                    <div id="a" style="display:none;" class="info"><strong>아이디:</strong> <span id="modalUserId"></span></div>
                         </div>
                     </div>
                 </div>
@@ -74,7 +79,7 @@
         var confirmReport = confirm("신고하시겠습니까?");
         if (confirmReport) {
             // 신고 처리 로직을 여기에 추가
-            window.location.href = "${path}../ccenter/report?report=" + document.getElementById('modalNickname').innerText;
+            window.location.href = "${path}../ccenter/report?report=" + document.getElementById('modalUserId').innerText;
         } else {
             alert("신고가 취소되었습니다.");
         }
@@ -87,6 +92,7 @@
 function openModal(member) {
     document.getElementById('modalNickname').innerText = member.nickname;
     document.getElementById('modalEmail').innerText = member.email;
+    document.getElementById('modalUserId').innerText = member.userId;
 
     // 현재 로그인된 세션의 정보 가져오기 (예: 세션에 저장된 닉네임)
     var loggedInNickname = "${sessionScope.member.nickname}";
