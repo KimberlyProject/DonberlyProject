@@ -96,6 +96,8 @@ function openModal(member) {
 
     // 현재 로그인된 세션의 정보 가져오기 (예: 세션에 저장된 닉네임)
     var loggedInNickname = "${sessionScope.member.nickname}";
+    var loggedInEmail = "${sessionScope.member.email}";
+    var loggedInUserid = "${sessionScope.member.userId}";
 
     // 클릭한 닉네임과 세션의 닉네임이 같은 경우에만 버튼을 숨깁니다.
     if (member.nickname === loggedInNickname) {

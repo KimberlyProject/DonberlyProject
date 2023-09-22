@@ -171,9 +171,6 @@
 		 	WHERE	1=1
 		]]>
 			<include refid="search"/>
-		<![CDATA[
-			ORDER BY write_Date desc, rownum
-		]]>
 	</select>
 	
 	<select id="saleListTotalCount" parameterType="com.ezen.board.dto.Criteria" resultType="Integer">
@@ -183,9 +180,6 @@
 		 	WHERE	1=1
 		]]>
 			<include refid="search"/>
-		<![CDATA[
-			ORDER BY write_Date desc, rownum
-		]]>
 	</select>
 	
 	<!-- 게시글 목록 가져오기 (Paging) -->

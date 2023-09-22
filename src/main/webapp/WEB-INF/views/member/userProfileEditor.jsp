@@ -228,6 +228,10 @@
 		            return;
 		        }
 		
+		        if (address2 === "") {
+		            alert("상세주소를 입력해주세요.");
+		            return;
+		        }
 		
 		        if (tel === "") {
 		            alert("연락처를 입력해주세요.");
