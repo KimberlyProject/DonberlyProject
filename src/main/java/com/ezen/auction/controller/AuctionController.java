@@ -333,7 +333,7 @@ public class AuctionController {
 		}
 		auctionService.tryBid(articleMap);
 		
-		return "redirect:/auction/auction_main";
+		return "redirect:/auction/auction_maintosearch?page=1&searchType=&keyword=";
 	}//tryBid
 	
 	//구매자 상한가 구매하기
