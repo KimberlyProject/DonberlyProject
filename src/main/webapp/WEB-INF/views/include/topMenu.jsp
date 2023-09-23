@@ -2,62 +2,63 @@
 <%@ taglib prefix="c"	uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!-- header -->
-<script>
-$(document).ready(function(){
-	console.log("시작");
-	alarm();
-	//setInterval(alarm,500);
-});
-function gochat(chatId){
-	window.open("${path}/chat/chattingview?chatId="+chatId , "_blank", "width=940, height=750");
-}
-function alarm(){
-	$.ajax({
-		 url:	"${path}/chat/alarm",
-		 type:	"post",
-		 dataType: "json",
-		 data:	{
-			 
-		 },	
-		 success: function(data){
-			 //console.log(data);
-			 var html="";
-			 var cnt = data.length;
-			 
-			 for(var i=0 ; i<data.length;i++){
-				html+=
-					"<li><a onClick='gochat("+data[i].chatId+")'>"+ data[i].fromId +"님이 메시지를 보내셨습니다.</a></li>";
+<c:if test="${ member != null }">
+	<script>
+	$(document).ready(function(){
+		alarm();
+		//setInterval(alarm,500);
+	});
+	function gochat(chatId){
+		window.open("${path}/chat/chattingview?chatId="+chatId , "_blank", "width=940, height=750");
+	}
+	function alarm(){
+		$.ajax({
+			 url:	"${path}/chat/alarm",
+			 type:	"post",
+			 dataType: "json", 
+			 data:	{
+				 
+			 },	
+			 success: function(data){
+				 //console.log(data);
+				 var html="";
+				 var cnt = data.length;
+				 
+				 for(var i=0 ; i<data.length;i++){
+					html+=
+						"<li><a onClick='gochat("+data[i].chatId+")'>"+ data[i].fromId +"님이 메시지를 보내셨습니다.</a></li>";
+				 }
+				 if(cnt==0){
+					 $('.chatAlarm').html(
+								html
+						  );
+				 }
+				 else{
+					 $('.chatAlarm').html(
+						html
+					 );	 
+				 }
+				 
+				 if(cnt==0){
+					 cnt=null;
+				 }
+				 
+				 $('.alerm_num').html(
+					cnt
+				 );
+			 },
+			 error:function(request,status,error){
+				 
+				 console.log("실패");
+				 
+			 },
+			 complete:function(){ 
+				 
 			 }
-			 if(cnt==0){
-				 $('.chatAlarm').html(
-							html
-					  );
-			 }
-			 else{
-				 $('.chatAlarm').html(
-					html
-				 );	 
-			 }
-			 
-			 if(cnt==0){
-				 cnt=null;
-			 }
-			 
-			 $('.alerm_num').html(
-				cnt
-			 );
-		 },
-		 error:function(request,status,error){
-			 
-			 console.log("실패");
-			 
-		 },
-		 complete:function(){ 
-			 
-		 }
-	 });
-}
-</script>
+		 });
+	}
+	</script>
+</c:if>
 <script>
 if("${memberlevel.userStatus}" == "N1"){
 	alert("${memberlevel.downTime}까지 정지상태입니다.");

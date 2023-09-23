@@ -98,7 +98,7 @@
     <h1 class="pageTitle"><div>회원 가입</div></h1>
 
 <div id="membership">
-      <form action="/member/membership" method="post" id="memberForm">
+      <form action="${path}/member/membership" method="post" id="memberForm">
         <div>
           <label for="user_id">아 이 디</label>
           <input type="text" id="userID" name="userId"/>
@@ -174,7 +174,7 @@ $(document).ready(function() {
 	// 회원가입취소 버튼을 누르면 
 	//-------------------------------------------------------------------------------------------------
 	$(".cancel").on("click", function() {
-		location.href="/member/login";
+		location.href="${path}/member/login";
 	});
 	
 	//-------------------------------------------------------------------------------------------------
@@ -185,7 +185,7 @@ $(document).ready(function() {
 		// alert(inputID);
 		
 		$.ajax({
-			url:			"/member/idCheck",
+			url:			"${path}/member/idCheck",
 			type:			"post",
 			dataType:		"json",
 			data:			{"userId" : $('#userID').val()},
@@ -219,7 +219,7 @@ $(document).ready(function() {
         var inputNickname = $("#nickname").val();
 
         $.ajax({
-            url: "/member/nickCheck",
+            url: "${path}/member/nickCheck",
             type: "post",
             dataType: "json",
             data: {"nickname": inputNickname},
@@ -314,7 +314,7 @@ $(document).ready(function() {
 
 	        // 페이지를 이동하거나 필요한 작업을 수행할 수 있습니다.
 	        // 예를 들어, 회원가입 성공 후 메인 페이지로 리다이렉트할 수 있습니다.
-	        window.location.href = "member/login"; // 로그인 페이지 이동
+	        window.location.href = "${path}member/login"; // 로그인 페이지 이동
 	    }
 
     $('#memberForm').submit();
