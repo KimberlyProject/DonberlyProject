@@ -11,6 +11,8 @@ bin/
 *.tar.gz
 *.rar
 
+root-context.xml
+
 # Servers 폴더
 Servers
 
