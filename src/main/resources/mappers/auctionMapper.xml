@@ -8,7 +8,7 @@
  	<select id ="selectNewAucCode" resultType="int">
  		<![CDATA[
  			SELECT	NVL(MAX(aucCode), 0) + 1
-			FROM	AUCTION
+			FROM	Auction
  		]]>
  	</select>
  	
@@ -16,10 +16,10 @@
   	<insert id="insertNewArticle" parameterType="java.util.Map">
   		<![CDATA[
   			INSERT INTO
-  			AUCTION (aucCode, minPrice, maxPrice, writeDate, title, content, nowBid, 
+  			Auction (aucCode, minPrice, maxPrice, writeDate, title, content, nowBid, 
   					bidRate, aucId, status, deadline, aucNick)
-  			VALUES (#{aucCode}, #{minPrice}, #{maxPrice}, sysdate, #{title}, #{content}, #{minPrice}, 
-  					#{bidRate}, #{aucId}, 0, sysdate+#{deadlineRate},  #{aucNick})
+  			VALUES (#{aucCode}, #{minPrice}, #{maxPrice}, NOW(), #{title}, #{content}, #{minPrice}, 
+  					#{bidRate}, #{aucId}, 0, NOW()+#{deadlineRate},  #{aucNick})
   		]]>
   	</insert>
   	
@@ -27,7 +27,7 @@
  	<select id ="selectNewImgFileNo" resultType="int">
  		<![CDATA[
  			SELECT NVL(MAX(imgNo), 0) + 1 
- 			FROM AUCIMG
+ 			FROM AucImg
  		]]>
  	</select>
   	
@@ -61,7 +61,7 @@
     <select id="pullArticleInfo" resultMap="aucArticle">
 		<![CDATA[
 			SELECT  a.*, m.nickname, m.email
-			FROM	AUCTION a, members m
+			FROM	Auction a, Members m
 			WHERE	a.aucId = m.userId
 			ORDER BY writeDate desc
 		]]>
@@ -78,7 +78,7 @@
     <select id="pullArticleImg" resultMap="aucImage">
 		<![CDATA[
 			SELECT *
-			FROM AUCIMG
+			FROM AucImg
 		]]>
     </select>
  
@@ -86,7 +86,7 @@
    <select id="pullArticleInfoDetail" parameterType="int" resultType="auctionDTO">
    		<![CDATA[
    			SELECT  a.*, m.nickname, m.email
-			FROM	AUCTION a, members m
+			FROM	Auction a, Members m
 			WHERE	a.aucId = m.userId
 			AND		aucCode = #{aucCode}
 			ORDER BY writeDate desc
@@ -97,7 +97,7 @@
    <select id="pullArticleImgDetail" parameterType="int" resultType="aucImgDTO">
 	     <![CDATA[
 	     	SELECT *
-	     	FROM AUCIMG
+	     	FROM AucImg
 	     	WHERE aucCode = #{aucCode} 
 	     ]]>
    </select>
@@ -105,7 +105,7 @@
    <!-- auctionOff Query -->
 	<delete id="auctionOff" parameterType="int">
 		<![CDATA[
-			DELETE FROM AUCTION
+			DELETE FROM Auction
 			WHERE  aucCode = #{aucCode}
 		]]>
 	</delete>
@@ -113,7 +113,7 @@
 	<!-- saleNow Query -->
 	<update id="saleNow" parameterType="java.util.Map">
 		<![CDATA[
-			UPDATE	AUCTION
+			UPDATE	Auction
 			SET		status		= 1,
 					cstmId		= #{cstmId}
 			WHERE	aucCode	= #{aucCode}
@@ -123,7 +123,7 @@
 	<!-- tryBid Query -->
 	<update id="tryBid" parameterType="java.util.Map">
 		<![CDATA[
-			UPDATE	AUCTION
+			UPDATE	Auction
 			SET		cstmId = #{cstmId},
 					nowBid = #{nowBid}
 			WHERE	aucCode	= #{aucCode}
@@ -133,7 +133,7 @@
 	<!-- buyNow Query -->
 	<update id="buyNow" parameterType="java.util.Map">
 		<![CDATA[
-			UPDATE	AUCTION
+			UPDATE	Auction
 			SET		cstmId = #{cstmId},
 					nowBid = #{maxPrice},
 					status = 1
@@ -155,7 +155,7 @@
 	<select id="auctionTotalCount" parameterType="com.ezen.auction.dto.SearchCriteria" resultType="integer">
 		<![CDATA[
 			 SELECT COUNT(*)
-			 FROM auction
+			 FROM Auction
 			 WHERE 1=1
 		]]> <include refid="search"/>	
 	</select>
@@ -163,14 +163,16 @@
 	<!-- 게시글 목록 가져오기(paging) -->
 	<select id="auctionPaging" parameterType="com.ezen.auction.dto.SearchCriteria" resultMap="aucArticle">
 		<![CDATA[
-        	SELECT a.*, m.nickname, m.email
-			FROM AUCTION a, members m
-			WHERE 1=1
-			AND  a.aucId = m.userId
+        	SELECT	recNum, aucCode, minPrice, maxPrice, writeDate, title, content, nowBid, bidRate, aucId, status, deadline, aucNick
+			FROM	(
+				SELECT  @ROWNUM:=@rownum+1 AS recNum, a.*
+				FROM Auction a, Members m, (SELECT @ROWNUM:=0) R
+		        WHERE a.aucId = m.userId
 	    ]]> <include refid="search"/>
 	    <![CDATA[
-	        ORDER BY aucCode DESC
-	        OFFSET #{perPageNum} * (#{page} - 1) ROWS FETCH NEXT #{perPageNum} ROWS ONLY
+	        ) AucList, (SELECT @ROWNUM := 0 ) NewROWNUM
+	        where recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
+			ORDER BY writeDate desc
 	    ]]>
 	</select>
 	
@@ -178,9 +180,9 @@
 	<select id="auctionPagingImg" parameterType="int" resultMap="aucImage">
 		<![CDATA[
 			SELECT *
-			FROM aucImg
+			FROM AucImg
 			WHERE aucCode = #{aucCode}
-			AND imgNo = (SELECT MIN(imgNo) FROM aucImg WHERE aucCode = #{aucCode})
+			AND imgNo = (SELECT MIN(imgNo) FROM AucImg WHERE aucCode = #{aucCode})
 		]]>
  	</select>
  	
@@ -188,7 +190,7 @@
     <select id="myauctionArticles" parameterType="String" resultMap="aucArticle">
 		<![CDATA[
 			SELECT  *
-			FROM   AUCTION
+			FROM   Auction
 			WHERE aucId = #{aucId}
 			ORDER BY writeDate desc
 		]]>
@@ -198,7 +200,7 @@
     <select id="mybidArticles" parameterType="String" resultMap="aucArticle">
 		<![CDATA[
 			SELECT  a.*, m.nickname, m.email
-			FROM   AUCTION a, members m
+			FROM   Auction a, Members m
 			WHERE cstmId = #{cstmId}
 			AND		a.aucId = m.userId
 			ORDER BY writeDate desc
@@ -209,7 +211,7 @@
     <select id="mypageImg" parameterType="int" resultMap="aucImage">
 		<![CDATA[
 			SELECT *
-			FROM AUCIMG
+			FROM Auction
 			WHERE aucCode = #{aucCode}
 		]]>
     </select>
@@ -218,7 +220,7 @@
 	<select id="myauctionTotalCount" parameterType="com.ezen.auction.dto.SearchCriteria" resultType="integer">
 		<![CDATA[
 			 SELECT COUNT(*)
-			 FROM auction
+			 FROM Auction
 			 WHERE aucId = #{aucId}
 		]]>
 	</select>
@@ -227,7 +229,7 @@
 	<select id="mybidTotalCount" parameterType="com.ezen.auction.dto.SearchCriteria" resultType="integer">
 		<![CDATA[
 			 SELECT COUNT(*)
-			 FROM auction
+			 FROM Auction
 			 WHERE cstmId = #{cstmId}
 		]]>
 	</select>
