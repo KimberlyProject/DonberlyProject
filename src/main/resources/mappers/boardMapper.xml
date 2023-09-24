@@ -75,7 +75,7 @@
 		<![CDATA[
 			INSERT INTO article_buy
 					(articleNO,  userId, write_date,	title,		content,	 thumbnail, price, p_code, nickname)
-			VALUES 	(#{articleNO}, #{userId}, sysdate,	#{title},	#{content},	#{thumbnail}, #{price} , #{p_code}, #{nickname})
+			VALUES 	(#{articleNO}, #{userId}, NOW(),	#{title},	#{content},	#{thumbnail}, #{price} , #{p_code}, #{nickname})
 		]]>
 	</insert>
 	
@@ -83,7 +83,7 @@
 		<![CDATA[
 			INSERT INTO article_sale
 					(articleNO,  userId, write_date,	title,		content,	 thumbnail, price, p_code, nickname)
-			VALUES 	(#{articleNO}, #{userId}, sysdate,	#{title},	#{content},	#{thumbnail}, #{price} , #{p_code}, #{nickname})
+			VALUES 	(#{articleNO}, #{userId}, NOW(),	#{title},	#{content},	#{thumbnail}, #{price} , #{p_code}, #{nickname})
 		]]>
 	</insert>
 
@@ -92,7 +92,7 @@
 		<![CDATA[
 		
 			SELECT  a.*, m.email
-			FROM article_buy a, members m
+			FROM article_buy a, Members m
 	        WHERE		a.userId=m.userId
 			and	articleNO = #{articleNO}
 		]]>
@@ -101,7 +101,7 @@
 	<select id="saleSelectArticle" parameterType="int" resultType="saleArticleDTO">
 		<![CDATA[
 			SELECT  a.*, m.email
-			FROM article_sale a, members m
+			FROM article_sale a, Members m
 	        WHERE		a.userId=m.userId
 			and	articleNO = #{articleNO}
 		]]>
@@ -189,10 +189,10 @@
 	   <![CDATA[
 	    select *
 	    from (
-	    SELECT   ROWNUM AS recNum, articleno, userid, write_date, title, content, p_code, purpose, thumbnail, price, nickname, email
+	    SELECT   recNum, articleno, userid, write_date, title, content, p_code, purpose, thumbnail, price, nickname, email
 	    FROM   (
-	            SELECT a.*, m.email
-	            FROM article_buy a, members m
+	            SELECT @ROWNUM:=@ROWNUM+1 AS recNum, a.*, m.email
+	            FROM article_buy a, Members m, (SELECT @ROWNUM:=0) R
 	            WHERE      a.userId=m.userId
 	    ]]>
 	       <if test="searchType == 't'.toString()">AND TITLE   LIKE '%' || #{keyword} || '%'</if>
@@ -200,9 +200,9 @@
 	      <if test="searchType == 'w'.toString()">AND a.nickname      LIKE '%' || #{keyword} || '%'</if>
 	    <![CDATA[
 	      ORDER BY write_Date desc
-	            ) 
+	            ) RecList
 	        ORDER BY recNum
-	        )      
+	        ) ArticleList
 	    where recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
 	   ]]>
    </select>
@@ -211,10 +211,10 @@
 	   <![CDATA[
 	    select *
 	    from (
-	    SELECT   ROWNUM AS recNum, articleno, userid, write_date, title, content, p_code, purpose, thumbnail, price, nickname, email
+	    SELECT   recNum, articleno, userid, write_date, title, content, p_code, purpose, thumbnail, price, nickname, email
 	    FROM   (
-	            SELECT a.*, m.email
-	            FROM article_sale a, members m
+	            SELECT @ROWNUM:=@rownum+1 AS recNum, a.*, m.email
+	            FROM article_sale a, Members m, (SELECT @ROWNUM:=0) R
 	            WHERE      a.userId=m.userId
 	    ]]>
 	       <if test="searchType == 't'.toString()">AND TITLE   LIKE '%' || #{keyword} || '%'</if>
@@ -222,9 +222,9 @@
 	      <if test="searchType == 'w'.toString()">AND a.nickname      LIKE '%' || #{keyword} || '%'</if>
 	    <![CDATA[
 	      ORDER BY write_Date desc
-	            ) 
+	            ) RecList
 	        ORDER BY recNum
-	        )      
+	        ) ArticleList  
 	    where recNum BETWEEN (#{page} - 1) * #{perPageNum} + 1 AND #{page} * #{perPageNum}
 	   ]]>
    </select>
