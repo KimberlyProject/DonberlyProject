@@ -20,6 +20,7 @@ public class FileDownloadController {
 	// 업로드된 폴더와 위치가 같아야 한다.
 	//-----------------------------------------------------------------------------------------------------------
 	private static final String ARTICLE_IMAGE_REPO = "C:\\data\\workspace\\DonberlyProject\\src\\main\\webapp\\resources\\images\\board\\article_image";
+	//private static final String ARTICLE_IMAGE_REPO = "tomcat/webapps/DonberlyProject/resources/images/board/article_image";
 	
 	//-----------------------------------------------------------------------------------------------------------
 	// 이미지 파일 다운로드
