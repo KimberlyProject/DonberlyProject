@@ -38,7 +38,7 @@
 		  <li>
 		  	  <a href="${path}/auction/myAuction?aucId=${member.userId}">내 경매</a>
 			  <ul>
-			  	<li><a href="${path}/mypage/marketInfo.do">입찰 내역</a></li>
+			  	<li><a href="${path}/auction/myBid?cstmId=${member.nickname}">입찰 내역</a></li>
 			  </ul>
 		  </li>
 		  <li><a href="${path}/chat/chat_list">채팅목록</a></li>

@@ -19,7 +19,7 @@ public class FileDownloadController {
 	//-----------------------------------------------------------------------------------------------------------
 	// 업로드된 폴더와 위치가 같아야 한다.
 	//-----------------------------------------------------------------------------------------------------------
-	private static final String ARTICLE_IMAGE_REPO = "C:\\data\\workspace\\DonberlyProject\\src\\main\\webapp\\resources\\images\\board\\article_image";
+	private static final String ARTICLE_IMAGE_REPO = "C://data\\workspace\\DonberlyProject\\src\\main\\webapp\\resources\\images\\board\\article_image";
 	//private static final String ARTICLE_IMAGE_REPO = "tomcat/webapps/DonberlyProject/resources/images/board/article_image";
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ public class FileDownloadController {
 							HttpServletResponse response)	throws Exception {
 								
 		OutputStream out = response.getOutputStream();
-		String downFile	 = ARTICLE_IMAGE_REPO + "\\" + articleNO + "\\" + thumbnail;
+		String downFile	 = ARTICLE_IMAGE_REPO + "/" + articleNO + "/" + thumbnail;
 		File file = new File(downFile);
 	
 		response.setHeader("Cache-Control", "no-cache");

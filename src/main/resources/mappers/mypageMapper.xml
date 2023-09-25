@@ -12,7 +12,7 @@
    
    <insert id="insertcalendar" parameterType="com.ezen.mypage.dto.CalendarDTO">
    		INSERT INTO Calendar 
-   		VALUES ( (SELECT IFNULL(max(CALENDARID),0) FROM Calendar) + 1, #{userId}, #{articleId}, #{status}, #{schedule}, #{contents})   		
+   		VALUES ( (SELECT IFNULL(max(CALENDARID),0) FROM Calendar MaxCal) + 1, #{userId}, #{articleId}, #{status}, #{schedule}, #{contents})   		
    </insert>
    <delete id="deletecalendar" parameterType="int">
    		DELETE FROM Calendar WHERE calendarId = #{calId}

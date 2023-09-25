@@ -97,9 +97,7 @@
 	<%@ include file="../include/sidebar.jsp" %>
     <div class="page_dir container">
       <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
-      <a href="/">홈</a> &gt;
-      <a href="#">마이페이지</a> &gt;
-       <a href="#">내가 올린 경매 상품</a> &gt;
+      홈 &gt; 마이페이지 &gt; 내가 올린 경매 상품
     </div>
     <h1 class="pageTitle"><div>내가 올린 경매 상품</div></h1>
     
@@ -233,7 +231,7 @@
 		</c:choose>
 		
 		<div class="middlecenter"> <!-- 페이징 -->
-				<div class="btngroup">
+			<div class="btngroup">
 				<c:if test="${pageMaker.prev}">				
 				<div class="item"><!-- 숫자 버튼 -->
 					<a href='<c:url value="${path}/auction//myAuction?aucId=${member.userId}"/>'>
@@ -253,9 +251,9 @@
 					</a>
 				</div>
 				</c:if>
-				</div>
 			</div>
 		</div>
+	</div>
 		
 		
 		
@@ -265,7 +263,7 @@
 			<input type="hidden" name="searchType" value="${searchType}">
 			<input type="hidden" name="keyword" value="${keyword}">
 		</form>
-	</div><!-- <div class="container"> -->
+	<!-- <div class="container"> -->
 
 
 
@@ -290,7 +288,7 @@
 		$('#chat').on("click", function(seller,buyer,artNo){
 			console.log("판매자 : "+$('.seller').val()+"구매자 : "+$('.buyer').val()+"넘버 : "+$('.artNo').val());
 			$.ajax({
-				 url:	"/chat/makeRoom2",
+				 url:	"${path}/chat/makeRoom2",
 				 type:	"post",
 				 dataType: "text",
 				 contentType: 'application/json',
@@ -329,7 +327,7 @@
 	  $('.chat').on("click", function(){
 			console.log("판매자 : "+$('.seller').val()+"구매자 : "+$('.buyer').val()+"넘버 : "+$('.artNo').val());
 			$.ajax({
-				 url:	"/chat/makeRoom2",
+				 url:	"${path}/chat/makeRoom2",
 				 type:	"post",
 				 dataType: "text",
 				 contentType: 'application/json',
@@ -342,7 +340,7 @@
 				 }),	
 				 success: function(data){
 					 console.log(data);
-					 window.open(data, "_blank", "width=940, height=750");
+					 window.open("${path}" + data, "_blank", "width=940, height=750");
 					//location.href=data;
 					
 				 },

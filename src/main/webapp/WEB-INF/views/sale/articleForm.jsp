@@ -83,7 +83,12 @@
 
 	<c:set var="menu" value="board" />
 <%@ include file="../include/sidebar.jsp" %>
-
+<c:if test="${member == null}">
+	<script>
+		alert("로그인이 필요합니다.");
+		action_path();
+	</script>
+</c:if>
     <div class="page_dir container">
       <button id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
       홈 &gt; 장터 &gt; 상품등록    </div>

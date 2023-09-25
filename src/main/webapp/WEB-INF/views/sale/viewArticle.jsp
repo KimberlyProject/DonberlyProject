@@ -254,7 +254,7 @@ function fn_chat(artNo){
 		 }),	
 		 success: function(data){
 			 console.log(data);
-			 window.open(data, "_blank", "width=940, height=750");
+			 window.open("${path}" + data, "_blank", "width=940, height=750");
 			//location.href=data;
 		 },
 		 error:function(request,status,error){

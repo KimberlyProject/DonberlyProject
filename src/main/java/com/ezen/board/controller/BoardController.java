@@ -272,11 +272,11 @@ public class BoardController {
 			System.out.println("thumbnail ==> " + thumbnail);
 
 			// File file = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + fileName);
-			File file = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + thumbnail);
+			File file = new File(ARTICLE_IMAGE_REPO + "/" + "temp" + "/" + thumbnail);
 			if(mFile.getSize() != 0) {
 				if(!file.exists()) { // 파일을 올릴 경로에 파일이 존재하지 않는다면
 					file.getParentFile().mkdirs();	// 경로에 해당하는 디렉토리를 생성한다.
-					mFile.transferTo(new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + thumbnail));
+					mFile.transferTo(new File(ARTICLE_IMAGE_REPO + "/" + "temp" + "/" + thumbnail));
 				}
 			}
 		}

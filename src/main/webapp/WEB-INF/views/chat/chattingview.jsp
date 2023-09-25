@@ -538,7 +538,6 @@ function chatOut(){
 }
 
 function calendar_insert(){
-	console.log($('#scheduleData').val());
 	
 	if(!$('#scheduleData').val()){
 		alert("날짜를 선택해 주세요.");
@@ -550,7 +549,6 @@ function calendar_insert(){
 	}
 	 
 	if(confirm("일정을 등록하시겠습니까?")){
-		console.log($('.code').val());
 		$.ajax({
 			 url:	"${path}/mypage/calendar",
 			 type:	"post",

@@ -206,7 +206,6 @@ function fn_remove(url, articleNO) {
 }
 
 function readURL(input) {
-	alert('그림바꾸기');
 	if(input.files && input.files[0]) {
 		var reader = new FileReader();
 		
@@ -238,7 +237,7 @@ function fn_chat(artNo){
 		 }),	
 		 success: function(data){
 			 console.log(data);
-			 window.open(data, "_blank", "width=940, height=750");
+			 window.open("${path}" + data, "_blank", "width=940, height=750");
 			//location.href=data;
 			
 		 },

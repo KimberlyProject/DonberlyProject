@@ -264,7 +264,7 @@
 		  //console.log(calId, typeof calId);
 		  if(confirm("메모를 삭제하시겠습니까?")){
 			  $.ajax({
-				 url:	"/mypage/calendarDelete",
+				 url:	"${path}/mypage/calendarDelete",
 				 type:	"post",
 				 data:	{ "calId" :  calId },	
 				 success: function(data){

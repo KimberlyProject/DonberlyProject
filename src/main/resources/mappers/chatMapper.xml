@@ -29,7 +29,7 @@
 	
 	<!-- 채팅넣기 -->
 	<insert id="insertContent" parameterType="com.ezen.chat.dto.ChatDTO">
-		insert into Chat values(#{chatId},#{artNo},#{fromId},#{toId},#{chatContent},sysdate,#{chatRead})
+		insert into Chat values(#{chatId},#{artNo},#{fromId},#{toId},#{chatContent},NOW(),#{chatRead})
 	</insert>
 	
 	<!-- 채팅누른 아티클번호 가져오기 -->
@@ -91,8 +91,8 @@
 	<select id="findContent" resultType="chatDTO">
 		<![CDATA[
 		select *
-		from (select * from Chat where toid = #{fromId} and chatid=#{chatId} order by chattime desc)
-		where rownum <= 1
+		from (select @ROWNUM:=@ROWNUM + 1, Chat.* from Chat, (SELECT @ROWNUM:=0) R where toid = #{fromId} and chatid=#{chatId} order by chattime desc)
+		where @ROWNUM <= 1
 		]]>
 	</select>
 	
@@ -145,9 +145,9 @@
 	
 	<!-- 멤버 아이디로 닉네임 찾기 -->
 	<select id="find_nickname" resultType="String">
-	select nickname
-	from Members
-	where userId = #{memberId}
+		select nickname
+		from Members
+		where userId = #{memberId}
 	</select>
 	
 	<!-- 회원 목록 다 가져와 -->

@@ -92,9 +92,7 @@
 	<%@ include file="../include/sidebar.jsp" %>
     <div class="page_dir container">
       <button id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
-      <a href="/">홈</a> &gt;
-      <a href="#">마이페이지</a> &gt;
-       <a href="#">내가 입찰한 경매 상품</a> &gt;
+      홈 &gt; 마이페이지 &gt; 내가 입찰한 경매 상품
     </div>
     <h1 class="pageTitle"><div>내가 입찰한 경매 상품</div></h1>
     
