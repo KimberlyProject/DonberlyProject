@@ -257,7 +257,7 @@ function fn_chat(artNo){
 	//window.open("${path}/chat/chattingview?articleNo=s"+articleNO, "_blank", "width=940, height=750");
 }
 
-
+//구매완료
 $("#buyEnd").on("click", function() {
 	var articleNO = ${article.articleNO};
 	var userId = ${member.userId};
@@ -266,7 +266,7 @@ $("#buyEnd").on("click", function() {
 	location.href = "${path}/buy/buyEnd?articleNO=" + articleNO + "&userId=" + userId;
 	alert("구매가 완료되었습니다.");
 	}
-});//#buyNow
+});
 
 </script>
 

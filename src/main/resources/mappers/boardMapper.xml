@@ -54,7 +54,7 @@
 		]]>
 	</select>
 	
-	
+	<!-- 상품코드 생성하기 -->
 	<select id="selectNewPcode" resultType="int">
 		<![CDATA[
 			SELECT	NVL(MAX(p_code), 0) + 1

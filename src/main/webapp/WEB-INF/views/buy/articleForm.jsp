@@ -147,7 +147,6 @@
         return false;
       }
 
-      // Parse the price as a number
       var minPrice = parseFloat($("#price").val());
       if (isNaN(minPrice)) {
         alert("숫자만 입력해주세요.");

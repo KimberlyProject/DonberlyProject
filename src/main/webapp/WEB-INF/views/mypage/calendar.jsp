@@ -119,7 +119,7 @@
 	      	}
 	      	#calendarPage .calendar>div{
 	      		grid-template-columns: 1fr;
-	      	}	      	
+	      	}
 	      	#calendarPage .calendar>.dateBoard>div{
 	      		height:100px;
 	      	}

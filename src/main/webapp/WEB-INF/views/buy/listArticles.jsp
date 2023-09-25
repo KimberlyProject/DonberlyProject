@@ -8,59 +8,59 @@
 	<%@ include file="../member/profileModal.jsp" %>
 	<style>
 			
-		.imgsize {
-		width: 180px;
-		height: 155px;
-		
-		}
-		
-		.selectBox{
-		display: flex;
-		justify-content:space-between;
-		}
-		
-		/* 제일 상위 */
-		.products {
-		display:grid;
-		grid-template-columns: 1fr 1fr 1fr;
-	    border: 1px solid #ccc; /* 테이블 경계 설정 */
-	    border-radius: 20px;
-	    padding: 10px; /* 테이블 내부 여백 설정 */
-	    margin-bottom: 20px; /* 테이블 간격 설정 */
-	  	}
-		/* products 하위 */
-		.product {	
-	    display: block;
-	    text-align: center;
-	    text-decoration:none;
-	    color: black;
-	    margin-left: 5px;
-	    margin-right: 5px;
-	    margin-bottom: 15px;
-	    
-		}
-		
-		/* 상품 글 제목 */
-		.product-title {
-		font-size: 18px;
-		text-align: center;
-		margin-top: 20px;
-		margin-bottom: 10px;
-		}
-		
-		/* 상품 글 가격 */
-		.product-price {
-		text-align: center;
-		margin-top: 10px;
-		margin-bottom: 10px;
-		}
-		
-		/* 상품 글 판매자 */
-		.product-seller {
-		text-align: center;
-		margin-top: 10px;
-		margin-bottom: 10px;
-		}
+	.imgsize {
+	width: 180px;
+	height: 155px;
+	
+	}
+	
+	.selectBox{
+	display: flex;
+	justify-content:space-between;
+	}
+	
+	/* 제일 상위 */
+	.products {
+	display:grid;
+	grid-template-columns: 1fr 1fr 1fr;
+    border: 1px solid #ccc; /* 테이블 경계 설정 */
+    border-radius: 20px;
+    padding: 10px; /* 테이블 내부 여백 설정 */
+    margin-bottom: 20px; /* 테이블 간격 설정 */
+  	}
+	/* products 하위 */
+	.product {	
+    display: block;
+    text-align: center;
+    text-decoration:none;
+    color: black;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 15px;
+    
+	}
+	
+	/* 상품 글 제목 */
+	.product-title {
+	font-size: 18px;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	}
+	
+	/* 상품 글 가격 */
+	.product-price {
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	}
+	
+	/* 상품 글 판매자 */
+	.product-seller {
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	}
 	
 	/* 상품 글 작성일자 */
 	.product-date {

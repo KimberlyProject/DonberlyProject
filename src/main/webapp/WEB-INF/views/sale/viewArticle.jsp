@@ -228,16 +228,6 @@ function fn_modify_article(obj) {
 }
 
 
-$("#buyEnd").on("click", function() {
-	var articleNO = ${article.articleNO};
-	var userId = ${member.userId};
-	if(confirm("해당 상품을 구매 완료하시겠습니까?")) {
-	
-	location.href = "${path}/sale/saleEnd?articleNO=" + articleNO + "&userId=" + userId;
-	alert("구매가 완료되었습니다.");
-	}
-});//#buyNow
-
 //1:1 채팅 방만들기
 function fn_chat(artNo){
 	$.ajax({
@@ -268,6 +258,17 @@ function fn_chat(artNo){
 	 });
 	
 }
+
+//구매완료
+$("#buyEnd").on("click", function() {
+	var articleNO = ${article.articleNO};
+	var userId = ${member.userId};
+	if(confirm("해당 상품을 판매 완료하시겠습니까?")) {
+	
+	location.href = "${path}/buy/buyEnd?articleNO=" + articleNO + "&userId=" + userId;
+	alert("판매가 완료되었습니다.");
+	}
+});
 
 </script>
 

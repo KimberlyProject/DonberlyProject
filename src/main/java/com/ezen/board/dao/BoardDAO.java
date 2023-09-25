@@ -158,7 +158,9 @@ public class BoardDAO {
 		return sqlSession.selectList(namespace + ".saleBoardListPaging", cri);
 	}
 
-	
+	//-----------------------------------------------------------------------------------------------------------
+	// 구매완료
+	//-----------------------------------------------------------------------------------------------------------	
 	public void buyNow(Map articleMap) throws DataAccessException {
 		System.out.println("------------------------------------------buyNow dao------------------------------------------");
 		sqlSession.update(namespace + ".buyNow", articleMap);
