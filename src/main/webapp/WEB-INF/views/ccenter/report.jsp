@@ -110,52 +110,21 @@
 
 
 <script>
-	$(document).ready(function() {
-		
-		var confirem;
-	    
-		if($("#reportedUser").val() == "") {
-	       //$('#reportedUser').attr('readonly', false);
-	       $("#reportedUser").removeAttr("readonly");
-	       //document.getElementById("reportedUser").readonly	 = false;
-	       }
-		
-		// 문의하기 버튼을 눌렀을 경우 공백있을 때 채워달라는 알림
-	    $("#report-button").on("click", function() {
-	    	
-	       if($("#reportedUser").val() == "") {
-	          alert("신고대상을 입력해주세요.");
-	          $("#reportedUser").focus();
-	          return false;
-	       }
-
-	       if($("#content").val() == "") {
-	          alert("내용을 입력해주세요.");
-	          $("#content").focus();
-	          return false;
-	       }
-	       
-	       if(confirem == 1) {
-	    	   
-		          alert("신고처리가 완료되었습니다.");
-		          $("#reportedUser").focus();
-		          
-		   } else {
-			   alert("확인된 아이디가 없습니다.");
-			   return false;
-		   }
-	    });
-	    
-	    
+$(document).ready(function() {
 	
-	
-	
+	var confirem;
+    
+	if($("#reportedUser").val() == "") {
+       //$('#reportedUser').attr('readonly', false);
+       $("#reportedUser").removeAttr("readonly");
+       //document.getElementById("reportedUser").readonly	 = false;
+       }
 	
 	//-------------------------------------------------------------------------------------------------
 	// 아이디 입력란에 글자를 쓰면 실시간으로 사용이 가능한지 아닌지 검사한다.
 	//-------------------------------------------------------------------------------------------------
 	$("#reportedUser").on("input", function() {
-		var inputID = $('#reportedUser').val();
+		let inputID = $('#reportedUser').val();
 		// alert(inputID);
 		
 		$.ajax({
@@ -167,6 +136,7 @@
 				confirem = data   //confirem에 ajax가져온 data를 이용할수 있음.
 				// alert("중복검사결과 : " + data);
 				// if(inputID == "" && data == '0') {
+				alert("dddddd" + confirem);
 				if(data == 1) {
 					document.getElementById("msg").innerHTML =  " ";
 					$("#msg").css("color", "green");
@@ -187,6 +157,51 @@
 		});
 		
 	});
+	
+	
+	// 문의하기 버튼을 눌렀을 경우 공백있을 때 채워달라는 알림
+    $("#report-button").on("click", function() {
+    	
+       if($("#reportedUser").val() == "") {
+          alert("신고대상을 입력해주세요.");
+          $("#reportedUser").focus();
+          return false;
+       }
+
+       if($("#content").val() == "") {
+          alert("내용을 입력해주세요.");
+          $("#content").focus();
+          return false;
+       }
+       
+       $.ajax({
+			url:			"/ccenter/idCheck",
+			type:			"post",
+			dataType:		"json",
+			async: false,
+			data:			{"userId" : $('#reportedUser').val()},
+			success:		function(data) {
+				confirem = data;
+			},
+			error: function(info) {
+				alert("에러가 발생하였습니다!");
+			},
+			complete: function(info) {
+				//alert("작업을 완료하였습니다.");
+			}
+		});
+       if(confirem == 1) {
+	          alert("신고처리가 완료되었습니다.");
+	          $("#reportedUser").focus();
+	          
+	   } else {
+		   alert("확인된 아이디가 없습니다.");
+		   console.log(confirem);
+		   return false;
+	   }
+    });
+	
+	
 });	
 	
 </script>
