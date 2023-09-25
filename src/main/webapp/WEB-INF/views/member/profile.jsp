@@ -104,7 +104,7 @@ h1 {
 
 	<div class="container">
 		<div class="profile-info">
-			<img src="../../resources/images/jjangu.png" alt="프로필 사진">
+			<img src="${path}/resources/images/jjangu.png" alt="프로필 사진">
 
 			<div class="row">
 				<div class="row-md-offset-2">

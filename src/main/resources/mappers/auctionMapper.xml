@@ -7,7 +7,7 @@
    	<!-- 새로운 게시글 사용할 번호 추출하기  -->
  	<select id ="selectNewAucCode" resultType="int">
  		<![CDATA[
- 			SELECT	NVL(MAX(aucCode), 0) + 1
+ 			SELECT	IFNULL(MAX(aucCode), 0) + 1
 			FROM	Auction
  		]]>
  	</select>
@@ -26,17 +26,16 @@
    	<!-- 새로운 게시글 이미지에 사용할 번호 추출하기  -->
  	<select id ="selectNewImgFileNo" resultType="int">
  		<![CDATA[
- 			SELECT NVL(MAX(imgNo), 0) + 1 
+ 			SELECT IFNULL(MAX(imgNo), 0) + 1 
  			FROM AucImg
  		]]>
  	</select>
   	
   	<!-- 새로운 게시글에 이미지 추가하기 -->
  	<insert id="insertNewImg" parameterType="java.util.Map">
-	  <foreach item="item"  collection="list"   open="INSERT ALL" 
- 			separator=" " close="SELECT * FROM DUAL" >
- 			INTO AUCIMG (imgNo, imgName, aucCode)
- 			VALUES (#{item.imgNo}, #{item.imgName}, #{item.aucCode})	
+ 			INSERT INTO AucImg (imgNo, imgName, aucCode) VALUES
+	  <foreach item="item"  collection="list"   open="" separator="," close="" >
+ 			 (#{item.imgNo}, #{item.imgName}, #{item.aucCode})
  	  </foreach>
  	</insert>
  	
@@ -163,9 +162,9 @@
 	<!-- 게시글 목록 가져오기(paging) -->
 	<select id="auctionPaging" parameterType="com.ezen.auction.dto.SearchCriteria" resultMap="aucArticle">
 		<![CDATA[
-        	SELECT	recNum, aucCode, minPrice, maxPrice, writeDate, title, content, nowBid, bidRate, aucId, status, deadline, aucNick
+        	SELECT	*
 			FROM	(
-				SELECT  @ROWNUM:=@rownum+1 AS recNum, a.*
+				SELECT  @ROWNUM:=@rownum+1 AS recNum, a.*, m.nickname, m.email
 				FROM Auction a, Members m, (SELECT @ROWNUM:=0) R
 		        WHERE a.aucId = m.userId
 	    ]]> <include refid="search"/>

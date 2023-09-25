@@ -46,7 +46,7 @@
 	<!-- 새로운 채팅방번호 번호 추출하기-->
 	<select id="selectNewChatId" resultType="int">
 		<![CDATA[
-		select nvl(max(chatid),0)+1
+		select IFNULL(max(chatid),0)+1
 		from chatlist
 		]]>
 	</select>

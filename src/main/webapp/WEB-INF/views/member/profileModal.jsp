@@ -26,7 +26,7 @@
     }
     
     .modal-body {
-    	background-image: url("${path}../../resources/images/profliebackground.jpeg");
+    	background-image: url("${path}/resources/images/profliebackground.jpeg");
     }
     
     .a {
@@ -47,7 +47,7 @@
             <div class="modal-body">
                 <!-- 프로필 정보 영역 -->
                 <div class="profile-info">
-                    <img src="${path}../../resources/images/profileimage.png" alt="프로필 사진">
+                    <img src="${path}/resources/images/profileimage.png" alt="프로필 사진">
                     <div class="row">
                         <div class="row-md-offset-2">
                             <p class="info"><strong>닉네임:</strong> <span id="modalNickname"></span></p>

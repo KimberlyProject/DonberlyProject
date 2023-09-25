@@ -137,7 +137,6 @@
 			</div>
 		</c:when>
 		</c:choose>
-		
 		<!-- 게시글이 있는 경우 -->
 		<c:choose>
 		<c:when test="${articles != null}">
@@ -146,23 +145,23 @@
 		    <c:forEach var="article" items="${articles}" varStatus="articleNum">
 		        <tr>
 		           <c:forEach var="img" items="${imgs[articleNum.index]}" varStatus="imgNum"> <!-- 이중리스트 -->
-		            <c:if test="${article.aucCode == img.aucCode}">
-		                    <th rowspan="4" class="innerimg">
-		                        <div class="item">
-		                            <c:choose><c:when test="${img.imgName == null}">
-					       				<div><br><br/><br/><br/><p id="imgNull">등록된 사진이 없습니다.</p></div>
-					               	</c:when></c:choose>
-					               	<c:choose><c:when test="${img.imgName != null}">
-					               	<img id="i" src="${path}/auction/pullAuctionImges?imgName=${img.imgName}&aucCode=${img.aucCode}"/>
-					               	</c:when></c:choose>
-		                        </div>
-		                    </th>    
+		            <c:if test="${article.aucCode == img.aucCode}">						
+	                    <th rowspan="4" class="innerimg">
+	                        <div class="item">
+	                            <c:choose><c:when test="${img.imgName == null}">
+				       				<div><br><br/><br/><br/><p id="imgNull">등록된 사진이 없습니다.</p></div>
+				               	</c:when></c:choose>
+				               	<c:choose><c:when test="${img.imgName != null}">
+				               	<img id="i" src="${path}/auction/pullAuctionImges?imgName=${img.imgName}&aucCode=${img.aucCode}"/>
+				               	</c:when></c:choose>
+	                        </div>
+	                    </th>    
                     </c:if>	
 		            </c:forEach>
 					<th class="cate">제목</th><th class="colon">:</th><th colspan="4">${article.title}</th>
 					<th rowspan="4" id="detailarea">
 						<br/>
-						<form action="${path}auction_detail" method="get">
+						<form action="${path}/auction/auction_detail" method="get">
 							<input type="hidden" name="aucCode" value="${article.aucCode}"/>
 							<c:choose>
 							<c:when test="${article.status == 0 && (article.deadline > today || article.deadline == today)}">
@@ -179,7 +178,7 @@
 				</tr>
 				<tr>
 					<th class="cate">판매자</th>
-					<th class="colon">:</th>
+					<th class="colon">:</th>				
 					<th colspan="4">[<a href="javascript:void(0);" onclick="openModal({nickname: '${article.nickname}', email: '${article.email}', userId: '${article.aucId }'})">${article.aucNick}</a>]님
 				</tr>
 				<tr>

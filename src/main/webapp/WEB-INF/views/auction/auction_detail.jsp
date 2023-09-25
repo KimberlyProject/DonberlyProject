@@ -94,17 +94,12 @@
 	</style>
 </head>
 <body>
-	<%//로그인 세션
-		if(session.getAttribute("isLogOn") == null) {
-			PrintWriter pw = response.getWriter();
-			pw.println("<script>");
-			pw.println("alert('로그인이 필요합니다.');");
-			pw.println("location.href='/member/login?action=/auction/auction_wirte';");
-			pw.println("</script>");
-			pw.flush();
-			pw.close();
-		}
-	%>	
+	<c:if test="${member == null}">
+		<script>
+			alert("로그인이 필요합니다.");
+			action_path();
+		</script>
+	</c:if>
 	
 	<%@ include file="../include/topMenu.jsp" %>
 	
@@ -256,7 +251,7 @@ $(document).ready(function () {
 		//판매자 경매종료
 		$("#auctionOff").on("click", function() {
 			if(confirm("현재 입찰 중인 상품입니다. 경매를 취소하시겠습니까? 삭제된 게시글은 복원되지 않습니다.")) {
-				location.href = "/auction/auctionOff?aucCode=" + ${article.aucCode};
+				location.href = "${path}/auction/auctionOff?aucCode=" + ${article.aucCode};
 				alert("게시글이 삭제되었습니다.");
 			} else {
 				return;

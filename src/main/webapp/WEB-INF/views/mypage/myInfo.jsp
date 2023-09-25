@@ -33,8 +33,7 @@
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
-            background-color: black;
-            background-image: url("../../resources/images/profliebackground.jpeg");
+            background-image: url("${path}/resources/images/profliebackground.jpeg");
             border: 1px solid #ccc;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -156,7 +155,7 @@
     
     <div class="container my">
 	    <div class="profile-info">
-            <img src="${path}../../resources/images/profileimage.png" alt="프로필 사진">
+            <img src="${path}/resources/images/profileimage.png" alt="프로필 사진">
             
             <div class="row">
             <div class="row-md-offset-2">

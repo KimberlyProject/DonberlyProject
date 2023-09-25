@@ -533,7 +533,7 @@ public class BoardController {
 			srcFile.delete();
 			
 			message	 = "<script>";
-			message	+= "alert('오류가 발생하였습니다.\n다시 시도해 주십시오.');";
+			message	+= "alert('오류가 발생하였습니다. 다시 시도해 주십시오.');";
 			message	+= "location.href='" + multipartRequest.getContextPath() + "/sale/viewArticle.do?articleNO=" + articleNO + "';";
 			message	+= "</script>";
 			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);

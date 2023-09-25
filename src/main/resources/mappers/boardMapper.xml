@@ -42,14 +42,14 @@
 	<!-- 새로운 게시글에 사용할 번호 추출하기 : 게시글 테이블에서 -->
 	<select id="selectNewArticleNO" resultType="int">
 		<![CDATA[
-			SELECT	NVL(MAX(articleNO), 0) + 1
+			SELECT	IFNULL(MAX(articleNO), 0) + 1
 			FROM	article_buy
 		]]>
 	</select>
 	
 	<select id="saleSelectNewArticleNO" resultType="int">
 		<![CDATA[
-			SELECT	NVL(MAX(articleNO), 0) + 1
+			SELECT	IFNULL(MAX(articleNO), 0) + 1
 			FROM	article_sale
 		]]>
 	</select>
@@ -57,14 +57,14 @@
 	
 	<select id="selectNewPcode" resultType="int">
 		<![CDATA[
-			SELECT	NVL(MAX(p_code), 0) + 1
+			SELECT	IFNULL(MAX(p_code), 0) + 1
 			FROM	article_buy
 		]]>
 	</select>
 		
 	<select id="saleSelectNewPcode" resultType="int">
 		<![CDATA[
-			SELECT	NVL(MAX(p_code), 0) + 1
+			SELECT	IFNULL(MAX(p_code), 0) + 1
 			FROM	article_sale
 		]]>
 	</select>

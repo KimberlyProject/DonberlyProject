@@ -82,19 +82,12 @@
 		홈 &gt; 경매장 &gt; 경매상품 올리기
 	</div>
 	<h1 class="pageTitle"><div>경매 상품 올리기</div></h1>
-    
-   <%
-	//로그인 세션 없으면 로그인을 먼저 하도록 한다.
-	if(session.getAttribute("isLogOn") == null) {
-		PrintWriter pw = response.getWriter();
-		pw.println("<script>");
-		pw.println("alert('로그인이 필요합니다.');");
-		pw.println("location.href='/member/login?action=/auction/auction_wirte';");
-		pw.println("</script>");
-		pw.flush();
-		pw.close();
-	}
-	%>
+	<c:if test="${member == null}">
+		<script>
+			alert("로그인이 필요합니다.");
+			action_path();
+		</script>
+	</c:if>
 		
 	<div class="container">
 		<form id="formgroup" name="aucArticle" method="post" action="${path}/auction/addNewArticle" enctype="multipart/form-data">

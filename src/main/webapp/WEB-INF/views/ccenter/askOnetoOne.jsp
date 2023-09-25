@@ -36,26 +36,12 @@
 <%@ include file="../include/topMenu.jsp" %>
 
 <!-- 비로그인 상태에서 1:1 문의하기 클릭했을 때 로그인 창으로 보내는 펑션 -->
-<%
-	if(session.getAttribute("isLogOn") == null) {%>
-	<!-- 
+	<c:if test="${member == null}">
 		<script>
-			alert("먼저 로그인을 하셔야 글을 쓰실 수 있습니다!");
-			location.href="/member/login";
+			alert("로그인이 필요합니다.");
+			action_path();
 		</script>
-	 -->	
-		<%
-		PrintWriter pw = response.getWriter();
-		pw.println("<script>");
-		pw.println("alert('먼저 로그인을 하셔야 글을 쓰실 수 있습니다!');");
-		pw.println("location.href='/member/login?action=/ccenter/askOnetoOne';");
-		pw.println("</script>");
-		pw.flush();
-		pw.close();
-		// out.println("<script>alert("먼저 로그인을 해주세요!");</script>");
-		// response.sendRedirect("/member/login");
-	}
-%>
+	</c:if>
 	<%@ include file="../include/topMenu.jsp" %>
 	<c:set var="menu" value="ccenter" />
 	<%@ include file="../include/sidebar.jsp" %>	

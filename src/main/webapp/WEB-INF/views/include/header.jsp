@@ -15,18 +15,17 @@
 <link rel="stylesheet" href="${path}/resources/css/common.css">
 <script>
 	function action_path(){
-	    const prevpath = location.pathname
+	    const prevpath = location.pathname;
+	    const pathparam = location.search;
 	    const new_prevpath = prevpath.substr(0, prevpath.length-1); // /path/ 뒤에 / 빼기
 	    
 	    if("${path}" === new_prevpath){ // path에 경로 안붙었을때; 
 	       location.href = "${path}/member/login?action=/";	       
 	       return false;
-	    }else if("${path}"){ // path 값있을때
+	    }else{ // path 값있을때
 	       	const firstpath = prevpath.substring(0,prevpath.indexOf("/", 1)); // 첫번째 디덱토리
-		    location.href = "${path}/member/login?action=" + prevpath.substr(firstpath.length, prevpath.length-1);
-	       return false;         
+		    location.href = "${path}/member/login?action=" + prevpath.substr(firstpath.length, prevpath.length-1) + pathparam;
+	       	return false;         
 	    }
-	    location.href = "${path}/member/login?action=" + prevpath;
-	    return false;
 	 }
  </script>
