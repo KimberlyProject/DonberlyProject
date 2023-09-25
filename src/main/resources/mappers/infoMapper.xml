@@ -33,13 +33,13 @@
 	</select>
 	
 	<select id="infoList1" parameterType="com.ezen.mypage.dto.MarketInfo" resultMap="articlesResult">
-	<![CDATA[
-	SELECT	*
-	FROM	article_buy
-	WHERE userId = #{userId}
-	and rownum BETWEEN 1 and 3 * #{buycount}
-	order by sysdate desc
- 	]]>
+		<![CDATA[
+			SELECT	@ROWNUM:=@ROWNUM+1, a.*
+			FROM	article_buy a, (SELECT @ROWNUM := 0) R
+			WHERE userId = #{userId}
+			and @ROWNUM BETWEEN 0 and 3 * #{buycount}
+			order by NOW() desc
+	 	]]>
 	</select>
 
 	<!-- ==================================================================================================================================================== -->
@@ -55,13 +55,13 @@
 	</select>
 
 	<select id="infoList2" parameterType="com.ezen.mypage.dto.MarketInfo" resultMap="articlesResult">
-	<![CDATA[
-	SELECT	*
-	FROM	article_sale
-	WHERE userId = #{userId}
-	and rownum BETWEEN 1 and 3 * #{salecount}
-	order by sysdate desc
- 	]]>
+		<![CDATA[
+			SELECT	@ROWNUM:=@ROWNUM+1, a.*
+			FROM	article_sale a, (SELECT @ROWNUM := 0) R
+			WHERE userId = #{userId}
+			and @ROWNUM BETWEEN 0 and 3 * #{salecount}
+			order by NOW() desc
+	 	]]>
 	</select>
 	
 	
