@@ -156,8 +156,8 @@ public class BoardController {
 		try {
 			int articleNO = boardService.buyAddNewArticle(articleMap);
 			if(thumbnail != null && thumbnail.length() != 0) {
-				File srcDir  = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + thumbnail);
-				File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO);
+				File srcDir  = new File(ARTICLE_IMAGE_REPO + "/" + "temp" + "/" + thumbnail);
+				File destDir = new File(ARTICLE_IMAGE_REPO + "/" + articleNO);
 				FileUtils.moveToDirectory(srcDir, destDir, true);
 			}
 			
@@ -167,7 +167,7 @@ public class BoardController {
 			message	+= "</script>";
 			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
-			File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + thumbnail);
+			File srcFile = new File(ARTICLE_IMAGE_REPO + "/" + "temp" + "/" + thumbnail);
 			srcFile.delete();
 			
 			message	 = "<script>";
@@ -228,8 +228,8 @@ public class BoardController {
 		try {
 			int articleNO = boardService.saleAddNewArticle(articleMap);
 			if(thumbnail != null && thumbnail.length() != 0) {
-				File srcDir  = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + thumbnail );
-				File destDir = new File(ARTICLE_IMAGE_REPO + "\\"  + articleNO);
+				File srcDir  = new File(ARTICLE_IMAGE_REPO + "/" + "temp" + "/" + thumbnail );
+				File destDir = new File(ARTICLE_IMAGE_REPO + "/"  + articleNO);
 				FileUtils.moveToDirectory(srcDir, destDir, true);
 			}
 			
@@ -239,7 +239,7 @@ public class BoardController {
 			message	+= "</script>";
 			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
-			File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + thumbnail);
+			File srcFile = new File(ARTICLE_IMAGE_REPO + "/" + "temp" + "/" + thumbnail);
 			srcFile.delete();
 			
 			message	 = "<script>";
@@ -448,12 +448,12 @@ public class BoardController {
 			boardService.buyModArticle(articleMap);
 			
 			if(thumbnail != null && thumbnail.length() != 0) {
-				File srcDir  = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + thumbnail);
-				File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO);
+				File srcDir  = new File(ARTICLE_IMAGE_REPO + "/" + "temp" + "/" + thumbnail);
+				File destDir = new File(ARTICLE_IMAGE_REPO + "/" + articleNO);
 				FileUtils.moveToDirectory(srcDir, destDir, true);
 				
 				String	originalFileName = (String) articleMap.get("originalFileName");
-				File oldFile = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO + "\\" + originalFileName);
+				File oldFile = new File(ARTICLE_IMAGE_REPO + "/" + articleNO + "/" + originalFileName);
 				oldFile.delete();
 			}
 			message	 = "<script>";
@@ -462,7 +462,7 @@ public class BoardController {
 			message	+= "</script>";
 			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
-			File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + thumbnail);
+			File srcFile = new File(ARTICLE_IMAGE_REPO + "/" + "temp" + "/" + thumbnail);
 			srcFile.delete();
 			
 			message	 = "<script>";
@@ -513,12 +513,12 @@ public class BoardController {
 			boardService.saleModArticle(articleMap);
 			
 			if(thumbnail != null && thumbnail.length() != 0) {
-				File srcDir  = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + thumbnail);
-				File destDir = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO);
+				File srcDir  = new File(ARTICLE_IMAGE_REPO + "/" + "temp" + "/" + thumbnail);
+				File destDir = new File(ARTICLE_IMAGE_REPO + "/" + articleNO);
 				FileUtils.moveToDirectory(srcDir, destDir, true);
 				
 				String	originalFileName = (String) articleMap.get("originalFileName");
-				File oldFile = new File(ARTICLE_IMAGE_REPO + "\\" + articleNO + "\\" + originalFileName);
+				File oldFile = new File(ARTICLE_IMAGE_REPO + "/" + articleNO + "/" + originalFileName);
 				oldFile.delete();
 				
 				
@@ -529,7 +529,7 @@ public class BoardController {
 			message	+= "</script>";
 			resEnt	 = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
-			File srcFile = new File(ARTICLE_IMAGE_REPO + "\\" + "temp" + "\\" + thumbnail);
+			File srcFile = new File(ARTICLE_IMAGE_REPO + "/" + "temp" + "/" + thumbnail);
 			srcFile.delete();
 			
 			message	 = "<script>";

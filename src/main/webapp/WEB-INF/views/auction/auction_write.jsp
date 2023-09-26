@@ -98,11 +98,11 @@
 					<th colspan="2"><input id="title" type="text" maxlength="500" name="title" placeholder="예) 상품명"> &nbsp;&nbsp;&nbsp; 판매자 [${member.nickname}] 님</th>
 				<tr> <!-- 최소금액 -->
 					<th id="minprice" class="cate">최소 금액</th>					
-					<th colspan="2"><input id="minPrice" class="commas" onkeyup="addCommas(this)" type="text" maxlength="10" name="minPrice" placeholder="숫자만 입력하세요">원</th>
+					<th colspan="2"><input id="minPrice" class="commas" oninput="addCommas(this)" type="text" maxlength="10" name="minPrice" placeholder="숫자만 입력하세요">원</th>
 				</tr>
 				<tr> <!-- 상한금액 -->
 					<th class="cate">상한 금액</th>					
-					<th colspan="2"><input id="maxPrice" class="commas" onkeyup="addCommas(this)" type="text" maxlength="10" name="maxPrice" placeholder="숫자만 입력하세요">원</th>
+					<th colspan="2"><input id="maxPrice" class="commas" oninput="addCommas(this)" type="text" maxlength="10" name="maxPrice" placeholder="숫자만 입력하세요">원</th>
 				</tr>
 				<tr><!-- 입찰단위 -->
 					<th class="cate">입찰 단위</th>				
@@ -142,8 +142,8 @@
 						 	사진이 없을 시 입찰자 없이 경매가 종료될 수 있습니다.</span>
 						 	
 						 	<br/><br/>
-							<input type="file" id="imageFileName1" name="imageFileName1" onchange="readAndResize(this)"/><br/>
-							<input type="file" id="imageFileName2" name="imageFileName2" onchange="readAndResize(this)"/>
+							<input type="file" id="imageFileName1" name="imageFileName1"/><br/>
+							<input type="file" id="imageFileName2" name="imageFileName2"/>
 							
 						</div>
 					</th>
