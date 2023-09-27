@@ -102,14 +102,17 @@
 			<table id="tb1" class="row table table-bordered table-striped">
 				<tr><!-- 사진, 제목 -->  
 					<th class="cate">제목</th> 
-					<th colspan="2"><input id="title" type="text" maxlength="500" name="title" placeholder="예) 상품명"> &nbsp;&nbsp;&nbsp; 판매자 [${member.nickname}] 님</th>
+					<th colspan="2"><c:out value="${boardInfo.brdmemo}" escapeXml="false"/>
+						<input id="title" type="text" maxlength="500" name="title" placeholder="예) 상품명"> &nbsp;&nbsp;&nbsp; 판매자 [${member.nickname}] 님</th>
 				<tr> <!-- 최소금액 -->
 					<th id="minprice" class="cate">최소 금액</th>					
-					<th colspan="2"><input id="minPrice" class="commas" onkeyup="addCommas(this)" type="text" maxlength="10" name="minPrice" placeholder="숫자만 입력하세요">원</th>
+					<th colspan="2"><c:out value="${boardInfo.brdmemo}" escapeXml="false"/>
+						<input id="minPrice" class="commas" onkeyup="addCommas(this)" type="text" maxlength="10" name="minPrice" placeholder="숫자만 입력하세요">원</th>
 				</tr>
 				<tr> <!-- 상한금액 -->
 					<th class="cate">상한 금액</th>					
-					<th colspan="2"><input id="maxPrice" class="commas" onkeyup="addCommas(this)" type="text" maxlength="10" name="maxPrice" placeholder="숫자만 입력하세요">원</th>
+					<th colspan="2"><c:out value="${boardInfo.brdmemo}" escapeXml="false"/>
+						<input id="maxPrice" class="commas" onkeyup="addCommas(this)" type="text" maxlength="10" name="maxPrice" placeholder="숫자만 입력하세요">원</th>
 				</tr>
 				<tr><!-- 입찰단위 -->
 					<th class="cate">입찰 단위</th>				
@@ -157,7 +160,7 @@
 				<tr>
 					<th class="cate">제품 설명</th><!-- 내용 -->
 					<th colspan="2">
-					 <div>
+					 <div><c:out value="${boardInfo.brdmemo}" escapeXml="false"/>
 						<textarea name="content" id="content" placeholder="판매하실 상품에 대한 상세한 설명을 입력해주세요." 
 						style="overflow-y: hidden; height: 300px;"></textarea>
 					</div>

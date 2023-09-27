@@ -182,7 +182,7 @@
 			WHERE aucCode = #{aucCode}
 			AND imgNo = (SELECT MIN(imgNo) FROM aucImg WHERE aucCode = #{aucCode})
 		]]>
- 	</select>
+ 	</select> 
  	
  	<!-- 마이페이지 myAuction 게시글 Query -->
     <select id="myauctionArticles" parameterType="String" resultMap="aucArticle">
