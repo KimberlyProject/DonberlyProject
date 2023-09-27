@@ -130,7 +130,7 @@
 	</div>
 		<div class="arti">
 		<c:choose>
-			<c:when test="${saleArticlesList == null}"> <!-- 게시글이 하나도 없는 경우 -->
+			<c:when test="${empty saleArticlesList}"> <!-- 게시글이 하나도 없는 경우 -->
 				<div>
 					<div>
 						<p align="center">

@@ -70,7 +70,8 @@ public class BoardController {
 	//-----------------------------------------------------------------------------------------------------------
 	// 업로드된 폴더와 위치가 같아야 한다.
 	//-----------------------------------------------------------------------------------------------------------
-	private static final String ARTICLE_IMAGE_REPO = "C:\\data\\workspace\\DonberlyProject\\src\\main\\webapp\\resources\\images\\board\\article_image";
+	//private static final String ARTICLE_IMAGE_REPO = "C:\\data\\workspace\\DonberlyProject\\src\\main\\webapp\\resources\\images\\board\\article_image";
+	private static final String ARTICLE_IMAGE_REPO = "tomcat/webapps/DonberlyProject/resources/images/board/article_image";
 	
 	//-----------------------------------------------------------------------------------------------------------
 	// Spring에서 지원하는 어노테이션

@@ -131,7 +131,7 @@
 		
 		<div class="arti">
 		<c:choose>
-			<c:when test="${articlesList == null}"> <!-- 게시글이 하나도 없는 경우 -->
+			<c:when test="${empty articlesList}"> <!-- 게시글이 하나도 없는 경우 -->
 				<div>
 					<div>
 						<p align="center">

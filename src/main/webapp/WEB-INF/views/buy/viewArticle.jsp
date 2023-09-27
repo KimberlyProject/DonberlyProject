@@ -190,7 +190,6 @@ function fn_enable(obj) {
 
 // 게시글 삭제하기
 function fn_remove(url, articleNO) {
-	alert('게시글 삭제하기');
 	var form	= document.createElement("form");
 	form.setAttribute("method",	"post");
 	form.setAttribute("action", url);

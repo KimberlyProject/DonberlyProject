@@ -4,8 +4,8 @@
 	<aside id="sideMenu">
 		<h2>내 장터</h2>
 		<ul>	
-			<li><a href="${path}/buy/listArticles.do">팝니다</a></li>	
-			<li><a href="${path}/sale/listArticles.do">삽니다</a></li> 
+			<li><a href="${path}/sale/listArticles.do">팝니다</a></li> 
+			<li><a href="${path}/buy/listArticles.do">삽니다</a></li>	
 		</ul>
 	  	<button class="btn " id="sideMenu_close"><span class="glyphicon glyphicon-menu-left"></span></button>
 	</aside>

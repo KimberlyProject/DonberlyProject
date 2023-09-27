@@ -77,7 +77,7 @@
 				<li>
 			</ul>
 			<ul class="item">
-				<li id="a"><input type="hidden" class="btn btn-primary" name="thumbnail" id="i_thumbnail" onchange="readURL(this);" /><li>
+				<li id="a"><input type="hidden" class="btn btn-primary" name="thumbnail" id="i_thumbnail" onchange="readURL(this);"/><li>
 			</ul>
 		</c:when>
 		<c:otherwise>
@@ -191,7 +191,6 @@ function fn_enable(obj) {
 
 // 게시글 삭제하기
 function fn_remove(url, articleNO) {
-	alert('게시글 삭제하기');
 	var form	= document.createElement("form");
 	form.setAttribute("method",	"post");
 	form.setAttribute("action", url);
@@ -207,7 +206,6 @@ function fn_remove(url, articleNO) {
 }
 
 function readURL(input) {
-	alert('그림바꾸기');
 	if(input.files && input.files[0]) {
 		var reader = new FileReader();
 		
@@ -219,9 +217,7 @@ function readURL(input) {
 }
 
 // 게시글 수정하기
-function fn_modify_article(obj) {
-	
-	
+function fn_modify_article(obj) {	
 	
 	obj.action = "${path}/sale/modArticle.do";
 	obj.submit();

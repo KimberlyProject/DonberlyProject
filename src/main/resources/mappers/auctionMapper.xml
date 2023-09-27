@@ -19,7 +19,7 @@
   			Auction (aucCode, minPrice, maxPrice, writeDate, title, content, nowBid, 
   					bidRate, aucId, status, deadline, aucNick)
   			VALUES (#{aucCode}, #{minPrice}, #{maxPrice}, NOW(), #{title}, #{content}, #{minPrice}, 
-  					#{bidRate}, #{aucId}, 0, NOW()+#{deadlineRate},  #{aucNick})
+  					#{bidRate}, #{aucId}, 0, DATE_ADD(NOW(), INTERVAL #{deadlineRate} DAY),  #{aucNick})
   		]]>
   	</insert>
   	

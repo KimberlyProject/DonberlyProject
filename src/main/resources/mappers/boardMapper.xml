@@ -126,11 +126,11 @@
 	<!-- 게시글 번호에 해당하는 타이틀, 글내용, 이미지파일 업데이트하기 -->
 	<update id="updateArticle" parameterType="java.util.Map">
 		<![CDATA[
-		UPDATE	article_Buy
+		UPDATE	article_buy a, (SELECT thumbnail FROM article_buy WHERE articleNO = #{articleNO}) setimg
 		SET		title		= #{title},
 				content		= #{content},
 				purpose		= #{purpose},
-				thumbnail 	= #{thumbnail},
+				a.thumbnail 	= CASE WHEN #{thumbnail} = '' THEN setimg.thumbnail ELSE #{thumbnail} END,
 				price		= #{price},
 				nickname	= #{nickname}
 
@@ -140,11 +140,11 @@
 	
 	<update id="saleUpdateArticle" parameterType="java.util.Map">
 		<![CDATA[
-		UPDATE	article_sale
+		UPDATE	article_sale a, (SELECT thumbnail FROM article_sale WHERE articleNO = #{articleNO}) setimg
 		SET		title		= #{title},
 				content		= #{content},
 				purpose		= #{purpose},
-				thumbnail 	= #{thumbnail},
+				a.thumbnail 	= CASE WHEN #{thumbnail} = '' THEN setimg.thumbnail ELSE #{thumbnail} END,
 				price		= #{price},
 				nickname	= #{nickname}
 
