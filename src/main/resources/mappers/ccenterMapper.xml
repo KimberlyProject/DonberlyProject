@@ -8,15 +8,15 @@
     <insert id="addNewAsk" parameterType="java.util.Map">
 		<![CDATA[
 			insert into 
-			ask	(articleNo, userId, email, writeDate, title, content) 
-			values (#{articleNo}, #{userId}, #{email}, sysdate, #{title}, #{content})
+			Ask	(articleNo, userId, email, writeDate, title, content) 
+			values (#{articleNo}, #{userId}, #{email}, NOW(), #{title}, #{content})
 		]]>
 	</insert>
 	
 	<select id="selectNewArticleNO" resultType="int">
 		<![CDATA[
 		SELECT	IFNULL(MAX(articleNo), 0) + 1
-		FROM	ask
+		FROM	Ask
 		]]>
 	
 	</select>
@@ -25,15 +25,15 @@
     <insert id="addNewReport" parameterType="java.util.Map">
 		<![CDATA[
 			insert into 
-			report	(articleNo, reporter, reportedUser, writeDate, reason, content) 
-			values (#{articleNo}, #{reporter}, #{reportedUser}, sysdate, #{reason}, #{content})
+			Report	(articleNo, reporter, reportedUser, writeDate, reason, content) 
+			values (#{articleNo}, #{reporter}, #{reportedUser}, NOW(), #{reason}, #{content})
 		]]>
 	</insert>
 	
 	<select id="selectArticleNO" resultType="int">
 		<![CDATA[
 		SELECT	IFNULL(MAX(articleNo), 0) + 1
-		FROM	report
+		FROM	Report
 		]]>
 	
 	</select>

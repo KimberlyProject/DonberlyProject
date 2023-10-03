@@ -56,7 +56,7 @@
     <h1 class="pageTitle"><div>신고하기</div></h1>
     
     <div class="container">
-   	 	<form name="reportAnswer" method="post" action="${path }/ccenter/addNewReport.do" enctype="multipart/form-data">
+   	 	<form name="reportAnswer" method="post" action="${path}/ccenter/addNewReport.do" enctype="multipart/form-data">
             <table style="width: 100%;" class="table" id="table" >
                 <tr>
                     <td><label for="reporter">신고자</label></td>
@@ -146,7 +146,7 @@
 		// alert(inputID);
 		
 		$.ajax({
-			url:			"/ccenter/idCheck",
+			url:			"${path}/ccenter/idCheck",
 			type:			"post",
 			dataType:		"json",
 			data:			{"userId" : $('#reportedUser').val()},
