@@ -203,20 +203,18 @@ public class AdminController {
 	// 관리자 탭: 회원 7일 정지
 	//--------------------------------------------------------------------------------------------------
 	@RequestMapping(value="/Asuspension", method=RequestMethod.POST)
-	public String Asuspension(String userId) throws Exception {
+	public void Asuspension(String userId) throws Exception {
 		logger.info("회원 3일정지 POST " + userId);
 		adminService.Asuspension(userId);
-		return "redirect:/admin/memberList";
 	}
 	
 	//--------------------------------------------------------------------------------------------------
 	// 관리자 탭: 회원 영구 정지
 	//--------------------------------------------------------------------------------------------------
 	@RequestMapping(value="/Psuspension", method=RequestMethod.POST)
-	public String Psuspension(String userId) throws Exception {
+	public void Psuspension(String userId) throws Exception {
 		logger.info("회원 3일정지 POST " + userId);
 		adminService.Psuspension(userId);
-		return "redirect:/admin/memberList";
 	}
 	
 

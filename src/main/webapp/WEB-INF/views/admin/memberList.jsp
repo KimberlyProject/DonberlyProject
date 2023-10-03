@@ -194,62 +194,56 @@
       	
       	// 7일 정지: 7일정지 버튼을 누를 경우
     $("#Asbtn").on("click", function() {
-		var inputID = [];
 		$('input:checkbox[name="checkBox"]').each(function(index, item){
             /* 그 중에서도 체크박스에 check 되었을 경우 */
             if($(this).is(':checked', true)) {
                 //console.log("체크");
                 var idSelect = $(this).parent().next().next().text();
-                alert(idSelect);
-
                 $.ajax({
     				url:		"${path}/admin/Asuspension",
     				type:		"post",
     				dataType:	"text",
     				data:		{"userId" : idSelect},
     				success:	function(data) {
-    					alert(idSelect + "회원님께서 7일 정지 되었습니다.");
+    					console.log(data);
     				},
     				error:		function(data) {
     					alert("에러가 발생하였습니다!");
     				},
     				complete:	function(data) {
-    					alert("작업을 완료하였습니다!");
     				}
     			});
     		};
        	})
-		
+		alert("7일 정지 처리 되었습니다.");
+		location.href = location.href;
 	});
     
       	// 영구정지: 영구정지 버튼을 누를 경우
     $("#psbtn").on("click", function() {
-		var inputID = [];
 		$('input:checkbox[name="checkBox"]').each(function(index, item){
             /* 그 중에서도 체크박스에 check 되었을 경우 */
             if($(this).is(':checked', true)) {
                 //console.log("체크");
                 var idSelect = $(this).parent().next().next().text();
-                alert(idSelect);
-
                 $.ajax({
     				url:		"${path}/admin/Psuspension",
     				type:		"post",
     				dataType:	"text",
     				data:		{"userId" : idSelect},
     				success:	function(data) {
-    					alert(idSelect + "회원님께서 영구 정지 되었습니다.");
+    					console.log(data);
     				},
     				error:		function(data) {
     					alert("에러가 발생하였습니다!");
     				},
     				complete:	function(data) {
-    					alert("작업을 완료하였습니다!");
     				}
     			});
     		};
        	})
-		
+		alert("영구 정지 처리 되었습니다.");
+		location.href = location.href; 
 	});
    	var formObj = $("#formList");
    	

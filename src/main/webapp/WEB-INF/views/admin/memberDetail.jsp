@@ -75,9 +75,9 @@
 			<div class="form-group">
 				<div id="fbtn">
 					<!-- 스크립트를 통한 수정 -->
-					<input class="btn btn-primary fbtn" type="submit" value="수정" onClick='btn_click("update");'/>
+					<input class="btn btn-primary fbtn" type="button" value="수정" onClick='btn_click("update");'/>
 					<!-- 스크립트를 통한 삭제 -->
-					<input class="btn btn-danger fbtn" type="submit" value="삭제(POST)" onClick='btn_click("delete");'/>
+					<input class="btn btn-danger fbtn" type="button" value="삭제(POST)" onClick='btn_click("delete");'/>
 				</div>
 			</div>
 		</form>
@@ -85,22 +85,22 @@
 	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	<%@ include file="../include/footer.jsp" %>
 		<script>
-		function btn_click(str) {
-			alert(str);
-			
-			if(str == "update") {
-				console.log("1");
-				frm.action = "${path}/admin/memberUpdate";
-			} else if (str == "delete") {
-				console.log("2");
+		function btn_click(str) {	
+			switch(str){
+			case 'update' :
+				if(pw.value != repw.value){
+					alert("비밀번호가 일치하지 않습니다.");
+					return false;
+				}
+				alert("수정 완료되었습니다.")
+				frm.submit();
+				break;
+			case 'delete' :				
 				frm.action = "${path}/admin/memberDelete";
-			} else {
-				console.log("3");
-				alert("키를 잘못누르셨다");
-			}
-			
-			frm.method = "post";
-			frm.submit();
+				alert("삭제 완료되었습니다.")
+				frm.submit();
+				break;
+			}					
 		}
 	</script>
 </body>
