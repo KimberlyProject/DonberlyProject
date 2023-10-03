@@ -117,7 +117,7 @@
         </div>
         <div>
           <label for="address2">상세주소</label>
-          <input type="text" id="address2" name="address2"/>
+          <input type="text" id="address2" name="address2" value="${editor.address2}"/>
 	     <!--  <input type="hidden" id="address" name="address"/> -->
         </div>
         <div>

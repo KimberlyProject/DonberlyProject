@@ -86,9 +86,9 @@
 	<!-- 관리자 회원목록 전체 조회 + 페이징처리 + 검색 -->
 	<select id="memberList" parameterType="com.ezen.admin.dto.Criteria" resultType="com.ezen.member.dto.MemberDTO">
 		<![CDATA[
-			SELECT	 recNum, userId, pw, repw, name, nickName, regDate, tel, email, address, zipCode
+			SELECT	 *
 			FROM(
-				SELECT  @ROWNUM:=@ROWNUM+1 AS recNum, userId, pw, repw, name, nickName, regDate, tel, email, address, zipCode
+				SELECT  @ROWNUM:=@ROWNUM+1 AS recNum, Members.*
 				FROM	Members, (SELECT @ROWNUM:=0) R
 				WHERE	1=1
 		]]>
@@ -115,7 +115,8 @@
 				nickname	= #{nickname},
 				tel			= #{tel},
 				email		= #{email},
-				address		= #{address}
+				address		= #{address},
+				address2		= #{address2}
 		WHERE	userId		= #{userId}
 	</update>
 	

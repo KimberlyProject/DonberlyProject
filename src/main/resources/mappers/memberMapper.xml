@@ -6,7 +6,7 @@
    
    <!-- 경은 -->
    <select id="login" parameterType="com.ezen.member.dto.MemberDTO" resultType="com.ezen.member.dto.MemberDTO">
-      SELECT userId, pw, name, nickname, regDate, tel, email, address, repw, zipCode
+      SELECT *
       FROM   Members
       WHERE   userId       = #{userId}
       AND     pw   = #{pw}
@@ -47,9 +47,7 @@
 	
 	<!-- 회원 가입 POST -->
 	<insert id="insert" parameterType="com.ezen.member.dto.MemberDTO">
-		INSERT INTO Members
-				(userId, 	  pw,    name,    nickname, regDate,   tel,     email,    address,    repw, zipCode)
-		VALUES	(#{userId},#{pw}, #{name}, #{nickname}, NOW(), #{tel},  #{email}, #{address}, #{repw}, #{zipCode} )
+		INSERT INTO Members VALUES (#{userId}, #{pw}, #{repw}, #{name}, #{nickname}, NOW(), #{tel}, #{email}, #{address}, #{address2}, #{zipCode} )
 	</insert>
 
 	
@@ -72,6 +70,7 @@
 				tel			= #{tel},
 				zipCode		= #{zipCode},
 				address		= #{address},
+				address2		= #{address2},
 				email		= #{email}
 		WHERE	userId		= #{userId}
 	</update>

@@ -37,7 +37,7 @@
           font-size:18px;
         }
         #membership form>div>#user_id,
-        #membership form>div>#address1{
+        #membership form>div>#address{
           width:calc(100% - 100px);
           margin-right:10px;
         }
@@ -146,7 +146,7 @@
         </div>
         <div>
           <label for="address1">주    소</label>
-          <input type="text" id="address1" name="address1"/>
+          <input type="text" id="address" name="address"/>
           <button type="button" class="btn" onclick="daumZipCode()">주소 검색</button>
         </div>
         <div>
@@ -154,7 +154,6 @@
           <input type="text" id="zipCode" name="zipCode" readonly/>
           <input type="text" id="address2" name="address2"/>
         </div>
-        <input type="hidden" id="address" name="address"/>
         <div class="submit">
           <input type="button" class="btn" value="회원가입"/>
         </div>
@@ -304,7 +303,6 @@ $(document).ready(function() {
 		}
 		var mobile = $("#tel1").val() + $("#tel2").val() + $("#tel3").val();
 		$("#tel").val(mobile);
-		$("#address").val($("#address1").val() + $("#address2").val());
 		
 		var registrationSuccess = true; // 회원가입 성공
 		
@@ -353,7 +351,7 @@ $(document).ready(function() {
             
           // 추출한 우편번호와 주소정보를 입력항목에 나타낸다.
           document.getElementById('zipCode').value = data.zonecode;
-          document.getElementById('address1').value	= fullAddress;
+          document.getElementById('address').value	= fullAddress;
           
           // 커서를 상세주소 입력란으로 이동시킨다.
           document.getElementById('address2').focus();
