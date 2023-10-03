@@ -527,7 +527,8 @@ function chatOut(){
 				 $('#chatContent').val('');
 			 }
 		 });
- 
+
+		window.opener.location = window.opener.location
 	 }else{   //취소
 
 	     return false;
