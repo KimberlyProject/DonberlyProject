@@ -47,8 +47,8 @@ import com.ezen.member.dto.MemberDTO;
 public class AuctionController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AuctionController.class);
-	//private static final String IMGROOT = "C:/data/workspace/DonberlyProject/src/main/webapp/resources/images/auction/auction_image";
-	private static final String IMGROOT = "tomcat/webapps/DonberlyProject/resources/images/auction/auction_image";
+	private static final String IMGROOT = "C:/data/workspace/DonberlyProject/src/main/webapp/resources/images/auction/auction_image";
+	//private static final String IMGROOT = "tomcat/webapps/DonberlyProject/resources/images/auction/auction_image";
 	@Inject
 	private AuctionService auctionService;
 

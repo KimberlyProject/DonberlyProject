@@ -96,7 +96,7 @@
     <c:set var="menu" value="mypage" />
 	<%@ include file="../include/sidebar.jsp" %>
     <div class="page_dir container">
-      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+      <button class="btn" id="sideMenu_open"><span class="glyphicon glyphicon-th-large"></span></button>
       홈 &gt; 마이페이지 &gt; 내가 올린 경매 상품
     </div>
     <h1 class="pageTitle"><div>내가 올린 경매 상품</div></h1>

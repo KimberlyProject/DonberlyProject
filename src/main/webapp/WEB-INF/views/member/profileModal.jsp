@@ -79,7 +79,7 @@
         var confirmReport = confirm("신고하시겠습니까?");
         if (confirmReport) {
             // 신고 처리 로직을 여기에 추가
-            window.location.href = "${path}../ccenter/report?report=" + document.getElementById('modalUserId').innerText;
+            window.location.href = "${path}/ccenter/report?report=" + document.getElementById('modalUserId').innerText;
         } else {
             alert("신고가 취소되었습니다.");
         }

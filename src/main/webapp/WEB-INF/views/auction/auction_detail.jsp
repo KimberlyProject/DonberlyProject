@@ -265,7 +265,7 @@ $(document).ready(function () {
 		    var price = ${article.nowBid + article.bidRate};
 		    
 		    if(confirm(cstmId + "님에게 " + price + "원에 판매하시겠습니까? 거래가 완료되면 취소할 수 없습니다.")) {
-		        location.href = "/auction/saleNow?aucCode=" + aucCode + "&cstmId=" + cstmId;
+		        location.href = "${path}/auction/saleNow?aucCode=" + aucCode + "&cstmId=" + cstmId;
 		        alert("판매가 완료되었습니다.");
 		    } else {
 		    	return;
@@ -279,7 +279,7 @@ $(document).ready(function () {
 			var price = ${article.nowBid + article.bidRate};
 			
 			if(confirm(price + "원으로 입찰하시겠습니까? 입찰 후 판매자가 경매를 종료하면 즉시 구매가 진행됩니다.")) {
-				location.href = "/auction/tryBid?aucCode=" + aucCode + "&cstmId=" + cstmId + "&nowBid=" + price; 
+				location.href = "${path}/auction/tryBid?aucCode=" + aucCode + "&cstmId=" + cstmId + "&nowBid=" + price; 
 				  alert("입찰이 완료되었습니다.");
 			} else {
 				return;
@@ -292,7 +292,7 @@ $(document).ready(function () {
 			var cstmId = "${member.nickname}";
 			var price = ${article.maxPrice};
 			if(confirm("상한가 " + price + "원에 바로 구매하시겠습니까? 경매가 종료되면 취소할 수 없습니다.")) {
-				location.href = "/auction/buyNow?aucCode=" + aucCode + "&cstmId=" + cstmId + "&maxPrice=" + price;
+				location.href = "${path}/auction/buyNow?aucCode=" + aucCode + "&cstmId=" + cstmId + "&maxPrice=" + price;
 				alert("구매가 완료되었습니다.");
 			} else {
 				return;
@@ -305,7 +305,7 @@ $(document).ready(function () {
 		$('#chat').on("click", function(){
 			console.log("판매자 : "+$('.seller').val()+"구매자 : "+$('.buyer').val()+"넘버 : "+$('.artNo').val());
 			$.ajax({
-				 url:	"/chat/makeRoom",
+				 url:	"${path}/chat/makeRoom",
 				 type:	"post",
 				 dataType: "text",
 				 contentType: 'application/json',
