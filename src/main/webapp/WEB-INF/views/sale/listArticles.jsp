@@ -7,6 +7,14 @@
 	<%@ include file="../include/header.jsp" %>
 	<%@ include file="../member/profileModal.jsp" %>
 	<style>
+		.article_menu{
+			display:flex;
+			justify-content:space-between;
+			align-items:center;
+		}		
+		.article_menu select, .article_menu input, .article_menu button{
+			height:34px;
+		}
 		.imgsize {
 		width: 180px;
 		height: 155px;
@@ -90,6 +98,36 @@
 	li a:hover {
    		color:rgb(73, 124, 64);
 	}
+	@media all and (max-width:760px) {
+		.products{
+			grid-template-columns: 1fr 1fr;		
+		}
+	}
+	@media all and (max-width:480px) {
+		.article_menu{
+			display:block;
+		}
+		.article_menu>a{
+			display:block;
+			margin-bottom:5px;
+		}
+		.article_menu>div{
+			display:flex;
+			justify-content:space-between;
+		}
+		.article_menu>div>select{
+			width:75px;
+		}
+		.article_menu>div>input{
+			width:calc(100% - 135px);
+		}
+		.article_menu>div>button{
+			width:50px;
+		}
+		.products{
+			display:block;	
+		}
+	}
 	</style>
 	
 </head>
@@ -110,23 +148,21 @@
 
 <div class="container">
 	
-	<p style="float: left;">
+	<div class="article_menu">
+		
 		<a class="btn btn-primary" 
 		href="javascript:fn_articleForm('${isLogOn}', '${path}/sale/articleForm.do', '${path}/member/login')">상품등록</a>
-	</p>
-	
-	
-	<!-- 검색 조건 -->
-	<div style="float: right;">
-		
-		<select id="searchType" style="font-size:18px;">
-			<option>검색종류</option>
-			<option value="t" <c:if test="{pageVO.type} == 't'">selected</c:if>>제목</option>
-			<option value="c" <c:if test="{pageVO.type} == 'c'">selected</c:if>>내용</option>
-			<option value="w" <c:if test="{pageVO.type} == 'w'">selected</c:if>>글쓴이</option>
-		</select>
-		<input type="text" id="searchKeyword" value="${pageVO.keyword }" placeholder="검색값"/>
-		<button id="searchBtn" class="btn btn-warning btn-sm">검&nbsp;색</button>
+			
+		<!-- 검색 조건 -->
+		<div>		
+			<select id="searchType">
+				<option value="t" <c:if test="{pageVO.type} == 't'">selected</c:if>>제목</option>
+				<option value="c" <c:if test="{pageVO.type} == 'c'">selected</c:if>>내용</option>
+				<option value="w" <c:if test="{pageVO.type} == 'w'">selected</c:if>>글쓴이</option>
+			</select>
+			<input type="text" id="searchKeyword" value="${pageVO.keyword }" placeholder="검색값"/>
+			<button id="searchBtn" class="btn btn-warning btn-sm">검&nbsp;색</button>
+		</div>
 	</div>
 		<div class="arti">
 		<c:choose>
