@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>돈벌리</title>
 	<%@ include file="../include/header.jsp" %>
 	<%@ include file="../member/profileModal.jsp" %>
 	<style>
