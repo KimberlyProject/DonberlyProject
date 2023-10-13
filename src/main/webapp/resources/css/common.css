@@ -239,8 +239,8 @@ footer{
         margin-bottom:15px;
         text-align:left;
     }
-    header .navbar-collapse{
-        padding-bottom:15px;
+    header .collapse{
+        padding-bottom:80px;   
     }
     header .navbar-nav li{
         width:100%;        
@@ -267,10 +267,16 @@ footer{
     header .navbar-toggle .icon-bar+.icon-bar{
         margin-top:10px;
     }
-    header .dropdown.alermicon .dropdown-menu{
-        transform:translate(-30px);
-        width:calc(100vw - 60px);
+    header .dropdown-menu{
+        width:calc(100vw - 90px);
     }
+    header .dropdown.alermicon .dropdown-menu{
+    	transform:translate(-30px);
+    }     
+    header .dropdown.myinfo .dropdown-menu{
+    	transform:translate(-57px);
+    }
+    
     header .dropdown.calicon .dropdown-menu {
         width:calc(100vw - 60px);
     }

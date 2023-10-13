@@ -10,6 +10,8 @@
 	});
 	function gochat(chatId){
 		window.open("${path}/chat/chattingview?chatId="+chatId , "_blank", "width=940, height=750");
+		$('.alerm_num').html('');
+		$('.chatAlarm').html('<li><a>메시지가 없습니다.</a></li>'); 	
 	}
 	function alarm(){
 		$.ajax({
@@ -22,30 +24,18 @@
 			 success: function(data){
 				 //console.log(data);
 				 var html="";
-				 var cnt = data.length;
-				 
-				 for(var i=0 ; i<data.length;i++){
-					html+=
-						"<li><a onClick='gochat("+data[i].chatId+")'>"+ data[i].fromId +"님이 메시지를 보내셨습니다.</a></li>";
-				 }
+				 var cnt = data.length;								 
 				 if(cnt==0){
-					 $('.chatAlarm').html(
-								html
-						  );
+					 html += "<li><a>메시지가 없습니다.</a></li>";	
+					 cnt=null;				 
 				 }
 				 else{
-					 $('.chatAlarm').html(
-						html
-					 );	 
+				  	for(var i=0 ; i<data.length;i++){
+						html += "<li><a onClick='gochat("+data[i].chatId+")'>"+ data[i].fromId +"님이 메시지를 보내셨습니다.</a></li>";
+				 	}
 				 }
-				 
-				 if(cnt==0){
-					 cnt=null;
-				 }
-				 
-				 $('.alerm_num').html(
-					cnt
-				 );
+				 $('.chatAlarm').html(html); 				 
+				 $('.alerm_num').html(cnt);
 			 },
 			 error:function(request,status,error){
 				 
